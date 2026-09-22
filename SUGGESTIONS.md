@@ -49,18 +49,22 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
-- [ ] **The bank holds 45 items, not 300 — and only 15 are live.** The 2025 paper port
-      (`content/items/legacy-iq-2025.json`, 15 items) is seeded at `status='review'` and is not
-      drawable until you sign it off: `npm run items:seed -- --live --file legacy-iq-2025.json`.
-      Until then every candidate still gets the same paper. Two batches await sign-off:
-      `legacy-iq-2025.json` (15, ported) and `maths-batch-02.json` (15, authored). Authoring the
-      remaining 255 is the bulk of the work left.
-- [ ] **Review the 2025 port and decide the subject split.** See `content/items/legacy-iq-2025.md`.
-      The institute's own paper is ~65% maths with no science at all, while spec §1 mandates
-      5 maths / 5 English / 5 science. Worth settling before the remaining items get authored
-      against a split the institute does not actually practise — the science items are the ones
-      that will be invented from nothing rather than drawn from experience. Maths batches can
-      proceed regardless; English and science are what the answer gates.
+- [ ] **The bank holds 45 items, not 300 — all live as of 2026-09-23.** Composition:
+      maths 20/7/5, English 5/2/1, science 3/1/1 (easy/moderate/difficult against a 60/20/20
+      target per subject). Maths is comfortable; the other two are not — see the exposure item
+      above. Authoring the remaining 255 is the bulk of the work left, and it is now almost
+      entirely English and science.
+- [x] ~~**Review the 2025 port and decide the subject split.**~~ **DONE 2026-09-23** — both
+      batches signed off and promoted to live; the split stays **5 maths / 5 English / 5 science**
+      per spec §1, the institute's own maths-heavy paper notwithstanding. Science items must
+      therefore be authored from scratch rather than drawn from experience.
+- [ ] **Science is fully exposed — author it next.** With 45 live items, 200 simulated draws gave
+      200 distinct papers, but six items appear on *every* one: `S-E-01`, `S-E-02`, `S-E-03`,
+      `S-M-04`, `S-D-05` (the whole science section) and `E-D-05` (the only difficult English
+      item). A paper needs 3 easy + 1 moderate + 1 difficult per subject and science holds exactly
+      that, so there is nothing to choose between. One screenshot of the science section burns it
+      for every candidate. Priority order: science easy → science moderate/difficult → English
+      difficult.
 - [ ] **Two filler distractors, flagged not fixed.** `M-E-11` option D (89,223) and `M-E-13`
       option D (28) correspond to no derivable candidate error, so they are dead options that make
       the items easier than their tier implies. Noted in each item's `rationale`. Left in

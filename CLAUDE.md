@@ -163,10 +163,20 @@ Migrations are applied deliberately, never by a deploy:
   second. When tightening a policy, enumerate every caller of the table first;
   a read path is easy to miss precisely because it never errors, it just
   returns fewer rows.
+- **2026-09-23 — The 5/5/5 split stands, and the whole bank went live.** Both
+  batches signed off; 45 live items. The institute's own paper is ~65% maths
+  with no science, but spec §1 wins, so every science item has to be authored
+  rather than drawn from experience. Measured straight after: 200 draws gave
+  200 distinct papers, yet six items sit on *every* one — all five science
+  items plus the single difficult English item, because those strata hold
+  exactly the 3/1/1 a paper needs and there is nothing to choose between.
+  Variety in one subject buys none in another; check exposure per stratum,
+  never per bank.
 - **2026-09-22 — Maths batches proceed while the subject split is open.** The
   institute's own paper is ~65% maths with no science; spec §1 mandates 5/5/5.
   That decision is the user's, and maths needs 60/20/20 either way — so
   authoring maths cannot be wasted by it, while English and science can.
+  (Settled 2026-09-23, above.)
 - **2026-09-22 — Lint compares option *quantities*, not just strings.** `2/3`
   and `4/6` are one option printed twice: eliminated together, and two correct
   answers if one is the key. `parseOptionValue` refuses anything containing
