@@ -49,22 +49,29 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
-- [ ] **The bank holds 45 items, not 300 — all live as of 2026-09-23.** Composition:
-      maths 20/7/5, English 5/2/1, science 3/1/1 (easy/moderate/difficult against a 60/20/20
-      target per subject). Maths is comfortable; the other two are not — see the exposure item
-      above. Authoring the remaining 255 is the bulk of the work left, and it is now almost
-      entirely English and science.
+- [ ] **The bank holds 105 items, not 300 — all live and signed off as of 2026-09-23.**
+      Composition: maths 20/14/13, English 10/7/6, science 15/10/10 (easy/moderate/difficult
+      against a 60/20/20 target per subject). Verified against the database, not the JSON files.
+      Authoring the remaining 195 is the bulk of the work left; the largest absolute gaps are the
+      easy strata — English 50 short, science 45, maths 40 — and the thinnest are English
+      difficult (6) and English moderate (7). **Nothing is urgent:** no item now appears on more
+      than a third of papers.
 - [x] ~~**Review the 2025 port and decide the subject split.**~~ **DONE 2026-09-23** — both
       batches signed off and promoted to live; the split stays **5 maths / 5 English / 5 science**
       per spec §1, the institute's own maths-heavy paper notwithstanding. Science items must
       therefore be authored from scratch rather than drawn from experience.
-- [ ] **Science is fully exposed — author it next.** With 45 live items, 200 simulated draws gave
-      200 distinct papers, but six items appear on *every* one: `S-E-01`, `S-E-02`, `S-E-03`,
-      `S-M-04`, `S-D-05` (the whole science section) and `E-D-05` (the only difficult English
-      item). A paper needs 3 easy + 1 moderate + 1 difficult per subject and science holds exactly
-      that, so there is nothing to choose between. One screenshot of the science section burns it
-      for every candidate. Priority order: science easy → science moderate/difficult → English
-      difficult.
+- [x] ~~**Science is fully exposed — author it next.**~~ **DONE 2026-09-23** — at 45 live items,
+      six sat on *every* paper (the whole science section plus `E-D-05`). Four batches later the
+      live bank is 105 and, over 2,000 simulated draws from the database, **no item appears on
+      every paper** and the most exposed is 32%. Re-run that simulation after any future batch;
+      exposure is a per-stratum property and a healthy bank total can hide a starved stratum.
+- [ ] **36 answer keys rest on a rationale and a human read, with no machine check behind them.**
+      Every science and English MCQ. `items:lint` verifies shape, duplication and length tells; it
+      cannot verify that "terse" means brief, or that the third-law partner of the Earth's pull on
+      a book is the book's pull on the Earth (`S-D-30`) rather than the table's push. The maths
+      batches are different — every key there was recomputed from the stem in code. If a wrong key
+      is ever going to reach a candidate, it will be one of these 36. Worth a second pass by
+      someone who teaches the subject.
 - [ ] **Two filler distractors, flagged not fixed.** `M-E-11` option D (89,223) and `M-E-13`
       option D (28) correspond to no derivable candidate error, so they are dead options that make
       the items easier than their tier implies. Noted in each item's `rationale`. Left in
