@@ -1,0 +1,227 @@
+[
+  {
+    "ref": "S-E-21",
+    "subject": "science",
+    "skill": "magnetism",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A bar magnet is cut into two equal pieces. Each piece will",
+    "options": {
+      "A": "have both poles",
+      "B": "have only a north pole",
+      "C": "have only a south pole",
+      "D": "lose its magnetism"
+    },
+    "answer_key": "A",
+    "rationale": "Magnetic poles cannot be separated: cutting a magnet produces two smaller magnets, each with a north and a south. B and C are the intuitive answers and they are symmetric on purpose, so a candidate guessing from the picture in their head has no reason to prefer one, and both are wrong for the same reason. D treats cutting as damage."
+  },
+  {
+    "ref": "S-E-22",
+    "subject": "science",
+    "skill": "speed-of-light-and-sound",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "During a storm you see the lightning before you hear the thunder. This is because light",
+    "options": {
+      "A": "travels faster than sound",
+      "B": "is brighter than sound is loud",
+      "C": "travels in straight lines",
+      "D": "reaches the eye before the ear"
+    },
+    "answer_key": "A",
+    "rationale": "Light covers the distance almost instantly while sound takes about three seconds per kilometre. D is the distractor worth having: it is perfectly true and it merely restates the observation in the stem without explaining it. A candidate who picks it has matched words rather than found a cause, which is the habit the science section should be catching early."
+  },
+  {
+    "ref": "S-E-23",
+    "subject": "science",
+    "skill": "mass-and-weight",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "An object has a mass of 5 kg. Taking g as 10 m/s2, what is its weight in newtons?",
+    "numeric_answer": 50,
+    "numeric_tolerance": 0,
+    "rationale": "Weight is mass times gravitational field strength: 5 x 10 = 50 N. The characteristic error is answering 5, treating weight and mass as the same quantity in different clothes — an error the numeric format catches cleanly, since 5 appears in the stem and would look reassuring in an option list. The unit is named so there is no conversion involved."
+  },
+  {
+    "ref": "S-M-24",
+    "subject": "science",
+    "skill": "change-of-state",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Ice at 0 degrees C is heated steadily. While it is melting its temperature does not rise. The heat supplied is being used to",
+    "options": {
+      "A": "separate the particles of ice",
+      "B": "raise the temperature of the water",
+      "C": "escape into the surrounding air",
+      "D": "increase the weight of the ice"
+    },
+    "answer_key": "A",
+    "rationale": "Energy going into a change of state breaks the forces holding the solid together rather than speeding the particles up, which is why the thermometer sits still while the ice disappears. B is the dominant error: heat supplied is assumed to mean temperature raised, and the stem states plainly that it does not. Moderate because it requires separating energy from temperature, which are the same thing in everyday speech."
+  },
+  {
+    "ref": "S-M-25",
+    "subject": "science",
+    "skill": "pressure-in-liquids",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "The wall of a dam is built much thicker at the bottom than at the top. This is mainly because water pressure",
+    "options": {
+      "A": "increases with depth",
+      "B": "acts only downwards",
+      "C": "is greatest at the surface",
+      "D": "depends on the width of the dam"
+    },
+    "answer_key": "A",
+    "rationale": "Pressure in a liquid rises with the depth of water above, so the deepest part of the wall carries the greatest sideways push. B is a common misconception worth catching — if pressure acted only downwards there would be no need for a wall at all. D substitutes the quantity of water for its depth, which is why a narrow deep lake presses as hard as a broad one."
+  },
+  {
+    "ref": "S-M-26",
+    "subject": "science",
+    "skill": "chemical-and-physical-change",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which of these is a chemical change?",
+    "options": {
+      "A": "Iron rusting in damp air",
+      "B": "Ice melting into water",
+      "C": "Salt dissolving in water",
+      "D": "Water boiling into steam"
+    },
+    "answer_key": "A",
+    "rationale": "Rusting forms a new substance, iron oxide, and cannot be undone by cooling or drying. C is the reason this is moderate: dissolving looks like a transformation because the salt vanishes, but the salt is unchanged and reappears on evaporation. B and D are changes of state. The test is whether a new substance exists afterwards, not whether the appearance changed."
+  },
+  {
+    "ref": "S-M-27",
+    "subject": "science",
+    "skill": "concentration",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A solution is made by dissolving 20 g of salt in 80 g of water. What is the percentage of salt by mass in the solution?",
+    "numeric_answer": 20,
+    "numeric_tolerance": 0,
+    "rationale": "The solution weighs 20 + 80 = 100 g, so the salt is 20/100 = 20 per cent of it. Moderate because the denominator has to be built before it can be used: the tempting move is 20/80 = 25 per cent, dividing by the water rather than the whole solution. Numeric format matters here — with 25 visible in an option list, many candidates would stop at it."
+  },
+  {
+    "ref": "S-M-28",
+    "subject": "science",
+    "skill": "density-and-buoyancy",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A hot air balloon rises when the air inside it is heated. This is because the heated air",
+    "options": {
+      "A": "is less dense than the outside air",
+      "B": "expands and pushes the balloon up",
+      "C": "weighs more than the cooler air",
+      "D": "moves faster than the surrounding air"
+    },
+    "answer_key": "A",
+    "rationale": "Heating spreads the same mass of air through a larger volume, so the air inside becomes less dense than the air it displaces and the balloon floats upward for the same reason a cork floats in water. B is the mechanical story people tell themselves and it names expansion without connecting it to density, which is the step that actually matters. C inverts the effect."
+  },
+  {
+    "ref": "S-M-29",
+    "subject": "science",
+    "skill": "electrical-safety",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "The metal body of an electric iron is connected to the earth wire. The main purpose of this is to",
+    "options": {
+      "A": "prevent an electric shock",
+      "B": "make the iron heat faster",
+      "C": "reduce the electricity bill",
+      "D": "stop the fuse from melting too soon"
+    },
+    "answer_key": "A",
+    "rationale": "If a live wire works loose and touches the casing, the earth wire gives the current a low-resistance path away from anyone holding it, and the resulting surge blows the fuse. D is the near-miss: the fuse does operate, but its melting is the mechanism protecting the circuit, not the thing the earth wire is there to prevent. Moderate because the answer requires imagining a fault that is not in the stem."
+  },
+  {
+    "ref": "S-D-30",
+    "subject": "science",
+    "skill": "action-and-reaction",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A book lies at rest on a table. Which force forms an action-reaction pair with the Earth's gravitational pull on the book?",
+    "options": {
+      "A": "The book's pull on the Earth",
+      "B": "The table's push on the book",
+      "C": "The book's push on the table",
+      "D": "The book's weight acting downwards"
+    },
+    "answer_key": "A",
+    "rationale": "A third-law pair is the same interaction seen from both sides, so the partner of the Earth pulling the book is the book pulling the Earth — equal, opposite, and acting on different bodies. B is the answer almost everyone gives and it is wrong for an instructive reason: the table's push balances the weight, but balancing is not pairing, and the two forces act on the same object. Difficult because a true statement about equilibrium has to be rejected in favour of the one about interaction."
+  },
+  {
+    "ref": "S-D-31",
+    "subject": "science",
+    "skill": "conservation-of-mass",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A piece of iron is weighed, left in damp air until it rusts, and weighed again. It is now heavier. The best explanation is that",
+    "options": {
+      "A": "oxygen from the air has joined the iron",
+      "B": "rust is a denser material than iron",
+      "C": "the iron has absorbed water only",
+      "D": "mass is not conserved in chemical changes"
+    },
+    "answer_key": "A",
+    "rationale": "Rust is iron oxide, and the oxygen comes from the air, so the gain in mass is matched by a loss from the surroundings. B confuses density with mass — a denser substance is not automatically a heavier sample. D is the conclusion a candidate reaches by taking the observation at face value, and it is exactly backwards: the extra mass is the evidence that something joined, not that mass appeared. Difficult because it requires treating air as a material with weight."
+  },
+  {
+    "ref": "S-D-32",
+    "subject": "science",
+    "skill": "energy-transformation",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "In a hydroelectric power station, water stored high behind a dam falls and turns a turbine. The main energy changes are",
+    "options": {
+      "A": "potential to kinetic to electrical",
+      "B": "kinetic to potential to electrical",
+      "C": "chemical to kinetic to electrical",
+      "D": "electrical to kinetic to potential"
+    },
+    "answer_key": "A",
+    "rationale": "Stored height is gravitational potential energy; falling converts it to kinetic energy; the turbine and generator convert that to electrical energy. B has the first two in the wrong order and is the most attractive error, since the word most associated with moving water is kinetic. Difficult because the chain has to be read from the stored state rather than from the visible motion."
+  },
+  {
+    "ref": "S-D-33",
+    "subject": "science",
+    "skill": "reflection",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "You stand 2 m in front of a plane mirror, then step back 1 m. The distance between you and your image is now",
+    "options": {
+      "A": "6 m",
+      "B": "3 m",
+      "C": "4 m",
+      "D": "5 m"
+    },
+    "answer_key": "A",
+    "rationale": "A plane mirror forms an image as far behind it as the object stands in front, so at 3 m the gap is 3 + 3 = 6 m. B is the distance to the mirror, the answer of a candidate who forgets the image moves too. C is the separation before stepping back. D comes from adding the 1 m step to the original 4 m separation instead of doubling it. Difficult because two distances change together."
+  },
+  {
+    "ref": "S-D-34",
+    "subject": "science",
+    "skill": "concentration",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A 200 ml sugar solution contains 10 g of sugar. Another 200 ml of water is added. What is the new concentration in grams per litre?",
+    "numeric_answer": 25,
+    "numeric_tolerance": 0,
+    "rationale": "The sugar is unchanged at 10 g while the volume doubles to 400 ml, which is 0.4 litre, so the concentration is 10 / 0.4 = 25 g per litre. Difficult because three things must be held at once: that dilution changes volume and not the solute, that the final volume is the sum, and that millilitres must become litres. Answering 50 means using the original volume; 0.025 means dividing by 400 without converting."
+  },
+  {
+    "ref": "S-D-35",
+    "subject": "science",
+    "skill": "electric-power",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A 40 W bulb and a 100 W bulb are each connected to the same mains supply. Compared with the 40 W bulb, the 100 W bulb",
+    "options": {
+      "A": "draws more current",
+      "B": "has a higher resistance",
+      "C": "uses less energy per hour",
+      "D": "glows for a longer time"
+    },
+    "answer_key": "A",
+    "rationale": "At the same voltage, power is voltage times current, so the brighter bulb must draw more current — and since resistance is voltage divided by current, it must have a LOWER resistance. B is the dominant error and a revealing one: candidates associate a more powerful appliance with more of everything, and resistance is the quantity that moves the other way. Difficult because the correct answer forces a second conclusion that feels wrong."
+  }
+]
