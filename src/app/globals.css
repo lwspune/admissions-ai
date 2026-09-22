@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root { color-scheme: light dark; }
+
+  /* Visible focus on every interactive element (spec 10). Never remove this
+     without replacing it — keyboard users have nothing else to go on. */
+  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
+    outline: 3px solid #1d4ed8;
+    outline-offset: 2px;
+  }
+}
