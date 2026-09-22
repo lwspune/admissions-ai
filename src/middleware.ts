@@ -9,7 +9,13 @@ import { createServerClient } from '@supabase/ssr'
 
 // robots.txt must be reachable by a crawler that has no session — the
 // middleware was redirecting it to /login, so the rules never got read.
-const PUBLIC = ['/login', '/t/', '/api/t/', '/robots.txt']
+//
+// /api/cron/ is here for the same reason: Vercel Cron carries no session, so
+// the middleware would redirect the purge to /login and it would never run,
+// reporting 307s nobody reads. Those routes guard themselves with CRON_SECRET
+// and must — being on this list means the middleware protects them from
+// nothing at all.
+const PUBLIC = ['/login', '/t/', '/api/t/', '/api/cron/', '/robots.txt']
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
