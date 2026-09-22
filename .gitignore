@@ -25,3 +25,5 @@ supabase/.branches/
 
 .vercel
 .env*
+# ...but the template carries no values and must stay tracked.
+!.env.example

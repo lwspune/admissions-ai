@@ -17,7 +17,9 @@ import { fileURLToPath } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const ROLES = ['telecaller', 'counsellor', 'superadmin']
-const MIN_PASSWORD = 12
+// 8 is the NIST SP 800-63B floor. Set by the institute; raise it if staff
+// accounts ever get more than superadmin's own data behind them.
+const MIN_PASSWORD = 8
 
 const USAGE = `
 Usage:
