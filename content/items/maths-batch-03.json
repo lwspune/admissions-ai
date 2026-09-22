@@ -1,0 +1,202 @@
+[
+  {
+    "ref": "M-M-33",
+    "subject": "maths",
+    "skill": "weighted-average",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A shopkeeper mixes 8 kg of rice costing ₹40 per kg with 12 kg costing ₹60 per kg. What is the cost per kg of the mixture, in rupees?",
+    "numeric_answer": 52,
+    "numeric_tolerance": 0,
+    "rationale": "Total cost is 8 x 40 + 12 x 60 = ₹1,040 over 20 kg, so ₹52 per kg. The characteristic error is averaging 40 and 60 to get 50, ignoring that there is more of the dearer rice — and 50 is close enough to 52 to feel right. Numeric format matters: seeing 50 and 52 side by side would prompt the re-check the item is trying to measure."
+  },
+  {
+    "ref": "M-M-34",
+    "subject": "maths",
+    "skill": "average",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "The average of five numbers is 20. One of them is replaced by 35 and the average becomes 23. What was the number that was replaced?",
+    "options": {
+      "A": "20",
+      "B": "15",
+      "C": "25",
+      "D": "30"
+    },
+    "answer_key": "A",
+    "rationale": "The total rises from 100 to 115, a gain of 15, so the number removed was 35 - 15 = 20. B is the dominant error: it is the amount the total changed by, mistaken for the number itself. Moderate because the route runs through the sums rather than the averages, and a candidate who works only with averages has nothing to manipulate."
+  },
+  {
+    "ref": "M-M-35",
+    "subject": "maths",
+    "skill": "interest-comparison",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Find the difference between the compound interest and the simple interest on ₹10,000 at 10% per annum for 2 years, in rupees.",
+    "numeric_answer": 100,
+    "numeric_tolerance": 0,
+    "rationale": "Simple interest is 10,000 x 10 x 2 / 100 = ₹2,000; compound interest is 10,000 x (1.1 squared - 1) = ₹2,100. The difference, ₹100, is precisely the interest earned in the second year on the first year's interest. Moderate because both formulas are needed and the answer is their gap rather than either one."
+  },
+  {
+    "ref": "M-M-36",
+    "subject": "maths",
+    "skill": "relative-speed",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A boat travels at 12 km/h in still water. A river flows at 3 km/h. How long does the boat take to cover 30 km downstream?",
+    "options": {
+      "A": "2 hours",
+      "B": "2 hours 30 minutes",
+      "C": "3 hours 20 minutes",
+      "D": "4 hours"
+    },
+    "answer_key": "A",
+    "rationale": "Going downstream the current helps, so the effective speed is 12 + 3 = 15 km/h and the time is 30 / 15 = 2 hours. B is what you get by ignoring the current entirely and dividing by 12 — the single most common error here. C uses the upstream speed of 9 km/h, applying the current in the wrong direction. Moderate because the arithmetic is trivial and the whole item is whether the current is added or subtracted."
+  },
+  {
+    "ref": "M-M-37",
+    "subject": "maths",
+    "skill": "percentage-of-a-percentage",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "In a school, 60% of the students are boys, and 25% of the boys play football. What percentage of all the students are boys who play football?",
+    "options": {
+      "A": "15%",
+      "B": "25%",
+      "C": "35%",
+      "D": "85%"
+    },
+    "answer_key": "A",
+    "rationale": "The second percentage applies to the boys, not to the school, so it is 0.60 x 0.25 = 15%. D adds the two figures and C subtracts them; both treat the percentages as applying to the same base, which is the error the item exists to find. B repeats the second figure unchanged, the answer of a candidate who reads 25% as already being a share of the school."
+  },
+  {
+    "ref": "M-M-38",
+    "subject": "maths",
+    "skill": "sets-and-overlap",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "In a group, 40 people like tea, 30 like coffee and 12 like both. Everyone likes at least one of the two. How many people are in the group?",
+    "numeric_answer": 58,
+    "numeric_tolerance": 0,
+    "rationale": "Adding 40 and 30 counts the 12 who like both twice, so the group is 40 + 30 - 12 = 58. Answering 70 means adding without correcting for the overlap, and it is the error almost everyone makes on a first reading. Moderate because the correction has to be noticed rather than computed — the arithmetic itself is one subtraction."
+  },
+  {
+    "ref": "M-M-39",
+    "subject": "maths",
+    "skill": "pattern-rule",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "If 2 * 3 = 13, 3 * 4 = 25 and 4 * 5 = 41, what is the value of 5 * 6?",
+    "options": {
+      "A": "61",
+      "B": "51",
+      "C": "71",
+      "D": "56"
+    },
+    "answer_key": "A",
+    "rationale": "The rule is the sum of the squares: 4 + 9 = 13, 9 + 16 = 25, 16 + 25 = 41, so 25 + 36 = 61. Three worked examples are given because one rule must be found that fits all of them — a candidate who tests only the first will find several rules that work and no way to choose. D (56) comes from continuing the differences 12 and 16 by adding 15 rather than applying the rule."
+  },
+  {
+    "ref": "M-D-40",
+    "subject": "maths",
+    "skill": "successive-discounts",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A jacket listed at ₹2,000 is sold after two successive discounts of 20% and 10%. What single discount percentage would give the same final price?",
+    "numeric_answer": 28,
+    "numeric_tolerance": 0,
+    "rationale": "The price becomes 2,000 x 0.8 x 0.9 = ₹1,440, a reduction of ₹560, which is 28% of the list price. The seductive answer is 30, adding the two discounts — and it is wrong because the second applies to the already-reduced price, so the shopper saves less than the sum suggests. Difficult because the answer must be expressed back as a percentage of the original after working in absolute money."
+  },
+  {
+    "ref": "M-D-41",
+    "subject": "maths",
+    "skill": "speed-distance-time",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A train 180 m long, travelling at 54 km/h, crosses a bridge in 20 seconds. What is the length of the bridge in metres?",
+    "numeric_answer": 120,
+    "numeric_tolerance": 0,
+    "rationale": "54 km/h is 15 m/s, so the train covers 300 m in 20 seconds — but that distance is the bridge plus the train's own length, because the train is clear only when its rear leaves. The bridge is 300 - 180 = 120 m. Difficult on two counts: the unit conversion, and realising the train's length is part of the distance travelled. Answering 300 means missing the second."
+  },
+  {
+    "ref": "M-D-42",
+    "subject": "maths",
+    "skill": "time-and-work",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A can do a job in 12 days and B in 18 days. They start together, but A leaves after 4 days. How many more days does B need to finish the job?",
+    "options": {
+      "A": "8",
+      "B": "6",
+      "C": "9",
+      "D": "10"
+    },
+    "answer_key": "A",
+    "rationale": "Together they do 1/12 + 1/18 = 5/36 of the job per day, so 4 days completes 20/36 = 5/9. The remaining 4/9 at B's rate of 1/18 per day takes 8 days. Difficult because it runs in three stages — combine the rates, apply them for a fixed time, then switch to one rate for the remainder — and an error at any stage still yields a plausible whole number."
+  },
+  {
+    "ref": "M-D-43",
+    "subject": "maths",
+    "skill": "mixture-replacement",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A vessel holds 40 litres of pure milk. 4 litres are removed and replaced with water. The same is done a second time. How many litres of milk remain?",
+    "numeric_answer": 32.4,
+    "numeric_tolerance": 0,
+    "rationale": "After the first replacement 36 litres of milk remain. The second removal takes 4 litres of a mixture that is only 36/40 milk, so it removes 3.6 litres of milk, leaving 32.4. The answer many candidates give is 32, subtracting 4 twice as though the second scoop were pure milk — the whole difficulty is noticing that the vessel's contents changed between the two operations."
+  },
+  {
+    "ref": "M-D-44",
+    "subject": "maths",
+    "skill": "average",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "The average weight of 8 boys is 45 kg. Two more boys join and the average becomes 47 kg. What is the average weight of the two new boys, in kilograms?",
+    "numeric_answer": 55,
+    "numeric_tolerance": 0,
+    "rationale": "The original total is 360 kg and the new total is 10 x 47 = 470 kg, so the two newcomers weigh 110 kg between them and average 55 kg each. Difficult because the question asks for the average of a sub-group that never appears directly: the candidate must reach it through two totals and then divide by two, and stopping at 110 is the most common place to stop."
+  },
+  {
+    "ref": "M-D-45",
+    "subject": "maths",
+    "skill": "lcm-with-remainder",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "What is the smallest number which, when divided by 6, 8 or 12, leaves a remainder of 3 in every case?",
+    "numeric_answer": 27,
+    "numeric_tolerance": 0,
+    "rationale": "A number divisible by all three is a multiple of their LCM, 24; adding the remainder gives 27, and 27 leaves 3 on division by 6, 8 and 12 alike. Difficult because the remainder has to be set aside before the LCM is found and restored afterwards — candidates who try to work with the remainder in place have nothing systematic to do. Answering 24 means forgetting to add it back."
+  },
+  {
+    "ref": "M-D-46",
+    "subject": "maths",
+    "skill": "probability",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A bag holds 3 red and 5 blue balls. Two are drawn one after the other without replacement. What is the probability that both are red?",
+    "options": {
+      "A": "3/28",
+      "B": "9/64",
+      "C": "3/8",
+      "D": "1/4"
+    },
+    "answer_key": "A",
+    "rationale": "The first draw is 3/8; the second is 2/7, because one red has gone and only seven balls remain. The product is 6/56 = 3/28. B is the answer for drawing with replacement, (3/8) squared, and it is the reason the item is difficult — the phrase 'without replacement' changes both the numerator and the denominator of the second fraction, and candidates commonly adjust neither or only one."
+  },
+  {
+    "ref": "M-D-47",
+    "subject": "maths",
+    "skill": "profit-and-loss",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A trader sells two watches at ₹960 each. On one he gains 20% and on the other he loses 20%. Overall he makes",
+    "options": {
+      "A": "a loss of 4%",
+      "B": "no profit or loss",
+      "C": "a gain of 4%",
+      "D": "a loss of 2%"
+    },
+    "answer_key": "A",
+    "rationale": "The cost prices are 960/1.2 = ₹800 and 960/0.8 = ₹1,200, totalling ₹2,000 against ₹1,920 received — a loss of ₹80, or 4%. B is the intuitive answer and it is wrong because the equal percentages apply to unequal cost prices: the 20% lost is computed on the dearer watch. Difficult because the symmetry of the figures argues loudly for an answer that is not correct."
+  }
+]
