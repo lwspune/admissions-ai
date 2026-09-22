@@ -13,8 +13,13 @@ itself server-side.
 | [DEPLOY.md](DEPLOY.md) | Deployment and credential rotation |
 
 **Live:** https://admissions-ai-omega.vercel.app · repo `lwspune/admissions-ai` (private)
-Supabase project `ohcvimrxaeeqbmnucbcn`. Deploys are manual (`npx vercel --prod`);
-no Git integration yet.
+Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
+
+**Git integration is connected: a push to `main` deploys to production.** Other
+branches get a preview deployment, which Vercel's own login protects, so a
+preview is not a second open copy of the system. `npx vercel --prod` still
+works as a manual path. Migrations are never part of a deploy (see below), so a
+push ships code against whatever schema is already live.
 
 ---
 
@@ -96,6 +101,11 @@ Migrations are applied deliberately, never by a deploy:
   `.env.example`. A `!.env.example` negation guards it.
 - **Check exit codes, not pipe output.** `cmd | tail && echo $?` reports
   `tail`'s status. This hid a red lint through one commit.
+- **Do not infer that an integration is absent from having used a manual path.**
+  CLAUDE.md claimed for a day that Git deploys were not connected, because
+  `npx vercel --prod` had been used and no one checked. The project was created
+  by importing the repo (DEPLOY.md step 3), which connects Git by definition.
+  `gh api repos/<repo>/deployments` settles it in one call.
 - **An upsert rewrites every column it names.** `items:seed` used to send
   `status` unconditionally, so a plain re-seed demoted the entire live bank to
   `review` and left nothing drawable — visible only later, as staff unable to

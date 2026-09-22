@@ -29,9 +29,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
-- [ ] **Vercel Git integration is not connected.** Deploys are manual (`npx vercel --prod`), so a push
-      to `main` ships nothing. Connect it in the Vercel dashboard if you want push-to-deploy — worth it
-      once more than one person touches the repo.
+- [x] ~~**Vercel Git integration is not connected.**~~ **WRONG — it is, and always was.**
+      Corrected 2026-09-22: pushing branch `items/legacy-iq-2025-port` produced Preview deployment
+      `6593653103` for that exact commit, and `main` commits `881bd48` / `e68f42e` / `fe36391` each
+      have a `vercel[bot]` Production deployment. **A push to `main` deploys to production.**
+      Previews sit behind Vercel's own login, so they are not a second open copy. The earlier
+      claim came from assuming the manual `npx vercel --prod` runs were the only mechanism.
 - [ ] **Custom domain.** The production URL is `admissions-ai-omega.vercel.app` (the plain
       `admissions-ai.vercel.app` belongs to someone else). A link from an unrecognised `vercel.app`
       subdomain, arriving from an unknown number, is exactly what people are taught not to tap. A
