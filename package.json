@@ -18,7 +18,7 @@
     "items:lint": "node scripts/items-lint.mjs",
     "db:verify": "node scripts/verify-schema.mjs",
     "db:verify-rls": "tsx scripts/verify-rls.mts",
-    "items:seed": "node scripts/seed-items.mjs",
+    "items:seed": "tsx scripts/seed-items.mts",
     "staff:add": "node scripts/create-staff.mjs add",
     "staff:list": "node scripts/create-staff.mjs list",
     "issue": "tsx scripts/issue-test.mts",
