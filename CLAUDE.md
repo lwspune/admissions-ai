@@ -25,7 +25,8 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 **`src/lib/` — pure.** Plain data in, plain data out, no IO. This is where the
 logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
-`serialize` (**the security boundary**) · `report` · `mobile` · `token` · `ip` · `types`
+`serialize` (**the security boundary**) · `report` · `items` (seed-status rules) ·
+`mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
@@ -73,7 +74,7 @@ npm run dev                                  npm run build:check
 npm run lint          npm run typecheck      npm test
 npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
-npm run items:seed -- --live
+npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210
@@ -95,6 +96,11 @@ Migrations are applied deliberately, never by a deploy:
   `.env.example`. A `!.env.example` negation guards it.
 - **Check exit codes, not pipe output.** `cmd | tail && echo $?` reports
   `tail`'s status. This hid a red lint through one commit.
+- **An upsert rewrites every column it names.** `items:seed` used to send
+  `status` unconditionally, so a plain re-seed demoted the entire live bank to
+  `review` and left nothing drawable — visible only later, as staff unable to
+  issue a paper. Seeding now preserves an existing status; only
+  `--live --file <batch>` promotes.
 
 ## Decisions
 
@@ -125,6 +131,18 @@ Migrations are applied deliberately, never by a deploy:
 - **2026-09-22 — The report shows facts, never a verdict.** Missing telemetry reads as
   "nothing seen", not "nothing happened", and unknown dwell prints `unknown` rather than 0 —
   zero would read as "answered instantly", which is a fraud signal the data does not support.
+- **2026-09-22 — The institute's own 2025 IQ paper was ported, not adopted.**
+  15 of its 20 questions entered the bank (`content/items/legacy-iq-2025.*`);
+  five were dropped — one needs a figure the `.docx` has lost, one duplicates
+  another's sequence, three are recall at p ≈ 0.95. Its two shipped answer keys
+  disagree with each other and five keys were wrong, so every key was
+  re-derived twice, the second time in code. Field-tested items beat authored
+  ones, but only once the keys are trustworthy.
+- **2026-09-22 — Seeding never demotes.** `resolveSeedStatus` in
+  `src/lib/items.ts` is pure and tested because the alternative — the rule
+  living inline in a script — is what took the live bank to zero. Promotion is
+  the answer-key sign-off and is now scoped per batch, since `--live` alone
+  would approve items nobody has reviewed.
 - **2026-09-22 — Staff get a narrow `assessment_items` insert policy** rather
   than the console running on service role after an application-level check.
   Keeps the access rule in the database.

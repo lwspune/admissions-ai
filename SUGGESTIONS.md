@@ -42,9 +42,25 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
-- [ ] **The bank holds 15 items, not 300.** Every candidate currently gets the same paper, and a
-      reissue repeats questions by design (exclusion falls back rather than failing). Authoring the
-      other 285 is the bulk of the remaining work.
+- [ ] **The bank holds 30 items, not 300 — and only 15 are live.** The 2025 paper port
+      (`content/items/legacy-iq-2025.json`, 15 items) is seeded at `status='review'` and is not
+      drawable until you sign it off: `npm run items:seed -- --live --file legacy-iq-2025.json`.
+      Until then every candidate still gets the same paper. Authoring the remaining 270 is the bulk
+      of the work left.
+- [ ] **Review the 2025 port and decide the subject split.** See `content/items/legacy-iq-2025.md`.
+      The institute's own paper is ~65% maths with no science at all, while spec §1 mandates
+      5 maths / 5 English / 5 science. Worth settling before 270 items get authored against a split
+      the institute does not actually practise — the science items are the ones that will be
+      invented from nothing rather than drawn from experience.
+- [ ] **Two filler distractors, flagged not fixed.** `M-E-11` option D (89,223) and `M-E-13`
+      option D (28) correspond to no derivable candidate error, so they are dead options that make
+      the items easier than their tier implies. Noted in each item's `rationale`. Replace when the
+      maths bank is next touched.
+- [ ] **The printed 2025 paper is still circulating with wrong answer keys.** Separate from the
+      port: `IQ Test Answer Key.docx` (Apr 2025) is wrong on Q4, Q7 and Q17 and guesses Q12 — 15% of
+      the paper, marked wrong regardless of what the candidate wrote. `IQ Test_Qs_A5_ak.docx`
+      (Nov 2025) is correct apart from Q3. Corrected key in `content/items/legacy-iq-2025.md`;
+      someone should reprint it and check whether any past candidate was marked against the April one.
 - [ ] **No visual design pass.** The candidate screens are unstyled-but-correct. Parents will see the
       consent screen while deciding whether the institute looks competent.
 - [x] ~~**Event timestamps are flush time, not action time.**~~ **DONE 2026-09-22** — events now
