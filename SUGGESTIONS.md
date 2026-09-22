@@ -19,9 +19,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       faked a 390x844 screen via curl; neither is a phone.) The 4-inch / Android 8 / 3G case is
       exactly where per-question save and the pausing timer earn their keep. Background the tab
       mid-question, return, submit.
-- [ ] **Exercise the staff console buttons in a browser.** `createLead` and `issueForLead` are verified
-      only through their data path (the RLS probe). React server actions cannot be driven from curl, so
-      the form submissions themselves are untested.
+- [x] ~~**Exercise the staff console buttons in a browser.**~~ **DONE 2026-09-22** — confirmed by
+      the user. The database shows one lead with a **submitted** assessment, so Add candidate →
+      Issue → the candidate flow → submit all ran end to end through the UI.
+- [ ] **Look at `/items` and the report's new Question column in a browser.** Both shipped
+      2026-09-22 and neither has been seen by a human. `/items` needs a superadmin session, so it
+      cannot be checked from a script — unauthenticated it redirects to `/login?next=%2Fitems`,
+      which is all that has been proved.
 - [x] ~~Private GitHub repo + Vercel project.~~ **DONE 2026-09-22** — `lwspune/admissions-ai`
       (private, verified by a 404 to anonymous requests) deployed to
       https://admissions-ai-omega.vercel.app. Production env vars set; Preview left unset so

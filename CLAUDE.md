@@ -35,11 +35,11 @@ logic worth testing lives, which is why it tests without a database.
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
-`auth` (session-bound client) · `assessments` (issue) · `attempt` (open,
+`auth` (session-bound client) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report`
 
 **`src/app/`** — `t/[token]/` is the only unauthenticated route. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/` are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -71,6 +71,11 @@ These are the things that quietly break everything if violated.
 - **A frozen paper is immutable.** `assessment_items` is insert-only even for
   superadmin; a question changing under a candidate mid-attempt is the failure
   that table exists to prevent.
+- **Answer keys are superadmin-only.** Non-superadmin staff read `test_items`
+  only for items that have appeared on a paper (migration 0008), so the review
+  queue is invisible to them. The paper draw goes through `live_pool()`, which
+  returns `id, subject, difficulty` and no answer — never `select` the table
+  for a draw, or a newly promoted item becomes undrawable.
 
 ## Commands
 
@@ -148,6 +153,16 @@ Migrations are applied deliberately, never by a deploy:
   disagree with each other and five keys were wrong, so every key was
   re-derived twice, the second time in code. Field-tested items beat authored
   ones, but only once the keys are trustworthy.
+- **2026-09-22 — Narrowing an RLS policy broke two things downstream, in
+  order.** Scoping `test_items` reads to superadmin plus issued items (0008)
+  made newly promoted items undrawable, because the paper draw read the table
+  through the session client; `live_pool()` fixed that (0009) and then returned
+  nothing for the service role, because `is_staff()` reads a JWT claim a
+  service key does not carry (0010). Each break was found by a check that could
+  fail — a throwaway live row for the first, the integration suite for the
+  second. When tightening a policy, enumerate every caller of the table first;
+  a read path is easy to miss precisely because it never errors, it just
+  returns fewer rows.
 - **2026-09-22 — Maths batches proceed while the subject split is open.** The
   institute's own paper is ~65% maths with no science; spec §1 mandates 5/5/5.
   That decision is the user's, and maths needs 60/20/20 either way — so
