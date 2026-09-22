@@ -2,6 +2,7 @@
 
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
+import Link from 'next/link'
 import { browserClient } from '@/lib/browserClient'
 import { createLead, issueForLead, type ActionResult } from './actions'
 
@@ -241,7 +242,12 @@ function LeadCard({ lead }: { lead: LeadRow }) {
         </div>
 
         {done ? (
-          <span className="rounded bg-green-100 px-3 py-1 text-sm text-green-900">Completed</span>
+          <Link
+            href={`/reports/${lead.id}`}
+            className="min-h-tap inline-flex items-center rounded bg-green-700 px-4 py-2 text-sm font-medium text-white"
+          >
+            View report
+          </Link>
         ) : (
           <button
             type="button"
@@ -254,8 +260,13 @@ function LeadCard({ lead }: { lead: LeadRow }) {
         )}
       </div>
 
-      {issues >= 3 && !done && (
-        <p className="mt-2 text-xs text-slate-500">All 3 links used. Contact the office.</p>
+      {issues > 0 && !done && (
+        <p className="mt-2 text-xs">
+          <Link href={`/reports/${lead.id}`} className="text-slate-500 hover:underline">
+            View report
+          </Link>
+          {issues >= 3 && <span className="text-slate-500"> · All 3 links used. Contact the office.</span>}
+        </p>
       )}
 
       {error && (

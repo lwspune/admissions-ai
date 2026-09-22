@@ -21,7 +21,8 @@
     "items:seed": "node scripts/seed-items.mjs",
     "staff:add": "node scripts/create-staff.mjs add",
     "staff:list": "node scripts/create-staff.mjs list",
-    "issue": "tsx scripts/issue-test.mts"
+    "issue": "tsx scripts/issue-test.mts",
+    "staff:rm": "node scripts/create-staff.mjs rm"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

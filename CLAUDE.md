@@ -25,15 +25,15 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 **`src/lib/` — pure.** Plain data in, plain data out, no IO. This is where the
 logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
-`serialize` (**the security boundary**) · `mobile` · `token` · `ip` · `types`
+`serialize` (**the security boundary**) · `report` · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `assessments` (issue) · `attempt` (open,
-identify, start, save, record, submit)
+identify, start, save, record, submit) · `report`
 
 **`src/app/`** — `t/[token]/` is the only unauthenticated route. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `login/` are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/` are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -75,7 +75,8 @@ npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run items:seed -- --live
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
-npm run staff:list    npm run issue -- "Name" 9876543210
+npm run staff:list    npm run staff:rm -- <email>
+npm run issue -- "Name" 9876543210
 ```
 
 Migrations are applied deliberately, never by a deploy:
@@ -117,6 +118,13 @@ Migrations are applied deliberately, never by a deploy:
   verifiable-consent question: the consent screen renders on the parent's own
   device before the child sees a question. It also removed the unique
   constraint on `leads.contact_mobile`, since siblings share a number.
+- **2026-09-22 — Telemetry events carry a relative `offsetMs`, not a timestamp.** Server
+  arrival is flush time, so events cluster into 5-second groups; an ANSWERED question carries
+  its own dwell but a SKIPPED one had no usable timing at all. An offset from attempt start is
+  a duration, not a clock reading, so nothing new has to be trusted.
+- **2026-09-22 — The report shows facts, never a verdict.** Missing telemetry reads as
+  "nothing seen", not "nothing happened", and unknown dwell prints `unknown` rather than 0 —
+  zero would read as "answered instantly", which is a fraud signal the data does not support.
 - **2026-09-22 — Staff get a narrow `assessment_items` insert policy** rather
   than the console running on service role after an application-level check.
   Keeps the access rule in the database.

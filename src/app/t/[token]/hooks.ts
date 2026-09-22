@@ -16,13 +16,20 @@ export interface ClientEvent {
  * win. Every failure is swallowed — losing telemetry costs the report some
  * detail, losing an answer costs the candidate their test.
  *
- * Events are not timestamped here. The server stamps them on arrival, because
- * a client clock is not evidence.
+ * Events are not timestamped here — the server stamps arrival, because a client
+ * clock is not evidence. But arrival time is FLUSH time, which clusters events
+ * into 5-second groups and destroys per-question timing for questions that were
+ * never answered (an answered one carries its own dwell). So each event also
+ * carries `offsetMs`: milliseconds since this attempt started, measured on the
+ * client. It is a relative duration, not a timestamp, so there is still no
+ * clock to trust, and the server's own total bounds it.
  */
-export function useTelemetry(attemptId: string | null, flushMs = 5000) {
+export function useTelemetry(attemptId: string | null, startedAt: number | null, flushMs = 5000) {
   const buffer = useRef<ClientEvent[]>([])
   const attemptRef = useRef(attemptId)
   attemptRef.current = attemptId
+  const startRef = useRef(startedAt)
+  startRef.current = startedAt
 
   const flush = useCallback(async () => {
     const id = attemptRef.current
@@ -45,7 +52,11 @@ export function useTelemetry(attemptId: string | null, flushMs = 5000) {
 
   const record = useCallback(
     (event: ClientEvent, immediate = false) => {
-      buffer.current.push(event)
+      const start = startRef.current
+      buffer.current.push({
+        ...event,
+        payload: { ...(event.payload ?? {}), offsetMs: start === null ? null : Date.now() - start },
+      })
       if (immediate) void flush()
     },
     [flush],

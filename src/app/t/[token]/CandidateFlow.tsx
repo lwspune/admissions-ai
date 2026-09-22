@@ -46,7 +46,8 @@ export function CandidateFlow({
   const [current, setCurrent] = useState(1)
   const [reviewing, setReviewing] = useState(false)
 
-  const { record, flush } = useTelemetry(attemptId)
+  const [startedAt, setStartedAt] = useState<number | null>(null)
+  const { record, flush } = useTelemetry(attemptId, startedAt)
   const submitting = useRef(false)
   const questionEnteredAt = useRef(Date.now())
   const dwell = useRef<Record<number, number>>({})
@@ -247,6 +248,9 @@ export function CandidateFlow({
         ),
       )
       questionEnteredAt.current = Date.now()
+      // Local instant the attempt began. Events carry a RELATIVE offset from
+      // it, so telemetry survives flush-time clustering without a clock to trust.
+      setStartedAt(Date.now())
       setStage('running')
     } catch {
       setError('Could not reach the server. Please check your connection and try again.')

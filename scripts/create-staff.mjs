@@ -25,6 +25,7 @@ const USAGE = `
 Usage:
   npm run staff:add -- <email> <password> <${ROLES.join('|')}>
   npm run staff:list
+  npm run staff:rm -- <email>
 `
 
 function readEnv() {
@@ -78,6 +79,51 @@ async function main() {
       console.log(`  ${u.email.padEnd(34)} ${role}`)
     }
     console.log()
+    return 0
+  }
+
+  if (cmd === 'rm') {
+    const [email] = rest
+    if (!email) {
+      console.error(USAGE)
+      return 1
+    }
+
+    const res = await admin('users?per_page=200')
+    if (!res.ok) {
+      console.error(`Failed: HTTP ${res.status}`, (await res.text()).slice(0, 300))
+      return 1
+    }
+    const { users } = await res.json()
+    const user = users.find((u) => u.email === email)
+    if (!user) {
+      console.error(`
+No account with email ${email}.
+`)
+      return 1
+    }
+
+    // Refuse to remove the last superadmin: nobody could then promote anyone,
+    // and the only way back is a service-role script.
+    const superadmins = users.filter((u) => u.app_metadata?.role === 'superadmin')
+    if (user.app_metadata?.role === 'superadmin' && superadmins.length <= 1) {
+      console.error(`
+Refusing: ${email} is the only superadmin.
+`)
+      return 1
+    }
+
+    const del = await admin(`users/${user.id}`, { method: 'DELETE' })
+    if (!del.ok) {
+      console.error(`
+Failed: HTTP ${del.status}`)
+      console.error((await del.text()).slice(0, 300))
+      return 1
+    }
+
+    console.log(`
+Removed ${email} (was ${user.app_metadata?.role ?? 'no role'}).
+`)
     return 0
   }
 

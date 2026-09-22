@@ -10,8 +10,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [ ] **Rotate the Supabase `service_role` key and the database password.** Both, plus the anon key,
       were pasted into a chat transcript on 2026-09-22. The anon key is public by design; the other two
       are not. Settings → API → Reset, then update `.env.local`.
-- [ ] **Change the seeded staff password.** `admin@lwspune.test` was created with a known password
-      that is also in that transcript. `npm run staff:list` shows accounts and flags any with no role.
+- [x] ~~**Change the seeded staff password.**~~ **DONE 2026-09-22** — `admin@lwspune.test` deleted
+      via the new `npm run staff:rm`, which refuses to remove the last superadmin.
 - [ ] **Check the database password is not reused elsewhere.** It looks like it may be shared with
       other institute systems. This database should have its own.
 - [ ] **Take the test on a real Android phone over mobile data.** Now possible — the site is
@@ -29,8 +29,6 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
-- [ ] **Delete `admin@lwspune.test`.** A real superadmin (`connect.lwspune@gmail.com`) now exists, so
-      the seeded account with a transcript-known password should go. `npm run staff:list` shows both.
 - [ ] **Vercel Git integration is not connected.** Deploys are manual (`npx vercel --prod`), so a push
       to `main` ships nothing. Connect it in the Vercel dashboard if you want push-to-deploy — worth it
       once more than one person touches the repo.
@@ -41,19 +39,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [ ] **Vercel Hobby is licensed for non-commercial use.** This is a fee-charging institute's
       admissions pipeline. If enforced, candidate links go down mid-window with no warning to the
       telecaller. Decided on 2026-09-22 to stay on Hobby for now; revisit before a real intake.
-- [ ] **The report does not exist.** Scores are graded and stored, and nothing displays them. This is
-      the next build item and the thing that makes any of it readable to a counsellor.
+- [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
+      bars, the five facts, and an expandable per-question table. Question stems are hidden from
+      telecallers. `src/lib/report.ts` is pure with 20 tests.
 - [ ] **The bank holds 15 items, not 300.** Every candidate currently gets the same paper, and a
       reissue repeats questions by design (exclusion falls back rather than failing). Authoring the
       other 285 is the bulk of the remaining work.
 - [ ] **No visual design pass.** The candidate screens are unstyled-but-correct. Parents will see the
       consent screen while deciding whether the institute looks competent.
-- [ ] **Event timestamps are flush time, not action time.** Telemetry batches every 5 seconds and
-      the server stamps arrival, so `nav` events cluster. Answered questions are unaffected — dwell
-      is stored per answer and was accurate to the millisecond on the 2026-09-22 trial run. But a
-      SKIPPED question has no answer row, so its only timing evidence is those clustered events.
-      Fix before the report quotes time-per-question: have the client send a millisecond offset
-      from attempt start in the payload. Relative, so there is still no client clock to trust.
+- [x] ~~**Event timestamps are flush time, not action time.**~~ **DONE 2026-09-22** — events now
+      carry `offsetMs`, a relative duration from attempt start (no clock to trust). Verified on
+      production: 18 events arriving inside a 17s flush spread yielded correct 12s dwells for
+      SKIPPED questions, which previously had no usable timing at all.
 - [ ] **The pause signal has not been triggered by a real tab switch.** `changed_after_pause` is
       verified by posting pause/resume events directly; the `visibilitychange` wiring that emits them
       is written but unexercised in a browser.
