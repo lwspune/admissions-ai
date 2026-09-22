@@ -1,8 +1,9 @@
+import { redirect } from 'next/navigation'
+
+// The root is not a page. Middleware has already bounced anyone without a
+// session to /login, so whoever reaches here is signed in and wants the
+// console. A landing page here is a dead end: it was one, and a signed-in
+// staff member had no way out of it.
 export default function Home() {
-  return (
-    <main className="mx-auto max-w-lg p-6">
-      <h1 className="text-xl font-semibold">Admissions</h1>
-      <p className="mt-2 text-sm text-slate-600">Staff console. Sign in to continue.</p>
-    </main>
-  )
+  redirect('/leads')
 }

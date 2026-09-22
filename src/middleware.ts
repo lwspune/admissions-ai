@@ -7,7 +7,9 @@ import { createServerClient } from '@supabase/ssr'
 // The candidate route is deliberately excluded: /t/[token] is public by design
 // and the token plus the parent's number is its gate.
 
-const PUBLIC = ['/login', '/t/', '/api/t/']
+// robots.txt must be reachable by a crawler that has no session — the
+// middleware was redirecting it to /login, so the rules never got read.
+const PUBLIC = ['/login', '/t/', '/api/t/', '/robots.txt']
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
