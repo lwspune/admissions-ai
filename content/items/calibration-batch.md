@@ -2,7 +2,8 @@
 
 **Date:** 2026-09-22
 **Purpose:** Establish the difficulty register and house style **before** the remaining 285 items are authored.
-**Status:** Awaiting review. Blocks spec §16 Phase 4.
+**Status:** Approved 2026-09-22. Three items revised post-approval to clear length tells flagged by
+`npm run items:lint` — see S-E-01, S-E-02 and E-D-05. Machine-readable source: `calibration-batch.json`.
 **Composition:** Exactly one paper's worth — 3 easy / 1 moderate / 1 difficult per subject, per spec §8.
 
 This markdown is the **review artifact**. Once approved, these are seeded to `test_items` with
@@ -236,10 +237,10 @@ Moderate because it requires two independent cues — pronoun reference and tens
 
 | | |
 |---|---|
-| A | Meera is a member of the debate team. |
-| B | Meera may or may not be a member of the debate team. |
-| C | Meera is not a member of the debate team. |
-| D | The debate team has only one member. |
+| A | Meera is on the debate team. |
+| B | Meera may or may not be on the debate team. |
+| C | Meera is not on the debate team. |
+| D | Everyone at the workshop is on the debate team. |
 
 **Key: B**
 
@@ -252,7 +253,10 @@ neither is established.
   reverse it. This is close to a pure reasoning measure with almost no knowledge content, which makes
   it among the most valuable items in the batch.
 - **C** — inverts the error.
-- **D** — unrelated to the premises; a distractor for candidates guessing at the shape of logic questions.
+- **D** — states the converse of the premise outright, which is exactly the unwarranted step A takes
+  implicitly. (Revised: the original "the debate team has only one member" was unrelated to the premises
+  and tempted nobody, and the hedged key was the longest option — a length tell. D is now both the
+  longer option and the better distractor.)
 
 **Watch on review:** the word "must" carries the item. If real candidates read past it, p may fall
 below 0.20 and the item will need the word emphasised rather than the item discarded.
@@ -269,10 +273,10 @@ below 0.20 and the item will need the word emphasised rather than the item disca
 
 | | |
 |---|---|
-| A | carries away the water vapour collecting near the clothes |
-| B | raises the temperature of the clothes |
-| C | increases the air pressure on the clothes |
-| D | adds heat energy directly to the water |
+| A | carries away the water vapour near the clothes |
+| B | raises the temperature of the wet clothes |
+| C | increases the air pressure around the wet clothes |
+| D | adds heat energy directly to the wet clothes |
 
 **Key: A**
 
@@ -292,7 +296,7 @@ the candidate applies a mechanism to an everyday observation.
 
 | | |
 |---|---|
-| A | Air |
+| A | Atmospheric air |
 | B | Sea water |
 | C | Brass |
 | D | Carbon dioxide |
@@ -301,7 +305,8 @@ the candidate applies a mechanism to an everyday observation.
 
 **Rationale.** Carbon dioxide is a compound — fixed composition, chemically bonded. The other three are
 mixtures in varying proportions.
-- **A (Air)** — a mixture of gases; candidates who think "pure substance" because it is invisible.
+- **A (Atmospheric air)** — a mixture of gases; candidates who think "pure substance" because it is
+  invisible. Lengthened from "Air" so the key is no longer the longest option.
 - **B (Sea water)** — the most obvious mixture; included as an anchor.
 - **C (Brass)** — an alloy, and therefore a mixture. The real discriminator: candidates who think
   "metal = element" pick this.

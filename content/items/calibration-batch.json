@@ -1,0 +1,227 @@
+[
+  {
+    "ref": "M-E-01",
+    "subject": "maths",
+    "skill": "number-series",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Find the next number in the series: 3, 6, 11, 18, 27, ___",
+    "options": {
+      "A": "36",
+      "B": "38",
+      "C": "37",
+      "D": "40"
+    },
+    "answer_key": "B",
+    "rationale": "Differences are 3, 5, 7, 9 — consecutive odd numbers — so the next is 11 and 27 + 11 = 38. A repeats the previous difference of 9. C increases the difference by 1 each time. D skips an odd number, using 13."
+  },
+  {
+    "ref": "M-E-02",
+    "subject": "maths",
+    "skill": "percentage",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "In a class of 40 students, 25% did not appear for a test. How many students appeared for the test?",
+    "numeric_answer": 30,
+    "numeric_tolerance": 0,
+    "rationale": "25% of 40 = 10 absent, so 40 - 10 = 30 appeared. The second step discriminates: a candidate who computes 10 and stops has answered a question that was not asked. Numeric format means that error scores 0 rather than being cued by an option list."
+  },
+  {
+    "ref": "M-E-03",
+    "subject": "maths",
+    "skill": "ratio-proportion",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Three friends share ₹1,200 in the ratio 2 : 3 : 7. How much does the friend with the largest share receive?",
+    "options": {
+      "A": "₹700",
+      "B": "₹600",
+      "C": "₹840",
+      "D": "₹300"
+    },
+    "answer_key": "A",
+    "rationale": "Total parts = 12, one part = ₹100, largest share = 7 × 100 = ₹700. B sums the parts wrongly as 14 (1200 ÷ 14 × 7), landing on a clean number. C reads 7 as 70%. D returns the middle share, ignoring 'largest'."
+  },
+  {
+    "ref": "M-M-04",
+    "subject": "maths",
+    "skill": "time-and-work",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A tap fills a tank in 6 hours. A second tap fills the same tank in 12 hours. If both taps are opened together, how long will the tank take to fill?",
+    "options": {
+      "A": "4 hours",
+      "B": "9 hours",
+      "C": "18 hours",
+      "D": "3 hours"
+    },
+    "answer_key": "A",
+    "rationale": "Rates add: 1/6 + 1/12 = 1/4 of the tank per hour, so 4 hours. B averages the times and is the dominant wrong answer — it feels right, and knowing that rates rather than times are additive is what makes this moderate. C adds the times, failing the sanity check that two taps beat one. D halves the faster tap."
+  },
+  {
+    "ref": "M-D-05",
+    "subject": "maths",
+    "skill": "multi-step-arithmetic",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A shopkeeper marks an item 40% above its cost price, then gives a 25% discount on the marked price. If the item cost ₹800, what is the selling price in rupees?",
+    "numeric_answer": 840,
+    "numeric_tolerance": 0,
+    "rationale": "Marked price = 800 × 1.40 = 1120; selling price = 1120 × 0.75 = 840. Difficult because the percentages apply to different bases. The seductive error nets them (40 - 25 = 15, giving 920), treating both as applying to cost price. Numeric format is deliberate: seeing 840 and 920 side by side would prompt a re-check the candidate would not otherwise do."
+  },
+  {
+    "ref": "E-E-01",
+    "subject": "english",
+    "skill": "analogy",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Doctor is to Hospital as Teacher is to ___",
+    "options": {
+      "A": "School",
+      "B": "Student",
+      "C": "Book",
+      "D": "Lesson"
+    },
+    "answer_key": "A",
+    "rationale": "The relation is professional to place of work. B is the person served, C the tool used, D the thing produced. Every distractor is a genuine teacher-relation, so the item tests whether the candidate identifies which relation the first pair establishes — that is what makes an analogy a reasoning item rather than a vocabulary one."
+  },
+  {
+    "ref": "E-E-02",
+    "subject": "english",
+    "skill": "odd-one-out",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which word does not belong with the others?",
+    "options": {
+      "A": "Frequently",
+      "B": "Rarely",
+      "C": "Often",
+      "D": "Regularly"
+    },
+    "answer_key": "B",
+    "rationale": "Frequently, often and regularly all indicate high frequency; rarely indicates low frequency. All four words sit on the same semantic dimension, so the item discriminates — an earlier draft (calm/quiet/peaceful/loud) would have calibrated near p = 0.95 and been a free mark."
+  },
+  {
+    "ref": "E-E-03",
+    "subject": "english",
+    "skill": "sentence-completion",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Although he had practised for months, he ___ to qualify for the final round.",
+    "options": {
+      "A": "failed",
+      "B": "managed",
+      "C": "hoped",
+      "D": "deserved"
+    },
+    "answer_key": "A",
+    "rationale": "'Although' signals contrast, so the clause must report the opposite of what practice predicts. All four options are grammatical with the infinitive, deliberately: if one were grammatically impossible it could be eliminated without reading for meaning, and the item would measure grammar rather than the connector. B is a positive outcome, C an intention, D an evaluation."
+  },
+  {
+    "ref": "E-M-04",
+    "subject": "english",
+    "skill": "sentence-sequencing",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Arrange the four sentences into a logical paragraph. P. He then walked to the station. Q. Rahul woke up late. R. The train had already left. S. He dressed in a hurry.",
+    "options": {
+      "A": "Q S P R",
+      "B": "Q P S R",
+      "C": "S Q P R",
+      "D": "Q S R P"
+    },
+    "answer_key": "A",
+    "rationale": "Q must open: it is the only sentence with a named subject, and the others use 'he', which needs an antecedent. The rest follows causally. B walks to the station before dressing. C opens on the pronoun. D places the departure before the arrival, which the past perfect 'had already left' rules out. Moderate because two independent cues are needed, not just event order."
+  },
+  {
+    "ref": "E-D-05",
+    "subject": "english",
+    "skill": "inference",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Every member of the debate team attends the Saturday workshop. Meera attends the Saturday workshop. Which statement must be true?",
+    "options": {
+      "A": "Meera is on the debate team.",
+      "B": "Meera may or may not be on the debate team.",
+      "C": "Meera is not on the debate team.",
+      "D": "Everyone at the workshop is on the debate team."
+    },
+    "answer_key": "B",
+    "rationale": "The premise says members attend, not that only members attend, so the workshop may be open to anyone and neither conclusion is established. A is affirming the consequent and is the expected majority answer, separating candidates who read a conditional as one-directional from those who silently reverse it. C inverts the error. D states the converse of the premise outright, which is exactly the unwarranted step A takes implicitly. Close to a pure reasoning measure with almost no knowledge content."
+  },
+  {
+    "ref": "S-E-01",
+    "subject": "science",
+    "skill": "everyday-phenomenon",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Wet clothes dry faster on a windy day than on a still day. The main reason is that the wind ___",
+    "options": {
+      "A": "carries away the water vapour near the clothes",
+      "B": "raises the temperature of the wet clothes",
+      "C": "increases the air pressure around the wet clothes",
+      "D": "adds heat energy directly to the wet clothes"
+    },
+    "answer_key": "A",
+    "rationale": "Evaporation slows as the air around the clothes saturates; wind replaces it so evaporation continues. No formula or definition — the candidate applies a mechanism to an everyday observation. B contradicts the experience of wind cooling. C confuses air movement with pressure. D is the 'wind is warm' misconception, which cold wind refutes."
+  },
+  {
+    "ref": "S-E-02",
+    "subject": "science",
+    "skill": "classification",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is not a mixture?",
+    "options": {
+      "A": "Atmospheric air",
+      "B": "Sea water",
+      "C": "Brass",
+      "D": "Carbon dioxide"
+    },
+    "answer_key": "D",
+    "rationale": "Carbon dioxide is a compound with fixed composition and chemical bonds; the others are mixtures in varying proportions. A catches those who read invisible as pure. B is the obvious mixture, included as an anchor. C is the real discriminator: brass is an alloy, and candidates who think metal equals element pick it."
+  },
+  {
+    "ref": "S-E-03",
+    "subject": "science",
+    "skill": "unit-and-magnitude",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A cyclist covers 12 km in 40 minutes. What is the average speed in kilometres per hour?",
+    "numeric_answer": 18,
+    "numeric_tolerance": 0,
+    "rationale": "40 minutes = 2/3 hour, so 12 ÷ (2/3) = 18 km/h. The discriminator is the unit conversion, not the division: candidates who divide 12 by 40 and report 0.3, or ignore units and report 12, have missed what was asked. Tiered easy, but the conversion step may calibrate it to moderate."
+  },
+  {
+    "ref": "S-M-04",
+    "subject": "science",
+    "skill": "experimental-reasoning",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "To test whether a plant needs sunlight, a student keeps one plant in bright light and an identical plant in a dark cupboard. For a fair test, what must be the same for both?",
+    "options": {
+      "A": "The water, soil and temperature",
+      "B": "Only the type of pot",
+      "C": "The amount of light received",
+      "D": "Nothing else needs to be the same"
+    },
+    "answer_key": "A",
+    "rationale": "A fair test holds every variable constant except the one under investigation, and light is the variable being tested. C is the strongest distractor: it sounds like textbook fair-test language, but holding light constant destroys the experiment — it catches candidates repeating a phrase rather than reasoning about what the experiment is for. B controls the least relevant variable; D controls nothing."
+  },
+  {
+    "ref": "S-D-05",
+    "subject": "science",
+    "skill": "applying-a-principle",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A sealed, rigid steel container filled with air is heated. Which statement about the air inside is correct?",
+    "options": {
+      "A": "The pressure increases and the volume stays the same",
+      "B": "The volume increases and the pressure stays the same",
+      "C": "Both the pressure and the volume increase",
+      "D": "Both the pressure and the volume decrease"
+    },
+    "answer_key": "A",
+    "rationale": "'Rigid' fixes the volume, so heating raises the pressure at constant volume. Difficult because 'heating makes things expand' is a correct general intuition that one word in the stem must suppress — it measures whether a candidate reads constraints before applying a rule. B is that intuition unchecked and is the expected majority wrong answer. C applies both effects without noticing they are mutually exclusive in a rigid container. D confuses heating with cooling."
+  }
+]

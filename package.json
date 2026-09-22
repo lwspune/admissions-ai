@@ -13,8 +13,11 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "items:lint": "tsx scripts/items-lint.ts",
-    "db:verify": "node scripts/verify-schema.mjs"
+    "items:lint": "node scripts/items-lint.mjs",
+    "db:verify": "node scripts/verify-schema.mjs",
+    "items:seed": "node scripts/seed-items.mjs",
+    "staff:add": "node scripts/create-staff.mjs add",
+    "staff:list": "node scripts/create-staff.mjs list"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

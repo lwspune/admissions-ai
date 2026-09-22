@@ -206,10 +206,12 @@ console.log('\nCleaning up probe rows')
 await rest('leads?name=like.Probe*', SVC, { method: 'DELETE' })
 await rest('test_items?skill=eq.probe', SVC, { method: 'DELETE' })
 
-const leftLeads = await (await rest('leads?select=id', SVC)).json()
-const leftItems = await (await rest('test_items?select=id', SVC)).json()
+// Assert no PROBE rows remain — not that the tables are empty. The real item
+// bank lives in test_items and must survive this probe untouched.
+const leftLeads = await (await rest('leads?select=id&name=like.Probe*', SVC)).json()
+const leftItems = await (await rest('test_items?select=id&skill=eq.probe', SVC)).json()
 check('all probe rows removed', leftLeads.length === 0 && leftItems.length === 0,
-  `${leftLeads.length} leads, ${leftItems.length} items remain`)
+  `${leftLeads.length} probe leads, ${leftItems.length} probe items remain`)
 
 console.log(`\n${passed} passed, ${failed} failed\n`)
 process.exit(failed === 0 ? 0 : 1)

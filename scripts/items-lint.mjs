@@ -1,0 +1,142 @@
+// Item bank lint. Runs before any item is seeded.
+//
+//   npm run items:lint
+//
+// A wrong answer key is the failure that hides for six months, so this checks
+// the mechanical properties a human reviewer reads past: shape, duplication,
+// and the length tell that lets a candidate pick the key without reading the
+// question. It cannot check whether an answer is actually correct — that is
+// what the rationale and human review are for.
+
+import { readFileSync, readdirSync } from 'node:fs'
+import { join, dirname } from 'node:path'
+import { fileURLToPath } from 'node:url'
+
+const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
+
+const SUBJECTS = ['maths', 'english', 'science']
+const DIFFICULTIES = ['easy', 'moderate', 'difficult']
+const CHOICES = ['A', 'B', 'C', 'D']
+const MAX_STEM_WORDS = 40
+const MIN_RATIONALE_CHARS = 60
+/** Per subject, the minimum a paper needs (spec §6). */
+const MIN_PER_SUBJECT = { easy: 3, moderate: 1, difficult: 1 }
+
+const words = (s) => s.trim().split(/\s+/).filter(Boolean).length
+
+function main() {
+  let errors = 0
+  let warnings = 0
+  const err = (ref, msg) => { errors++; console.log(`  ERROR  ${ref}: ${msg}`) }
+  const warn = (ref, msg) => { warnings++; console.log(`  WARN   ${ref}: ${msg}`) }
+
+  const files = readdirSync(DIR).filter((f) => f.endsWith('.json'))
+  if (files.length === 0) {
+    console.error(`No item files in ${DIR}`)
+    return 1
+  }
+
+  const items = []
+  for (const file of files) {
+    const parsed = JSON.parse(readFileSync(join(DIR, file), 'utf8'))
+    if (!Array.isArray(parsed)) {
+      console.error(`${file} is not a JSON array`)
+      return 1
+    }
+    for (const item of parsed) items.push({ ...item, __file: file })
+  }
+
+  console.log(`\nLinting ${items.length} items from ${files.length} file(s)\n`)
+
+  const seenRefs = new Map()
+  const seenStems = new Map()
+
+  for (const item of items) {
+    const ref = item.ref ?? '(no ref)'
+
+    if (!item.ref) err(ref, 'missing ref')
+    else if (seenRefs.has(item.ref)) err(ref, `duplicate ref, also in ${seenRefs.get(item.ref)}`)
+    else seenRefs.set(item.ref, item.__file)
+
+    if (!SUBJECTS.includes(item.subject)) err(ref, `invalid subject "${item.subject}"`)
+    if (!DIFFICULTIES.includes(item.difficulty)) err(ref, `invalid difficulty "${item.difficulty}"`)
+    if (!item.skill || !item.skill.trim()) err(ref, 'missing skill')
+
+    if (!item.stem || !item.stem.trim()) {
+      err(ref, 'missing stem')
+    } else {
+      if (words(item.stem) > MAX_STEM_WORDS) {
+        err(ref, `stem is ${words(item.stem)} words, limit is ${MAX_STEM_WORDS}`)
+      }
+      const key = item.stem.trim().toLowerCase()
+      if (seenStems.has(key)) err(ref, `duplicate stem, also in ${seenStems.get(key)}`)
+      else seenStems.set(key, ref)
+    }
+
+    // The answer-key sign-off depends on the rationale being substantive.
+    if (!item.rationale || item.rationale.trim().length < MIN_RATIONALE_CHARS) {
+      err(ref, `rationale is missing or too short (min ${MIN_RATIONALE_CHARS} chars)`)
+    }
+
+    if (item.format === 'mcq') {
+      if (item.numeric_answer != null) err(ref, 'mcq item carries a numeric_answer')
+      if (!item.options || typeof item.options !== 'object') {
+        err(ref, 'mcq item has no options')
+        continue
+      }
+      const keys = Object.keys(item.options).sort()
+      if (keys.join('') !== 'ABCD') err(ref, `options must be exactly A-D, got ${keys.join('')}`)
+
+      const values = CHOICES.map((c) => item.options[c]).filter((v) => v != null)
+      if (values.some((v) => !String(v).trim())) err(ref, 'an option is blank')
+      if (new Set(values.map((v) => String(v).trim().toLowerCase())).size !== values.length) {
+        err(ref, 'two options are identical')
+      }
+      if (!CHOICES.includes(item.answer_key)) err(ref, `invalid answer_key "${item.answer_key}"`)
+
+      // The length tell: if the correct answer is visibly the longest, a
+      // candidate can pick it without reading the question.
+      if (CHOICES.includes(item.answer_key) && values.length === 4) {
+        const keyLen = String(item.options[item.answer_key]).length
+        const others = CHOICES.filter((c) => c !== item.answer_key).map((c) => String(item.options[c]).length)
+        const longestOther = Math.max(...others)
+        if (keyLen > longestOther * 1.5) {
+          err(ref, `key is ${keyLen} chars vs ${longestOther} for the next longest — a length tell`)
+        } else if (keyLen > longestOther) {
+          warn(ref, `key is the longest option (${keyLen} vs ${longestOther}) — mild length tell`)
+        }
+      }
+    } else if (item.format === 'numeric') {
+      if (item.options != null) err(ref, 'numeric item carries options')
+      if (item.answer_key != null) err(ref, 'numeric item carries an answer_key')
+      if (typeof item.numeric_answer !== 'number' || !Number.isFinite(item.numeric_answer)) {
+        err(ref, 'numeric_answer must be a finite number')
+      }
+      if (item.numeric_tolerance != null &&
+          (typeof item.numeric_tolerance !== 'number' || item.numeric_tolerance < 0)) {
+        err(ref, 'numeric_tolerance must be a non-negative number')
+      }
+    } else {
+      err(ref, `invalid format "${item.format}"`)
+    }
+  }
+
+  console.log('\nBank can fill a paper')
+  for (const subject of SUBJECTS) {
+    for (const difficulty of DIFFICULTIES) {
+      const n = items.filter((i) => i.subject === subject && i.difficulty === difficulty).length
+      const need = MIN_PER_SUBJECT[difficulty]
+      if (n < need) {
+        errors++
+        console.log(`  ERROR  ${subject}/${difficulty}: ${n} item(s), a paper needs ${need}`)
+      } else {
+        console.log(`  ok     ${subject}/${difficulty}: ${n}`)
+      }
+    }
+  }
+
+  console.log(`\n${items.length} items · ${errors} error(s) · ${warnings} warning(s)\n`)
+  return errors === 0 ? 0 : 1
+}
+
+process.exitCode = main()
