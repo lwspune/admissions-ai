@@ -1,0 +1,12 @@
+# Normalise line endings in the repository.
+#
+# Without this, git converts LF to CRLF in the working tree on Windows, and
+# exact-text patching of committed files then fails in confusing ways. It also
+# makes diffs noisy for anyone on another platform.
+* text=auto eol=lf
+
+# Binary and generated files git must not touch.
+*.png binary
+*.jpg binary
+*.ico binary
+package-lock.json -diff

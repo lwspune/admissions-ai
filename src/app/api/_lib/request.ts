@@ -1,23 +1,20 @@
 import 'server-only'
 import type { NextRequest } from 'next/server'
+import { parseClientIp } from '@/lib/ip'
 
 /**
- * Client IP as the platform reports it.
+ * Client IP as the platform reports it, validated.
  *
- * Behind Vercel, x-forwarded-for is a chain and the FIRST entry is the client.
- * Taking the last would record the proxy and make per-IP limiting useless.
- * Spoofable in principle; it is a rate-limit input and a forensic hint, never
- * an authorisation decision.
+ * The value lands in a Postgres `inet` column, and a malformed one fails the
+ * INSERT that starts an attempt — so an unvalidated header could stop a
+ * candidate sitting the test. Anything unparseable becomes null.
+ *
+ * Spoofable in principle; this is a rate-limit input and a forensic hint,
+ * never an authorisation decision.
  */
 export function clientIp(req: NextRequest): string | null {
-  const forwarded = req.headers.get('x-forwarded-for')
-  if (forwarded) {
-    const first = forwarded.split(',')[0]?.trim()
-    if (first) return first
-  }
-  return req.headers.get('x-real-ip')
+  return parseClientIp(req.headers.get('x-forwarded-for')) ?? parseClientIp(req.headers.get('x-real-ip'))
 }
-
 export function userAgent(req: NextRequest): string | null {
   return req.headers.get('user-agent')?.slice(0, 500) ?? null
 }
