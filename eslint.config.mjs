@@ -9,8 +9,13 @@ export default tseslint.config(
   next.flatConfig.coreWebVitals,
   {
     // Build config files run in Node, not the browser.
-    files: ['*.config.{mjs,ts}', 'scripts/**/*.ts'],
-    languageOptions: { globals: { process: 'readonly', console: 'readonly' } },
+    files: ['*.config.{mjs,ts}', 'scripts/**/*.{ts,mjs}'],
+    languageOptions: {
+      globals: {
+        process: 'readonly', console: 'readonly',
+        fetch: 'readonly', URL: 'readonly',
+      },
+    },
   },
   {
     files: ['**/*.{ts,tsx}'],

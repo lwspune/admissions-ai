@@ -154,7 +154,7 @@ console.log('\nValid data is accepted')
 const lead = await accepts('leads: accepts a valid lead', 'leads', {
   name: 'Probe Candidate', contact_mobile: '9876543210',
 })
-const sibling = await accepts('leads: accepts a sibling on the same number', 'leads', {
+await accepts('leads: accepts a sibling on the same number', 'leads', {
   name: 'Probe Sibling', contact_mobile: '9876543210',
 })
 
