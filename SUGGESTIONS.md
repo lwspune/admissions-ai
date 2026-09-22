@@ -14,7 +14,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       that is also in that transcript. `npm run staff:list` shows accounts and flags any with no role.
 - [ ] **Check the database password is not reused elsewhere.** It looks like it may be shared with
       other institute systems. This database should have its own.
-- [ ] **Take the test on a real Android phone over mobile data.** The 4-inch / Android 8 / 3G case is
+- [ ] **Take the test on a real Android phone over mobile data.** (2026-09-22: the trial run was
+      desktop Chrome at 1536x864, so this is still open.) The 4-inch / Android 8 / 3G case is
       exactly where per-question save and the pausing timer earn their keep, and it has never been
       exercised. Background the tab mid-question, return, submit.
 - [ ] **Exercise the staff console buttons in a browser.** `createLead` and `issueForLead` are verified
@@ -32,6 +33,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       other 285 is the bulk of the remaining work.
 - [ ] **No visual design pass.** The candidate screens are unstyled-but-correct. Parents will see the
       consent screen while deciding whether the institute looks competent.
+- [ ] **Event timestamps are flush time, not action time.** Telemetry batches every 5 seconds and
+      the server stamps arrival, so `nav` events cluster. Answered questions are unaffected — dwell
+      is stored per answer and was accurate to the millisecond on the 2026-09-22 trial run. But a
+      SKIPPED question has no answer row, so its only timing evidence is those clustered events.
+      Fix before the report quotes time-per-question: have the client send a millisecond offset
+      from attempt start in the payload. Relative, so there is still no client clock to trust.
 - [ ] **The pause signal has not been triggered by a real tab switch.** `changed_after_pause` is
       verified by posting pause/resume events directly; the `visibilitychange` wiring that emits them
       is written but unexercised in a browser.
