@@ -18,7 +18,8 @@
     "db:verify": "node scripts/verify-schema.mjs",
     "items:seed": "node scripts/seed-items.mjs",
     "staff:add": "node scripts/create-staff.mjs add",
-    "staff:list": "node scripts/create-staff.mjs list"
+    "staff:list": "node scripts/create-staff.mjs list",
+    "issue": "tsx scripts/issue-test.mts"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.45.0",

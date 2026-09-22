@@ -190,6 +190,44 @@ describe('identify', () => {
     expect('candidateName' in r).toBe(false)
   })
 
+  it('locks the token after 5 failed attempts', async () => {
+    const { assessment } = await issueAssessment(db, { leadId })
+
+    for (let n = 1; n <= 4; n++) {
+      const r = await identify(db, { token: assessment.token, mobile: '9999999999' })
+      expect(r.ok).toBe(false)
+      if (r.ok) throw new Error('unreachable')
+      expect(r.locked).toBe(false)
+      expect(r.remaining).toBe(5 - n)
+    }
+
+    const fifth = await identify(db, { token: assessment.token, mobile: '9999999999' })
+    expect(fifth.ok).toBe(false)
+    if (fifth.ok) throw new Error('unreachable')
+    expect(fifth.locked).toBe(true)
+
+    // Locked means locked: the correct number no longer opens it either.
+    const withCorrect = await identify(db, { token: assessment.token, mobile: MOBILE })
+    expect(withCorrect.ok).toBe(false)
+  })
+
+  it('does not count successful attempts toward the lock', async () => {
+    const { assessment } = await issueAssessment(db, { leadId })
+    for (let n = 0; n < 8; n++) {
+      expect((await identify(db, { token: assessment.token, mobile: MOBILE })).ok).toBe(true)
+    }
+  })
+
+  it('records every attempt for the report, successful or not', async () => {
+    const { assessment } = await issueAssessment(db, { leadId })
+    await identify(db, { token: assessment.token, mobile: '9999999999' })
+    await identify(db, { token: assessment.token, mobile: MOBILE })
+
+    const { data } = await db.from('identify_attempts').select('ok').eq('token', assessment.token)
+    expect(data).toHaveLength(2)
+    expect(data!.map((r) => r.ok).sort()).toEqual([false, true])
+  })
+
   it('rejects junk without leaking whether the token exists', async () => {
     const { assessment } = await issueAssessment(db, { leadId })
     expect((await identify(db, { token: assessment.token, mobile: 'abc' })).ok).toBe(false)

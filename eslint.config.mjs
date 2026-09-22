@@ -1,6 +1,7 @@
 import js from '@eslint/js'
 import tseslint from 'typescript-eslint'
 import next from '@next/eslint-plugin-next'
+import reactHooks from 'eslint-plugin-react-hooks'
 
 export default tseslint.config(
   { ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts', 'dist/**'] },
@@ -16,6 +17,11 @@ export default tseslint.config(
         fetch: 'readonly', URL: 'readonly',
       },
     },
+  },
+  {
+    files: ['**/*.tsx'],
+    plugins: { 'react-hooks': reactHooks },
+    rules: reactHooks.configs.recommended.rules,
   },
   {
     files: ['**/*.{ts,tsx}'],

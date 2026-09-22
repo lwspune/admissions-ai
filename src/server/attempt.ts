@@ -9,6 +9,11 @@ import { LIMIT_MS, type Choice, type Subject } from '../lib/types'
 
 const LIVE_STATES = ['issued', 'opened', 'started']
 
+/** Failed identity attempts before a token is locked (spec §5). */
+export const MAX_IDENTIFY_FAILURES = 5
+/** Identity attempts allowed per IP per hour, across all tokens. */
+export const MAX_IDENTIFY_PER_IP_HOUR = 20
+
 export interface Attempt {
   id: string
   assessment_id: string
@@ -54,23 +59,72 @@ export async function openByToken(db: Db, token: string): Promise<OpenResult> {
   }
 }
 
+export type IdentifyResult =
+  | { ok: true; candidateName: string }
+  | { ok: false; locked: boolean; remaining: number }
+
 /**
  * The identity gate: the candidate types the number the link was sent to.
  *
- * Deliberately returns the same shape for "wrong number" and "unparseable
- * input", so probing cannot distinguish them.
+ * The number is a 10-digit secret in a known format, so this is rate limited —
+ * per token, and per IP across all tokens. Both counters live in the database,
+ * because serverless instances do not share memory and an in-memory limit
+ * would multiply by the instance count.
+ *
+ * Returns the same shape for "wrong number", "unparseable input" and "no such
+ * token", so probing cannot tell them apart.
  */
 export async function identify(
   db: Db,
-  { token, mobile }: { token: string; mobile: string },
-): Promise<{ ok: true; candidateName: string } | { ok: false }> {
-  if (!isValidTokenShape(token)) return { ok: false }
+  { token, mobile, ip }: { token: string; mobile: string; ip?: string | null },
+): Promise<IdentifyResult> {
+  if (!isValidTokenShape(token)) return { ok: false, locked: false, remaining: 0 }
+
+  const failures = await failuresForToken(db, token)
+  if (failures >= MAX_IDENTIFY_FAILURES) return { ok: false, locked: true, remaining: 0 }
+  if (ip && (await attemptsFromIp(db, ip)) >= MAX_IDENTIFY_PER_IP_HOUR) {
+    return { ok: false, locked: true, remaining: 0 }
+  }
 
   const row = await loadByToken(db, token)
-  if (!row || !LIVE_STATES.includes(row.state)) return { ok: false }
-  if (!mobilesMatch(mobile, row.leads.contact_mobile)) return { ok: false }
+  const matched =
+    row != null && LIVE_STATES.includes(row.state) && mobilesMatch(mobile, row.leads.contact_mobile)
 
-  return { ok: true, candidateName: row.leads.name }
+  // Recorded whatever the outcome: the failures are the forensics.
+  await db.from('identify_attempts').insert({ token, ip: ip ?? null, ok: matched })
+
+  if (!matched) {
+    const used = failures + 1
+    return {
+      ok: false,
+      locked: used >= MAX_IDENTIFY_FAILURES,
+      remaining: Math.max(0, MAX_IDENTIFY_FAILURES - used),
+    }
+  }
+
+  return { ok: true, candidateName: row!.leads.name }
+}
+
+/**
+ * All failures for this token, not just recent ones. No time window is needed:
+ * a token only lives two hours, so its whole history IS the recent window.
+ */
+async function failuresForToken(db: Db, token: string): Promise<number> {
+  const { count } = await db
+    .from('identify_attempts')
+    .select('id', { count: 'exact', head: true })
+    .eq('token', token)
+    .eq('ok', false)
+  return count ?? 0
+}
+
+async function attemptsFromIp(db: Db, ip: string): Promise<number> {
+  const { count } = await db
+    .from('identify_attempts')
+    .select('id', { count: 'exact', head: true })
+    .eq('ip', ip)
+    .gte('at', new Date(Date.now() - 60 * 60_000).toISOString())
+  return count ?? 0
 }
 
 export interface AttemptContext {
