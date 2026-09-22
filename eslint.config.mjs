@@ -4,7 +4,7 @@ import next from '@next/eslint-plugin-next'
 import reactHooks from 'eslint-plugin-react-hooks'
 
 export default tseslint.config(
-  { ignores: ['.next/**', 'node_modules/**', 'next-env.d.ts', 'dist/**'] },
+  { ignores: ['.next/**', '.next-verify/**', 'node_modules/**', 'next-env.d.ts', 'dist/**'] },
   js.configs.recommended,
   ...tseslint.configs.recommended,
   next.flatConfig.coreWebVitals,

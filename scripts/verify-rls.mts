@@ -59,9 +59,10 @@ async function main(): Promise<number> {
     .select('id', { count: 'exact', head: true })
     .not('name', 'like', `${MARKER}%`)
   if ((realLeads ?? 0) > 0) {
-    console.error('\nREFUSING TO RUN: this database holds real leads.')
-    console.error('This probe writes rows and must never touch candidate data.\n')
-    return 1
+    console.error('\nSKIPPED: this database holds real leads.')
+    console.error('This probe writes rows and must never touch candidate data.')
+    console.error('It is a tool for an empty development database.')
+    return 2 // distinct from 1, so a skip is never read as a failure
   }
 
   const db = createClient(url, anonKey, { auth: { persistSession: false } })

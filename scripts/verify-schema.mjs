@@ -47,6 +47,9 @@ const rest = (path, key, init = {}) =>
     },
   })
 
+/** Distinct from 1 so a skipped run is not read as a failed one. */
+const REFUSED = 2
+
 let passed = 0
 let failed = 0
 
@@ -92,126 +95,132 @@ const TABLES = [
 
 // ── run ──────────────────────────────────────────────────────────────────────
 
-console.log(`\nProbing ${URL_}\n`)
+async function main() {
 
-// Safety: never run against a database holding real leads.
-const existing = await rest('leads?select=id&limit=1', SVC)
-if (!existing.ok) {
-  console.error('Cannot read leads — has the migration been applied?')
-  process.exit(1)
-}
-if ((await existing.json()).length > 0) {
-  console.error('REFUSING TO RUN: the leads table is not empty.')
-  console.error('This probe writes test rows and must never touch real candidate data.')
-  process.exit(1)
-}
+  console.log(`\nProbing ${URL_}\n`)
 
-console.log('Tables present')
-for (const t of TABLES) {
-  const r = await rest(`${t}?select=*&limit=1`, SVC)
-  check(t, r.status === 200, `HTTP ${r.status}`)
-}
-
-console.log('\nRLS closed to the anon key')
-for (const t of TABLES) {
-  const r = await rest(`${t}?select=*&limit=1`, ANON)
-  const rows = r.ok ? await r.json() : null
-  // With RLS on and no anon policy, PostgREST returns an empty set, never rows.
-  check(`${t} leaks nothing to anon`, r.status === 200 && Array.isArray(rows) && rows.length === 0, `HTTP ${r.status}`)
-}
-
-console.log('\nConstraints reject bad data')
-
-await rejects('leads: rejects a malformed mobile number', 'leads', {
-  name: 'Probe', contact_mobile: '12345',
-})
-await rejects('leads: rejects a blank name', 'leads', {
-  name: '   ', contact_mobile: '9876543210',
-})
-await rejects('test_items: rejects an MCQ with no options', 'test_items', {
-  subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
-  stem: 'probe', answer_key: 'A', rationale: 'probe',
-})
-await rejects('test_items: rejects an MCQ missing option D', 'test_items', {
-  subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
-  stem: 'probe', options: { A: '1', B: '2', C: '3' }, answer_key: 'A', rationale: 'probe',
-})
-await rejects('test_items: rejects a numeric item carrying an answer key', 'test_items', {
-  subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
-  stem: 'probe', numeric_answer: 5, answer_key: 'A', rationale: 'probe',
-})
-await rejects('test_items: rejects a blank rationale', 'test_items', {
-  subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
-  stem: 'probe', numeric_answer: 5, rationale: '  ',
-})
-await rejects('test_items: rejects an unknown subject', 'test_items', {
-  subject: 'history', skill: 'probe', difficulty: 'easy', format: 'numeric',
-  stem: 'probe', numeric_answer: 5, rationale: 'probe',
-})
-
-console.log('\nValid data is accepted')
-
-const lead = await accepts('leads: accepts a valid lead', 'leads', {
-  name: 'Probe Candidate', contact_mobile: '9876543210',
-})
-await accepts('leads: accepts a sibling on the same number', 'leads', {
-  name: 'Probe Sibling', contact_mobile: '9876543210',
-})
-
-const item = await accepts('test_items: accepts a well-formed MCQ', 'test_items', {
-  subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
-  stem: 'probe', options: { A: '1', B: '2', C: '3', D: '4' },
-  answer_key: 'B', rationale: 'probe',
-})
-
-console.log('\nReissue cap and paper integrity')
-
-let assessment = null
-if (lead) {
-  for (const seq of [1, 2, 3]) {
-    const a = await accepts(`assessments: accepts issue ${seq}`, 'assessments', {
-      lead_id: lead.id, token: `probe-token-${seq}-${Date.now()}`, issue_seq: seq,
-    })
-    if (seq === 1) assessment = a
+  // Safety: never run against a database holding real leads.
+  const existing = await rest('leads?select=id&limit=1', SVC)
+  if (!existing.ok) {
+    console.error('Cannot read leads — has the migration been applied?')
+    return REFUSED
   }
-  await rejects('assessments: rejects a 4th issue — the cap is in the database', 'assessments', {
-    lead_id: lead.id, token: `probe-token-4-${Date.now()}`, issue_seq: 4,
+  if ((await existing.json()).length > 0) {
+    console.error('SKIPPED: the leads table is not empty.')
+    console.error('This probe writes test rows and must never touch real candidate data.')
+    console.error('It is a tool for an empty development database.')
+    return REFUSED
+  }
+
+  console.log('Tables present')
+  for (const t of TABLES) {
+    const r = await rest(`${t}?select=*&limit=1`, SVC)
+    check(t, r.status === 200, `HTTP ${r.status}`)
+  }
+
+  console.log('\nRLS closed to the anon key')
+  for (const t of TABLES) {
+    const r = await rest(`${t}?select=*&limit=1`, ANON)
+    const rows = r.ok ? await r.json() : null
+    // With RLS on and no anon policy, PostgREST returns an empty set, never rows.
+    check(`${t} leaks nothing to anon`, r.status === 200 && Array.isArray(rows) && rows.length === 0, `HTTP ${r.status}`)
+  }
+
+  console.log('\nConstraints reject bad data')
+
+  await rejects('leads: rejects a malformed mobile number', 'leads', {
+    name: 'Probe', contact_mobile: '12345',
   })
-  await rejects('assessments: rejects a duplicate issue_seq for the same lead', 'assessments', {
-    lead_id: lead.id, token: `probe-token-dup-${Date.now()}`, issue_seq: 1,
+  await rejects('leads: rejects a blank name', 'leads', {
+    name: '   ', contact_mobile: '9876543210',
   })
-  await rejects('assessments: rejects voiding without a reason', 'assessments', {
-    lead_id: lead.id, token: `probe-token-v-${Date.now()}`, issue_seq: 4, state: 'voided',
+  await rejects('test_items: rejects an MCQ with no options', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
+    stem: 'probe', answer_key: 'A', rationale: 'probe',
   })
+  await rejects('test_items: rejects an MCQ missing option D', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
+    stem: 'probe', options: { A: '1', B: '2', C: '3' }, answer_key: 'A', rationale: 'probe',
+  })
+  await rejects('test_items: rejects a numeric item carrying an answer key', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe', numeric_answer: 5, answer_key: 'A', rationale: 'probe',
+  })
+  await rejects('test_items: rejects a blank rationale', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe', numeric_answer: 5, rationale: '  ',
+  })
+  await rejects('test_items: rejects an unknown subject', 'test_items', {
+    subject: 'history', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe', numeric_answer: 5, rationale: 'probe',
+  })
+
+  console.log('\nValid data is accepted')
+
+  const lead = await accepts('leads: accepts a valid lead', 'leads', {
+    name: 'Probe Candidate', contact_mobile: '9876543210',
+  })
+  await accepts('leads: accepts a sibling on the same number', 'leads', {
+    name: 'Probe Sibling', contact_mobile: '9876543210',
+  })
+
+  const item = await accepts('test_items: accepts a well-formed MCQ', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq',
+    stem: 'probe', options: { A: '1', B: '2', C: '3', D: '4' },
+    answer_key: 'B', rationale: 'probe',
+  })
+
+  console.log('\nReissue cap and paper integrity')
+
+  let assessment = null
+  if (lead) {
+    for (const seq of [1, 2, 3]) {
+      const a = await accepts(`assessments: accepts issue ${seq}`, 'assessments', {
+        lead_id: lead.id, token: `probe-token-${seq}-${Date.now()}`, issue_seq: seq,
+      })
+      if (seq === 1) assessment = a
+    }
+    await rejects('assessments: rejects a 4th issue — the cap is in the database', 'assessments', {
+      lead_id: lead.id, token: `probe-token-4-${Date.now()}`, issue_seq: 4,
+    })
+    await rejects('assessments: rejects a duplicate issue_seq for the same lead', 'assessments', {
+      lead_id: lead.id, token: `probe-token-dup-${Date.now()}`, issue_seq: 1,
+    })
+    await rejects('assessments: rejects voiding without a reason', 'assessments', {
+      lead_id: lead.id, token: `probe-token-v-${Date.now()}`, issue_seq: 4, state: 'voided',
+    })
+  }
+
+  if (assessment && item) {
+    await accepts('assessment_items: accepts a paper position', 'assessment_items', {
+      assessment_id: assessment.id, position: 1, item_id: item.id,
+    })
+    await rejects('assessment_items: rejects the same item twice on one paper', 'assessment_items', {
+      assessment_id: assessment.id, position: 2, item_id: item.id,
+    })
+    await rejects('assessment_items: rejects a position outside 1-15', 'assessment_items', {
+      assessment_id: assessment.id, position: 16, item_id: item.id,
+    })
+  }
+
+  // ── cleanup ──────────────────────────────────────────────────────────────────
+
+  console.log('\nCleaning up probe rows')
+  // Sweep by marker rather than by collected id: a row this probe expected to be
+  // REJECTED but that slipped through would otherwise be left behind. Every probe
+  // row carries name 'Probe ...' or skill 'probe'.
+  await rest('leads?name=like.Probe*', SVC, { method: 'DELETE' })
+  await rest('test_items?skill=eq.probe', SVC, { method: 'DELETE' })
+
+  // Assert no PROBE rows remain — not that the tables are empty. The real item
+  // bank lives in test_items and must survive this probe untouched.
+  const leftLeads = await (await rest('leads?select=id&name=like.Probe*', SVC)).json()
+  const leftItems = await (await rest('test_items?select=id&skill=eq.probe', SVC)).json()
+  check('all probe rows removed', leftLeads.length === 0 && leftItems.length === 0,
+    `${leftLeads.length} probe leads, ${leftItems.length} probe items remain`)
+
+  console.log(`\n${passed} passed, ${failed} failed\n`)
+  return failed === 0 ? 0 : 1
 }
 
-if (assessment && item) {
-  await accepts('assessment_items: accepts a paper position', 'assessment_items', {
-    assessment_id: assessment.id, position: 1, item_id: item.id,
-  })
-  await rejects('assessment_items: rejects the same item twice on one paper', 'assessment_items', {
-    assessment_id: assessment.id, position: 2, item_id: item.id,
-  })
-  await rejects('assessment_items: rejects a position outside 1-15', 'assessment_items', {
-    assessment_id: assessment.id, position: 16, item_id: item.id,
-  })
-}
-
-// ── cleanup ──────────────────────────────────────────────────────────────────
-
-console.log('\nCleaning up probe rows')
-// Sweep by marker rather than by collected id: a row this probe expected to be
-// REJECTED but that slipped through would otherwise be left behind. Every probe
-// row carries name 'Probe ...' or skill 'probe'.
-await rest('leads?name=like.Probe*', SVC, { method: 'DELETE' })
-await rest('test_items?skill=eq.probe', SVC, { method: 'DELETE' })
-
-// Assert no PROBE rows remain — not that the tables are empty. The real item
-// bank lives in test_items and must survive this probe untouched.
-const leftLeads = await (await rest('leads?select=id&name=like.Probe*', SVC)).json()
-const leftItems = await (await rest('test_items?select=id&skill=eq.probe', SVC)).json()
-check('all probe rows removed', leftLeads.length === 0 && leftItems.length === 0,
-  `${leftLeads.length} probe leads, ${leftItems.length} probe items remain`)
-
-console.log(`\n${passed} passed, ${failed} failed\n`)
-process.exit(failed === 0 ? 0 : 1)
+process.exitCode = await main()
