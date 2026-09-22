@@ -19,7 +19,13 @@ Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
 branches get a preview deployment, which Vercel's own login protects, so a
 preview is not a second open copy of the system. `npx vercel --prod` still
 works as a manual path. Migrations are never part of a deploy (see below), so a
-push ships code against whatever schema is already live.
+push ships code against whatever schema is already live — **and the reverse
+bites too**: applying a migration while its code sits on a branch leaves
+production running against a schema it does not know about. Ship them close
+together, schema first only when the old code tolerates it.
+
+`vercel.json` registers one cron: `/api/cron/purge`, daily at 03:00 UTC.
+Hobby caps cron frequency at once per day.
 
 ---
 
@@ -77,6 +83,12 @@ These are the things that quietly break everything if violated.
   queue is invisible to them. The paper draw goes through `live_pool()`, which
   returns `id, subject, difficulty` and no answer — never `select` the table
   for a draw, or a newly promoted item becomes undrawable.
+- **Telecallers never see question text.** `loadPaper` blanks both the stem
+  and the options for that role — options alone identify an item, and
+  `correctDisplay` renders "C. <option text>". This is the one access rule that
+  lives in application code rather than the database, because RLS cannot mask
+  columns per role. It was inert until the report gained a Question column;
+  `report.itest.ts` is what stops it becoming inert again.
 - **Candidate data is kept 12 months, because the consent screen says so.**
   `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent text in
   `CandidateFlow` must move together. A new table holding candidate data must

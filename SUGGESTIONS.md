@@ -22,6 +22,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**Exercise the staff console buttons in a browser.**~~ **DONE 2026-09-22** — confirmed by
       the user. The database shows one lead with a **submitted** assessment, so Add candidate →
       Issue → the candidate flow → submit all ran end to end through the UI.
+- [ ] **Decide whether the first intake runs in shadow mode.** Discussed repeatedly on 2026-09-22
+      and 2026-09-23 and never written down until now, which is how a decision with a deadline gets
+      lost. Shadow mode = record every score, pass everyone through to the counsellor, for the
+      first couple of hundred candidates. Nobody yet knows what a 7/15 predicts about a cadet, and
+      the app computes no cut-off by design (spec §1) precisely so a human sets that bar. The
+      deadline is the **first candidate you turn away**, not the first candidate you test: after
+      that you are defending a number retrospectively. Cheap now, impossible later.
 - [ ] **Look at `/items` and the report's new Question column in a browser.** Both shipped
       2026-09-22 and neither has been seen by a human. `/items` needs a superadmin session, so it
       cannot be checked from a script — unauthenticated it redirects to `/login?next=%2Fitems`,
@@ -39,6 +46,16 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       have a `vercel[bot]` Production deployment. **A push to `main` deploys to production.**
       Previews sit behind Vercel's own login, so they are not a second open copy. The earlier
       claim came from assuming the manual `npx vercel --prod` runs were the only mechanism.
+- [ ] **The purge is deployed but three things about it are unproven.** (1) Whether Vercel actually
+      registered the cron from `vercel.json` — the local CLI had no readable auth token, so this was
+      never confirmed; look under project → Settings → Cron Jobs for `/api/cron/purge` at
+      `0 3 * * *`. (2) The production *happy path*. Rejection was verified live (404 with no header
+      and with a wrong one), but the accepting path never was, because production's `CRON_SECRET`
+      is not readable locally — the dashboard's "Run" button proves it in one click and emits the
+      `purge: cutoff=… leads=…` log line. (3) It has never deleted a real row, and will not need to
+      for ~12 months, so its first genuine run will be unobserved. Worth inserting a throwaway
+      backdated lead once and letting the *scheduled* job take it, rather than trusting a manual
+      curl of the same code path.
 - [ ] **Custom domain.** The production URL is `admissions-ai-omega.vercel.app` (the plain
       `admissions-ai.vercel.app` belongs to someone else). A link from an unrecognised `vercel.app`
       subdomain, arriving from an unknown number, is exactly what people are taught not to tap. A
