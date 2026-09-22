@@ -59,5 +59,46 @@ describe('inPromotionScope', () => {
   })
 })
 
-// Imported separately so the describe block above reads as behaviour, not plumbing.
-import { inPromotionScope as inPromotionScopeHelper } from './items'
+// Imported separately so the describe blocks above read as behaviour, not plumbing.
+import { inPromotionScope as inPromotionScopeHelper, parseOptionValue } from './items'
+
+// Two options that differ as text but not as quantity are both wrong answers a
+// candidate can eliminate together, and if one of them is the key the item has
+// two correct answers. The string-equality check in items-lint cannot see it.
+describe('parseOptionValue', () => {
+  it('reduces fractions to a comparable value', () => {
+    expect(parseOptionValue('2/3')).toEqual(parseOptionValue('4/6'))
+    expect(parseOptionValue('1/2')).not.toEqual(parseOptionValue('2/3'))
+  })
+
+  it('ignores thousands separators', () => {
+    expect(parseOptionValue('2,500')).toEqual(parseOptionValue('2500'))
+  })
+
+  it('keeps a unit as part of the identity, so 80 m never equals 80 kg', () => {
+    expect(parseOptionValue('80 m')).not.toEqual(parseOptionValue('80 kg'))
+    expect(parseOptionValue('80 m')).toEqual(parseOptionValue('80m'))
+  })
+
+  it('treats a percentage as its own unit', () => {
+    expect(parseOptionValue('25%')).toEqual(parseOptionValue('25 %'))
+    expect(parseOptionValue('25%')).not.toEqual(parseOptionValue('25'))
+  })
+
+  it('refuses anything carrying words, so 4% less never collides with 4% more', () => {
+    expect(parseOptionValue('4% less')).toBeNull()
+    expect(parseOptionValue('4% more')).toBeNull()
+    expect(parseOptionValue('the same')).toBeNull()
+    expect(parseOptionValue('7 minutes')).toBeNull()
+  })
+
+  it('refuses a fraction with a zero denominator rather than returning Infinity', () => {
+    expect(parseOptionValue('3/0')).toBeNull()
+  })
+
+  it('refuses plain text', () => {
+    expect(parseOptionValue('Thursday')).toBeNull()
+    expect(parseOptionValue('BROWN')).toBeNull()
+    expect(parseOptionValue('4-15-7')).toBeNull()
+  })
+})

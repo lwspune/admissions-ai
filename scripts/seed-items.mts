@@ -19,8 +19,8 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { execFileSync } from 'node:child_process'
 import { resolveSeedStatus, inPromotionScope, type ItemStatus } from '../src/lib/items'
+import { lintItems } from './items-lint.mts'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const DIR = join(ROOT, 'content', 'items')
@@ -55,9 +55,7 @@ async function main(): Promise<number> {
     return 1
   }
 
-  try {
-    execFileSync(process.execPath, [join(ROOT, 'scripts', 'items-lint.mjs')], { stdio: 'inherit' })
-  } catch {
+  if (lintItems() !== 0) {
     console.error('\nSeeding aborted: item lint failed.\n')
     return 1
   }

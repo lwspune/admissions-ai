@@ -35,3 +35,33 @@ export function inPromotionScope(file: string, only: string | undefined): boolea
   const strip = (s: string) => s.replace(/\.json$/i, '')
   return strip(file) === strip(only)
 }
+
+/**
+ * A comparable identity for one MCQ option, or null when it is not a bare
+ * quantity.
+ *
+ * Two options that read differently but mean the same number — 2/3 and 4/6 —
+ * are a defect: they are eliminated together, and if one is the key the item
+ * has two right answers. Comparing the strings cannot see it.
+ *
+ * Deliberately refuses anything containing words. "4% less" and "4% more" both
+ * carry the number 4 and are a legitimate pair, so a looser parser would report
+ * them and train the reader to ignore the check. A unit is part of the identity
+ * for the same reason: 80 m is not 80 kg.
+ */
+export function parseOptionValue(raw: string): string | null {
+  const text = raw.replace(/,/g, '').trim()
+
+  const fraction = /^(-?\d+(?:\.\d+)?)\/(\d+(?:\.\d+)?)$/.exec(text)
+  if (fraction) {
+    const numerator = Number(fraction[1])
+    const denominator = Number(fraction[2])
+    if (denominator === 0) return null
+    return `${numerator / denominator}:`
+  }
+
+  // A number, optionally followed by a percent sign or a short unit.
+  const quantity = /^(-?\d+(?:\.\d+)?)\s*(%|[a-zA-Z]{1,3})?$/.exec(text)
+  if (!quantity) return null
+  return `${Number(quantity[1])}:${(quantity[2] ?? '').toLowerCase()}`
+}
