@@ -15,3 +15,7 @@ Thumbs.db
 .vercel
 .idea/
 .vscode/
+
+# Supabase CLI scratch
+supabase/.temp/
+supabase/.branches/
