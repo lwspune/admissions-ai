@@ -96,7 +96,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [ ] **The pause signal has not been triggered by a real tab switch.** `changed_after_pause` is
       verified by posting pause/resume events directly; the `visibilitychange` wiring that emits them
       is written but unexercised in a browser.
-- [ ] No cohort analytics, no per-issuer pass rates, no 12-month purge job. All specced, none built.
+- [x] ~~12-month purge job.~~ **DONE 2026-09-23** — `/api/cron/purge`, daily at 03:00 UTC via
+      `vercel.json`, guarded by a timing-safe `CRON_SECRET` bearer check and failing closed with
+      503 if that is unset. `?dryRun=1` reports without deleting. Covers `identify_attempts`,
+      which no cascade reaches.
+- [ ] **No cohort analytics and no per-issuer pass rates — and the purge now has a bearing on
+      them.** Both are specced and unbuilt. Note the ordering constraint: the purge deletes rather
+      than anonymises, so any aggregate worth keeping has to be rolled up before the rows go, not
+      reconstructed afterwards. Nothing is lost yet; the oldest candidate data is days old.
 
 ## Decisions taken that are worth revisiting once there is data
 

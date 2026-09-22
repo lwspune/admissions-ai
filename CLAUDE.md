@@ -31,14 +31,15 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
 `serialize` (**the security boundary**) · `report` · `items` (seed-status rules) ·
-`mobile` · `token` · `ip` · `types`
+`retention` (the 12-month rule) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
-identify, start, save, record, submit) · `report`
+identify, start, save, record, submit) · `report` · `retention` (the purge)
 
-**`src/app/`** — `t/[token]/` is the only unauthenticated route. `api/t/*` are
+**`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
+the latter guards itself with `CRON_SECRET`. `api/t/*` are
 thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
@@ -76,6 +77,11 @@ These are the things that quietly break everything if violated.
   queue is invisible to them. The paper draw goes through `live_pool()`, which
   returns `id, subject, difficulty` and no answer — never `select` the table
   for a draw, or a newly promoted item becomes undrawable.
+- **Candidate data is kept 12 months, because the consent screen says so.**
+  `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent text in
+  `CandidateFlow` must move together. A new table holding candidate data must
+  either cascade from `leads` or be added to `purgeExpired` by hand —
+  `identify_attempts` has no foreign key and is the standing reminder.
 
 ## Commands
 
@@ -111,6 +117,10 @@ Migrations are applied deliberately, never by a deploy:
   `npx vercel --prod` had been used and no one checked. The project was created
   by importing the repo (DEPLOY.md step 3), which connects Git by definition.
   `gh api repos/<repo>/deployments` settles it in one call.
+- **A route the middleware protects is a route that never runs for a cron.**
+  A scheduled request carries no session, so `/api/cron/*` had to join the
+  PUBLIC list or the purge would have been redirected to `/login` forever,
+  emitting 307s nobody reads. Anything on that list guards itself.
 - **An upsert rewrites every column it names.** `items:seed` used to send
   `status` unconditionally, so a plain re-seed demoted the entire live bank to
   `review` and left nothing drawable — visible only later, as staff unable to
@@ -163,6 +173,11 @@ Migrations are applied deliberately, never by a deploy:
   second. When tightening a policy, enumerate every caller of the table first;
   a read path is easy to miss precisely because it never errors, it just
   returns fewer rows.
+- **2026-09-23 — The purge deletes; it does not anonymise.** The consent says
+  "kept for 12 months", and deleting is the unambiguous way to honour that.
+  Aggregate history is lost with it — if cohort analytics are ever wanted, the
+  numbers must be rolled up BEFORE the purge takes the rows, not recovered
+  after. Raised rather than decided; nobody has asked for those analytics yet.
 - **2026-09-23 — The 5/5/5 split stands, and the whole bank went live.** Both
   batches signed off; 45 live items. The institute's own paper is ~65% maths
   with no science, but spec §1 wins, so every science item has to be authored
