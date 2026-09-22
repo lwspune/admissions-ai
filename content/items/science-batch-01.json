@@ -1,0 +1,227 @@
+[
+  {
+    "ref": "S-E-06",
+    "subject": "science",
+    "skill": "evaporation",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Water left in an open saucer disappears sooner than the same amount of water in a corked bottle. The main reason is that in the saucer the water",
+    "options": {
+      "A": "has a larger surface open to the air",
+      "B": "is at a higher temperature",
+      "C": "weighs less than the water in the bottle",
+      "D": "contains more dissolved air"
+    },
+    "answer_key": "A",
+    "rationale": "Evaporation happens at the surface, and the saucer exposes far more of it while the air above carries the vapour away. B is the most tempting wrong answer because heat is what candidates associate with evaporation — but both containers sit in the same room at the same temperature, which the stem establishes by saying the same amount of water. C and D are irrelevant properties dressed as explanations."
+  },
+  {
+    "ref": "S-E-07",
+    "subject": "science",
+    "skill": "inertia",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A moving bus brakes suddenly and the standing passengers lurch forward. This happens because their bodies",
+    "options": {
+      "A": "tend to keep moving forward",
+      "B": "are pushed forward by the bus",
+      "C": "become heavier as the bus slows",
+      "D": "lose grip because of friction"
+    },
+    "answer_key": "A",
+    "rationale": "Inertia: the bus stops, the passengers do not, and what they feel is their own motion continuing. B inverts the direction of the force — the bus is pushing backwards on them, which is precisely why the top of the body outruns the feet. C confuses mass with weight and invents a change in neither. Everyday inertia is the standard entry point to Newton's first law at this level."
+  },
+  {
+    "ref": "S-E-08",
+    "subject": "science",
+    "skill": "density",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A metal block has a mass of 270 g and a volume of 100 cm3. What is its density in g/cm3?",
+    "numeric_answer": 2.7,
+    "numeric_tolerance": 0,
+    "rationale": "Density is mass divided by volume: 270 / 100 = 2.7 g/cm3. One step, clean numbers, and the unit is given in the stem so there is no conversion to trip on. The characteristic error is inverting the formula to volume / mass, giving 0.37 — numeric format means that scores 0 rather than being cued by seeing both values in a list."
+  },
+  {
+    "ref": "S-E-09",
+    "subject": "science",
+    "skill": "electric-circuits",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In a string of decorative lights, one bulb fuses and the entire string goes dark. The bulbs must be connected",
+    "options": {
+      "A": "in series",
+      "B": "in parallel",
+      "C": "in a closed loop with a switch",
+      "D": "each to its own battery"
+    },
+    "answer_key": "A",
+    "rationale": "A series circuit offers current one path, so a single break stops everything. B is the direct contrast and the reason the item works: in parallel the remaining bulbs stay lit, which is what most candidates have seen in newer light strings and will reason from. C describes any working circuit and explains nothing. D would leave the others unaffected."
+  },
+  {
+    "ref": "S-E-10",
+    "subject": "science",
+    "skill": "respiration",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A person breathes faster while running than while sitting. The muscles are mainly demanding more",
+    "options": {
+      "A": "oxygen",
+      "B": "water",
+      "C": "protein",
+      "D": "vitamins"
+    },
+    "answer_key": "A",
+    "rationale": "Working muscles release energy from glucose using oxygen, so the demand for oxygen rises and breathing rate rises with it. The distractors are all things the body genuinely needs, which is the point — the candidate must pick the one that breathing actually delivers, rather than the one that sounds most like nutrition. A floor item for the science section."
+  },
+  {
+    "ref": "S-E-11",
+    "subject": "science",
+    "skill": "properties-of-light",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A shadow has the same shape as the object casting it. Which property of light best explains this?",
+    "options": {
+      "A": "It travels in straight lines.",
+      "B": "It is absorbed by opaque objects.",
+      "C": "It reflects off smooth surfaces.",
+      "D": "It bends around obstacles."
+    },
+    "answer_key": "A",
+    "rationale": "Light travelling in straight lines is what makes the blocked region take the outline of the blocker. B is the sharpest distractor because it is TRUE — an opaque object does absorb light — but it explains why the shadow is dark, not why it is that shape, and the stem asks about shape. Distinguishing a true statement from a relevant one is the skill being tested. D describes diffraction, which would blur the outline."
+  },
+  {
+    "ref": "S-E-12",
+    "subject": "science",
+    "skill": "rate-and-quantity",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A leaking tap drips 3 drops of water every second. Each drop is 0.05 ml. How many millilitres leak in one minute?",
+    "numeric_answer": 9,
+    "numeric_tolerance": 0,
+    "rationale": "3 drops per second x 60 seconds = 180 drops, and 180 x 0.05 = 9 ml. Two steps, with the minute-to-second conversion sitting between them. The usual error drops the conversion entirely and answers 0.15, the volume in one second. Deliberately distinct from S-E-03, which converts minutes to hours for a speed rather than counting a quantity."
+  },
+  {
+    "ref": "S-E-13",
+    "subject": "science",
+    "skill": "acids-and-bases",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A liquid turns blue litmus paper red. The liquid is most likely",
+    "options": {
+      "A": "lemon juice",
+      "B": "soap solution",
+      "C": "baking soda solution",
+      "D": "common salt solution"
+    },
+    "answer_key": "A",
+    "rationale": "Blue litmus turning red is the standard test for an acid, and lemon juice is acidic from citric acid. B and C are both basic and would turn red litmus blue instead — the opposite result, which makes them useful for spotting a candidate who has memorised the pair of colours without attaching them to the right direction. D is roughly neutral and changes nothing."
+  },
+  {
+    "ref": "S-E-14",
+    "subject": "science",
+    "skill": "food-chains",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In a grassland, insects eat grass, frogs eat insects and snakes eat frogs. If all the frogs were removed, what would most likely happen?",
+    "options": {
+      "A": "The number of insects increases",
+      "B": "The grass becomes more abundant",
+      "C": "The number of snakes increases",
+      "D": "The insects begin to eat snakes"
+    },
+    "answer_key": "A",
+    "rationale": "Removing a predator releases its prey, so insect numbers rise. C is the dominant wrong answer and is worth the item on its own: it reads as though the snakes benefit, when in fact they have lost their food supply and would decline. B inverts the knock-on effect — more insects means less grass, not more. D is biologically impossible and exists to catch guessing."
+  },
+  {
+    "ref": "S-M-15",
+    "subject": "science",
+    "skill": "heat-transfer",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A metal spoon and a wooden spoon are left standing in the same pot of hot soup. The metal one feels hotter to touch because metal",
+    "options": {
+      "A": "conducts heat better than wood",
+      "B": "holds more heat than wood does",
+      "C": "reaches a higher temperature than the wood",
+      "D": "has a smoother surface than wood"
+    },
+    "answer_key": "A",
+    "rationale": "Both spoons sit in the same soup and settle at the same temperature; what differs is how fast each delivers heat into the hand. C is the reason this is moderate rather than easy — it is the intuitive answer and it contradicts the stem, which states both spoons are in the same pot. Separating temperature from rate of heat transfer is the whole item. B confuses conductivity with heat capacity."
+  },
+  {
+    "ref": "S-M-16",
+    "subject": "science",
+    "skill": "interpreting-evidence",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Moist seeds are kept in two identical jars, one in a warm room and one in a fridge. Only the seeds in the warm jar sprout. This experiment shows that germination needs",
+    "options": {
+      "A": "warmth",
+      "B": "warmth and moisture",
+      "C": "light",
+      "D": "air"
+    },
+    "answer_key": "A",
+    "rationale": "Only one variable differs between the jars — temperature — so warmth is the only thing the experiment can demonstrate. B is the trap and it is a good one: germination really does need moisture, but both jars were moist, so this experiment says nothing about it. Choosing B means answering from prior knowledge instead of from the evidence in front of you, which is the distinction that makes this moderate. C and D were never varied either."
+  },
+  {
+    "ref": "S-M-17",
+    "subject": "science",
+    "skill": "density",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A stone of mass 150 g is lowered into a measuring cylinder holding 200 ml of water. The level rises to 260 ml. What is the stone's density in g/cm3?",
+    "numeric_answer": 2.5,
+    "numeric_tolerance": 0,
+    "rationale": "The stone displaces 260 - 200 = 60 ml, so its volume is 60 cm3 and its density is 150 / 60 = 2.5 g/cm3. Moderate because the volume has to be found by displacement before the formula can be used, and the stem offers 200 and 260 as ready-made numbers to divide by — 150/260 and 150/200 are both one careless step away."
+  },
+  {
+    "ref": "S-D-18",
+    "subject": "science",
+    "skill": "applying-a-principle",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "An iron nail sinks in water, yet a ship built of iron floats. The ship floats because its",
+    "options": {
+      "A": "average density is less than water's",
+      "B": "weight is spread over a larger area",
+      "C": "hollow shape makes the iron lighter",
+      "D": "steel differs from the iron in a nail"
+    },
+    "answer_key": "A",
+    "rationale": "A ship encloses a large volume of air, so the density of the whole vessel — iron plus air — falls below that of water even though the iron itself is unchanged. C is the error almost everyone makes and it is subtly wrong in an instructive way: the hollow does not make the iron lighter, it makes the ship bigger for the same mass. B imports pressure, which governs whether something dents the ground, not whether it floats. Difficult because the reasoning must be applied to the object as a whole rather than the material."
+  },
+  {
+    "ref": "S-D-19",
+    "subject": "science",
+    "skill": "inference-from-results",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A candle sealed in a jar burns for 2 minutes. With a green plant in the jar under bright light it burns for 5 minutes; with the same plant in darkness, 1 minute. What explains the dark result?",
+    "options": {
+      "A": "The plant used up oxygen by respiring",
+      "B": "The plant stopped growing in the dark",
+      "C": "A candle burns differently in darkness",
+      "D": "The plant gives out carbon dioxide only at night"
+    },
+    "answer_key": "A",
+    "rationale": "Plants respire continuously; in light, photosynthesis more than replaces the oxygen used, which is why the candle lasts longer. In darkness photosynthesis stops while respiration does not, so the plant now competes with the flame for oxygen and the candle fails sooner than with no plant at all. D is the sharpest distractor — the familiar half-truth that plants release carbon dioxide at night, which omits that they do so all the time. Difficult because the candidate must hold both processes at once and read three results together."
+  },
+  {
+    "ref": "S-D-20",
+    "subject": "science",
+    "skill": "action-and-reaction",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A person standing on a skateboard throws a heavy ball forward and rolls backward. This happens because",
+    "options": {
+      "A": "the ball pushes back with equal force",
+      "B": "the person weighs less after the throw",
+      "C": "the ground pushes the skateboard back",
+      "D": "air resistance acts on the person"
+    },
+    "answer_key": "A",
+    "rationale": "Newton's third law: the force the person exerts on the ball is matched by the ball's force on the person, and with little friction under the wheels that push is free to move them. C is the most attractive wrong answer because the ground is where people expect forces to come from, and it is exactly backwards — friction with the ground is what normally prevents this, which is why the skateboard is in the stem at all. Difficult because the force acts through the thrown object, not the surface."
+  }
+]
