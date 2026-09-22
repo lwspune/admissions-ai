@@ -67,8 +67,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       the paper, marked wrong regardless of what the candidate wrote. `IQ Test_Qs_A5_ak.docx`
       (Nov 2025) is correct apart from Q3. Corrected key in `content/items/legacy-iq-2025.md`;
       someone should reprint it and check whether any past candidate was marked against the April one.
-- [ ] **No visual design pass.** The candidate screens are unstyled-but-correct. Parents will see the
-      consent screen while deciding whether the institute looks competent.
+- [x] ~~**No visual design pass.** The candidate screens are unstyled-but-correct.~~
+      **WRONG — corrected 2026-09-22.** They are not unstyled: `Shell` is a centred `max-w-md`
+      card, `min-h-tap` is on every button, inputs are `text-base` (which stops iOS zooming on
+      focus), focus outlines are enforced globally in `globals.css`, and `body` is explicitly
+      light so dark mode cannot surprise anyone. Anything further is fonts, colour and a logo —
+      cosmetics, with no evidence they are needed. **Do not schedule a "design pass" as a task.**
+      If the real-phone test turns up something specific, fix that specific thing.
 - [x] ~~**Event timestamps are flush time, not action time.**~~ **DONE 2026-09-22** — events now
       carry `offsetMs`, a relative duration from attempt start (no clock to trust). Verified on
       production: 18 events arriving inside a 17s flush spread yielded correct 12s dwells for
