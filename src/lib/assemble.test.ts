@@ -151,14 +151,35 @@ describe('assemblePaper — exhausted strata', () => {
     expect(caught!.message).toMatch(/science/i)
   })
 
-  it('throws when exclusions empty a stratum on reissue', () => {
+  it('falls back to seen items rather than failing when a stratum is all-seen', () => {
+    // A reissue that repeats a question beats no reissue at all. Failing here
+    // would put a 500 in front of staff whenever the bank is thin.
     const bank = pool(3)
     const seen = bank.filter((i) => i.subject === 'maths' && i.difficulty === 'difficult').map((i) => i.id)
-    expect(() => assemblePaper({ pool: bank, excludeItemIds: seen, rng: seeded(10) })).toThrow(
-      StratumExhaustedError,
-    )
+    const paper = assemblePaper({ pool: bank, excludeItemIds: seen, rng: seeded(10) })
+    expect(paper).toHaveLength(15)
+    expect(paper.filter((i) => i.subject === 'maths' && i.difficulty === 'difficult')).toHaveLength(1)
   })
 
+  it('still prefers unseen items when some remain', () => {
+    const bank = pool(20)
+    const seen = bank.filter((_, n) => n % 5 === 0).map((i) => i.id)
+    const paper = assemblePaper({ pool: bank, excludeItemIds: seen, rng: seeded(15) })
+    expect(paper.some((i) => seen.includes(i.id))).toBe(false)
+  })
+
+  it('can still draw when every item in the bank has been seen', () => {
+    // The live bank is exactly one paper today, so a reissue is all-repeats.
+    // It must produce a full paper rather than failing.
+    const bank: PoolItem[] = []
+    for (const subject of SUBJECTS) {
+      for (let n = 0; n < 3; n++) bank.push({ id: `${subject}-e-${n}`, subject, difficulty: 'easy' })
+      bank.push({ id: `${subject}-m`, subject, difficulty: 'moderate' })
+      bank.push({ id: `${subject}-d`, subject, difficulty: 'difficult' })
+    }
+    const paper = assemblePaper({ pool: bank, excludeItemIds: bank.map((i) => i.id), rng: seeded(16) })
+    expect(paper).toHaveLength(15)
+  })
   it('throws on an empty pool rather than returning an empty paper', () => {
     expect(() => assemblePaper({ pool: [], rng: seeded(1) })).toThrow(StratumExhaustedError)
   })

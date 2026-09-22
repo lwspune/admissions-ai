@@ -1,0 +1,398 @@
+import 'server-only'
+import type { Db } from './supabase'
+import { isValidTokenShape } from '../lib/token'
+import { mobilesMatch } from '../lib/mobile'
+import { toCandidatePaper, type BankRow, type CandidateQuestion } from '../lib/serialize'
+import { gradeAttempt, type GradeItem, type GradeAnswer } from '../lib/grade'
+import { computeActiveMs, computeDeadline, canStart, type TimerEvent } from '../lib/timer'
+import { LIMIT_MS, type Choice, type Subject } from '../lib/types'
+
+const LIVE_STATES = ['issued', 'opened', 'started']
+
+export interface Attempt {
+  id: string
+  assessment_id: string
+  started_at: string
+  active_ms: number
+  deadline_at: string
+  submitted_at: string | null
+}
+
+export type OpenResult =
+  | { status: 'ok'; candidateName: string; expiresAt: string; alreadySubmitted: boolean }
+  | { status: 'not_found' | 'expired' | 'too_late' | 'submitted' }
+
+/**
+ * What the landing page may know before the candidate proves anything: the
+ * name to confirm, and how long the window has left. Never the paper.
+ */
+export async function openByToken(db: Db, token: string): Promise<OpenResult> {
+  if (!isValidTokenShape(token)) return { status: 'not_found' }
+
+  const row = await loadByToken(db, token)
+  if (!row) return { status: 'not_found' }
+
+  if (row.state === 'submitted') return { status: 'submitted' }
+  if (!LIVE_STATES.includes(row.state)) return { status: 'not_found' }
+
+  const expiresAt = new Date(row.expires_at).getTime()
+  if (Date.now() >= expiresAt) return { status: 'expired' }
+
+  // Starting with under 15 minutes left would hand them a truncated test and a
+  // score nobody can read, so the link is treated as spent (spec §4).
+  if (row.state !== 'started' && !canStart(Date.now(), expiresAt)) return { status: 'too_late' }
+
+  if (row.state === 'issued') {
+    await db.from('assessments').update({ state: 'opened' }).eq('id', row.id)
+  }
+
+  return {
+    status: 'ok',
+    candidateName: row.leads.name,
+    expiresAt: row.expires_at,
+    alreadySubmitted: false,
+  }
+}
+
+/**
+ * The identity gate: the candidate types the number the link was sent to.
+ *
+ * Deliberately returns the same shape for "wrong number" and "unparseable
+ * input", so probing cannot distinguish them.
+ */
+export async function identify(
+  db: Db,
+  { token, mobile }: { token: string; mobile: string },
+): Promise<{ ok: true; candidateName: string } | { ok: false }> {
+  if (!isValidTokenShape(token)) return { ok: false }
+
+  const row = await loadByToken(db, token)
+  if (!row || !LIVE_STATES.includes(row.state)) return { ok: false }
+  if (!mobilesMatch(mobile, row.leads.contact_mobile)) return { ok: false }
+
+  return { ok: true, candidateName: row.leads.name }
+}
+
+export interface AttemptContext {
+  userAgent?: string | null
+  ip?: string | null
+  screen?: string | null
+}
+
+/**
+ * Starts the attempt, or returns the one in progress.
+ *
+ * Resume is not a separate path: returning to the link mid-attempt lands here
+ * and gets the same attempt back with a recomputed deadline, because the
+ * unique constraint on assessment_id makes a second attempt impossible anyway.
+ */
+export async function startAttempt(
+  db: Db,
+  { token, context }: { token: string; context: AttemptContext },
+): Promise<{ attempt: Attempt; questions: CandidateQuestion[]; answers: SavedAnswer[]; resumed: boolean }> {
+  if (!isValidTokenShape(token)) throw new Error('This link is not valid.')
+
+  const row = await loadByToken(db, token)
+  if (!row || !LIVE_STATES.includes(row.state)) throw new Error('This link is no longer available.')
+
+  const expiresAt = new Date(row.expires_at).getTime()
+  if (Date.now() >= expiresAt) throw new Error('This link has expired.')
+
+  const questions = toCandidatePaper(await loadPaper(db, row.id))
+
+  const existing = await loadAttempt(db, row.id)
+  if (existing) {
+    if (existing.submitted_at) throw new Error('This test has already been submitted.')
+    const deadline = await refreshDeadline(db, existing, expiresAt)
+    return { attempt: deadline, questions, answers: await loadAnswers(db, existing.id), resumed: true }
+  }
+
+  if (!canStart(Date.now(), expiresAt)) {
+    throw new Error('This link is about to expire. Please ask for a fresh one.')
+  }
+
+  const { data, error } = await db
+    .from('attempts')
+    .insert({
+      assessment_id: row.id,
+      deadline_at: new Date(Date.now() + LIMIT_MS).toISOString(),
+      user_agent: context.userAgent ?? null,
+      ip: context.ip ?? null,
+      screen: context.screen ?? null,
+    })
+    .select()
+    .single()
+
+  if (error) throw new Error(error.message)
+  return { attempt: data as Attempt, questions, answers: [], resumed: false }
+}
+
+export interface SavedAnswer {
+  position: number
+  choice: Choice | null
+  numeric_value: number | null
+  change_count: number
+  changed_after_pause: boolean
+}
+
+/**
+ * Saves one answer. Idempotent on (attempt, position) so a retry over a flaky
+ * connection cannot duplicate or double-count.
+ *
+ * `changed_after_pause` is computed here rather than trusted from the client:
+ * it is the signal a cheating candidate would most want to suppress.
+ */
+export async function saveAnswer(
+  db: Db,
+  {
+    attemptId,
+    position,
+    choice = null,
+    numericValue = null,
+    activeMs,
+  }: {
+    attemptId: string
+    position: number
+    choice?: Choice | null
+    numericValue?: number | null
+    activeMs: number
+  },
+): Promise<void> {
+  if (!Number.isInteger(position) || position < 1 || position > 15) {
+    throw new Error(`position ${position} is not on the paper`)
+  }
+
+  const attempt = await requireOpenAttempt(db, attemptId)
+
+  const { data: prior } = await db
+    .from('attempt_answers')
+    .select('choice, numeric_value, change_count, changed_after_pause')
+    .eq('attempt_id', attemptId)
+    .eq('position', position)
+    .maybeSingle()
+
+  const isChange =
+    prior != null && (prior.choice !== choice || Number(prior.numeric_value) !== Number(numericValue))
+
+  const { error } = await db.from('attempt_answers').upsert(
+    {
+      attempt_id: attemptId,
+      position,
+      choice,
+      numeric_value: numericValue,
+      active_ms: Math.max(0, Math.round(activeMs)),
+      change_count: (prior?.change_count ?? 0) + (isChange ? 1 : 0),
+      changed_after_pause:
+        (prior?.changed_after_pause ?? false) ||
+        (isChange && (await pausedSinceLastAnswer(db, attempt.id, position))),
+      last_answered_at: new Date().toISOString(),
+    },
+    { onConflict: 'attempt_id,position' },
+  )
+
+  if (error) throw new Error(error.message)
+}
+
+export interface IncomingEvent {
+  kind: string
+  position?: number | null
+  payload?: Record<string, unknown>
+}
+
+/**
+ * Appends telemetry. Fire-and-forget by design: losing events degrades the
+ * report, but must never block a candidate from answering.
+ */
+export async function recordEvents(
+  db: Db,
+  { attemptId, events }: { attemptId: string; events: IncomingEvent[] },
+): Promise<void> {
+  if (!events.length) return
+
+  const rows = events.slice(0, 200).map((e) => ({
+    attempt_id: attemptId,
+    kind: e.kind,
+    position: e.position ?? null,
+    // Timestamped on the server. A client clock is not evidence.
+    payload: e.payload ?? {},
+  }))
+
+  const { error } = await db.from('attempt_events').insert(rows)
+  if (error) throw new Error(error.message)
+}
+
+export interface SubmitResult {
+  score: number
+  correct: number
+  incorrect: number
+  skipped: number
+  sections: Record<Subject, number>
+}
+
+/**
+ * Grades server-side against the key the candidate never received, and closes
+ * the attempt. A trigger moves the assessment to `submitted`.
+ */
+export async function submitAttempt(
+  db: Db,
+  { attemptId, reason }: { attemptId: string; reason: 'manual' | 'timer' | 'window' },
+): Promise<SubmitResult> {
+  const attempt = await requireOpenAttempt(db, attemptId)
+
+  const paper = await loadPaper(db, attempt.assessment_id)
+  const items: GradeItem[] = paper.map(({ position, item }) => ({
+    position,
+    subject: item.subject,
+    format: item.format,
+    answerKey: item.answer_key,
+    numericAnswer: item.numeric_answer === null ? null : Number(item.numeric_answer),
+    numericTolerance: Number(item.numeric_tolerance ?? 0),
+  }))
+
+  const saved = await loadAnswers(db, attemptId)
+  const answers: GradeAnswer[] = saved.map((a) => ({
+    position: a.position,
+    choice: a.choice,
+    numericValue: a.numeric_value === null ? null : Number(a.numeric_value),
+  }))
+
+  const result = gradeAttempt(items, answers)
+  const activeMs = computeActiveMs(new Date(attempt.started_at).getTime(), await loadTimerEvents(db, attemptId), Date.now())
+
+  const { error } = await db
+    .from('attempts')
+    .update({
+      submitted_at: new Date().toISOString(),
+      submit_reason: reason,
+      active_ms: activeMs,
+      score: result.score,
+      correct: result.correct,
+      incorrect: result.incorrect,
+      skipped: result.skipped,
+      maths_score: result.sections.maths,
+      english_score: result.sections.english,
+      science_score: result.sections.science,
+    })
+    .eq('id', attemptId)
+    .is('submitted_at', null) // loses a double-submit race rather than regrading
+
+  if (error) throw new Error(error.message)
+
+  return {
+    score: result.score,
+    correct: result.correct,
+    incorrect: result.incorrect,
+    skipped: result.skipped,
+    sections: result.sections,
+  }
+}
+
+// ── internals ────────────────────────────────────────────────────────────────
+
+interface AssessmentRow {
+  id: string
+  expires_at: string
+  state: string
+  leads: { name: string; contact_mobile: string }
+}
+
+async function loadByToken(db: Db, token: string): Promise<AssessmentRow | null> {
+  const { data } = await db
+    .from('assessments')
+    .select('id, expires_at, state, leads(name, contact_mobile)')
+    .eq('token', token)
+    .maybeSingle()
+
+  return (data as AssessmentRow | null) ?? null
+}
+
+async function loadPaper(db: Db, assessmentId: string): Promise<{ position: number; item: BankRow }[]> {
+  const { data, error } = await db
+    .from('assessment_items')
+    .select('position, test_items(*)')
+    .eq('assessment_id', assessmentId)
+    .order('position')
+
+  if (error) throw new Error(error.message)
+  return (data ?? []).map((row) => ({
+    position: row.position as number,
+    item: row.test_items as never as BankRow,
+  }))
+}
+
+async function loadAttempt(db: Db, assessmentId: string): Promise<Attempt | null> {
+  const { data } = await db.from('attempts').select('*').eq('assessment_id', assessmentId).maybeSingle()
+  return (data as Attempt | null) ?? null
+}
+
+async function loadAnswers(db: Db, attemptId: string): Promise<SavedAnswer[]> {
+  const { data } = await db
+    .from('attempt_answers')
+    .select('position, choice, numeric_value, change_count, changed_after_pause')
+    .eq('attempt_id', attemptId)
+    .order('position')
+  return (data ?? []) as SavedAnswer[]
+}
+
+async function loadTimerEvents(db: Db, attemptId: string): Promise<TimerEvent[]> {
+  const { data } = await db
+    .from('attempt_events')
+    .select('kind, at')
+    .eq('attempt_id', attemptId)
+    .in('kind', ['pause', 'resume'])
+    .order('at')
+
+  return (data ?? []).map((e) => ({
+    kind: e.kind as 'pause' | 'resume',
+    at: new Date(e.at as string).getTime(),
+  }))
+}
+
+async function requireOpenAttempt(db: Db, attemptId: string): Promise<Attempt & { assessment_id: string }> {
+  const { data } = await db.from('attempts').select('*').eq('id', attemptId).maybeSingle()
+  if (!data) throw new Error('No such attempt.')
+  if (data.submitted_at) throw new Error('This test has already been submitted.')
+  return data as Attempt & { assessment_id: string }
+}
+
+/** Was there a pause between the last save for this position and now? */
+async function pausedSinceLastAnswer(db: Db, attemptId: string, position: number): Promise<boolean> {
+  const { data } = await db
+    .from('attempt_events')
+    .select('kind, at')
+    .eq('attempt_id', attemptId)
+    .eq('kind', 'resume')
+    .order('at', { ascending: false })
+    .limit(1)
+
+  if (!data?.length) return false
+
+  const { data: answer } = await db
+    .from('attempt_answers')
+    .select('last_answered_at')
+    .eq('attempt_id', attemptId)
+    .eq('position', position)
+    .maybeSingle()
+
+  if (!answer?.last_answered_at) return false
+  return new Date(data[0]!.at as string).getTime() > new Date(answer.last_answered_at as string).getTime()
+}
+
+/** Recomputes the server-authoritative deadline on resume. */
+async function refreshDeadline(db: Db, attempt: Attempt, windowEndsAt: number): Promise<Attempt> {
+  const deadline = computeDeadline({
+    startedAt: new Date(attempt.started_at).getTime(),
+    events: await loadTimerEvents(db, attempt.id),
+    now: Date.now(),
+    windowEndsAt,
+  })
+
+  const { data } = await db
+    .from('attempts')
+    .update({ deadline_at: new Date(deadline).toISOString() })
+    .eq('id', attempt.id)
+    .select()
+    .single()
+
+  return (data as Attempt) ?? attempt
+}

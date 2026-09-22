@@ -8,7 +8,10 @@ export interface PoolItem {
 
 export interface AssembleInput {
   pool: PoolItem[]
-  /** Items this lead has already seen on a previous issue. */
+  /**
+   * Items this lead has already seen on a previous issue. A strong preference,
+   * not a hard rule: see assemblePaper.
+   */
   excludeItemIds?: readonly string[]
   /** Injectable for deterministic tests; production passes nothing. */
   rng?: () => number
@@ -53,18 +56,26 @@ function shuffle<T>(items: readonly T[], rng: () => number): T[] {
  * Selection is plain uniform random. With 100 items per subject and 5 drawn,
  * overlap between two candidates is already negligible, so exposure-weighted
  * selection would add machinery for no measurable gain (spec §12).
+ *
+ * `excludeItemIds` is a strong preference rather than a hard rule. Unseen items
+ * are always taken first, and a stratum only falls back to already-seen ones
+ * when it cannot otherwise be filled. A hard rule reads better but fails in the
+ * wrong direction: a lead on their third issue, or a bank thinned by
+ * retirements, would make reissue impossible and put a 500 in front of staff.
+ * A reissue that repeats a question or two beats no reissue at all.
+ *
+ * It still throws when the stratum cannot be filled even WITH repeats, because
+ * a short paper scored out of 15 is worse than a visible failure.
  */
 export function assemblePaper(input: AssembleInput): PoolItem[] {
   const { pool, excludeItemIds = [], rng = Math.random } = input
-
   const excluded = new Set(excludeItemIds)
-  const available = pool.filter((item) => !excluded.has(item.id))
 
   const picked: PoolItem[] = []
   for (const subject of SUBJECTS) {
     for (const difficulty of DIFFICULTIES) {
       const needed = PAPER_MIX[difficulty]
-      const stratum = available.filter(
+      const stratum = pool.filter(
         (item) => item.subject === subject && item.difficulty === difficulty,
       )
 
@@ -72,7 +83,9 @@ export function assemblePaper(input: AssembleInput): PoolItem[] {
         throw new StratumExhaustedError(subject, difficulty, needed, stratum.length)
       }
 
-      picked.push(...shuffle(stratum, rng).slice(0, needed))
+      const unseen = shuffle(stratum.filter((item) => !excluded.has(item.id)), rng)
+      const seen = shuffle(stratum.filter((item) => excluded.has(item.id)), rng)
+      picked.push(...[...unseen, ...seen].slice(0, needed))
     }
   }
 
