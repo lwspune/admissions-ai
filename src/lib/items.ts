@@ -1,8 +1,46 @@
-// Item-bank seeding rules. Pure, so the one decision that can take the bank
-// offline is testable without a database.
+// Item-bank rules. Pure, so the one decision that can take the bank offline is
+// testable without a database, and so the bank browser's shape is too.
+
+import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from './types'
 
 /** Mirrors the CHECK on test_items.status (migration 0001). */
 export type ItemStatus = 'review' | 'live' | 'retired'
+
+export interface BankGroup<T> {
+  subject: Subject
+  difficulty: Difficulty
+  items: T[]
+}
+
+/**
+ * Arranges the bank into the nine subject-difficulty buckets a paper is drawn
+ * from, in the order a reader expects them.
+ *
+ * Empty groups are kept. "science / difficult: 0" is the single most useful
+ * thing this page can tell whoever is deciding what to author next, and a
+ * bucket that disappears when empty tells them nothing. Items with no ref sort
+ * last rather than being dropped — an unreferenced row is a data problem worth
+ * seeing, not hiding.
+ */
+export function groupBank<T extends { ref?: string | null; subject: Subject; difficulty: Difficulty }>(
+  items: readonly T[],
+): BankGroup<T>[] {
+  const groups: BankGroup<T>[] = []
+  for (const subject of SUBJECTS) {
+    for (const difficulty of DIFFICULTIES) {
+      const inGroup = items
+        .filter((i) => i.subject === subject && i.difficulty === difficulty)
+        .sort((a, b) => {
+          if (!a.ref && !b.ref) return 0
+          if (!a.ref) return 1
+          if (!b.ref) return -1
+          return a.ref.localeCompare(b.ref)
+        })
+      groups.push({ subject, difficulty, items: inGroup })
+    }
+  }
+  return groups
+}
 
 /**
  * What status a seeded row should carry.

@@ -1,5 +1,62 @@
 import { describe, it, expect } from 'vitest'
-import { resolveSeedStatus, type ItemStatus } from './items'
+import { resolveSeedStatus, groupBank, type ItemStatus } from './items'
+import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from './types'
+
+const row = (ref: string | null, subject: Subject, difficulty: Difficulty) =>
+  ({ ref, subject, difficulty }) as const
+
+// The bank browser groups by subject and difficulty. Empty groups are kept on
+// purpose: "science / difficult: 0" is the most useful thing the page can say
+// to whoever is deciding what to author next, and a group that vanishes when
+// empty says nothing at all.
+describe('groupBank', () => {
+  it('returns every subject-difficulty pair even when the bank is empty', () => {
+    const groups = groupBank([])
+    expect(groups).toHaveLength(SUBJECTS.length * DIFFICULTIES.length)
+    expect(groups.every((g) => g.items.length === 0)).toBe(true)
+  })
+
+  it('orders groups by subject, then by difficulty', () => {
+    const groups = groupBank([])
+    expect(groups.map((g) => `${g.subject}/${g.difficulty}`)).toEqual([
+      'maths/easy', 'maths/moderate', 'maths/difficult',
+      'english/easy', 'english/moderate', 'english/difficult',
+      'science/easy', 'science/moderate', 'science/difficult',
+    ])
+  })
+
+  it('files each item under its own subject and difficulty', () => {
+    const groups = groupBank([row('M-E-01', 'maths', 'easy'), row('S-D-05', 'science', 'difficult')])
+    const find = (s: string) => groups.find((g) => `${g.subject}/${g.difficulty}` === s)!
+    expect(find('maths/easy').items.map((i) => i.ref)).toEqual(['M-E-01'])
+    expect(find('science/difficult').items.map((i) => i.ref)).toEqual(['S-D-05'])
+    expect(find('english/easy').items).toEqual([])
+  })
+
+  it('sorts items by ref inside a group', () => {
+    const groups = groupBank([
+      row('M-E-13', 'maths', 'easy'),
+      row('M-E-02', 'maths', 'easy'),
+      row('M-E-07', 'maths', 'easy'),
+    ])
+    expect(groups[0]!.items.map((i) => i.ref)).toEqual(['M-E-02', 'M-E-07', 'M-E-13'])
+  })
+
+  it('puts items with no ref last rather than dropping them', () => {
+    const groups = groupBank([row(null, 'maths', 'easy'), row('M-E-01', 'maths', 'easy')])
+    expect(groups[0]!.items.map((i) => i.ref)).toEqual(['M-E-01', null])
+  })
+
+  it('loses nothing', () => {
+    const items = [
+      row('M-E-01', 'maths', 'easy'),
+      row('E-M-04', 'english', 'moderate'),
+      row('S-D-05', 'science', 'difficult'),
+      row(null, 'english', 'easy'),
+    ]
+    expect(groupBank(items).flatMap((g) => g.items)).toHaveLength(items.length)
+  })
+})
 
 // Regression: a plain `npm run items:seed` used to write status='review' on
 // every row it upserted, which silently demoted the entire live bank and left
