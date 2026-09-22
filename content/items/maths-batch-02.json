@@ -1,0 +1,217 @@
+[
+  {
+    "ref": "M-E-18",
+    "subject": "maths",
+    "skill": "average",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A batsman scores 42, 35, 60, 28 and 50 runs in five innings. What is his average score per innings?",
+    "numeric_answer": 43,
+    "numeric_tolerance": 0,
+    "rationale": "The five scores total 215, and 215 ÷ 5 = 43. Two steps, both routine, which is what places it at the floor of the tier. Numeric format is deliberate: the characteristic error is dividing by 4 after miscounting the innings, and an option list containing 53.75 would make that error visible enough to self-correct."
+  },
+  {
+    "ref": "M-E-19",
+    "subject": "maths",
+    "skill": "fraction-comparison",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these fractions is the largest?",
+    "options": {
+      "A": "3/5",
+      "B": "5/8",
+      "C": "2/3",
+      "D": "7/12"
+    },
+    "answer_key": "C",
+    "rationale": "Over a common denominator of 120 these are 72, 75, 80 and 70, so 2/3 is largest. Every value sits between 0.58 and 0.67, which is the point: they are close enough that eyeballing fails and the candidate must actually convert. B (5/8) is the near miss at 0.625 and will take most of the wrong responses; D (7/12) is the smallest and attracts anyone comparing numerators alone."
+  },
+  {
+    "ref": "M-E-20",
+    "subject": "maths",
+    "skill": "profit-and-loss",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A shopkeeper buys a chair for ₹1,200 and sells it for ₹1,500. What is the profit percentage?",
+    "options": {
+      "A": "15%",
+      "B": "20%",
+      "C": "25%",
+      "D": "30%"
+    },
+    "answer_key": "C",
+    "rationale": "Profit is ₹300 on a cost of ₹1,200, so 300/1200 = 25%. B (20%) is the single most common error in profit-and-loss: it computes 300/1500, taking the profit as a fraction of the selling price rather than the cost. The item exists to catch exactly that, so B is placed adjacent to the key where an unsure candidate will hover."
+  },
+  {
+    "ref": "M-E-21",
+    "subject": "maths",
+    "skill": "hcf-and-lcm",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "Two bells ring at intervals of 12 minutes and 18 minutes. They ring together at 9:00 am. After how many minutes will they next ring together?",
+    "numeric_answer": 36,
+    "numeric_tolerance": 0,
+    "rationale": "12 = 2² x 3 and 18 = 2 x 3², so the LCM is 2² x 3² = 36 minutes. The seductive wrong answer is the HCF, 6, and the second is 216 from multiplying the two intervals. Numeric format means both score 0 rather than being cued by an option list — deciding whether a situation calls for LCM or HCF is the whole skill here."
+  },
+  {
+    "ref": "M-E-22",
+    "subject": "maths",
+    "skill": "area-and-perimeter",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A rectangular field is 24 m long and 16 m wide. How much fencing is needed to enclose it completely?",
+    "options": {
+      "A": "40 m",
+      "B": "80 m",
+      "C": "160 m",
+      "D": "384 m"
+    },
+    "answer_key": "B",
+    "rationale": "Fencing follows the perimeter: 2 x (24 + 16) = 80 m. D (384 m) is the area, 24 x 16, and is the dominant error — the word 'enclose' is the only signal distinguishing the two, so the item measures reading as much as arithmetic. A (40 m) adds the sides once instead of twice. C (160 m) doubles the perimeter."
+  },
+  {
+    "ref": "M-E-23",
+    "subject": "maths",
+    "skill": "simple-interest",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the simple interest on ₹5,000 at 8% per annum for 3 years, in rupees?",
+    "numeric_answer": 1200,
+    "numeric_tolerance": 0,
+    "rationale": "5,000 x 8 x 3 / 100 = 1,200. A single formula applied once, with no conversion or reversal, which is what makes it easy. The common error is returning 6,200 — the amount rather than the interest — and the stem says 'simple interest' explicitly so that the error is the candidate's, not the item's."
+  },
+  {
+    "ref": "M-E-24",
+    "subject": "maths",
+    "skill": "number-classification",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which number does not belong with the others?",
+    "options": {
+      "A": "8",
+      "B": "27",
+      "C": "45",
+      "D": "125"
+    },
+    "answer_key": "C",
+    "rationale": "8, 27 and 125 are 2³, 3³ and 5³; 45 is not a perfect cube. The set is chosen so that exactly one rule fits — 45 is not a perfect square either, so there is no second reading that reaches a different answer. Ambiguity is the usual failure of odd-one-out items and this one is built to avoid it."
+  },
+  {
+    "ref": "M-E-25",
+    "subject": "maths",
+    "skill": "unit-conversion",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A container holds 2.5 litres of water. How many millilitres is this?",
+    "options": {
+      "A": "25",
+      "B": "250",
+      "C": "2,500",
+      "D": "25,000"
+    },
+    "answer_key": "C",
+    "rationale": "One litre is 1,000 millilitres, so 2.5 litres is 2,500 ml. Every distractor is a power-of-ten slip in one direction or the other, which is precisely how this error occurs in practice — candidates rarely get the conversion conceptually wrong, they misplace the decimal. A floor item: a candidate who misses it is not ready for the rest of the paper."
+  },
+  {
+    "ref": "M-E-26",
+    "subject": "maths",
+    "skill": "numeric-coding",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If CAT is written as 3-1-20, how is DOG written in the same code?",
+    "options": {
+      "A": "4-15-7",
+      "B": "4-14-7",
+      "C": "3-14-6",
+      "D": "5-16-8"
+    },
+    "answer_key": "A",
+    "rationale": "Each letter maps to its alphabet position: D = 4, O = 15, G = 7. B (4-14-7) miscounts O as 14, the off-by-one that comes from counting the alphabet from a nearby anchor rather than carefully. C shifts every letter back one, D shifts every letter forward one — both are candidates who find a pattern in the example and apply it to the wrong thing."
+  },
+  {
+    "ref": "M-M-27",
+    "subject": "maths",
+    "skill": "ages",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A father is three times as old as his son. In 10 years, he will be twice as old as his son. How old is the son now?",
+    "options": {
+      "A": "8",
+      "B": "10",
+      "C": "12",
+      "D": "15"
+    },
+    "answer_key": "B",
+    "rationale": "If the son is s then the father is 3s, and 3s + 10 = 2(s + 10) gives s = 10 — a son of 10 and a father of 30, who in ten years are 20 and 40. Moderate because it needs two relationships from two points in time held simultaneously; a candidate who works only from the present cannot start. Every distractor is a plausible age, so none can be eliminated on sense alone."
+  },
+  {
+    "ref": "M-M-28",
+    "subject": "maths",
+    "skill": "probability",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A bag contains 4 red balls and 6 blue balls. One ball is drawn at random. What is the probability that it is red?",
+    "options": {
+      "A": "2/5",
+      "B": "2/3",
+      "C": "3/5",
+      "D": "1/4"
+    },
+    "answer_key": "A",
+    "rationale": "There are 10 balls of which 4 are red, so 4/10 = 2/5. B (2/3) is the reason this sits at moderate rather than easy: it is 4/6, the ratio of red to blue, used where the denominator must be the total. C (3/5) is the probability of blue — the right method answering the wrong question. D assumes one favourable outcome in four."
+  },
+  {
+    "ref": "M-M-29",
+    "subject": "maths",
+    "skill": "number-series",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Find the next number in the series: 5, 11, 23, 47, 95, ___",
+    "options": {
+      "A": "143",
+      "B": "189",
+      "C": "190",
+      "D": "191"
+    },
+    "answer_key": "D",
+    "rationale": "Each term is double the previous plus one: 95 x 2 + 1 = 191. The differences 6, 12, 24, 48 double as well, so reading the series either way converges on 191 — a property worth having, because it means a candidate who finds a valid route is not punished for finding the other one. C (190) doubles and forgets the +1. B (189) doubles and subtracts. A (143) repeats the difference of 48 instead of doubling it."
+  },
+  {
+    "ref": "M-D-30",
+    "subject": "maths",
+    "skill": "combined-rates",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A pipe fills a tank in 4 hours. A leak at the bottom would empty the full tank in 6 hours. With the leak present, how many hours does the pipe take to fill the tank?",
+    "numeric_answer": 12,
+    "numeric_tolerance": 0,
+    "rationale": "The rates oppose: 1/4 − 1/6 = 1/12 of the tank per hour, so 12 hours. Difficult because the candidate must recognise that one rate is negative before any arithmetic starts — adding them gives 5/12 and an answer of 2.4 hours, which is faster than the pipe alone and should fail a sanity check that many candidates will not apply. Numeric format denies them the chance to notice that 2.4 looks wrong next to 12."
+  },
+  {
+    "ref": "M-D-31",
+    "subject": "maths",
+    "skill": "percentage-change-chain",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The price of a book is increased by 20% and then decreased by 20%. Compared with the original price, the final price is:",
+    "options": {
+      "A": "4% less",
+      "B": "the same",
+      "C": "4% more",
+      "D": "40% less"
+    },
+    "answer_key": "A",
+    "rationale": "1.20 x 0.80 = 0.96, so the price ends 4% below where it started. B (the same) is the intuitive answer and should take most of the wrong responses — the two percentages look symmetrical but apply to different bases, the second to the already-inflated price. C offers the same error with the sign flipped. D (40% less) adds the percentages. Difficult despite trivial arithmetic: the whole item is whether the candidate notices the base has moved."
+  },
+  {
+    "ref": "M-D-32",
+    "subject": "maths",
+    "skill": "reverse-percentage",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A trader gives a 20% discount on the marked price and still makes a 20% profit on an item that cost him ₹2,000. What was the marked price, in rupees?",
+    "numeric_answer": 3000,
+    "numeric_tolerance": 0,
+    "rationale": "A 20% profit on ₹2,000 means a selling price of ₹2,400, and that is 80% of the marked price, so the marked price is 2,400 ÷ 0.8 = ₹3,000. Difficult because it chains two percentages on different bases and runs the second one backwards — dividing where the instinct is to multiply. The characteristic error is 2,400 x 1.2 = 2,880, applying the discount forwards; the trap is that 2,880 is close enough to 3,000 to look plausible."
+  }
+]
