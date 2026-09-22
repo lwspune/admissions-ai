@@ -138,6 +138,15 @@ Migrations are applied deliberately, never by a deploy:
   disagree with each other and five keys were wrong, so every key was
   re-derived twice, the second time in code. Field-tested items beat authored
   ones, but only once the keys are trustworthy.
+- **2026-09-22 — Maths batches proceed while the subject split is open.** The
+  institute's own paper is ~65% maths with no science; spec §1 mandates 5/5/5.
+  That decision is the user's, and maths needs 60/20/20 either way — so
+  authoring maths cannot be wasted by it, while English and science can.
+- **2026-09-22 — Lint compares option *quantities*, not just strings.** `2/3`
+  and `4/6` are one option printed twice: eliminated together, and two correct
+  answers if one is the key. `parseOptionValue` refuses anything containing
+  words, because `4% less` / `4% more` is a legitimate pair and a check that
+  cries wolf is a check people stop reading.
 - **2026-09-22 — Seeding never demotes.** `resolveSeedStatus` in
   `src/lib/items.ts` is pure and tested because the alternative — the rule
   living inline in a script — is what took the live bank to zero. Promotion is

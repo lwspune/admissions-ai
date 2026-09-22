@@ -42,20 +42,23 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
-- [ ] **The bank holds 30 items, not 300 — and only 15 are live.** The 2025 paper port
+- [ ] **The bank holds 45 items, not 300 — and only 15 are live.** The 2025 paper port
       (`content/items/legacy-iq-2025.json`, 15 items) is seeded at `status='review'` and is not
       drawable until you sign it off: `npm run items:seed -- --live --file legacy-iq-2025.json`.
-      Until then every candidate still gets the same paper. Authoring the remaining 270 is the bulk
-      of the work left.
+      Until then every candidate still gets the same paper. Two batches await sign-off:
+      `legacy-iq-2025.json` (15, ported) and `maths-batch-02.json` (15, authored). Authoring the
+      remaining 255 is the bulk of the work left.
 - [ ] **Review the 2025 port and decide the subject split.** See `content/items/legacy-iq-2025.md`.
       The institute's own paper is ~65% maths with no science at all, while spec §1 mandates
-      5 maths / 5 English / 5 science. Worth settling before 270 items get authored against a split
-      the institute does not actually practise — the science items are the ones that will be
-      invented from nothing rather than drawn from experience.
+      5 maths / 5 English / 5 science. Worth settling before the remaining items get authored
+      against a split the institute does not actually practise — the science items are the ones
+      that will be invented from nothing rather than drawn from experience. Maths batches can
+      proceed regardless; English and science are what the answer gates.
 - [ ] **Two filler distractors, flagged not fixed.** `M-E-11` option D (89,223) and `M-E-13`
       option D (28) correspond to no derivable candidate error, so they are dead options that make
-      the items easier than their tier implies. Noted in each item's `rationale`. Replace when the
-      maths bank is next touched.
+      the items easier than their tier implies. Noted in each item's `rationale`. Left in
+      deliberately — they belong to the institute's own paper, and rewriting more of it than the
+      wrong keys required is your call. Cheap to fix at sign-off.
 - [ ] **The printed 2025 paper is still circulating with wrong answer keys.** Separate from the
       port: `IQ Test Answer Key.docx` (Apr 2025) is wrong on Q4, Q7 and Q17 and guesses Q12 — 15% of
       the paper, marked wrong regardless of what the candidate wrote. `IQ Test_Qs_A5_ak.docx`
