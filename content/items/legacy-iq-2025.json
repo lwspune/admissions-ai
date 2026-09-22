@@ -1,0 +1,242 @@
+[
+  {
+    "ref": "M-E-06",
+    "subject": "maths",
+    "skill": "number-series",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Find the missing number in the sequence: 2, 6, 12, 20, ___, 42",
+    "options": {
+      "A": "28",
+      "B": "30",
+      "C": "32",
+      "D": "36"
+    },
+    "answer_key": "B",
+    "rationale": "Differences run 4, 6, 8, 10, 12, so the gap after 20 is 10 and the missing term is 30 — confirmed by 30 + 12 = 42, which the printed final term lets the candidate check for themselves. A (28) repeats the previous difference of 8. C (32) advances to 12 one step early. D (36) reads the series as roughly doubling. Self-checking, which is why it sits at easy."
+  },
+  {
+    "ref": "M-E-07",
+    "subject": "maths",
+    "skill": "speed-distance-time",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A train travels 60 km in 90 minutes. What is its speed in km/h?",
+    "options": {
+      "A": "40",
+      "B": "45",
+      "C": "50",
+      "D": "55"
+    },
+    "answer_key": "A",
+    "rationale": "90 minutes is 1.5 hours, so 60 ÷ 1.5 = 40 km/h. The item turns entirely on converting minutes to hours before dividing. Every distractor is larger than the key, so a candidate who fails the conversion and reaches for something near 60 is caught rather than accidentally right. Near-neighbour of S-E-03, which asks the same conversion under the science tag."
+  },
+  {
+    "ref": "M-E-08",
+    "subject": "maths",
+    "skill": "linear-equation",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If 3x + 2 = 11, what is the value of x?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "5"
+    },
+    "answer_key": "B",
+    "rationale": "3x = 9, so x = 3. D (5) solves 3x = 15, adding the 2 instead of subtracting it — the dominant error. A and C sit either side of the key so that a slip lands on an option rather than prompting a re-check. This is the floor of the maths bank: a candidate who misses one-step algebra has told the counsellor something useful in fifteen seconds."
+  },
+  {
+    "ref": "M-E-09",
+    "subject": "maths",
+    "skill": "prime-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of the following is a prime number?",
+    "options": {
+      "A": "15",
+      "B": "27",
+      "C": "31",
+      "D": "51"
+    },
+    "answer_key": "C",
+    "rationale": "31 has no divisor other than 1 and itself. A (15 = 3 x 5) and B (27 = 3 x 3 x 3) are visibly composite. D (51) is the reason the item exists: 51 = 3 x 17 reads as prime because it is odd and does not end in 5, and its divisibility surfaces only if the candidate applies the digit-sum test for 3 rather than eyeballing it."
+  },
+  {
+    "ref": "M-E-10",
+    "subject": "maths",
+    "skill": "calendar-reasoning",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If today is Monday, what day of the week will it be 45 days from now?",
+    "options": {
+      "A": "Wednesday",
+      "B": "Thursday",
+      "C": "Friday",
+      "D": "Saturday"
+    },
+    "answer_key": "B",
+    "rationale": "45 = 6 x 7 + 3, so the answer is three days after Monday: Thursday. A (Wednesday) is the off-by-one from counting Monday itself as day one, and is the dominant wrong answer. C and D take the remainder as 4 or 5. The arithmetic is trivial; the discrimination lies entirely in whether the candidate counts from Monday or counts Monday."
+  },
+  {
+    "ref": "M-E-11",
+    "subject": "maths",
+    "skill": "multi-step-arithmetic",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A car's odometer reads 86,923 km and increases by 225 km every day. What will it read after 7 days?",
+    "options": {
+      "A": "87,498 km",
+      "B": "88,498 km",
+      "C": "88,923 km",
+      "D": "89,223 km"
+    },
+    "answer_key": "B",
+    "rationale": "225 x 7 = 1,575 and 86,923 + 1,575 = 88,498. A (87,498) drops the thousand while adding — the carry slip this kind of item exists to catch. C (88,923) adds a round 2,000 by eye. D (89,223) corresponds to no recognisable error and is filler; it is the weakest option here and a candidate for replacement. Plain computation, no trick, which anchors the easy tier against the pattern-spotting items."
+  },
+  {
+    "ref": "M-E-12",
+    "subject": "maths",
+    "skill": "linear-equation",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If 3y - 7 = 2y + 5, what is the value of y?",
+    "options": {
+      "A": "10",
+      "B": "11",
+      "C": "12",
+      "D": "13"
+    },
+    "answer_key": "C",
+    "rationale": "Collecting terms gives 3y - 2y = 5 + 7, so y = 12. The variable appearing on both sides is the only step separating this from M-E-08. Distractors cluster tightly around the key so an arithmetic slip of one lands on an option instead of prompting a re-check. CORRECTION: the institute's April 2025 answer key declared 12 not to be among the options, four times over. It is option C."
+  },
+  {
+    "ref": "M-E-13",
+    "subject": "maths",
+    "skill": "division-word-problem",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A book has 300 pages. If you read 12 pages per day, how many days will it take to finish the book?",
+    "options": {
+      "A": "24",
+      "B": "25",
+      "C": "26",
+      "D": "28"
+    },
+    "answer_key": "B",
+    "rationale": "300 ÷ 12 = 25 exactly, so there is no remainder to interpret and no rounding decision to get wrong. This is the easiest item carried over from the 2025 paper and is useful mainly as a check that the candidate is engaging at all. A and C are off-by-one landing points; D (28) is filler and does not correspond to a derivable error."
+  },
+  {
+    "ref": "M-M-14",
+    "subject": "maths",
+    "skill": "clock-angles",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A clock shows the time as 3:15. If the minute hand moves 120 degrees clockwise, what will the time be?",
+    "options": {
+      "A": "3:35",
+      "B": "3:45",
+      "C": "4:00",
+      "D": "4:15"
+    },
+    "answer_key": "A",
+    "rationale": "The minute hand sweeps 360 degrees in 60 minutes, so 120 degrees is 20 minutes: 3:15 + 20 = 3:35. B (3:45) treats 120 degrees as half a revolution, C (4:00) as three quarters, D (4:15) as a full turn. Moderate because it needs the degrees-to-minutes conversion rather than clock reading. CORRECTION: the April 2025 key claimed 3:35 was not among the options and awarded B. It is option A."
+  },
+  {
+    "ref": "M-M-15",
+    "subject": "maths",
+    "skill": "inverse-proportion",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "If 8 people can complete a job in 12 days, how many days will it take 6 people to complete the same job?",
+    "options": {
+      "A": "9",
+      "B": "14",
+      "C": "16",
+      "D": "18"
+    },
+    "answer_key": "C",
+    "rationale": "The job is 8 x 12 = 96 person-days, and 96 ÷ 6 = 16. A (9) is the reason this item exists: it comes from 12 x 6/8, applying direct proportion where the relationship is inverse, and it fails the sanity check that fewer people must take longer. REVISED: the 2025 paper offered 14, 15, 16, 18, none of which captured that error; 15 has been replaced by 9."
+  },
+  {
+    "ref": "M-M-16",
+    "subject": "maths",
+    "skill": "rate-reasoning",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "If 7 cats catch 7 mice in 7 minutes, how long will 14 cats take to catch 14 mice?",
+    "options": {
+      "A": "7 minutes",
+      "B": "14 minutes",
+      "C": "3.5 minutes",
+      "D": "21 minutes"
+    },
+    "answer_key": "A",
+    "rationale": "Each cat catches one mouse in 7 minutes. Doubling cats and mice together leaves the per-cat rate untouched, so the time is still 7 minutes. B (14 minutes) is the intuitive answer and should attract most of the wrong responses — the candidate scales time along with the quantities. C scales it the other way. Moderate despite needing no arithmetic: it measures whether a candidate identifies the per-unit rate before scaling."
+  },
+  {
+    "ref": "M-D-17",
+    "subject": "maths",
+    "skill": "ratio-chaining",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "If 5 apples cost as much as 2 bananas, and 10 bananas cost as much as 3 oranges, what is the ratio of the cost of one apple to one orange?",
+    "options": {
+      "A": "1 : 3",
+      "B": "2 : 3",
+      "C": "3 : 25",
+      "D": "25 : 3"
+    },
+    "answer_key": "C",
+    "rationale": "One apple = 2/5 banana and one banana = 3/10 orange, so one apple = 2/5 x 3/10 = 3/25 of an orange, giving 3 : 25. D (25 : 3) is the same correct work reported the wrong way round and is the sharpest distractor in the bank. B (2 : 3) reads two numbers off the surface of the question. Difficult because the chain runs through an intermediate unit across two invertible conversions. REVISED: the paper's option D was 1 : 5, which no error produces. CORRECTION: the April 2025 key derived 3/25 and then selected 1 : 5."
+  },
+  {
+    "ref": "E-E-06",
+    "subject": "english",
+    "skill": "syllogism",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If all Bloops are Razzies and all Razzies are Lazzies, then all Bloops are definitely Lazzies. This statement is:",
+    "options": {
+      "A": "True",
+      "B": "False",
+      "C": "Cannot be determined",
+      "D": "None of the above"
+    },
+    "answer_key": "A",
+    "rationale": "Transitivity: every Bloop is a Razzie and every Razzie is a Lazzie, so every Bloop is a Lazzie. The nonsense nouns are the point — they strip out world knowledge and leave only the form of the argument. C attracts candidates who mistake unfamiliar terms for missing information. Pairs with E-D-05, which is the same structure carrying an invalid conclusion."
+  },
+  {
+    "ref": "E-E-07",
+    "subject": "english",
+    "skill": "anagram",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Rearrange the letters to form a meaningful word: OBRNW",
+    "options": {
+      "A": "BROWN",
+      "B": "BORNW",
+      "C": "WORNB",
+      "D": "NROBW"
+    },
+    "answer_key": "A",
+    "rationale": "The five letters O, B, R, N, W form exactly one English word: BROWN. REVISED: all three distractors now use the same five letters. The 2025 paper offered BOARD and WORD, which contain letters that are not present and can therefore be eliminated without solving anything — the item could be answered by counting characters. A floor check on letter familiarity, easy by design."
+  },
+  {
+    "ref": "E-M-08",
+    "subject": "english",
+    "skill": "letter-series",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "What is the next letter in the pattern? A, C, F, J, O, ___",
+    "options": {
+      "A": "S",
+      "B": "T",
+      "C": "U",
+      "D": "V"
+    },
+    "answer_key": "C",
+    "rationale": "The alphabet positions are 1, 3, 6, 10, 15 — gaps of 2, 3, 4, 5 — so the next gap is 6 and the answer is position 21, U. A (S) is position 19, repeating a gap of 4. B (T) is 20, repeating 5. D (V) is 22, a gap of 7. Moderate because the pattern lives in letter positions rather than letters, and the alphabet must be counted without error. CORRECTION: the November 2025 A5 key gives A (S); the answer is C (U)."
+  }
+]
