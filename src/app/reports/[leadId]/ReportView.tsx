@@ -193,10 +193,11 @@ function Detail({
           Question text is not shown at your access level.
         </p>
       )}
-      <table className="w-full min-w-[42rem] text-left text-sm">
+      <table className="w-full min-w-[56rem] text-left text-sm">
         <thead className="border-b border-slate-200 text-xs uppercase tracking-wide text-slate-400">
           <tr>
             <th className="py-2 pr-2">#</th>
+            <th className="w-[22rem] py-2 pr-3">Question</th>
             <th className="py-2 pr-2">Subject</th>
             <th className="py-2 pr-2">Skill</th>
             <th className="py-2 pr-2">Level</th>
@@ -210,6 +211,9 @@ function Detail({
           {questions.map((q) => (
             <tr key={q.position} className="border-b border-slate-100 align-top">
               <td className="py-2 pr-2 tabular-nums text-slate-500">{q.position}</td>
+              <td className="py-2 pr-3 text-slate-700">
+                {q.stem || <span className="text-slate-400">—</span>}
+              </td>
               <td className="py-2 pr-2">{SUBJECT_LABEL[q.subject]}</td>
               <td className="py-2 pr-2 text-slate-500">{q.skill}</td>
               <td className="py-2 pr-2 text-slate-500">{q.difficulty}</td>

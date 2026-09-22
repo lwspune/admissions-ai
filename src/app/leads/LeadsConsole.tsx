@@ -53,6 +53,16 @@ export function LeadsConsole({
           </p>
         </div>
         <div className="flex gap-2">
+          {/* Cosmetic only. /items 404s for anyone who is not a superadmin, and
+              RLS on test_items is the rule underneath that. */}
+          {staff.role === 'superadmin' && (
+            <Link
+              href="/items"
+              className="min-h-tap inline-flex items-center rounded border border-slate-300 px-4 py-2 text-sm"
+            >
+              Questions
+            </Link>
+          )}
           <button
             type="button"
             className="min-h-tap rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white"

@@ -72,12 +72,16 @@ async function assertIssuable(db: Db, leadId: string): Promise<void> {
   }
 }
 
-/** Every live item, as the draw needs it. */
+/**
+ * Every live item, as the draw needs it: three columns and no answer.
+ *
+ * Goes through `live_pool()` rather than selecting test_items, because SELECT
+ * on that table is scoped to items a staff member has already seen on a paper
+ * (migration 0008). Reading it directly meant a newly promoted item was
+ * invisible to a counsellor and could never be drawn.
+ */
 async function livePool(db: Db): Promise<PoolItem[]> {
-  const { data, error } = await db
-    .from('test_items')
-    .select('id, subject, difficulty')
-    .eq('status', 'live')
+  const { data, error } = await db.rpc('live_pool')
 
   if (error) throw new Error(`could not load the item bank: ${error.message}`)
   return (data ?? []) as PoolItem[]

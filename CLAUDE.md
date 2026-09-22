@@ -13,8 +13,13 @@ itself server-side.
 | [DEPLOY.md](DEPLOY.md) | Deployment and credential rotation |
 
 **Live:** https://admissions-ai-omega.vercel.app · repo `lwspune/admissions-ai` (private)
-Supabase project `ohcvimrxaeeqbmnucbcn`. Deploys are manual (`npx vercel --prod`);
-no Git integration yet.
+Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
+
+**Git integration is connected: a push to `main` deploys to production.** Other
+branches get a preview deployment, which Vercel's own login protects, so a
+preview is not a second open copy of the system. `npx vercel --prod` still
+works as a manual path. Migrations are never part of a deploy (see below), so a
+push ships code against whatever schema is already live.
 
 ---
 
@@ -25,15 +30,16 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 **`src/lib/` — pure.** Plain data in, plain data out, no IO. This is where the
 logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
-`serialize` (**the security boundary**) · `report` · `mobile` · `token` · `ip` · `types`
+`serialize` (**the security boundary**) · `report` · `items` (seed-status rules) ·
+`mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
-`auth` (session-bound client) · `assessments` (issue) · `attempt` (open,
+`auth` (session-bound client) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report`
 
 **`src/app/`** — `t/[token]/` is the only unauthenticated route. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/` are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -65,6 +71,11 @@ These are the things that quietly break everything if violated.
 - **A frozen paper is immutable.** `assessment_items` is insert-only even for
   superadmin; a question changing under a candidate mid-attempt is the failure
   that table exists to prevent.
+- **Answer keys are superadmin-only.** Non-superadmin staff read `test_items`
+  only for items that have appeared on a paper (migration 0008), so the review
+  queue is invisible to them. The paper draw goes through `live_pool()`, which
+  returns `id, subject, difficulty` and no answer — never `select` the table
+  for a draw, or a newly promoted item becomes undrawable.
 
 ## Commands
 
@@ -73,7 +84,7 @@ npm run dev                                  npm run build:check
 npm run lint          npm run typecheck      npm test
 npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
-npm run items:seed -- --live
+npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210
@@ -95,6 +106,16 @@ Migrations are applied deliberately, never by a deploy:
   `.env.example`. A `!.env.example` negation guards it.
 - **Check exit codes, not pipe output.** `cmd | tail && echo $?` reports
   `tail`'s status. This hid a red lint through one commit.
+- **Do not infer that an integration is absent from having used a manual path.**
+  CLAUDE.md claimed for a day that Git deploys were not connected, because
+  `npx vercel --prod` had been used and no one checked. The project was created
+  by importing the repo (DEPLOY.md step 3), which connects Git by definition.
+  `gh api repos/<repo>/deployments` settles it in one call.
+- **An upsert rewrites every column it names.** `items:seed` used to send
+  `status` unconditionally, so a plain re-seed demoted the entire live bank to
+  `review` and left nothing drawable — visible only later, as staff unable to
+  issue a paper. Seeding now preserves an existing status; only
+  `--live --file <batch>` promotes.
 
 ## Decisions
 
@@ -125,6 +146,37 @@ Migrations are applied deliberately, never by a deploy:
 - **2026-09-22 — The report shows facts, never a verdict.** Missing telemetry reads as
   "nothing seen", not "nothing happened", and unknown dwell prints `unknown` rather than 0 —
   zero would read as "answered instantly", which is a fraud signal the data does not support.
+- **2026-09-22 — The institute's own 2025 IQ paper was ported, not adopted.**
+  15 of its 20 questions entered the bank (`content/items/legacy-iq-2025.*`);
+  five were dropped — one needs a figure the `.docx` has lost, one duplicates
+  another's sequence, three are recall at p ≈ 0.95. Its two shipped answer keys
+  disagree with each other and five keys were wrong, so every key was
+  re-derived twice, the second time in code. Field-tested items beat authored
+  ones, but only once the keys are trustworthy.
+- **2026-09-22 — Narrowing an RLS policy broke two things downstream, in
+  order.** Scoping `test_items` reads to superadmin plus issued items (0008)
+  made newly promoted items undrawable, because the paper draw read the table
+  through the session client; `live_pool()` fixed that (0009) and then returned
+  nothing for the service role, because `is_staff()` reads a JWT claim a
+  service key does not carry (0010). Each break was found by a check that could
+  fail — a throwaway live row for the first, the integration suite for the
+  second. When tightening a policy, enumerate every caller of the table first;
+  a read path is easy to miss precisely because it never errors, it just
+  returns fewer rows.
+- **2026-09-22 — Maths batches proceed while the subject split is open.** The
+  institute's own paper is ~65% maths with no science; spec §1 mandates 5/5/5.
+  That decision is the user's, and maths needs 60/20/20 either way — so
+  authoring maths cannot be wasted by it, while English and science can.
+- **2026-09-22 — Lint compares option *quantities*, not just strings.** `2/3`
+  and `4/6` are one option printed twice: eliminated together, and two correct
+  answers if one is the key. `parseOptionValue` refuses anything containing
+  words, because `4% less` / `4% more` is a legitimate pair and a check that
+  cries wolf is a check people stop reading.
+- **2026-09-22 — Seeding never demotes.** `resolveSeedStatus` in
+  `src/lib/items.ts` is pure and tested because the alternative — the rule
+  living inline in a script — is what took the live bank to zero. Promotion is
+  the answer-key sign-off and is now scoped per batch, since `--live` alone
+  would approve items nobody has reviewed.
 - **2026-09-22 — Staff get a narrow `assessment_items` insert policy** rather
   than the console running on service role after an application-level check.
   Keeps the access rule in the database.

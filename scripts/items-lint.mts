@@ -4,13 +4,14 @@
 //
 // A wrong answer key is the failure that hides for six months, so this checks
 // the mechanical properties a human reviewer reads past: shape, duplication,
-// and the length tell that lets a candidate pick the key without reading the
+// and the tells that let a candidate pick the key without reading the
 // question. It cannot check whether an answer is actually correct — that is
 // what the rationale and human review are for.
 
 import { readFileSync, readdirSync } from 'node:fs'
-import { join, dirname } from 'node:path'
+import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { parseOptionValue } from '../src/lib/items'
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
 
@@ -20,15 +21,30 @@ const CHOICES = ['A', 'B', 'C', 'D']
 const MAX_STEM_WORDS = 40
 const MIN_RATIONALE_CHARS = 60
 /** Per subject, the minimum a paper needs (spec §6). */
-const MIN_PER_SUBJECT = { easy: 3, moderate: 1, difficult: 1 }
+const MIN_PER_SUBJECT: Record<string, number> = { easy: 3, moderate: 1, difficult: 1 }
 
-const words = (s) => s.trim().split(/\s+/).filter(Boolean).length
+interface RawItem {
+  ref?: string
+  subject?: string
+  skill?: string
+  difficulty?: string
+  format?: string
+  stem?: string
+  options?: Record<string, string> | null
+  answer_key?: string | null
+  numeric_answer?: number | null
+  numeric_tolerance?: number | null
+  rationale?: string
+  __file?: string
+}
 
-function main() {
+const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
+
+export function lintItems(): number {
   let errors = 0
   let warnings = 0
-  const err = (ref, msg) => { errors++; console.log(`  ERROR  ${ref}: ${msg}`) }
-  const warn = (ref, msg) => { warnings++; console.log(`  WARN   ${ref}: ${msg}`) }
+  const err = (ref: string, msg: string) => { errors++; console.log(`  ERROR  ${ref}: ${msg}`) }
+  const warn = (ref: string, msg: string) => { warnings++; console.log(`  WARN   ${ref}: ${msg}`) }
 
   const files = readdirSync(DIR).filter((f) => f.endsWith('.json'))
   if (files.length === 0) {
@@ -36,7 +52,7 @@ function main() {
     return 1
   }
 
-  const items = []
+  const items: RawItem[] = []
   for (const file of files) {
     const parsed = JSON.parse(readFileSync(join(DIR, file), 'utf8'))
     if (!Array.isArray(parsed)) {
@@ -48,18 +64,18 @@ function main() {
 
   console.log(`\nLinting ${items.length} items from ${files.length} file(s)\n`)
 
-  const seenRefs = new Map()
-  const seenStems = new Map()
+  const seenRefs = new Map<string, string>()
+  const seenStems = new Map<string, string>()
 
   for (const item of items) {
     const ref = item.ref ?? '(no ref)'
 
     if (!item.ref) err(ref, 'missing ref')
     else if (seenRefs.has(item.ref)) err(ref, `duplicate ref, also in ${seenRefs.get(item.ref)}`)
-    else seenRefs.set(item.ref, item.__file)
+    else seenRefs.set(item.ref, item.__file ?? '')
 
-    if (!SUBJECTS.includes(item.subject)) err(ref, `invalid subject "${item.subject}"`)
-    if (!DIFFICULTIES.includes(item.difficulty)) err(ref, `invalid difficulty "${item.difficulty}"`)
+    if (!SUBJECTS.includes(item.subject ?? '')) err(ref, `invalid subject "${item.subject}"`)
+    if (!DIFFICULTIES.includes(item.difficulty ?? '')) err(ref, `invalid difficulty "${item.difficulty}"`)
     if (!item.skill || !item.skill.trim()) err(ref, 'missing skill')
 
     if (!item.stem || !item.stem.trim()) {
@@ -69,7 +85,8 @@ function main() {
         err(ref, `stem is ${words(item.stem)} words, limit is ${MAX_STEM_WORDS}`)
       }
       const key = item.stem.trim().toLowerCase()
-      if (seenStems.has(key)) err(ref, `duplicate stem, also in ${seenStems.get(key)}`)
+      const prior = seenStems.get(key)
+      if (prior) err(ref, `duplicate stem, also in ${prior}`)
       else seenStems.set(key, ref)
     }
 
@@ -84,21 +101,37 @@ function main() {
         err(ref, 'mcq item has no options')
         continue
       }
-      const keys = Object.keys(item.options).sort()
+      const options = item.options
+      const keys = Object.keys(options).sort()
       if (keys.join('') !== 'ABCD') err(ref, `options must be exactly A-D, got ${keys.join('')}`)
 
-      const values = CHOICES.map((c) => item.options[c]).filter((v) => v != null)
+      const values = CHOICES.map((c) => options[c]).filter((v): v is string => v != null)
       if (values.some((v) => !String(v).trim())) err(ref, 'an option is blank')
       if (new Set(values.map((v) => String(v).trim().toLowerCase())).size !== values.length) {
         err(ref, 'two options are identical')
       }
-      if (!CHOICES.includes(item.answer_key)) err(ref, `invalid answer_key "${item.answer_key}"`)
+      if (!CHOICES.includes(item.answer_key ?? '')) err(ref, `invalid answer_key "${item.answer_key}"`)
+
+      // Two options that read differently but mean the same quantity (2/3 and
+      // 4/6) are eliminated together, and if one is the key the item has two
+      // right answers. String equality above cannot see it.
+      const byValue = new Map<string, string>()
+      for (const choice of CHOICES) {
+        const raw = options[choice]
+        if (raw == null) continue
+        const value = parseOptionValue(String(raw))
+        if (value === null) continue
+        const twin = byValue.get(value)
+        if (twin) err(ref, `options ${twin} and ${choice} are the same quantity ("${options[twin]}" / "${raw}")`)
+        else byValue.set(value, choice)
+      }
 
       // The length tell: if the correct answer is visibly the longest, a
       // candidate can pick it without reading the question.
-      if (CHOICES.includes(item.answer_key) && values.length === 4) {
-        const keyLen = String(item.options[item.answer_key]).length
-        const others = CHOICES.filter((c) => c !== item.answer_key).map((c) => String(item.options[c]).length)
+      const answerKey = item.answer_key
+      if (answerKey && CHOICES.includes(answerKey) && values.length === 4) {
+        const keyLen = String(options[answerKey]).length
+        const others = CHOICES.filter((c) => c !== answerKey).map((c) => String(options[c]).length)
         const longestOther = Math.max(...others)
         if (keyLen > longestOther * 1.5) {
           err(ref, `key is ${keyLen} chars vs ${longestOther} for the next longest — a length tell`)
@@ -125,7 +158,7 @@ function main() {
   for (const subject of SUBJECTS) {
     for (const difficulty of DIFFICULTIES) {
       const n = items.filter((i) => i.subject === subject && i.difficulty === difficulty).length
-      const need = MIN_PER_SUBJECT[difficulty]
+      const need = MIN_PER_SUBJECT[difficulty] ?? 0
       if (n < need) {
         errors++
         console.log(`  ERROR  ${subject}/${difficulty}: ${n} item(s), a paper needs ${need}`)
@@ -139,4 +172,7 @@ function main() {
   return errors === 0 ? 0 : 1
 }
 
-process.exitCode = main()
+const entry = process.argv[1]
+if (entry && resolve(entry) === resolve(fileURLToPath(import.meta.url))) {
+  process.exitCode = lintItems()
+}

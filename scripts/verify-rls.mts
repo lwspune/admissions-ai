@@ -89,6 +89,40 @@ async function main(): Promise<number> {
   const { data: pool } = await db.from('test_items').select('id, subject, difficulty').eq('status', 'live')
   check('read the item bank', (pool?.length ?? 0) > 0)
 
+  // Who may read the bank, and how much of it.
+  //
+  // Superadmin browses it, answer keys included — that is /items. Every other
+  // role must not: a telecaller who can read the keys can coach the items, and
+  // they are measured on candidates reaching the counsellor. Unissued and
+  // review-status rows are the sharp edge, since that is the sign-off queue.
+  //
+  // This assertion is role-aware because the probe signs in as exactly one
+  // person. Run it as a superadmin AND as a counsellor; a single green run
+  // proves only half of it.
+  const role = auth.user.app_metadata?.role
+  const { count: reviewVisible } = await db
+    .from('test_items')
+    .select('id', { count: 'exact', head: true })
+    .eq('status', 'review')
+  const { count: reviewReal } = await svc
+    .from('test_items')
+    .select('id', { count: 'exact', head: true })
+    .eq('status', 'review')
+
+  if (role === 'superadmin') {
+    check(
+      `superadmin reads the whole bank (${reviewReal} review items)`,
+      (reviewReal ?? 0) === 0 || (reviewVisible ?? 0) === (reviewReal ?? 0),
+      `saw ${reviewVisible} of ${reviewReal}`,
+    )
+  } else {
+    check(
+      `${role} cannot read unreviewed items (${reviewReal} exist)`,
+      (reviewVisible ?? 0) === 0,
+      `saw ${reviewVisible} of ${reviewReal} — the answer keys are readable`,
+    )
+  }
+
   const paper = assemblePaper({ pool: (pool ?? []) as PoolItem[] })
   const { data: assessment, error: issueErr } = await db.rpc('issue_assessment', {
     p_lead_id: lead!.id,
