@@ -22,3 +22,6 @@ supabase/.branches/
 
 # Verification build output (keeps `next build` off the dev server)
 .next-verify/
+
+.vercel
+.env*
