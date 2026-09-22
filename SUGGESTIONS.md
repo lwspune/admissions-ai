@@ -14,18 +14,33 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       that is also in that transcript. `npm run staff:list` shows accounts and flags any with no role.
 - [ ] **Check the database password is not reused elsewhere.** It looks like it may be shared with
       other institute systems. This database should have its own.
-- [ ] **Take the test on a real Android phone over mobile data.** (2026-09-22: the trial run was
-      desktop Chrome at 1536x864, so this is still open.) The 4-inch / Android 8 / 3G case is
-      exactly where per-question save and the pausing timer earn their keep, and it has never been
-      exercised. Background the tab mid-question, return, submit.
+- [ ] **Take the test on a real Android phone over mobile data.** Now possible — the site is
+      public. (2026-09-22: the one real run was desktop Chrome at 1536x864, and a later check
+      faked a 390x844 screen via curl; neither is a phone.) The 4-inch / Android 8 / 3G case is
+      exactly where per-question save and the pausing timer earn their keep. Background the tab
+      mid-question, return, submit.
 - [ ] **Exercise the staff console buttons in a browser.** `createLead` and `issueForLead` are verified
       only through their data path (the RLS probe). React server actions cannot be driven from curl, so
       the form submissions themselves are untested.
-- [ ] Private GitHub repo + Vercel project. Nothing is pushed yet. Per-environment env vars, previews
-      pointed at a separate staging Supabase project — see spec §11 for the trap.
+- [x] ~~Private GitHub repo + Vercel project.~~ **DONE 2026-09-22** — `lwspune/admissions-ai`
+      (private, verified by a 404 to anonymous requests) deployed to
+      https://admissions-ai-omega.vercel.app. Production env vars set; Preview left unset so
+      previews fail loudly rather than becoming a second copy of the live system.
 
 ## Known gaps
 
+- [ ] **Delete `admin@lwspune.test`.** A real superadmin (`connect.lwspune@gmail.com`) now exists, so
+      the seeded account with a transcript-known password should go. `npm run staff:list` shows both.
+- [ ] **Vercel Git integration is not connected.** Deploys are manual (`npx vercel --prod`), so a push
+      to `main` ships nothing. Connect it in the Vercel dashboard if you want push-to-deploy — worth it
+      once more than one person touches the repo.
+- [ ] **Custom domain.** The production URL is `admissions-ai-omega.vercel.app` (the plain
+      `admissions-ai.vercel.app` belongs to someone else). A link from an unrecognised `vercel.app`
+      subdomain, arriving from an unknown number, is exactly what people are taught not to tap. A
+      subdomain of the institute's own domain would materially improve the open rate.
+- [ ] **Vercel Hobby is licensed for non-commercial use.** This is a fee-charging institute's
+      admissions pipeline. If enforced, candidate links go down mid-window with no warning to the
+      telecaller. Decided on 2026-09-22 to stay on Hobby for now; revisit before a real intake.
 - [ ] **The report does not exist.** Scores are graded and stored, and nothing displays them. This is
       the next build item and the thing that makes any of it readable to a counsellor.
 - [ ] **The bank holds 15 items, not 300.** Every candidate currently gets the same paper, and a
@@ -63,8 +78,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
   `.next-verify`.
 - **The two database probes skip when real leads exist** (exit 2, not 1). They write rows, so they are
   development tools for an empty database, not a production health check.
-- **Files are CRLF.** There is no `.gitattributes`, so git normalises line endings and exact-text
-  patching of committed files fails in confusing ways.
+- ~~**Files are CRLF.**~~ **FIXED 2026-09-22** — `.gitattributes` now normalises to LF and the
+  tree was renormalised. Historic note: before that, exact-text patching of committed files
+  failed confusingly, which cost real time.
 - **`verify-schema` runs as service role and therefore proves nothing about RLS.** That is what
   `verify-rls` is for — it signs in as a real staff member.
 
