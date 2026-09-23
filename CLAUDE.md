@@ -68,8 +68,8 @@ These are the things that quietly break everything if violated.
   the MCQ/numeric item shape, answer idempotency, and the assessment state
   machine all live in Postgres. `npm run db:verify` proves the database
   actually rejects what it claims to.
-- **Roles live in `app_metadata`, never `user_metadata`** — the latter is
-  editable by the signed-in user. Read via `getUser()`, never `getSession()`,
+- **Roles and staff names live in `app_metadata`, never `user_metadata`** — the
+  latter is editable by the signed-in user. Read via `getUser()`, never `getSession()`,
   which trusts a cookie the browser can edit.
 - **No cut-off is computed anywhere.** The score is reported; a human sets the
   bar, outside the app. Do not let this drift inward.
@@ -117,6 +117,9 @@ npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210
 ```
+
+Day-to-day staff management is the `/staff` page; the `staff:*` scripts are the
+break-glass path and the only way to create the first superadmin.
 
 Migrations are applied deliberately, never by a deploy:
 `npx supabase db push --db-url "postgresql://postgres:<pw>@db.<ref>.supabase.co:5432/postgres"`
@@ -195,6 +198,14 @@ Migrations are applied deliberately, never by a deploy:
   second. When tightening a policy, enumerate every caller of the table first;
   a read path is easy to miss precisely because it never errors, it just
   returns fewer rows.
+- **2026-09-23 — Staff management moved into the app, on service role.** The
+  CLI needed the service-role key on the operator's machine. Creating a login
+  has no RLS path, so the gate went into `src/server/staff.ts` (see
+  Invariants) rather than into a SECURITY DEFINER function writing Supabase's
+  internal `auth` tables. The superadmin sets a temporary password and hands it
+  over; by the user's choice there is no self-service password change and no
+  email invite (built-in Supabase mail is rate-limited and lands in spam). A
+  forgotten password is remove + re-add.
 - **2026-09-23 — The purge deletes; it does not anonymise.** The consent says
   "kept for 12 months", and deleting is the unambiguous way to honour that.
   Aggregate history is lost with it — if cohort analytics are ever wanted, the

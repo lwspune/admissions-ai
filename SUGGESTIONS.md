@@ -29,10 +29,21 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       the app computes no cut-off by design (spec §1) precisely so a human sets that bar. The
       deadline is the **first candidate you turn away**, not the first candidate you test: after
       that you are defending a number retrospectively. Cheap now, impossible later.
-- [ ] **Look at `/items` and the report's new Question column in a browser.** Both shipped
-      2026-09-22 and neither has been seen by a human. `/items` needs a superadmin session, so it
-      cannot be checked from a script — unauthenticated it redirects to `/login?next=%2Fitems`,
-      which is all that has been proved.
+- [ ] **Look at `/items`, `/staff` and the report's new Question column in a browser.** None has
+      been seen by a human. `/staff` (shipped 2026-09-23, commit `83de925`) went to production on
+      the user's instruction without the golden-path check: add a throwaway account, copy the
+      details, change its role, remove it. Its server layer is covered by `staff.itest.ts` against
+      the real auth server; the UI is not. All three need a superadmin session, so unauthenticated
+      redirects to `/login` are all that has been proved.
+- [ ] **Give Claude a way to browser-verify superadmin pages, or accept that the user does it.**
+      2026-09-23: creating a temporary superadmin on production to drive `/staff` through Edge was
+      blocked by the permission classifier — correctly, since it mints top-level access on the live
+      project. There is only one Supabase project, so every signed-in check is against production.
+      This is why `/items` and `/staff` both shipped unseen. Options: (a) the user runs the
+      golden path after each superadmin-page change (cheapest, status quo); (b) a separate
+      Supabase project for Preview deployments, where a test superadmin is harmless; (c) a
+      standing `e2e` telecaller account, which verifies nothing superadmin-only. (b) is the only
+      one that closes the gap, and it also stops integration tests writing to production.
 - [x] ~~Private GitHub repo + Vercel project.~~ **DONE 2026-09-22** — `lwspune/admissions-ai`
       (private, verified by a 404 to anonymous requests) deployed to
       https://admissions-ai-omega.vercel.app. Production env vars set; Preview left unset so
