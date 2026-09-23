@@ -41,18 +41,20 @@ logic worth testing lives, which is why it tests without a database.
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
-`auth` (session-bound client) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
+`auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge)
 
 **`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
 the latter guards itself with `CRON_SECRET`. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` (superadmin only) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` and `staff/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
 client so **RLS** decides access; the candidate API uses service role because
 it has no session to act for. A staff feature reaching for service role is a
-bug — it moves the access rule out of the database and into an `if`.
+bug — it moves the access rule out of the database and into an `if`. The one
+sanctioned exception is `src/server/staff.ts` (see Invariants): login accounts
+have no RLS path at all.
 
 ## Invariants
 
@@ -89,6 +91,14 @@ These are the things that quietly break everything if violated.
   lives in application code rather than the database, because RLS cannot mask
   columns per role. It was inert until the report gained a Question column;
   `report.itest.ts` is what stops it becoming inert again.
+- **Staff accounts are managed on service role, gated in `src/server/staff.ts`.**
+  Creating, re-roling or deleting a login is only possible through the auth
+  admin API, so RLS never sees it — the second access rule in application
+  code. Every export takes the actor from `currentStaff()` and refuses a
+  non-superadmin; nobody may change their own account, which is also what
+  keeps one superadmin in existence. `staff.itest.ts` fails if the gate goes.
+  The database reads roles from the JWT, so a demotion or removal reaches RLS
+  only when that token expires (≤ 1 hour).
 - **Candidate data is kept 12 months, because the consent screen says so.**
   `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent text in
   `CandidateFlow` must move together. A new table holding candidate data must
