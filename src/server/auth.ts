@@ -2,9 +2,9 @@ import 'server-only'
 import { cookies } from 'next/headers'
 import { createServerClient } from '@supabase/ssr'
 import type { Db } from './supabase'
+import { ROLES, type Role } from '@/lib/staff'
 
-export const ROLES = ['telecaller', 'counsellor', 'superadmin'] as const
-export type Role = (typeof ROLES)[number]
+export { ROLES, type Role }
 
 export interface StaffUser {
   id: string
