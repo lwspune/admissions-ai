@@ -1,8 +1,8 @@
 import { describe, it, expect } from 'vitest'
-import { validateNewStaff, checkChangeTarget, MIN_PASSWORD } from './staff'
+import { validateNewStaff, validateName, checkChangeTarget, MIN_PASSWORD, MAX_NAME } from './staff'
 
 describe('validateNewStaff', () => {
-  const good = { email: 'priya@institute.in', password: 'longenough', role: 'counsellor' }
+  const good = { name: 'Priya Sharma', email: 'priya@institute.in', password: 'longenough', role: 'counsellor' }
 
   it('accepts a well-formed account', () => {
     expect(validateNewStaff(good)).toEqual({ ok: true, value: good })
@@ -33,6 +33,38 @@ describe('validateNewStaff', () => {
   it('does not trim the password — a space is a legitimate character in one', () => {
     const result = validateNewStaff({ ...good, password: ' spaced pass ' })
     expect(result).toEqual({ ok: true, value: { ...good, password: ' spaced pass ' } })
+  })
+})
+
+describe('validateName', () => {
+  it('accepts a name and trims it', () => {
+    expect(validateName('  Ravi Nagpurkar ')).toEqual({ ok: true, value: 'Ravi Nagpurkar' })
+  })
+
+  it('collapses runs of whitespace — a pasted name often carries a double space or a tab', () => {
+    expect(validateName('Ravi \t  Nagpurkar')).toEqual({ ok: true, value: 'Ravi Nagpurkar' })
+  })
+
+  it('rejects an empty or whitespace-only name', () => {
+    for (const name of ['', '   ', '\t\n']) expect(validateName(name).ok).toBe(false)
+  })
+
+  it(`rejects a name longer than ${MAX_NAME} characters`, () => {
+    expect(validateName('x'.repeat(MAX_NAME)).ok).toBe(true)
+    expect(validateName('x'.repeat(MAX_NAME + 1)).ok).toBe(false)
+  })
+})
+
+describe('validateNewStaff requires a name', () => {
+  const good = { name: 'Priya Sharma', email: 'priya@institute.in', password: 'longenough', role: 'counsellor' }
+
+  it('rejects a missing name', () => {
+    expect(validateNewStaff({ ...good, name: '  ' }).ok).toBe(false)
+  })
+
+  it('stores the cleaned name', () => {
+    const result = validateNewStaff({ ...good, name: ' Priya   Sharma ' })
+    expect(result.ok && result.value.name).toBe('Priya Sharma')
   })
 })
 

@@ -1,7 +1,7 @@
 import 'server-only'
 import { serviceClient } from './supabase'
 import type { StaffUser } from './auth'
-import { validateNewStaff, checkChangeTarget, isRole, type Role } from '@/lib/staff'
+import { validateNewStaff, validateName, checkChangeTarget, isRole, type Role } from '@/lib/staff'
 
 // Staff account management.
 //
@@ -20,6 +20,8 @@ import { validateNewStaff, checkChangeTarget, isRole, type Role } from '@/lib/st
 
 export interface StaffAccount {
   id: string
+  /** Null for an account created before names were recorded. */
+  name: string | null
   email: string
   /** Null for an account created outside this app with no role set. */
   role: Role | null
@@ -55,28 +57,32 @@ export async function listStaff(actor: StaffUser): Promise<StaffAccount[]> {
   return data.users
     .map((u) => ({
       id: u.id,
+      name: typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : null,
       email: u.email ?? '',
       role: isRole(u.app_metadata?.role) ? u.app_metadata.role : null,
       lastSignInAt: u.last_sign_in_at ?? null,
     }))
-    .sort((a, b) => a.email.localeCompare(b.email))
+    .sort((a, b) => (a.name ?? a.email).localeCompare(b.name ?? b.email))
 }
 
 export async function addStaff(
   actor: StaffUser,
-  input: { email: string; password: string; role: string },
+  input: { name: string; email: string; password: string; role: string },
 ): Promise<StaffResult> {
   if (!isSuperadmin(actor)) return FORBIDDEN
 
   const checked = validateNewStaff(input)
   if (!checked.ok) return checked
 
-  const { email, password, role } = checked.value
+  const { name, email, password, role } = checked.value
   const { error } = await serviceClient().auth.admin.createUser({
     email,
     password,
     email_confirm: true, // internal staff; the superadmin hands over the password
-    app_metadata: { role },
+    // The name sits beside the role in app_metadata, not in user_metadata:
+    // the latter is editable by its owner, and a name that labels who issued a
+    // test is only worth anything if staff cannot rewrite their own.
+    app_metadata: { role, name },
   })
 
   if (error?.code === 'email_exists') {
@@ -102,6 +108,27 @@ export async function changeStaffRole(
     app_metadata: { role },
   })
   if (error) return failed('role change', error)
+  return { ok: true }
+}
+
+/**
+ * Unlike a role change, renaming your own account is allowed: a name grants
+ * nothing, and the self-rule exists to keep a superadmin in existence.
+ */
+export async function renameStaff(
+  actor: StaffUser,
+  targetId: string,
+  name: string,
+): Promise<StaffResult> {
+  if (!isSuperadmin(actor)) return FORBIDDEN
+
+  const checked = validateName(name)
+  if (!checked.ok) return checked
+
+  const { error } = await serviceClient().auth.admin.updateUserById(targetId, {
+    app_metadata: { name: checked.value },
+  })
+  if (error) return failed('rename', error)
   return { ok: true }
 }
 

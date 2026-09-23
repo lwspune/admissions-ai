@@ -8,6 +8,8 @@ export { ROLES, type Role }
 
 export interface StaffUser {
   id: string
+  /** Null for an account created before names were recorded. */
+  name: string | null
   email: string
   role: Role
 }
@@ -60,7 +62,13 @@ export async function currentStaff(): Promise<StaffUser | null> {
   const role = data.user.app_metadata?.role
   if (!ROLES.includes(role as Role)) return null
 
-  return { id: data.user.id, email: data.user.email ?? '', role: role as Role }
+  const name = data.user.app_metadata?.name
+  return {
+    id: data.user.id,
+    name: typeof name === 'string' ? name : null,
+    email: data.user.email ?? '',
+    role: role as Role,
+  }
 }
 
 /** For pages and actions that must not run without a staff session. */

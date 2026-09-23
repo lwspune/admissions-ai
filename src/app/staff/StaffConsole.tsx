@@ -3,9 +3,9 @@
 import { useRef, useState, useTransition } from 'react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ROLES, MIN_PASSWORD, type Role } from '@/lib/staff'
+import { ROLES, MIN_PASSWORD, MAX_NAME, validateName, type Role } from '@/lib/staff'
 import type { StaffAccount, StaffResult } from '@/server/staff'
-import { addStaffAction, changeRoleAction, removeStaffAction } from './actions'
+import { addStaffAction, changeRoleAction, renameAction, removeStaffAction } from './actions'
 
 const ROLE_LABEL: Record<Role, string> = {
   telecaller: 'Telecaller',
@@ -17,6 +17,12 @@ const ROLE_HINT: Record<Role, string> = {
   telecaller: 'Adds candidates and issues tests. Never sees question text.',
   counsellor: 'Everything a telecaller does, plus full reports with questions.',
   superadmin: 'Everything, including answer keys and managing staff.',
+}
+
+/** The name as the server stored it, for echoing back after a create. */
+function cleanName(raw: string) {
+  const checked = validateName(raw)
+  return checked.ok ? checked.value : raw
 }
 
 export function StaffConsole({
@@ -81,7 +87,7 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
   const form = useRef<HTMLFormElement>(null)
   const [pending, start] = useTransition()
   const [error, setError] = useState('')
-  const [created, setCreated] = useState<{ email: string; password: string } | null>(null)
+  const [created, setCreated] = useState<{ name: string; email: string; password: string } | null>(null)
   const [copied, setCopied] = useState(false)
 
   function submit(formData: FormData) {
@@ -95,6 +101,7 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
         return
       }
       setCreated({
+        name: cleanName(String(formData.get('name'))),
         email: String(formData.get('email')).trim().toLowerCase(),
         password: String(formData.get('password')),
       })
@@ -104,12 +111,26 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
   }
 
   const details = created
-    ? `Sign in at ${signInUrl}\nEmail: ${created.email}\nPassword: ${created.password}`
+    ? `Hi ${created.name}, your staff account is ready.\nSign in at ${signInUrl}\nEmail: ${created.email}\nPassword: ${created.password}`
     : ''
 
   return (
     <form ref={form} className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4" action={submit}>
-      <div className="grid gap-3 sm:grid-cols-3">
+      <div className="grid gap-3 sm:grid-cols-2">
+        <div>
+          <label htmlFor="name" className="block text-sm font-medium text-slate-700">
+            Full name<span aria-hidden="true"> *</span>
+          </label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            required
+            maxLength={MAX_NAME}
+            autoComplete="off"
+            className="min-h-tap mt-1 w-full rounded border border-slate-300 px-3 py-2 text-base"
+          />
+        </div>
         <div>
           <label htmlFor="email" className="block text-sm font-medium text-slate-700">
             Email<span aria-hidden="true"> *</span>
@@ -207,14 +228,20 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
   const [role, setRole] = useState<string>(account.role ?? '')
   const [error, setError] = useState('')
 
+  const [editingName, setEditingName] = useState(false)
+  const [name, setName] = useState(account.name ?? '')
+
+  const who = account.name ?? account.email
   const selectId = `role-${account.id}`
+  const nameId = `name-${account.id}`
   const dirty = role !== (account.role ?? '')
 
-  function run(action: () => Promise<StaffResult>) {
+  function run(action: () => Promise<StaffResult>, onOk?: () => void) {
     setError('')
     start(async () => {
       const r = await action()
       if (!r.ok) setError(r.error)
+      else onOk?.()
       router.refresh()
     })
   }
@@ -223,10 +250,62 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
     <li className="rounded-lg border border-slate-200 p-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="min-w-0">
-          <p className="break-all font-medium text-slate-900">
-            {account.email}
-            {isSelf && <span className="ml-2 text-sm font-normal text-slate-500">(you)</span>}
-          </p>
+          {editingName ? (
+            <form
+              className="flex flex-wrap items-center gap-2"
+              onSubmit={(e) => {
+                e.preventDefault()
+                run(() => renameAction(account.id, name), () => setEditingName(false))
+              }}
+            >
+              <label htmlFor={nameId} className="sr-only">
+                Name for {account.email}
+              </label>
+              <input
+                id={nameId}
+                value={name}
+                required
+                maxLength={MAX_NAME}
+                autoFocus
+                disabled={pending}
+                onChange={(e) => setName(e.target.value)}
+                className="min-h-tap rounded border border-slate-300 px-3 py-2 text-base"
+              />
+              <button
+                type="submit"
+                disabled={pending}
+                className="min-h-tap rounded bg-slate-900 px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
+              >
+                Save
+              </button>
+              <button
+                type="button"
+                disabled={pending}
+                className="min-h-tap rounded border border-slate-300 bg-white px-3 py-2 text-sm"
+                onClick={() => {
+                  setName(account.name ?? '')
+                  setEditingName(false)
+                  setError('')
+                }}
+              >
+                Cancel
+              </button>
+            </form>
+          ) : (
+            <p className="break-all font-medium text-slate-900">
+              {account.name ?? <span className="italic text-slate-600">No name</span>}
+              {isSelf && <span className="ml-2 text-sm font-normal text-slate-500">(you)</span>}
+              <button
+                type="button"
+                aria-label={`Edit name for ${account.email}`}
+                className="min-h-tap ml-2 rounded px-2 text-sm font-normal text-blue-800 underline"
+                onClick={() => setEditingName(true)}
+              >
+                Edit name
+              </button>
+            </p>
+          )}
+          <p className="break-all text-sm text-slate-600">{account.email}</p>
           <p className="text-xs text-slate-500">
             {account.lastSignInAt
               ? `Last signed in ${new Date(account.lastSignInAt).toLocaleString('en-IN', {
@@ -247,7 +326,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
         ) : (
           <div className="flex flex-wrap items-center gap-2">
             <label htmlFor={selectId} className="sr-only">
-              Role for {account.email}
+              Role for {who}
             </label>
             {/* Saved with an explicit button, not on change: on Windows the
                 arrow keys change a closed select's value, so a keyboard user
@@ -274,7 +353,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
               <button
                 type="button"
                 disabled={pending}
-                aria-label={`Save role for ${account.email}`}
+                aria-label={`Save role for ${who}`}
                 className="min-h-tap rounded bg-slate-900 px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
                 onClick={() => run(() => changeRoleAction(account.id, role))}
               >
@@ -284,10 +363,10 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
             <button
               type="button"
               disabled={pending}
-              aria-label={`Remove ${account.email}`}
+              aria-label={`Remove ${who}`}
               className="min-h-tap rounded border border-red-300 bg-white px-3 py-2 text-sm text-red-800 disabled:opacity-50"
               onClick={() => {
-                if (window.confirm(`Remove ${account.email}? They will no longer be able to sign in.`)) {
+                if (window.confirm(`Remove ${who} (${account.email})? They will no longer be able to sign in.`)) {
                   run(() => removeStaffAction(account.id))
                 }
               }}

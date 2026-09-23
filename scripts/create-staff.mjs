@@ -1,6 +1,6 @@
 // Creates a staff account with a role the RLS policies will actually honour.
 //
-//   npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
+//   npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 //   npm run staff:list
 //
 // Why this exists: the Supabase dashboard's "Add user" cannot set
@@ -23,7 +23,7 @@ const MIN_PASSWORD = 8
 
 const USAGE = `
 Usage:
-  npm run staff:add -- <email> <password> <${ROLES.join('|')}>
+  npm run staff:add -- <email> <password> <${ROLES.join('|')}> ["Full Name"]
   npm run staff:list
   npm run staff:rm -- <email>
 `
@@ -76,7 +76,7 @@ async function main() {
     console.log(`\n${users.length} account(s):\n`)
     for (const u of users) {
       const role = u.app_metadata?.role ?? '(NO ROLE — will see an empty console)'
-      console.log(`  ${u.email.padEnd(34)} ${role}`)
+      console.log(`  ${u.email.padEnd(34)} ${role.padEnd(12)} ${u.app_metadata?.name ?? ''}`)
     }
     console.log()
     return 0
@@ -132,7 +132,10 @@ Removed ${email} (was ${user.app_metadata?.role ?? 'no role'}).
     return 1
   }
 
-  const [email, password, role] = rest
+  const [email, password, role, ...nameParts] = rest
+  // Same cleaning as validateName in src/lib/staff.ts. Optional here so the
+  // break-glass path still works with nothing but an email to hand.
+  const name = nameParts.join(' ').trim().replace(/\s+/g, ' ')
   if (!email || !password || !role) {
     console.error(USAGE)
     return 1
@@ -152,7 +155,7 @@ Removed ${email} (was ${user.app_metadata?.role ?? 'no role'}).
       email,
       password,
       email_confirm: true, // internal staff; no inbox round-trip
-      app_metadata: { role },
+      app_metadata: name ? { role, name } : { role },
     }),
   })
 

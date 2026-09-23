@@ -37,7 +37,7 @@ export function LeadsConsole({
   staff,
   leads,
 }: {
-  staff: { email: string; role: string }
+  staff: { name: string | null; email: string; role: string }
   leads: LeadRow[]
 }) {
   const router = useRouter()
@@ -49,7 +49,7 @@ export function LeadsConsole({
         <div>
           <h1 className="text-xl font-semibold text-slate-900">Candidates</h1>
           <p className="text-sm text-slate-500">
-            {staff.email} · {staff.role}
+            {staff.name ?? staff.email} · {staff.role}
           </p>
         </div>
         <div className="flex gap-2">
