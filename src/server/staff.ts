@@ -9,7 +9,8 @@ import { validateNewStaff, validateName, checkChangeTarget, isRole, type Role } 
 // login can only be created, re-roled or deleted through the auth admin API,
 // which needs the service-role key — RLS never sees these calls. So the rule
 // lives here instead: every export takes the actor, and refuses unless they
-// are a superadmin. The actor MUST come from `currentStaff()`, which reads the
+// are a superadmin — except `listAssignees`, which a counsellor may also call
+// and which returns names only. The actor MUST come from `currentStaff()`, which reads the
 // role via getUser() from the auth server, never from anything the browser
 // sends. `staff.itest.ts` is what keeps the refusals from going inert.
 //
@@ -63,6 +64,40 @@ export async function listStaff(actor: StaffUser): Promise<StaffAccount[]> {
       lastSignInAt: u.last_sign_in_at ?? null,
     }))
     .sort((a, b) => (a.name ?? a.email).localeCompare(b.name ?? b.email))
+}
+
+export interface Assignee {
+  id: string
+  /** The name, or the email for an account created before names were recorded. */
+  label: string
+}
+
+/**
+ * Telecallers a lead can be assigned to.
+ *
+ * The one read here a counsellor may make: counsellors assign leads, and the
+ * only list of who the telecallers are is the auth admin API. It returns ids
+ * and names and nothing else. Assignment itself is enforced in the database
+ * (the `leads_guard` trigger, migration 0012); this only fills the dropdown.
+ */
+export async function listAssignees(actor: StaffUser): Promise<Assignee[]> {
+  if (actor.role !== 'counsellor' && actor.role !== 'superadmin') {
+    throw new Error('Only a counsellor or superadmin can assign leads.')
+  }
+
+  const { data, error } = await serviceClient().auth.admin.listUsers({ perPage: PER_PAGE })
+  if (error) {
+    console.error('staff: assignee list failed:', error)
+    throw new Error('Could not load the telecallers.')
+  }
+
+  return data.users
+    .filter((u) => u.app_metadata?.role === 'telecaller')
+    .map((u) => ({
+      id: u.id,
+      label: typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : (u.email ?? u.id),
+    }))
+    .sort((a, b) => a.label.localeCompare(b.label))
 }
 
 export async function addStaff(

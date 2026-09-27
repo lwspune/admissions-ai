@@ -83,10 +83,12 @@ async function assertIssuable(db: Db, leadId: string): Promise<void> {
  * sentence instead of a constraint name.
  */
 async function admittingClass(db: Db, leadId: string): Promise<ClassLevel> {
-  const { data, error } = await db.from('leads').select('class_level').eq('id', leadId).maybeSingle()
+  const { data, error } = await db.from('leads').select('name, class_level').eq('id', leadId).maybeSingle()
 
   if (error) throw new Error(error.message)
   if (!data) throw new Error('Candidate not found.')
+  // Imported leads may have no name; the candidate confirms theirs on screen.
+  if (!data.name) throw new Error('Add the candidate’s name before issuing a test.')
 
   const classLevel = parseClassLevel(data.class_level)
   if (classLevel === null) {
