@@ -113,7 +113,7 @@ npm run lint          npm run typecheck      npm test
 npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
-npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin>
+npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210
 ```
@@ -205,7 +205,9 @@ Migrations are applied deliberately, never by a deploy:
   internal `auth` tables. The superadmin sets a temporary password and hands it
   over; by the user's choice there is no self-service password change and no
   email invite (built-in Supabase mail is rate-limited and lands in spam). A
-  forgotten password is remove + re-add.
+  forgotten password is remove + re-add. Staff names (required on add, same
+  day) sit beside the role in `app_metadata`; renaming is the one change a
+  superadmin may make to their own account, since a name grants nothing.
 - **2026-09-23 — The purge deletes; it does not anonymise.** The consent says
   "kept for 12 months", and deleting is the unambiguous way to honour that.
   Aggregate history is lost with it — if cohort analytics are ever wanted, the

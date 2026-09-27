@@ -34,7 +34,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       the user's instruction without the golden-path check: add a throwaway account, copy the
       details, change its role, remove it. Its server layer is covered by `staff.itest.ts` against
       the real auth server; the UI is not. All three need a superadmin session, so unauthenticated
-      redirects to `/login` are all that has been proved.
+      redirects to `/login` are all that has been proved. **Carry-forward 2026-09-23:** names and
+      rename shipped in `543ba19`, also unseen. The first real use should be **Edit name** →
+      "Ravi Nagpurkar" on `rrnlws8@gmail.com` (counsellor), then the superadmin's own name — both
+      accounts have no name yet, and my attempt to set Ravi's by script was blocked (see below).
 - [ ] **Give Claude a way to browser-verify superadmin pages, or accept that the user does it.**
       2026-09-23: creating a temporary superadmin on production to drive `/staff` through Edge was
       blocked by the permission classifier — correctly, since it mints top-level access on the live
@@ -44,6 +47,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       Supabase project for Preview deployments, where a test superadmin is harmless; (c) a
       standing `e2e` telecaller account, which verifies nothing superadmin-only. (b) is the only
       one that closes the gap, and it also stops integration tests writing to production.
+      Same day, a one-off service-role script setting a staff name on production was blocked
+      too: any data fix on the live project has to go through the UI or be run by the user.
 - [x] ~~Private GitHub repo + Vercel project.~~ **DONE 2026-09-22** — `lwspune/admissions-ai`
       (private, verified by a 404 to anonymous requests) deployed to
       https://admissions-ai-omega.vercel.app. Production env vars set; Preview left unset so
