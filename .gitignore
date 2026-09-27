@@ -27,3 +27,6 @@ supabase/.branches/
 .env*
 # ...but the template carries no values and must stay tracked.
 !.env.example
+
+# Personal Claude Code overrides; never shared.
+.claude/settings.local.json

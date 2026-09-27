@@ -7,20 +7,24 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **Apply migration 0011 (class-scoped papers), then deploy, then verify — in that order and
-      close together.** Written 2026-09-27 and not yet applied: the database password is not on
-      this machine. The migration drops the zero-argument `live_pool()`, so code older than the
-      migration cannot issue until redeployed (it fails closed with "could not load the item
-      bank"), and code newer than the schema cannot issue either. The window is minutes if the
-      push follows the `db push`. Afterwards: (1) `npm run test:integration` — 4 new tests prove
-      a class 9 admit never receives a class 11 item and that the *database* refuses such a
-      paper whatever the caller drew; they cannot run before the migration. (2) `npm run
-      items:seed` once, so the 105 rows carry `taught_in` from the files (all at the floor, no
-      behaviour change). (3) `db:verify` gained seven probes but **skips on production because
-      real leads exist** — it needs the empty-database route (item below). (4) Golden path, by
-      the user: Add candidate now requires "Admission to class"; save, issue, open the link.
-      The two pre-existing leads with no class are both `submitted`, so nothing can be issued
-      to them anyway and no backfill is needed.
+- [x] ~~**Apply migration 0011 (class-scoped papers), then deploy, then verify.**~~ **DONE
+      2026-09-27**, in the wrong order and it did not matter: the code was pushed first (issuing
+      failed closed for the interval), then the migration went in with the database password
+      pasted into chat — see the rotation item below — after the user added a Bash allow rule
+      for `npx supabase db push` in `.claude/settings.local.json` (gitignored). Then
+      `items:seed` wrote the tags (database now 47/24/17/14/3 by `taught_in`, matching the
+      files), `live_pool(p_class)` returns per-class counts identical to the lint's table, and
+      the integration suite passed 68/68 including the four class-scoping tests, leaving the
+      four real leads and 105 items untouched. The two pre-existing "11" leads cast cleanly; the
+      two null-class leads are both `submitted`, so nothing can be issued to them and no
+      backfill is needed. **Still unverified:** `db:verify`'s seven new probes (it skips on
+      production because real leads exist) and the golden path in a browser — Add candidate now
+      requires "Admission to class"; save a class 9 candidate, issue, open the link, and check
+      the card and report read "Admission to class 9".
+- [ ] **Rotate the database password now, not later.** It was pasted into this chat on
+      2026-09-27 (as it was on 2026-09-22), and this time it was used from the transcript to
+      apply a migration. Supabase → Settings → Database → reset. Nothing on this machine stores
+      it, so no local file needs updating afterwards.
 - [ ] **Review the class tags, then seed them.** Tagged 2026-09-27 against the NCERT sequence,
       checked against the Maharashtra board where they differ; each batch `.md` now ends with a
       "Class tags" table giving the reason for every raised tag, so a disagreement is a one-cell
