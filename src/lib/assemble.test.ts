@@ -216,3 +216,19 @@ describe('assemblePaper — spread', () => {
     expect(overlap).toBeLessThanOrEqual(3)
   })
 })
+
+// When the pool has already been filtered by class, the error has to say so,
+// or whoever reads it goes looking at the bank total instead of the stratum
+// that class actually has.
+describe('assemblePaper — class in the error', () => {
+  it('names the class a starved stratum was drawn for', () => {
+    const thin = pool(20).filter((i) => !(i.subject === 'english' && i.difficulty === 'difficult'))
+    expect(() => assemblePaper({ pool: thin, rng: seeded(1), forClass: 9 })).toThrow(/class 9/)
+  })
+
+  it('says nothing about class when none was given', () => {
+    const thin = pool(20).filter((i) => !(i.subject === 'english' && i.difficulty === 'difficult'))
+    expect(() => assemblePaper({ pool: thin, rng: seeded(1) })).toThrow(StratumExhaustedError)
+    expect(() => assemblePaper({ pool: thin, rng: seeded(1) })).not.toThrow(/class/)
+  })
+})

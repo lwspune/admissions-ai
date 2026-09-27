@@ -1,6 +1,7 @@
 import 'server-only'
 import type { Db } from './supabase'
 import { assemblePaper, type PoolItem } from '../lib/assemble'
+import { parseClassLevel, type ClassLevel } from '../lib/classes'
 import { generateToken } from '../lib/token'
 
 export interface Assessment {
@@ -32,10 +33,14 @@ export async function issueAssessment(
   // StratumExhaustedError would report the wrong reason entirely.
   await assertIssuable(db, leadId)
 
-  const pool = await livePool(db)
+  // The class decides the pool. An admit to class N draws content taught up to
+  // N−1 (src/lib/classes); live_pool() applies that, and issue_assessment
+  // re-checks the finished paper inside its transaction.
+  const classLevel = await admittingClass(db, leadId)
+  const pool = await livePool(db, classLevel)
   const seen = await itemsAlreadySeen(db, leadId)
 
-  const paper = assemblePaper({ pool, excludeItemIds: seen })
+  const paper = assemblePaper({ pool, excludeItemIds: seen, forClass: classLevel })
 
   const { data, error } = await db.rpc('issue_assessment', {
     p_lead_id: leadId,
@@ -73,15 +78,34 @@ async function assertIssuable(db: Db, leadId: string): Promise<void> {
 }
 
 /**
- * Every live item, as the draw needs it: three columns and no answer.
+ * The class this lead is being admitted to. Issuing without one has no pool to
+ * draw from, and the database refuses it too; failing here gives staff a
+ * sentence instead of a constraint name.
+ */
+async function admittingClass(db: Db, leadId: string): Promise<ClassLevel> {
+  const { data, error } = await db.from('leads').select('class_level').eq('id', leadId).maybeSingle()
+
+  if (error) throw new Error(error.message)
+  if (!data) throw new Error('Candidate not found.')
+
+  const classLevel = parseClassLevel(data.class_level)
+  if (classLevel === null) {
+    throw new Error('Set the class this candidate is being admitted to before issuing a test.')
+  }
+  return classLevel
+}
+
+/**
+ * Every live item this class may be shown, as the draw needs it: three
+ * columns and no answer.
  *
  * Goes through `live_pool()` rather than selecting test_items, because SELECT
  * on that table is scoped to items a staff member has already seen on a paper
  * (migration 0008). Reading it directly meant a newly promoted item was
  * invisible to a counsellor and could never be drawn.
  */
-async function livePool(db: Db): Promise<PoolItem[]> {
-  const { data, error } = await db.rpc('live_pool')
+async function livePool(db: Db, classLevel: ClassLevel): Promise<PoolItem[]> {
+  const { data, error } = await db.rpc('live_pool', { p_class: classLevel })
 
   if (error) throw new Error(`could not load the item bank: ${error.message}`)
   return (data ?? []) as PoolItem[]

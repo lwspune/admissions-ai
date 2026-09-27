@@ -18,7 +18,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 |---|---|
 | Funnel | Gate 2 — after the telecaller's in-call verbal screen, for high-intent leads only |
 | Issuers | Telecaller and counsellor |
-| Content | Reasoning-shaped, ≤10th content ceiling, English only, text-only |
+| Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (9–12) is tested on content taught up to class N−1 (added 2026-09-27) |
 | Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult |
 | Time | 15 minutes of active time. Timer pauses when the tab is hidden |
 | Window | 2 hours from creation. Hard backstop — the attempt dies with the window |
@@ -65,15 +65,21 @@ so they test without a database — that's where the TDD effort goes (§11).
 Six tables. Constraints do the enforcing, not application `if`s.
 
 **`leads`** — `id` · `name` · `contact_mobile` (the parent's number, where the link goes and the
-identity key) · `student_mobile` NULL · `city` / `school` / `board` / `class` NULL · `consented_at` ·
+identity key) · `student_mobile` NULL · `city` / `school` / `board` NULL · `class_level` smallint
+CHECK ∈ 9–12, **the class being admitted to**, required to issue (migration 0011) · `consented_at` ·
 `created_by` · `created_at`.
 
 No unique constraint on `contact_mobile` — siblings share a parent's number. Instead the create form
 shows existing leads on that number and makes the user choose "open existing" or "add sibling."
 
 **`test_items`** — `id` · `subject` CHECK ∈ (maths, english, science) · `skill` · `difficulty` CHECK ∈
-(easy, moderate, difficult) · `format` CHECK ∈ (mcq, numeric) · `stem` · `options` jsonb · `answer_key` ·
-`numeric_answer` · `numeric_tolerance` · `rationale` NOT NULL · `status` CHECK ∈ (review, live, retired).
+(easy, moderate, difficult) · `taught_in` smallint CHECK ∈ 6–11, the class in which the content is
+taught (6 = open to every admit) · `format` CHECK ∈ (mcq, numeric) · `stem` · `options` jsonb ·
+`answer_key` · `numeric_answer` · `numeric_tolerance` · `rationale` NOT NULL · `status` CHECK ∈
+(review, live, retired).
+
+The draw reads `live_pool(p_class)`, which returns live items with `taught_in ≤ p_class − 1`, and
+`issue_assessment` refuses a paper unless all 15 items come back from that pool for the lead's class.
 
 A CHECK enforces the format pairing — an MCQ must have options and a key and no numeric answer; a
 numeric item the reverse. `rationale` is NOT NULL because a wrong answer key is the failure that hides
@@ -212,6 +218,15 @@ reasoning, unit sense.
 
 **Excluded:** formula recall, definitions, dates, trivia, anything a 15-second search answers, anything
 needing a diagram.
+
+**Class tag (added 2026-09-27).** Every item carries `taught_in`, the class in which its content is
+taught, 6 to 11. It describes the content, not the audience: "probability is taught in class 10" is
+a fact the author states; whether a class 11 admit may see it is derived by the N−1 rule, in one
+place. Most reasoning items sit at the floor (6) and reach every admit; the tag bites on science and
+the odd maths item. Coverage is checked per class as well as per stratum — `items:lint` refuses a
+bank that cannot fill a paper for some class and warns when a class would see the same items on
+every paper — because a filter splits every stratum and the class that loses is the one whose
+candidate sees a failure.
 
 **Difficulty is a target p-value** (proportion answering correctly): easy 0.75–0.90 (~60 per subject),
 moderate 0.45–0.70 (~20), difficult 0.20–0.40 (~20) — mirroring consumption. Initial tiers are authored

@@ -1,6 +1,9 @@
 // Issues a test link for manual end-to-end checking.
 //
-//   npm run issue -- "Candidate Name" 9876543210
+//   npm run issue -- "Candidate Name" 9876543210 11
+//
+// The third argument is the class the candidate is being admitted to (9-12).
+// It decides the pool: an admit to class N draws content taught up to N-1.
 //
 // The throwaway version of what the staff console will do. It exists so the
 // candidate flow can be exercised on a real phone before that console is built.
@@ -16,6 +19,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@supabase/supabase-js'
 import { assemblePaper, type PoolItem } from '../src/lib/assemble'
+import { parseClassLevel } from '../src/lib/classes'
 import { generateToken } from '../src/lib/token'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -31,9 +35,10 @@ const env = Object.fromEntries(
 )
 
 async function main(): Promise<number> {
-  const [name, mobile] = process.argv.slice(2)
-  if (!name || !mobile) {
-    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210\n')
+  const [name, mobile, rawClass] = process.argv.slice(2)
+  const classLevel = parseClassLevel(rawClass)
+  if (!name || !mobile || classLevel === null) {
+    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210 <9|10|11|12>\n')
     return 1
   }
 
@@ -48,7 +53,11 @@ async function main(): Promise<number> {
     leadId = existing[0]!.id
     console.log(`\nUsing existing lead: ${existing[0]!.name}`)
   } else {
-    const { data, error } = await db.from('leads').insert({ name, contact_mobile: mobile }).select().single()
+    const { data, error } = await db
+      .from('leads')
+      .insert({ name, contact_mobile: mobile, class_level: classLevel })
+      .select()
+      .single()
     if (error) {
       console.error(`\nCould not create the lead: ${error.message}\n`)
       return 1
@@ -57,7 +66,12 @@ async function main(): Promise<number> {
     console.log(`\nCreated lead: ${name}`)
   }
 
-  const { data: pool } = await db.from('test_items').select('id, subject, difficulty').eq('status', 'live')
+  // The lead's stored class wins over the argument when they differ: the
+  // database checks the paper against the row, not against the command line.
+  const { data: leadRow } = await db.from('leads').select('class_level').eq('id', leadId).single()
+  const forClass = parseClassLevel(leadRow?.class_level) ?? classLevel
+
+  const { data: pool } = await db.rpc('live_pool', { p_class: forClass })
   const { data: priors } = await db.from('assessments').select('id').eq('lead_id', leadId)
   const { data: seenRows } = priors?.length
     ? await db.from('assessment_items').select('item_id').in('assessment_id', priors.map((p) => p.id))
@@ -68,6 +82,7 @@ async function main(): Promise<number> {
     paper = assemblePaper({
       pool: (pool ?? []) as PoolItem[],
       excludeItemIds: (seenRows ?? []).map((r) => r.item_id as string),
+      forClass,
     })
   } catch (e) {
     console.error(`\n${e instanceof Error ? e.message : String(e)}\n`)

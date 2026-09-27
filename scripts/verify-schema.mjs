@@ -71,6 +71,12 @@ async function rejects(label, table, row) {
   return body
 }
 
+/** Calls a Postgres function through PostgREST as service role. */
+async function rpc(fn, args) {
+  const r = await rest(`rpc/${fn}`, SVC, { method: 'POST', body: JSON.stringify(args) })
+  return { ok: r.ok, body: await r.text() }
+}
+
 /** Asserts an insert SUCCEEDS, returning the created row. */
 async function accepts(label, table, row) {
   const r = await rest(table, SVC, {
@@ -154,14 +160,31 @@ async function main() {
     subject: 'history', skill: 'probe', difficulty: 'easy', format: 'numeric',
     stem: 'probe', numeric_answer: 5, rationale: 'probe',
   })
+  await rejects('leads: rejects an admitting class below 9', 'leads', {
+    name: 'Probe Class8', contact_mobile: '9876543210', class_level: 8,
+  })
+  await rejects('leads: rejects an admitting class above 12', 'leads', {
+    name: 'Probe Class13', contact_mobile: '9876543210', class_level: 13,
+  })
+  await rejects('test_items: rejects taught_in below the floor (6)', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe', numeric_answer: 5, rationale: 'probe', taught_in: 5,
+  })
+  await rejects('test_items: rejects taught_in at class 12 — nobody may be tested on it', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe', numeric_answer: 5, rationale: 'probe', taught_in: 12,
+  })
 
   console.log('\nValid data is accepted')
 
   const lead = await accepts('leads: accepts a valid lead', 'leads', {
-    name: 'Probe Candidate', contact_mobile: '9876543210',
+    name: 'Probe Candidate', contact_mobile: '9876543210', class_level: 9,
   })
-  await accepts('leads: accepts a sibling on the same number', 'leads', {
-    name: 'Probe Sibling', contact_mobile: '9876543210',
+  const sibling = await accepts('leads: accepts a sibling on the same number', 'leads', {
+    name: 'Probe Sibling', contact_mobile: '9876543210', class_level: 12,
+  })
+  const unclassed = await accepts('leads: accepts a lead with no class yet', 'leads', {
+    name: 'Probe Unclassed', contact_mobile: '9876543210',
   })
 
   const item = await accepts('test_items: accepts a well-formed MCQ', 'test_items', {
@@ -201,6 +224,62 @@ async function main() {
     await rejects('assessment_items: rejects a position outside 1-15', 'assessment_items', {
       assessment_id: assessment.id, position: 16, item_id: item.id,
     })
+  }
+
+  console.log('\nClass scoping (live_pool + issue_assessment)')
+
+  // A live item taught in class 11: drawable for a class 12 admit and nobody
+  // younger. Skill 'probe' so the sweep below removes it.
+  const senior = await accepts('test_items: accepts a live item taught in class 11', 'test_items', {
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe senior', numeric_answer: 5, rationale: 'probe', status: 'live', taught_in: 11,
+  })
+
+  const poolFor = async (cls) => {
+    const r = await rpc('live_pool', { p_class: cls })
+    return r.ok ? JSON.parse(r.body).map((row) => row.id) : []
+  }
+
+  if (senior) {
+    const pool9 = await poolFor(9)
+    const pool12 = await poolFor(12)
+    check('live_pool(9) hides the class 11 item', !pool9.includes(senior.id))
+    check('live_pool(12) shows the class 11 item', pool12.includes(senior.id))
+
+    // The RPC checks need fourteen other live items a class 9 admit may see.
+    // A fresh database with no seeded bank has none; say so rather than
+    // asserting against an empty paper.
+    const juniorPool = pool9.filter((id) => id !== senior.id)
+    if (juniorPool.length < 15) {
+      console.log(`  SKIP  issue_assessment class checks — ${juniorPool.length} live class-9 items; seed the bank first`)
+    } else {
+      const mixed = [...juniorPool.slice(0, 14), senior.id]
+      const allJunior = juniorPool.slice(0, 15)
+
+      if (unclassed) {
+        const r = await rpc('issue_assessment', {
+          p_lead_id: unclassed.id, p_issued_by: null, p_token: `probe-rpc-u-${Date.now()}`, p_item_ids: allJunior,
+        })
+        check('issue_assessment: refuses a lead with no admitting class', !r.ok && /class/i.test(r.body), r.ok ? 'it was ISSUED' : r.body.slice(0, 160))
+      }
+      if (sibling) {
+        const r = await rpc('issue_assessment', {
+          p_lead_id: sibling.id, p_issued_by: null, p_token: `probe-rpc-12-${Date.now()}`, p_item_ids: mixed,
+        })
+        check('issue_assessment: accepts the class 11 item on a class 12 admit’s paper', r.ok, r.body.slice(0, 160))
+      }
+      // `lead` is class 9 but already carries three direct-insert assessments,
+      // so the cap would reject before the ceiling could. Use a fresh one.
+      const junior = await accepts('leads: accepts a second class 9 lead', 'leads', {
+        name: 'Probe Junior', contact_mobile: '9876543211', class_level: 9,
+      })
+      if (junior) {
+        const r = await rpc('issue_assessment', {
+          p_lead_id: junior.id, p_issued_by: null, p_token: `probe-rpc-9-${Date.now()}`, p_item_ids: mixed,
+        })
+        check('issue_assessment: refuses the class 11 item on a class 9 admit’s paper', !r.ok && /ceiling|class/i.test(r.body), r.ok ? 'it was ISSUED' : r.body.slice(0, 160))
+      }
+    }
   }
 
   // ── cleanup ──────────────────────────────────────────────────────────────────

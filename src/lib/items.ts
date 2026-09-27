@@ -1,7 +1,8 @@
 // Item-bank rules. Pure, so the one decision that can take the bank offline is
 // testable without a database, and so the bank browser's shape is too.
 
-import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from './types'
+import { SUBJECTS, DIFFICULTIES, PAPER_MIX, type Subject, type Difficulty } from './types'
+import { CLASSES, isDrawableFor, type ClassLevel } from './classes'
 
 /** Mirrors the CHECK on test_items.status (migration 0001). */
 export type ItemStatus = 'review' | 'live' | 'retired'
@@ -102,4 +103,53 @@ export function parseOptionValue(raw: string): string | null {
   const quantity = /^(-?\d+(?:\.\d+)?)\s*(%|[a-zA-Z]{1,3})?$/.exec(text)
   if (!quantity) return null
   return `${Number(quantity[1])}:${(quantity[2] ?? '').toLowerCase()}`
+}
+
+/** One class × subject × difficulty cell of the coverage table. */
+export interface CoverageCell {
+  classLevel: ClassLevel
+  subject: Subject
+  difficulty: Difficulty
+  /** Items this class may be shown in this stratum. */
+  count: number
+  /** What one paper draws from it (PAPER_MIX). */
+  needed: number
+  /**
+   * `short`: a paper cannot be filled — issuing fails for this class.
+   * `thin`: it can, but with fewer than twice the need, so every paper for
+   * this class shows much the same items. `ok`: neither.
+   */
+  status: 'short' | 'thin' | 'ok'
+}
+
+/**
+ * How well the bank serves each class.
+ *
+ * Filtering the draw by class splits every stratum, and the class that loses
+ * is the one whose candidate sees a 500 in front of staff. The lint reads this
+ * to refuse a bank that strands a class; the bank page reads it to say what to
+ * author next. Both have to agree, so the rule lives here once.
+ *
+ * "Thin" exists because of the 2026-09-23 exposure finding: a stratum holding
+ * exactly what a paper needs puts the same items on every paper, and a healthy
+ * bank total hides it. Exposure is a per-stratum property, and now a per-class
+ * one too.
+ */
+export function coverageByClass<T extends { subject: Subject; difficulty: Difficulty; taught_in: number }>(
+  items: readonly T[],
+): CoverageCell[] {
+  const cells: CoverageCell[] = []
+  for (const classLevel of CLASSES) {
+    for (const subject of SUBJECTS) {
+      for (const difficulty of DIFFICULTIES) {
+        const needed = PAPER_MIX[difficulty]
+        const count = items.filter(
+          (i) => i.subject === subject && i.difficulty === difficulty && isDrawableFor(i.taught_in, classLevel),
+        ).length
+        const status = count < needed ? 'short' : count < needed * 2 ? 'thin' : 'ok'
+        cells.push({ classLevel, subject, difficulty, count, needed, status })
+      }
+    }
+  }
+  return cells
 }

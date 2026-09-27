@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { userClient, requireStaff } from '@/server/auth'
 import { issueAssessment } from '@/server/assessments'
 import { normalizeMobile } from '@/lib/mobile'
+import { parseClassLevel } from '@/lib/classes'
 
 export interface ActionResult {
   ok: boolean
@@ -37,6 +38,13 @@ export async function createLead(formData: FormData): Promise<ActionResult> {
     return { ok: false, error: 'Enter a valid 10-digit Indian mobile number.' }
   }
 
+  // Required at creation, not only at issue: a lead saved without it cannot be
+  // issued a test and there is no edit form to add it later.
+  const classLevel = parseClassLevel(formData.get('class_level'))
+  if (classLevel === null) {
+    return { ok: false, error: 'Choose the class the candidate is being admitted to.' }
+  }
+
   if (!confirmedSibling) {
     const { data: existing } = await db
       .from('leads')
@@ -58,7 +66,7 @@ export async function createLead(formData: FormData): Promise<ActionResult> {
     city: str(formData.get('city')),
     school: str(formData.get('school')),
     board: str(formData.get('board')),
-    class_level: str(formData.get('class_level')),
+    class_level: classLevel,
   })
 
   if (error) return { ok: false, error: error.message }

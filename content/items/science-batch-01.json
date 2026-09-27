@@ -4,6 +4,7 @@
     "subject": "science",
     "skill": "evaporation",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Water left in an open saucer disappears sooner than the same amount of water in a corked bottle. The main reason is that in the saucer the water",
     "options": {
@@ -20,6 +21,7 @@
     "subject": "science",
     "skill": "inertia",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A moving bus brakes suddenly and the standing passengers lurch forward. This happens because their bodies",
     "options": {
@@ -36,6 +38,7 @@
     "subject": "science",
     "skill": "density",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A metal block has a mass of 270 g and a volume of 100 cm3. What is its density in g/cm3?",
     "numeric_answer": 2.7,
@@ -47,6 +50,7 @@
     "subject": "science",
     "skill": "electric-circuits",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "In a string of decorative lights, one bulb fuses and the entire string goes dark. The bulbs must be connected",
     "options": {
@@ -63,6 +67,7 @@
     "subject": "science",
     "skill": "respiration",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A person breathes faster while running than while sitting. The muscles are mainly demanding more",
     "options": {
@@ -79,6 +84,7 @@
     "subject": "science",
     "skill": "properties-of-light",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A shadow has the same shape as the object casting it. Which property of light best explains this?",
     "options": {
@@ -95,6 +101,7 @@
     "subject": "science",
     "skill": "rate-and-quantity",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A leaking tap drips 3 drops of water every second. Each drop is 0.05 ml. How many millilitres leak in one minute?",
     "numeric_answer": 9,
@@ -106,6 +113,7 @@
     "subject": "science",
     "skill": "acids-and-bases",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A liquid turns blue litmus paper red. The liquid is most likely",
     "options": {
@@ -122,6 +130,7 @@
     "subject": "science",
     "skill": "food-chains",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "In a grassland, insects eat grass, frogs eat insects and snakes eat frogs. If all the frogs were removed, what would most likely happen?",
     "options": {
@@ -138,6 +147,7 @@
     "subject": "science",
     "skill": "heat-transfer",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A metal spoon and a wooden spoon are left standing in the same pot of hot soup. The metal one feels hotter to touch because metal",
     "options": {
@@ -154,6 +164,7 @@
     "subject": "science",
     "skill": "interpreting-evidence",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Moist seeds are kept in two identical jars, one in a warm room and one in a fridge. Only the seeds in the warm jar sprout. This experiment shows that germination needs",
     "options": {
@@ -170,6 +181,7 @@
     "subject": "science",
     "skill": "density",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A stone of mass 150 g is lowered into a measuring cylinder holding 200 ml of water. The level rises to 260 ml. What is the stone's density in g/cm3?",
     "numeric_answer": 2.5,
@@ -181,6 +193,7 @@
     "subject": "science",
     "skill": "applying-a-principle",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "An iron nail sinks in water, yet a ship built of iron floats. The ship floats because its",
     "options": {
@@ -197,6 +210,7 @@
     "subject": "science",
     "skill": "inference-from-results",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A candle sealed in a jar burns for 2 minutes. With a green plant in the jar under bright light it burns for 5 minutes; with the same plant in darkness, 1 minute. What explains the dark result?",
     "options": {
@@ -213,6 +227,7 @@
     "subject": "science",
     "skill": "action-and-reaction",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A person standing on a skateboard throws a heavy ball forward and rolls backward. This happens because",
     "options": {

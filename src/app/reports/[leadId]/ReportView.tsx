@@ -21,7 +21,7 @@ export function ReportView({ data, role }: { data: LeadReport; role: string }) {
         <p className="text-sm text-slate-500">
           {lead.contact_mobile}
           {lead.school && ` · ${lead.school}`}
-          {lead.class_level && ` · Class ${lead.class_level}`}
+          {lead.class_level && ` · Admission to class ${lead.class_level}`}
         </p>
         <p className="mt-1 text-xs text-slate-500">
           {issue.state === 'none'

@@ -4,6 +4,7 @@
     "subject": "english",
     "skill": "synonym-in-context",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "The commander gave a terse reply. As used here, \"terse\" most nearly means",
     "options": {
@@ -20,6 +21,7 @@
     "subject": "english",
     "skill": "antonym",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which word is most nearly the opposite of \"scarce\"?",
     "options": {
@@ -36,6 +38,7 @@
     "subject": "english",
     "skill": "subject-verb-agreement",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Choose the correct word: Neither of the boys ___ finished the work.",
     "options": {
@@ -52,6 +55,7 @@
     "subject": "english",
     "skill": "preposition-usage",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Choose the correct word: The soldier was accused ___ neglecting his duty.",
     "options": {
@@ -68,6 +72,7 @@
     "subject": "english",
     "skill": "idiom-meaning",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "The captain told the cadets to pull up their socks. He was telling them to",
     "options": {
@@ -84,6 +89,7 @@
     "subject": "english",
     "skill": "analogy",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Thermometer is to temperature as barometer is to",
     "options": {
@@ -100,6 +106,7 @@
     "subject": "english",
     "skill": "relationship-reasoning",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Pointing to a photograph, Ravi said, \"She is the daughter of the only son of my father.\" How is the girl related to Ravi?",
     "options": {
@@ -116,6 +123,7 @@
     "subject": "english",
     "skill": "reading-inference",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "The library was silent except for the scratch of pens. Anand glanced at the clock, closed his unopened book and left. It is most reasonable to conclude that Anand",
     "options": {
@@ -132,6 +140,7 @@
     "subject": "english",
     "skill": "identifying-assumptions",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "\"We should cancel the outdoor parade. The forecast says heavy rain.\" This argument assumes that",
     "options": {
@@ -148,6 +157,7 @@
     "subject": "english",
     "skill": "logical-connectors",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Choose the word that best joins these sentences: The cadet trained every morning. ___, he failed the fitness test.",
     "options": {
@@ -164,6 +174,7 @@
     "subject": "english",
     "skill": "logical-deduction",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "In a race, Amit finished ahead of Bhavna. Chetan finished behind Bhavna but ahead of Dev. Ravi finished ahead of Amit. Who finished third?",
     "options": {
@@ -180,6 +191,7 @@
     "subject": "english",
     "skill": "quantifier-logic",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "\"Not all cadets passed the swimming test.\" Which statement must be true?",
     "options": {
@@ -196,6 +208,7 @@
     "subject": "english",
     "skill": "evaluating-an-argument",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "\"Students who eat breakfast score higher in exams, so eating breakfast improves exam scores.\" Which finding would most weaken this argument?",
     "options": {
@@ -212,6 +225,7 @@
     "subject": "english",
     "skill": "supported-conclusion",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A town banned cars from its centre. Shops in the centre reported higher sales; shops just outside reported lower sales. Which conclusion is best supported?",
     "options": {
@@ -228,6 +242,7 @@
     "subject": "english",
     "skill": "identifying-tone",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "\"The new rifle is lighter than the old one, and cheaper. Reliability tests are still under way.\" The writer's attitude to the new rifle is best described as",
     "options": {

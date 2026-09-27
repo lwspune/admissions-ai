@@ -25,7 +25,7 @@ async function backdate(table: string, column: string, id: string, iso: string) 
 async function makeLead(name: string) {
   const { data, error } = await db
     .from('leads')
-    .insert({ name: `${MARKER} ${name}`, contact_mobile: MOBILE })
+    .insert({ name: `${MARKER} ${name}`, contact_mobile: MOBILE, class_level: 11 })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)

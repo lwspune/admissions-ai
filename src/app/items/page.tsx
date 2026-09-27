@@ -3,8 +3,9 @@ import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadBank, type BankItem } from '@/server/items'
-import { groupBank, type ItemStatus } from '@/lib/items'
-import { CHOICES, type Subject } from '@/lib/types'
+import { groupBank, coverageByClass, type ItemStatus, type CoverageCell } from '@/lib/items'
+import { CLASSES, TAUGHT_IN_MIN } from '@/lib/classes'
+import { CHOICES, SUBJECTS, DIFFICULTIES, type Subject } from '@/lib/types'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Questions', robots: { index: false, follow: false } }
@@ -62,6 +63,8 @@ export default async function ItemsPage({
         </p>
       </header>
 
+      <Coverage cells={coverageByClass(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))} />
+
       <nav aria-label="Filter by status" className="mt-4 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
           <Link
@@ -105,6 +108,72 @@ export default async function ItemsPage({
   )
 }
 
+const COVERAGE_STYLE: Record<CoverageCell['status'], string> = {
+  short: 'bg-red-100 text-red-900',
+  thin: 'bg-amber-100 text-amber-900',
+  ok: 'text-slate-700',
+}
+
+/**
+ * How many live items each class can be shown per stratum. An admit to class
+ * N draws content taught up to N−1, so a stratum can be healthy for class 12
+ * and empty for class 9. Red means that class cannot be issued a paper at
+ * all; amber means every paper for that class draws much the same items.
+ */
+function Coverage({ cells }: { cells: CoverageCell[] }) {
+  const cell = (c: number, s: Subject, d: string) =>
+    cells.find((x) => x.classLevel === c && x.subject === s && x.difficulty === d)!
+  return (
+    <section className="mt-4 overflow-x-auto" aria-labelledby="coverage-heading">
+      <h2 id="coverage-heading" className="text-sm font-semibold text-slate-900">
+        Live items each class can draw from
+      </h2>
+      <p className="mt-1 text-xs text-slate-500">
+        An admit to class N is tested on content taught up to class N−1. Red: that class cannot be issued a paper.
+        Amber: fewer than twice a paper’s need, so its papers repeat.
+      </p>
+      <table className="mt-2 w-full text-xs">
+        <thead>
+          <tr className="text-left text-slate-500">
+            <th scope="col" className="py-1 pr-3 font-medium">Class</th>
+            {SUBJECTS.map((s) =>
+              DIFFICULTIES.map((d) => (
+                <th key={`${s}/${d}`} scope="col" className="py-1 pr-3 font-medium">
+                  {SUBJECT_LABEL[s].slice(0, 3)} <span className="capitalize">{d.slice(0, 3)}</span>
+                </th>
+              )),
+            )}
+          </tr>
+        </thead>
+        <tbody>
+          {CLASSES.map((c) => (
+            <tr key={c} className="border-t border-slate-100">
+              <th scope="row" className="py-1 pr-3 text-left font-medium text-slate-700">
+                {c}
+              </th>
+              {SUBJECTS.map((s) =>
+                DIFFICULTIES.map((d) => {
+                  const x = cell(c, s, d)
+                  return (
+                    <td key={`${s}/${d}`} className="py-1 pr-3">
+                      <span className={`rounded px-1.5 py-0.5 tabular-nums ${COVERAGE_STYLE[x.status]}`}>
+                        {x.count}
+                        <span className="sr-only">
+                          {x.status === 'short' ? ', short: a paper needs ' + x.needed : x.status === 'thin' ? ', thin' : ''}
+                        </span>
+                      </span>
+                    </td>
+                  )
+                }),
+              )}
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </section>
+  )
+}
+
 function Item({ item }: { item: BankItem }) {
   return (
     <li className="rounded-lg border border-slate-200 bg-white p-4">
@@ -113,6 +182,11 @@ function Item({ item }: { item: BankItem }) {
         <span className={`rounded px-1.5 py-0.5 text-xs ${STATUS_STYLE[item.status]}`}>{item.status}</span>
         <span className="text-xs text-slate-400">{item.skill}</span>
         <span className="text-xs text-slate-400">{item.format}</span>
+        {/* The floor means "open to every admit" and is what an untagged item
+            carries, so it is shown as such rather than as a class number. */}
+        <span className="text-xs text-slate-400">
+          {item.taughtIn <= TAUGHT_IN_MIN ? 'all classes' : `taught in class ${item.taughtIn}`}
+        </span>
       </div>
 
       <p className="mt-2 text-sm text-slate-900">{item.stem}</p>

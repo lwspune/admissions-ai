@@ -21,7 +21,7 @@ beforeAll(async () => {
   await db.from('leads').delete().like('name', 'RptTest%')
   const { data, error } = await db
     .from('leads')
-    .insert({ name: 'RptTest Candidate', contact_mobile: MOBILE })
+    .insert({ name: 'RptTest Candidate', contact_mobile: MOBILE, class_level: 11 })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)

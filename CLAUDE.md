@@ -11,6 +11,7 @@ itself server-side.
 | [SUGGESTIONS.md](SUGGESTIONS.md) | Open items, traps, what is unverified |
 | [BRAINSTORM.md](BRAINSTORM.md) | The wider funnel this sits inside |
 | [DEPLOY.md](DEPLOY.md) | Deployment and credential rotation |
+| [content/items/README.md](content/items/README.md) | Item fields and the class tag, for authors |
 
 **Live:** https://admissions-ai-omega.vercel.app · repo `lwspune/admissions-ai` (private)
 Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
@@ -36,7 +37,8 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 **`src/lib/` — pure.** Plain data in, plain data out, no IO. This is where the
 logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
-`serialize` (**the security boundary**) · `report` · `items` (seed-status rules) ·
+`serialize` (**the security boundary**) · `report` · `items` (seed-status rules,
+per-class coverage) · `classes` (the N−1 content rule) ·
 `retention` (the 12-month rule) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
@@ -99,6 +101,18 @@ These are the things that quietly break everything if violated.
   keeps one superadmin in existence. `staff.itest.ts` fails if the gate goes.
   The database reads roles from the JWT, so a demotion or removal reaches RLS
   only when that token expires (≤ 1 hour).
+- **The paper is scoped to the class being admitted to.** `leads.class_level`
+  is the class the student joins (9–12), not the one they are in;
+  `test_items.taught_in` is the class in which the content is taught (6–11,
+  6 meaning "open to everyone" and what an untagged item carries). An admit to
+  class N draws `taught_in ≤ N−1`. The rule is stated once in
+  `src/lib/classes.ts` and enforced in `issue_assessment`, which checks the
+  finished paper against `live_pool(p_class)` — a SECURITY DEFINER function,
+  because the RPC runs as the caller and migration 0008 hides unissued items
+  from non-superadmin staff, so a direct check on `test_items` would pass
+  vacuously. Coverage is a per-class property: `items:lint` refuses a bank that
+  strands a class and `/items` shows the table. There is no overload of
+  `live_pool()` without a class; a draw that does not name one cannot run.
 - **Candidate data is kept 12 months, because the consent screen says so.**
   `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent text in
   `CandidateFlow` must move together. A new table holding candidate data must
@@ -115,7 +129,7 @@ npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
-npm run issue -- "Name" 9876543210
+npm run issue -- "Name" 9876543210 <9|10|11|12>
 ```
 
 Day-to-day staff management is the `/staff` page; the `staff:*` scripts are the
@@ -156,6 +170,25 @@ Migrations are applied deliberately, never by a deploy:
 
 ### 2026-09
 
+- **2026-09-27 — Papers are scoped by the class being admitted to, with one
+  tag on the item and one rule in the code.** Students are admitted to 9, 10,
+  11 and 12 and every admit drew the same pool. Three choices were made in
+  order. The lead stores the *admitting* class, not the current one: in April a
+  student who has finished class 10 is in nobody's class, and the batch they
+  join is what the parent says on the phone. The item is tagged with the class
+  in which its content is *taught*, a fact an author can state, rather than a
+  window of who it is fair for, a policy that would be re-decided item by
+  item; one integer replaced the min/max pair first proposed, since reasoning
+  items do not go stale with age and the bank is too small to give up items at
+  the top. The rule connecting them — an admit to class N draws content taught
+  up to N−1 — is a constant in `src/lib/classes.ts` and a check in
+  `issue_assessment`, and is conservative in the fair direction for a mid-year
+  admit. Plumbing shipped first with all 105 items at the floor, so behaviour
+  is unchanged until a tag is raised; the tagging pass is the user's, with the
+  lint as the net. The "45 live items" in the 09-23 entry below was true that
+  day; the bank was 105, all live, when this was measured. A per-class draw
+  splits every stratum, so exposure has to be checked per class as well as per
+  stratum — `coverageByClass` is the one place that count is made.
 - **2026-09-22 — Spec cut by two thirds after "why are you overcomplicating
   this?".** The first spec specified a ten-signal weighted integrity score, and
   in the same breath admitted the weights were guesses. Everything needing

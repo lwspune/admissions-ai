@@ -5,7 +5,7 @@ import { buildReport, type ReportInput, type ReportPaperItem } from '../lib/repo
 import { LIMIT_MS } from '../lib/types'
 
 export interface LeadReport {
-  lead: { id: string; name: string; contact_mobile: string; school: string | null; class_level: string | null }
+  lead: { id: string; name: string; contact_mobile: string; school: string | null; class_level: number | null }
   issue: { seq: number; of: number; createdAt: string; expiresAt: string; state: string }
   attempt: { startedAt: string; submittedAt: string | null; submitReason: string | null } | null
   report: ReturnType<typeof buildReport> | null

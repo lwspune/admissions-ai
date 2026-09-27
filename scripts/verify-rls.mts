@@ -78,7 +78,7 @@ async function main(): Promise<number> {
 
   const { data: lead, error: leadErr } = await db
     .from('leads')
-    .insert({ name: `${MARKER} Candidate`, contact_mobile: '9700000002' })
+    .insert({ name: `${MARKER} Candidate`, contact_mobile: '9700000002', class_level: 11 })
     .select()
     .single()
   check('create a lead', !leadErr, leadErr?.message)
@@ -86,8 +86,10 @@ async function main(): Promise<number> {
   const { error: readErr } = await db.from('leads').select('id').limit(1)
   check('read leads', !readErr, readErr?.message)
 
-  const { data: pool } = await db.from('test_items').select('id, subject, difficulty').eq('status', 'live')
-  check('read the item bank', (pool?.length ?? 0) > 0)
+  // The draw's door into the bank. Per class: the lead above is a class 11
+  // admit, so the pool is content taught up to class 10.
+  const { data: pool, error: poolErr } = await db.rpc('live_pool', { p_class: 11 })
+  check('read the live pool for a class 11 admit (live_pool)', !poolErr && (pool?.length ?? 0) > 0, poolErr?.message)
 
   // Who may read the bank, and how much of it.
   //
@@ -123,7 +125,7 @@ async function main(): Promise<number> {
     )
   }
 
-  const paper = assemblePaper({ pool: (pool ?? []) as PoolItem[] })
+  const paper = assemblePaper({ pool: (pool ?? []) as PoolItem[], forClass: 11 })
   const { data: assessment, error: issueErr } = await db.rpc('issue_assessment', {
     p_lead_id: lead!.id,
     p_issued_by: auth.user.id,

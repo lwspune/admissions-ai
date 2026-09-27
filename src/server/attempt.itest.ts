@@ -30,11 +30,15 @@ async function expireWindow(assessmentId: string) {
   if (error) throw new Error(`could not expire the window: ${error.message}`)
 }
 
-async function freshLead() {
+/**
+ * A lead admitted to `classLevel`, or with no class when null. Issuing needs a
+ * class; the one test that passes null is checking that it is refused.
+ */
+async function freshLead(classLevel: number | null = 11) {
   await db.from('leads').delete().like('name', 'ITest%')
   const { data, error } = await db
     .from('leads')
-    .insert({ name: 'ITest Candidate', contact_mobile: MOBILE })
+    .insert({ name: 'ITest Candidate', contact_mobile: MOBILE, class_level: classLevel })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)
@@ -110,6 +114,102 @@ describe('issueAssessment', () => {
     await submitAttempt(db, { attemptId: attempt.id, reason: 'manual' })
 
     await expect(issueAssessment(db, { leadId })).rejects.toThrow(/submitted/i)
+  })
+
+  it('refuses a lead with no admitting class, before the draw', async () => {
+    const unclassed = await freshLead(null)
+    await expect(issueAssessment(db, { leadId: unclassed })).rejects.toThrow(/class/i)
+    const { count } = await db.from('assessments').select('id', { count: 'exact', head: true }).eq('lead_id', unclassed)
+    expect(count).toBe(0)
+  })
+})
+
+// ── class scoping ────────────────────────────────────────────────────────────
+//
+// An admit to class N is tested on content taught up to N−1 (src/lib/classes).
+// The draw filters through live_pool(p_class); issue_assessment re-checks the
+// paper inside its transaction. Both are proved here against a live item that
+// only a class 12 admit may see.
+
+describe('issueAssessment — class scoping', () => {
+  const SENIOR = { skill: 'ITest-senior', taught_in: 11 }
+  let seniorItemId: string
+
+  async function removeSeniorItem() {
+    // Papers referencing it go with their leads; freshLead already swept those.
+    await db.from('leads').delete().like('name', 'ITest%')
+    await db.from('test_items').delete().eq('skill', SENIOR.skill)
+  }
+
+  beforeEach(async () => {
+    await removeSeniorItem()
+    const { data, error } = await db
+      .from('test_items')
+      .insert({
+        subject: 'maths', skill: SENIOR.skill, difficulty: 'easy', format: 'numeric',
+        stem: 'ITest senior-only item', numeric_answer: 1, rationale: 'Integration fixture: class 11 content.',
+        status: 'live', taught_in: SENIOR.taught_in,
+      })
+      .select('id')
+      .single()
+    if (error) throw new Error(`could not create fixture item: ${error.message}`)
+    seniorItemId = data.id as string
+  })
+
+  afterAll(removeSeniorItem)
+
+  it('live_pool shows a class 11 item to a class 12 admit and to nobody younger', async () => {
+    for (const classLevel of [9, 10, 11]) {
+      const { data } = await db.rpc('live_pool', { p_class: classLevel })
+      expect((data ?? []).map((r: { id: string }) => r.id)).not.toContain(seniorItemId)
+    }
+    const { data: senior } = await db.rpc('live_pool', { p_class: 12 })
+    expect((senior ?? []).map((r: { id: string }) => r.id)).toContain(seniorItemId)
+  })
+
+  it('never puts an item above the ceiling on a younger admit’s paper', async () => {
+    const lead9 = await freshLead(9)
+    const { assessment } = await issueAssessment(db, { leadId: lead9 })
+    const { data: items } = await db
+      .from('assessment_items')
+      .select('item_id, test_items(taught_in)')
+      .eq('assessment_id', assessment.id)
+    expect(items).toHaveLength(15)
+    for (const row of items!) {
+      expect((row.test_items as never as { taught_in: number }).taught_in).toBeLessThanOrEqual(8)
+    }
+  })
+
+  it('the database refuses a paper holding an item above the ceiling, whatever the caller drew', async () => {
+    const lead9 = await freshLead(9)
+    const { data: pool } = await db.rpc('live_pool', { p_class: 9 })
+    const fourteen = (pool as { id: string }[]).map((r) => r.id).filter((id) => id !== seniorItemId).slice(0, 14)
+
+    const { error } = await db.rpc('issue_assessment', {
+      p_lead_id: lead9,
+      p_issued_by: null,
+      p_token: 'itest-ceiling-' + Date.now(),
+      p_item_ids: [...fourteen, seniorItemId],
+    })
+    expect(error).not.toBeNull()
+    expect(error!.message).toMatch(/class|ceiling/i)
+
+    const { count } = await db.from('assessments').select('id', { count: 'exact', head: true }).eq('lead_id', lead9)
+    expect(count).toBe(0)
+  })
+
+  it('accepts the same paper for a class 12 admit', async () => {
+    const lead12 = await freshLead(12)
+    const { data: pool } = await db.rpc('live_pool', { p_class: 12 })
+    const fourteen = (pool as { id: string }[]).map((r) => r.id).filter((id) => id !== seniorItemId).slice(0, 14)
+
+    const { error } = await db.rpc('issue_assessment', {
+      p_lead_id: lead12,
+      p_issued_by: null,
+      p_token: 'itest-ceiling-ok-' + Date.now(),
+      p_item_ids: [...fourteen, seniorItemId],
+    })
+    expect(error).toBeNull()
   })
 })
 

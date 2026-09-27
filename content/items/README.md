@@ -1,0 +1,37 @@
+# Item files
+
+Each `*.json` here is one authored batch; the matching `*.md` is its review sheet. `npm run
+items:lint` checks every file, `npm run items:seed` upserts them by `ref` (never demoting a status),
+and `npm run items:seed -- --live --file <batch.json>` is the answer-key sign-off that promotes one
+reviewed batch.
+
+## Fields
+
+| Field | Values | Meaning |
+|---|---|---|
+| `ref` | `M-E-01` | Subject letter, difficulty letter, number. Unique across the bank |
+| `subject` | `maths` · `english` · `science` | Spec §1: 5 per paper each |
+| `skill` | kebab-case | What the item exercises; free text, shown on `/items` |
+| `difficulty` | `easy` · `moderate` · `difficult` | A target p-value (spec §9), 3/1/1 per subject per paper |
+| `taught_in` | integer 6–11 | **The class in which the content is taught.** See below |
+| `format` | `mcq` · `numeric` | An MCQ has `options` A–D and `answer_key`; a numeric item has `numeric_answer` and optional `numeric_tolerance` |
+| `stem` | ≤ 40 words | The question |
+| `rationale` | ≥ 60 chars | Why the key is right and what each distractor catches. The sign-off reads this |
+
+## `taught_in` — the class tag
+
+Students are admitted to classes 9–12, and **an admit to class N is tested on content taught up to
+class N−1** (`src/lib/classes.ts`, enforced by `issue_assessment`). The tag describes the content,
+not the audience: state the class in which the idea is taught, and let the rule decide who sees it.
+
+- **6 is the floor** and means "open to every admit". Number series, ratio, percentage, averages,
+  analogies, odd-one-out, everyday physical reasoning all belong here. It is also what an item
+  carries before anyone has tagged it, so an untagged batch changes nothing.
+- **Raise it only when the content genuinely first appears in that class.** Probability, sets,
+  acids and bases, electric power, reflection are class 10; a class 9 admit has not met them.
+- **11 is the ceiling.** Class 12 content can never be fair to anyone this test is issued to.
+
+Coverage is per class. After changing tags run `npm run items:lint`: it refuses a bank that cannot
+fill a paper for some class (3 easy + 1 moderate + 1 difficult per subject) and warns when a class
+would see the same items on every paper. `/items` shows the same table against the live database.
+Class 9 is the constrained one — it can see only content up to class 8.

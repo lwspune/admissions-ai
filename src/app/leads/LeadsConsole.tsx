@@ -4,6 +4,7 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { browserClient } from '@/lib/browserClient'
+import { CLASSES } from '@/lib/classes'
 import { createLead, issueForLead, type ActionResult } from './actions'
 
 export interface LeadRow {
@@ -12,7 +13,8 @@ export interface LeadRow {
   contact_mobile: string
   city: string | null
   school: string | null
-  class_level: string | null
+  /** The class being admitted to (9–12). Null only on leads older than the class rule. */
+  class_level: number | null
   created_at: string
   assessments: {
     id: string
@@ -136,7 +138,7 @@ function AddLead({ onDone }: { onDone: () => void }) {
         <Field name="name" label="Candidate name" required />
         <Field name="contact_mobile" label="Parent's mobile" required type="tel" hint="The link is sent here" />
         <Field name="school" label="School" />
-        <Field name="class_level" label="Class" />
+        <ClassField />
         <Field name="city" label="City" />
         <Field name="board" label="Board" />
       </div>
@@ -219,6 +221,42 @@ function Field({
   )
 }
 
+/**
+ * The class the candidate is being admitted to, not the one they are in. In
+ * the admission season a student who has finished class 10 is in nobody's
+ * class; the batch they join is unambiguous. It decides which items they may
+ * be shown, so it is a fixed list and required — see src/lib/classes.ts.
+ */
+function ClassField() {
+  return (
+    <div>
+      <label htmlFor="class_level" className="block text-sm font-medium text-slate-700">
+        Admission to class<span aria-hidden="true"> *</span>
+      </label>
+      <select
+        id="class_level"
+        name="class_level"
+        required
+        defaultValue=""
+        aria-describedby="class_level-hint"
+        className="min-h-tap mt-1 w-full rounded border border-slate-300 bg-white px-3 py-2 text-base"
+      >
+        <option value="" disabled>
+          Choose…
+        </option>
+        {CLASSES.map((c) => (
+          <option key={c} value={c}>
+            Class {c}
+          </option>
+        ))}
+      </select>
+      <p id="class_level-hint" className="mt-1 text-xs text-slate-500">
+        Decides which questions can be drawn
+      </p>
+    </div>
+  )
+}
+
 function LeadCard({ lead }: { lead: LeadRow }) {
   const router = useRouter()
   const [pending, start] = useTransition()
@@ -251,7 +289,7 @@ function LeadCard({ lead }: { lead: LeadRow }) {
           <p className="text-sm text-slate-500">
             {lead.contact_mobile}
             {lead.school && ` · ${lead.school}`}
-            {lead.class_level && ` · Class ${lead.class_level}`}
+            {lead.class_level ? ` · Admission to class ${lead.class_level}` : ' · No class set'}
           </p>
           <p className="mt-1 text-xs text-slate-500">
             {issues === 0 ? 'No test issued' : `Issue ${issues} of 3`}

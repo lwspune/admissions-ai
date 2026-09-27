@@ -4,6 +4,7 @@
     "subject": "maths",
     "skill": "number-series",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Find the missing number in the sequence: 2, 6, 12, 20, ___, 42",
     "options": {
@@ -20,6 +21,7 @@
     "subject": "maths",
     "skill": "speed-distance-time",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A train travels 60 km in 90 minutes. What is its speed in km/h?",
     "options": {
@@ -36,6 +38,7 @@
     "subject": "maths",
     "skill": "linear-equation",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If 3x + 2 = 11, what is the value of x?",
     "options": {
@@ -52,6 +55,7 @@
     "subject": "maths",
     "skill": "prime-numbers",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which of the following is a prime number?",
     "options": {
@@ -68,6 +72,7 @@
     "subject": "maths",
     "skill": "calendar-reasoning",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If today is Monday, what day of the week will it be 45 days from now?",
     "options": {
@@ -84,6 +89,7 @@
     "subject": "maths",
     "skill": "multi-step-arithmetic",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A car's odometer reads 86,923 km and increases by 225 km every day. What will it read after 7 days?",
     "options": {
@@ -100,6 +106,7 @@
     "subject": "maths",
     "skill": "linear-equation",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If 3y - 7 = 2y + 5, what is the value of y?",
     "options": {
@@ -116,6 +123,7 @@
     "subject": "maths",
     "skill": "division-word-problem",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A book has 300 pages. If you read 12 pages per day, how many days will it take to finish the book?",
     "options": {
@@ -132,6 +140,7 @@
     "subject": "maths",
     "skill": "clock-angles",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A clock shows the time as 3:15. If the minute hand moves 120 degrees clockwise, what will the time be?",
     "options": {
@@ -148,6 +157,7 @@
     "subject": "maths",
     "skill": "inverse-proportion",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If 8 people can complete a job in 12 days, how many days will it take 6 people to complete the same job?",
     "options": {
@@ -164,6 +174,7 @@
     "subject": "maths",
     "skill": "rate-reasoning",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If 7 cats catch 7 mice in 7 minutes, how long will 14 cats take to catch 14 mice?",
     "options": {
@@ -180,6 +191,7 @@
     "subject": "maths",
     "skill": "ratio-chaining",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If 5 apples cost as much as 2 bananas, and 10 bananas cost as much as 3 oranges, what is the ratio of the cost of one apple to one orange?",
     "options": {
@@ -196,6 +208,7 @@
     "subject": "english",
     "skill": "syllogism",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If all Bloops are Razzies and all Razzies are Lazzies, then all Bloops are definitely Lazzies. This statement is:",
     "options": {
@@ -212,6 +225,7 @@
     "subject": "english",
     "skill": "anagram",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Rearrange the letters to form a meaningful word: OBRNW",
     "options": {
@@ -228,6 +242,7 @@
     "subject": "english",
     "skill": "letter-series",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "What is the next letter in the pattern? A, C, F, J, O, ___",
     "options": {

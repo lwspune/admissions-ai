@@ -4,6 +4,7 @@
     "subject": "maths",
     "skill": "number-series",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Find the next number in the series: 3, 6, 11, 18, 27, ___",
     "options": {
@@ -20,6 +21,7 @@
     "subject": "maths",
     "skill": "percentage",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "In a class of 40 students, 25% did not appear for a test. How many students appeared for the test?",
     "numeric_answer": 30,
@@ -31,6 +33,7 @@
     "subject": "maths",
     "skill": "ratio-proportion",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Three friends share ₹1,200 in the ratio 2 : 3 : 7. How much does the friend with the largest share receive?",
     "options": {
@@ -47,6 +50,7 @@
     "subject": "maths",
     "skill": "time-and-work",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A tap fills a tank in 6 hours. A second tap fills the same tank in 12 hours. If both taps are opened together, how long will the tank take to fill?",
     "options": {
@@ -63,6 +67,7 @@
     "subject": "maths",
     "skill": "multi-step-arithmetic",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A shopkeeper marks an item 40% above its cost price, then gives a 25% discount on the marked price. If the item cost ₹800, what is the selling price in rupees?",
     "numeric_answer": 840,
@@ -74,6 +79,7 @@
     "subject": "english",
     "skill": "analogy",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Doctor is to Hospital as Teacher is to ___",
     "options": {
@@ -90,6 +96,7 @@
     "subject": "english",
     "skill": "odd-one-out",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which word does not belong with the others?",
     "options": {
@@ -106,6 +113,7 @@
     "subject": "english",
     "skill": "sentence-completion",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Although he had practised for months, he ___ to qualify for the final round.",
     "options": {
@@ -122,6 +130,7 @@
     "subject": "english",
     "skill": "sentence-sequencing",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Arrange the four sentences into a logical paragraph. P. He then walked to the station. Q. Rahul woke up late. R. The train had already left. S. He dressed in a hurry.",
     "options": {
@@ -138,6 +147,7 @@
     "subject": "english",
     "skill": "inference",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Every member of the debate team attends the Saturday workshop. Meera attends the Saturday workshop. Which statement must be true?",
     "options": {
@@ -154,6 +164,7 @@
     "subject": "science",
     "skill": "everyday-phenomenon",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Wet clothes dry faster on a windy day than on a still day. The main reason is that the wind ___",
     "options": {
@@ -170,6 +181,7 @@
     "subject": "science",
     "skill": "classification",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which of these is not a mixture?",
     "options": {
@@ -186,6 +198,7 @@
     "subject": "science",
     "skill": "unit-and-magnitude",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A cyclist covers 12 km in 40 minutes. What is the average speed in kilometres per hour?",
     "numeric_answer": 18,
@@ -197,6 +210,7 @@
     "subject": "science",
     "skill": "experimental-reasoning",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "To test whether a plant needs sunlight, a student keeps one plant in bright light and an identical plant in a dark cupboard. For a fair test, what must be the same for both?",
     "options": {
@@ -213,6 +227,7 @@
     "subject": "science",
     "skill": "applying-a-principle",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A sealed, rigid steel container filled with air is heated. Which statement about the air inside is correct?",
     "options": {

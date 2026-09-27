@@ -7,6 +7,28 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Apply migration 0011 (class-scoped papers), then deploy, then verify — in that order and
+      close together.** Written 2026-09-27 and not yet applied: the database password is not on
+      this machine. The migration drops the zero-argument `live_pool()`, so code older than the
+      migration cannot issue until redeployed (it fails closed with "could not load the item
+      bank"), and code newer than the schema cannot issue either. The window is minutes if the
+      push follows the `db push`. Afterwards: (1) `npm run test:integration` — 4 new tests prove
+      a class 9 admit never receives a class 11 item and that the *database* refuses such a
+      paper whatever the caller drew; they cannot run before the migration. (2) `npm run
+      items:seed` once, so the 105 rows carry `taught_in` from the files (all at the floor, no
+      behaviour change). (3) `db:verify` gained seven probes but **skips on production because
+      real leads exist** — it needs the empty-database route (item below). (4) Golden path, by
+      the user: Add candidate now requires "Admission to class"; save, issue, open the link.
+      The two pre-existing leads with no class are both `submitted`, so nothing can be issued
+      to them anyway and no backfill is needed.
+- [ ] **Tag the 105 items with the class their content is taught in.** This is the real work
+      the class rule was built for and it is a curriculum judgement, not a code task. All items
+      sit at `taught_in: 6` (open to every admit) so the draw is unchanged today. Raise the tag
+      in the batch `.json`, re-run `npm run items:lint` (it refuses a bank that strands a class
+      and warns when a class's papers would repeat), then `npm run items:seed`. Expect it to bite
+      on science — acids and bases, electric power, reflection are class 10 — and a few maths
+      items (probability, sets). English should stay at the floor. `/items` shows the per-class
+      coverage table; class 9 is the one to watch, since it can only see content up to class 8.
 - [ ] **Rotate the Supabase `service_role` key and the database password.** Both, plus the anon key,
       were pasted into a chat transcript on 2026-09-22. The anon key is public by design; the other two
       are not. Settings → API → Reset, then update `.env.local`.
@@ -84,7 +106,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       telecallers. `src/lib/report.ts` is pure with 20 tests.
 - [ ] **The bank holds 105 items, not 300 — all live and signed off as of 2026-09-23.**
       Composition: maths 20/14/13, English 10/7/6, science 15/10/10 (easy/moderate/difficult
-      against a 60/20/20 target per subject). Verified against the database, not the JSON files.
+      against a 60/20/20 target per subject). Verified against the database, not the JSON files
+      (re-verified 2026-09-27: still 105, nothing at review). Once items are class-tagged these
+      numbers become per-class, and the thinnest cell will be class 9's, not the bank's.
       Authoring the remaining 195 is the bulk of the work left; the largest absolute gaps are the
       easy strata — English 50 short, science 45, maths 40 — and the thinnest are English
       difficult (6) and English moderate (7). **Nothing is urgent:** no item now appears on more

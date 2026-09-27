@@ -159,3 +159,78 @@ describe('parseOptionValue', () => {
     expect(parseOptionValue('4-15-7')).toBeNull()
   })
 })
+
+// Per-class coverage. Filtering the draw by class splits every stratum, and
+// the class that loses is the one whose candidate sees a 500. This is the
+// number the lint and the bank page both read; it has to be right in one place.
+import { coverageByClass } from './items'
+import { CLASSES } from './classes'
+import { PAPER_MIX } from './types'
+
+describe('coverageByClass', () => {
+  const item = (subject: Subject, difficulty: Difficulty, taught_in: number) => ({ subject, difficulty, taught_in })
+
+  /** `per` items in every stratum, all tagged `taught_in`. */
+  const bank = (per: number, taught_in = 6) => {
+    const out = []
+    for (const s of SUBJECTS) for (const d of DIFFICULTIES) for (let n = 0; n < per; n++) out.push(item(s, d, taught_in))
+    return out
+  }
+
+  const cell = (cells: ReturnType<typeof coverageByClass>, c: number, s: Subject, d: Difficulty) =>
+    cells.find((x) => x.classLevel === c && x.subject === s && x.difficulty === d)!
+
+  it('reports every class × subject × difficulty, classes outermost', () => {
+    const cells = coverageByClass([])
+    expect(cells).toHaveLength(CLASSES.length * SUBJECTS.length * DIFFICULTIES.length)
+    expect(cells.slice(0, 9).every((c) => c.classLevel === 9)).toBe(true)
+    expect(cells.map((c) => c.classLevel)).toEqual([...cells.map((c) => c.classLevel)].sort((a, b) => a - b))
+  })
+
+  it('counts only items taught at or below the class ceiling', () => {
+    const cells = coverageByClass([
+      item('maths', 'easy', 6),
+      item('maths', 'easy', 8),
+      item('maths', 'easy', 9),
+      item('maths', 'easy', 11),
+    ])
+    expect(cell(cells, 9, 'maths', 'easy').count).toBe(2)
+    expect(cell(cells, 10, 'maths', 'easy').count).toBe(3)
+    expect(cell(cells, 11, 'maths', 'easy').count).toBe(3)
+    expect(cell(cells, 12, 'maths', 'easy').count).toBe(4)
+  })
+
+  it('carries the paper need for each difficulty', () => {
+    const cells = coverageByClass([])
+    expect(cell(cells, 9, 'maths', 'easy').needed).toBe(PAPER_MIX.easy)
+    expect(cell(cells, 9, 'maths', 'moderate').needed).toBe(PAPER_MIX.moderate)
+    expect(cell(cells, 9, 'maths', 'difficult').needed).toBe(PAPER_MIX.difficult)
+  })
+
+  it('marks a stratum short when a paper cannot be filled', () => {
+    const cells = coverageByClass(bank(2))
+    expect(cell(cells, 9, 'maths', 'easy').status).toBe('short')
+    expect(cell(cells, 9, 'maths', 'moderate').status).toBe('ok')
+  })
+
+  it('marks a stratum thin when every paper would draw the same items', () => {
+    // Exactly the need in each stratum: every class-9 paper is the same paper.
+    const exact = []
+    for (const s of SUBJECTS) for (const d of DIFFICULTIES) for (let n = 0; n < PAPER_MIX[d]; n++) exact.push(item(s, d, 6))
+    const cells = coverageByClass(exact)
+    expect(cell(cells, 9, 'maths', 'easy').status).toBe('thin')
+    expect(cell(cells, 9, 'maths', 'moderate').status).toBe('thin')
+    expect(cells.every((c) => c.status === 'thin')).toBe(true)
+  })
+
+  it('marks a stratum ok at double the need or more', () => {
+    const cells = coverageByClass(bank(6))
+    expect(cells.every((c) => c.status === 'ok')).toBe(true)
+  })
+
+  it('is per class: a bank tagged at class 9 strands class 9 and serves class 10', () => {
+    const cells = coverageByClass(bank(6, 9))
+    expect(cells.filter((c) => c.classLevel === 9).every((c) => c.status === 'short')).toBe(true)
+    expect(cells.filter((c) => c.classLevel === 10).every((c) => c.status === 'ok')).toBe(true)
+  })
+})

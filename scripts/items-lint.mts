@@ -11,7 +11,9 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { parseOptionValue } from '../src/lib/items'
+import { parseOptionValue, coverageByClass } from '../src/lib/items'
+import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
+import type { Subject, Difficulty } from '../src/lib/types'
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
 
@@ -20,14 +22,13 @@ const DIFFICULTIES = ['easy', 'moderate', 'difficult']
 const CHOICES = ['A', 'B', 'C', 'D']
 const MAX_STEM_WORDS = 40
 const MIN_RATIONALE_CHARS = 60
-/** Per subject, the minimum a paper needs (spec §6). */
-const MIN_PER_SUBJECT: Record<string, number> = { easy: 3, moderate: 1, difficult: 1 }
 
 interface RawItem {
   ref?: string
   subject?: string
   skill?: string
   difficulty?: string
+  taught_in?: number
   format?: string
   stem?: string
   options?: Record<string, string> | null
@@ -77,6 +78,17 @@ export function lintItems(): number {
     if (!SUBJECTS.includes(item.subject ?? '')) err(ref, `invalid subject "${item.subject}"`)
     if (!DIFFICULTIES.includes(item.difficulty ?? '')) err(ref, `invalid difficulty "${item.difficulty}"`)
     if (!item.skill || !item.skill.trim()) err(ref, 'missing skill')
+
+    // The class in which the content is taught. Required, because a missing
+    // tag would be seeded as the floor and quietly open a class 11 item to a
+    // class 9 admit; the author has to say 6 on purpose.
+    if (
+      !Number.isInteger(item.taught_in) ||
+      (item.taught_in as number) < TAUGHT_IN_MIN ||
+      (item.taught_in as number) > TAUGHT_IN_MAX
+    ) {
+      err(ref, `taught_in must be an integer from ${TAUGHT_IN_MIN} to ${TAUGHT_IN_MAX}, got ${JSON.stringify(item.taught_in)}`)
+    }
 
     if (!item.stem || !item.stem.trim()) {
       err(ref, 'missing stem')
@@ -154,17 +166,24 @@ export function lintItems(): number {
     }
   }
 
-  console.log('\nBank can fill a paper')
-  for (const subject of SUBJECTS) {
-    for (const difficulty of DIFFICULTIES) {
-      const n = items.filter((i) => i.subject === subject && i.difficulty === difficulty).length
-      const need = MIN_PER_SUBJECT[difficulty] ?? 0
-      if (n < need) {
-        errors++
-        console.log(`  ERROR  ${subject}/${difficulty}: ${n} item(s), a paper needs ${need}`)
-      } else {
-        console.log(`  ok     ${subject}/${difficulty}: ${n}`)
-      }
+  // Can every class be issued a paper? The filter by class splits each
+  // stratum, and the class that comes up short is the one whose candidate
+  // sees a failure in front of staff. "thin" is the exposure warning: fewer
+  // than twice the need means every paper for that class looks much the same.
+  console.log('\nBank can fill a paper for every class')
+  const shaped = items
+    .filter((i) => SUBJECTS.includes(i.subject ?? '') && DIFFICULTIES.includes(i.difficulty ?? '') && Number.isInteger(i.taught_in))
+    .map((i) => ({ subject: i.subject as Subject, difficulty: i.difficulty as Difficulty, taught_in: i.taught_in as number }))
+  for (const cell of coverageByClass(shaped)) {
+    const label = `class ${cell.classLevel} · ${cell.subject}/${cell.difficulty}`
+    if (cell.status === 'short') {
+      errors++
+      console.log(`  ERROR  ${label}: ${cell.count} item(s), a paper needs ${cell.needed}`)
+    } else if (cell.status === 'thin') {
+      warnings++
+      console.log(`  WARN   ${label}: ${cell.count} item(s) for a need of ${cell.needed} — every paper draws the same ones`)
+    } else {
+      console.log(`  ok     ${label}: ${cell.count}`)
     }
   }
 

@@ -1,4 +1,5 @@
 import { SUBJECTS, DIFFICULTIES, PAPER_MIX, type Subject, type Difficulty } from './types'
+import type { ClassLevel } from './classes'
 
 export interface PoolItem {
   id: string
@@ -15,6 +16,13 @@ export interface AssembleInput {
   excludeItemIds?: readonly string[]
   /** Injectable for deterministic tests; production passes nothing. */
   rng?: () => number
+  /**
+   * The class the pool was filtered for, when it was. Used only to name the
+   * class in a failure: the filtering itself happens in `live_pool()`, so a
+   * starved stratum here is starved *for this class*, and an error that says
+   * "english/difficult has 0" sends the reader to a bank total that looks fine.
+   */
+  forClass?: ClassLevel
 }
 
 /**
@@ -30,10 +38,13 @@ export class StratumExhaustedError extends Error {
     readonly difficulty: Difficulty,
     readonly needed: number,
     readonly available: number,
+    readonly forClass?: ClassLevel,
   ) {
     super(
-      `Cannot draw a paper: ${subject}/${difficulty} needs ${needed} live item(s) but only ` +
-        `${available} are available. Author more items or widen the exclusions.`,
+      `Cannot draw a paper${forClass ? ` for a class ${forClass} admit` : ''}: ${subject}/${difficulty} ` +
+        `needs ${needed} live item(s) but only ${available} are available` +
+        `${forClass ? ` at or below class ${forClass - 1} content` : ''}. ` +
+        'Author more items or widen the exclusions.',
     )
     this.name = 'StratumExhaustedError'
   }
@@ -68,7 +79,7 @@ function shuffle<T>(items: readonly T[], rng: () => number): T[] {
  * a short paper scored out of 15 is worse than a visible failure.
  */
 export function assemblePaper(input: AssembleInput): PoolItem[] {
-  const { pool, excludeItemIds = [], rng = Math.random } = input
+  const { pool, excludeItemIds = [], rng = Math.random, forClass } = input
   const excluded = new Set(excludeItemIds)
 
   const picked: PoolItem[] = []
@@ -80,7 +91,7 @@ export function assemblePaper(input: AssembleInput): PoolItem[] {
       )
 
       if (stratum.length < needed) {
-        throw new StratumExhaustedError(subject, difficulty, needed, stratum.length)
+        throw new StratumExhaustedError(subject, difficulty, needed, stratum.length, forClass)
       }
 
       const unseen = shuffle(stratum.filter((item) => !excluded.has(item.id)), rng)

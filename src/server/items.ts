@@ -9,6 +9,8 @@ export interface BankItem {
   subject: Subject
   skill: string
   difficulty: Difficulty
+  /** The class in which the content is taught; an admit to class N may see taughtIn ≤ N−1. */
+  taughtIn: number
   status: ItemStatus
   format: Format
   stem: string
@@ -30,7 +32,7 @@ export interface BankItem {
 export async function loadBank(db: Db): Promise<BankItem[]> {
   const { data, error } = await db
     .from('test_items')
-    .select('id, ref, subject, skill, difficulty, status, format, stem, options, answer_key, numeric_answer, numeric_tolerance, rationale')
+    .select('id, ref, subject, skill, difficulty, taught_in, status, format, stem, options, answer_key, numeric_answer, numeric_tolerance, rationale')
     .order('ref')
 
   if (error) throw new Error(`could not read the item bank: ${error.message}`)
@@ -41,6 +43,7 @@ export async function loadBank(db: Db): Promise<BankItem[]> {
     subject: row.subject as Subject,
     skill: row.skill as string,
     difficulty: row.difficulty as Difficulty,
+    taughtIn: Number(row.taught_in),
     status: row.status as ItemStatus,
     format: row.format as Format,
     stem: row.stem as string,

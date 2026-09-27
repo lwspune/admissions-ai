@@ -93,6 +93,7 @@ async function main(): Promise<number> {
         subject: item.subject,
         skill: item.skill,
         difficulty: item.difficulty,
+        taught_in: item.taught_in,
         format: item.format,
         stem: item.stem,
         options: item.format === 'mcq' ? item.options : null,

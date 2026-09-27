@@ -4,6 +4,7 @@
     "subject": "maths",
     "skill": "average",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A batsman scores 42, 35, 60, 28 and 50 runs in five innings. What is his average score per innings?",
     "numeric_answer": 43,
@@ -15,6 +16,7 @@
     "subject": "maths",
     "skill": "fraction-comparison",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which of these fractions is the largest?",
     "options": {
@@ -31,6 +33,7 @@
     "subject": "maths",
     "skill": "profit-and-loss",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A shopkeeper buys a chair for ₹1,200 and sells it for ₹1,500. What is the profit percentage?",
     "options": {
@@ -47,6 +50,7 @@
     "subject": "maths",
     "skill": "hcf-and-lcm",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "Two bells ring at intervals of 12 minutes and 18 minutes. They ring together at 9:00 am. After how many minutes will they next ring together?",
     "numeric_answer": 36,
@@ -58,6 +62,7 @@
     "subject": "maths",
     "skill": "area-and-perimeter",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A rectangular field is 24 m long and 16 m wide. How much fencing is needed to enclose it completely?",
     "options": {
@@ -74,6 +79,7 @@
     "subject": "maths",
     "skill": "simple-interest",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "What is the simple interest on ₹5,000 at 8% per annum for 3 years, in rupees?",
     "numeric_answer": 1200,
@@ -85,6 +91,7 @@
     "subject": "maths",
     "skill": "number-classification",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Which number does not belong with the others?",
     "options": {
@@ -101,6 +108,7 @@
     "subject": "maths",
     "skill": "unit-conversion",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A container holds 2.5 litres of water. How many millilitres is this?",
     "options": {
@@ -117,6 +125,7 @@
     "subject": "maths",
     "skill": "numeric-coding",
     "difficulty": "easy",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "If CAT is written as 3-1-20, how is DOG written in the same code?",
     "options": {
@@ -133,6 +142,7 @@
     "subject": "maths",
     "skill": "ages",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A father is three times as old as his son. In 10 years, he will be twice as old as his son. How old is the son now?",
     "options": {
@@ -149,6 +159,7 @@
     "subject": "maths",
     "skill": "probability",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "A bag contains 4 red balls and 6 blue balls. One ball is drawn at random. What is the probability that it is red?",
     "options": {
@@ -165,6 +176,7 @@
     "subject": "maths",
     "skill": "number-series",
     "difficulty": "moderate",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "Find the next number in the series: 5, 11, 23, 47, 95, ___",
     "options": {
@@ -181,6 +193,7 @@
     "subject": "maths",
     "skill": "combined-rates",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A pipe fills a tank in 4 hours. A leak at the bottom would empty the full tank in 6 hours. With the leak present, how many hours does the pipe take to fill the tank?",
     "numeric_answer": 12,
@@ -192,6 +205,7 @@
     "subject": "maths",
     "skill": "percentage-change-chain",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "mcq",
     "stem": "The price of a book is increased by 20% and then decreased by 20%. Compared with the original price, the final price is:",
     "options": {
@@ -208,6 +222,7 @@
     "subject": "maths",
     "skill": "reverse-percentage",
     "difficulty": "difficult",
+    "taught_in": 6,
     "format": "numeric",
     "stem": "A trader gives a 20% discount on the marked price and still makes a 20% profit on an item that cost him ₹2,000. What was the marked price, in rupees?",
     "numeric_answer": 3000,
