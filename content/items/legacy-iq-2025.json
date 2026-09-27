@@ -21,7 +21,7 @@
     "subject": "maths",
     "skill": "speed-distance-time",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A train travels 60 km in 90 minutes. What is its speed in km/h?",
     "options": {
@@ -38,7 +38,7 @@
     "subject": "maths",
     "skill": "linear-equation",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "If 3x + 2 = 11, what is the value of x?",
     "options": {
@@ -106,7 +106,7 @@
     "subject": "maths",
     "skill": "linear-equation",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "If 3y - 7 = 2y + 5, what is the value of y?",
     "options": {
@@ -157,7 +157,7 @@
     "subject": "maths",
     "skill": "inverse-proportion",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "If 8 people can complete a job in 12 days, how many days will it take 6 people to complete the same job?",
     "options": {
@@ -191,7 +191,7 @@
     "subject": "maths",
     "skill": "ratio-chaining",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "If 5 apples cost as much as 2 bananas, and 10 bananas cost as much as 3 oranges, what is the ratio of the cost of one apple to one orange?",
     "options": {

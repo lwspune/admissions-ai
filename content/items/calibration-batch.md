@@ -450,3 +450,30 @@ Carry these into the remaining 285:
 - Is the overall register right — too easy, too hard, or about right for the leads you expect?
 - Are the target-p values plausible against what you know of last year's cohort? Your read on this
   population is better than my estimate, and every tier in the remaining 285 depends on it.
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| M-E-01 | 6 | reasoning or everyday content; open to every admit |
+| M-E-02 | 7 | percentage — Class 7 Comparing Quantities |
+| M-E-03 | 6 | reasoning or everyday content; open to every admit |
+| M-M-04 | 8 | two taps / work rates — Class 8 Direct and Inverse Proportions |
+| M-D-05 | 8 | mark-up then discount — Class 8 Comparing Quantities |
+| E-E-01 | 6 | reasoning or everyday content; open to every admit |
+| E-E-02 | 6 | reasoning or everyday content; open to every admit |
+| E-E-03 | 6 | reasoning or everyday content; open to every admit |
+| E-M-04 | 6 | reasoning or everyday content; open to every admit |
+| E-D-05 | 6 | reasoning or everyday content; open to every admit |
+| S-E-01 | 6 | reasoning or everyday content; open to every admit |
+| S-E-02 | 9 | mixture vs compound (brass, CO₂) — Class 9 Is Matter Around Us Pure |
+| S-E-03 | 7 | average speed — Class 7 Motion and Time |
+| S-M-04 | 6 | reasoning or everyday content; open to every admit |
+| S-D-05 | 9 | gas pressure rises on heating at fixed volume — Class 9 Matter in Our Surroundings |

@@ -21,14 +21,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       the user: Add candidate now requires "Admission to class"; save, issue, open the link.
       The two pre-existing leads with no class are both `submitted`, so nothing can be issued
       to them anyway and no backfill is needed.
-- [ ] **Tag the 105 items with the class their content is taught in.** This is the real work
-      the class rule was built for and it is a curriculum judgement, not a code task. All items
-      sit at `taught_in: 6` (open to every admit) so the draw is unchanged today. Raise the tag
-      in the batch `.json`, re-run `npm run items:lint` (it refuses a bank that strands a class
-      and warns when a class's papers would repeat), then `npm run items:seed`. Expect it to bite
-      on science — acids and bases, electric power, reflection are class 10 — and a few maths
-      items (probability, sets). English should stay at the floor. `/items` shows the per-class
-      coverage table; class 9 is the one to watch, since it can only see content up to class 8.
+- [ ] **Review the class tags, then seed them.** Tagged 2026-09-27 against the NCERT sequence,
+      checked against the Maharashtra board where they differ; each batch `.md` now ends with a
+      "Class tags" table giving the reason for every raised tag, so a disagreement is a one-cell
+      edit in the `.json` plus `npm run items:lint`. Distribution: 47 at the floor, 24 at class 7,
+      17 at 8, 14 at 9, 3 at 10 (`S-M-29` earthing, `S-D-35` electric power, `M-D-46` two draws
+      without replacement); nothing at 11. English is entirely at the floor. Two predictions in
+      the earlier version of this item were wrong and are corrected in the tables: litmus is
+      Class 7, not 10, and a single-draw probability is Class 8. **The cell to watch is class 9
+      science/difficult: 3 items for a need of 1** (`S-D-19`, `S-D-31`, `S-D-33`), so a class 9
+      admit sees one of three difficult science items on every paper — legal, but the next
+      science batch should be difficult items on class 7–8 content. Seeding waits on migration
+      0011 (`taught_in` does not exist in production yet); `npm run items:seed` after it.
 - [ ] **Rotate the Supabase `service_role` key and the database password.** Both, plus the anon key,
       were pasted into a chat transcript on 2026-09-22. The anon key is public by design; the other two
       are not. Settings → API → Reset, then update `.env.local`.

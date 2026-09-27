@@ -87,3 +87,30 @@ To promote this batch once reviewed:
 ```
 npm run items:seed -- --live --file science-batch-02.json
 ```
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| S-E-21 | 6 | reasoning or everyday content; open to every admit |
+| S-E-22 | 8 | light faster than sound — Class 8 Sound |
+| S-E-23 | 9 | weight = mg — Class 9 Gravitation |
+| S-M-24 | 9 | latent heat of fusion — Class 9 Matter in Our Surroundings |
+| S-M-25 | 8 | liquid pressure increases with depth — Class 8 Force and Pressure |
+| S-M-26 | 7 | chemical vs physical change — Class 7 |
+| S-M-27 | 9 | concentration by mass — Class 9 Is Matter Around Us Pure |
+| S-M-28 | 7 | hot air is less dense and rises — Class 7 Heat (convection) |
+| S-M-29 | 10 | earthing of appliances — Class 10 Electricity (domestic circuits) |
+| S-D-30 | 9 | identifying the reaction pair — Class 9 Third Law |
+| S-D-31 | 7 | rusting adds oxygen to iron — Class 7 Physical and Chemical Changes |
+| S-D-32 | 9 | potential → kinetic → electrical — Class 9 Work and Energy |
+| S-D-33 | 7 | plane mirror image distance — Class 7 Light |
+| S-D-34 | 9 | concentration in g/L after dilution — Class 9 |
+| S-D-35 | 10 | power, current and resistance at fixed voltage — Class 10 Electricity |

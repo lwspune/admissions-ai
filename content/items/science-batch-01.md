@@ -103,3 +103,30 @@ To promote this batch once reviewed:
 ```
 npm run items:seed -- --live --file science-batch-01.json
 ```
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| S-E-06 | 6 | reasoning or everyday content; open to every admit |
+| S-E-07 | 9 | inertia — Class 9 Force and Laws of Motion |
+| S-E-08 | 9 | density = mass ÷ volume — Class 9 Gravitation (relative density) |
+| S-E-09 | 7 | series circuit, one bulb breaks the loop — Class 7 Electric Current and its Effects |
+| S-E-10 | 7 | breathing rate and oxygen demand — Class 7 Respiration in Organisms |
+| S-E-11 | 6 | reasoning or everyday content; open to every admit |
+| S-E-12 | 6 | reasoning or everyday content; open to every admit |
+| S-E-13 | 7 | blue litmus turns red in acid — Class 7 Acids, Bases and Salts |
+| S-E-14 | 7 | food chain disturbance — Class 7 |
+| S-M-15 | 7 | conduction in metal vs wood — Class 7 Heat |
+| S-M-16 | 6 | reasoning or everyday content; open to every admit |
+| S-M-17 | 9 | density by displacement — Class 9 |
+| S-D-18 | 9 | floating by average density — Class 9 Gravitation (buoyancy) |
+| S-D-19 | 7 | plants respire in the dark — Class 7 Respiration in Organisms |
+| S-D-20 | 9 | action and reaction — Class 9 Third Law |

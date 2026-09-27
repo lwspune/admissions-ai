@@ -93,3 +93,30 @@ science   easy  3   moderate 1   difficult 1
 ```
 npm run items:seed -- --live --file maths-batch-02.json
 ```
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| M-E-18 | 7 | mean — Class 7 Data Handling |
+| M-E-19 | 6 | reasoning or everyday content; open to every admit |
+| M-E-20 | 7 | profit per cent — Class 7 Comparing Quantities |
+| M-E-21 | 6 | reasoning or everyday content; open to every admit |
+| M-E-22 | 6 | reasoning or everyday content; open to every admit |
+| M-E-23 | 7 | simple interest — Class 7 Comparing Quantities |
+| M-E-24 | 8 | recognising perfect cubes — Class 8 Cubes and Cube Roots |
+| M-E-25 | 6 | reasoning or everyday content; open to every admit |
+| M-E-26 | 6 | reasoning or everyday content; open to every admit |
+| M-M-27 | 8 | ages as a linear equation — Class 8 |
+| M-M-28 | 8 | single-draw probability — Class 8 Data Handling (chance and probability) |
+| M-M-29 | 6 | reasoning or everyday content; open to every admit |
+| M-D-30 | 8 | fill and leak rates — Class 8 inverse proportion |
+| M-D-31 | 8 | successive percentage change — Class 8 Comparing Quantities |
+| M-D-32 | 8 | discount and profit on marked price — Class 8 Comparing Quantities |

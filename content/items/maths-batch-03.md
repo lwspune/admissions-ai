@@ -78,3 +78,30 @@ To promote this batch once reviewed:
 ```
 npm run items:seed -- --live --file maths-batch-03.json
 ```
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| M-M-33 | 7 | weighted mean — Class 7 Data Handling |
+| M-M-34 | 7 | mean with a replaced value — Class 7 |
+| M-M-35 | 8 | compound vs simple interest — Class 8 Comparing Quantities |
+| M-M-36 | 7 | speed with a current — Class 7 speed; the stream is an addition, not a new idea |
+| M-M-37 | 7 | percentage of a percentage — Class 7 |
+| M-M-38 | 9 | two-set overlap (inclusion–exclusion) — Sets, Maharashtra Std 9 / NCERT Class 11 |
+| M-M-39 | 6 | reasoning or everyday content; open to every admit |
+| M-D-40 | 8 | successive discounts — Class 8 Comparing Quantities |
+| M-D-41 | 7 | train crossing a bridge — Class 7 speed, distance, time |
+| M-D-42 | 8 | shared work with one leaving — Class 8 inverse proportion |
+| M-D-43 | 8 | repeated fractional replacement — Class 8 percentage chain |
+| M-D-44 | 7 | mean of joined group — Class 7 |
+| M-D-45 | 6 | reasoning or everyday content; open to every admit |
+| M-D-46 | 10 | two draws without replacement — Class 10 probability with compound events |
+| M-D-47 | 8 | gain and loss on equal selling prices — Class 8 Comparing Quantities |

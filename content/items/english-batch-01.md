@@ -89,3 +89,30 @@ To promote this batch once reviewed:
 ```
 npm run items:seed -- --live --file english-batch-01.json
 ```
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| E-E-09 | 6 | reasoning or everyday content; open to every admit |
+| E-E-10 | 6 | reasoning or everyday content; open to every admit |
+| E-E-11 | 6 | reasoning or everyday content; open to every admit |
+| E-E-12 | 6 | reasoning or everyday content; open to every admit |
+| E-E-13 | 6 | reasoning or everyday content; open to every admit |
+| E-M-14 | 6 | reasoning or everyday content; open to every admit |
+| E-M-15 | 6 | reasoning or everyday content; open to every admit |
+| E-M-16 | 6 | reasoning or everyday content; open to every admit |
+| E-M-17 | 6 | reasoning or everyday content; open to every admit |
+| E-M-18 | 6 | reasoning or everyday content; open to every admit |
+| E-D-19 | 6 | reasoning or everyday content; open to every admit |
+| E-D-20 | 6 | reasoning or everyday content; open to every admit |
+| E-D-21 | 6 | reasoning or everyday content; open to every admit |
+| E-D-22 | 6 | reasoning or everyday content; open to every admit |
+| E-D-23 | 6 | reasoning or everyday content; open to every admit |

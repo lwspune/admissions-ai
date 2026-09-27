@@ -21,7 +21,7 @@
     "subject": "science",
     "skill": "speed-of-light-and-sound",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "During a storm you see the lightning before you hear the thunder. This is because light",
     "options": {
@@ -38,7 +38,7 @@
     "subject": "science",
     "skill": "mass-and-weight",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "numeric",
     "stem": "An object has a mass of 5 kg. Taking g as 10 m/s2, what is its weight in newtons?",
     "numeric_answer": 50,
@@ -50,7 +50,7 @@
     "subject": "science",
     "skill": "change-of-state",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "mcq",
     "stem": "Ice at 0 degrees C is heated steadily. While it is melting its temperature does not rise. The heat supplied is being used to",
     "options": {
@@ -67,7 +67,7 @@
     "subject": "science",
     "skill": "pressure-in-liquids",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "The wall of a dam is built much thicker at the bottom than at the top. This is mainly because water pressure",
     "options": {
@@ -84,7 +84,7 @@
     "subject": "science",
     "skill": "chemical-and-physical-change",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "Which of these is a chemical change?",
     "options": {
@@ -101,7 +101,7 @@
     "subject": "science",
     "skill": "concentration",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "numeric",
     "stem": "A solution is made by dissolving 20 g of salt in 80 g of water. What is the percentage of salt by mass in the solution?",
     "numeric_answer": 20,
@@ -113,7 +113,7 @@
     "subject": "science",
     "skill": "density-and-buoyancy",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A hot air balloon rises when the air inside it is heated. This is because the heated air",
     "options": {
@@ -130,7 +130,7 @@
     "subject": "science",
     "skill": "electrical-safety",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 10,
     "format": "mcq",
     "stem": "The metal body of an electric iron is connected to the earth wire. The main purpose of this is to",
     "options": {
@@ -147,7 +147,7 @@
     "subject": "science",
     "skill": "action-and-reaction",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "mcq",
     "stem": "A book lies at rest on a table. Which force forms an action-reaction pair with the Earth's gravitational pull on the book?",
     "options": {
@@ -164,7 +164,7 @@
     "subject": "science",
     "skill": "conservation-of-mass",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A piece of iron is weighed, left in damp air until it rusts, and weighed again. It is now heavier. The best explanation is that",
     "options": {
@@ -181,7 +181,7 @@
     "subject": "science",
     "skill": "energy-transformation",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "mcq",
     "stem": "In a hydroelectric power station, water stored high behind a dam falls and turns a turbine. The main energy changes are",
     "options": {
@@ -198,7 +198,7 @@
     "subject": "science",
     "skill": "reflection",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "You stand 2 m in front of a plane mirror, then step back 1 m. The distance between you and your image is now",
     "options": {
@@ -215,7 +215,7 @@
     "subject": "science",
     "skill": "concentration",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 9,
     "format": "numeric",
     "stem": "A 200 ml sugar solution contains 10 g of sugar. Another 200 ml of water is added. What is the new concentration in grams per litre?",
     "numeric_answer": 25,
@@ -227,7 +227,7 @@
     "subject": "science",
     "skill": "electric-power",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 10,
     "format": "mcq",
     "stem": "A 40 W bulb and a 100 W bulb are each connected to the same mains supply. Compared with the 40 W bulb, the 100 W bulb",
     "options": {

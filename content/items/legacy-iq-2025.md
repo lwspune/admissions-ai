@@ -127,3 +127,30 @@ science   easy  3   moderate 1   difficult 1
 ```
 
 Target is 60 / 20 / 20 per subject. `npm run items:lint` → 30 items, 0 errors, 0 warnings.
+
+---
+
+## Class tags (2026-09-27)
+
+`taught_in` is the class in which the content is first taught (NCERT sequence, checked against the
+Maharashtra board where they differ); an admit to class N draws `taught_in ≤ N−1`. 6 is the floor
+and means open to every admit. Raised tags are a curriculum judgement — overrule in the `.json`
+and re-run `npm run items:lint`.
+
+| Ref | taught_in | Why |
+|---|---|---|
+| M-E-06 | 6 | reasoning or everyday content; open to every admit |
+| M-E-07 | 7 | speed = distance ÷ time — Class 7 Motion and Time |
+| M-E-08 | 7 | one-step linear equation — Class 7 Simple Equations |
+| M-E-09 | 6 | reasoning or everyday content; open to every admit |
+| M-E-10 | 6 | reasoning or everyday content; open to every admit |
+| M-E-11 | 6 | reasoning or everyday content; open to every admit |
+| M-E-12 | 8 | variable on both sides — Class 8 Linear Equations in One Variable |
+| M-E-13 | 6 | reasoning or everyday content; open to every admit |
+| M-M-14 | 6 | reasoning or everyday content; open to every admit |
+| M-M-15 | 8 | inverse proportion — Class 8 |
+| M-M-16 | 6 | reasoning or everyday content; open to every admit |
+| M-D-17 | 7 | chained ratio — Class 7 ratio and proportion |
+| E-E-06 | 6 | reasoning or everyday content; open to every admit |
+| E-E-07 | 6 | reasoning or everyday content; open to every admit |
+| E-M-08 | 6 | reasoning or everyday content; open to every admit |
