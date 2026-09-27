@@ -39,16 +39,18 @@ logic worth testing lives, which is why it tests without a database.
 `grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
 `serialize` (**the security boundary**) · `report` · `items` (seed-status rules,
 per-class coverage) · `classes` (the N−1 content rule) ·
-`retention` (the 12-month rule) · `mobile` · `token` · `ip` · `types`
+`retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
+`csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
-identify, start, save, record, submit) · `report` · `retention` (the purge)
+identify, start, save, record, submit) · `report` · `retention` (the purge) ·
+`leads` (list and detail reads) · `leadImport` (preview and commit)
 
 **`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
 the latter guards itself with `CRON_SECRET`. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `login/`, `reports/[leadId]/`, `items/` and `staff/` (superadmin only) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/`, `items/` and `staff/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -118,6 +120,28 @@ These are the things that quietly break everything if violated.
   `CandidateFlow` must move together. A new table holding candidate data must
   either cascade from `leads` or be added to `purgeExpired` by hand —
   `identify_attempts` has no foreign key and is the standing reminder.
+  An imported lead's `created_at` is its import date, never the source's
+  date (that is `lead_origins.source_date`) — or the purge would delete a
+  2025 sheet row the night it arrived.
+- **A telecaller sees only leads assigned to them; visibility is stated once.**
+  `can_see_lead()` on `leads` (migration 0012), and every table hanging off a
+  lead — assessments, attempts, answers, events, identify_attempts, comments,
+  origins — asks "can I see the parent row?" through its own policy, since a
+  policy's subquery is itself under RLS. Only counsellors and superadmin
+  assign, and only to a telecaller: the `leads_guard` trigger, not the page.
+- **Lead history is append-only, and its author comes from the session.**
+  `lead_comments` has no update or delete policy; `lead_comments_stamp`
+  overwrites whatever author the client sends. Stage changes write their own
+  line (`leads_stage_history`); the insert policy refuses kind `stage` from
+  anyone else.
+- **An import adds; it never overwrites.** One number is one lead. A number
+  on one lead gets the new origin and notes, and a name or interest only
+  where it had none — stage and assignment are untouched. A number on several
+  leads (siblings) is reported, not guessed at. `import_leads` is one
+  transaction: a bad row writes none of the file.
+- **A lead's name is optional until a test is issued, then permanent.**
+  `issue_assessment` refuses a nameless lead (the candidate confirms the name
+  on screen), and `leads_guard` refuses removing a name once set.
 
 ## Commands
 
@@ -165,11 +189,32 @@ Migrations are applied deliberately, never by a deploy:
   `review` and left nothing drawable — visible only later, as staff unable to
   issue a paper. Seeding now preserves an existing status; only
   `--live --file <batch>` promotes.
+- **Narrowing who can see rows silently breaks every "does this exist?" check.**
+  Once telecallers could not see each other's leads, the add form's duplicate
+  check — a `select` by mobile — would have found nothing and created the
+  duplicate it exists to prevent. Existence checks across a visibility
+  boundary go through a SECURITY DEFINER function that returns a count and
+  nothing else (`leads_on_mobile`). When narrowing a policy, list every
+  caller that *counts* rows, not only those that read them.
 
 ## Decisions
 
 ### 2026-09
 
+- **2026-09-28 — Lead management lives in the `leads` table the test already
+  uses.** Leads come from many sources and move telecaller → counsellor → EIS;
+  any of them may be sent the test. One row per lead, test or no test, so the
+  report, reissue cap and purge needed no change. The user's answers set the
+  shape: one number is one lead; counsellors or superadmin assign;
+  telecallers see only their own, counsellors all; comments are a history,
+  not a field; SPI leads are in scope (`interest`); class and name are
+  optional until issue; stages New → CNR → Contacted → Qualified → In EIS,
+  plus Not interested. Import is CSV with a column mapping remembered per
+  source — no Excel dependency. Imported NOT CONNECTED → CNR and
+  CONNECTED → Contacted; remarks become the first comment; "not interested"
+  is never inferred from free text. Retention was deliberately left open (see
+  SUGGESTIONS.md for the deadline). EIS matching is deferred until the file
+  is shared.
 - **2026-09-27 — Papers are scoped by the class being admitted to, with one
   tag on the item and one rule in the code.** Students are admitted to 9, 10,
   11 and 12 and every admit drew the same pool. Three choices were made in

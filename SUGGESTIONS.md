@@ -7,6 +7,30 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Ship lead management: apply migration 0012, push, run the suite, walk the golden path.**
+      Built 2026-09-28, not yet applied. Order: `npx supabase db push` (0012) **then push `main`
+      straight after** — the old code runs against the new schema (it only ever inserts named
+      leads, and a telecaller's insert is auto-assigned to them), but from the moment 0012 is live
+      telecallers see only leads assigned to them, and every existing lead is unassigned
+      (`created_by` was never filled in, so there is nobody to backfill to). A counsellor assigns
+      them on `/leads`. Then `npm run test:integration` — `leads.itest.ts` (24 tests) failed
+      21/24 before the migration for the right reason (missing columns and tables). After it goes
+      green, break `leads_guard`'s name rule on purpose and watch "lets a name be corrected but not
+      removed" go red: before 0012 that test passed only because `name` was NOT NULL. **Golden
+      path, by the user** (needs real counsellor + telecaller sessions on production): export the
+      WhatsApp Consolidated sheet as CSV → `/leads/import` as a counsellor, new source → preview
+      (the sheet has 597 rows; rows with no number, like the first "S. Shingre", should be listed
+      as skipped) → import → filter
+      Source + Unassigned → select 5, assign to a telecaller → sign in as that telecaller: exactly
+      those 5 → open one, set CNR, add a comment → add name and class, issue a test.
+- [ ] **Decide whether leads that never took a test are ever purged.** The user's call
+      2026-09-28: keep the data, decide later. Nothing is purged yet in practice — the purge counts
+      12 months from `leads.created_at`, which for an imported lead is the import date (the
+      sheet's own date is kept separately in `lead_origins.source_date` for exactly this reason).
+      **Deadline: 12 months after the first import.** After that the nightly purge starts deleting
+      untested imported leads, because it treats every lead alike. The consent screen's "kept for
+      12 months" covers test data; leads from other sources were consented at source.
+
 - [x] ~~**Apply migration 0011 (class-scoped papers), then deploy, then verify.**~~ **DONE
       2026-09-27**, in the wrong order and it did not matter: the code was pushed first (issuing
       failed closed for the interval), then the migration went in with the database password
@@ -85,6 +109,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       previews fail loudly rather than becoming a second copy of the live system.
 
 ## Known gaps
+
+- [ ] **Lead management: what is deliberately not built (2026-09-28).** EIS matching (the user
+      will share the EIS Excel; decide then whether "in EIS" is a flag or carries EIS status);
+      call-back reminders; automatic intake from Meta / Google forms; a per-row Source column in
+      an import file (one source per file for now — the user may have meant per-row). An import is
+      capped at 5000 rows / 900 KB: one file is one transaction and must finish inside the
+      statement timeout. A comment's author name is captured when it is written, so a rename does
+      not rewrite old comments.
+- [ ] **`db:verify` and `db:verify-rls` cannot see migration 0012.** Both refuse to run on a
+      database holding real leads, which production now does, so the lead rules are proven only by
+      `leads.itest.ts`. This is the gap option (b) in "Give Claude a way to browser-verify" would
+      close.
 
 - [x] ~~**Vercel Git integration is not connected.**~~ **WRONG — it is, and always was.**
       Corrected 2026-09-22: pushing branch `items/legacy-iq-2025-port` produced Preview deployment
@@ -169,6 +205,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       them.** Both are specced and unbuilt. Note the ordering constraint: the purge deletes rather
       than anonymises, so any aggregate worth keeping has to be rolled up before the rows go, not
       reconstructed afterwards. Nothing is lost yet; the oldest candidate data is days old.
+
+## Backfill ledger
+
+Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
+go-ahead before anything shipped is touched.
+
+- [ ] **Staff references that block removing a staff member.** Found 2026-09-28 while writing
+      0012: `assessments.issued_by` and `voided_by` reference `auth.users` with no `on delete`
+      rule, so removing (via `/staff` or `staff:rm`) anyone who has issued a test most likely fails
+      with "The change could not be saved". 0012 fixed the same shape on `leads.created_by`, which
+      it started filling in, and gave every new reference `on delete set null`. Not yet confirmed
+      on production; not yet analysed or fixed.
 
 ## Decisions taken that are worth revisiting once there is data
 
