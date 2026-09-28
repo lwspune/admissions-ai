@@ -180,6 +180,12 @@ Migrations are applied deliberately, never by a deploy:
   `npx vercel --prod` had been used and no one checked. The project was created
   by importing the repo (DEPLOY.md step 3), which connects Git by definition.
   `gh api repos/<repo>/deployments` settles it in one call.
+- **A push is not a deploy.** From 09-27 Vercel blocked every production
+  deploy (`TEAM_ACCESS_REQUIRED`: commit author not a team member) while notes
+  recorded each push as shipped; production sat on 09-23 code that migration
+  0011 had broken. After every push, check the deployment's state:
+  `gh api repos/lwspune/admissions-ai/commits/<sha>/status` must say
+  "Deployment has completed", not "Deployment was blocked".
 - **A route the middleware protects is a route that never runs for a cron.**
   A scheduled request carries no session, so `/api/cron/*` had to join the
   PUBLIC list or the purge would have been redirected to `/login` forever,

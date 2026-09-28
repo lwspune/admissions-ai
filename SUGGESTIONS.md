@@ -7,6 +7,24 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **URGENT — production has not deployed since 2026-09-23, and issuing is likely broken.**
+      Found 2026-09-28. Every Git deploy since `bce06da` (09-27) and a manual `npx vercel --prod`
+      of `1fb9aef` were refused by Vercel: *"the commit author doesn't have permission to create
+      deployments for this project"* (`seatBlock.blockCode: TEAM_ACCESS_REQUIRED`, `isVerified:
+      false`). The commit author is `LWS Pune <connect.lwspune@gmail.com>` — the same author whose
+      commits deployed fine up to `6facb61` on 09-23; the Vercel login is `connectapjschool-4966`
+      on team `apj-school`. Production still serves `6facb61`, which calls the zero-argument
+      `live_pool()` that migration 0011 dropped on 09-27 — so **Issue test has most likely failed
+      in production since 09-27**, and the 0011 entry below ("issuing failed closed for the
+      interval") was wrong: the interval never ended. Production also now runs that old code on
+      the 0012 schema (telecallers see no leads). **Fix is in the Vercel dashboard, by the owner:**
+      make the commit author a recognised member — Account Settings → Authentication, connect the
+      GitHub account that owns `connect.lwspune@gmail.com` to the `connectapjschool` Vercel login
+      (or add that email to the account) — then redeploy `main` (Deployments → the blocked
+      `1fb9aef` → Redeploy, or push any commit). See
+      https://vercel.com/docs/deployments/troubleshoot-project-collaboration#team-configuration.
+      Lesson: "pushed" was recorded as "deployed" twice without checking the deployment status.
+
 - [ ] **Ship lead management: apply migration 0012, push, run the suite, walk the golden path.**
       **0012 APPLIED 2026-09-28** (dry run first: it was the only pending migration), with the
       database password pasted into chat a third time — rotation below is now urgent. Integration
