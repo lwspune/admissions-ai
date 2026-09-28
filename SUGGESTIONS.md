@@ -8,7 +8,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 ## Do before anyone real uses this
 
 - [ ] **Ship lead management: apply migration 0012, push, run the suite, walk the golden path.**
-      Built 2026-09-28, not yet applied. Order: `npx supabase db push` (0012) **then push `main`
+      **0012 APPLIED 2026-09-28** (dry run first: it was the only pending migration), with the
+      database password pasted into chat a third time — rotation below is now urgent. Integration
+      suite **92/92** afterwards, including all 24 in `leads.itest.ts`. The planned mutation of
+      `leads_guard` was not run: it would mean disabling a guard on the live database. The name
+      test is still meaningful — the import tests insert nameless leads, so NOT NULL is gone and
+      only the trigger can be refusing the removal. A read-only count of the real leads afterwards
+      was blocked, so their survival rests on the suite's cleanup being scoped to 97000010xx
+      numbers and one named source. **Still to do: push, golden path.** Built 2026-09-28. Order: `npx supabase db push` (0012) **then push `main`
       straight after** — the old code runs against the new schema (it only ever inserts named
       leads, and a telecaller's insert is auto-assigned to them), but from the moment 0012 is live
       telecallers see only leads assigned to them, and every existing lead is unassigned
