@@ -104,7 +104,7 @@ These are the things that quietly break everything if violated.
   The database reads roles from the JWT, so a demotion or removal reaches RLS
   only when that token expires (≤ 1 hour).
 - **The paper is scoped to the class being admitted to.** `leads.class_level`
-  is the class the student joins (9–12), not the one they are in;
+  is the class the student joins (8–12), not the one they are in;
   `test_items.taught_in` is the class in which the content is taught (6–11,
   6 meaning "open to everyone" and what an untagged item carries). An admit to
   class N draws `taught_in ≤ N−1`. The rule is stated once in
@@ -153,14 +153,17 @@ npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
-npm run issue -- "Name" 9876543210 <9|10|11|12>
+npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 ```
 
 Day-to-day staff management is the `/staff` page; the `staff:*` scripts are the
 break-glass path and the only way to create the first superadmin.
 
-Migrations are applied deliberately, never by a deploy:
-`npx supabase db push --db-url "postgresql://postgres:<pw>@db.<ref>.supabase.co:5432/postgres"`
+Migrations are applied deliberately, never by a deploy — dry run first, then apply:
+`npx supabase db push [--dry-run] --db-url "postgresql://postgres.<ref>:<pw>@aws-0-ap-south-1.pooler.supabase.com:5432/postgres"`
+That is the IPv4 session pooler. The direct host `db.<ref>.supabase.co` is
+IPv6-only; from this machine its lookup fails intermittently and, by address,
+the connection is refused (2026-10-01).
 
 ## Traps
 
@@ -204,6 +207,17 @@ Migrations are applied deliberately, never by a deploy:
   caller that *counts* rows, not only those that read them.
 
 ## Decisions
+
+### 2026-10
+
+- **2026-10-01 — Class 8 admits added; the rule did not change.** An admit
+  to class 8 draws content taught up to class 7: 71 of 105 items, every
+  stratum fillable. The cost is exposure in the thin cells — maths/difficult
+  has 4 items (each on ~1 paper in 4, against ~1 in 12 for class 9) and
+  science/difficult 3, which three issues to one candidate exactly exhaust.
+  More difficult maths at `taught_in` ≤ 7 is the remedy, not a different
+  rule. Scores across classes were never comparable and still are not; the
+  app sets no cut-off.
 
 ### 2026-09
 

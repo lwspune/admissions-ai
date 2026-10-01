@@ -18,7 +18,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 |---|---|
 | Funnel | Gate 2 — after the telecaller's in-call verbal screen, for high-intent leads only |
 | Issuers | Telecaller and counsellor |
-| Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (9–12) is tested on content taught up to class N−1 (added 2026-09-27) |
+| Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (8–12) is tested on content taught up to class N−1 (added 2026-09-27; class 8 added 2026-10-01) |
 | Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult |
 | Time | 15 minutes of active time. Timer pauses when the tab is hidden |
 | Window | 2 hours from creation. Hard backstop — the attempt dies with the window |
@@ -66,7 +66,7 @@ Six tables. Constraints do the enforcing, not application `if`s.
 
 **`leads`** — `id` · `name` · `contact_mobile` (the parent's number, where the link goes and the
 identity key) · `student_mobile` NULL · `city` / `school` / `board` NULL · `class_level` smallint
-CHECK ∈ 9–12, **the class being admitted to**, required to issue (migration 0011) · `consented_at` ·
+CHECK ∈ 8–12, **the class being admitted to**, required to issue (migrations 0011, 0013) · `consented_at` ·
 `created_by` · `created_at`.
 
 No unique constraint on `contact_mobile` — siblings share a parent's number. Instead the create form

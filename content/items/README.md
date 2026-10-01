@@ -20,7 +20,7 @@ reviewed batch.
 
 ## `taught_in` — the class tag
 
-Students are admitted to classes 9–12, and **an admit to class N is tested on content taught up to
+Students are admitted to classes 8–12, and **an admit to class N is tested on content taught up to
 class N−1** (`src/lib/classes.ts`, enforced by `issue_assessment`). The tag describes the content,
 not the audience: state the class in which the idea is taught, and let the rule decide who sees it.
 

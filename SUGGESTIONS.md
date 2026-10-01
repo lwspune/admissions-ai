@@ -7,6 +7,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Class 8 admits (2026-10-01): migration 0013 applied, suite 93/93; golden path unseen.**
+      Add a lead, choose "Class 8", issue, and check the report reads "Admission to class 8".
+      Authoring follow-up: maths/difficult holds only 4 items at `taught_in` ≤ 7, so each sits
+      on ~1 in 4 class 8 papers — 3–4 more difficult maths items tagged 6 or 7 would bring it
+      in line.
+
 - [x] **RESOLVED 2026-10-01 — production had not deployed since 2026-09-23.** After the user's
       change on the Vercel side, push `04f60fc` deployed (status "Deployment has completed",
       Ready, aliased to production). Not yet checked: that the cron is still registered, and
