@@ -3,8 +3,8 @@
 // exactly one place — here, and mirrored in `issue_assessment` (migration 0011).
 
 /** The classes the institute admits to. Mirrors the CHECK on leads.class_level. */
-export type ClassLevel = 9 | 10 | 11 | 12
-export const CLASSES: readonly ClassLevel[] = [9, 10, 11, 12] as const
+export type ClassLevel = 8 | 9 | 10 | 11 | 12
+export const CLASSES: readonly ClassLevel[] = [8, 9, 10, 11, 12] as const
 
 /**
  * The range an item's `taught_in` may take. Mirrors the CHECK on
@@ -22,7 +22,7 @@ export const TAUGHT_IN_MAX = 11
 
 /**
  * Reads a class off a form field or a database row. Anything that is not one
- * of the four admitted classes is null: "9th" and "IX" are what the old free
+ * of the five admitted classes is null: "9th" and "IX" are what the old free
  * text column held, and a filter cannot act on a guess.
  */
 export function parseClassLevel(raw: unknown): ClassLevel | null {

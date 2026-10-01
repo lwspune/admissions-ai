@@ -159,7 +159,7 @@ describe('issueAssessment — class scoping', () => {
   afterAll(removeSeniorItem)
 
   it('live_pool shows a class 11 item to a class 12 admit and to nobody younger', async () => {
-    for (const classLevel of [9, 10, 11]) {
+    for (const classLevel of [8, 9, 10, 11]) {
       const { data } = await db.rpc('live_pool', { p_class: classLevel })
       expect((data ?? []).map((r: { id: string }) => r.id)).not.toContain(seniorItemId)
     }
@@ -177,6 +177,19 @@ describe('issueAssessment — class scoping', () => {
     expect(items).toHaveLength(15)
     for (const row of items!) {
       expect((row.test_items as never as { taught_in: number }).taught_in).toBeLessThanOrEqual(8)
+    }
+  })
+
+  it('issues a class 8 admit a paper of content taught up to class 7', async () => {
+    const lead8 = await freshLead(8)
+    const { assessment } = await issueAssessment(db, { leadId: lead8 })
+    const { data: items } = await db
+      .from('assessment_items')
+      .select('item_id, test_items(taught_in)')
+      .eq('assessment_id', assessment.id)
+    expect(items).toHaveLength(15)
+    for (const row of items!) {
+      expect((row.test_items as never as { taught_in: number }).taught_in).toBeLessThanOrEqual(7)
     }
   })
 

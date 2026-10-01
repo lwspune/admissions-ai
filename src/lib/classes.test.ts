@@ -9,10 +9,11 @@ import {
 } from './classes'
 
 // The lead form used to store class as free text ("9", "9th", "IX"), which no
-// filter can act on. The only values that mean anything are the four classes
+// filter can act on. The only values that mean anything are the five classes
 // the institute admits to; everything else is refused rather than guessed.
 describe('parseClassLevel', () => {
-  it('accepts the four admitted classes as numbers or strings', () => {
+  it('accepts the five admitted classes as numbers or strings', () => {
+    expect(parseClassLevel(8)).toBe(8)
     expect(parseClassLevel(9)).toBe(9)
     expect(parseClassLevel('10')).toBe(10)
     expect(parseClassLevel(' 11 ')).toBe(11)
@@ -20,7 +21,7 @@ describe('parseClassLevel', () => {
   })
 
   it('refuses classes outside the admitted range', () => {
-    expect(parseClassLevel(8)).toBeNull()
+    expect(parseClassLevel(7)).toBeNull()
     expect(parseClassLevel('13')).toBeNull()
   })
 
@@ -38,6 +39,7 @@ describe('parseClassLevel', () => {
 // in nobody's class yet. The paper is drawn from content taught up to N−1.
 describe('contentCeiling', () => {
   it('is one class below the class being admitted to', () => {
+    expect(contentCeiling(8)).toBe(7)
     expect(contentCeiling(9)).toBe(8)
     expect(contentCeiling(10)).toBe(9)
     expect(contentCeiling(11)).toBe(10)
@@ -54,12 +56,14 @@ describe('contentCeiling', () => {
 
 describe('isDrawableFor', () => {
   it('allows an item taught at or below the ceiling', () => {
+    expect(isDrawableFor(7, 8)).toBe(true)
     expect(isDrawableFor(6, 9)).toBe(true)
     expect(isDrawableFor(8, 9)).toBe(true)
     expect(isDrawableFor(11, 12)).toBe(true)
   })
 
   it('refuses an item taught in the class being admitted to or above', () => {
+    expect(isDrawableFor(8, 8)).toBe(false)
     expect(isDrawableFor(9, 9)).toBe(false)
     expect(isDrawableFor(11, 11)).toBe(false)
     expect(isDrawableFor(10, 9)).toBe(false)

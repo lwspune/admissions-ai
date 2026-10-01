@@ -183,7 +183,7 @@ describe('coverageByClass', () => {
   it('reports every class × subject × difficulty, classes outermost', () => {
     const cells = coverageByClass([])
     expect(cells).toHaveLength(CLASSES.length * SUBJECTS.length * DIFFICULTIES.length)
-    expect(cells.slice(0, 9).every((c) => c.classLevel === 9)).toBe(true)
+    expect(cells.slice(0, 9).every((c) => c.classLevel === CLASSES[0])).toBe(true)
     expect(cells.map((c) => c.classLevel)).toEqual([...cells.map((c) => c.classLevel)].sort((a, b) => a - b))
   })
 

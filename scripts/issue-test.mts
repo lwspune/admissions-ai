@@ -2,7 +2,7 @@
 //
 //   npm run issue -- "Candidate Name" 9876543210 11
 //
-// The third argument is the class the candidate is being admitted to (9-12).
+// The third argument is the class the candidate is being admitted to (8-12).
 // It decides the pool: an admit to class N draws content taught up to N-1.
 //
 // The throwaway version of what the staff console will do. It exists so the
@@ -38,7 +38,7 @@ async function main(): Promise<number> {
   const [name, mobile, rawClass] = process.argv.slice(2)
   const classLevel = parseClassLevel(rawClass)
   if (!name || !mobile || classLevel === null) {
-    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210 <9|10|11|12>\n')
+    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210 <8|9|10|11|12>\n')
     return 1
   }
 
