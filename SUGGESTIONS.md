@@ -17,7 +17,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       `live_pool()` that migration 0011 dropped on 09-27 — so **Issue test has most likely failed
       in production since 09-27**, and the 0011 entry below ("issuing failed closed for the
       interval") was wrong: the interval never ended. Production also now runs that old code on
-      the 0012 schema (telecallers see no leads). **Fix is in the Vercel dashboard, by the owner:**
+      the 0012 schema (telecallers see no leads). **Diagnosed 2026-10-01 from the deployment
+      records:** the blocked deploy's `seatBlock` resolves GitHub `lwspune` (id 265271616) to
+      Vercel user `PJQRidKLNEY9QU7rsfcbj8Xr`, not this account (`v22v1W7akoc61Ufax2uCIi7d`,
+      connect.apjschool@gmail.com, Hobby team created 2026-09-22), whose Authentication page now
+      shows GitHub unconnected. Why the link moved is not established — the user runs several
+      Vercel accounts from one GitHub without trouble. **Fix is in the Vercel dashboard, by the owner:**
       make the commit author a recognised member — Account Settings → Authentication, connect the
       GitHub account that owns `connect.lwspune@gmail.com` to the `connectapjschool` Vercel login
       (or add that email to the account) — then redeploy `main` (Deployments → the blocked
