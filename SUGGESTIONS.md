@@ -7,7 +7,11 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **URGENT — production has not deployed since 2026-09-23, and issuing is likely broken.**
+- [x] **RESOLVED 2026-10-01 — production had not deployed since 2026-09-23.** After the user's
+      change on the Vercel side, push `04f60fc` deployed (status "Deployment has completed",
+      Ready, aliased to production). Not yet checked: that the cron is still registered, and
+      issuing a test end to end (the golden path below).
+      Original entry:
       Found 2026-09-28. Every Git deploy since `bce06da` (09-27) and a manual `npx vercel --prod`
       of `1fb9aef` were refused by Vercel: *"the commit author doesn't have permission to create
       deployments for this project"* (`seatBlock.blockCode: TEAM_ACCESS_REQUIRED`, `isVerified:
