@@ -18,8 +18,9 @@ Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
 
 **Git integration is connected: a push to `main` deploys to production.** Other
 branches get a preview deployment, which Vercel's own login protects, so a
-preview is not a second open copy of the system. `npx vercel --prod` still
-works as a manual path. Migrations are never part of a deploy (see below), so a
+preview is not a second open copy of the system. `npx vercel --prod` is the
+manual path. Both stop dead if Vercel cannot match the commit author to this
+account — see "A push is not a deploy" under Traps. Migrations are never part of a deploy (see below), so a
 push ships code against whatever schema is already live — **and the reverse
 bites too**: applying a migration while its code sits on a branch leaves
 production running against a schema it does not know about. Ship them close

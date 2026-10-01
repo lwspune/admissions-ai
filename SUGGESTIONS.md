@@ -40,29 +40,17 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       https://vercel.com/docs/deployments/troubleshoot-project-collaboration#team-configuration.
       Lesson: "pushed" was recorded as "deployed" twice without checking the deployment status.
 
-- [ ] **Ship lead management: apply migration 0012, push, run the suite, walk the golden path.**
-      **0012 APPLIED 2026-09-28** (dry run first: it was the only pending migration), with the
-      database password pasted into chat a third time — rotation below is now urgent. Integration
-      suite **92/92** afterwards, including all 24 in `leads.itest.ts`. The planned mutation of
-      `leads_guard` was not run: it would mean disabling a guard on the live database. The name
-      test is still meaningful — the import tests insert nameless leads, so NOT NULL is gone and
-      only the trigger can be refusing the removal. A read-only count of the real leads afterwards
-      was blocked, so their survival rests on the suite's cleanup being scoped to 97000010xx
-      numbers and one named source. **Still to do: push, golden path.** Built 2026-09-28. Order: `npx supabase db push` (0012) **then push `main`
-      straight after** — the old code runs against the new schema (it only ever inserts named
-      leads, and a telecaller's insert is auto-assigned to them), but from the moment 0012 is live
-      telecallers see only leads assigned to them, and every existing lead is unassigned
-      (`created_by` was never filled in, so there is nobody to backfill to). A counsellor assigns
-      them on `/leads`. Then `npm run test:integration` — `leads.itest.ts` (24 tests) failed
-      21/24 before the migration for the right reason (missing columns and tables). After it goes
-      green, break `leads_guard`'s name rule on purpose and watch "lets a name be corrected but not
-      removed" go red: before 0012 that test passed only because `name` was NOT NULL. **Golden
-      path, by the user** (needs real counsellor + telecaller sessions on production): export the
-      WhatsApp Consolidated sheet as CSV → `/leads/import` as a counsellor, new source → preview
-      (the sheet has 597 rows; rows with no number, like the first "S. Shingre", should be listed
-      as skipped) → import → filter
-      Source + Unassigned → select 5, assign to a telecaller → sign in as that telecaller: exactly
-      those 5 → open one, set CNR, add a comment → add name and class, issue a test.
+- [ ] **Lead management: shipped, golden path unseen.** Migration 0012 applied 2026-09-28
+      (suite 92/92, now 93/93); code live 2026-10-01 (`04f60fc`, after the Vercel block below).
+      The planned break-the-guard test of `leads_guard`'s name rule was not run on the live
+      database; the suite still exercises it, since nameless leads now insert and only the trigger
+      can refuse removing a name. **Left for the user** (needs counsellor + telecaller logins):
+      export the WhatsApp Consolidated sheet as CSV → `/leads/import` as a counsellor, new source →
+      preview (597 rows; rows with no number, like the first "S. Shingre", listed as skipped) →
+      import → filter Source + Unassigned → assign 5 to a telecaller → as that telecaller, exactly
+      those 5 → set CNR, comment, add name and class, issue. **Also:** every lead older than 0012
+      is unassigned (`created_by` was never filled in), so telecallers see none of them until a
+      counsellor assigns them.
 - [ ] **Decide whether leads that never took a test are ever purged.** The user's call
       2026-09-28: keep the data, decide later. Nothing is purged yet in practice — the purge counts
       12 months from `leads.created_at`, which for an imported lead is the import date (the
@@ -72,8 +60,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       12 months" covers test data; leads from other sources were consented at source.
 
 - [x] ~~**Apply migration 0011 (class-scoped papers), then deploy, then verify.**~~ **DONE
-      2026-09-27**, in the wrong order and it did not matter: the code was pushed first (issuing
-      failed closed for the interval), then the migration went in with the database password
+      2026-09-27** — but **corrected 2026-10-01: the code did not reach production until
+      2026-10-01.** The push was blocked by Vercel (see the RESOLVED entry above), so production ran
+      09-23 code against this schema and issuing failed for four days. What follows was true of
+      the database: the migration went in the migration went in with the database password
       pasted into chat — see the rotation item below — after the user added a Bash allow rule
       for `npx supabase db push` in `.claude/settings.local.json` (gitignored). Then
       `items:seed` wrote the tags (database now 47/24/17/14/3 by `taught_in`, matching the
@@ -85,9 +75,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       production because real leads exist) and the golden path in a browser — Add candidate now
       requires "Admission to class"; save a class 9 candidate, issue, open the link, and check
       the card and report read "Admission to class 9".
-- [ ] **Rotate the database password now, not later.** It was pasted into this chat on
-      2026-09-27 (as it was on 2026-09-22), and this time it was used from the transcript to
-      apply a migration. Supabase → Settings → Database → reset. Nothing on this machine stores
+- [ ] **Rotate the database password now, not later.** Pasted into chat on 2026-09-22,
+      2026-09-27 and 2026-09-28, and used from the transcript for migrations 0011, 0012 and 0013
+      (the last on 2026-10-01). Supabase → Settings → Database → reset. Nothing on this machine stores
       it, so no local file needs updating afterwards.
 - [ ] **Review the class tags, then seed them.** Tagged 2026-09-27 against the NCERT sequence,
       checked against the Maharashtra board where they differ; each batch `.md` now ends with a
@@ -157,7 +147,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       capped at 5000 rows / 900 KB: one file is one transaction and must finish inside the
       statement timeout. A comment's author name is captured when it is written, so a rename does
       not rewrite old comments.
-- [ ] **`db:verify` and `db:verify-rls` cannot see migration 0012.** Both refuse to run on a
+- [ ] **Find out which Vercel account holds the GitHub `lwspune` login link.** From 09-27 to
+      10-01 Vercel resolved commit author `lwspune` to another Vercel user (`PJQRidKL…`) and
+      blocked every deploy here; it cleared after the user changed something on the Vercel side,
+      and the cause was never established. The user runs several Vercel accounts from one
+      GitHub. Knowing which account holds the login link — Settings → Authentication in each — is
+      what stops the next connect silently re-blocking this project. Until then, check every push:
+      `gh api repos/lwspune/admissions-ai/commits/<sha>/status` must say "Deployment has completed".
+- [ ] **`db:verify` and `db:verify-rls` cannot see migrations 0012 or 0013.** Both refuse to run on a
       database holding real leads, which production now does, so the lead rules are proven only by
       `leads.itest.ts`. This is the gap option (b) in "Give Claude a way to browser-verify" would
       close.
