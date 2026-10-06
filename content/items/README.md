@@ -24,11 +24,15 @@ Students are admitted to classes 8–12, and **an admit to class N is tested on 
 class N−1** (`src/lib/classes.ts`, enforced by `issue_assessment`). The tag describes the content,
 not the audience: state the class in which the idea is taught, and let the rule decide who sees it.
 
-- **6 is the floor** and means "open to every admit". Number series, ratio, percentage, averages,
-  analogies, odd-one-out, everyday physical reasoning all belong here. It is also what an item
-  carries before anyone has tagged it, so an untagged batch changes nothing.
-- **Raise it only when the content genuinely first appears in that class.** Probability, sets,
-  acids and bases, electric power, reflection are class 10; a class 9 admit has not met them.
+- **6 is the floor** and means "open to every admit". Number series, primes and factors,
+  fractions, analogies, odd-one-out and everyday physical reasoning belong here. It is also what an
+  item carries before anyone has tagged it, so an untagged batch changes nothing.
+- **"Taught" means taught in the NCERT book this year's admits used.** NCERT's new books reached
+  classes 6–8 by 2025–26 and class 9 in 2026–27, and they moved topics later. Percentages, profit
+  and loss, interest, ratio, averages, food chains and floating are class 8 (*Ganita Prakash 8*,
+  *Curiosity 8*); probability is class 9 (*Ganita Manjari*). Where the old and new books disagree,
+  take the later class: it is the fair direction. `content/parent-pack/syllabus.json` maps each
+  skill to its chapters in both editions; check a new skill there.
 - **11 is the ceiling.** Class 12 content can never be fair to anyone this test is issued to.
 
 Coverage is per class. After changing tags run `npm run items:lint`: it refuses a bank that cannot

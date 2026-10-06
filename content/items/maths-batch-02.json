@@ -33,7 +33,7 @@
     "subject": "maths",
     "skill": "profit-and-loss",
     "difficulty": "easy",
-    "taught_in": 7,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "A shopkeeper buys a chair for ₹1,200 and sells it for ₹1,500. What is the profit percentage?",
     "options": {
@@ -79,7 +79,7 @@
     "subject": "maths",
     "skill": "simple-interest",
     "difficulty": "easy",
-    "taught_in": 7,
+    "taught_in": 8,
     "format": "numeric",
     "stem": "What is the simple interest on ₹5,000 at 8% per annum for 3 years, in rupees?",
     "numeric_answer": 1200,
@@ -159,7 +159,7 @@
     "subject": "maths",
     "skill": "probability",
     "difficulty": "moderate",
-    "taught_in": 8,
+    "taught_in": 9,
     "format": "mcq",
     "stem": "A bag contains 4 red balls and 6 blue balls. One ball is drawn at random. What is the probability that it is red?",
     "options": {

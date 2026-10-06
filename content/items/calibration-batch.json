@@ -21,7 +21,7 @@
     "subject": "maths",
     "skill": "percentage",
     "difficulty": "easy",
-    "taught_in": 7,
+    "taught_in": 8,
     "format": "numeric",
     "stem": "In a class of 40 students, 25% did not appear for a test. How many students appeared for the test?",
     "numeric_answer": 30,
@@ -33,7 +33,7 @@
     "subject": "maths",
     "skill": "ratio-proportion",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 8,
     "format": "mcq",
     "stem": "Three friends share ₹1,200 in the ratio 2 : 3 : 7. How much does the friend with the largest share receive?",
     "options": {
