@@ -7,6 +7,16 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **30-question paper (2026-10-06): Phase 1 built on `feat/thirty-question-paper`.**
+      Migration 0014, the draw, the test screens and both reports handle 15 or 30 questions;
+      every class stays on 15 until its syllabus batch is live, so shipping it changes nothing a
+      candidate sees except the label contrast. Still to do: apply 0014 (dry run first) and run
+      the integration suite against it; see a 30-question paper in the browser with fixture
+      items; merge. **Phase 2**: syllabus batches (`part: "syllabus"`, `term`), class 9 → 10 → 11
+      → 7 → 8, about 15 per class per subject, each signed off; plus about 15 English basics
+      (a 10-question English part reuses the 23 items too often). **Phase 3**: the parent pack
+      at 30 questions. Its `topicClass` treats every bank item as basics, so a syllabus skill
+      would read as drawable for every later class; it must learn the part first.
 - [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
       75 new questions; every calculable key re-derived in code, the lint clean, each paper
       checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,

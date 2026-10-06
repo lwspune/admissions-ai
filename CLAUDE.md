@@ -38,9 +38,11 @@ Next.js App Router + TypeScript + Supabase. Three layers, deliberately separated
 
 **`src/lib/` — pure.** Plain data in, plain data out, no IO. This is where the
 logic worth testing lives, which is why it tests without a database.
-`grade` · `timer` (active-time accounting) · `assemble` (the 3/1/1 draw) ·
-`serialize` (**the security boundary**) · `report` · `items` (seed-status rules,
-per-class coverage) · `classes` (the N−1 content rule) ·
+`grade` · `timer` (active-time accounting) · `assemble` (the draw, and the
+15-or-30 choice) · `serialize` (**the security boundary**) · `report` · `items`
+(seed-status rules, per-class coverage and 30-question readiness) · `classes`
+(the N−1 content rule and the syllabus rule) · `syllabus` and `samplePaper`
+(the parent pack) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
@@ -95,8 +97,21 @@ These are the things that quietly break everything if violated.
 - **Answer keys are superadmin-only.** Non-superadmin staff read `test_items`
   only for items that have appeared on a paper (migration 0008), so the review
   queue is invisible to them. The paper draw goes through `live_pool()`, which
-  returns `id, subject, difficulty` and no answer — never `select` the table
-  for a draw, or a newly promoted item becomes undrawable.
+  returns `id, subject, difficulty, part` and no answer — never `select` the
+  table for a draw, or a newly promoted item becomes undrawable.
+- **A paper carries its own size and time.** `assessments.question_count`,
+  `limit_minutes` and `class_level` are set by `issue_assessment` (migration
+  0014) and read by the timer, the test screens and the report. There is no
+  global question count or time limit any more; `limitMsFor` turns a paper's
+  minutes into the limit, and the timer functions require it. A 15-question
+  attempt from before 0014 keeps its 15 minutes.
+- **Two parts, one rule each.** Basics: `taught_in ≤ N−1`, the existing rule.
+  Syllabus (maths and science only): `taught_in = N−1` *and* `term = 1`,
+  because a candidate tested in October has not been taught class N−1's second
+  term. Both are in `src/lib/classes.ts` and in `live_pool()`. A class gets 30
+  questions only when its live pool fills every quota of `SHAPE_30`
+  (`choosePaperShape`), otherwise 15; `issue_assessment` checks the paper's
+  subject-and-part make-up for either shape.
 - **Telecallers never see question text.** `loadPaper` blanks both the stem
   and the options for that role — options alone identify an item, and
   `correctDisplay` renders "C. <option text>". This is the one access rule that
@@ -221,6 +236,17 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-06 — The paper grows to 30 questions, half of maths and science
+  from the class N−1 syllabus.** The user's call, after the parent pack: 10
+  English, 10 maths, 10 science in 30 minutes. English is all basics (6/2/2);
+  maths and science are 5 basics (3/1/1) and 5 syllabus (3/1/1), the syllabus
+  part from exactly class N−1's first-term NCERT chapters (*Ganita Prakash*
+  Part 1 is literally the first term); class 11 science is physics and
+  chemistry. All 30 are interleaved, each labelled "Basics" or "Class N−1"; the
+  user preferred that to two titled parts. A class keeps the 15-question paper
+  until its syllabus batch is signed off and live, so nothing broke while the
+  questions are written; the reports split each subject's score by part only
+  on a paper that has both. The v1 spec said 15; it now says either.
 - **2026-10-06 — "Taught in" means the NCERT book this year's admits used,
   and nine items were retagged for it.** Mapping the syllabus to chapters found
   NCERT's new books (classes 6–8 by 2025–26, 9 in 2026–27) teach percentages,

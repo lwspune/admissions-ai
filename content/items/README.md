@@ -14,6 +14,8 @@ reviewed batch.
 | `skill` | kebab-case | What the item exercises; free text, shown on `/items` |
 | `difficulty` | `easy` · `moderate` · `difficult` | A target p-value (spec §9), 3/1/1 per subject per paper |
 | `taught_in` | integer 6–11 | **The class in which the content is taught.** See below |
+| `part` | `basics` (default) · `syllabus` | Basics is the reasoning bank, drawn for every class with `taught_in ≤ N−1`. Syllabus is maths or science content from one class's NCERT chapters, drawn only for an admit to the class above, and only if `term` is 1 |
+| `term` | `1` · `2` | Syllabus items only: the term of class `taught_in` in which the chapter is taught. Only term 1 is drawn, because candidates are tested before the year ends. Class 11 syllabus science is physics or chemistry |
 | `format` | `mcq` · `numeric` | An MCQ has `options` A–D and `answer_key`; a numeric item has `numeric_answer` and optional `numeric_tolerance` |
 | `stem` | ≤ 40 words | The question |
 | `rationale` | ≥ 60 chars | Why the key is right and what each distractor catches. The sign-off reads this |

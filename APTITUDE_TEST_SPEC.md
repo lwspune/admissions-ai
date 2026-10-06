@@ -19,8 +19,8 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 | Funnel | Gate 2 — after the telecaller's in-call verbal screen, for high-intent leads only |
 | Issuers | Telecaller and counsellor |
 | Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (8–12) is tested on content taught up to class N−1 (added 2026-09-27; class 8 added 2026-10-01) |
-| Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult |
-| Time | 15 minutes of active time. Timer pauses when the tab is hidden |
+| Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult. **From 2026-10-06, 30 questions once a class's syllabus batch is live:** 10 each; English all basics (6/2/2); maths and science 5 basics (3/1/1) + 5 from class N−1's first-term NCERT syllabus (3/1/1). All interleaved, each labelled Basics or Class N−1 |
+| Time | 15 minutes of active time (30 for the 30-question paper; each paper records its own). Timer pauses when the tab is hidden |
 | Window | 2 hours from creation. Hard backstop — the attempt dies with the window |
 | Delivery | Staff copy the link, paste into WhatsApp. **Sent to the parent's number.** No messaging API |
 | Identity | Candidate enters the number the link was sent to, then a handover screen names who should answer |
