@@ -153,3 +153,35 @@ export function coverageByClass<T extends { subject: Subject; difficulty: Diffic
   }
   return cells
 }
+
+/** A subject whose answer keys lean on one letter. */
+export interface KeySkew {
+  subject: Subject
+  letter: string
+  count: number
+  total: number
+}
+
+const SKEW_MAX_SHARE = 0.4
+const SKEW_MIN_ITEMS = 8
+
+/**
+ * Options are served in the order they were authored, so the key's letter is
+ * what the candidate sees. On 2026-10-06 73% of keys were A, and answering A to
+ * everything scored about 9 of 15. Judged per subject, since a paper is five of
+ * each and one lopsided subject is enough to leak.
+ */
+export function keySkew<T extends { subject: Subject; format: string; answer_key: string | null }>(
+  items: readonly T[],
+): KeySkew[] {
+  const skew: KeySkew[] = []
+  for (const subject of SUBJECTS) {
+    const keys = items.filter((i) => i.subject === subject && i.format === 'mcq' && i.answer_key).map((i) => i.answer_key as string)
+    if (keys.length < SKEW_MIN_ITEMS) continue
+    for (const letter of ['A', 'B', 'C', 'D']) {
+      const count = keys.filter((k) => k === letter).length
+      if (count / keys.length > SKEW_MAX_SHARE) skew.push({ subject, letter, count, total: keys.length })
+    }
+  }
+  return skew
+}

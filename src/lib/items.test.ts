@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { resolveSeedStatus, groupBank, type ItemStatus } from './items'
+import { resolveSeedStatus, groupBank, keySkew, type ItemStatus } from './items'
 import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from './types'
 
 const row = (ref: string | null, subject: Subject, difficulty: Difficulty) =>
@@ -232,5 +232,32 @@ describe('coverageByClass', () => {
     const cells = coverageByClass(bank(6, 9))
     expect(cells.filter((c) => c.classLevel === 9).every((c) => c.status === 'short')).toBe(true)
     expect(cells.filter((c) => c.classLevel === 10).every((c) => c.status === 'ok')).toBe(true)
+  })
+})
+
+// 2026-10-06: 73% of keys were A (science 27 of 28), so answering A to every
+// question scored about 9 of 15. Options are served in authored order, so the
+// key position is what the candidate sees.
+describe('keySkew', () => {
+  const mcq = (subject: Subject, answer_key: string) => ({ subject, format: 'mcq', answer_key })
+  const keys = (subject: Subject, letters: string) => [...letters].map((k) => mcq(subject, k))
+
+  it('passes a subject whose keys are spread', () => {
+    expect(keySkew(keys('science', 'ABCDABCDAB'))).toEqual([])
+  })
+
+  it('flags a subject where one letter holds more than 40% of the keys', () => {
+    const skew = keySkew(keys('science', 'AAAAABCDAB'))
+    expect(skew).toEqual([{ subject: 'science', letter: 'A', count: 6, total: 10 }])
+  })
+
+  it('judges each subject on its own keys', () => {
+    const skew = keySkew([...keys('maths', 'ABCDABCD'), ...keys('english', 'BBBBBBAC')])
+    expect(skew.map((s) => s.subject)).toEqual(['english'])
+  })
+
+  it('ignores numeric items and subjects too small to judge', () => {
+    const numeric = Array.from({ length: 20 }, () => ({ subject: 'maths' as Subject, format: 'numeric', answer_key: null }))
+    expect(keySkew([...numeric, ...keys('maths', 'AAAA')])).toEqual([])
   })
 })

@@ -11,7 +11,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { parseOptionValue, coverageByClass } from '../src/lib/items'
+import { parseOptionValue, coverageByClass, keySkew } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
 import type { Subject, Difficulty } from '../src/lib/types'
 
@@ -186,6 +186,21 @@ export function lintItems(): number {
       console.log(`  ok     ${label}: ${cell.count}`)
     }
   }
+
+  // Options are served in authored order, so a key that is usually A is a key
+  // a candidate can guess without reading. Rebalance with a swap of two
+  // options, not a rewrite of the item.
+  console.log('\nAnswer keys are spread across A-D')
+  const skewed = keySkew(
+    items
+      .filter((i) => SUBJECTS.includes(i.subject ?? ''))
+      .map((i) => ({ subject: i.subject as Subject, format: String(i.format), answer_key: i.answer_key ?? null })),
+  )
+  for (const s of skewed) {
+    errors++
+    console.log(`  ERROR  ${s.subject}: ${s.count} of ${s.total} keys are ${s.letter}`)
+  }
+  if (skewed.length === 0) console.log('  ok     no letter holds more than 40% of any subject')
 
   console.log(`\n${items.length} items · ${errors} error(s) · ${warnings} warning(s)\n`)
   return errors === 0 ? 0 : 1
