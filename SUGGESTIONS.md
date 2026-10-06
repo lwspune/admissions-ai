@@ -254,6 +254,15 @@ go-ahead before anything shipped is touched.
       with "The change could not be saved". 0012 fixed the same shape on `leads.created_by`, which
       it started filling in, and gave every new reference `on delete set null`. Not yet confirmed
       on production; not yet analysed or fixed.
+- [x] **Answer keys were piled on A. FIXED 2026-10-06.** Measured over the 83 MCQ items: A 73%,
+      B 13%, C 11%, D 2% (science 27 of 28 on A). Options are served in authored order
+      (`assemble.ts` shuffles items, not options), so answering A to everything scored 9–10 of
+      15 on average. 43 items had their key swapped with one distractor (explanation letters
+      swapped to match); 18 stayed put — "None of the above"-style options and numbers listed in
+      order. Now A 28 / B 25 / C 24 / D 23%. All 5 production attempts had their stored answers
+      and `answer_set` event letters remapped to the same option text; each regraded to its
+      stored score before and after. `items:lint` now fails when one letter holds over 40% of a
+      subject (`keySkew`). The batch `.md` review sheets carry the old letters, with a note.
 
 ## Decisions taken that are worth revisiting once there is data
 

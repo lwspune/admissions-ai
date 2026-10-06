@@ -217,6 +217,16 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-06 — Answer keys are balanced across A–D, at authoring time.**
+  Options are served in the order they were written, and 73% of keys were A
+  (science 27 of 28), so answering A to everything scored about 9 of 15. 43
+  items had the key swapped with one distractor, explanation letters swapped
+  to match; "None of the above"-style options and numbers listed in order
+  stayed put. Shuffling options per paper was not chosen: a stored answer is a
+  letter, so a per-paper order would have to be frozen with the paper. The five
+  production attempts were remapped to the same option text and regraded to
+  their stored scores. `items:lint` now refuses a subject with over 40% of its
+  keys on one letter (`keySkew`).
 - **2026-10-06 — Parents may be sent the score, never the questions.**
   Students asked for a report. The sheet (`/reports/[leadId]/summary`, saved
   as PDF from the browser and sent on WhatsApp) shows the score, per-subject
