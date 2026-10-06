@@ -780,6 +780,276 @@
   "rationale": "Both are at 100 °C, but steam releases a large amount of extra heat (latent heat) when it turns back into water on the skin."
  },
  {
+  "paper": 10,
+  "ref": "P10-E6",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "After the heavy rain, the hill path became treacherous. As used here, \"treacherous\" most nearly means",
+  "options": {
+   "A": "dangerous",
+   "B": "narrow",
+   "C": "muddy",
+   "D": "steep"
+  },
+  "answer_key": "A",
+  "rationale": "Treacherous means full of hidden danger. The rain may well have made the path muddy, but that is a cause, not the meaning of the word."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E7",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: The train arrived ___ the station on time.",
+  "options": {
+   "A": "in",
+   "B": "on",
+   "C": "at",
+   "D": "to"
+  },
+  "answer_key": "C",
+  "rationale": "We arrive \"at\" a place such as a station, and \"in\" a city or country. \"Arrived to\" is a common slip, but it is not standard English."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E8",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Author is to book as composer is to ___",
+  "options": {
+   "A": "orchestra",
+   "B": "piano",
+   "C": "stage",
+   "D": "music"
+  },
+  "answer_key": "D",
+  "rationale": "An author creates a book; a composer creates music. An orchestra and a piano perform it, and a stage is where it is performed."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E9",
+  "subject": "english",
+  "skill": "letter-series",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What comes next in the series? B, E, H, K, ___",
+  "options": {
+   "A": "M",
+   "B": "N",
+   "C": "O",
+   "D": "L"
+  },
+  "answer_key": "B",
+  "rationale": "Each letter is three places after the one before: B (+3) E (+3) H (+3) K (+3) N. M and L come from counting two or one place instead of three."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E10",
+  "subject": "english",
+  "skill": "syllogism",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "No soldier is careless. Some cadets are careless. Which statement must be true?",
+  "options": {
+   "A": "No cadet is a soldier",
+   "B": "Some cadets are not soldiers",
+   "C": "All soldiers are cadets",
+   "D": "Some soldiers are careless"
+  },
+  "answer_key": "B",
+  "rationale": "The careless cadets cannot be soldiers, so at least some cadets are not soldiers. Nothing rules out other cadets being soldiers, so \"no cadet is a soldier\" goes too far."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-MS1",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "coordinate-quadrants",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "On which axis does the point (0, −4) lie?",
+  "options": {
+   "A": "the x-axis",
+   "B": "the y-axis",
+   "C": "neither axis",
+   "D": "both axes"
+  },
+  "answer_key": "B",
+  "rationale": "Its x-coordinate is 0, so the point is on the y-axis, 4 units below the origin. Points on the x-axis have y-coordinate 0 instead."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-MS2",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "value-of-polynomial",
+  "difficulty": "easy",
+  "format": "numeric",
+  "stem": "If p(x) = 4x + 7, what is the value of p(3)?",
+  "numeric_answer": 19,
+  "numeric_tolerance": 0,
+  "rationale": "Put x = 3 into the polynomial: 4 × 3 + 7 = 12 + 7 = 19. This is a type-in question: the answer is typed as a number."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-MS3",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "algebraic-identities",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "What do you get when you expand (a − 3)(a + 3)?",
+  "options": {
+   "A": "a² − 9",
+   "B": "a² + 9",
+   "C": "a² − 6a − 9",
+   "D": "a² − 3"
+  },
+  "answer_key": "A",
+  "rationale": "The identity (x − y)(x + y) = x² − y² gives a² − 3² = a² − 9. The middle terms −3a and +3a cancel, so there is no a-term."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-MS4",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "coordinate-distance",
+  "difficulty": "moderate",
+  "format": "numeric",
+  "stem": "How far is the point (6, 8) from the origin?",
+  "numeric_answer": 10,
+  "numeric_tolerance": 0,
+  "rationale": "The distance from the origin is √(6² + 8²) = √(36 + 64) = √100 = 10. This is a type-in question: the answer is typed as a number."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-MS5",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "angles-in-a-circle",
+  "difficulty": "difficult",
+  "format": "mcq",
+  "stem": "AB is a diameter of a circle and C is a point on the circle. If ∠CAB = 35°, what is ∠CBA?",
+  "options": {
+   "A": "35°",
+   "B": "45°",
+   "C": "55°",
+   "D": "90°"
+  },
+  "answer_key": "C",
+  "rationale": "The angle in a semicircle is 90°, so ∠ACB = 90°. The angles of triangle ABC add to 180°, so ∠CBA = 180° − 90° − 35° = 55°."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-SS1",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "average-speed",
+  "difficulty": "easy",
+  "format": "numeric",
+  "stem": "A train covers 150 km in 2.5 hours. What is its average speed, in km/h?",
+  "numeric_answer": 60,
+  "numeric_tolerance": 0,
+  "rationale": "Average speed is total distance divided by total time: 150 km ÷ 2.5 h = 60 km/h. This is a type-in question: the answer is typed as a number."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-SS2",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "cell-organelles",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "Which part of a plant cell contains chlorophyll and makes food?",
+  "options": {
+   "A": "Nucleus",
+   "B": "Chloroplast",
+   "C": "Vacuole",
+   "D": "Cell wall"
+  },
+  "answer_key": "B",
+  "rationale": "Chloroplasts hold the green pigment chlorophyll and carry out photosynthesis. The nucleus controls the cell, the vacuole stores, the cell wall supports."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-SS3",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "separating-mixtures",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "Which method recovers the salt from salt water?",
+  "options": {
+   "A": "Filtration",
+   "B": "Decantation",
+   "C": "Evaporation",
+   "D": "Chromatography"
+  },
+  "answer_key": "C",
+  "rationale": "Salt is dissolved, so it passes through filter paper and cannot be poured off. Evaporating the water leaves the salt behind."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-SS4",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "newtons-second-law",
+  "difficulty": "moderate",
+  "format": "mcq",
+  "stem": "A net force of 12 N acts on a 4 kg trolley. What is its acceleration?",
+  "options": {
+   "A": "0.33 m/s²",
+   "B": "3 m/s²",
+   "C": "16 m/s²",
+   "D": "48 m/s²"
+  },
+  "answer_key": "B",
+  "rationale": "From F = ma, a = F ÷ m = 12 N ÷ 4 kg = 3 m/s². 48 multiplies instead of dividing, and 0.33 divides the wrong way round."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-SS5",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 9,
+  "skill": "kinematic-equations",
+  "difficulty": "difficult",
+  "format": "numeric",
+  "stem": "A cyclist moving at 4 m/s speeds up uniformly at 0.5 m/s² for 6 seconds. What is the final velocity, in m/s?",
+  "numeric_answer": 7,
+  "numeric_tolerance": 0,
+  "rationale": "Using v = u + at: v = 4 + 0.5 × 6 = 4 + 3 = 7 m/s. This is a type-in question: the answer is typed as a number."
+ },
+ {
   "paper": 11,
   "ref": "P11-M1",
   "subject": "maths",

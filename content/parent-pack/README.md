@@ -2,14 +2,24 @@
 
 What staff send a parent who asks for the syllabus or a sample paper: one PDF per admitting class
 (`pdf/reasoning-test-class-N.pdf`). Each holds how the test works, the NCERT chapters the paper
-draws on for that class, a 15-question sample paper of the real shape, and the answers with
-working.
+draws on for that class, a sample paper of the real shape, and the answers with working.
 
 | File | What |
 |---|---|
-| `syllabus.json` | Topics (each a group of bank skills), the NCERT chapters that teach them in the old and new editions, and the cohort the sheets are written for |
-| `sample-papers.json` | 75 questions, 15 per class, in the item-bank format plus a `paper` field |
+| `syllabus.json` | Topics (each a group of bank skills), the NCERT chapters that teach them in the old and new editions, the cohort the sheets are written for, and `syllabusChapters`: class N−1's chapters with their term and the syllabus skills each covers |
+| `sample-papers.json` | 15 questions per class, 30 for a class on the 30-question paper, in the item-bank format plus a `paper` field |
 | `pdf/` | The built PDFs. Rebuild after any change: `npm run parent-pack` |
+
+## 15 or 30 questions
+
+**The build asks the live database which paper each class gets** (`live_pool` and
+`choosePaperShape`, exactly as issuing does), so it needs `.env.local`. A class on 30 questions
+gets the 30-question facts, a "Class N−1 syllabus questions" section listing its first-term
+chapters, and a 30-question sample: ten English basics, and five basics plus five class N−1
+first-term syllabus questions in each of maths and science, labelled as on the real paper. **When a
+class's syllabus batch goes live, the build stops** until that class has its 30-question sample and
+its chapters in `syllabusChapters` — the pack cannot keep promising a 15-question paper. Every
+syllabus bank item and sample must sit in a chapter of its own class and term.
 
 ## How a sheet is worked out
 

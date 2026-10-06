@@ -131,5 +131,18 @@
     { "subject": "science", "classLevel": 9, "edition": "old", "book": "Science", "title": "Work and Energy", "topics": ["s-energy"] },
     { "subject": "science", "classLevel": 10, "edition": "old", "book": "Science", "title": "Electricity", "topics": ["s-electricity"] },
     { "subject": "science", "classLevel": 10, "edition": "old", "book": "Science", "title": "Our Environment", "topics": ["s-food"] }
+  ],
+
+  "syllabusChapters": [
+    { "subject": "maths", "classLevel": 9, "edition": "new", "book": "Ganita Manjari", "chapter": 1, "term": 1, "title": "Orienting Yourself: The Use of Coordinates", "covers": "quadrants, distance, midpoint, section formula", "skills": ["coordinate-quadrants", "coordinate-distance", "coordinate-midpoint", "section-formula"] },
+    { "subject": "maths", "classLevel": 9, "edition": "new", "book": "Ganita Manjari", "chapter": 2, "term": 1, "title": "Introduction to Linear Polynomials", "covers": "value and zero of a polynomial, linear growth", "skills": ["zero-of-linear-polynomial", "value-of-polynomial", "linear-growth"] },
+    { "subject": "maths", "classLevel": 9, "edition": "new", "book": "Ganita Manjari", "chapter": 3, "term": 1, "title": "The World of Numbers", "covers": "irrational numbers, decimal expansions", "skills": ["irrational-numbers", "decimal-expansion"] },
+    { "subject": "maths", "classLevel": 9, "edition": "new", "book": "Ganita Manjari", "chapter": 4, "term": 1, "title": "Exploring Algebraic Identities", "covers": "identities, factorising", "skills": ["algebraic-identities", "factorisation"] },
+    { "subject": "maths", "classLevel": 9, "edition": "new", "book": "Ganita Manjari", "chapter": 5, "term": 1, "title": "I'm Up and Down, and Round and Round", "covers": "circles: chords, angles, cyclic quadrilaterals", "skills": ["angles-in-a-circle", "chord-distance", "cyclic-quadrilateral"] },
+    { "subject": "science", "classLevel": 9, "edition": "new", "book": "Exploration", "chapter": 2, "term": 1, "title": "Cell – The Building Block of Life", "covers": "cell parts, plant and animal cells, osmosis", "skills": ["cell-organelles", "plant-and-animal-cells", "osmosis"] },
+    { "subject": "science", "classLevel": 9, "edition": "new", "book": "Exploration", "chapter": 3, "term": 1, "title": "Tissues in Action", "covers": "plant and animal tissues", "skills": ["plant-tissues"] },
+    { "subject": "science", "classLevel": 9, "edition": "new", "book": "Exploration", "chapter": 4, "term": 1, "title": "Describing Motion Around Us", "covers": "displacement, speed, acceleration, graphs, equations of motion", "skills": ["displacement", "average-speed", "acceleration", "motion-graphs", "kinematic-equations"] },
+    { "subject": "science", "classLevel": 9, "edition": "new", "book": "Exploration", "chapter": 5, "term": 1, "title": "Exploring Mixtures and their Separation", "covers": "separating mixtures", "skills": ["separating-mixtures"] },
+    { "subject": "science", "classLevel": 9, "edition": "new", "book": "Exploration", "chapter": 6, "term": 1, "title": "How Forces Affect Motion", "covers": "Newton's laws, momentum", "skills": ["momentum", "newtons-second-law"] }
   ]
 }

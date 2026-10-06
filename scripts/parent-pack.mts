@@ -5,6 +5,12 @@
 //   npm run parent-pack              # validate, then write the PDFs
 //   npm run parent-pack -- --html    # validate, write HTML only (no browser)
 //
+// Each class's sheet describes the paper that class actually gets today: 30
+// questions once its syllabus batch is live, otherwise 15. That is read from
+// the live database (live_pool, as the draw reads it), so the pack cannot
+// promise a paper the class does not get — and a class that moves to 30 stops
+// the build until its 30-question sample is written.
+//
 // The sample questions are written for the pack and are never seeded: a bank
 // item printed here would sit on real papers with its answer in a parent's
 // hands. This refuses a sample whose stem is a bank stem, and warns when one
@@ -16,11 +22,12 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 import { tmpdir } from 'node:os'
 import { execFileSync } from 'node:child_process'
 import { samplePaperProblems } from '../src/lib/samplePaper'
+import { choosePaperShape, type PoolItem } from '../src/lib/assemble'
 import { CLASSES, contentCeiling, type ClassLevel } from '../src/lib/classes'
-import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from '../src/lib/types'
+import { SUBJECTS, DIFFICULTIES, SHAPE_30, type Subject, type Difficulty, type Part, type PaperShape } from '../src/lib/types'
 import {
-  syllabusFor, topicClass, unmappedSkills,
-  type SyllabusTopic, type SyllabusChapter, type SyllabusInput,
+  syllabusFor, topicClass, unmappedSkills, editionStudied,
+  type SyllabusTopic, type SyllabusChapter, type SyllabusInput, type Edition,
 } from '../src/lib/syllabus'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -32,6 +39,8 @@ interface PackItem {
   paper: number
   ref: string
   subject: Subject
+  part?: Part
+  term?: number | null
   skill: string
   difficulty: Difficulty
   taught_in: number
@@ -43,11 +52,25 @@ interface PackItem {
   rationale: string
 }
 
+/** A first-term (or second-term) chapter of class N−1, for the syllabus part. */
+interface SyllabusPartChapter {
+  subject: Subject
+  classLevel: number
+  edition: Edition
+  book: string
+  chapter: number
+  term: number
+  title: string
+  covers: string
+  skills: string[]
+}
+
 interface SyllabusFile {
   cohortYear: number
   newFrom: Record<string, number>
   topics: (Omit<SyllabusTopic, 'taught_in' | 'reasoning'> & { skills: string[]; reasoning?: boolean })[]
   chapters: SyllabusChapter[]
+  syllabusChapters: SyllabusPartChapter[]
 }
 
 const SUBJECT_LABEL: Record<Subject, string> = { maths: 'Maths', english: 'English', science: 'Science' }
@@ -62,11 +85,14 @@ const bank: { ref: string; stem: string; skill: string; taught_in: number; part?
   .filter((f) => f.endsWith('.json'))
   .flatMap((f) => JSON.parse(readFileSync(join(BANK, f), 'utf8')))
 
-// The chapter mapping below describes the basics part. Syllabus items (class
-// N−1 content, migration 0014) reach the sheets in Phase 3 of the 30-question
-// work; until then they are left out of it, but every bank stem, syllabus or
-// not, still counts for the copy check on the samples.
-const basicsBank = bank.filter((b) => (b.part ?? 'basics') === 'basics')
+// Basics and syllabus are described differently: basics by topic across every
+// class the child has done, syllabus by class N−1's first-term chapters. Every
+// bank stem, either part, counts for the copy check on the samples.
+const isSyllabus = (i: { part?: string }) => i.part === 'syllabus'
+const basicsBank = bank.filter((b) => !isSyllabus(b))
+const syllabusBank = bank.filter(isSyllabus)
+const basicsSamples = items.filter((i) => !isSyllabus(i))
+const syllabusSamples = items.filter(isSyllabus)
 
 // A topic's class comes from the bank's own tags, so a retag reaches the
 // sheets on the next build instead of waiting for someone to edit this file.
@@ -85,6 +111,15 @@ const syllabusInput: SyllabusInput = {
 const topicOfSkill = new Map(syllabusFile.topics.flatMap((t) => t.skills.map((s) => [s, t.key] as const)))
 const topicByKey = new Map(syllabusInput.topics.map((t) => [t.key, t]))
 
+/** Class N−1's first-term chapters, in the edition this cohort used. */
+function firstTermChapters(classLevel: ClassLevel): SyllabusPartChapter[] {
+  const below = contentCeiling(classLevel)
+  const edition = editionStudied(below, classLevel, syllabusInput.cohortYear, syllabusInput.newFrom)
+  return syllabusFile.syllabusChapters
+    .filter((c) => c.classLevel === below && c.term === 1 && c.edition === edition)
+    .sort((a, b) => a.chapter - b.chapter)
+}
+
 const normalise = (s: string) => s.toLowerCase().replace(/\s+/g, ' ').trim()
 const wordSet = (s: string) =>
   new Set(normalise(s).replace(/(\d),(\d)/g, '$1$2').split(/[^a-z0-9.]+/).filter((w) => w.length > 3 || /\d/.test(w)))
@@ -96,25 +131,73 @@ function overlap(a: Set<string>, b: Set<string>): number {
   return shared / (a.size + b.size - shared)
 }
 
-function validate(): number {
+/**
+ * The paper each class gets today, read the way the draw reads it. Needs the
+ * service-role key in .env.local, like the seed.
+ */
+async function liveShapes(): Promise<Map<ClassLevel, PaperShape>> {
+  const env = Object.fromEntries(
+    readFileSync(join(ROOT, '.env.local'), 'utf8')
+      .split('\n')
+      .filter((l) => l.includes('=') && !l.startsWith('#'))
+      .map((l) => {
+        const i = l.indexOf('=')
+        return [l.slice(0, i).trim(), l.slice(i + 1).trim().replace(/^"|"$/g, '')]
+      }),
+  )
+  const url = env.NEXT_PUBLIC_SUPABASE_URL
+  const key = env.SUPABASE_SERVICE_ROLE_KEY
+  if (!url || !key) throw new Error('.env.local needs NEXT_PUBLIC_SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY')
+
+  const shapes = new Map<ClassLevel, PaperShape>()
+  for (const classLevel of CLASSES) {
+    const res = await fetch(`${url}/rest/v1/rpc/live_pool`, {
+      method: 'POST',
+      headers: { apikey: key, Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ p_class: classLevel }),
+    })
+    if (!res.ok) throw new Error(`live_pool(${classLevel}) failed: ${await res.text()}`)
+    shapes.set(classLevel, choosePaperShape((await res.json()) as PoolItem[]))
+  }
+  return shapes
+}
+
+function validate(shapes: Map<ClassLevel, PaperShape>): number {
   let errors = 0
   const bankStems = new Map(bank.map((b) => [normalise(b.stem), b.ref]))
   const bankWords = bank.map((b) => ({ ref: b.ref, words: wordSet(b.stem) }))
 
-  // Every skill the bank or a sample uses must sit under a syllabus topic, or
-  // the sheet would leave out something the paper can ask.
+  // Every skill the bank or a sample uses must be described somewhere, or the
+  // sheet would leave out something the paper can ask. Basics skills sit
+  // under a topic; syllabus skills under a chapter of the class they are from.
   for (const skill of unmappedSkills(syllabusFile.topics, basicsBank.map((b) => b.skill))) {
     errors++
     console.log(`  ERROR  bank skill "${skill}" is in no syllabus topic (syllabus.json)`)
   }
-  for (const skill of unmappedSkills(syllabusFile.topics, items.map((i) => i.skill))) {
+  for (const skill of unmappedSkills(syllabusFile.topics, basicsSamples.map((i) => i.skill))) {
     errors++
     console.log(`  ERROR  sample skill "${skill}" is in no syllabus topic (syllabus.json)`)
   }
+  const chapterFor = (i: { subject: string; skill: string; taught_in: number; term?: number | null }) =>
+    syllabusFile.syllabusChapters.find(
+      (c) => c.subject === i.subject && c.classLevel === i.taught_in && c.term === (i.term ?? 0) && c.skills.includes(i.skill),
+    )
+  for (const b of syllabusBank) {
+    if (!chapterFor(b as never)) {
+      errors++
+      console.log(`  ERROR  bank item ${b.ref} ("${b.skill}") is in no chapter of its class and term (syllabusChapters)`)
+    }
+  }
+  for (const i of syllabusSamples) {
+    if (!chapterFor(i)) {
+      errors++
+      console.log(`  ERROR  sample ${i.ref} ("${i.skill}") is in no chapter of its class and term (syllabusChapters)`)
+    }
+  }
 
-  // A sample tagged below the class the bank teaches its topic in would show a
-  // parent content their child's paper cannot hold.
-  for (const item of items) {
+  // A basics sample tagged below the class the bank teaches its topic in would
+  // show a parent content their child's paper cannot hold.
+  for (const item of basicsSamples) {
     const key = topicOfSkill.get(item.skill)
     const topicTag = key ? topicByKey.get(key)?.taught_in : null
     if (key && topicTag == null) {
@@ -127,10 +210,15 @@ function validate(): number {
   }
 
   for (const classLevel of CLASSES) {
+    const shape = shapes.get(classLevel)!
     const paper = items.filter((i) => i.paper === classLevel)
-    for (const problem of samplePaperProblems(classLevel, paper)) {
+    for (const problem of samplePaperProblems(classLevel, paper, shape)) {
       errors++
-      console.log(`  ERROR  class ${classLevel}: ${problem}`)
+      console.log(`  ERROR  class ${classLevel} (${shape.questions}-question paper): ${problem}`)
+    }
+    if (shape === SHAPE_30 && firstTermChapters(classLevel).length === 0) {
+      errors++
+      console.log(`  ERROR  class ${classLevel} is on 30 questions but syllabusChapters has no class ${contentCeiling(classLevel)} first-term chapters`)
     }
     for (const topic of syllabusFor(classLevel, syllabusInput).unplaced) {
       console.log(`  WARN   class ${classLevel}: "${topic.label}" is drawable but in no NCERT chapter the child used by class ${contentCeiling(classLevel)}`)
@@ -157,12 +245,26 @@ function validate(): number {
 const escape = (s: string) =>
   s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;')
 
-/** Subjects interleaved, as on a real paper, each subject easy to difficult. */
+/**
+ * Subjects interleaved, as on a real paper; within a subject easy to
+ * difficult, with basics and syllabus alternating at each level so the two
+ * parts are mixed as they are on the real paper.
+ */
 function ordered(paper: PackItem[]): PackItem[] {
   const rank = (d: Difficulty) => DIFFICULTIES.indexOf(d)
-  const bySubject = SUBJECTS.map((s) =>
-    paper.filter((i) => i.subject === s).sort((a, b) => rank(a.difficulty) - rank(b.difficulty)),
-  )
+  const bySubject = SUBJECTS.map((s) => {
+    const inSubject = paper.filter((i) => i.subject === s)
+    const out: PackItem[] = []
+    for (const d of DIFFICULTIES) {
+      const basics = inSubject.filter((i) => i.difficulty === d && !isSyllabus(i))
+      const syllabus = inSubject.filter((i) => i.difficulty === d && isSyllabus(i))
+      for (let n = 0; n < Math.max(basics.length, syllabus.length); n++) {
+        if (basics[n]) out.push(basics[n])
+        if (syllabus[n]) out.push(syllabus[n])
+      }
+    }
+    return out.sort((a, b) => rank(a.difficulty) - rank(b.difficulty))
+  })
   const out: PackItem[] = []
   for (let n = 0; n < Math.max(...bySubject.map((q) => q.length)); n++) {
     for (const q of bySubject) if (q[n]) out.push(q[n])
@@ -175,8 +277,9 @@ function answerText(item: PackItem): string {
   return `${item.answer_key}. ${item.options?.[item.answer_key ?? ''] ?? ''}`
 }
 
-function render(classLevel: ClassLevel): string {
+function render(classLevel: ClassLevel, shape: PaperShape): string {
   const ceiling = contentCeiling(classLevel)
+  const thirty = shape === SHAPE_30
   const paper = ordered(items.filter((i) => i.paper === classLevel))
 
   const sheet = syllabusFor(classLevel, syllabusInput)
@@ -213,6 +316,21 @@ function render(classLevel: ClassLevel): string {
   // English is short and maths ends sooner than science, so English goes under maths.
   const topics = `<div>${block('maths')}${block('english')}</div><div>${block('science')}</div>`
 
+  const syllabusBlock = (s: Subject) => {
+    const chapters = firstTermChapters(classLevel).filter((c) => c.subject === s)
+    if (chapters.length === 0) return ''
+    const list = chapters
+      .map((c) => `<li><span class="chapter">Ch ${c.chapter}. ${escape(c.title)}</span> <span class="covers">${escape(c.covers)}</span></li>`)
+      .join('')
+    return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3><div class="book"><p class="book-name">Class ${ceiling} · ${escape(chapters[0]!.book)}</p><ul>${list}</ul></div></div>`
+  }
+  const syllabusPart = thirty
+    ? `<h2>Class ${ceiling} syllabus questions</h2>
+  <p class="lead">Five maths and five science questions come from these Class ${ceiling} chapters only: the first-term chapters, because the test can be taken before the year ends.</p>
+  <div class="syllabus">${syllabusBlock('maths')}${syllabusBlock('science')}</div>`
+    : ''
+
+  const partLabel = (item: PackItem) => (thirty ? (isSyllabus(item) ? ` · Class ${ceiling}` : ' · Basics') : '')
   const questions = paper.map((item) => {
     const body =
       item.format === 'mcq'
@@ -220,12 +338,17 @@ function render(classLevel: ClassLevel): string {
             .map((c) => `<li><span class="letter">${c}</span>${escape(item.options?.[c] ?? '')}</li>`)
             .join('')}</ol>`
         : `<p class="typein">Type-in answer: <span class="blank"></span></p>`
-    return `<li class="question"><p class="subject">${SUBJECT_LABEL[item.subject]}</p><p class="stem">${escape(item.stem)}</p>${body}</li>`
+    return `<li class="question"><p class="subject">${SUBJECT_LABEL[item.subject]}${partLabel(item)}</p><p class="stem">${escape(item.stem)}</p>${body}</li>`
   }).join('')
 
   const answers = paper.map((item, n) =>
     `<tr><td class="num">${n + 1}</td><td class="ans">${escape(answerText(item))}</td><td>${escape(item.rationale)}</td></tr>`,
   ).join('')
+
+  const facts = thirty
+    ? `<li>30 questions in 30 minutes: 10 each of maths, English and science, mixed together.</li>
+    <li>Half the maths and science questions are from the Class ${ceiling} syllabus (the chapters listed below); the rest test reasoning. Each question is marked Basics or Class ${ceiling}.</li>`
+    : `<li>15 questions in 15 minutes: 5 each of maths, English and science, mixed together.</li>`
 
   return `<!doctype html>
 <html lang="en">
@@ -265,7 +388,9 @@ function render(classLevel: ClassLevel): string {
   .blank { display: inline-block; width: 70pt; border-bottom: 1pt solid #1a1a1a; }
   .sample, .answers { break-before: page; }
   .sample h2, .answers h2 { margin-top: 0; }
+  ${thirty ? ".question { margin-bottom: 7pt; } .stem { margin: 0 0 3pt; } ol.options { gap: 1pt 14pt; } td { padding: 3pt 6pt; }" : ""}
   table { width: 100%; border-collapse: collapse; }
+  tr { break-inside: avoid; }
   td { vertical-align: top; padding: 4pt 6pt; border-bottom: 0.75pt solid #ccc; }
   td.num { width: 22pt; font-weight: 600; }
   td.ans { width: 120pt; font-weight: 600; }
@@ -277,16 +402,18 @@ function render(classLevel: ClassLevel): string {
 
   <h2>About the test</h2>
   <ul class="facts">
-    <li>15 questions in 15 minutes: 5 each of maths, English and science, mixed together.</li>
+    ${facts}
     <li>Taken online on a phone or computer, through a link sent to the parent's WhatsApp. The link works for 2 hours.</li>
     <li>Most questions have four options; a few ask for a number to be typed in.</li>
     <li>One mark for a correct answer. A quarter mark off for a wrong multiple-choice answer; nothing off for a wrong type-in answer or a blank.</li>
     <li>Answers can be changed before submitting. If the candidate leaves the page, the timer pauses.</li>
   </ul>
 
-  <h2>What the test covers</h2>
-  <p class="lead">The questions test reasoning, not memory, using ideas taught up to Class ${ceiling}. Chapters are from the NCERT (CBSE) books a student joining Class ${classLevel} in ${syllabusInput.cohortYear + 1} will have used; other boards teach the same ideas under their own names.</p>
+  <h2>What the test covers${thirty ? ': basics' : ''}</h2>
+  <p class="lead">${thirty ? 'Basics' : 'The'} questions test reasoning, not memory, using ideas taught up to Class ${ceiling}. Chapters are from the NCERT (CBSE) books a student joining Class ${classLevel} in ${syllabusInput.cohortYear + 1} will have used; other boards teach the same ideas under their own names.</p>
   <div class="syllabus">${topics}</div>
+
+  ${syllabusPart}
 
   <section class="sample">
   <h2>Sample paper</h2>
@@ -317,9 +444,11 @@ function findBrowser(): string {
   return found
 }
 
-function main(): number {
-  console.log(`\nChecking ${items.length} sample questions\n`)
-  const errors = validate()
+async function main(): Promise<number> {
+  const shapes = await liveShapes()
+  console.log(`\nPapers today: ${CLASSES.map((c) => `class ${c} ${shapes.get(c)!.questions}q`).join(' · ')}`)
+  console.log(`Checking ${items.length} sample questions\n`)
+  const errors = validate(shapes)
   if (errors > 0) {
     console.log(`\n${errors} error(s); nothing written.\n`)
     return 1
@@ -334,7 +463,7 @@ function main(): number {
   for (const classLevel of CLASSES) {
     const name = `reasoning-test-class-${classLevel}`
     const html = join(htmlDir, `${name}.html`)
-    writeFileSync(html, render(classLevel))
+    writeFileSync(html, render(classLevel, shapes.get(classLevel)!))
     if (browser) {
       const pdf = join(OUT, `${name}.pdf`)
       rmSync(pdf, { force: true })
@@ -357,5 +486,8 @@ function main(): number {
 
 const entry = process.argv[1]
 if (entry && resolve(entry) === resolve(fileURLToPath(import.meta.url))) {
-  process.exitCode = main()
+  main().then(
+    (code) => { process.exitCode = code },
+    (e) => { console.error(`\n${e instanceof Error ? e.message : String(e)}\n`); process.exitCode = 1 },
+  )
 }
