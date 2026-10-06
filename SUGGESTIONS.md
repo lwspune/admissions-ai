@@ -7,17 +7,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **30-question paper (2026-10-06): Phase 1 built on `feat/thirty-question-paper`.**
-      Migration 0014, the draw, the test screens and both reports handle 15 or 30 questions;
-      every class stays on 15 until its syllabus batch is live, so shipping it changes nothing a
-      candidate sees except the label contrast. 0014 applied to production 2026-10-06 (dry run
-      first); integration suite 100/100 against it; a 30-question paper walked in the browser
-      with temporary class 7 fixtures, since removed. Not yet seen signed in: the staff report
-      and parent sheet with a part split. Still to do: merge. **Phase 2**: syllabus batches (`part: "syllabus"`, `term`), class 9 → 10 → 11
-      → 7 → 8, about 15 per class per subject, each signed off; plus about 15 English basics
-      (a 10-question English part reuses the 23 items too often). **Phase 3**: the parent pack
-      at 30 questions. Its `topicClass` treats every bank item as basics, so a syllabus skill
-      would read as drawable for every later class; it must learn the part first.
+- [ ] **30-question paper (2026-10-06).** Phase 1 shipped 2026-10-06: migration 0014 applied,
+      merged and deployed; the draw, test screens and both reports handle 15 or 30 questions.
+      **Phase 2 in progress: admits to class 10 are on 30 questions since 2026-10-07**
+      (`syllabus-class-09.json`, signed off and live; a test issue confirmed 30 questions with 5
+      class 9 first-term syllabus items each in maths and science). Not yet seen signed in: the
+      staff report and parent sheet with a part split — the first real class 10 submission is
+      the chance. Next batches: class 10 content (admits to 11), class 11 (admits to 12, physics
+      and chemistry), then 7 and 8 — about 15 per class per subject, each signed off; plus about
+      15 English basics (a 10-question English part reuses the 23 items too often). **Phase 3**:
+      the parent pack at 30 questions. Its chapter mapping reads basics items only for now; it
+      needs a "Class N−1 syllabus (first term)" section, and the class 10 sheet already
+      understates that paper.
 - [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
       75 new questions; every calculable key re-derived in code, the lint clean, each paper
       checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,
