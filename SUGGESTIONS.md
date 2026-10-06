@@ -7,6 +7,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
+      75 new questions; every calculable key re-derived in code, the lint clean, each paper
+      checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,
+      for the April 2027 joiners. Nobody but the author has read the questions or the chapter
+      mapping; the bank's batches each had a sign-off, and these deserve one. The build refuses
+      a skill the syllabus does not claim, but placing a new topic in its chapters is by hand,
+      and `cohortYear` in `syllabus.json` must be bumped every April.
 - [ ] **Class 8 admits (2026-10-01): migration 0013 applied, suite 93/93; golden path unseen.**
       Add a lead, choose "Class 8", issue, and check the report reads "Admission to class 8".
       Authoring follow-up: maths/difficult holds only 4 items at `taught_in` ≤ 7, so each sits
@@ -248,6 +255,25 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
+- [ ] **Two topics the new NCERT books teach later than the bank's tags say.** Found 2026-10-06
+      by the parent-pack build, which warns whenever a drawable topic has no chapter in the
+      child's books. (1) Averages: the mean first appears in *Ganita Prakash 8* ("Tales by Dots
+      and Lines"; absent from GP 6 and 7), but M-E-18, M-M-33, M-M-34 and M-D-44 are tagged 7, so
+      a class 8 admit on the new books can be asked them. Retagging them to 8 leaves class 8
+      maths/moderate 7 → 5 and maths/difficult 3 → 2, still fillable but thin. (2) Speed of
+      light and sound: *Curiosity 8* has no sound chapter (it is *Exploration 9*), but S-E-22 is
+      tagged 8; class 9 science/easy 11 → 10 if retagged, and sample P9-S1 would move with it.
+      Until then the class 8 and 9 sheets say "also asked, though the newer NCERT books teach it
+      in a later class". Awaiting the user's decision.
+- [x] **Class tags followed the old NCERT books. RETAGGED 2026-10-06** with the user's
+      go-ahead. NCERT's new books reached classes 6–8 by 2025–26 and class 9 in 2026–27 and
+      moved topics later: percentages, profit and loss, interest (*Ganita Prakash 8* "Fractions
+      in Disguise"), ratio ("Proportional Reasoning"), food chains and floating (*Curiosity 8*),
+      probability (*Ganita Manjari 9*). M-E-02, M-E-03, M-D-17, M-E-20, M-E-23, M-M-37, S-E-14
+      and S-M-28 went to 8; M-M-28 to 9. Seeded to production, all 105 still live, the nine read
+      back from the database. Class 8 maths/difficult is now 3 and science/moderate 4. Issued
+      papers are frozen and unaffected. State Board and ICSE admits may have met these in class
+      7; the later tag is the fair direction for everyone.
 - [ ] **Staff references that block removing a staff member.** Found 2026-09-28 while writing
       0012: `assessments.issued_by` and `voided_by` reference `auth.users` with no `on delete`
       rule, so removing (via `/staff` or `staff:rm`) anyone who has issued a test most likely fails

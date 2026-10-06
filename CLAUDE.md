@@ -12,6 +12,7 @@ itself server-side.
 | [BRAINSTORM.md](BRAINSTORM.md) | The wider funnel this sits inside |
 | [DEPLOY.md](DEPLOY.md) | Deployment and credential rotation |
 | [content/items/README.md](content/items/README.md) | Item fields and the class tag, for authors |
+| [content/parent-pack/README.md](content/parent-pack/README.md) | The syllabus and sample-paper PDFs staff send parents |
 
 **Live:** https://admissions-ai-omega.vercel.app · repo `lwspune/admissions-ai` (private)
 Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
@@ -113,7 +114,9 @@ These are the things that quietly break everything if violated.
 - **The paper is scoped to the class being admitted to.** `leads.class_level`
   is the class the student joins (8–12), not the one they are in;
   `test_items.taught_in` is the class in which the content is taught (6–11,
-  6 meaning "open to everyone" and what an untagged item carries). An admit to
+  6 meaning "open to everyone" and what an untagged item carries), in the
+  NCERT book this year's admits used; where old and new editions disagree, the
+  later class. An admit to
   class N draws `taught_in ≤ N−1`. The rule is stated once in
   `src/lib/classes.ts` and enforced in `issue_assessment`, which checks the
   finished paper against `live_pool(p_class)` — a SECURITY DEFINER function,
@@ -161,6 +164,7 @@ npm run items:seed                   npm run items:seed -- --live --file <batch.
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210 <8|9|10|11|12>
+npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
 ```
 
 Day-to-day staff management is the `/staff` page; the `staff:*` scripts are the
@@ -217,6 +221,25 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-06 — "Taught in" means the NCERT book this year's admits used,
+  and nine items were retagged for it.** Mapping the syllabus to chapters found
+  NCERT's new books (classes 6–8 by 2025–26, 9 in 2026–27) teach percentages,
+  profit and loss, interest, ratio, food chains and floating in class 8 and
+  probability in class 9, while the bank said 6–8. A CBSE class 8 admit could be
+  asked percentages they had never been taught. With the user's go-ahead eight
+  items went to 8 and one to 9, seeded to production; the later class is the
+  fair direction for State Board admits too. Averages (4 items) and the speed of
+  sound (1) have the same problem and await a decision (SUGGESTIONS.md).
+- **2026-10-06 — Parents get a class-wise syllabus and sample paper, written
+  apart from the bank.** One PDF per admitting class (`content/parent-pack/`):
+  format, the NCERT chapters drawn on, 15 sample questions, answers with
+  working. The user chose five papers, no institute name, no word on
+  calculators, NCERT chapter names in the edition each child used, and the April
+  2027 joiners as the cohort. Samples are new questions, never bank items: a bank
+  item on a sample is on real papers with its answer published. A topic's class
+  is read from the bank's tags at build time, and the build refuses a skill the
+  syllabus does not map. A class 12 sheet lists the same topics as class 11,
+  because no item is tagged 11.
 - **2026-10-06 — Answer keys are balanced across A–D, at authoring time.**
   Options are served in the order they were written, and 73% of keys were A
   (science 27 of 28), so answering A to everything scored about 9 of 15. 43
