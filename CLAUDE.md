@@ -51,7 +51,7 @@ identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 
 **`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
 the latter guards itself with `CRON_SECRET`. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/`, `items/` and `staff/` (superadmin only) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/` and `staff/` (superadmin only) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -69,6 +69,12 @@ These are the things that quietly break everything if violated.
   ALLOW-LIST, not a delete-list — a column added to `test_items` later must not
   silently start shipping. Its tests assert on serialized bytes, since a
   property check is defeated by nesting.
+- **The parent report carries the score and nothing else.** `toParentReport`
+  is an allow-list like `toCandidatePaper`: name, date, time used, total and
+  per-subject score with correct / wrong / not-attempted counts. No question,
+  answer, skill, integrity fact, percentile or verdict — its test checks the
+  bytes. The consent text says a summary may be sent to the parent; the two
+  move together.
 - **Constraints and triggers enforce, not application code.** The reissue cap,
   the MCQ/numeric item shape, answer idempotency, and the assessment state
   machine all live in Postgres. `npm run db:verify` proves the database
@@ -210,6 +216,16 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-06 — Parents may be sent the score, never the questions.**
+  Students asked for a report. The sheet (`/reports/[leadId]/summary`, saved
+  as PDF from the browser and sent on WhatsApp) shows the score, per-subject
+  scores and counts, date and time used; the user cut class, institute name,
+  logo, subject descriptions and any note. The consent screen previously said
+  the result is not shown to the candidate; it now says a summary may be sent
+  to the parent. Earlier candidates consented to the old wording — sending
+  theirs is the user's call. The lead list now offers Issue link / Reissue /
+  Report on each row, so issuing needs no click into the lead.
 
 - **2026-10-01 — Class 8 admits added; the rule did not change.** An admit
   to class 8 draws content taught up to class 7: 71 of 105 items, every

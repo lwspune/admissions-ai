@@ -31,7 +31,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 | Cut-off | **None in the system.** Scores are reported; the bar is set by a human, outside the app |
 | Fraud | Capture and display. Never block, never score |
 | Reissue | Max 3 per lead. Single-use, unguessable tokens |
-| Candidate sees | Consent → handover → test → "Thank you, we'll be in touch." No score |
+| Candidate sees | Consent → handover → test → "Thank you, we'll be in touch." No score on screen. Staff may later send the parent a score-only sheet (added 2026-10-06) — never questions or answers |
 | Stack | Next.js (App Router) + TypeScript + Supabase, GitHub → Vercel |
 
 **Assumptions — correct me if wrong:** staff auth is Supabase Auth with role in `app_metadata`;
