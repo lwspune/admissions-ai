@@ -1,0 +1,537 @@
+[
+  {
+    "ref": "M9-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "coordinate-quadrants",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In which quadrant does the point (−3, 5) lie?",
+    "options": {
+      "A": "First",
+      "B": "Second",
+      "C": "Third",
+      "D": "Fourth"
+    },
+    "answer_key": "B",
+    "rationale": "A negative x and a positive y put the point left of the y-axis and above the x-axis: the second quadrant. Fourth is the sign swap (x positive, y negative)."
+  },
+  {
+    "ref": "M9-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "coordinate-distance",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the distance between the points (1, 2) and (4, 6)?",
+    "numeric_answer": 5,
+    "numeric_tolerance": 0,
+    "rationale": "The differences are 3 and 4, so the distance is √(9 + 16) = √25 = 5. Adding the differences (7) is the error the numeric format leaves uncued."
+  },
+  {
+    "ref": "M9-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "coordinate-midpoint",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the midpoint of the line segment joining (2, −4) and (8, 6)?",
+    "options": {
+      "A": "(3, 5)",
+      "B": "(10, 2)",
+      "C": "(6, 10)",
+      "D": "(5, 1)"
+    },
+    "answer_key": "D",
+    "rationale": "Average each coordinate: ((2 + 8)/2, (−4 + 6)/2) = (5, 1). (10, 2) forgets to halve; (6, 10) and (3, 5) subtract instead of adding."
+  },
+  {
+    "ref": "M9-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "zero-of-linear-polynomial",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the zero of the polynomial p(x) = 3x − 12?",
+    "options": {
+      "A": "−4",
+      "B": "3",
+      "C": "4",
+      "D": "12"
+    },
+    "answer_key": "C",
+    "rationale": "The zero is the x that makes p(x) = 0: 3x − 12 = 0 gives x = 4. −4 is the sign slip; 3 and 12 are the coefficients read off as answers."
+  },
+  {
+    "ref": "M9-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "value-of-polynomial",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "If p(x) = 5 − 2x, what is the value of p(−3)?",
+    "numeric_answer": 11,
+    "numeric_tolerance": 0,
+    "rationale": "p(−3) = 5 − 2 × (−3) = 5 + 6 = 11. Dropping the sign of −3 gives −1, the characteristic error."
+  },
+  {
+    "ref": "M9-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "irrational-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers is irrational?",
+    "options": {
+      "A": "√16",
+      "B": "0.75",
+      "C": "22/7",
+      "D": "√12"
+    },
+    "answer_key": "D",
+    "rationale": "√12 = 2√3, and √3 is irrational. √16 = 4, 0.75 = 3/4 and 22/7 are all ratios of integers; 22/7 is only an approximation to π, not π itself."
+  },
+  {
+    "ref": "M9-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "decimal-expansion",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these fractions has a terminating decimal expansion?",
+    "options": {
+      "A": "1/3",
+      "B": "2/7",
+      "C": "7/20",
+      "D": "5/6"
+    },
+    "answer_key": "C",
+    "rationale": "A fraction in lowest terms terminates when its denominator has no prime factor but 2 and 5. 20 = 2² × 5, so 7/20 = 0.35. 3, 7 and 6 each bring a 3 or a 7."
+  },
+  {
+    "ref": "M9-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "algebraic-identities",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which expression is equal to (x + 5)²?",
+    "options": {
+      "A": "x² + 25",
+      "B": "x² + 10x + 25",
+      "C": "x² + 5x + 25",
+      "D": "2x + 10"
+    },
+    "answer_key": "B",
+    "rationale": "(a + b)² = a² + 2ab + b², so (x + 5)² = x² + 10x + 25. x² + 25 misses the middle term, the commonest error with this identity."
+  },
+  {
+    "ref": "M9-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "angles-in-a-circle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "An arc of a circle subtends an angle of 80° at the centre. What angle does it subtend at a point on the remaining part of the circle?",
+    "options": {
+      "A": "40°",
+      "B": "80°",
+      "C": "160°",
+      "D": "100°"
+    },
+    "answer_key": "A",
+    "rationale": "The angle at the centre is twice the angle at any point on the remaining part of the circle, so 80° ÷ 2 = 40°. 160° doubles the wrong way; 100° confuses it with a supplement."
+  },
+  {
+    "ref": "M9-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "chord-distance",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A circle has a radius of 10 cm. A chord is 6 cm from the centre. How long is the chord, in centimetres?",
+    "numeric_answer": 16,
+    "numeric_tolerance": 0,
+    "rationale": "The perpendicular from the centre bisects the chord, so half the chord is √(10² − 6²) = 8 cm and the chord is 16 cm. Stopping at 8 is the error being tested."
+  },
+  {
+    "ref": "M9-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "algebraic-identities",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Using a suitable identity, find the value of 103 × 97.",
+    "options": {
+      "A": "9919",
+      "B": "10009",
+      "C": "9909",
+      "D": "9991"
+    },
+    "answer_key": "D",
+    "rationale": "103 × 97 = (100 + 3)(100 − 3) = 100² − 3² = 10000 − 9 = 9991. 10009 adds the 9; 9919 and 9909 come from slips in long multiplication."
+  },
+  {
+    "ref": "M9-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "linear-growth",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A plant is 12 cm tall and grows 1.5 cm every week, so its height after w weeks is 12 + 1.5w. After how many weeks will it be 30 cm tall?",
+    "numeric_answer": 12,
+    "numeric_tolerance": 0,
+    "rationale": "12 + 1.5w = 30 gives 1.5w = 18, so w = 12. Dividing 30 by 1.5 (20) forgets the starting height, which is what the item checks."
+  },
+  {
+    "ref": "M9-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "cyclic-quadrilateral",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "ABCD is a cyclic quadrilateral with ∠A = (2x + 10)° and ∠C = (3x − 5)°. What is the measure of ∠A?",
+    "options": {
+      "A": "70°",
+      "B": "80°",
+      "C": "100°",
+      "D": "110°"
+    },
+    "answer_key": "B",
+    "rationale": "Opposite angles of a cyclic quadrilateral sum to 180°: 5x + 5 = 180, so x = 35 and ∠A = 80°. 100° is ∠C; setting the angles equal gives x = 15 and 40°, which is not offered."
+  },
+  {
+    "ref": "M9-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "factorisation",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Which of these is a factor of x² − 5x − 14?",
+    "options": {
+      "A": "x + 7",
+      "B": "x − 2",
+      "C": "x + 2",
+      "D": "x − 14"
+    },
+    "answer_key": "C",
+    "rationale": "Split −5x into −7x + 2x: the numbers multiply to −14 and add to −5, so x² − 5x − 14 = (x − 7)(x + 2). x + 7 and x − 2 have the signs reversed."
+  },
+  {
+    "ref": "M9-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "section-formula",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Point P divides the line segment from A(2, 1) to B(8, 7) in the ratio 1 : 2. What are the coordinates of P?",
+    "options": {
+      "A": "(4, 3)",
+      "B": "(6, 5)",
+      "C": "(5, 4)",
+      "D": "(3, 2)"
+    },
+    "answer_key": "A",
+    "rationale": "P is one third of the way from A to B: (2 + 6/3, 1 + 6/3) = (4, 3). (6, 5) is the 2 : 1 point, the ratio read backwards; (5, 4) is the midpoint."
+  },
+  {
+    "ref": "S9-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "displacement",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A runner goes 4 m east and then 3 m west along a straight track. What is the runner's displacement?",
+    "options": {
+      "A": "7 m east",
+      "B": "1 m east",
+      "C": "1 m west",
+      "D": "7 m west"
+    },
+    "answer_key": "B",
+    "rationale": "Displacement is the change in position: 4 m east less 3 m west leaves 1 m east. 7 m is the distance travelled, which is the distinction the item tests."
+  },
+  {
+    "ref": "S9-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "average-speed",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A cyclist rides 12 km in the first hour and 8 km in the second hour. What is the average speed for the whole ride, in km/h?",
+    "numeric_answer": 10,
+    "numeric_tolerance": 0,
+    "rationale": "Average speed is total distance over total time: 20 km in 2 h is 10 km/h. Here the times are equal, so the plain average of the two speeds also works."
+  },
+  {
+    "ref": "S9-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "acceleration",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A car's velocity increases steadily from 10 m/s to 25 m/s in 5 seconds. What is its average acceleration?",
+    "options": {
+      "A": "1 m/s²",
+      "B": "1.5 m/s²",
+      "C": "2 m/s²",
+      "D": "3 m/s²"
+    },
+    "answer_key": "D",
+    "rationale": "Acceleration is the change in velocity over time: (25 − 10) ÷ 5 = 3 m/s². 2 m/s² divides the starting speed by the time; 5 m/s² (25 ÷ 5) is not offered."
+  },
+  {
+    "ref": "S9-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "momentum",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the momentum of a 2 kg ball moving at 3 m/s, in kg m/s?",
+    "numeric_answer": 6,
+    "numeric_tolerance": 0,
+    "rationale": "Momentum is mass × velocity: 2 kg × 3 m/s = 6 kg m/s. Adding the two (5) is the error a candidate who half-remembers the definition makes."
+  },
+  {
+    "ref": "S9-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "newtons-second-law",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What net force is needed to give a 5 kg box an acceleration of 2 m/s²?",
+    "options": {
+      "A": "2.5 N",
+      "B": "7 N",
+      "C": "10 N",
+      "D": "3 N"
+    },
+    "answer_key": "C",
+    "rationale": "F = ma = 5 kg × 2 m/s² = 10 N. 2.5 N divides instead of multiplying; 7 N and 3 N add and subtract the numbers."
+  },
+  {
+    "ref": "S9-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "cell-organelles",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which part of a cell releases energy from food and is often called the powerhouse of the cell?",
+    "options": {
+      "A": "Nucleus",
+      "B": "Vacuole",
+      "C": "Cell membrane",
+      "D": "Mitochondrion"
+    },
+    "answer_key": "D",
+    "rationale": "Mitochondria carry out cellular respiration, releasing energy from food. The nucleus controls the cell, the vacuole stores, and the membrane controls what enters and leaves."
+  },
+  {
+    "ref": "S9-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "plant-and-animal-cells",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is found in plant cells but not in animal cells?",
+    "options": {
+      "A": "Cell membrane",
+      "B": "Nucleus",
+      "C": "Cell wall",
+      "D": "Mitochondria"
+    },
+    "answer_key": "C",
+    "rationale": "Plant cells have a rigid cell wall outside the membrane; animal cells do not. Both kinds have a membrane, a nucleus and mitochondria."
+  },
+  {
+    "ref": "S9-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "plant-tissues",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which plant tissue carries water and minerals from the roots to the leaves?",
+    "options": {
+      "A": "Xylem",
+      "B": "Phloem",
+      "C": "Epidermis",
+      "D": "Cork"
+    },
+    "answer_key": "A",
+    "rationale": "Xylem conducts water and minerals upward from the roots. Phloem carries food made in the leaves, the usual confusion; epidermis and cork protect."
+  },
+  {
+    "ref": "S9-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "separating-mixtures",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which method is best for separating sand from a mixture of sand and water?",
+    "options": {
+      "A": "Filtration",
+      "B": "Evaporation",
+      "C": "Distillation",
+      "D": "Chromatography"
+    },
+    "answer_key": "A",
+    "rationale": "Sand does not dissolve, so filter paper holds it back while water passes through. Evaporation and distillation recover a dissolved solid or the liquid; chromatography separates dyes."
+  },
+  {
+    "ref": "S9-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "osmosis",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Raisins left in a bowl of water swell up after a few hours. This is mainly because",
+    "options": {
+      "A": "water enters them by osmosis",
+      "B": "sugar moves into them from the water",
+      "C": "their skin soaks up air bubbles",
+      "D": "warmth in the water expands them"
+    },
+    "answer_key": "A",
+    "rationale": "The raisin's cells hold a strong sugar solution, so water moves in across the membrane by osmosis. Sugar moves out, if anything, not in."
+  },
+  {
+    "ref": "S9-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "motion-graphs",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "On a velocity–time graph, the line for a car is horizontal and above the time axis. The car is",
+    "options": {
+      "A": "standing still",
+      "B": "moving at constant velocity",
+      "C": "speeding up steadily",
+      "D": "slowing down steadily"
+    },
+    "answer_key": "B",
+    "rationale": "A horizontal line means the velocity does not change, and above the axis means it is not zero. Standing still is what a horizontal line means on a position–time graph."
+  },
+  {
+    "ref": "S9-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "separating-mixtures",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which method separates the different coloured dyes that make up black ink?",
+    "options": {
+      "A": "Filtration",
+      "B": "Sublimation",
+      "C": "Chromatography",
+      "D": "Decantation"
+    },
+    "answer_key": "C",
+    "rationale": "The dyes are dissolved together, and chromatography separates them because each travels a different distance with the solvent. Filtering and decanting cannot split a solution."
+  },
+  {
+    "ref": "S9-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "kinematic-equations",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A ball starts from rest and rolls down a slope with a uniform acceleration of 2 m/s². How far does it travel in 4 seconds, in metres?",
+    "numeric_answer": 16,
+    "numeric_tolerance": 0,
+    "rationale": "From rest, s = ½at² = ½ × 2 × 4² = 16 m. Forgetting the half gives 32; using v = at (8) answers a different question."
+  },
+  {
+    "ref": "S9-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "momentum",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Two skaters stand at rest on ice. The 50 kg skater pushes the 25 kg skater, who moves off at 2 m/s. How fast does the 50 kg skater move back?",
+    "options": {
+      "A": "0.5 m/s",
+      "B": "0.75 m/s",
+      "C": "1 m/s",
+      "D": "4 m/s"
+    },
+    "answer_key": "C",
+    "rationale": "Total momentum stays zero, so 50 × v = 25 × 2 and v = 1 m/s, in the opposite direction. 4 m/s inverts the mass ratio."
+  },
+  {
+    "ref": "S9-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 9,
+    "skill": "kinematic-equations",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A car moving at 20 m/s brakes with a uniform deceleration of 5 m/s² until it stops. How far does it travel while braking?",
+    "options": {
+      "A": "20 m",
+      "B": "40 m",
+      "C": "80 m",
+      "D": "100 m"
+    },
+    "answer_key": "B",
+    "rationale": "v² = u² − 2as gives 0 = 400 − 10s, so s = 40 m. Equivalently, it takes 4 s at an average 10 m/s. 80 m uses the full 20 m/s for all 4 s."
+  }
+]

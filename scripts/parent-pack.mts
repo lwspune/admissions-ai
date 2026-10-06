@@ -58,9 +58,15 @@ const SIMILAR_SHARE = 0.6
 
 const items: PackItem[] = JSON.parse(readFileSync(join(PACK, 'sample-papers.json'), 'utf8'))
 const syllabusFile: SyllabusFile = JSON.parse(readFileSync(join(PACK, 'syllabus.json'), 'utf8'))
-const bank: { ref: string; stem: string; skill: string; taught_in: number }[] = readdirSync(BANK)
+const bank: { ref: string; stem: string; skill: string; taught_in: number; part?: string }[] = readdirSync(BANK)
   .filter((f) => f.endsWith('.json'))
   .flatMap((f) => JSON.parse(readFileSync(join(BANK, f), 'utf8')))
+
+// The chapter mapping below describes the basics part. Syllabus items (class
+// N−1 content, migration 0014) reach the sheets in Phase 3 of the 30-question
+// work; until then they are left out of it, but every bank stem, syllabus or
+// not, still counts for the copy check on the samples.
+const basicsBank = bank.filter((b) => (b.part ?? 'basics') === 'basics')
 
 // A topic's class comes from the bank's own tags, so a retag reaches the
 // sheets on the next build instead of waiting for someone to edit this file.
@@ -72,7 +78,7 @@ const syllabusInput: SyllabusInput = {
     subject: t.subject,
     label: t.label,
     reasoning: t.reasoning ?? false,
-    taught_in: topicClass(t.skills, bank),
+    taught_in: topicClass(t.skills, basicsBank),
   })),
   chapters: syllabusFile.chapters,
 }
@@ -97,7 +103,7 @@ function validate(): number {
 
   // Every skill the bank or a sample uses must sit under a syllabus topic, or
   // the sheet would leave out something the paper can ask.
-  for (const skill of unmappedSkills(syllabusFile.topics, bank.map((b) => b.skill))) {
+  for (const skill of unmappedSkills(syllabusFile.topics, basicsBank.map((b) => b.skill))) {
     errors++
     console.log(`  ERROR  bank skill "${skill}" is in no syllabus topic (syllabus.json)`)
   }
