@@ -1,10 +1,14 @@
-import { CHOICES, type Subject, type Choice, type Format, type Difficulty } from './types'
+import { CHOICES, type Subject, type Choice, type Format, type Difficulty, type Part } from './types'
 
 /** A row as it exists in `test_items` — answer key and all. Server-side only. */
 export interface BankRow {
   id: string
   ref: string | null
   subject: Subject
+  part: Part
+  taught_in: number
+  /** First or second term of class N−1; set on syllabus items only. */
+  term: number | null
   skill: string
   difficulty: Difficulty
   format: Format
@@ -21,6 +25,8 @@ export interface BankRow {
 export interface CandidateQuestion {
   position: number
   subject: Subject
+  /** Shown as a label on the question (2026-10-06). */
+  part: Part
   format: Format
   stem: string
   options: Record<Choice, string> | null
@@ -44,6 +50,8 @@ export interface CandidateQuestion {
  *   - `difficulty`, because knowing an item is "difficult" changes how long a
  *     candidate spends on it and corrupts the dwell timings
  *   - `skill`, which names the reasoning pattern being tested
+ *   - `taught_in` and `term`; the syllabus label names the class from the
+ *     assessment, and a per-item class would let candidates map the bank
  */
 export function toCandidatePaper(
   rows: { position: number; item: BankRow }[],
@@ -53,6 +61,7 @@ export function toCandidatePaper(
     .map(({ position, item }) => ({
       position,
       subject: item.subject,
+      part: item.part,
       format: item.format,
       stem: item.stem,
       options: candidateOptions(item),

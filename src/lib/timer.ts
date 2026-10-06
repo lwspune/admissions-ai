@@ -1,5 +1,3 @@
-import { LIMIT_MS } from './types'
-
 export type TimerEventKind = 'pause' | 'resume'
 export interface TimerEvent {
   kind: TimerEventKind
@@ -11,7 +9,8 @@ export interface TimerInput {
   events: TimerEvent[]
   now: number
   windowEndsAt: number
-  limitMs?: number
+  /** The paper's own active-time limit: 15 or 30 minutes (2026-10-06). */
+  limitMs: number
 }
 
 export interface AttemptStatus {
@@ -69,7 +68,7 @@ export function computeActiveMs(startedAt: number, events: TimerEvent[], now: nu
  * before `now`, so a caller can always treat it as a countdown target.
  */
 export function computeDeadline(input: TimerInput): number {
-  const { startedAt, events, now, windowEndsAt, limitMs = LIMIT_MS } = input
+  const { startedAt, events, now, windowEndsAt, limitMs } = input
   const remaining = Math.max(0, limitMs - computeActiveMs(startedAt, events, now))
   return Math.max(now, Math.min(now + remaining, windowEndsAt))
 }
@@ -81,7 +80,7 @@ export function computeDeadline(input: TimerInput): number {
  * the candidate was shown and the one they will ask about.
  */
 export function attemptStatus(input: TimerInput): AttemptStatus {
-  const { startedAt, events, now, windowEndsAt, limitMs = LIMIT_MS } = input
+  const { startedAt, events, now, windowEndsAt, limitMs } = input
   const remainingMs = Math.max(0, limitMs - computeActiveMs(startedAt, events, now))
 
   const timerEnded = remainingMs <= 0
@@ -101,6 +100,6 @@ export function attemptStatus(input: TimerInput): AttemptStatus {
  * a two-minute test and produce a score nobody can read. They are told to ask
  * for a fresh link instead.
  */
-export function canStart(now: number, windowEndsAt: number, limitMs: number = LIMIT_MS): boolean {
+export function canStart(now: number, windowEndsAt: number, limitMs: number): boolean {
   return windowEndsAt - now >= limitMs
 }

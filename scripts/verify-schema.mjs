@@ -221,10 +221,22 @@ async function main() {
     await rejects('assessment_items: rejects the same item twice on one paper', 'assessment_items', {
       assessment_id: assessment.id, position: 2, item_id: item.id,
     })
-    await rejects('assessment_items: rejects a position outside 1-15', 'assessment_items', {
-      assessment_id: assessment.id, position: 16, item_id: item.id,
+    await rejects('assessment_items: rejects a position outside 1-30', 'assessment_items', {
+      assessment_id: assessment.id, position: 31, item_id: item.id,
     })
   }
+
+  console.log('\nItem parts (migration 0014)')
+  const syllabusItem = (over) => ({
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
+    stem: 'probe syllabus', numeric_answer: 5, rationale: 'probe', status: 'review',
+    part: 'syllabus', term: 1, taught_in: 9, ...over,
+  })
+  await accepts('test_items: accepts a first-term class 9 syllabus item', 'test_items', syllabusItem({}))
+  await rejects('test_items: rejects a syllabus item with no term', 'test_items', syllabusItem({ term: null }))
+  await rejects('test_items: rejects a basics item with a term', 'test_items', syllabusItem({ part: 'basics' }))
+  await rejects('test_items: rejects English syllabus content', 'test_items', syllabusItem({ subject: 'english' }))
+  await rejects('test_items: rejects syllabus content below class 7', 'test_items', syllabusItem({ taught_in: 6 }))
 
   console.log('\nClass scoping (live_pool + issue_assessment)')
 

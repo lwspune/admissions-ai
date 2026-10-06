@@ -7,6 +7,7 @@ import type { Choice } from '@/lib/types'
 interface Question {
   position: number
   subject: string
+  part: 'basics' | 'syllabus'
   format: 'mcq' | 'numeric'
   stem: string
   options: Record<Choice, string> | null
@@ -28,10 +29,17 @@ export function CandidateFlow({
   token,
   candidateName,
   expiresAt,
+  questionCount,
+  minutes,
+  syllabusClass,
 }: {
   token: string
   candidateName: string
   expiresAt: string
+  questionCount: number
+  minutes: number
+  /** Class N−1 on a 30-question paper; null on the 15-question one. */
+  syllabusClass: number | null
 }) {
   const windowEndsAt = new Date(expiresAt).getTime()
 
@@ -269,7 +277,17 @@ export function CandidateFlow({
     return <Handover name={candidateName} onReady={() => setStage('instructions')} />
   }
   if (stage === 'instructions') {
-    return <Instructions expiresAt={windowEndsAt} onStart={doStart} busy={busy} error={error} />
+    return (
+      <Instructions
+        expiresAt={windowEndsAt}
+        questionCount={questionCount}
+        minutes={minutes}
+        syllabusClass={syllabusClass}
+        onStart={doStart}
+        busy={busy}
+        error={error}
+      />
+    )
   }
   if (stage === 'done') return <Done />
 
@@ -314,6 +332,7 @@ export function CandidateFlow({
         question && (
           <QuestionView
             question={question}
+            syllabusClass={syllabusClass}
             answer={answers[question.position]}
             onChoice={setChoice}
             onNumeric={setNumeric}
@@ -488,11 +507,17 @@ function Handover({ name, onReady }: { name: string; onReady: () => void }) {
 
 function Instructions({
   expiresAt,
+  questionCount,
+  minutes,
+  syllabusClass,
   onStart,
   busy,
   error,
 }: {
   expiresAt: number
+  questionCount: number
+  minutes: number
+  syllabusClass: number | null
   onStart: () => void
   busy: boolean
   error: string
@@ -501,7 +526,15 @@ function Instructions({
   return (
     <Shell title="How the test works">
       <ul className="mt-3 space-y-2 text-sm leading-relaxed text-slate-600">
-        <li>15 questions — maths, English and science — in 15 minutes.</li>
+        <li>
+          {questionCount} questions — maths, English and science — in {minutes} minutes.
+        </li>
+        {syllabusClass !== null && (
+          <li>
+            Some maths and science questions are from the Class {syllabusClass} syllabus; each question is marked
+            either Basics or Class {syllabusClass}.
+          </li>
+        )}
         <li>One mark for a correct answer. A quarter mark is deducted for a wrong multiple-choice answer; there is no penalty on the type-in questions, or for leaving one blank.</li>
         <li>You can go back and change any answer before submitting.</li>
         <li>
@@ -541,12 +574,14 @@ function Done() {
 
 function QuestionView({
   question,
+  syllabusClass,
   answer,
   onChoice,
   onNumeric,
   onNumericCommit,
 }: {
   question: Question
+  syllabusClass: number | null
   answer: { choice: Choice | null; numeric: string } | undefined
   onChoice: (position: number, choice: Choice) => void
   onNumeric: (position: number, value: string) => void
@@ -554,7 +589,12 @@ function QuestionView({
 }) {
   return (
     <section className="mt-5" aria-labelledby={`q-${question.position}`}>
-      <p className="text-xs uppercase tracking-wide text-slate-400">{question.subject}</p>
+      <p className="text-xs uppercase tracking-wide text-slate-500">
+        {question.subject}
+        {syllabusClass !== null && (
+          <> · {question.part === 'syllabus' ? `Class ${syllabusClass}` : 'Basics'}</>
+        )}
+      </p>
       <h2 id={`q-${question.position}`} className="mt-1 text-base leading-relaxed text-slate-900">
         {question.stem}
       </h2>

@@ -14,7 +14,7 @@ const MESSAGES: Record<string, { title: string; body: string }> = {
   },
   too_late: {
     title: 'Not enough time left',
-    body: 'The test needs a clear 15 minutes, and this link is close to expiring. Please ask the institute for a fresh link.',
+    body: 'The test needs its full time without interruption, and this link is close to expiring. Please ask the institute for a fresh link.',
   },
   submitted: {
     title: 'This test has already been completed',

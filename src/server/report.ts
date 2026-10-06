@@ -2,11 +2,22 @@ import 'server-only'
 import type { Db } from './supabase'
 import type { Role } from './auth'
 import { buildReport, toParentReport, type ParentReport, type ReportInput, type ReportPaperItem } from '../lib/report'
-import { LIMIT_MS } from '../lib/types'
+import { limitMsFor } from '../lib/types'
 
 export interface LeadReport {
   lead: { id: string; name: string; contact_mobile: string; school: string | null; class_level: number | null }
-  issue: { seq: number; of: number; createdAt: string; expiresAt: string; state: string }
+  issue: {
+    seq: number
+    of: number
+    createdAt: string
+    expiresAt: string
+    state: string
+    /** 15 or 30, and the minutes allowed, as recorded on the paper. */
+    questionCount: number
+    minutes: number
+    /** Class N−1 on a paper with a syllabus part; null otherwise. */
+    syllabusClass: number | null
+  }
   attempt: { startedAt: string; submittedAt: string | null; submitReason: string | null } | null
   report: ReturnType<typeof buildReport> | null
   /** Prior issues that were abandoned or replaced. Three of these is itself a finding. */
@@ -33,7 +44,7 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
 
   const { data: assessments } = await db
     .from('assessments')
-    .select('id, token, issue_seq, state, created_at, expires_at')
+    .select('id, token, issue_seq, state, created_at, expires_at, question_count, limit_minutes, class_level')
     .eq('lead_id', leadId)
     .order('issue_seq', { ascending: false })
 
@@ -44,7 +55,7 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
   if (!current) {
     return {
       lead,
-      issue: { seq: 0, of: 3, createdAt: '', expiresAt: '', state: 'none' },
+      issue: { seq: 0, of: 3, createdAt: '', expiresAt: '', state: 'none', questionCount: 0, minutes: 0, syllabusClass: null },
       attempt: null,
       report: null,
       priorIssues: [],
@@ -72,6 +83,10 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
       createdAt: current.created_at as string,
       expiresAt: current.expires_at as string,
       state: current.state as string,
+      questionCount: current.question_count as number,
+      minutes: current.limit_minutes as number,
+      syllabusClass:
+        current.question_count === 30 && current.class_level != null ? (current.class_level as number) - 1 : null,
     },
     priorIssues: all
       .filter((a) => a.id !== current.id)
@@ -87,7 +102,14 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
     loadEvents(db, attempt.id),
   ])
 
-  const input: ReportInput = { paper, answers, events, activeMs: attempt.active_ms ?? 0, limitMs: LIMIT_MS }
+  // The paper's own limit: an old 15-question attempt keeps its 15 minutes.
+  const input: ReportInput = {
+    paper,
+    answers,
+    events,
+    activeMs: attempt.active_ms ?? 0,
+    limitMs: limitMsFor(current.limit_minutes as number),
+  }
 
   return {
     ...base,
@@ -107,13 +129,18 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
 export async function loadParentReport(db: Db, leadId: string, role: Role): Promise<ParentReport | null> {
   const data = await loadLeadReport(db, leadId, role)
   if (!data?.report || data.issue.state !== 'submitted' || !data.attempt?.submittedAt) return null
-  return toParentReport({ name: data.lead.name, submittedAt: data.attempt.submittedAt, report: data.report })
+  return toParentReport({
+    name: data.lead.name,
+    submittedAt: data.attempt.submittedAt,
+    report: data.report,
+    syllabusClass: data.issue.syllabusClass,
+  })
 }
 
 async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<ReportPaperItem[]> {
   const { data } = await db
     .from('assessment_items')
-    .select('position, test_items(subject, skill, difficulty, format, stem, options, answer_key, numeric_answer, numeric_tolerance)')
+    .select('position, test_items(subject, part, skill, difficulty, format, stem, options, answer_key, numeric_answer, numeric_tolerance)')
     .eq('assessment_id', assessmentId)
     .order('position')
 
@@ -122,6 +149,7 @@ async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<Repo
   return (data ?? []).map((row) => {
     const item = row.test_items as never as {
       subject: ReportPaperItem['subject']
+      part: ReportPaperItem['part']
       skill: string
       difficulty: ReportPaperItem['difficulty']
       format: ReportPaperItem['format']
@@ -134,6 +162,7 @@ async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<Repo
     return {
       position: row.position as number,
       subject: item.subject,
+      part: item.part,
       skill: item.skill,
       difficulty: item.difficulty,
       format: item.format,

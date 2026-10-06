@@ -5,7 +5,7 @@ import { mobilesMatch } from '../lib/mobile'
 import { toCandidatePaper, type BankRow, type CandidateQuestion } from '../lib/serialize'
 import { gradeAttempt, type GradeItem, type GradeAnswer } from '../lib/grade'
 import { computeActiveMs, computeDeadline, canStart, type TimerEvent } from '../lib/timer'
-import { LIMIT_MS, type Choice, type Subject } from '../lib/types'
+import { limitMsFor, type Choice, type Subject } from '../lib/types'
 
 const LIVE_STATES = ['issued', 'opened', 'started']
 
@@ -23,8 +23,16 @@ export interface Attempt {
   submitted_at: string | null
 }
 
+/** What the candidate is told about the paper before it opens. */
+export interface PaperMeta {
+  questionCount: number
+  minutes: number
+  /** Class N−1, named on syllabus questions. Null on a paper without them. */
+  syllabusClass: number | null
+}
+
 export type OpenResult =
-  | { status: 'ok'; candidateName: string; expiresAt: string; alreadySubmitted: boolean }
+  | ({ status: 'ok'; candidateName: string; expiresAt: string; alreadySubmitted: boolean } & PaperMeta)
   | { status: 'not_found' | 'expired' | 'too_late' | 'submitted' }
 
 /**
@@ -43,9 +51,10 @@ export async function openByToken(db: Db, token: string): Promise<OpenResult> {
   const expiresAt = new Date(row.expires_at).getTime()
   if (Date.now() >= expiresAt) return { status: 'expired' }
 
-  // Starting with under 15 minutes left would hand them a truncated test and a
-  // score nobody can read, so the link is treated as spent (spec §4).
-  if (row.state !== 'started' && !canStart(Date.now(), expiresAt)) return { status: 'too_late' }
+  // Starting with less than the paper's full time left would hand them a
+  // truncated test and a score nobody can read, so the link is treated as
+  // spent (spec §4).
+  if (row.state !== 'started' && !canStart(Date.now(), expiresAt, limitMsOf(row))) return { status: 'too_late' }
 
   if (row.state === 'issued') {
     await db.from('assessments').update({ state: 'opened' }).eq('id', row.id)
@@ -56,6 +65,7 @@ export async function openByToken(db: Db, token: string): Promise<OpenResult> {
     candidateName: row.leads.name,
     expiresAt: row.expires_at,
     alreadySubmitted: false,
+    ...paperMeta(row),
   }
 }
 
@@ -157,11 +167,11 @@ export async function startAttempt(
   const existing = await loadAttempt(db, row.id)
   if (existing) {
     if (existing.submitted_at) throw new Error('This test has already been submitted.')
-    const deadline = await refreshDeadline(db, existing, expiresAt)
+    const deadline = await refreshDeadline(db, existing, expiresAt, limitMsOf(row))
     return { attempt: deadline, questions, answers: await loadAnswers(db, existing.id), resumed: true }
   }
 
-  if (!canStart(Date.now(), expiresAt)) {
+  if (!canStart(Date.now(), expiresAt, limitMsOf(row))) {
     throw new Error('This link is about to expire. Please ask for a fresh one.')
   }
 
@@ -169,7 +179,7 @@ export async function startAttempt(
     .from('attempts')
     .insert({
       assessment_id: row.id,
-      deadline_at: new Date(Date.now() + LIMIT_MS).toISOString(),
+      deadline_at: new Date(Date.now() + limitMsOf(row)).toISOString(),
       user_agent: context.userAgent ?? null,
       ip: context.ip ?? null,
       screen: context.screen ?? null,
@@ -212,7 +222,9 @@ export async function saveAnswer(
     activeMs: number
   },
 ): Promise<void> {
-  if (!Number.isInteger(position) || position < 1 || position > 15) {
+  // The longest paper is 30. Whether this position is on *this* paper is the
+  // database's check (attempt_answers_on_paper, migration 0014).
+  if (!Number.isInteger(position) || position < 1 || position > 30) {
     throw new Error(`position ${position} is not on the paper`)
   }
 
@@ -347,13 +359,29 @@ interface AssessmentRow {
   id: string
   expires_at: string
   state: string
+  question_count: number
+  limit_minutes: number
+  class_level: number | null
   leads: { name: string; contact_mobile: string }
+}
+
+/** Each paper carries its own limit: 15 minutes, or 30 for the longer paper. */
+function limitMsOf(row: Pick<AssessmentRow, 'limit_minutes'>): number {
+  return limitMsFor(row.limit_minutes)
+}
+
+function paperMeta(row: AssessmentRow): PaperMeta {
+  return {
+    questionCount: row.question_count,
+    minutes: row.limit_minutes,
+    syllabusClass: row.question_count === 30 && row.class_level !== null ? row.class_level - 1 : null,
+  }
 }
 
 async function loadByToken(db: Db, token: string): Promise<AssessmentRow | null> {
   const { data } = await db
     .from('assessments')
-    .select('id, expires_at, state, leads(name, contact_mobile)')
+    .select('id, expires_at, state, question_count, limit_minutes, class_level, leads(name, contact_mobile)')
     .eq('token', token)
     .maybeSingle()
 
@@ -433,12 +461,13 @@ async function pausedSinceLastAnswer(db: Db, attemptId: string, position: number
 }
 
 /** Recomputes the server-authoritative deadline on resume. */
-async function refreshDeadline(db: Db, attempt: Attempt, windowEndsAt: number): Promise<Attempt> {
+async function refreshDeadline(db: Db, attempt: Attempt, windowEndsAt: number, limitMs: number): Promise<Attempt> {
   const deadline = computeDeadline({
     startedAt: new Date(attempt.started_at).getTime(),
     events: await loadTimerEvents(db, attempt.id),
     now: Date.now(),
     windowEndsAt,
+    limitMs,
   })
 
   const { data } = await db

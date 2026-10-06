@@ -7,14 +7,17 @@ import {
   type ReportPaperItem,
   type ReportEvent,
 } from './report'
-import { LIMIT_MS, type Subject } from './types'
+import { limitMsFor, type Subject, type Part } from './types'
+
+const LIMIT_MS = limitMsFor(15)
 
 const MIN = 60_000
 
-function mcq(position: number, subject: Subject, key: 'A' | 'B' | 'C' | 'D' = 'B'): ReportPaperItem {
+function mcq(position: number, subject: Subject, key: 'A' | 'B' | 'C' | 'D' = 'B', part: Part = 'basics'): ReportPaperItem {
   return {
     position,
     subject,
+    part,
     skill: 'number-series',
     difficulty: 'easy',
     format: 'mcq',
@@ -331,5 +334,74 @@ describe('displayName', () => {
 
   it('leaves capitals that are already there', () => {
     expect(displayName('Riya McKenzie')).toBe('Riya McKenzie')
+  })
+})
+
+// ── the two parts of a 30-question paper (2026-10-06) ────────────────────────
+
+describe('buildReport — parts', () => {
+  const answer = (position: number, choice: 'A' | 'B' | 'C' | 'D') => ({
+    position, choice, numericValue: null, activeMs: 20_000, changeCount: 0, changedAfterPause: false,
+  })
+
+  // Maths basics right; maths syllabus one right, one wrong; science syllabus skipped.
+  const built = buildReport(
+    input({
+      paper: [
+        mcq(1, 'maths'),
+        mcq(2, 'maths', 'B', 'syllabus'),
+        mcq(3, 'maths', 'B', 'syllabus'),
+        mcq(4, 'english'),
+        mcq(5, 'science', 'B', 'syllabus'),
+      ],
+      answers: [answer(1, 'B'), answer(2, 'B'), answer(3, 'A')],
+    }),
+  )
+
+  it('labels each question with its part', () => {
+    expect(built.questions.map((q) => q.part)).toEqual(['basics', 'syllabus', 'syllabus', 'basics', 'syllabus'])
+  })
+
+  it('totals each subject by part, for the parts the paper holds', () => {
+    expect(built.totals.parts).toEqual([
+      { subject: 'maths', part: 'basics', score: 1, outOf: 1 },
+      { subject: 'maths', part: 'syllabus', score: 0.75, outOf: 2 },
+      { subject: 'english', part: 'basics', score: 0, outOf: 1 },
+      { subject: 'science', part: 'syllabus', score: 0, outOf: 1 },
+    ])
+  })
+
+  it('a 15-question paper totals as basics only', () => {
+    const plain = buildReport(input())
+    expect(plain.totals.parts.every((p) => p.part === 'basics')).toBe(true)
+  })
+})
+
+describe('toParentReport — parts', () => {
+  const answer = (position: number, choice: 'A' | 'B' | 'C' | 'D') => ({
+    position, choice, numericValue: null, activeMs: 20_000, changeCount: 0, changedAfterPause: false,
+  })
+
+  it('splits a subject into basics and its class syllabus when the paper has both', () => {
+    const built = buildReport(
+      input({
+        paper: [mcq(1, 'maths'), mcq(2, 'maths', 'B', 'syllabus'), mcq(3, 'english'), mcq(4, 'science', 'B', 'syllabus')],
+        answers: [answer(1, 'B'), answer(2, 'C')],
+      }),
+    )
+    const parent = toParentReport({ name: 'a', submittedAt: '', report: built, syllabusClass: 9 })
+    expect(parent.syllabusClass).toBe(9)
+    expect(parent.subjects[0]!.parts).toEqual([
+      { part: 'basics', score: 1, outOf: 1, correct: 1, wrong: 0, notAttempted: 0 },
+      { part: 'syllabus', score: -0.25, outOf: 1, correct: 0, wrong: 1, notAttempted: 0 },
+    ])
+    // English has no syllabus part, so it is not split.
+    expect(parent.subjects[1]!.parts).toBeUndefined()
+  })
+
+  it('leaves a 15-question sheet exactly as it was: no parts, no class', () => {
+    const parent = toParentReport({ name: 'a', submittedAt: '', report: buildReport(input()), syllabusClass: 9 })
+    expect('syllabusClass' in parent).toBe(false)
+    expect(parent.subjects.some((s) => 'parts' in s)).toBe(false)
   })
 })

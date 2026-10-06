@@ -15,7 +15,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@supabase/supabase-js'
-import { assemblePaper, type PoolItem } from '../src/lib/assemble'
+import { assemblePaper, choosePaperShape, type PoolItem } from '../src/lib/assemble'
 import { generateToken } from '../src/lib/token'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -125,7 +125,7 @@ async function main(): Promise<number> {
     )
   }
 
-  const paper = assemblePaper({ pool: (pool ?? []) as PoolItem[], forClass: 11 })
+  const paper = assemblePaper({ pool: (pool ?? []) as PoolItem[], shape: choosePaperShape((pool ?? []) as PoolItem[]), forClass: 11 })
   const { data: assessment, error: issueErr } = await db.rpc('issue_assessment', {
     p_lead_id: lead!.id,
     p_issued_by: auth.user.id,
@@ -139,7 +139,7 @@ async function main(): Promise<number> {
       .from('assessment_items')
       .select('position', { count: 'exact', head: true })
       .eq('assessment_id', assessment.id)
-    check('the issued paper holds all 15 questions', count === 15, `got ${count}`)
+    check('the issued paper holds every question', count === paper.length, `got ${count} of ${paper.length}`)
   }
 
   // ── what staff may NOT do ──────────────────────────────────────────────────
@@ -162,7 +162,7 @@ async function main(): Promise<number> {
     .from('assessment_items')
     .select('position', { count: 'exact', head: true })
     .eq('assessment_id', assessment!.id)
-  check('delete a frozen paper', left === 15, `${left} of 15 rows survived`)
+  check('delete a frozen paper', left === paper.length, `${left} of ${paper.length} rows survived`)
 
   // ── what anonymous visitors may see ────────────────────────────────────────
   await db.auth.signOut()

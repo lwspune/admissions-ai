@@ -9,6 +9,9 @@ function mcqRow(overrides: Partial<BankRow> = {}): BankRow {
     id: 'item-1',
     ref: 'M-E-01',
     subject: 'maths',
+    part: 'basics',
+    taught_in: 6,
+    term: null,
     skill: 'number-series',
     difficulty: 'easy',
     format: 'mcq',
@@ -87,7 +90,7 @@ describe('toCandidatePaper — the answer key never leaves the server', () => {
     // An allow-list, not a delete-list: a column added to the bank later must
     // not silently start reaching candidates.
     const out = toCandidatePaper(paper)
-    expect(Object.keys(out[0]!).sort()).toEqual(['format', 'options', 'position', 'stem', 'subject'])
+    expect(Object.keys(out[0]!).sort()).toEqual(['format', 'options', 'part', 'position', 'stem', 'subject'])
   })
 })
 
@@ -127,5 +130,21 @@ describe('toCandidatePaper — what the candidate does need', () => {
     const row = mcqRow({ options: { A: '1', B: '2', C: '3', D: '4', E: 'leak' } as never })
     const json = JSON.stringify(toCandidatePaper([{ position: 1, item: row }]))
     expect(json).not.toContain('leak')
+  })
+})
+
+// 2026-10-06: every question is labelled "Basics" or with its class syllabus,
+// so the part travels. The class tag and term do not: the label comes from the
+// assessment, and a per-item class would let a candidate map the bank.
+describe('toCandidatePaper — parts', () => {
+  it('carries the part a question belongs to', () => {
+    const out = toCandidatePaper([{ position: 1, item: mcqRow({ part: 'syllabus', taught_in: 9, term: 1 }) }])
+    expect(out[0]!.part).toBe('syllabus')
+  })
+
+  it('withholds the class tag and the term', () => {
+    const bytes = JSON.stringify(toCandidatePaper([{ position: 1, item: mcqRow({ part: 'syllabus', taught_in: 9, term: 1 }) }]))
+    expect(bytes).not.toContain('taught_in')
+    expect(bytes).not.toContain('term')
   })
 })

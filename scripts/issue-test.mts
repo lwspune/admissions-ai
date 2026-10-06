@@ -18,7 +18,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@supabase/supabase-js'
-import { assemblePaper, type PoolItem } from '../src/lib/assemble'
+import { assemblePaper, choosePaperShape, type PoolItem } from '../src/lib/assemble'
 import { parseClassLevel } from '../src/lib/classes'
 import { generateToken } from '../src/lib/token'
 
@@ -81,6 +81,8 @@ async function main(): Promise<number> {
   try {
     paper = assemblePaper({
       pool: (pool ?? []) as PoolItem[],
+      // The same choice the app makes: 30 questions once the class's syllabus batch is live.
+      shape: choosePaperShape((pool ?? []) as PoolItem[]),
       excludeItemIds: (seenRows ?? []).map((r) => r.item_id as string),
       forClass,
     })

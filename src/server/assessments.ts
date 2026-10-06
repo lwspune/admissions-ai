@@ -1,6 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { assemblePaper, type PoolItem } from '../lib/assemble'
+import { assemblePaper, choosePaperShape, type PoolItem } from '../lib/assemble'
 import { parseClassLevel, type ClassLevel } from '../lib/classes'
 import { generateToken } from '../lib/token'
 
@@ -12,6 +12,9 @@ export interface Assessment {
   created_at: string
   expires_at: string
   state: string
+  question_count: number
+  limit_minutes: number
+  class_level: number | null
   superseded_by: string | null
   voided_reason: string | null
 }
@@ -21,8 +24,11 @@ export interface Assessment {
  *
  * The draw happens here, where it is unit tested; the write happens in the
  * `issue_assessment` function, where it gets a transaction. Splitting an
- * assessment from its 15 items across two REST calls risks a paper with
- * missing questions, scored out of 15 regardless.
+ * assessment from its items across two REST calls risks a paper with missing
+ * questions, scored out of the full count regardless.
+ *
+ * The class's pool picks the paper: 30 questions once its syllabus batch is
+ * live, 15 until then (2026-10-06).
  */
 export async function issueAssessment(
   db: Db,
@@ -40,7 +46,8 @@ export async function issueAssessment(
   const pool = await livePool(db, classLevel)
   const seen = await itemsAlreadySeen(db, leadId)
 
-  const paper = assemblePaper({ pool, excludeItemIds: seen, forClass: classLevel })
+  const shape = choosePaperShape(pool)
+  const paper = assemblePaper({ pool, shape, excludeItemIds: seen, forClass: classLevel })
 
   const { data, error } = await db.rpc('issue_assessment', {
     p_lead_id: leadId,
@@ -98,8 +105,8 @@ async function admittingClass(db: Db, leadId: string): Promise<ClassLevel> {
 }
 
 /**
- * Every live item this class may be shown, as the draw needs it: three
- * columns and no answer.
+ * Every live item this class may be shown, as the draw needs it: id, subject,
+ * difficulty and part, and no answer.
  *
  * Goes through `live_pool()` rather than selecting test_items, because SELECT
  * on that table is scoped to items a staff member has already seen on a paper

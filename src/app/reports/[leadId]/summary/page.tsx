@@ -3,7 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadParentReport } from '@/server/report'
-import type { ParentCounts } from '@/lib/report'
+import type { ParentReport } from '@/lib/report'
 import type { Subject } from '@/lib/types'
 import { PrintButton } from './PrintButton'
 
@@ -52,7 +52,7 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
         <header className="bg-gradient-to-br from-blue-900 to-indigo-700 px-5 py-7 text-white sm:px-8">
           <p className="text-xs uppercase tracking-[0.14em] text-indigo-200">Aptitude Test</p>
           <h1 className="mt-1 text-2xl font-bold">Score Report</h1>
-          <p className="mt-1 text-sm text-indigo-100">15 questions · Maths, English and Science</p>
+          <p className="mt-1 text-sm text-indigo-100">{total.outOf} questions · Maths, English and Science</p>
         </header>
 
         <div className="px-5 pb-7 pt-6 sm:px-8">
@@ -100,7 +100,7 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
           <h2 className="mt-7 text-sm font-semibold uppercase tracking-wider text-slate-600">By subject</h2>
           <div className="mt-3 grid gap-3 sm:grid-cols-3">
             {report.subjects.map((s) => (
-              <SubjectCard key={s.subject} subject={s.subject} counts={s} />
+              <SubjectCard key={s.subject} subject={s.subject} counts={s} syllabusClass={report.syllabusClass} />
             ))}
           </div>
 
@@ -131,7 +131,15 @@ function Pill({ tone, n, label }: { tone: string; n: number; label: string }) {
   )
 }
 
-function SubjectCard({ subject, counts }: { subject: Subject; counts: ParentCounts }) {
+function SubjectCard({
+  subject,
+  counts,
+  syllabusClass,
+}: {
+  subject: Subject
+  counts: ParentReport['subjects'][number]
+  syllabusClass: number | undefined
+}) {
   const c = SUBJECT[subject]
   return (
     <section aria-label={c.label} className={`rounded-xl border border-t-4 border-slate-200 px-4 py-3.5 ${c.border}`}>
@@ -144,6 +152,13 @@ function SubjectCard({ subject, counts }: { subject: Subject; counts: ParentCoun
       <span aria-hidden="true" className={`block h-2 overflow-hidden rounded-full ${c.soft}`}>
         <span className={`block h-full rounded-full ${c.bar}`} style={{ width: `${share(counts.score, counts.outOf)}%` }} />
       </span>
+      {counts.parts && syllabusClass !== undefined && (
+        <p className="mt-2 text-sm tabular-nums text-slate-700">
+          {counts.parts
+            .map((p) => `${p.part === 'syllabus' ? `Class ${syllabusClass}` : 'Basics'} ${p.score} / ${p.outOf}`)
+            .join(' · ')}
+        </p>
+      )}
       <dl className="mt-3 space-y-0.5 text-sm text-slate-600">
         <Row label="Correct" n={counts.correct} />
         <Row label="Wrong" n={counts.wrong} />

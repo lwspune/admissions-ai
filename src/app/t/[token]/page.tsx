@@ -21,6 +21,13 @@ export default async function TestPage({ params }: { params: Promise<{ token: st
   }
 
   return (
-    <CandidateFlow token={token} candidateName={result.candidateName} expiresAt={result.expiresAt} />
+    <CandidateFlow
+      token={token}
+      candidateName={result.candidateName}
+      expiresAt={result.expiresAt}
+      questionCount={result.questionCount}
+      minutes={result.minutes}
+      syllabusClass={result.syllabusClass}
+    />
   )
 }

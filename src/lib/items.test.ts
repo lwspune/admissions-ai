@@ -163,7 +163,8 @@ describe('parseOptionValue', () => {
 // Per-class coverage. Filtering the draw by class splits every stratum, and
 // the class that loses is the one whose candidate sees a 500. This is the
 // number the lint and the bank page both read; it has to be right in one place.
-import { coverageByClass } from './items'
+import { coverageByClass, thirtyReadiness } from './items'
+import type { Part } from './types'
 import { CLASSES } from './classes'
 import { PAPER_MIX } from './types'
 
@@ -259,5 +260,62 @@ describe('keySkew', () => {
   it('ignores numeric items and subjects too small to judge', () => {
     const numeric = Array.from({ length: 20 }, () => ({ subject: 'maths' as Subject, format: 'numeric', answer_key: null }))
     expect(keySkew([...numeric, ...keys('maths', 'AAAA')])).toEqual([])
+  })
+})
+
+// ── the 30-question paper (2026-10-06) ───────────────────────────────────────
+
+describe('coverageByClass — basics only', () => {
+  it('does not count syllabus items toward the 15-question fallback', () => {
+    const cells = coverageByClass([
+      { subject: 'maths' as Subject, difficulty: 'easy' as Difficulty, taught_in: 8, part: 'syllabus' as const },
+      { subject: 'maths' as Subject, difficulty: 'easy' as Difficulty, taught_in: 8, part: 'basics' as const },
+    ])
+    expect(cells.find((c) => c.classLevel === 9 && c.subject === 'maths' && c.difficulty === 'easy')!.count).toBe(1)
+  })
+})
+
+describe('thirtyReadiness', () => {
+  type Row = { subject: Subject; difficulty: Difficulty; taught_in: number; part: Part; term: number | null }
+  const many = (n: number, row: Row): Row[] => Array.from({ length: n }, () => ({ ...row }))
+
+  /** Enough basics for every class, plus first-term class 9 syllabus. */
+  function bankFor10(): Row[] {
+    const out: Row[] = []
+    for (const subject of SUBJECTS) {
+      out.push(...many(6, { subject, difficulty: 'easy', taught_in: 6, part: 'basics', term: null }))
+      out.push(...many(2, { subject, difficulty: 'moderate', taught_in: 6, part: 'basics', term: null }))
+      out.push(...many(2, { subject, difficulty: 'difficult', taught_in: 6, part: 'basics', term: null }))
+    }
+    for (const subject of ['maths', 'science'] as Subject[]) {
+      out.push(...many(3, { subject, difficulty: 'easy', taught_in: 9, part: 'syllabus', term: 1 }))
+      out.push(...many(1, { subject, difficulty: 'moderate', taught_in: 9, part: 'syllabus', term: 1 }))
+      out.push(...many(1, { subject, difficulty: 'difficult', taught_in: 9, part: 'syllabus', term: 1 }))
+    }
+    return out
+  }
+
+  const forClass = (rows: Row[], c: number) => thirtyReadiness(rows).find((r) => r.classLevel === c)!
+
+  it('marks a class ready when every quota of the 30-question paper fills', () => {
+    expect(forClass(bankFor10(), 10).ready).toBe(true)
+    expect(forClass(bankFor10(), 10).missing).toEqual([])
+  })
+
+  it('leaves the other classes on 15 questions: syllabus is exactly class N−1', () => {
+    expect(forClass(bankFor10(), 11).ready).toBe(false)
+    expect(forClass(bankFor10(), 9).ready).toBe(false)
+  })
+
+  it('names what is missing', () => {
+    const rows = bankFor10().filter((r) => !(r.part === 'syllabus' && r.subject === 'science' && r.difficulty === 'difficult'))
+    expect(forClass(rows, 10).missing).toEqual([
+      { subject: 'science', part: 'syllabus', difficulty: 'difficult', count: 0, needed: 1 },
+    ])
+  })
+
+  it('does not count second-term syllabus items', () => {
+    const rows = bankFor10().map((r) => (r.part === 'syllabus' ? { ...r, term: 2 } : r))
+    expect(forClass(rows, 10).ready).toBe(false)
   })
 })

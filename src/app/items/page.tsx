@@ -3,7 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadBank, type BankItem } from '@/server/items'
-import { groupBank, coverageByClass, type ItemStatus, type CoverageCell } from '@/lib/items'
+import { groupBank, coverageByClass, thirtyReadiness, type ItemStatus, type CoverageCell, type Readiness } from '@/lib/items'
 import { CLASSES, TAUGHT_IN_MIN } from '@/lib/classes'
 import { CHOICES, SUBJECTS, DIFFICULTIES, type Subject } from '@/lib/types'
 
@@ -63,7 +63,10 @@ export default async function ItemsPage({
         </p>
       </header>
 
-      <Coverage cells={coverageByClass(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))} />
+      <Coverage
+        cells={coverageByClass(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))}
+        readiness={thirtyReadiness(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))}
+      />
 
       <nav aria-label="Filter by status" className="mt-4 flex flex-wrap gap-2">
         {FILTERS.map((f) => (
@@ -120,7 +123,8 @@ const COVERAGE_STYLE: Record<CoverageCell['status'], string> = {
  * and empty for class 9. Red means that class cannot be issued a paper at
  * all; amber means every paper for that class draws much the same items.
  */
-function Coverage({ cells }: { cells: CoverageCell[] }) {
+function Coverage({ cells, readiness }: { cells: CoverageCell[]; readiness: Readiness[] }) {
+  const ready = (c: number) => readiness.find((r) => r.classLevel === c)!
   const cell = (c: number, s: Subject, d: string) =>
     cells.find((x) => x.classLevel === c && x.subject === s && x.difficulty === d)!
   return (
@@ -130,12 +134,14 @@ function Coverage({ cells }: { cells: CoverageCell[] }) {
       </h2>
       <p className="mt-1 text-xs text-slate-500">
         An admit to class N is tested on content taught up to class N−1. Red: that class cannot be issued a paper.
-        Amber: fewer than twice a paper’s need, so its papers repeat.
+        Amber: fewer than twice a paper’s need, so its papers repeat. The counts are basics; Paper shows whether a
+        class gets 30 questions, which needs its class N−1 first-term syllabus items live.
       </p>
       <table className="mt-2 w-full text-xs">
         <thead>
           <tr className="text-left text-slate-500">
             <th scope="col" className="py-1 pr-3 font-medium">Class</th>
+            <th scope="col" className="py-1 pr-3 font-medium">Paper</th>
             {SUBJECTS.map((s) =>
               DIFFICULTIES.map((d) => (
                 <th key={`${s}/${d}`} scope="col" className="py-1 pr-3 font-medium">
@@ -151,6 +157,21 @@ function Coverage({ cells }: { cells: CoverageCell[] }) {
               <th scope="row" className="py-1 pr-3 text-left font-medium text-slate-700">
                 {c}
               </th>
+              <td className="py-1 pr-3">
+                {ready(c).ready ? (
+                  <span className="rounded bg-emerald-100 px-1.5 py-0.5 text-emerald-900">30 q</span>
+                ) : (
+                  <span
+                    className="tabular-nums text-slate-700"
+                    title={ready(c).missing.map((m) => `${m.subject} ${m.part} ${m.difficulty}: ${m.count} of ${m.needed}`).join('; ')}
+                  >
+                    15 q
+                    <span className="sr-only">
+                      , 30 questions needs {ready(c).missing.map((m) => `${m.needed - m.count} more ${m.subject} ${m.part} ${m.difficulty}`).join(', ')}
+                    </span>
+                  </span>
+                )}
+              </td>
               {SUBJECTS.map((s) =>
                 DIFFICULTIES.map((d) => {
                   const x = cell(c, s, d)

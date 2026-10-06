@@ -6,6 +6,7 @@ import {
   parseClassLevel,
   contentCeiling,
   isDrawableFor,
+  isSyllabusFor,
 } from './classes'
 
 // The lead form used to store class as free text ("9", "9th", "IX"), which no
@@ -71,5 +72,30 @@ describe('isDrawableFor', () => {
 
   it('lets the floor reach every class, so an untagged bank changes nothing', () => {
     for (const c of CLASSES) expect(isDrawableFor(TAUGHT_IN_MIN, c)).toBe(true)
+  })
+})
+
+// Syllabus questions (2026-10-06) come from exactly class N−1, first term:
+// a candidate tested in October has not been taught the rest of the year.
+describe('isSyllabusFor', () => {
+  it('takes first-term content of the class just below the admitting class', () => {
+    expect(isSyllabusFor(9, 1, 10)).toBe(true)
+    expect(isSyllabusFor(11, 1, 12)).toBe(true)
+  })
+
+  it('refuses second-term content', () => {
+    expect(isSyllabusFor(9, 2, 10)).toBe(false)
+  })
+
+  it('refuses an earlier class, unlike basics', () => {
+    expect(isSyllabusFor(8, 1, 10)).toBe(false)
+  })
+
+  it('refuses the admitting class itself', () => {
+    expect(isSyllabusFor(10, 1, 10)).toBe(false)
+  })
+
+  it('refuses an item with no term', () => {
+    expect(isSyllabusFor(9, null, 10)).toBe(false)
   })
 })

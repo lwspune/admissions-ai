@@ -3,7 +3,10 @@
 // tested on — is checked by the same function the class rule lives beside.
 
 import { isDrawableFor, contentCeiling, type ClassLevel } from './classes'
-import { SUBJECTS, DIFFICULTIES, PAPER_MIX, QUESTIONS_PER_PAPER, type Subject, type Difficulty } from './types'
+import { SUBJECTS, DIFFICULTIES, PAPER_MIX, SHAPE_15, type Subject, type Difficulty } from './types'
+
+// The parent pack still shows the 15-question paper; it moves to 30 in Phase 3.
+const QUESTIONS_PER_PAPER = SHAPE_15.questions
 
 export interface SampleItem {
   ref: string

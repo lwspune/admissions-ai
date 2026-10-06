@@ -47,3 +47,15 @@ export function contentCeiling(admittingTo: ClassLevel): number {
 export function isDrawableFor(taughtIn: number, admittingTo: ClassLevel): boolean {
   return taughtIn <= contentCeiling(admittingTo)
 }
+
+/**
+ * Whether a syllabus item may appear on a paper for this admit (2026-10-06).
+ *
+ * Syllabus questions are class N−1's own content, so exactly that class — not
+ * "up to", which is the basics rule — and only first-term chapters, because a
+ * candidate tested in October is still partway through class N−1. Mirrored in
+ * `live_pool()`.
+ */
+export function isSyllabusFor(taughtIn: number, term: number | null, admittingTo: ClassLevel): boolean {
+  return taughtIn === contentCeiling(admittingTo) && term === 1
+}

@@ -94,6 +94,11 @@ async function main(): Promise<number> {
         skill: item.skill,
         difficulty: item.difficulty,
         taught_in: item.taught_in,
+        // Sent on every upsert, as the seed sends every column it names: an
+        // item that does not say otherwise is basics, and only syllabus
+        // content carries a term (migration 0014).
+        part: item.part ?? 'basics',
+        term: item.part === 'syllabus' ? item.term : null,
         format: item.format,
         stem: item.stem,
         options: item.format === 'mcq' ? item.options : null,

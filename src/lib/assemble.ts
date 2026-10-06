@@ -1,14 +1,17 @@
-import { SUBJECTS, DIFFICULTIES, PAPER_MIX, type Subject, type Difficulty } from './types'
+import { SHAPE_15, SHAPE_30, type Subject, type Difficulty, type Part, type PaperShape } from './types'
 import type { ClassLevel } from './classes'
 
 export interface PoolItem {
   id: string
   subject: Subject
   difficulty: Difficulty
+  part: Part
 }
 
 export interface AssembleInput {
   pool: PoolItem[]
+  /** Which paper to draw. The 15-question paper when not given. */
+  shape?: PaperShape
   /**
    * Items this lead has already seen on a previous issue. A strong preference,
    * not a hard rule: see assemblePaper.
@@ -26,7 +29,7 @@ export interface AssembleInput {
 }
 
 /**
- * Thrown when a (subject, difficulty) stratum cannot fill its quota.
+ * Thrown when a (subject, part, difficulty) stratum cannot fill its quota.
  *
  * This fails loudly on purpose. Silently returning a short paper would produce
  * scores out of 13 that look like scores out of 15, and nobody would notice
@@ -39,9 +42,10 @@ export class StratumExhaustedError extends Error {
     readonly needed: number,
     readonly available: number,
     readonly forClass?: ClassLevel,
+    readonly part: Part = 'basics',
   ) {
     super(
-      `Cannot draw a paper${forClass ? ` for a class ${forClass} admit` : ''}: ${subject}/${difficulty} ` +
+      `Cannot draw a paper${forClass ? ` for a class ${forClass} admit` : ''}: ${subject}/${difficulty}${part === 'syllabus' ? ' (syllabus)' : ''} ` +
         `needs ${needed} live item(s) but only ${available} are available` +
         `${forClass ? ` at or below class ${forClass - 1} content` : ''}. ` +
         'Author more items or widen the exclusions.',
@@ -61,8 +65,8 @@ function shuffle<T>(items: readonly T[], rng: () => number): T[] {
 }
 
 /**
- * Draws one frozen paper: 3 easy + 1 moderate + 1 difficult per subject,
- * interleaved into mixed order.
+ * Draws one frozen paper to the given shape — per subject and part, so many
+ * easy, moderate and difficult — interleaved into mixed order.
  *
  * Selection is plain uniform random. With 100 items per subject and 5 drawn,
  * overlap between two candidates is already negligible, so exposure-weighted
@@ -79,28 +83,41 @@ function shuffle<T>(items: readonly T[], rng: () => number): T[] {
  * a short paper scored out of 15 is worse than a visible failure.
  */
 export function assemblePaper(input: AssembleInput): PoolItem[] {
-  const { pool, excludeItemIds = [], rng = Math.random, forClass } = input
+  const { pool, shape = SHAPE_15, excludeItemIds = [], rng = Math.random, forClass } = input
   const excluded = new Set(excludeItemIds)
 
   const picked: PoolItem[] = []
-  for (const subject of SUBJECTS) {
-    for (const difficulty of DIFFICULTIES) {
-      const needed = PAPER_MIX[difficulty]
-      const stratum = pool.filter(
-        (item) => item.subject === subject && item.difficulty === difficulty,
-      )
+  for (const { subject, part, difficulty, count: needed } of shape.quotas) {
+    const stratum = stratumOf(pool, subject, part, difficulty)
 
-      if (stratum.length < needed) {
-        throw new StratumExhaustedError(subject, difficulty, needed, stratum.length, forClass)
-      }
-
-      const unseen = shuffle(stratum.filter((item) => !excluded.has(item.id)), rng)
-      const seen = shuffle(stratum.filter((item) => excluded.has(item.id)), rng)
-      picked.push(...[...unseen, ...seen].slice(0, needed))
+    if (stratum.length < needed) {
+      throw new StratumExhaustedError(subject, difficulty, needed, stratum.length, forClass, part)
     }
+
+    const unseen = shuffle(stratum.filter((item) => !excluded.has(item.id)), rng)
+    const seen = shuffle(stratum.filter((item) => excluded.has(item.id)), rng)
+    picked.push(...[...unseen, ...seen].slice(0, needed))
   }
 
-  // Interleave. Drawing subject-by-subject would otherwise present three blocks,
-  // which is the sectioned paper we decided against.
+  // Interleave. Drawing subject-by-subject would otherwise present blocks,
+  // which is the sectioned paper we decided against — for parts as well as
+  // subjects (2026-10-06: every question labelled, all mixed).
   return shuffle(picked, rng)
+}
+
+/**
+ * The paper a class gets: 30 questions once every quota of the longer paper
+ * can be filled from its pool, otherwise the 15-question paper. A class's
+ * syllabus items go live as one signed-off batch, so this flips once per
+ * class rather than paper by paper.
+ */
+export function choosePaperShape(pool: readonly PoolItem[]): PaperShape {
+  const fits = SHAPE_30.quotas.every(
+    ({ subject, part, difficulty, count }) => stratumOf(pool, subject, part, difficulty).length >= count,
+  )
+  return fits ? SHAPE_30 : SHAPE_15
+}
+
+function stratumOf(pool: readonly PoolItem[], subject: Subject, part: Part, difficulty: Difficulty): PoolItem[] {
+  return pool.filter((item) => item.subject === subject && item.part === part && item.difficulty === difficulty)
 }

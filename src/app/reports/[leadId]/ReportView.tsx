@@ -60,6 +60,17 @@ export function ReportView({ data, role }: { data: LeadReport; role: string }) {
                     label={SUBJECT_LABEL[subject]}
                     score={report.totals.sections[subject]}
                     outOf={report.questions.filter((q) => q.subject === subject).length}
+                    parts={
+                      data.issue.syllabusClass !== null && report.questions.some((q) => q.subject === subject && q.part === 'syllabus')
+                        ? report.totals.parts
+                            .filter((p) => p.subject === subject)
+                            .map((p) => ({
+                              label: p.part === 'syllabus' ? `Class ${data.issue.syllabusClass}` : 'Basics',
+                              score: p.score,
+                              outOf: p.outOf,
+                            }))
+                        : []
+                    }
                   />
                 ))}
               </ul>
@@ -83,14 +94,25 @@ export function ReportView({ data, role }: { data: LeadReport; role: string }) {
             {showDetail ? 'Hide detail' : 'Show detail'}
           </button>
 
-          {showDetail && <Detail questions={report.questions} role={role} />}
+          {showDetail && <Detail questions={report.questions} role={role} syllabusClass={data.issue.syllabusClass} />}
         </>
       )}
     </>
   )
 }
 
-function SectionBar({ label, score, outOf }: { label: string; score: number; outOf: number }) {
+function SectionBar({
+  label,
+  score,
+  outOf,
+  parts,
+}: {
+  label: string
+  score: number
+  outOf: number
+  /** Basics and Class N−1, on a 30-question paper. Empty otherwise. */
+  parts: { label: string; score: number; outOf: number }[]
+}) {
   // Negative marking means a section can go below zero; clamp the BAR, never
   // the number, so the reader sees the real score.
   const pct = outOf === 0 ? 0 : Math.max(0, Math.min(100, (score / outOf) * 100))
@@ -105,6 +127,11 @@ function SectionBar({ label, score, outOf }: { label: string; score: number; out
       <div className="mt-1 h-2 rounded bg-slate-100">
         <div className="h-2 rounded bg-slate-700" style={{ width: `${pct}%` }} />
       </div>
+      {parts.length > 0 && (
+        <p className="mt-1 text-xs tabular-nums text-slate-600">
+          {parts.map((p) => `${p.label} ${p.score} / ${p.outOf}`).join(' · ')}
+        </p>
+      )}
     </li>
   )
 }
@@ -179,12 +206,19 @@ function Facts({
   )
 }
 
+function partLabel(part: 'basics' | 'syllabus', syllabusClass: number | null): string {
+  if (syllabusClass === null) return ''
+  return part === 'syllabus' ? ` · Class ${syllabusClass}` : ' · Basics'
+}
+
 function Detail({
   questions,
   role,
+  syllabusClass,
 }: {
   questions: NonNullable<LeadReport['report']>['questions']
   role: string
+  syllabusClass: number | null
 }) {
   return (
     <div className="mt-4 overflow-x-auto">
@@ -214,7 +248,10 @@ function Detail({
               <td className="py-2 pr-3 text-slate-700">
                 {q.stem || <span className="text-slate-400">—</span>}
               </td>
-              <td className="py-2 pr-2">{SUBJECT_LABEL[q.subject]}</td>
+              <td className="py-2 pr-2">
+                {SUBJECT_LABEL[q.subject]}
+                {partLabel(q.part, syllabusClass)}
+              </td>
               <td className="py-2 pr-2 text-slate-500">{q.skill}</td>
               <td className="py-2 pr-2 text-slate-500">{q.difficulty}</td>
               <td className={`py-2 pr-2 ${verdictClass(q.verdict)}`}>

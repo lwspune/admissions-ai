@@ -2,7 +2,9 @@ import { describe, it, expect, beforeEach, afterAll } from 'vitest'
 import { serviceClient } from './supabase'
 import { issueAssessment } from './assessments'
 import { openByToken, identify, startAttempt, saveAnswer, recordEvents, submitAttempt } from './attempt'
-import { LIMIT_MS } from '../lib/types'
+import { limitMsFor } from '../lib/types'
+
+const LIMIT_MS = limitMsFor(15)
 
 // Integration tests against the real database (npm run test:integration).
 // Mocks would not exercise the constraints, triggers and RPC that most of this
@@ -48,6 +50,28 @@ async function freshLead(classLevel: number | null = 11) {
 beforeEach(async () => {
   leadId = await freshLead()
 })
+
+type PoolRow = { id: string; subject: string; part: string }
+
+/**
+ * A 15-question paper by hand: five basics per subject from this pool, minus
+ * any ids in `skip`, plus the ids in `extra` counted against their subject.
+ * The database checks the per-subject make-up (migration 0014), so a paper
+ * built to test some other rule has to have the right shape first.
+ */
+function basicsPaper(pool: PoolRow[], { skip = [], extra = [] }: { skip?: string[]; extra?: PoolRow[] } = {}): string[] {
+  const ids: string[] = extra.map((r) => r.id)
+  for (const subject of ['maths', 'english', 'science']) {
+    const need = 5 - extra.filter((r) => r.subject === subject).length
+    ids.push(
+      ...pool
+        .filter((r) => r.subject === subject && r.part === 'basics' && !skip.includes(r.id) && !ids.includes(r.id))
+        .slice(0, need)
+        .map((r) => r.id),
+    )
+  }
+  return ids
+}
 
 afterAll(async () => {
   await db.from('leads').delete().like('name', 'ITest%')
@@ -196,13 +220,16 @@ describe('issueAssessment — class scoping', () => {
   it('the database refuses a paper holding an item above the ceiling, whatever the caller drew', async () => {
     const lead9 = await freshLead(9)
     const { data: pool } = await db.rpc('live_pool', { p_class: 9 })
-    const fourteen = (pool as { id: string }[]).map((r) => r.id).filter((id) => id !== seniorItemId).slice(0, 14)
+    const paper = basicsPaper(pool as PoolRow[], {
+      skip: [seniorItemId],
+      extra: [{ id: seniorItemId, subject: 'maths', part: 'basics' }],
+    })
 
     const { error } = await db.rpc('issue_assessment', {
       p_lead_id: lead9,
       p_issued_by: null,
       p_token: 'itest-ceiling-' + Date.now(),
-      p_item_ids: [...fourteen, seniorItemId],
+      p_item_ids: paper,
     })
     expect(error).not.toBeNull()
     expect(error!.message).toMatch(/class|ceiling/i)
@@ -214,15 +241,157 @@ describe('issueAssessment — class scoping', () => {
   it('accepts the same paper for a class 12 admit', async () => {
     const lead12 = await freshLead(12)
     const { data: pool } = await db.rpc('live_pool', { p_class: 12 })
-    const fourteen = (pool as { id: string }[]).map((r) => r.id).filter((id) => id !== seniorItemId).slice(0, 14)
+    const paper = basicsPaper(pool as PoolRow[], {
+      skip: [seniorItemId],
+      extra: [{ id: seniorItemId, subject: 'maths', part: 'basics' }],
+    })
 
     const { error } = await db.rpc('issue_assessment', {
       p_lead_id: lead12,
       p_issued_by: null,
       p_token: 'itest-ceiling-ok-' + Date.now(),
-      p_item_ids: [...fourteen, seniorItemId],
+      p_item_ids: paper,
     })
     expect(error).toBeNull()
+  })
+})
+
+// ── the 30-question paper (migration 0014) ───────────────────────────────────
+//
+// Fixture: exactly one paper's worth of first-term class 7 syllabus items
+// (3/1/1 in maths and in science), so a class 8 admit can be drawn 30
+// questions. Class 8 because no real lead is a class 8 admit: a real paper
+// issued while these exist cannot pick one up. Plus two items that must NOT
+// be drawn for a class 8 admit: second-term class 7, and first-term class 8.
+
+describe('the 30-question paper', () => {
+  const SKILL = 'ITest-syllabus'
+
+  async function removeFixtures() {
+    await db.from('leads').delete().like('name', 'ITest%')
+    await db.from('test_items').delete().eq('skill', SKILL)
+  }
+
+  const row = (subject: string, difficulty: string, over: Record<string, unknown> = {}) => ({
+    subject,
+    skill: SKILL,
+    difficulty,
+    format: 'numeric',
+    stem: `ITest syllabus ${subject} ${difficulty}`,
+    numeric_answer: 1,
+    rationale: 'Integration fixture: class 7 first-term syllabus.',
+    status: 'live',
+    part: 'syllabus',
+    term: 1,
+    taught_in: 7,
+    ...over,
+  })
+
+  let secondTermId: string
+  let classEightId: string
+
+  beforeEach(async () => {
+    await removeFixtures()
+    const rows = []
+    for (const subject of ['maths', 'science']) {
+      rows.push(row(subject, 'easy'), row(subject, 'easy'), row(subject, 'easy'))
+      rows.push(row(subject, 'moderate'), row(subject, 'difficult'))
+    }
+    const { error } = await db.from('test_items').insert(rows)
+    if (error) throw new Error(`could not create syllabus fixtures: ${error.message}`)
+
+    const { data: t2 } = await db
+      .from('test_items')
+      .insert(row('maths', 'easy', { term: 2, stem: 'ITest term 2' }))
+      .select('id')
+      .single()
+    const { data: c8 } = await db
+      .from('test_items')
+      .insert(row('maths', 'easy', { taught_in: 8, stem: 'ITest class 8' }))
+      .select('id')
+      .single()
+    secondTermId = t2!.id as string
+    classEightId = c8!.id as string
+  })
+
+  afterAll(removeFixtures)
+
+  it('live_pool offers a class 8 admit only first-term class 7 syllabus items', async () => {
+    const { data } = await db.rpc('live_pool', { p_class: 8 })
+    const syllabus = (data as PoolRow[]).filter((r) => r.part === 'syllabus')
+    expect(syllabus).toHaveLength(10)
+    const ids = (data as PoolRow[]).map((r) => r.id)
+    expect(ids).not.toContain(secondTermId)
+    expect(ids).not.toContain(classEightId)
+  })
+
+  it('issues a class 8 admit 30 questions: ten per subject, five syllabus in maths and science', async () => {
+    const lead8 = await freshLead(8)
+    const { assessment } = await issueAssessment(db, { leadId: lead8 })
+    expect(assessment.question_count).toBe(30)
+    expect(assessment.limit_minutes).toBe(30)
+    expect(assessment.class_level).toBe(8)
+
+    const { data: items } = await db
+      .from('assessment_items')
+      .select('position, test_items(subject, part)')
+      .eq('assessment_id', assessment.id)
+    expect(items).toHaveLength(30)
+    const count = (subject: string, part: string) =>
+      items!.filter((r) => {
+        const t = r.test_items as never as { subject: string; part: string }
+        return t.subject === subject && t.part === part
+      }).length
+    expect(count('english', 'basics')).toBe(10)
+    expect(count('maths', 'basics')).toBe(5)
+    expect(count('maths', 'syllabus')).toBe(5)
+    expect(count('science', 'basics')).toBe(5)
+    expect(count('science', 'syllabus')).toBe(5)
+  })
+
+  it('keeps a class without syllabus items on the 15-question paper', async () => {
+    const lead9 = await freshLead(9)
+    const { assessment } = await issueAssessment(db, { leadId: lead9 })
+    expect(assessment.question_count).toBe(15)
+    expect(assessment.limit_minutes).toBe(15)
+    expect(assessment.class_level).toBe(9)
+  })
+
+  it('tells the candidate 30 questions, 30 minutes and the syllabus class', async () => {
+    const lead8 = await freshLead(8)
+    const { assessment } = await issueAssessment(db, { leadId: lead8 })
+    const opened = await openByToken(db, assessment.token)
+    expect(opened).toMatchObject({ status: 'ok', questionCount: 30, minutes: 30, syllabusClass: 7 })
+  })
+
+  it('runs 30 minutes and labels each question with its part, and nothing more', async () => {
+    const lead8 = await freshLead(8)
+    const { assessment } = await issueAssessment(db, { leadId: lead8 })
+    const { attempt, questions } = await startAttempt(db, { token: assessment.token, context: {} })
+    const remaining = new Date(attempt.deadline_at).getTime() - Date.now()
+    expect(remaining).toBeGreaterThan(limitMsFor(30) - 10_000)
+    expect(questions.filter((q) => q.part === 'syllabus')).toHaveLength(10)
+    const json = JSON.stringify(questions)
+    expect(json).not.toContain('taught_in')
+    expect(json).not.toContain('term')
+  })
+
+  it('the database refuses 30 basics items: the syllabus part is part of the shape', async () => {
+    const lead8 = await freshLead(8)
+    const { data: pool } = await db.rpc('live_pool', { p_class: 8 })
+    const basics = (pool as PoolRow[]).filter((r) => r.part === 'basics')
+    const thirty = ['maths', 'english', 'science'].flatMap((s) =>
+      basics.filter((r) => r.subject === s).slice(0, 10).map((r) => r.id),
+    )
+    expect(thirty).toHaveLength(30)
+    const { error } = await db.rpc('issue_assessment', {
+      p_lead_id: lead8,
+      p_issued_by: null,
+      p_token: 'itest-shape-' + Date.now(),
+      p_item_ids: thirty,
+    })
+    expect(error).not.toBeNull()
+    expect(error!.message).toMatch(/30-question paper must be/)
   })
 })
 
@@ -445,6 +614,15 @@ describe('saveAnswer', () => {
     await expect(
       saveAnswer(db, { attemptId: attempt.id, position: 99, choice: 'A', activeMs: 0 }),
     ).rejects.toThrow()
+  })
+
+  it('the database refuses an answer to position 20 on a 15-question paper', async () => {
+    const { assessment } = await issueAssessment(db, { leadId })
+    expect(assessment.question_count).toBe(15)
+    const { attempt } = await startAttempt(db, { token: assessment.token, context: {} })
+    await expect(
+      saveAnswer(db, { attemptId: attempt.id, position: 20, choice: 'A', activeMs: 0 }),
+    ).rejects.toThrow(/not on this paper/)
   })
 
   it('refuses to save into a submitted attempt', async () => {

@@ -1,9 +1,10 @@
 import { gradeAttempt, type GradeItem, type GradeAnswer } from './grade'
-import { SUBJECTS, CHOICES, type Subject, type Choice, type Format, type Difficulty } from './types'
+import { SUBJECTS, PARTS, CHOICES, type Subject, type Choice, type Format, type Difficulty, type Part } from './types'
 
 export interface ReportPaperItem {
   position: number
   subject: Subject
+  part: Part
   skill: string
   difficulty: Difficulty
   format: Format
@@ -69,6 +70,7 @@ export interface IntegrityFacts {
 export interface ReportQuestion {
   position: number
   subject: Subject
+  part: Part
   skill: string
   difficulty: Difficulty
   format: Format
@@ -90,6 +92,8 @@ export interface ReportTotals {
   incorrect: number
   skipped: number
   sections: Record<Subject, number>
+  /** Each subject's score per part, for the parts the paper holds. */
+  parts: { subject: Subject; part: Part; score: number; outOf: number }[]
 }
 
 /**
@@ -130,6 +134,7 @@ export function buildReport(input: ReportInput): {
     return {
       position: item.position,
       subject: item.subject,
+      part: item.part,
       skill: item.skill,
       difficulty: item.difficulty,
       format: item.format,
@@ -155,8 +160,23 @@ export function buildReport(input: ReportInput): {
       incorrect: graded.incorrect,
       skipped: graded.skipped,
       sections: graded.sections,
+      parts: partTotals(questions),
     },
   }
+}
+
+/** Summed in hundredths, as grade does, so -0.25s do not drift. */
+function partTotals(questions: ReportQuestion[]): ReportTotals['parts'] {
+  const out: ReportTotals['parts'] = []
+  for (const subject of SUBJECTS) {
+    for (const part of PARTS) {
+      const inPart = questions.filter((q) => q.subject === subject && q.part === part)
+      if (inPart.length === 0) continue
+      const hundredths = inPart.reduce((sum, q) => sum + Math.round(q.delta * 100), 0)
+      out.push({ subject, part, score: hundredths / 100, outOf: inPart.length })
+    }
+  }
+  return out
 }
 
 // ── facts ────────────────────────────────────────────────────────────────────
@@ -280,7 +300,9 @@ export interface ParentReport {
   timeUsedMs: number
   timeAvailableMs: number
   total: ParentCounts
-  subjects: (ParentCounts & { subject: Subject })[]
+  subjects: (ParentCounts & { subject: Subject; parts?: (ParentCounts & { part: Part })[] })[]
+  /** The class whose syllabus the paper drew on. Only on a paper that did. */
+  syllabusClass?: number
 }
 
 /**
@@ -292,10 +314,13 @@ export function toParentReport({
   name,
   submittedAt,
   report,
+  syllabusClass = null,
 }: {
   name: string
   submittedAt: string
   report: ReturnType<typeof buildReport>
+  /** Class N−1 for the admit; shown only when the paper has a syllabus part. */
+  syllabusClass?: number | null
 }): ParentReport {
   const count = (questions: ReportQuestion[]) => ({
     correct: questions.filter((q) => q.verdict === 'correct').length,
@@ -303,7 +328,11 @@ export function toParentReport({
     notAttempted: questions.filter((q) => q.verdict === 'skipped').length,
   })
 
-  return {
+  // A 15-question paper is all basics, and its sheet stays exactly as it was:
+  // no part split and no class line.
+  const hasSyllabus = report.questions.some((q) => q.part === 'syllabus')
+
+  const sheet: ParentReport = {
     name: displayName(name),
     testDate: submittedAt,
     timeUsedMs: Math.min(report.facts.timeUsedMs, report.facts.timeAvailableMs),
@@ -311,9 +340,24 @@ export function toParentReport({
     total: { score: report.totals.score, outOf: report.totals.outOf, ...count(report.questions) },
     subjects: SECTION_ORDER.map((subject) => {
       const questions = report.questions.filter((q) => q.subject === subject)
-      return { subject, score: report.totals.sections[subject], outOf: questions.length, ...count(questions) }
+      const row: ParentReport['subjects'][number] = {
+        subject, score: report.totals.sections[subject], outOf: questions.length, ...count(questions),
+      }
+      if (questions.some((q) => q.part === 'syllabus')) {
+        row.parts = report.totals.parts
+          .filter((p) => p.subject === subject)
+          .map((p) => ({
+            part: p.part,
+            score: p.score,
+            outOf: p.outOf,
+            ...count(questions.filter((q) => q.part === p.part)),
+          }))
+      }
+      return row
     }),
   }
+  if (hasSyllabus && syllabusClass !== null) sheet.syllabusClass = syllabusClass
+  return sheet
 }
 
 /** "ananya shah" as staff typed it reads as "Ananya Shah"; existing capitals stay. */

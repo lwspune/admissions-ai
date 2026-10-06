@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { assemblePaper, StratumExhaustedError, type PoolItem } from './assemble'
-import { SUBJECTS, type Difficulty, type Subject } from './types'
+import { assemblePaper, choosePaperShape, StratumExhaustedError, type PoolItem } from './assemble'
+import { SUBJECTS, SHAPE_15, SHAPE_30, type Difficulty, type Subject, type Part } from './types'
 
 // ── helpers ──────────────────────────────────────────────────────────────────
 
@@ -9,7 +9,7 @@ function pool(per: number): PoolItem[] {
   const out: PoolItem[] = []
   for (const subject of SUBJECTS) {
     for (const difficulty of ['easy', 'moderate', 'difficult'] as Difficulty[]) {
-      for (let n = 0; n < per; n++) out.push({ id: `${subject}-${difficulty}-${n}`, subject, difficulty })
+      for (let n = 0; n < per; n++) out.push({ id: `${subject}-${difficulty}-${n}`, subject, difficulty, part: 'basics' })
     }
   }
   return out
@@ -173,9 +173,9 @@ describe('assemblePaper — exhausted strata', () => {
     // It must produce a full paper rather than failing.
     const bank: PoolItem[] = []
     for (const subject of SUBJECTS) {
-      for (let n = 0; n < 3; n++) bank.push({ id: `${subject}-e-${n}`, subject, difficulty: 'easy' })
-      bank.push({ id: `${subject}-m`, subject, difficulty: 'moderate' })
-      bank.push({ id: `${subject}-d`, subject, difficulty: 'difficult' })
+      for (let n = 0; n < 3; n++) bank.push({ id: `${subject}-e-${n}`, subject, difficulty: 'easy', part: 'basics' })
+      bank.push({ id: `${subject}-m`, subject, difficulty: 'moderate', part: 'basics' })
+      bank.push({ id: `${subject}-d`, subject, difficulty: 'difficult', part: 'basics' })
     }
     const paper = assemblePaper({ pool: bank, excludeItemIds: bank.map((i) => i.id), rng: seeded(16) })
     expect(paper).toHaveLength(15)
@@ -187,9 +187,9 @@ describe('assemblePaper — exhausted strata', () => {
   it('succeeds on a pool holding exactly the minimum', () => {
     const bank: PoolItem[] = []
     for (const subject of SUBJECTS) {
-      for (let n = 0; n < 3; n++) bank.push({ id: `${subject}-e-${n}`, subject, difficulty: 'easy' })
-      bank.push({ id: `${subject}-m`, subject, difficulty: 'moderate' })
-      bank.push({ id: `${subject}-d`, subject, difficulty: 'difficult' })
+      for (let n = 0; n < 3; n++) bank.push({ id: `${subject}-e-${n}`, subject, difficulty: 'easy', part: 'basics' })
+      bank.push({ id: `${subject}-m`, subject, difficulty: 'moderate', part: 'basics' })
+      bank.push({ id: `${subject}-d`, subject, difficulty: 'difficult', part: 'basics' })
     }
     expect(assemblePaper({ pool: bank, rng: seeded(14) })).toHaveLength(15)
   })
@@ -230,5 +230,105 @@ describe('assemblePaper — class in the error', () => {
     const thin = pool(20).filter((i) => !(i.subject === 'english' && i.difficulty === 'difficult'))
     expect(() => assemblePaper({ pool: thin, rng: seeded(1) })).toThrow(StratumExhaustedError)
     expect(() => assemblePaper({ pool: thin, rng: seeded(1) })).not.toThrow(/class/)
+  })
+})
+
+// ── the 30-question paper (2026-10-06) ───────────────────────────────────────
+
+/** Basics in every subject plus class-syllabus items in maths and science. */
+function fullPool(per: number): PoolItem[] {
+  const out = pool(per)
+  for (const subject of ['maths', 'science'] as Subject[]) {
+    for (const difficulty of ['easy', 'moderate', 'difficult'] as Difficulty[]) {
+      for (let n = 0; n < per; n++) {
+        out.push({ id: `syl-${subject}-${difficulty}-${n}`, subject, difficulty, part: 'syllabus' })
+      }
+    }
+  }
+  return out
+}
+
+const countPart = (items: PoolItem[], subject: Subject, part: Part, difficulty?: Difficulty) =>
+  items.filter((i) => i.subject === subject && i.part === part && (!difficulty || i.difficulty === difficulty)).length
+
+describe('paper shapes', () => {
+  it('the 15-question shape is 15 questions in 15 minutes', () => {
+    expect(SHAPE_15.quotas.reduce((n, q) => n + q.count, 0)).toBe(15)
+    expect(SHAPE_15.questions).toBe(15)
+    expect(SHAPE_15.minutes).toBe(15)
+  })
+
+  it('the 30-question shape is 30 questions in 30 minutes', () => {
+    expect(SHAPE_30.quotas.reduce((n, q) => n + q.count, 0)).toBe(30)
+    expect(SHAPE_30.questions).toBe(30)
+    expect(SHAPE_30.minutes).toBe(30)
+  })
+})
+
+describe('assemblePaper — 30-question shape', () => {
+  it('draws 10 per subject: English all basics, maths and science half syllabus', () => {
+    const paper = assemblePaper({ pool: fullPool(20), shape: SHAPE_30, rng: seeded(31) })
+    expect(paper).toHaveLength(30)
+    expect(countPart(paper, 'english', 'basics')).toBe(10)
+    expect(countPart(paper, 'english', 'syllabus')).toBe(0)
+    for (const subject of ['maths', 'science'] as Subject[]) {
+      expect(countPart(paper, subject, 'basics')).toBe(5)
+      expect(countPart(paper, subject, 'syllabus')).toBe(5)
+    }
+  })
+
+  it('keeps each part at its own difficulty mix', () => {
+    const paper = assemblePaper({ pool: fullPool(20), shape: SHAPE_30, rng: seeded(32) })
+    expect(countPart(paper, 'english', 'basics', 'easy')).toBe(6)
+    expect(countPart(paper, 'english', 'basics', 'moderate')).toBe(2)
+    expect(countPart(paper, 'english', 'basics', 'difficult')).toBe(2)
+    for (const subject of ['maths', 'science'] as Subject[]) {
+      for (const part of ['basics', 'syllabus'] as Part[]) {
+        expect(countPart(paper, subject, part, 'easy')).toBe(3)
+        expect(countPart(paper, subject, part, 'moderate')).toBe(1)
+        expect(countPart(paper, subject, part, 'difficult')).toBe(1)
+      }
+    }
+  })
+
+  it('never fills a basics quota with a syllabus item', () => {
+    // A pool with syllabus items only for maths: the 15-question paper must
+    // still draw its maths from basics.
+    const paper = assemblePaper({ pool: fullPool(20), shape: SHAPE_15, rng: seeded(33) })
+    expect(paper.every((i) => i.part === 'basics')).toBe(true)
+  })
+
+  it('mixes the two parts through the paper rather than putting syllabus last', () => {
+    const paper = assemblePaper({ pool: fullPool(20), shape: SHAPE_30, rng: seeded(34) })
+    const firstHalf = paper.slice(0, 15).filter((i) => i.part === 'syllabus').length
+    expect(firstHalf).toBeGreaterThan(0)
+    expect(firstHalf).toBeLessThan(10)
+  })
+
+  it('names the part of a starved stratum', () => {
+    const thin = fullPool(20).filter((i) => !(i.part === 'syllabus' && i.subject === 'science' && i.difficulty === 'difficult'))
+    expect(() => assemblePaper({ pool: thin, shape: SHAPE_30, rng: seeded(35) })).toThrow(/syllabus/)
+  })
+})
+
+// A class moves to 30 questions only when its syllabus batch is live; until
+// then it keeps the 15-question paper (decision 2026-10-06).
+describe('choosePaperShape', () => {
+  it('gives the 30-question shape when every quota can be filled', () => {
+    expect(choosePaperShape(fullPool(20))).toBe(SHAPE_30)
+  })
+
+  it('falls back to 15 questions when the class has no syllabus items', () => {
+    expect(choosePaperShape(pool(20))).toBe(SHAPE_15)
+  })
+
+  it('falls back when one syllabus stratum is short', () => {
+    const thin = fullPool(20).filter((i) => !(i.part === 'syllabus' && i.subject === 'science' && i.difficulty === 'difficult'))
+    expect(choosePaperShape(thin)).toBe(SHAPE_15)
+  })
+
+  it('falls back when English basics cannot fill 6 easy for the longer paper', () => {
+    const thin = fullPool(20).filter((i) => !(i.subject === 'english' && i.difficulty === 'easy' && Number(i.id.split('-')[2]) >= 5))
+    expect(choosePaperShape(thin)).toBe(SHAPE_15)
   })
 })

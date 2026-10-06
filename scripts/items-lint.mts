@@ -11,7 +11,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { parseOptionValue, coverageByClass, keySkew } from '../src/lib/items'
+import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
 import type { Subject, Difficulty } from '../src/lib/types'
 
@@ -30,6 +30,8 @@ interface RawItem {
   skill?: string
   difficulty?: string
   taught_in?: number
+  part?: string
+  term?: number | null
   format?: string
   stem?: string
   options?: Record<string, string> | null
@@ -97,6 +99,22 @@ export function lintItems(): number {
       (item.taught_in as number) > TAUGHT_IN_MAX
     ) {
       err(ref, `taught_in must be an integer from ${TAUGHT_IN_MIN} to ${TAUGHT_IN_MAX}, got ${JSON.stringify(item.taught_in)}`)
+    }
+
+    // Two parts since 2026-10-06 (migration 0014). Basics is the default and
+    // carries no term; syllabus is maths or science content from one class
+    // (7–11, the class below an admit to 8–12) and says which term.
+    const part = item.part ?? 'basics'
+    if (part !== 'basics' && part !== 'syllabus') {
+      err(ref, `part must be "basics" or "syllabus", got ${JSON.stringify(item.part)}`)
+    } else if (part === 'basics' && item.term != null) {
+      err(ref, 'a basics item carries no term')
+    } else if (part === 'syllabus') {
+      if (item.term !== 1 && item.term !== 2) err(ref, `a syllabus item needs term 1 or 2, got ${JSON.stringify(item.term)}`)
+      if (item.subject === 'english') err(ref, 'English has no syllabus part')
+      if (!Number.isInteger(item.taught_in) || (item.taught_in as number) < 7 || (item.taught_in as number) > 11) {
+        err(ref, `a syllabus item is class 7–11 content, got ${JSON.stringify(item.taught_in)}`)
+      }
     }
 
     if (!item.stem || !item.stem.trim()) {
@@ -179,11 +197,17 @@ export function lintItems(): number {
   // stratum, and the class that comes up short is the one whose candidate
   // sees a failure in front of staff. "thin" is the exposure warning: fewer
   // than twice the need means every paper for that class looks much the same.
-  console.log('\nBank can fill a paper for every class')
+  console.log('\nBank can fill the 15-question paper (basics) for every class')
   const shaped = items
     .filter((i) => !i.__sample)
     .filter((i) => SUBJECTS.includes(i.subject ?? '') && DIFFICULTIES.includes(i.difficulty ?? '') && Number.isInteger(i.taught_in))
-    .map((i) => ({ subject: i.subject as Subject, difficulty: i.difficulty as Difficulty, taught_in: i.taught_in as number }))
+    .map((i) => ({
+      subject: i.subject as Subject,
+      difficulty: i.difficulty as Difficulty,
+      taught_in: i.taught_in as number,
+      part: (i.part === 'syllabus' ? 'syllabus' : 'basics') as 'basics' | 'syllabus',
+      term: i.term ?? null,
+    }))
   for (const cell of coverageByClass(shaped)) {
     const label = `class ${cell.classLevel} · ${cell.subject}/${cell.difficulty}`
     if (cell.status === 'short') {
@@ -194,6 +218,20 @@ export function lintItems(): number {
       console.log(`  WARN   ${label}: ${cell.count} item(s) for a need of ${cell.needed} — every paper draws the same ones`)
     } else {
       console.log(`  ok     ${label}: ${cell.count}`)
+    }
+  }
+
+  // Not an error: a class that cannot fill the longer paper keeps the
+  // 15-question one. This says which classes have moved, and what the rest
+  // still need. The file's items, whatever their status — the live bank is
+  // what /items reports.
+  console.log('\n30-question paper (needs class N−1 first-term syllabus items)')
+  for (const r of thirtyReadiness(shaped)) {
+    if (r.ready) {
+      console.log(`  ready  class ${r.classLevel}`)
+    } else {
+      const gaps = r.missing.map((m) => `${m.subject}/${m.part}/${m.difficulty} ${m.count} of ${m.needed}`).join(', ')
+      console.log(`  15 q   class ${r.classLevel}: ${gaps}`)
     }
   }
 

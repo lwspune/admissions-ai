@@ -1,8 +1,8 @@
 // Item-bank rules. Pure, so the one decision that can take the bank offline is
 // testable without a database, and so the bank browser's shape is too.
 
-import { SUBJECTS, DIFFICULTIES, PAPER_MIX, type Subject, type Difficulty } from './types'
-import { CLASSES, isDrawableFor, type ClassLevel } from './classes'
+import { SUBJECTS, DIFFICULTIES, PAPER_MIX, SHAPE_30, type Subject, type Difficulty, type Part } from './types'
+import { CLASSES, isDrawableFor, type ClassLevel, isSyllabusFor } from './classes'
 
 /** Mirrors the CHECK on test_items.status (migration 0001). */
 export type ItemStatus = 'review' | 'live' | 'retired'
@@ -135,9 +135,12 @@ export interface CoverageCell {
  * bank total hides it. Exposure is a per-stratum property, and now a per-class
  * one too.
  */
-export function coverageByClass<T extends { subject: Subject; difficulty: Difficulty; taught_in: number }>(
-  items: readonly T[],
+export function coverageByClass<T extends { subject: Subject; difficulty: Difficulty; taught_in: number; part?: Part }>(
+  rows: readonly T[],
 ): CoverageCell[] {
+  // The 15-question paper is what every class can always fall back to, and it
+  // is all basics: a syllabus item can never fill it.
+  const items = rows.filter((i) => (i.part ?? 'basics') === 'basics')
   const cells: CoverageCell[] = []
   for (const classLevel of CLASSES) {
     for (const subject of SUBJECTS) {
@@ -184,4 +187,37 @@ export function keySkew<T extends { subject: Subject; format: string; answer_key
     }
   }
   return skew
+}
+
+/** What stops one class from getting the 30-question paper. */
+export interface Readiness {
+  classLevel: ClassLevel
+  ready: boolean
+  missing: { subject: Subject; part: Part; difficulty: Difficulty; count: number; needed: number }[]
+}
+
+/**
+ * Which classes get the 30-question paper: those whose live items fill every
+ * quota of it. The same test the draw makes (`choosePaperShape`), stated over
+ * the bank so the lint and the bank page can say what to author next.
+ */
+export function thirtyReadiness<
+  T extends { subject: Subject; difficulty: Difficulty; taught_in: number; part?: Part; term?: number | null },
+>(items: readonly T[]): Readiness[] {
+  return CLASSES.map((classLevel) => {
+    const missing: Readiness['missing'] = []
+    for (const { subject, part, difficulty, count: needed } of SHAPE_30.quotas) {
+      const count = items.filter(
+        (i) =>
+          i.subject === subject &&
+          i.difficulty === difficulty &&
+          (i.part ?? 'basics') === part &&
+          (part === 'basics'
+            ? isDrawableFor(i.taught_in, classLevel)
+            : isSyllabusFor(i.taught_in, i.term ?? null, classLevel)),
+      ).length
+      if (count < needed) missing.push({ subject, part, difficulty, count, needed })
+    }
+    return { classLevel, ready: missing.length === 0, missing }
+  })
 }

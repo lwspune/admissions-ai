@@ -121,7 +121,7 @@ export function useCountdown({
 
     const tick = () => {
       // The window closes on wall-clock time whether or not the tab is
-      // visible; only the 15-minute allowance pauses.
+      // visible; only the paper’s own allowance pauses.
       if (Date.now() >= windowEndsAt) {
         if (!expired.current) {
           expired.current = true
