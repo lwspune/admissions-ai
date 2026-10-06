@@ -1,0 +1,527 @@
+[
+  {
+    "ref": "M10-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "hcf-lcm-product",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "The HCF of two numbers is 6 and their LCM is 180. If one of the numbers is 36, what is the other?",
+    "numeric_answer": 30,
+    "numeric_tolerance": 0,
+    "rationale": "For two numbers, HCF × LCM = the product of the numbers, so the other is 6 × 180 ÷ 36 = 30. Dividing the LCM by 36 (5) skips the HCF."
+  },
+  {
+    "ref": "M10-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "irrational-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers cannot be written in the form p/q, where p and q are integers and q ≠ 0?",
+    "options": {
+      "A": "√49",
+      "B": "0.125",
+      "C": "3 + √5",
+      "D": "13/8"
+    },
+    "answer_key": "C",
+    "rationale": "√5 is irrational, and adding a rational number to it keeps it irrational. √49 = 7, 0.125 = 1/8 and 13/8 are all ratios of integers."
+  },
+  {
+    "ref": "M10-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "zeroes-of-polynomial",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What are the zeroes of the polynomial x² − 9x + 20?",
+    "options": {
+      "A": "4 and 5",
+      "B": "−4 and −5",
+      "C": "2 and 10",
+      "D": "4 and −5"
+    },
+    "answer_key": "A",
+    "rationale": "x² − 9x + 20 = (x − 4)(x − 5), so the zeroes are 4 and 5. −4 and −5 flip the signs; 2 and 10 multiply to 20 but add to 12, not 9."
+  },
+  {
+    "ref": "M10-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "zeroes-and-coefficients",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the sum of the zeroes of the polynomial 2x² − 8x + 3?",
+    "options": {
+      "A": "−4",
+      "B": "4",
+      "C": "3/2",
+      "D": "−3/2"
+    },
+    "answer_key": "B",
+    "rationale": "For ax² + bx + c the sum of the zeroes is −b/a = 8/2 = 4. −4 forgets the minus sign; 3/2 is the product of the zeroes, c/a."
+  },
+  {
+    "ref": "M10-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "pair-of-linear-equations",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "Solve the pair of equations x + y = 10 and x − y = 4. What is the value of x?",
+    "numeric_answer": 7,
+    "numeric_tolerance": 0,
+    "rationale": "Adding the two equations gives 2x = 14, so x = 7 (and y = 3). Subtracting them instead gives y, a common slip."
+  },
+  {
+    "ref": "M10-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "nature-of-roots",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "How many real roots does the equation x² + 4x + 5 = 0 have?",
+    "options": {
+      "A": "Two distinct real roots",
+      "B": "Two equal real roots",
+      "C": "No real roots",
+      "D": "Infinitely many roots"
+    },
+    "answer_key": "C",
+    "rationale": "The discriminant b² − 4ac = 16 − 20 = −4 is negative, so there are no real roots. Equal roots need the discriminant to be exactly zero."
+  },
+  {
+    "ref": "M10-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "ap-nth-term",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the 10th term of the arithmetic progression 3, 7, 11, …?",
+    "numeric_answer": 39,
+    "numeric_tolerance": 0,
+    "rationale": "a = 3 and d = 4, so the 10th term is a + 9d = 3 + 36 = 39. Using 10d (43) counts one step too many."
+  },
+  {
+    "ref": "M10-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "distance-formula",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the distance between the points (−2, 3) and (4, −5)?",
+    "options": {
+      "A": "14",
+      "B": "100",
+      "C": "12",
+      "D": "10"
+    },
+    "answer_key": "D",
+    "rationale": "The differences are 6 and 8, so the distance is √(36 + 64) = √100 = 10. 14 adds the differences; 100 forgets the square root."
+  },
+  {
+    "ref": "M10-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "trigonometric-ratios",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the value of sin 30° + cos 60°?",
+    "options": {
+      "A": "1/2",
+      "B": "1",
+      "C": "√3/2",
+      "D": "√3"
+    },
+    "answer_key": "B",
+    "rationale": "sin 30° = 1/2 and cos 60° = 1/2, so the sum is 1. √3/2 is the value of sin 60° or cos 30°, the usual mix-up."
+  },
+  {
+    "ref": "M10-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "ap-sum",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "What is the sum of the first 20 terms of the arithmetic progression 2, 5, 8, …?",
+    "numeric_answer": 610,
+    "numeric_tolerance": 0,
+    "rationale": "Sₙ = n/2 × (2a + (n − 1)d) = 10 × (4 + 57) = 610. Adding only the first and 20th terms without halving n gives 1220."
+  },
+  {
+    "ref": "M10-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "basic-proportionality",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "In triangle ABC, D is on AB and E is on AC with DE parallel to BC. If AD = 3 cm, DB = 6 cm and AE = 4 cm, what is EC?",
+    "options": {
+      "A": "2 cm",
+      "B": "4.5 cm",
+      "C": "6 cm",
+      "D": "8 cm"
+    },
+    "answer_key": "D",
+    "rationale": "A line parallel to one side divides the other two in the same ratio: AD/DB = AE/EC, so 3/6 = 4/EC and EC = 8 cm. 2 cm inverts the ratio."
+  },
+  {
+    "ref": "M10-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "trigonometric-ratios",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "If tan A = 3/4 and A is an acute angle, what is sin A?",
+    "options": {
+      "A": "3/5",
+      "B": "4/5",
+      "C": "3/4",
+      "D": "5/3"
+    },
+    "answer_key": "A",
+    "rationale": "Take opposite 3 and adjacent 4, so the hypotenuse is 5 and sin A = 3/5. 4/5 is cos A; 5/3 is cosec A."
+  },
+  {
+    "ref": "M10-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "quadratic-word-problem",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "The product of two consecutive positive integers is 306. What is the smaller of the two integers?",
+    "numeric_answer": 17,
+    "numeric_tolerance": 0,
+    "rationale": "n(n + 1) = 306 gives n² + n − 306 = 0, which factorises as (n − 17)(n + 18) = 0, so n = 17 (17 × 18 = 306)."
+  },
+  {
+    "ref": "M10-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "section-formula",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "In what ratio does the point (−1, 6) divide the line segment joining (−3, 10) and (6, −8)?",
+    "options": {
+      "A": "2 : 7",
+      "B": "7 : 2",
+      "C": "1 : 3",
+      "D": "3 : 4"
+    },
+    "answer_key": "A",
+    "rationale": "Let the ratio be k : 1. Then x = (6k − 3)/(k + 1) = −1 gives k = 2/7, so the ratio is 2 : 7; y checks: (−16/7 + 10)/(9/7) = 6. 7 : 2 is the ratio reversed."
+  },
+  {
+    "ref": "M10-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "linear-equations-word-problem",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The digits of a two-digit number add up to 9. When 27 is added to the number, its digits are reversed. What is the number?",
+    "options": {
+      "A": "27",
+      "B": "36",
+      "C": "45",
+      "D": "63"
+    },
+    "answer_key": "B",
+    "rationale": "With digits a and b: a + b = 9 and (10a + b) + 27 = 10b + a, so b − a = 3. Then a = 3, b = 6: the number is 36. 63 is the reversed number."
+  },
+  {
+    "ref": "S10-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "types-of-reactions",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Fe + CuSO₄ → FeSO₄ + Cu is an example of which type of reaction?",
+    "options": {
+      "A": "Combination",
+      "B": "Decomposition",
+      "C": "Displacement",
+      "D": "Double displacement"
+    },
+    "answer_key": "C",
+    "rationale": "Iron is more reactive than copper and takes its place in the compound: a displacement reaction. Double displacement would swap partners between two compounds."
+  },
+  {
+    "ref": "S10-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "ph-scale",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A solution has a pH of 2. The solution is",
+    "options": {
+      "A": "strongly acidic",
+      "B": "weakly acidic",
+      "C": "neutral",
+      "D": "strongly basic"
+    },
+    "answer_key": "A",
+    "rationale": "pH below 7 is acidic, and the lower the number the stronger the acid; 2 is strongly acidic. Neutral is 7, and basic solutions are above 7."
+  },
+  {
+    "ref": "S10-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "common-salts",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which compound is commonly called baking soda?",
+    "options": {
+      "A": "Sodium carbonate",
+      "B": "Sodium chloride",
+      "C": "Calcium carbonate",
+      "D": "Sodium hydrogencarbonate"
+    },
+    "answer_key": "D",
+    "rationale": "Baking soda is sodium hydrogencarbonate, NaHCO₃. Sodium carbonate is washing soda, sodium chloride is common salt, and calcium carbonate is limestone."
+  },
+  {
+    "ref": "S10-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "nutrition-in-humans",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In which part of the human body is most digested food absorbed into the blood?",
+    "options": {
+      "A": "Stomach",
+      "B": "Small intestine",
+      "C": "Large intestine",
+      "D": "Oesophagus"
+    },
+    "answer_key": "B",
+    "rationale": "The small intestine is long and lined with villi, which give a large surface for absorption. The large intestine mainly absorbs water."
+  },
+  {
+    "ref": "S10-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "hormones",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which hormone controls the level of sugar in the blood?",
+    "options": {
+      "A": "Thyroxine",
+      "B": "Adrenaline",
+      "C": "Growth hormone",
+      "D": "Insulin"
+    },
+    "answer_key": "D",
+    "rationale": "Insulin, made by the pancreas, lowers blood sugar; a shortage causes diabetes. Thyroxine controls metabolism and adrenaline prepares the body for emergencies."
+  },
+  {
+    "ref": "S10-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "spherical-mirrors",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which kind of mirror is used as a rear-view mirror in vehicles?",
+    "options": {
+      "A": "Plane",
+      "B": "Concave",
+      "C": "Any of these",
+      "D": "Convex"
+    },
+    "answer_key": "D",
+    "rationale": "A convex mirror always gives an upright, smaller image and so shows a wider field of view. Concave mirrors are used in torches and for shaving."
+  },
+  {
+    "ref": "S10-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "ohms-law",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A current of 0.5 A flows through a resistor connected to a 6 V battery. What is its resistance, in ohms?",
+    "numeric_answer": 12,
+    "numeric_tolerance": 0,
+    "rationale": "By Ohm's law R = V ÷ I = 6 V ÷ 0.5 A = 12 Ω. Multiplying instead (3) is the characteristic error."
+  },
+  {
+    "ref": "S10-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "resistors-in-series",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Resistors of 4 Ω and 6 Ω are connected in series. What is their total resistance?",
+    "options": {
+      "A": "2.4 Ω",
+      "B": "10 Ω",
+      "C": "24 Ω",
+      "D": "5 Ω"
+    },
+    "answer_key": "B",
+    "rationale": "In series the resistances add: 4 + 6 = 10 Ω. 2.4 Ω is the parallel combination; 24 Ω multiplies them."
+  },
+  {
+    "ref": "S10-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "types-of-reactions",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "When a magnesium ribbon burns in air, it leaves a white powder. The powder is",
+    "options": {
+      "A": "magnesium oxide",
+      "B": "magnesium hydroxide",
+      "C": "magnesium carbonate",
+      "D": "magnesium nitrate"
+    },
+    "answer_key": "A",
+    "rationale": "Magnesium combines with oxygen from the air to form magnesium oxide, a combination reaction. Hydroxide forms only when that oxide is dissolved in water."
+  },
+  {
+    "ref": "S10-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "resistors-in-parallel",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Two 6 Ω resistors are connected in parallel. What is their combined resistance, in ohms?",
+    "numeric_answer": 3,
+    "numeric_tolerance": 0,
+    "rationale": "In parallel 1/R = 1/6 + 1/6 = 1/3, so R = 3 Ω. Two equal resistors in parallel always give half of one. Adding them (12) is the series answer."
+  },
+  {
+    "ref": "S10-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "power-of-lens",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A convex lens has a focal length of 50 cm. What is its power, in dioptres?",
+    "numeric_answer": 2,
+    "numeric_tolerance": 0,
+    "rationale": "Power is 1 ÷ focal length in metres: 1 ÷ 0.5 m = +2 D. Using 50 directly (0.02) forgets to convert centimetres to metres."
+  },
+  {
+    "ref": "S10-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "reflex-action",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "You pull your hand away from a hot object before you even feel the pain. This is",
+    "options": {
+      "A": "a reflex action controlled by the spinal cord",
+      "B": "a voluntary action decided by the brain",
+      "C": "a response caused by a hormone",
+      "D": "a movement controlled by the heart"
+    },
+    "answer_key": "A",
+    "rationale": "The reflex arc runs through the spinal cord, so the muscle moves before the message reaches the brain and pain is felt. Hormones act far too slowly."
+  },
+  {
+    "ref": "S10-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "mirror-formula",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "An object is placed 30 cm in front of a concave mirror of focal length 20 cm. Where is the image formed?",
+    "options": {
+      "A": "12 cm in front of the mirror",
+      "B": "60 cm in front of the mirror",
+      "C": "60 cm behind the mirror",
+      "D": "12 cm behind the mirror"
+    },
+    "answer_key": "B",
+    "rationale": "With u = −30 cm and f = −20 cm, 1/v = 1/f − 1/u = −1/20 + 1/30 = −1/60, so v = −60 cm: a real image 60 cm in front. 12 cm comes from adding the reciprocals."
+  },
+  {
+    "ref": "S10-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "electric-power",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "An electric heater draws 4 A from a 220 V supply. How much energy does it use in 10 minutes, in kilojoules?",
+    "numeric_answer": 528,
+    "numeric_tolerance": 0,
+    "rationale": "Power = VI = 220 × 4 = 880 W. Energy = power × time = 880 W × 600 s = 528 000 J = 528 kJ. Using 10 instead of 600 seconds gives 8.8 kJ."
+  },
+  {
+    "ref": "S10-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 10,
+    "skill": "neutralisation",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "10 mL of a sodium hydroxide solution exactly neutralises 8 mL of a hydrochloric acid solution. How much of the same acid neutralises 25 mL of the same base?",
+    "options": {
+      "A": "10 mL",
+      "B": "16 mL",
+      "C": "20 mL",
+      "D": "31.25 mL"
+    },
+    "answer_key": "C",
+    "rationale": "The volumes stay in the same ratio, 8 mL of acid for every 10 mL of base, so 25 mL of base needs 25 × 8 ÷ 10 = 20 mL. 31.25 mL inverts the ratio."
+  }
+]
