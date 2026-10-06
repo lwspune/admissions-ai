@@ -9,12 +9,12 @@
     "stem": "Find the next number in the series: 3, 6, 11, 18, 27, ___",
     "options": {
       "A": "36",
-      "B": "38",
+      "B": "40",
       "C": "37",
-      "D": "40"
+      "D": "38"
     },
-    "answer_key": "B",
-    "rationale": "Differences are 3, 5, 7, 9 — consecutive odd numbers — so the next is 11 and 27 + 11 = 38. A repeats the previous difference of 9. C increases the difference by 1 each time. D skips an odd number, using 13."
+    "answer_key": "D",
+    "rationale": "Differences are 3, 5, 7, 9 — consecutive odd numbers — so the next is 11 and 27 + 11 = 38. A repeats the previous difference of 9. C increases the difference by 1 each time. B skips an odd number, using 13."
   },
   {
     "ref": "M-E-02",
@@ -54,13 +54,13 @@
     "format": "mcq",
     "stem": "A tap fills a tank in 6 hours. A second tap fills the same tank in 12 hours. If both taps are opened together, how long will the tank take to fill?",
     "options": {
-      "A": "4 hours",
-      "B": "9 hours",
+      "A": "9 hours",
+      "B": "4 hours",
       "C": "18 hours",
       "D": "3 hours"
     },
-    "answer_key": "A",
-    "rationale": "Rates add: 1/6 + 1/12 = 1/4 of the tank per hour, so 4 hours. B averages the times and is the dominant wrong answer — it feels right, and knowing that rates rather than times are additive is what makes this moderate. C adds the times, failing the sanity check that two taps beat one. D halves the faster tap."
+    "answer_key": "B",
+    "rationale": "Rates add: 1/6 + 1/12 = 1/4 of the tank per hour, so 4 hours. A averages the times and is the dominant wrong answer — it feels right, and knowing that rates rather than times are additive is what makes this moderate. C adds the times, failing the sanity check that two taps beat one. D halves the faster tap."
   },
   {
     "ref": "M-D-05",
@@ -83,13 +83,13 @@
     "format": "mcq",
     "stem": "Doctor is to Hospital as Teacher is to ___",
     "options": {
-      "A": "School",
+      "A": "Book",
       "B": "Student",
-      "C": "Book",
+      "C": "School",
       "D": "Lesson"
     },
-    "answer_key": "A",
-    "rationale": "The relation is professional to place of work. B is the person served, C the tool used, D the thing produced. Every distractor is a genuine teacher-relation, so the item tests whether the candidate identifies which relation the first pair establishes — that is what makes an analogy a reasoning item rather than a vocabulary one."
+    "answer_key": "C",
+    "rationale": "The relation is professional to place of work. B is the person served, A the tool used, D the thing produced. Every distractor is a genuine teacher-relation, so the item tests whether the candidate identifies which relation the first pair establishes — that is what makes an analogy a reasoning item rather than a vocabulary one."
   },
   {
     "ref": "E-E-02",
@@ -117,13 +117,13 @@
     "format": "mcq",
     "stem": "Although he had practised for months, he ___ to qualify for the final round.",
     "options": {
-      "A": "failed",
+      "A": "deserved",
       "B": "managed",
       "C": "hoped",
-      "D": "deserved"
+      "D": "failed"
     },
-    "answer_key": "A",
-    "rationale": "'Although' signals contrast, so the clause must report the opposite of what practice predicts. All four options are grammatical with the infinitive, deliberately: if one were grammatically impossible it could be eliminated without reading for meaning, and the item would measure grammar rather than the connector. B is a positive outcome, C an intention, D an evaluation."
+    "answer_key": "D",
+    "rationale": "'Although' signals contrast, so the clause must report the opposite of what practice predicts. All four options are grammatical with the infinitive, deliberately: if one were grammatically impossible it could be eliminated without reading for meaning, and the item would measure grammar rather than the connector. B is a positive outcome, C an intention, A an evaluation."
   },
   {
     "ref": "E-M-04",

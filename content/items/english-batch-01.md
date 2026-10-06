@@ -1,5 +1,7 @@
 # English Batch 01 — 15 items
 
+> **Options re-lettered 2026-10-06** to balance answer keys across A–D. Option letters in this review sheet are as reviewed and may no longer match; the `.json` is current.
+
 **Date:** 2026-09-23
 **Status:** Awaiting review. Machine-readable source: `english-batch-01.json`.
 **Composition:** 5 easy / 5 moderate / 5 difficult, all English. All MCQ.

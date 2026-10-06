@@ -1,5 +1,7 @@
 # Legacy IQ Paper (2025) — 15 items ported
 
+> **Options re-lettered 2026-10-06** to balance answer keys across A–D. Option letters in this review sheet are as reviewed and may no longer match; the `.json` is current.
+
 **Date:** 2026-09-22
 **Source:** `C:\Vilas\LWS_Pune\LTSE\IQ_Test\01\` — `IQ Test_Qs.docx` (20 questions, 20 minutes,
 Max Marks 20, OMR-marked), plus its two answer keys `IQ Test Answer Key.docx` (Apr 2025) and

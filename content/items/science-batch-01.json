@@ -8,13 +8,13 @@
     "format": "mcq",
     "stem": "Water left in an open saucer disappears sooner than the same amount of water in a corked bottle. The main reason is that in the saucer the water",
     "options": {
-      "A": "has a larger surface open to the air",
+      "A": "weighs less than the water in the bottle",
       "B": "is at a higher temperature",
-      "C": "weighs less than the water in the bottle",
+      "C": "has a larger surface open to the air",
       "D": "contains more dissolved air"
     },
-    "answer_key": "A",
-    "rationale": "Evaporation happens at the surface, and the saucer exposes far more of it while the air above carries the vapour away. B is the most tempting wrong answer because heat is what candidates associate with evaporation — but both containers sit in the same room at the same temperature, which the stem establishes by saying the same amount of water. C and D are irrelevant properties dressed as explanations."
+    "answer_key": "C",
+    "rationale": "Evaporation happens at the surface, and the saucer exposes far more of it while the air above carries the vapour away. B is the most tempting wrong answer because heat is what candidates associate with evaporation — but both containers sit in the same room at the same temperature, which the stem establishes by saying the same amount of water. A and D are irrelevant properties dressed as explanations."
   },
   {
     "ref": "S-E-07",
@@ -25,13 +25,13 @@
     "format": "mcq",
     "stem": "A moving bus brakes suddenly and the standing passengers lurch forward. This happens because their bodies",
     "options": {
-      "A": "tend to keep moving forward",
-      "B": "are pushed forward by the bus",
+      "A": "are pushed forward by the bus",
+      "B": "tend to keep moving forward",
       "C": "become heavier as the bus slows",
       "D": "lose grip because of friction"
     },
-    "answer_key": "A",
-    "rationale": "Inertia: the bus stops, the passengers do not, and what they feel is their own motion continuing. B inverts the direction of the force — the bus is pushing backwards on them, which is precisely why the top of the body outruns the feet. C confuses mass with weight and invents a change in neither. Everyday inertia is the standard entry point to Newton's first law at this level."
+    "answer_key": "B",
+    "rationale": "Inertia: the bus stops, the passengers do not, and what they feel is their own motion continuing. A inverts the direction of the force — the bus is pushing backwards on them, which is precisely why the top of the body outruns the feet. C confuses mass with weight and invents a change in neither. Everyday inertia is the standard entry point to Newton's first law at this level."
   },
   {
     "ref": "S-E-08",
@@ -71,12 +71,12 @@
     "format": "mcq",
     "stem": "A person breathes faster while running than while sitting. The muscles are mainly demanding more",
     "options": {
-      "A": "oxygen",
-      "B": "water",
+      "A": "water",
+      "B": "oxygen",
       "C": "protein",
       "D": "vitamins"
     },
-    "answer_key": "A",
+    "answer_key": "B",
     "rationale": "Working muscles release energy from glucose using oxygen, so the demand for oxygen rises and breathing rate rises with it. The distractors are all things the body genuinely needs, which is the point — the candidate must pick the one that breathing actually delivers, rather than the one that sounds most like nutrition. A floor item for the science section."
   },
   {
@@ -88,13 +88,13 @@
     "format": "mcq",
     "stem": "A shadow has the same shape as the object casting it. Which property of light best explains this?",
     "options": {
-      "A": "It travels in straight lines.",
+      "A": "It bends around obstacles.",
       "B": "It is absorbed by opaque objects.",
       "C": "It reflects off smooth surfaces.",
-      "D": "It bends around obstacles."
+      "D": "It travels in straight lines."
     },
-    "answer_key": "A",
-    "rationale": "Light travelling in straight lines is what makes the blocked region take the outline of the blocker. B is the sharpest distractor because it is TRUE — an opaque object does absorb light — but it explains why the shadow is dark, not why it is that shape, and the stem asks about shape. Distinguishing a true statement from a relevant one is the skill being tested. D describes diffraction, which would blur the outline."
+    "answer_key": "D",
+    "rationale": "Light travelling in straight lines is what makes the blocked region take the outline of the blocker. B is the sharpest distractor because it is TRUE — an opaque object does absorb light — but it explains why the shadow is dark, not why it is that shape, and the stem asks about shape. Distinguishing a true statement from a relevant one is the skill being tested. A describes diffraction, which would blur the outline."
   },
   {
     "ref": "S-E-12",
@@ -117,13 +117,13 @@
     "format": "mcq",
     "stem": "A liquid turns blue litmus paper red. The liquid is most likely",
     "options": {
-      "A": "lemon juice",
+      "A": "common salt solution",
       "B": "soap solution",
       "C": "baking soda solution",
-      "D": "common salt solution"
+      "D": "lemon juice"
     },
-    "answer_key": "A",
-    "rationale": "Blue litmus turning red is the standard test for an acid, and lemon juice is acidic from citric acid. B and C are both basic and would turn red litmus blue instead — the opposite result, which makes them useful for spotting a candidate who has memorised the pair of colours without attaching them to the right direction. D is roughly neutral and changes nothing."
+    "answer_key": "D",
+    "rationale": "Blue litmus turning red is the standard test for an acid, and lemon juice is acidic from citric acid. B and C are both basic and would turn red litmus blue instead — the opposite result, which makes them useful for spotting a candidate who has memorised the pair of colours without attaching them to the right direction. A is roughly neutral and changes nothing."
   },
   {
     "ref": "S-E-14",
@@ -134,13 +134,13 @@
     "format": "mcq",
     "stem": "In a grassland, insects eat grass, frogs eat insects and snakes eat frogs. If all the frogs were removed, what would most likely happen?",
     "options": {
-      "A": "The number of insects increases",
+      "A": "The number of snakes increases",
       "B": "The grass becomes more abundant",
-      "C": "The number of snakes increases",
+      "C": "The number of insects increases",
       "D": "The insects begin to eat snakes"
     },
-    "answer_key": "A",
-    "rationale": "Removing a predator releases its prey, so insect numbers rise. C is the dominant wrong answer and is worth the item on its own: it reads as though the snakes benefit, when in fact they have lost their food supply and would decline. B inverts the knock-on effect — more insects means less grass, not more. D is biologically impossible and exists to catch guessing."
+    "answer_key": "C",
+    "rationale": "Removing a predator releases its prey, so insect numbers rise. A is the dominant wrong answer and is worth the item on its own: it reads as though the snakes benefit, when in fact they have lost their food supply and would decline. B inverts the knock-on effect — more insects means less grass, not more. D is biologically impossible and exists to catch guessing."
   },
   {
     "ref": "S-M-15",
@@ -151,12 +151,12 @@
     "format": "mcq",
     "stem": "A metal spoon and a wooden spoon are left standing in the same pot of hot soup. The metal one feels hotter to touch because metal",
     "options": {
-      "A": "conducts heat better than wood",
+      "A": "has a smoother surface than wood",
       "B": "holds more heat than wood does",
       "C": "reaches a higher temperature than the wood",
-      "D": "has a smoother surface than wood"
+      "D": "conducts heat better than wood"
     },
-    "answer_key": "A",
+    "answer_key": "D",
     "rationale": "Both spoons sit in the same soup and settle at the same temperature; what differs is how fast each delivers heat into the hand. C is the reason this is moderate rather than easy — it is the intuitive answer and it contradicts the stem, which states both spoons are in the same pot. Separating temperature from rate of heat transfer is the whole item. B confuses conductivity with heat capacity."
   },
   {
@@ -168,13 +168,13 @@
     "format": "mcq",
     "stem": "Moist seeds are kept in two identical jars, one in a warm room and one in a fridge. Only the seeds in the warm jar sprout. This experiment shows that germination needs",
     "options": {
-      "A": "warmth",
-      "B": "warmth and moisture",
+      "A": "warmth and moisture",
+      "B": "warmth",
       "C": "light",
       "D": "air"
     },
-    "answer_key": "A",
-    "rationale": "Only one variable differs between the jars — temperature — so warmth is the only thing the experiment can demonstrate. B is the trap and it is a good one: germination really does need moisture, but both jars were moist, so this experiment says nothing about it. Choosing B means answering from prior knowledge instead of from the evidence in front of you, which is the distinction that makes this moderate. C and D were never varied either."
+    "answer_key": "B",
+    "rationale": "Only one variable differs between the jars — temperature — so warmth is the only thing the experiment can demonstrate. A is the trap and it is a good one: germination really does need moisture, but both jars were moist, so this experiment says nothing about it. Choosing A means answering from prior knowledge instead of from the evidence in front of you, which is the distinction that makes this moderate. C and D were never varied either."
   },
   {
     "ref": "S-M-17",
@@ -214,12 +214,12 @@
     "format": "mcq",
     "stem": "A candle sealed in a jar burns for 2 minutes. With a green plant in the jar under bright light it burns for 5 minutes; with the same plant in darkness, 1 minute. What explains the dark result?",
     "options": {
-      "A": "The plant used up oxygen by respiring",
+      "A": "A candle burns differently in darkness",
       "B": "The plant stopped growing in the dark",
-      "C": "A candle burns differently in darkness",
+      "C": "The plant used up oxygen by respiring",
       "D": "The plant gives out carbon dioxide only at night"
     },
-    "answer_key": "A",
+    "answer_key": "C",
     "rationale": "Plants respire continuously; in light, photosynthesis more than replaces the oxygen used, which is why the candle lasts longer. In darkness photosynthesis stops while respiration does not, so the plant now competes with the flame for oxygen and the candle fails sooner than with no plant at all. D is the sharpest distractor — the familiar half-truth that plants release carbon dioxide at night, which omits that they do so all the time. Difficult because the candidate must hold both processes at once and read three results together."
   },
   {
@@ -231,12 +231,12 @@
     "format": "mcq",
     "stem": "A person standing on a skateboard throws a heavy ball forward and rolls backward. This happens because",
     "options": {
-      "A": "the ball pushes back with equal force",
-      "B": "the person weighs less after the throw",
+      "A": "the person weighs less after the throw",
+      "B": "the ball pushes back with equal force",
       "C": "the ground pushes the skateboard back",
       "D": "air resistance acts on the person"
     },
-    "answer_key": "A",
+    "answer_key": "B",
     "rationale": "Newton's third law: the force the person exerts on the ball is matched by the ball's force on the person, and with little friction under the wheels that push is free to move them. C is the most attractive wrong answer because the ground is where people expect forces to come from, and it is exactly backwards — friction with the ground is what normally prevents this, which is why the skateboard is in the stem at all. Difficult because the force acts through the thrown object, not the surface."
   }
 ]

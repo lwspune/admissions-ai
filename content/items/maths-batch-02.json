@@ -20,12 +20,12 @@
     "format": "mcq",
     "stem": "Which of these fractions is the largest?",
     "options": {
-      "A": "3/5",
+      "A": "2/3",
       "B": "5/8",
-      "C": "2/3",
+      "C": "3/5",
       "D": "7/12"
     },
-    "answer_key": "C",
+    "answer_key": "A",
     "rationale": "Over a common denominator of 120 these are 72, 75, 80 and 70, so 2/3 is largest. Every value sits between 0.58 and 0.67, which is the point: they are close enough that eyeballing fails and the candidate must actually convert. B (5/8) is the near miss at 0.625 and will take most of the wrong responses; D (7/12) is the smallest and attracts anyone comparing numerators alone."
   },
   {
@@ -129,13 +129,13 @@
     "format": "mcq",
     "stem": "If CAT is written as 3-1-20, how is DOG written in the same code?",
     "options": {
-      "A": "4-15-7",
+      "A": "5-16-8",
       "B": "4-14-7",
       "C": "3-14-6",
-      "D": "5-16-8"
+      "D": "4-15-7"
     },
-    "answer_key": "A",
-    "rationale": "Each letter maps to its alphabet position: D = 4, O = 15, G = 7. B (4-14-7) miscounts O as 14, the off-by-one that comes from counting the alphabet from a nearby anchor rather than carefully. C shifts every letter back one, D shifts every letter forward one — both are candidates who find a pattern in the example and apply it to the wrong thing."
+    "answer_key": "D",
+    "rationale": "Each letter maps to its alphabet position: A = 4, O = 15, G = 7. B (4-14-7) miscounts O as 14, the off-by-one that comes from counting the alphabet from a nearby anchor rather than carefully. C shifts every letter back one, A shifts every letter forward one — both are candidates who find a pattern in the example and apply it to the wrong thing."
   },
   {
     "ref": "M-M-27",
@@ -163,13 +163,13 @@
     "format": "mcq",
     "stem": "A bag contains 4 red balls and 6 blue balls. One ball is drawn at random. What is the probability that it is red?",
     "options": {
-      "A": "2/5",
+      "A": "1/4",
       "B": "2/3",
       "C": "3/5",
-      "D": "1/4"
+      "D": "2/5"
     },
-    "answer_key": "A",
-    "rationale": "There are 10 balls of which 4 are red, so 4/10 = 2/5. B (2/3) is the reason this sits at moderate rather than easy: it is 4/6, the ratio of red to blue, used where the denominator must be the total. C (3/5) is the probability of blue — the right method answering the wrong question. D assumes one favourable outcome in four."
+    "answer_key": "D",
+    "rationale": "There are 10 balls of which 4 are red, so 4/10 = 2/5. B (2/3) is the reason this sits at moderate rather than easy: it is 4/6, the ratio of red to blue, used where the denominator must be the total. C (3/5) is the probability of blue — the right method answering the wrong question. A assumes one favourable outcome in four."
   },
   {
     "ref": "M-M-29",

@@ -1,5 +1,7 @@
 # Maths Batch 03 — 15 items
 
+> **Options re-lettered 2026-10-06** to balance answer keys across A–D. Option letters in this review sheet are as reviewed and may no longer match; the `.json` is current.
+
 **Date:** 2026-09-23
 **Status:** Awaiting review. Machine-readable source: `maths-batch-03.json`.
 **Composition:** 0 easy / 7 moderate / 8 difficult. 8 numeric, 7 MCQ.

@@ -20,13 +20,13 @@
     "format": "mcq",
     "stem": "The average of five numbers is 20. One of them is replaced by 35 and the average becomes 23. What was the number that was replaced?",
     "options": {
-      "A": "20",
-      "B": "15",
+      "A": "15",
+      "B": "20",
       "C": "25",
       "D": "30"
     },
-    "answer_key": "A",
-    "rationale": "The total rises from 100 to 115, a gain of 15, so the number removed was 35 - 15 = 20. B is the dominant error: it is the amount the total changed by, mistaken for the number itself. Moderate because the route runs through the sums rather than the averages, and a candidate who works only with averages has nothing to manipulate."
+    "answer_key": "B",
+    "rationale": "The total rises from 100 to 115, a gain of 15, so the number removed was 35 - 15 = 20. A is the dominant error: it is the amount the total changed by, mistaken for the number itself. Moderate because the route runs through the sums rather than the averages, and a candidate who works only with averages has nothing to manipulate."
   },
   {
     "ref": "M-M-35",
@@ -95,12 +95,12 @@
     "format": "mcq",
     "stem": "If 2 * 3 = 13, 3 * 4 = 25 and 4 * 5 = 41, what is the value of 5 * 6?",
     "options": {
-      "A": "61",
+      "A": "71",
       "B": "51",
-      "C": "71",
+      "C": "61",
       "D": "56"
     },
-    "answer_key": "A",
+    "answer_key": "C",
     "rationale": "The rule is the sum of the squares: 4 + 9 = 13, 9 + 16 = 25, 16 + 25 = 41, so 25 + 36 = 61. Three worked examples are given because one rule must be found that fits all of them — a candidate who tests only the first will find several rules that work and no way to choose. D (56) comes from continuing the differences 12 and 16 by adding 15 rather than applying the rule."
   },
   {
@@ -136,12 +136,12 @@
     "format": "mcq",
     "stem": "A can do a job in 12 days and B in 18 days. They start together, but A leaves after 4 days. How many more days does B need to finish the job?",
     "options": {
-      "A": "8",
+      "A": "10",
       "B": "6",
       "C": "9",
-      "D": "10"
+      "D": "8"
     },
-    "answer_key": "A",
+    "answer_key": "D",
     "rationale": "Together they do 1/12 + 1/18 = 5/36 of the job per day, so 4 days completes 20/36 = 5/9. The remaining 4/9 at B's rate of 1/18 per day takes 8 days. Difficult because it runs in three stages — combine the rates, apply them for a fixed time, then switch to one rate for the remainder — and an error at any stage still yields a plausible whole number."
   },
   {
@@ -206,12 +206,12 @@
     "format": "mcq",
     "stem": "A trader sells two watches at ₹960 each. On one he gains 20% and on the other he loses 20%. Overall he makes",
     "options": {
-      "A": "a loss of 4%",
-      "B": "no profit or loss",
+      "A": "no profit or loss",
+      "B": "a loss of 4%",
       "C": "a gain of 4%",
       "D": "a loss of 2%"
     },
-    "answer_key": "A",
-    "rationale": "The cost prices are 960/1.2 = ₹800 and 960/0.8 = ₹1,200, totalling ₹2,000 against ₹1,920 received — a loss of ₹80, or 4%. B is the intuitive answer and it is wrong because the equal percentages apply to unequal cost prices: the 20% lost is computed on the dearer watch. Difficult because the symmetry of the figures argues loudly for an answer that is not correct."
+    "answer_key": "B",
+    "rationale": "The cost prices are 960/1.2 = ₹800 and 960/0.8 = ₹1,200, totalling ₹2,000 against ₹1,920 received — a loss of ₹80, or 4%. A is the intuitive answer and it is wrong because the equal percentages apply to unequal cost prices: the 20% lost is computed on the dearer watch. Difficult because the symmetry of the figures argues loudly for an answer that is not correct."
   }
 ]

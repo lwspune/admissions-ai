@@ -1,5 +1,7 @@
 # Science Batch 02 — 15 items
 
+> **Options re-lettered 2026-10-06** to balance answer keys across A–D. Option letters in this review sheet are as reviewed and may no longer match; the `.json` is current.
+
 **Date:** 2026-09-23
 **Status:** Awaiting review. Machine-readable source: `science-batch-02.json`.
 **Composition:** 3 easy / 6 moderate / 6 difficult, all science. 3 numeric, 12 MCQ.

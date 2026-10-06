@@ -8,13 +8,13 @@
     "format": "mcq",
     "stem": "The commander gave a terse reply. As used here, \"terse\" most nearly means",
     "options": {
-      "A": "brief",
+      "A": "polite",
       "B": "angry",
-      "C": "polite",
+      "C": "brief",
       "D": "confusing"
     },
-    "answer_key": "A",
-    "rationale": "Terse means short and to the point. B is the item's whole reason for existing: terse carries a faint suggestion of curtness, so candidates who have absorbed the tone without the meaning reach for \"angry\". The denotation is brevity, and a terse reply can be perfectly good-humoured. C and D are unrelated."
+    "answer_key": "C",
+    "rationale": "Terse means short and to the point. B is the item's whole reason for existing: terse carries a faint suggestion of curtness, so candidates who have absorbed the tone without the meaning reach for \"angry\". The denotation is brevity, and a terse reply can be perfectly good-humoured. A and D are unrelated."
   },
   {
     "ref": "E-E-10",
@@ -25,13 +25,13 @@
     "format": "mcq",
     "stem": "Which word is most nearly the opposite of \"scarce\"?",
     "options": {
-      "A": "plentiful",
-      "B": "expensive",
+      "A": "expensive",
+      "B": "plentiful",
       "C": "hidden",
       "D": "useful"
     },
-    "answer_key": "A",
-    "rationale": "Scarce means in short supply, so its opposite is plentiful. B is the strongest distractor because it is what scarcity causes rather than what it means — things become expensive because they are scarce, which makes \"expensive\" feel connected while being neither a synonym nor an antonym. Confusing a consequence with a definition is the error being tested."
+    "answer_key": "B",
+    "rationale": "Scarce means in short supply, so its opposite is plentiful. A is the strongest distractor because it is what scarcity causes rather than what it means — things become expensive because they are scarce, which makes \"expensive\" feel connected while being neither a synonym nor an antonym. Confusing a consequence with a definition is the error being tested."
   },
   {
     "ref": "E-E-11",
@@ -42,13 +42,13 @@
     "format": "mcq",
     "stem": "Choose the correct word: Neither of the boys ___ finished the work.",
     "options": {
-      "A": "has",
+      "A": "were",
       "B": "have",
       "C": "having",
-      "D": "were"
+      "D": "has"
     },
-    "answer_key": "A",
-    "rationale": "\"Neither\" is singular and governs the verb; \"of the boys\" is a prepositional phrase that does not. B is the dominant error and the point of the item — the plural noun sits directly next to the verb and pulls the ear towards \"have\". C is not a finite verb at all. D is plural and in the wrong tense."
+    "answer_key": "D",
+    "rationale": "\"Neither\" is singular and governs the verb; \"of the boys\" is a prepositional phrase that does not. B is the dominant error and the point of the item — the plural noun sits directly next to the verb and pulls the ear towards \"have\". C is not a finite verb at all. A is plural and in the wrong tense."
   },
   {
     "ref": "E-E-12",
@@ -76,13 +76,13 @@
     "format": "mcq",
     "stem": "The captain told the cadets to pull up their socks. He was telling them to",
     "options": {
-      "A": "work harder",
+      "A": "stand at attention",
       "B": "get dressed properly",
-      "C": "stand at attention",
+      "C": "work harder",
       "D": "stop complaining"
     },
-    "answer_key": "A",
-    "rationale": "The idiom means to make a greater effort. B is the literal reading and is exactly what the item is looking for — a candidate who has never met the phrase will translate it word by word, and the literal sense is plausible enough in a parade-ground setting to feel safe. C and D are contextually reasonable orders that the idiom does not mean."
+    "answer_key": "C",
+    "rationale": "The idiom means to make a greater effort. B is the literal reading and is exactly what the item is looking for — a candidate who has never met the phrase will translate it word by word, and the literal sense is plausible enough in a parade-ground setting to feel safe. A and D are contextually reasonable orders that the idiom does not mean."
   },
   {
     "ref": "E-M-14",
@@ -93,13 +93,13 @@
     "format": "mcq",
     "stem": "Thermometer is to temperature as barometer is to",
     "options": {
-      "A": "pressure",
-      "B": "weather",
+      "A": "weather",
+      "B": "pressure",
       "C": "altitude",
       "D": "humidity"
     },
-    "answer_key": "A",
-    "rationale": "The relation is instrument to the quantity it measures, and a barometer measures atmospheric pressure. B is why this sits at moderate rather than easy: weather is what a barometer is popularly used to predict, so the association is strong and the candidate has to notice that predicting is not measuring. C is a derived reading, D belongs to a hygrometer. Distinguishing the stated relation from a merely strong association is the skill."
+    "answer_key": "B",
+    "rationale": "The relation is instrument to the quantity it measures, and a barometer measures atmospheric pressure. A is why this sits at moderate rather than easy: weather is what a barometer is popularly used to predict, so the association is strong and the candidate has to notice that predicting is not measuring. C is a derived reading, D belongs to a hygrometer. Distinguishing the stated relation from a merely strong association is the skill."
   },
   {
     "ref": "E-M-15",
@@ -110,13 +110,13 @@
     "format": "mcq",
     "stem": "Pointing to a photograph, Ravi said, \"She is the daughter of the only son of my father.\" How is the girl related to Ravi?",
     "options": {
-      "A": "Daughter",
+      "A": "Granddaughter",
       "B": "Sister",
       "C": "Niece",
-      "D": "Granddaughter"
+      "D": "Daughter"
     },
-    "answer_key": "A",
-    "rationale": "The only son of Ravi's father is Ravi himself, so the girl is his daughter. The phrase has to be unwound from the inside out, and B is what a candidate lands on by stopping one step early at \"my father's daughter\". D comes from slipping a generation. Deliberately phrased as \"the only son of my father\" rather than \"my grandfather's only son\", which is ambiguous — that version leaves open whether the speaker descends through the son or a daughter, and admits two defensible answers."
+    "answer_key": "D",
+    "rationale": "The only son of Ravi's father is Ravi himself, so the girl is his daughter. The phrase has to be unwound from the inside out, and B is what a candidate lands on by stopping one step early at \"my father's daughter\". A comes from slipping a generation. Deliberately phrased as \"the only son of my father\" rather than \"my grandfather's only son\", which is ambiguous — that version leaves open whether the speaker descends through the son or a daughter, and admits two defensible answers."
   },
   {
     "ref": "E-M-16",
@@ -144,13 +144,13 @@
     "format": "mcq",
     "stem": "\"We should cancel the outdoor parade. The forecast says heavy rain.\" This argument assumes that",
     "options": {
-      "A": "rain would disrupt it",
-      "B": "the forecast is never wrong",
+      "A": "the forecast is never wrong",
+      "B": "rain would disrupt it",
       "C": "parades are unimportant",
       "D": "the cadets dislike rain"
     },
-    "answer_key": "A",
-    "rationale": "For the forecast to be a reason to cancel, rain must matter to the parade — remove that and the argument collapses, which is the test of a genuine assumption. B is the sharpest distractor: the argument does need the forecast to be reasonably reliable, but \"never wrong\" is far stronger than anything required, and an assumption that overshoots is not the one being made. Separating necessary from merely agreeable is what puts this at moderate."
+    "answer_key": "B",
+    "rationale": "For the forecast to be a reason to cancel, rain must matter to the parade — remove that and the argument collapses, which is the test of a genuine assumption. A is the sharpest distractor: the argument does need the forecast to be reasonably reliable, but \"never wrong\" is far stronger than anything required, and an assumption that overshoots is not the one being made. Separating necessary from merely agreeable is what puts this at moderate."
   },
   {
     "ref": "E-M-18",
@@ -161,13 +161,13 @@
     "format": "mcq",
     "stem": "Choose the word that best joins these sentences: The cadet trained every morning. ___, he failed the fitness test.",
     "options": {
-      "A": "Nevertheless",
+      "A": "For instance",
       "B": "Therefore",
       "C": "Moreover",
-      "D": "For instance"
+      "D": "Nevertheless"
     },
-    "answer_key": "A",
-    "rationale": "Training every morning ought to predict passing, so the second sentence reverses the expectation and needs a connector of contrast. B asserts the opposite relation and is the dominant error, chosen by candidates who register that the sentences are linked without registering how. C adds, D illustrates; neither fits a reversal. The item tests whether the candidate reads the relation between sentences or only their subject matter."
+    "answer_key": "D",
+    "rationale": "Training every morning ought to predict passing, so the second sentence reverses the expectation and needs a connector of contrast. B asserts the opposite relation and is the dominant error, chosen by candidates who register that the sentences are linked without registering how. C adds, A illustrates; neither fits a reversal. The item tests whether the candidate reads the relation between sentences or only their subject matter."
   },
   {
     "ref": "E-D-19",
@@ -179,11 +179,11 @@
     "stem": "In a race, Amit finished ahead of Bhavna. Chetan finished behind Bhavna but ahead of Dev. Ravi finished ahead of Amit. Who finished third?",
     "options": {
       "A": "Amit",
-      "B": "Bhavna",
+      "B": "Ravi",
       "C": "Chetan",
-      "D": "Ravi"
+      "D": "Bhavna"
     },
-    "answer_key": "B",
+    "answer_key": "D",
     "rationale": "The constraints give Ravi, Amit, Bhavna, Chetan, Dev in that order, so third is Bhavna. Difficult because no single statement fixes a position — the order only emerges once all four are combined, and the final clause moves Ravi above Amit after the reader has probably already settled Amit at the top. A is what you get by stopping before that clause."
   },
   {
@@ -212,13 +212,13 @@
     "format": "mcq",
     "stem": "\"Students who eat breakfast score higher in exams, so eating breakfast improves exam scores.\" Which finding would most weaken this argument?",
     "options": {
-      "A": "Students who eat breakfast also sleep more",
+      "A": "Some students dislike eating in the morning",
       "B": "Breakfast is cheap and widely available",
-      "C": "Some students dislike eating in the morning",
+      "C": "Students who eat breakfast also sleep more",
       "D": "Exam scores have risen over ten years"
     },
-    "answer_key": "A",
-    "rationale": "The argument reads a correlation as a cause. A supplies a third factor that could produce both the breakfast and the better scores, which is what undermines a causal claim — the strongest attack is an alternative explanation, not a denial of the data. B is irrelevant, C limits the remedy without touching the reasoning, D describes an unrelated trend. Difficult because the candidate must locate the argument's structure before judging the options."
+    "answer_key": "C",
+    "rationale": "The argument reads a correlation as a cause. C supplies a third factor that could produce both the breakfast and the better scores, which is what undermines a causal claim — the strongest attack is an alternative explanation, not a denial of the data. B is irrelevant, A limits the remedy without touching the reasoning, D describes an unrelated trend. Difficult because the candidate must locate the argument's structure before judging the options."
   },
   {
     "ref": "E-D-22",
@@ -246,12 +246,12 @@
     "format": "mcq",
     "stem": "\"The new rifle is lighter than the old one, and cheaper. Reliability tests are still under way.\" The writer's attitude to the new rifle is best described as",
     "options": {
-      "A": "cautiously positive",
+      "A": "completely neutral",
       "B": "openly hostile",
-      "C": "completely neutral",
+      "C": "cautiously positive",
       "D": "strongly enthusiastic"
     },
-    "answer_key": "A",
-    "rationale": "Two advantages are stated plainly and then held in check by an unresolved question, which is approval with a reservation attached. D takes the praise and discards the final sentence; C takes the flat, factual register as an absence of any view, missing that the writer has chosen to lead with two advantages. Difficult because tone here is carried by what is placed last rather than by any evaluative word."
+    "answer_key": "C",
+    "rationale": "Two advantages are stated plainly and then held in check by an unresolved question, which is approval with a reservation attached. D takes the praise and discards the final sentence; A takes the flat, factual register as an absence of any view, missing that the writer has chosen to lead with two advantages. Difficult because tone here is carried by what is placed last rather than by any evaluative word."
   }
 ]

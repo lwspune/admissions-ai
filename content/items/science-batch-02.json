@@ -8,13 +8,13 @@
     "format": "mcq",
     "stem": "A bar magnet is cut into two equal pieces. Each piece will",
     "options": {
-      "A": "have both poles",
-      "B": "have only a north pole",
+      "A": "have only a north pole",
+      "B": "have both poles",
       "C": "have only a south pole",
       "D": "lose its magnetism"
     },
-    "answer_key": "A",
-    "rationale": "Magnetic poles cannot be separated: cutting a magnet produces two smaller magnets, each with a north and a south. B and C are the intuitive answers and they are symmetric on purpose, so a candidate guessing from the picture in their head has no reason to prefer one, and both are wrong for the same reason. D treats cutting as damage."
+    "answer_key": "B",
+    "rationale": "Magnetic poles cannot be separated: cutting a magnet produces two smaller magnets, each with a north and a south. A and C are the intuitive answers and they are symmetric on purpose, so a candidate guessing from the picture in their head has no reason to prefer one, and both are wrong for the same reason. D treats cutting as damage."
   },
   {
     "ref": "S-E-22",
@@ -54,12 +54,12 @@
     "format": "mcq",
     "stem": "Ice at 0 degrees C is heated steadily. While it is melting its temperature does not rise. The heat supplied is being used to",
     "options": {
-      "A": "separate the particles of ice",
+      "A": "increase the weight of the ice",
       "B": "raise the temperature of the water",
       "C": "escape into the surrounding air",
-      "D": "increase the weight of the ice"
+      "D": "separate the particles of ice"
     },
-    "answer_key": "A",
+    "answer_key": "D",
     "rationale": "Energy going into a change of state breaks the forces holding the solid together rather than speeding the particles up, which is why the thermometer sits still while the ice disappears. B is the dominant error: heat supplied is assumed to mean temperature raised, and the stem states plainly that it does not. Moderate because it requires separating energy from temperature, which are the same thing in everyday speech."
   },
   {
@@ -71,12 +71,12 @@
     "format": "mcq",
     "stem": "The wall of a dam is built much thicker at the bottom than at the top. This is mainly because water pressure",
     "options": {
-      "A": "increases with depth",
+      "A": "is greatest at the surface",
       "B": "acts only downwards",
-      "C": "is greatest at the surface",
+      "C": "increases with depth",
       "D": "depends on the width of the dam"
     },
-    "answer_key": "A",
+    "answer_key": "C",
     "rationale": "Pressure in a liquid rises with the depth of water above, so the deepest part of the wall carries the greatest sideways push. B is a common misconception worth catching — if pressure acted only downwards there would be no need for a wall at all. D substitutes the quantity of water for its depth, which is why a narrow deep lake presses as hard as a broad one."
   },
   {
@@ -88,13 +88,13 @@
     "format": "mcq",
     "stem": "Which of these is a chemical change?",
     "options": {
-      "A": "Iron rusting in damp air",
+      "A": "Salt dissolving in water",
       "B": "Ice melting into water",
-      "C": "Salt dissolving in water",
+      "C": "Iron rusting in damp air",
       "D": "Water boiling into steam"
     },
-    "answer_key": "A",
-    "rationale": "Rusting forms a new substance, iron oxide, and cannot be undone by cooling or drying. C is the reason this is moderate: dissolving looks like a transformation because the salt vanishes, but the salt is unchanged and reappears on evaporation. B and D are changes of state. The test is whether a new substance exists afterwards, not whether the appearance changed."
+    "answer_key": "C",
+    "rationale": "Rusting forms a new substance, iron oxide, and cannot be undone by cooling or drying. A is the reason this is moderate: dissolving looks like a transformation because the salt vanishes, but the salt is unchanged and reappears on evaporation. B and D are changes of state. The test is whether a new substance exists afterwards, not whether the appearance changed."
   },
   {
     "ref": "S-M-27",
@@ -134,12 +134,12 @@
     "format": "mcq",
     "stem": "The metal body of an electric iron is connected to the earth wire. The main purpose of this is to",
     "options": {
-      "A": "prevent an electric shock",
-      "B": "make the iron heat faster",
+      "A": "make the iron heat faster",
+      "B": "prevent an electric shock",
       "C": "reduce the electricity bill",
       "D": "stop the fuse from melting too soon"
     },
-    "answer_key": "A",
+    "answer_key": "B",
     "rationale": "If a live wire works loose and touches the casing, the earth wire gives the current a low-resistance path away from anyone holding it, and the resulting surge blows the fuse. D is the near-miss: the fuse does operate, but its melting is the mechanism protecting the circuit, not the thing the earth wire is there to prevent. Moderate because the answer requires imagining a fault that is not in the stem."
   },
   {
@@ -151,12 +151,12 @@
     "format": "mcq",
     "stem": "A book lies at rest on a table. Which force forms an action-reaction pair with the Earth's gravitational pull on the book?",
     "options": {
-      "A": "The book's pull on the Earth",
+      "A": "The book's weight acting downwards",
       "B": "The table's push on the book",
       "C": "The book's push on the table",
-      "D": "The book's weight acting downwards"
+      "D": "The book's pull on the Earth"
     },
-    "answer_key": "A",
+    "answer_key": "D",
     "rationale": "A third-law pair is the same interaction seen from both sides, so the partner of the Earth pulling the book is the book pulling the Earth — equal, opposite, and acting on different bodies. B is the answer almost everyone gives and it is wrong for an instructive reason: the table's push balances the weight, but balancing is not pairing, and the two forces act on the same object. Difficult because a true statement about equilibrium has to be rejected in favour of the one about interaction."
   },
   {
@@ -168,13 +168,13 @@
     "format": "mcq",
     "stem": "A piece of iron is weighed, left in damp air until it rusts, and weighed again. It is now heavier. The best explanation is that",
     "options": {
-      "A": "oxygen from the air has joined the iron",
+      "A": "mass is not conserved in chemical changes",
       "B": "rust is a denser material than iron",
       "C": "the iron has absorbed water only",
-      "D": "mass is not conserved in chemical changes"
+      "D": "oxygen from the air has joined the iron"
     },
-    "answer_key": "A",
-    "rationale": "Rust is iron oxide, and the oxygen comes from the air, so the gain in mass is matched by a loss from the surroundings. B confuses density with mass — a denser substance is not automatically a heavier sample. D is the conclusion a candidate reaches by taking the observation at face value, and it is exactly backwards: the extra mass is the evidence that something joined, not that mass appeared. Difficult because it requires treating air as a material with weight."
+    "answer_key": "D",
+    "rationale": "Rust is iron oxide, and the oxygen comes from the air, so the gain in mass is matched by a loss from the surroundings. B confuses density with mass — a denser substance is not automatically a heavier sample. A is the conclusion a candidate reaches by taking the observation at face value, and it is exactly backwards: the extra mass is the evidence that something joined, not that mass appeared. Difficult because it requires treating air as a material with weight."
   },
   {
     "ref": "S-D-32",
@@ -185,12 +185,12 @@
     "format": "mcq",
     "stem": "In a hydroelectric power station, water stored high behind a dam falls and turns a turbine. The main energy changes are",
     "options": {
-      "A": "potential to kinetic to electrical",
+      "A": "chemical to kinetic to electrical",
       "B": "kinetic to potential to electrical",
-      "C": "chemical to kinetic to electrical",
+      "C": "potential to kinetic to electrical",
       "D": "electrical to kinetic to potential"
     },
-    "answer_key": "A",
+    "answer_key": "C",
     "rationale": "Stored height is gravitational potential energy; falling converts it to kinetic energy; the turbine and generator convert that to electrical energy. B has the first two in the wrong order and is the most attractive error, since the word most associated with moving water is kinetic. Difficult because the chain has to be read from the stored state rather than from the visible motion."
   },
   {
@@ -202,13 +202,13 @@
     "format": "mcq",
     "stem": "You stand 2 m in front of a plane mirror, then step back 1 m. The distance between you and your image is now",
     "options": {
-      "A": "6 m",
-      "B": "3 m",
+      "A": "3 m",
+      "B": "6 m",
       "C": "4 m",
       "D": "5 m"
     },
-    "answer_key": "A",
-    "rationale": "A plane mirror forms an image as far behind it as the object stands in front, so at 3 m the gap is 3 + 3 = 6 m. B is the distance to the mirror, the answer of a candidate who forgets the image moves too. C is the separation before stepping back. D comes from adding the 1 m step to the original 4 m separation instead of doubling it. Difficult because two distances change together."
+    "answer_key": "B",
+    "rationale": "A plane mirror forms an image as far behind it as the object stands in front, so at 3 m the gap is 3 + 3 = 6 m. A is the distance to the mirror, the answer of a candidate who forgets the image moves too. C is the separation before stepping back. D comes from adding the 1 m step to the original 4 m separation instead of doubling it. Difficult because two distances change together."
   },
   {
     "ref": "S-D-34",

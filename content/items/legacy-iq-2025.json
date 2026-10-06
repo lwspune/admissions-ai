@@ -77,12 +77,12 @@
     "stem": "If today is Monday, what day of the week will it be 45 days from now?",
     "options": {
       "A": "Wednesday",
-      "B": "Thursday",
+      "B": "Saturday",
       "C": "Friday",
-      "D": "Saturday"
+      "D": "Thursday"
     },
-    "answer_key": "B",
-    "rationale": "45 = 6 x 7 + 3, so the answer is three days after Monday: Thursday. A (Wednesday) is the off-by-one from counting Monday itself as day one, and is the dominant wrong answer. C and D take the remainder as 4 or 5. The arithmetic is trivial; the discrimination lies entirely in whether the candidate counts from Monday or counts Monday."
+    "answer_key": "D",
+    "rationale": "45 = 6 x 7 + 3, so the answer is three days after Monday: Thursday. A (Wednesday) is the off-by-one from counting Monday itself as day one, and is the dominant wrong answer. C and B take the remainder as 4 or 5. The arithmetic is trivial; the discrimination lies entirely in whether the candidate counts from Monday or counts Monday."
   },
   {
     "ref": "M-E-11",
@@ -178,12 +178,12 @@
     "format": "mcq",
     "stem": "If 7 cats catch 7 mice in 7 minutes, how long will 14 cats take to catch 14 mice?",
     "options": {
-      "A": "7 minutes",
+      "A": "21 minutes",
       "B": "14 minutes",
       "C": "3.5 minutes",
-      "D": "21 minutes"
+      "D": "7 minutes"
     },
-    "answer_key": "A",
+    "answer_key": "D",
     "rationale": "Each cat catches one mouse in 7 minutes. Doubling cats and mice together leaves the per-cat rate untouched, so the time is still 7 minutes. B (14 minutes) is the intuitive answer and should attract most of the wrong responses — the candidate scales time along with the quantities. C scales it the other way. Moderate despite needing no arithmetic: it measures whether a candidate identifies the per-unit rate before scaling."
   },
   {
