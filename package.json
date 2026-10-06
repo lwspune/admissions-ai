@@ -16,6 +16,7 @@
     "test:watch": "vitest",
     "test:integration": "vitest run --config vitest.integration.config.ts",
     "items:lint": "tsx scripts/items-lint.mts",
+    "parent-pack": "tsx scripts/parent-pack.mts",
     "db:verify": "node scripts/verify-schema.mjs",
     "db:verify-rls": "tsx scripts/verify-rls.mts",
     "items:seed": "tsx scripts/seed-items.mts",

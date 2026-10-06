@@ -1,0 +1,1302 @@
+[
+ {
+  "paper": 8,
+  "ref": "P8-M1",
+  "subject": "maths",
+  "skill": "number-series",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Find the next number in the series: 7, 10, 16, 25, 37, ___",
+  "options": {
+   "A": "49",
+   "B": "52",
+   "C": "55",
+   "D": "61"
+  },
+  "answer_key": "B",
+  "rationale": "The gaps grow by 3 each time: +3, +6, +9, +12, so the next gap is +15, and 37 + 15 = 52."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-M2",
+  "subject": "maths",
+  "skill": "hcf-and-lcm",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What is the largest number that divides both 48 and 72 exactly?",
+  "options": {
+   "A": "24",
+   "B": "36",
+   "C": "12",
+   "D": "6"
+  },
+  "answer_key": "A",
+  "rationale": "48 = 24 × 2 and 72 = 24 × 3, and 2 and 3 share no common factor, so 24 is the largest. 36 does not divide 48."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-M3",
+  "subject": "maths",
+  "skill": "area-and-perimeter",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "A square garden has a perimeter of 48 m. What is its area, in square metres?",
+  "numeric_answer": 144,
+  "numeric_tolerance": 0,
+  "rationale": "A square has four equal sides, so each side is 48 ÷ 4 = 12 m, and the area is 12 × 12 = 144 square metres. This is a type-in question."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-M4",
+  "subject": "maths",
+  "skill": "speed-distance-time",
+  "difficulty": "moderate",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "Riya cycles to school at 12 km/h and reaches in 25 minutes. How far is her school from home?",
+  "options": {
+   "A": "3 km",
+   "B": "4 km",
+   "C": "5 km",
+   "D": "6 km"
+  },
+  "answer_key": "C",
+  "rationale": "At 12 km/h she covers 1 km every 5 minutes, so in 25 minutes she covers 5 km. The minutes have to be turned into hours first."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-M5",
+  "subject": "maths",
+  "skill": "fraction-comparison",
+  "difficulty": "difficult",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "Asha spends one third of her pocket money on books and one quarter of what is left on snacks. She has ₹150 left. How much pocket money did she have?",
+  "options": {
+   "A": "₹200",
+   "B": "₹250",
+   "C": "₹300",
+   "D": "₹360"
+  },
+  "answer_key": "C",
+  "rationale": "After books, 2/3 is left; snacks take a quarter of that, leaving 3/4 of 2/3, which is 1/2. Half is ₹150, so she had ₹300. ₹360 comes from taking a quarter of the whole."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The old bridge was too fragile to carry the loaded truck. As used here, \"fragile\" most nearly means",
+  "options": {
+   "A": "ancient",
+   "B": "narrow",
+   "C": "weak",
+   "D": "crowded"
+  },
+  "answer_key": "C",
+  "rationale": "Fragile means easily broken. The sentence says the bridge could not carry the weight, which points to weakness, not age or width."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-E2",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: Each of the players ___ given a new jersey.",
+  "options": {
+   "A": "were",
+   "B": "was",
+   "C": "are",
+   "D": "have"
+  },
+  "answer_key": "B",
+  "rationale": "The subject is \"each\", which is singular, so the verb is \"was\". \"Players\" sits nearby but is not the subject."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-E3",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Pen is to writer as brush is to ___",
+  "options": {
+   "A": "painter",
+   "B": "canvas",
+   "C": "colour",
+   "D": "wall"
+  },
+  "answer_key": "A",
+  "rationale": "A pen is the tool a writer works with; a brush is the tool a painter works with. The other options are things a brush touches."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-E4",
+  "subject": "english",
+  "skill": "letter-series",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What comes next in the series? AZ, BY, CX, DW, ___",
+  "options": {
+   "A": "DV",
+   "B": "EU",
+   "C": "FX",
+   "D": "EV"
+  },
+  "answer_key": "D",
+  "rationale": "The first letter moves forward one step (A, B, C, D, E) while the second moves back one step (Z, Y, X, W, V), giving EV."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-E5",
+  "subject": "english",
+  "skill": "syllogism",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Some pilots are engineers. All engineers are graduates. Which statement must be true?",
+  "options": {
+   "A": "All pilots are graduates",
+   "B": "No pilot is a graduate",
+   "C": "Some pilots are graduates",
+   "D": "All graduates are pilots"
+  },
+  "answer_key": "C",
+  "rationale": "The pilots who are engineers must be graduates, so at least some pilots are graduates. Nothing is said about the other pilots."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-S1",
+  "subject": "science",
+  "skill": "magnetism",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which of these will a magnet attract?",
+  "options": {
+   "A": "a copper wire",
+   "B": "an iron pin",
+   "C": "aluminium foil",
+   "D": "a glass bead"
+  },
+  "answer_key": "B",
+  "rationale": "Magnets attract iron and a few other metals. Copper and aluminium are metals but are not attracted, and glass is not a metal."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-S2",
+  "subject": "science",
+  "skill": "acids-and-bases",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "Which of these tastes sour because it contains an acid?",
+  "options": {
+   "A": "vinegar",
+   "B": "soap solution",
+   "C": "baking soda solution",
+   "D": "chalk powder"
+  },
+  "answer_key": "A",
+  "rationale": "Vinegar contains acetic acid, which gives it a sour taste. Soap and baking soda are bases, and chalk is neither sour nor acidic."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-S3",
+  "subject": "science",
+  "skill": "speed",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "numeric",
+  "stem": "A ball rolls 45 m across flat ground in 9 seconds at a steady speed. What is its speed, in metres per second?",
+  "numeric_answer": 5,
+  "numeric_tolerance": 0,
+  "rationale": "Speed is distance divided by time: 45 m ÷ 9 s = 5 m/s. This is a type-in question: the answer is typed as a number."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-S4",
+  "subject": "science",
+  "skill": "electric-circuits",
+  "difficulty": "moderate",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "Two identical bulbs are connected in parallel to a battery and both glow. If one bulb is unscrewed, the other bulb",
+  "options": {
+   "A": "goes out",
+   "B": "glows dimmer",
+   "C": "stays lit as before",
+   "D": "flickers and fails"
+  },
+  "answer_key": "C",
+  "rationale": "In a parallel circuit each bulb has its own path to the battery, so removing one leaves the other's path complete and unchanged."
+ },
+ {
+  "paper": 8,
+  "ref": "P8-S5",
+  "subject": "science",
+  "skill": "photosynthesis",
+  "difficulty": "difficult",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "A leaf on a plant is partly covered with black paper for two days, then tested with iodine. Only the uncovered part turns blue-black. This shows that",
+  "options": {
+   "A": "iodine reacts with the black paper",
+   "B": "the covered part lost all its water",
+   "C": "the leaf breathes only where it is uncovered",
+   "D": "starch is made only where light reaches"
+  },
+  "answer_key": "D",
+  "rationale": "Iodine turns blue-black where there is starch. Only the part that received light made starch, so the leaf needs light to make food."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-M1",
+  "subject": "maths",
+  "skill": "unit-conversion",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "How many seconds are there in 2.5 hours?",
+  "options": {
+   "A": "150",
+   "B": "900",
+   "C": "9,000",
+   "D": "15,000"
+  },
+  "answer_key": "C",
+  "rationale": "One hour has 60 × 60 = 3,600 seconds, so 2.5 hours has 2.5 × 3,600 = 9,000 seconds. 150 is the number of minutes."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-M2",
+  "subject": "maths",
+  "skill": "ratio-proportion",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "The ratio of boys to girls in a class is 4 : 5. If there are 20 boys, how many girls are there?",
+  "options": {
+   "A": "16",
+   "B": "20",
+   "C": "24",
+   "D": "25"
+  },
+  "answer_key": "D",
+  "rationale": "20 boys is 4 parts, so one part is 5 students. Girls are 5 parts, which is 25. 16 comes from using the ratio the wrong way round."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-M3",
+  "subject": "maths",
+  "skill": "linear-equation",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "numeric",
+  "stem": "When a number is doubled and then increased by 7, the result is 31. What is the number?",
+  "numeric_answer": 12,
+  "numeric_tolerance": 0,
+  "rationale": "Work backwards: 31 − 7 = 24, and 24 ÷ 2 = 12. Check: 12 × 2 + 7 = 31. This is a type-in question."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-M4",
+  "subject": "maths",
+  "skill": "ages",
+  "difficulty": "moderate",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "A mother and her daughter are 50 years old together. Five years ago, the mother was 7 times as old as the daughter. How old is the daughter now?",
+  "options": {
+   "A": "8",
+   "B": "10",
+   "C": "12",
+   "D": "15"
+  },
+  "answer_key": "B",
+  "rationale": "Five years ago their ages added to 40, in the ratio 7 : 1, so they were 35 and 5. The daughter is now 10 and the mother 40."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-M5",
+  "subject": "maths",
+  "skill": "compound-growth",
+  "difficulty": "difficult",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "A scooter worth ₹80,000 loses 10% of its value every year. What will it be worth after 2 years?",
+  "options": {
+   "A": "₹64,800",
+   "B": "₹64,000",
+   "C": "₹66,000",
+   "D": "₹72,000"
+  },
+  "answer_key": "A",
+  "rationale": "After one year it is worth ₹72,000. The second year takes 10% of ₹72,000, which is ₹7,200, leaving ₹64,800. ₹64,000 takes ₹8,000 off twice."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-E1",
+  "subject": "english",
+  "skill": "antonym",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the word most nearly opposite in meaning to \"reluctant\".",
+  "options": {
+   "A": "eager",
+   "B": "slow",
+   "C": "afraid",
+   "D": "unwilling"
+  },
+  "answer_key": "A",
+  "rationale": "Reluctant means unwilling or hesitant, so its opposite is eager. \"Unwilling\" is a word with the same meaning, not the opposite."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-E2",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: She has been living in Pune ___ 2019.",
+  "options": {
+   "A": "from",
+   "B": "since",
+   "C": "for",
+   "D": "by"
+  },
+  "answer_key": "B",
+  "rationale": "\"Since\" is used with a point in time (since 2019); \"for\" is used with a length of time (for five years)."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-E3",
+  "subject": "english",
+  "skill": "idiom-meaning",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "When the coach said the match was \"in the bag\", he meant that",
+  "options": {
+   "A": "the team had packed its kit",
+   "B": "the result was still uncertain",
+   "C": "victory was almost certain",
+   "D": "the match had been called off"
+  },
+  "answer_key": "C",
+  "rationale": "\"In the bag\" is an idiom meaning that success is as good as secured. It has nothing to do with an actual bag."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-E4",
+  "subject": "english",
+  "skill": "sentence-sequencing",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Arrange the sentences in a logical order. P. Asha, their leader, checked the map. Q. The trekkers realised they were lost. R. They reached camp before dark. S. She found the right trail.",
+  "options": {
+   "A": "PQSR",
+   "B": "QSPR",
+   "C": "QPRS",
+   "D": "QPSR"
+  },
+  "answer_key": "D",
+  "rationale": "The problem comes first (Q), then the response (P), then the solution (S), then the result (R). \"She\" in S needs Asha named before it."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-E5",
+  "subject": "english",
+  "skill": "logical-deduction",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Ali, Bina, Dev, Esha and Tara sit in a row of five. Tara is in the middle, Ali at the left end and Bina next to Ali. Dev is not next to Tara. Who is at the right end?",
+  "options": {
+   "A": "Dev",
+   "B": "Esha",
+   "C": "Bina",
+   "D": "Cannot be determined"
+  },
+  "answer_key": "A",
+  "rationale": "Seats 1, 2 and 3 are Ali, Bina and Tara. Dev and Esha take seats 4 and 5; seat 4 is next to Tara, so Dev must be in seat 5."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-S1",
+  "subject": "science",
+  "skill": "sound",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "Sound cannot travel through",
+  "options": {
+   "A": "sea water",
+   "B": "a steel rail",
+   "C": "still air",
+   "D": "a vacuum"
+  },
+  "answer_key": "D",
+  "rationale": "Sound is a vibration passed from particle to particle, so it needs a material. A vacuum has no particles, so sound cannot cross it."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-S2",
+  "subject": "science",
+  "skill": "reflection",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "A card with a word printed on it is held in front of a plane mirror. In the mirror, the word appears",
+  "options": {
+   "A": "upside down",
+   "B": "with left and right swapped",
+   "C": "larger than on the card",
+   "D": "smaller than on the card"
+  },
+  "answer_key": "B",
+  "rationale": "A plane mirror forms an image the same size and the same way up, but with left and right swapped, which is why the word reads backwards."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-S3",
+  "subject": "science",
+  "skill": "respiration",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "Compared with the air we breathe in, the air we breathe out contains",
+  "options": {
+   "A": "more carbon dioxide",
+   "B": "more oxygen",
+   "C": "less water vapour",
+   "D": "no carbon dioxide at all"
+  },
+  "answer_key": "A",
+  "rationale": "The body uses oxygen to release energy from food and gives off carbon dioxide, so breathed-out air holds more carbon dioxide and less oxygen."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-S4",
+  "subject": "science",
+  "skill": "force-and-pressure",
+  "difficulty": "moderate",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "A sharp knife cuts more easily than a blunt one pushed with the same force, because the sharp edge",
+  "options": {
+   "A": "makes much more friction with what is cut",
+   "B": "pushes with a larger force overall",
+   "C": "acts on a smaller area, raising pressure",
+   "D": "spreads the force over a larger area"
+  },
+  "answer_key": "C",
+  "rationale": "Pressure is force divided by area. The same force on the thin edge of a sharp knife gives a much greater pressure, which cuts."
+ },
+ {
+  "paper": 9,
+  "ref": "P9-S5",
+  "subject": "science",
+  "skill": "force-and-pressure",
+  "difficulty": "difficult",
+  "taught_in": 8,
+  "format": "numeric",
+  "stem": "A box weighing 600 N has one face of area 2 m² and another of 0.5 m². How many pascals more pressure does it exert resting on the small face than on the large face?",
+  "numeric_answer": 900,
+  "numeric_tolerance": 0,
+  "rationale": "On the small face: 600 ÷ 0.5 = 1,200 Pa. On the large face: 600 ÷ 2 = 300 Pa. The difference is 900 Pa. This is a type-in question."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-M1",
+  "subject": "maths",
+  "skill": "clock-angles",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What is the angle between the hands of a clock at exactly 3 o'clock?",
+  "options": {
+   "A": "45°",
+   "B": "60°",
+   "C": "75°",
+   "D": "90°"
+  },
+  "answer_key": "D",
+  "rationale": "The clock face is 360°, and each hour mark is 30° apart. From 12 to 3 is three hour marks, so the angle is 3 × 30° = 90°."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-M2",
+  "subject": "maths",
+  "skill": "percentage-change",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "The price of a bag rises from ₹250 to ₹300. What is the percentage increase?",
+  "options": {
+   "A": "15%",
+   "B": "20%",
+   "C": "25%",
+   "D": "50%"
+  },
+  "answer_key": "B",
+  "rationale": "The rise is ₹50, and the percentage is worked out on the original price: 50 ÷ 250 = 0.2, which is 20%."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-M3",
+  "subject": "maths",
+  "skill": "direct-proportion",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "numeric",
+  "stem": "A car uses 8 litres of petrol to travel 96 km. How many litres will it need to travel 156 km?",
+  "numeric_answer": 13,
+  "numeric_tolerance": 0,
+  "rationale": "The car runs 96 ÷ 8 = 12 km on each litre, so 156 km needs 156 ÷ 12 = 13 litres. This is a type-in question."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-M4",
+  "subject": "maths",
+  "skill": "compound-interest",
+  "difficulty": "moderate",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "₹5,000 is deposited at 10% interest per year, compounded yearly. What will the amount be after 2 years?",
+  "options": {
+   "A": "₹5,500",
+   "B": "₹6,000",
+   "C": "₹6,050",
+   "D": "₹6,500"
+  },
+  "answer_key": "C",
+  "rationale": "After year 1: 5,000 + 500 = ₹5,500. Year 2 earns 10% of 5,500, which is ₹550, giving ₹6,050. ₹6,000 is simple interest."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-M5",
+  "subject": "maths",
+  "skill": "sets-and-overlap",
+  "difficulty": "difficult",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "In a class of 50 students, 30 play cricket, 25 play football and 8 play neither game. How many play both?",
+  "options": {
+   "A": "8",
+   "B": "13",
+   "C": "17",
+   "D": "22"
+  },
+  "answer_key": "B",
+  "rationale": "50 − 8 = 42 students play at least one game. 30 + 25 = 55 counts the players of both games twice, so 55 − 42 = 13 play both."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The general's plan was simple but ingenious. As used here, \"ingenious\" most nearly means",
+  "options": {
+   "A": "dangerous",
+   "B": "clever",
+   "C": "costly",
+   "D": "careless"
+  },
+  "answer_key": "B",
+  "rationale": "Ingenious means clever and inventive. \"Simple but\" signals a quality that is praised, which rules out careless and dangerous."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E2",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct words: The bundle of letters ___ on the table.",
+  "options": {
+   "A": "were lying",
+   "B": "are lying",
+   "C": "was lying",
+   "D": "have lain"
+  },
+  "answer_key": "C",
+  "rationale": "The subject is \"the bundle\", which is singular; \"of letters\" only describes it. So the verb is \"was lying\"."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E3",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Ear is to hearing as eye is to ___",
+  "options": {
+   "A": "tears",
+   "B": "face",
+   "C": "colour",
+   "D": "sight"
+  },
+  "answer_key": "D",
+  "rationale": "The pair links an organ to the sense it provides. The ear gives hearing and the eye gives sight."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E4",
+  "subject": "english",
+  "skill": "identifying-tone",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "\"The bus was late, the rain soaked us and the shop was shut. What a perfect day!\" The speaker's tone is",
+  "options": {
+   "A": "sarcastic",
+   "B": "sincere",
+   "C": "hopeful",
+   "D": "indifferent"
+  },
+  "answer_key": "A",
+  "rationale": "Everything described went wrong, so calling it a perfect day means the opposite of what is said. That is sarcasm."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-E5",
+  "subject": "english",
+  "skill": "evaluating-an-argument",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "\"New traffic lights were installed in May and road accidents fell in June, so the lights prevent accidents.\" Which fact, if true, most weakens this argument?",
+  "options": {
+   "A": "The lights cost the town a lot",
+   "B": "Some drivers dislike waiting at lights",
+   "C": "Schools closed in June, cutting traffic",
+   "D": "Accidents also happen late at night"
+  },
+  "answer_key": "C",
+  "rationale": "If traffic itself fell in June, that alone could explain fewer accidents, so the lights may not be the cause. The others do not touch the cause."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-S1",
+  "subject": "science",
+  "skill": "energy-transformation",
+  "difficulty": "easy",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "As a ball falls freely towards the ground, which energy change takes place?",
+  "options": {
+   "A": "potential energy to kinetic energy",
+   "B": "kinetic energy to potential energy",
+   "C": "kinetic energy to chemical energy",
+   "D": "heat energy to potential energy"
+  },
+  "answer_key": "A",
+  "rationale": "As the ball falls it loses height, so it loses potential energy, and it speeds up, so it gains kinetic energy."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-S2",
+  "subject": "science",
+  "skill": "mass-and-weight",
+  "difficulty": "easy",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "An astronaut has a mass of 60 kg on Earth. What is her mass on the Moon?",
+  "options": {
+   "A": "0 kg",
+   "B": "10 kg",
+   "C": "60 kg",
+   "D": "360 kg"
+  },
+  "answer_key": "C",
+  "rationale": "Mass is the amount of matter and does not change from place to place. Her weight on the Moon is about one sixth, but her mass stays 60 kg."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-S3",
+  "subject": "science",
+  "skill": "acids-and-bases",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "An ant bite injects an acid into the skin. Which of these would best relieve the sting?",
+  "options": {
+   "A": "a few drops of vinegar",
+   "B": "baking soda paste",
+   "C": "fresh lemon juice",
+   "D": "plain salt water"
+  },
+  "answer_key": "B",
+  "rationale": "An acid is neutralised by a base. Baking soda is a mild base; vinegar and lemon juice are acids and would not help."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-S4",
+  "subject": "science",
+  "skill": "concentration",
+  "difficulty": "moderate",
+  "taught_in": 9,
+  "format": "numeric",
+  "stem": "40 g of sugar is dissolved in water to make 500 ml of solution. What is the concentration, in grams per litre?",
+  "numeric_answer": 80,
+  "numeric_tolerance": 0,
+  "rationale": "500 ml is half a litre. 40 g in half a litre is the same as 80 g in a full litre. This is a type-in question."
+ },
+ {
+  "paper": 10,
+  "ref": "P10-S5",
+  "subject": "science",
+  "skill": "change-of-state",
+  "difficulty": "difficult",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "A burn from steam at 100 °C is usually worse than one from boiling water at 100 °C. This is because steam",
+  "options": {
+   "A": "is at a higher temperature than water",
+   "B": "moves faster and hits the skin harder",
+   "C": "carries germs that the water does not",
+   "D": "gives out extra heat as it condenses"
+  },
+  "answer_key": "D",
+  "rationale": "Both are at 100 °C, but steam releases a large amount of extra heat (latent heat) when it turns back into water on the skin."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-M1",
+  "subject": "maths",
+  "skill": "divisibility",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which of these numbers is divisible by both 3 and 4?",
+  "options": {
+   "A": "132",
+   "B": "138",
+   "C": "142",
+   "D": "150"
+  },
+  "answer_key": "A",
+  "rationale": "132 = 12 × 11, so it is divisible by both. 138 and 150 are divisible by 3 but not by 4; 142 is divisible by neither."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-M2",
+  "subject": "maths",
+  "skill": "percentage",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "numeric",
+  "stem": "Kiran scored 54 marks out of 75 in a test. What percentage did Kiran score?",
+  "numeric_answer": 72,
+  "numeric_tolerance": 0,
+  "rationale": "54 ÷ 75 = 0.72, which is 72%. Another way: 75 marks is 100%, so each mark is 4/3 %, and 54 × 4/3 = 72. This is a type-in question."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-M3",
+  "subject": "maths",
+  "skill": "speed-distance-time",
+  "difficulty": "easy",
+  "taught_in": 7,
+  "format": "mcq",
+  "stem": "A bus leaves at 9:40 am and travels 150 km at a steady 60 km/h. At what time does it arrive?",
+  "options": {
+   "A": "11:40 am",
+   "B": "11:50 am",
+   "C": "12:10 pm",
+   "D": "12:30 pm"
+  },
+  "answer_key": "C",
+  "rationale": "The journey takes 150 ÷ 60 = 2.5 hours, which is 2 hours 30 minutes. 9:40 am plus 2 hours 30 minutes is 12:10 pm."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-M4",
+  "subject": "maths",
+  "skill": "reverse-percentage",
+  "difficulty": "moderate",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "After a 25% increase, a salary is ₹20,000 a month. What was it before the increase?",
+  "options": {
+   "A": "₹15,000",
+   "B": "₹16,000",
+   "C": "₹16,500",
+   "D": "₹17,500"
+  },
+  "answer_key": "B",
+  "rationale": "The new salary is 125% of the old one, so the old salary is 20,000 ÷ 1.25 = ₹16,000. Taking 25% off ₹20,000 gives the wrong ₹15,000."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-M5",
+  "subject": "maths",
+  "skill": "probability",
+  "difficulty": "difficult",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "Two fair dice are thrown together. What is the probability that the two numbers add up to 8?",
+  "options": {
+   "A": "1/6",
+   "B": "1/9",
+   "C": "7/36",
+   "D": "5/36"
+  },
+  "answer_key": "D",
+  "rationale": "There are 36 equally likely outcomes. A total of 8 comes from (2,6), (3,5), (4,4), (5,3) and (6,2), which is 5 outcomes: 5/36."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The sentries stayed vigilant all night. As used here, \"vigilant\" most nearly means",
+  "options": {
+   "A": "tired",
+   "B": "watchful",
+   "C": "silent",
+   "D": "brave"
+  },
+  "answer_key": "B",
+  "rationale": "Vigilant means keeping careful watch for danger, which is exactly what a sentry does. Tired or silent sentries may still be vigilant."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-E2",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: The cadets were proud ___ their achievement.",
+  "options": {
+   "A": "of",
+   "B": "for",
+   "C": "with",
+   "D": "at"
+  },
+  "answer_key": "A",
+  "rationale": "\"Proud\" is followed by \"of\": proud of something. The other prepositions are not used with proud in this sense."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-E3",
+  "subject": "english",
+  "skill": "odd-one-out",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which word is the odd one out?",
+  "options": {
+   "A": "Cricket",
+   "B": "Hockey",
+   "C": "Football",
+   "D": "Chess"
+  },
+  "answer_key": "D",
+  "rationale": "Cricket, hockey and football are outdoor team games played with a ball. Chess is a board game for two players."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-E4",
+  "subject": "english",
+  "skill": "letter-coding",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "If COLD is written as DPME in a code, how is WARM written in the same code?",
+  "options": {
+   "A": "VZQL",
+   "B": "XBSM",
+   "C": "XBSN",
+   "D": "YCTO"
+  },
+  "answer_key": "C",
+  "rationale": "Each letter moves one step forward: C→D, O→P, L→M, D→E. So W→X, A→B, R→S, M→N, giving XBSN."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-E5",
+  "subject": "english",
+  "skill": "syllogism",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "All cadets wake at 5 am. Nobody who wakes at 5 am misses breakfast. Arun misses breakfast. Which statement must be true?",
+  "options": {
+   "A": "Arun wakes at 5 am",
+   "B": "Arun is a cadet",
+   "C": "Some cadets miss breakfast",
+   "D": "Arun is not a cadet"
+  },
+  "answer_key": "D",
+  "rationale": "Every cadet wakes at 5 am, and everyone who does has breakfast. Arun does not, so Arun cannot wake at 5 am and so cannot be a cadet."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-S1",
+  "subject": "science",
+  "skill": "electric-power",
+  "difficulty": "easy",
+  "taught_in": 10,
+  "format": "numeric",
+  "stem": "A 1,000 W room heater is switched on for 3 hours. How many units (kilowatt-hours) of electricity does it use?",
+  "numeric_answer": 3,
+  "numeric_tolerance": 0,
+  "rationale": "1,000 W is 1 kW, and energy is power × time: 1 kW × 3 h = 3 kWh, which is 3 units. This is a type-in question."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-S2",
+  "subject": "science",
+  "skill": "electrical-safety",
+  "difficulty": "easy",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "A fuse is fitted in a household circuit so that, if too much current flows, it",
+  "options": {
+   "A": "raises the voltage to appliances",
+   "B": "melts and breaks the circuit",
+   "C": "stores the extra electricity",
+   "D": "makes the bulbs glow brighter"
+  },
+  "answer_key": "B",
+  "rationale": "A fuse wire melts when the current is too large, which breaks the circuit and stops the flow before wires overheat or catch fire."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-S3",
+  "subject": "science",
+  "skill": "classification",
+  "difficulty": "easy",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "Which of these is a compound?",
+  "options": {
+   "A": "water",
+   "B": "oxygen",
+   "C": "iron",
+   "D": "air"
+  },
+  "answer_key": "A",
+  "rationale": "Water is hydrogen and oxygen chemically joined, so it is a compound. Oxygen and iron are elements, and air is a mixture."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-S4",
+  "subject": "science",
+  "skill": "electric-power",
+  "difficulty": "moderate",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "A 60 W bulb and a 1,500 W heater are each used for 2 hours. How many times more energy does the heater use?",
+  "options": {
+   "A": "2.5 times",
+   "B": "12.5 times",
+   "C": "25 times",
+   "D": "50 times"
+  },
+  "answer_key": "C",
+  "rationale": "Both run for the same time, so energy goes up with power alone: 1,500 ÷ 60 = 25. The 2 hours cancels out."
+ },
+ {
+  "paper": 11,
+  "ref": "P11-S5",
+  "subject": "science",
+  "skill": "density",
+  "difficulty": "difficult",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "A wooden block floats in water with exactly half of its volume under the surface. Water has a density of 1 g/cm³. What is the density of the wood?",
+  "options": {
+   "A": "1 g/cm³",
+   "B": "2 g/cm³",
+   "C": "0.25 g/cm³",
+   "D": "0.5 g/cm³"
+  },
+  "answer_key": "D",
+  "rationale": "A floating block pushes aside its own weight of water. It does so with half its volume, so it weighs as much as half its volume of water: 0.5 g/cm³."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-M1",
+  "subject": "maths",
+  "skill": "number-series",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Find the next number in the series: 1, 2, 6, 24, 120, ___",
+  "options": {
+   "A": "240",
+   "B": "600",
+   "C": "720",
+   "D": "840"
+  },
+  "answer_key": "C",
+  "rationale": "Each number is the one before multiplied by 2, then 3, then 4, then 5. The next step is × 6, and 120 × 6 = 720."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-M2",
+  "subject": "maths",
+  "skill": "profit-and-loss",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "numeric",
+  "stem": "A bicycle bought for ₹4,000 is sold at a loss of 15%. What is the selling price, in rupees?",
+  "numeric_answer": 3400,
+  "numeric_tolerance": 0,
+  "rationale": "15% of ₹4,000 is ₹600, so the bicycle sells for 4,000 − 600 = ₹3,400. This is a type-in question."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-M3",
+  "subject": "maths",
+  "skill": "number-classification",
+  "difficulty": "easy",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "Which of these is a perfect square?",
+  "options": {
+   "A": "1,024",
+   "B": "1,210",
+   "C": "1,440",
+   "D": "1,690"
+  },
+  "answer_key": "A",
+  "rationale": "1,024 = 32 × 32. The others fall between squares: 34² = 1,156 and 35² = 1,225; 37² = 1,369 and 38² = 1,444; 41² = 1,681 and 42² = 1,764."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-M4",
+  "subject": "maths",
+  "skill": "compound-growth",
+  "difficulty": "moderate",
+  "taught_in": 8,
+  "format": "mcq",
+  "stem": "A town's population of 20,000 grows by 10% every year. What will it be after 2 years?",
+  "options": {
+   "A": "24,000",
+   "B": "24,200",
+   "C": "24,400",
+   "D": "26,000"
+  },
+  "answer_key": "B",
+  "rationale": "After one year: 22,000. The second year's 10% is taken on 22,000, adding 2,200, so 24,200. 24,000 forgets the growth compounds."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-M5",
+  "subject": "maths",
+  "skill": "probability",
+  "difficulty": "difficult",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "One card is drawn at random from a well-shuffled pack of 52. What is the probability that it is a king or a heart?",
+  "options": {
+   "A": "1/13",
+   "B": "1/4",
+   "C": "17/52",
+   "D": "4/13"
+  },
+  "answer_key": "D",
+  "rationale": "There are 4 kings and 13 hearts, but the king of hearts is in both, so 16 cards qualify: 16/52 = 4/13. Counting it twice gives 17/52."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E1",
+  "subject": "english",
+  "skill": "antonym",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the word most nearly opposite in meaning to \"transparent\".",
+  "options": {
+   "A": "opaque",
+   "B": "clear",
+   "C": "bright",
+   "D": "thin"
+  },
+  "answer_key": "A",
+  "rationale": "Transparent means light passes through so you can see through it; opaque means light does not pass through. \"Clear\" means the same as transparent."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E2",
+  "subject": "english",
+  "skill": "sentence-completion",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The soldier was praised for his ___ in rescuing the trapped villagers.",
+  "options": {
+   "A": "cowardice",
+   "B": "courage",
+   "C": "carelessness",
+   "D": "confusion"
+  },
+  "answer_key": "B",
+  "rationale": "He was praised, so the missing word must be a good quality shown during a rescue. Only courage fits; the rest would be criticised."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E3",
+  "subject": "english",
+  "skill": "tense",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct words: By the time we reached the station, the train ___.",
+  "options": {
+   "A": "has left",
+   "B": "leaves",
+   "C": "is leaving",
+   "D": "had left"
+  },
+  "answer_key": "D",
+  "rationale": "Two past events are compared, and the train left first. The earlier of two past actions takes the past perfect: \"had left\"."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E4",
+  "subject": "english",
+  "skill": "identifying-assumptions",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "\"Book the tickets today; the fares go up next week.\" This advice assumes that",
+  "options": {
+   "A": "fares will never come down again",
+   "B": "the train is already nearly full",
+   "C": "the listener still plans to go",
+   "D": "next week is a public holiday"
+  },
+  "answer_key": "C",
+  "rationale": "Advice to book early only makes sense if the listener is going to travel. The other statements are not needed for the advice to hold."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E5",
+  "subject": "english",
+  "skill": "relationship-reasoning",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Pointing to a young man, Neha said, \"His mother is the only daughter of my mother.\" How is the man related to Neha?",
+  "options": {
+   "A": "Brother",
+   "B": "Son",
+   "C": "Nephew",
+   "D": "Cousin"
+  },
+  "answer_key": "B",
+  "rationale": "The only daughter of Neha's mother is Neha herself. So the man's mother is Neha, and he is her son. \"Nephew\" assumes a sister."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-S1",
+  "subject": "science",
+  "skill": "inertia",
+  "difficulty": "easy",
+  "taught_in": 9,
+  "format": "mcq",
+  "stem": "When a hanging carpet is beaten with a stick, dust falls out of it. This is mainly because",
+  "options": {
+   "A": "the dust stays put as the carpet moves",
+   "B": "the stick attracts the dust towards it",
+   "C": "the dust becomes heavier when it is hit",
+   "D": "the air pushes the dust inwards"
+  },
+  "answer_key": "A",
+  "rationale": "The carpet is suddenly pushed away, but the dust tends to stay at rest (inertia), so it is left behind and falls out."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-S2",
+  "subject": "science",
+  "skill": "electrical-safety",
+  "difficulty": "easy",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "Why is it dangerous to operate an electric switch with wet hands?",
+  "options": {
+   "A": "Wet hands slip off the switch",
+   "B": "Water lets current pass into the body",
+   "C": "Water damages the switch's plastic",
+   "D": "Wet skin makes the switch heat up fast"
+  },
+  "answer_key": "B",
+  "rationale": "Ordinary water conducts electricity, so moisture can carry current from the switch into the body and cause a shock."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-S3",
+  "subject": "science",
+  "skill": "electric-power",
+  "difficulty": "easy",
+  "taught_in": 10,
+  "format": "numeric",
+  "stem": "An electric kettle draws a current of 5 A from a 230 V supply. What is its power, in watts?",
+  "numeric_answer": 1150,
+  "numeric_tolerance": 0,
+  "rationale": "Power is voltage × current: 230 V × 5 A = 1,150 W. This is a type-in question: the answer is typed as a number."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-S4",
+  "subject": "science",
+  "skill": "everyday-phenomenon",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "On a humid day, drops of water form on the outside of a glass of iced water. This water comes from",
+  "options": {
+   "A": "water seeping out through the glass",
+   "B": "the glass giving off moisture",
+   "C": "water vapour in the air condensing",
+   "D": "ice melting inside the glass"
+  },
+  "answer_key": "C",
+  "rationale": "The cold glass cools the air touching it, and the water vapour in that air condenses into drops. Glass does not let water through."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-S5",
+  "subject": "science",
+  "skill": "electrical-safety",
+  "difficulty": "difficult",
+  "taught_in": 10,
+  "format": "mcq",
+  "stem": "Lights in a house are wired in parallel, not in series. The main reason is that in parallel",
+  "options": {
+   "A": "the house draws a smaller total current",
+   "B": "each bulb glows dimly and saves energy",
+   "C": "one switch turns every bulb on together",
+   "D": "each bulb gets full voltage on its own"
+  },
+  "answer_key": "D",
+  "rationale": "In parallel every bulb gets the full mains voltage and has its own path, so each can be switched on or off without affecting the others."
+ }
+]

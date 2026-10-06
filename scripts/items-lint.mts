@@ -16,6 +16,7 @@ import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
 import type { Subject, Difficulty } from '../src/lib/types'
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
+const SAMPLES = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'parent-pack', 'sample-papers.json')
 
 const SUBJECTS = ['maths', 'english', 'science']
 const DIFFICULTIES = ['easy', 'moderate', 'difficult']
@@ -37,6 +38,7 @@ interface RawItem {
   numeric_tolerance?: number | null
   rationale?: string
   __file?: string
+  __sample?: boolean
 }
 
 const words = (s: string) => s.trim().split(/\s+/).filter(Boolean).length
@@ -63,7 +65,14 @@ export function lintItems(): number {
     for (const item of parsed) items.push({ ...item, __file: file })
   }
 
-  console.log(`\nLinting ${items.length} items from ${files.length} file(s)\n`)
+  // The parent pack's sample questions get the same per-item checks, and the
+  // duplicate-stem check across both: a sample that repeats a bank stem would
+  // print a live question's answer. They are not bank items, so the coverage
+  // count below leaves them out.
+  const samples = JSON.parse(readFileSync(SAMPLES, 'utf8')) as RawItem[]
+  for (const item of samples) items.push({ ...item, __file: 'parent-pack/sample-papers.json', __sample: true })
+
+  console.log(`\nLinting ${items.length} items from ${files.length} file(s) and the parent pack\n`)
 
   const seenRefs = new Map<string, string>()
   const seenStems = new Map<string, string>()
@@ -172,6 +181,7 @@ export function lintItems(): number {
   // than twice the need means every paper for that class looks much the same.
   console.log('\nBank can fill a paper for every class')
   const shaped = items
+    .filter((i) => !i.__sample)
     .filter((i) => SUBJECTS.includes(i.subject ?? '') && DIFFICULTIES.includes(i.difficulty ?? '') && Number.isInteger(i.taught_in))
     .map((i) => ({ subject: i.subject as Subject, difficulty: i.difficulty as Difficulty, taught_in: i.taught_in as number }))
   for (const cell of coverageByClass(shaped)) {
@@ -191,14 +201,21 @@ export function lintItems(): number {
   // a candidate can guess without reading. Rebalance with a swap of two
   // options, not a rewrite of the item.
   console.log('\nAnswer keys are spread across A-D')
-  const skewed = keySkew(
-    items
-      .filter((i) => SUBJECTS.includes(i.subject ?? ''))
-      .map((i) => ({ subject: i.subject as Subject, format: String(i.format), answer_key: i.answer_key ?? null })),
-  )
+  // The bank and the samples are judged apart: a parent reading the sample's
+  // answer page sees its letters as a set.
+  const skewOf = (pool: RawItem[]) =>
+    keySkew(
+      pool
+        .filter((i) => SUBJECTS.includes(i.subject ?? ''))
+        .map((i) => ({ subject: i.subject as Subject, format: String(i.format), answer_key: i.answer_key ?? null })),
+    )
+  const skewed = [
+    ...skewOf(items.filter((i) => !i.__sample)).map((s) => ({ ...s, where: 'bank' })),
+    ...skewOf(items.filter((i) => i.__sample)).map((s) => ({ ...s, where: 'parent pack' })),
+  ]
   for (const s of skewed) {
     errors++
-    console.log(`  ERROR  ${s.subject}: ${s.count} of ${s.total} keys are ${s.letter}`)
+    console.log(`  ERROR  ${s.where} ${s.subject}: ${s.count} of ${s.total} keys are ${s.letter}`)
   }
   if (skewed.length === 0) console.log('  ok     no letter holds more than 40% of any subject')
 
