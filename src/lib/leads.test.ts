@@ -11,6 +11,7 @@ import {
   parseLeadFilters,
   searchTerm,
   testStatus,
+  testAction,
 } from './leads'
 
 describe('stageFromStatus', () => {
@@ -264,6 +265,28 @@ describe('testStatus', () => {
 
   it('shows the latest issue when none is live', () => {
     expect(testStatus([a('expired', 1)])).toBe('Expired · issue 1 of 3')
+  })
+})
+
+describe('testAction', () => {
+  const a = (state: string, seq = 1) => ({ state, issue_seq: seq })
+
+  it('offers a first link when no test has been issued', () => {
+    expect(testAction([])).toBe('issue')
+  })
+
+  it('offers the report once any issue was submitted', () => {
+    expect(testAction([a('voided', 1), a('submitted', 2)])).toBe('report')
+  })
+
+  it('offers a reissue while links remain, whatever became of the last one', () => {
+    expect(testAction([a('opened', 1)])).toBe('reissue')
+    expect(testAction([a('voided', 1), a('started', 2)])).toBe('reissue')
+    expect(testAction([a('expired', 1)])).toBe('reissue')
+  })
+
+  it('offers nothing once the third link is used and nothing was submitted', () => {
+    expect(testAction([a('voided', 1), a('voided', 2), a('opened', 3)])).toBeNull()
   })
 })
 

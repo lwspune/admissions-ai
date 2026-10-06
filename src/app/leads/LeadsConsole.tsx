@@ -9,6 +9,7 @@ import { STAGES, STAGE_LABEL, INTERESTS, type LeadFilters } from '@/lib/leads'
 import type { LeadList } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { createLead, assignLeads, type ActionResult } from './actions'
+import { RowTest } from './RowTest'
 
 export function LeadsConsole({
   staff,
@@ -307,37 +308,41 @@ function Results({
 
       <ul className="mt-3 space-y-2">
         {list.rows.map((lead) => (
-          <li key={lead.id} className="flex gap-3 rounded-lg border border-slate-200 bg-white p-3">
+          <li key={lead.id} className="flex items-start gap-3 rounded-lg border border-slate-200 bg-white p-3">
             {canAssign && (
               <input
                 type="checkbox"
                 checked={selected.has(lead.id)}
                 onChange={() => toggle(lead.id)}
                 aria-label={`Select ${lead.name ?? lead.contact_mobile}`}
-                className="mt-1 h-5 w-5 shrink-0"
+                className="mt-3 h-5 w-5 shrink-0"
               />
             )}
             <div className="min-w-0 flex-1">
-              <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <RowTest lead={lead} action={lead.testAction}>
                 <Link href={`/leads/${lead.id}`} className="font-medium text-slate-900 hover:underline">
                   {lead.name ?? <span className="italic text-slate-600">No name</span>}
                   <span className="font-normal text-slate-600"> · {lead.contact_mobile}</span>
                 </Link>
-                <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-800">
-                  {STAGE_LABEL[lead.stage]}
-                </span>
-              </div>
-              <p className="mt-1 text-xs text-slate-600">
-                {[
-                  lead.interest,
-                  lead.class_level && `Class ${lead.class_level}`,
-                  lead.sources.join(', ') || 'Added by hand',
-                  canAssign && assignedLabel(lead.assigned_to),
-                  lead.test,
-                ]
-                  .filter(Boolean)
-                  .join(' · ')}
-              </p>
+                <p className="text-xs text-slate-600">
+                  {[
+                    lead.interest,
+                    lead.class_level && `Class ${lead.class_level}`,
+                    lead.sources.join(', ') || 'Added by hand',
+                    canAssign && assignedLabel(lead.assigned_to),
+                    // "Issue link" says there is no test; the details must say a completed one is done.
+                    lead.testAction !== 'issue' && lead.test,
+                  ]
+                    .filter(Boolean)
+                    .join(' · ')}
+                </p>
+                {/* New is where every lead starts; only a stage someone set is worth a tag. */}
+                {lead.stage !== 'new' && (
+                  <span className="rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-800">
+                    {STAGE_LABEL[lead.stage]}
+                  </span>
+                )}
+              </RowTest>
               {lead.lastNote && (
                 <p className="mt-1 truncate text-sm text-slate-700">
                   <span className="text-slate-600">{lead.lastNote.author_name ?? 'Import'}:</span> {lead.lastNote.body}

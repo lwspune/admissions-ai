@@ -1,6 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { searchTerm, testStatus, type LeadFilters, type Stage, type Interest } from '../lib/leads'
+import { searchTerm, testStatus, testAction, type LeadFilters, type Stage, type Interest, type TestAction } from '../lib/leads'
 
 // Reads for the lead pages. Always the session client: RLS decides which leads
 // a staff member sees (migration 0012), so there is no role filter here, and a
@@ -19,6 +19,7 @@ export interface LeadListRow {
   created_at: string
   sources: string[]
   test: string
+  testAction: TestAction
   lastNote: { kind: string; body: string; author_name: string | null; created_at: string } | null
 }
 
@@ -52,7 +53,7 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
     .range(from, from + PAGE_SIZE - 1)
 
   if (error) throw new Error(`could not load leads: ${error.message}`)
-  const leads = (data ?? []) as unknown as Omit<LeadListRow, 'sources' | 'test' | 'lastNote'>[]
+  const leads = (data ?? []) as unknown as Omit<LeadListRow, 'sources' | 'test' | 'testAction' | 'lastNote'>[]
   if (leads.length === 0) return { rows: [], total: count ?? 0 }
 
   const ids = leads.map((l) => l.id)
@@ -87,6 +88,7 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
         ...lead,
         sources: [...new Set((originsBy.get(lead.id) ?? []).map((o) => o.lead_sources?.name).filter(Boolean) as string[])],
         test: testStatus(assessmentsBy.get(lead.id) ?? []),
+        testAction: testAction(assessmentsBy.get(lead.id) ?? []),
         lastNote: note
           ? { kind: note.kind, body: note.body, author_name: note.author_name, created_at: note.created_at }
           : null,

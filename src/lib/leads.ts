@@ -313,6 +313,18 @@ export function testStatus(assessments: { state: string; issue_seq: number }[]):
   return `${TEST_STATE_LABEL[current.state] ?? current.state} · issue ${current.issue_seq} of 3`
 }
 
+export type TestAction = 'issue' | 'reissue' | 'report' | null
+
+/**
+ * The one test button a lead's row offers. The database enforces the same
+ * rules (`issue_assessment`); this only decides what is worth showing.
+ */
+export function testAction(assessments: { state: string; issue_seq: number }[]): TestAction {
+  if (assessments.some((a) => a.state === 'submitted')) return 'report'
+  if (assessments.length === 0) return 'issue'
+  return Math.max(...assessments.map((a) => a.issue_seq)) < 3 ? 'reissue' : null
+}
+
 /**
  * The database writes a stage change as "old → new" in stage codes (the
  * `leads_stage_history` trigger), so the labels live in one place — here.
