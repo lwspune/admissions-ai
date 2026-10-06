@@ -246,7 +246,9 @@ describe('names', () => {
       p_lead_id: l.id,
       p_issued_by: null,
       p_token: 'x'.repeat(22),
-      p_item_ids: Array.from({ length: 15 }, () => l.id),
+      // Distinct placeholders: since 0014 a repeated id is refused before the
+      // lead is even looked at, and this test is about the name check.
+      p_item_ids: Array.from({ length: 15 }, () => crypto.randomUUID()),
     })
     expect(error?.message).toMatch(/name/i)
   })
