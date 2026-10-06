@@ -1,7 +1,7 @@
 import 'server-only'
 import type { Db } from './supabase'
 import type { Role } from './auth'
-import { buildReport, type ReportInput, type ReportPaperItem } from '../lib/report'
+import { buildReport, toParentReport, type ParentReport, type ReportInput, type ReportPaperItem } from '../lib/report'
 import { LIMIT_MS } from '../lib/types'
 
 export interface LeadReport {
@@ -98,6 +98,16 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
     },
     report: buildReport(input),
   }
+}
+
+/**
+ * The sheet a parent may be sent, or null until a test is submitted. Built
+ * from the staff report on the same session client, so RLS decides access.
+ */
+export async function loadParentReport(db: Db, leadId: string, role: Role): Promise<ParentReport | null> {
+  const data = await loadLeadReport(db, leadId, role)
+  if (!data?.report || data.issue.state !== 'submitted' || !data.attempt?.submittedAt) return null
+  return toParentReport({ name: data.lead.name, submittedAt: data.attempt.submittedAt, report: data.report })
 }
 
 async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<ReportPaperItem[]> {

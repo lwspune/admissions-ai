@@ -394,7 +394,10 @@ function Consent({ onAgree }: { onAgree: () => void }) {
           This is used only to assess the candidate for admission, is seen only by institute staff, and
           is kept for 12 months.
         </p>
-        <p>The result is not shown to the candidate and is not shared outside the institute.</p>
+        <p>
+          The score is not shown on screen. The institute may send you, the parent, a summary of the score. It is
+          not shared with anyone else.
+        </p>
       </div>
       <button
         type="button"

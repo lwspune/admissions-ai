@@ -263,3 +263,64 @@ function omitOffset(payload: Record<string, unknown>): Record<string, unknown> {
 
 /** Section order for display, so every report reads the same way. */
 export const SECTION_ORDER: readonly Subject[] = SUBJECTS
+
+// ── the parent report ────────────────────────────────────────────────────────
+
+export interface ParentCounts {
+  score: number
+  outOf: number
+  correct: number
+  wrong: number
+  notAttempted: number
+}
+
+export interface ParentReport {
+  name: string
+  testDate: string
+  timeUsedMs: number
+  timeAvailableMs: number
+  total: ParentCounts
+  subjects: (ParentCounts & { subject: Subject })[]
+}
+
+/**
+ * The sheet sent to the parent: the score and nothing that identifies a
+ * question. An ALLOW-LIST, like `toCandidatePaper` — a field added to the
+ * staff report later must not start leaving the institute on its own.
+ */
+export function toParentReport({
+  name,
+  submittedAt,
+  report,
+}: {
+  name: string
+  submittedAt: string
+  report: ReturnType<typeof buildReport>
+}): ParentReport {
+  const count = (questions: ReportQuestion[]) => ({
+    correct: questions.filter((q) => q.verdict === 'correct').length,
+    wrong: questions.filter((q) => q.verdict === 'incorrect').length,
+    notAttempted: questions.filter((q) => q.verdict === 'skipped').length,
+  })
+
+  return {
+    name: displayName(name),
+    testDate: submittedAt,
+    timeUsedMs: Math.min(report.facts.timeUsedMs, report.facts.timeAvailableMs),
+    timeAvailableMs: report.facts.timeAvailableMs,
+    total: { score: report.totals.score, outOf: report.totals.outOf, ...count(report.questions) },
+    subjects: SECTION_ORDER.map((subject) => {
+      const questions = report.questions.filter((q) => q.subject === subject)
+      return { subject, score: report.totals.sections[subject], outOf: questions.length, ...count(questions) }
+    }),
+  }
+}
+
+/** "ananya shah" as staff typed it reads as "Ananya Shah"; existing capitals stay. */
+export function displayName(name: string): string {
+  return name
+    .trim()
+    .split(/\s+/)
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ')
+}

@@ -1,5 +1,12 @@
 import { describe, it, expect } from 'vitest'
-import { buildReport, type ReportInput, type ReportPaperItem, type ReportEvent } from './report'
+import {
+  buildReport,
+  toParentReport,
+  displayName,
+  type ReportInput,
+  type ReportPaperItem,
+  type ReportEvent,
+} from './report'
 import { LIMIT_MS, type Subject } from './types'
 
 const MIN = 60_000
@@ -242,5 +249,87 @@ describe('buildReport — totals', () => {
 
   it('reports the maximum so a score is readable without knowing the paper', () => {
     expect(buildReport(input()).totals.outOf).toBe(3)
+  })
+})
+
+// ── the parent report ────────────────────────────────────────────────────────
+
+describe('toParentReport', () => {
+  const answer = (position: number, choice: 'A' | 'B' | 'C' | 'D' | null, numericValue: number | null = null) => ({
+    position,
+    choice,
+    numericValue,
+    activeMs: 30_000,
+    changeCount: 2,
+    changedAfterPause: true,
+  })
+
+  // Maths: right, wrong MCQ. English: wrong numeric, skipped. Science: right.
+  const built = buildReport(
+    input({
+      paper: [mcq(1, 'maths'), mcq(2, 'maths'), numeric(3, 'english'), mcq(4, 'english'), mcq(5, 'science')],
+      answers: [answer(1, 'B'), answer(2, 'C'), answer(3, null, 12), answer(5, 'B')],
+      events: [ev('pause', 60_000, 2), ev('resume', 90_000, 2), ev('paste', 95_000, 2)],
+      activeMs: 11 * MIN,
+    }),
+  )
+  const parent = toParentReport({ name: 'ananya shah', submittedAt: '2026-10-06T10:18:11Z', report: built })
+
+  it('carries the total and its counts', () => {
+    expect(parent.total).toEqual({ score: 1.75, outOf: 5, correct: 2, wrong: 2, notAttempted: 1 })
+  })
+
+  it('splits the same counts by subject, in section order', () => {
+    expect(parent.subjects).toEqual([
+      { subject: 'maths', score: 0.75, outOf: 2, correct: 1, wrong: 1, notAttempted: 0 },
+      { subject: 'english', score: 0, outOf: 2, correct: 0, wrong: 1, notAttempted: 1 },
+      { subject: 'science', score: 1, outOf: 1, correct: 1, wrong: 0, notAttempted: 0 },
+    ])
+  })
+
+  it('carries the name, the date and the time used', () => {
+    expect(parent.name).toBe('Ananya Shah')
+    expect(parent.testDate).toBe('2026-10-06T10:18:11Z')
+    expect(parent.timeUsedMs).toBe(11 * MIN)
+    expect(parent.timeAvailableMs).toBe(LIMIT_MS)
+  })
+
+  it('never reports more time used than was available', () => {
+    const over = buildReport(input({ activeMs: LIMIT_MS + 4_000 }))
+    expect(toParentReport({ name: 'A', submittedAt: '', report: over }).timeUsedMs).toBe(LIMIT_MS)
+  })
+
+  // An allow-list, checked on the bytes: the sheet leaves the institute.
+  it('carries no question, answer, skill or integrity fact', () => {
+    const bytes = JSON.stringify(parent)
+    for (const leak of [
+      'Question 1',
+      'thirty',
+      'number-series',
+      'easy',
+      'B.',
+      '840',
+      'pause',
+      'paste',
+      'changed',
+      'dwell',
+      'device',
+      'telemetry',
+      'position',
+      'verdict',
+    ]) {
+      expect(bytes).not.toContain(leak)
+    }
+  })
+})
+
+describe('displayName', () => {
+  it('capitalises each word as typed by staff', () => {
+    expect(displayName('ananya shah')).toBe('Ananya Shah')
+    expect(displayName('  ananya   shah ')).toBe('Ananya Shah')
+  })
+
+  it('leaves capitals that are already there', () => {
+    expect(displayName('Riya McKenzie')).toBe('Riya McKenzie')
   })
 })
