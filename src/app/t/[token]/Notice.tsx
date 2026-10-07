@@ -10,7 +10,7 @@ const MESSAGES: Record<string, { title: string; body: string }> = {
   },
   expired: {
     title: 'This link has expired',
-    body: 'Links stay open for two hours. Please contact the institute and they will send a new one.',
+    body: 'Links stay open for three hours. Please contact the institute and they will send a new one.',
   },
   too_late: {
     title: 'Not enough time left',

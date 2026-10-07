@@ -2,7 +2,7 @@
 
 Gate 2 of an NDA coaching institute's admissions funnel: a 30-question,
 30-minute reasoning test (15 and 15 only as a fallback). Staff issue it per candidate, the link goes to the
-**parent's** WhatsApp, the candidate takes it within two hours, it grades
+**parent's** WhatsApp, the candidate takes it within three hours, it grades
 itself server-side.
 
 | Doc | For |
@@ -237,6 +237,12 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-07 — A link stays open three hours, not two.** The user's call.
+  The window is the time to start, not to take, the test; with the 30-minute
+  paper two hours left about ninety minutes to hand the phone over. Only the
+  column default changed (migration 0015; `issue_assessment` inserts without
+  `expires_at`), so links issued before keep two hours. The message, the
+  expired-link notice, the parent PDFs and the spec say three.
 - **2026-10-07 — The parent PDFs are on the site, and go out with the test
   link.** Staff had no way to get them from the app. They now build into
   `public/parent-pack/`, open without a login (a parent has no session; the

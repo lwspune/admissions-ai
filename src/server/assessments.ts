@@ -124,7 +124,7 @@ async function livePool(db: Db, classLevel: ClassLevel): Promise<PoolItem[]> {
  * Items this lead has already been shown on a previous issue.
  *
  * A reissue that repeats questions is worth less than a fresh one — the
- * candidate has had two hours to look the first set up.
+ * candidate has had three hours to look the first set up.
  */
 async function itemsAlreadySeen(db: Db, leadId: string): Promise<string[]> {
   const { data: priors, error: priorsError } = await db

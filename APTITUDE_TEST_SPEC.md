@@ -5,7 +5,7 @@
 **Items:** [content/items/calibration-batch.md](content/items/calibration-batch.md) — 15 items awaiting review.
 
 A 15-question, 15-minute reasoning test. Staff create it per candidate, WhatsApp the link to the
-parent's number, the candidate takes it within 2 hours, it grades itself, staff read a report.
+parent's number, the candidate takes it within 3 hours, it grades itself, staff read a report.
 
 **Scope discipline:** v1 captures fraud signals and *shows* them. It does not score them. Anything that
 needs hundreds of attempts before it means anything is parked in §12, not built.
@@ -21,7 +21,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 | Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (8–12) is tested on content taught up to class N−1 (added 2026-09-27; class 8 added 2026-10-01) |
 | Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult. **From 2026-10-06, 30 questions once a class's syllabus batch is live:** 10 each; English all basics (6/2/2); maths and science 5 basics (3/1/1) + 5 from class N−1's first-term NCERT syllabus (3/1/1). All interleaved, each labelled Basics or Class N−1 |
 | Time | 15 minutes of active time (30 for the 30-question paper; each paper records its own). Timer pauses when the tab is hidden |
-| Window | 2 hours from creation. Hard backstop — the attempt dies with the window |
+| Window | 3 hours from creation (2 until 2026-10-07, migration 0015). Hard backstop — the attempt dies with the window |
 | Delivery | Staff copy the link, paste into WhatsApp. **Sent to the parent's number.** No messaging API |
 | Identity | Candidate enters the number the link was sent to, then a handover screen names who should answer |
 | Layout | One question per screen, Prev/Next, 15-dot palette, back-navigation allowed |
@@ -117,7 +117,7 @@ issued → opened → started → submitted
    └──────────────┴──▶ expired (2h)        superadmin ──▶ voided
 ```
 
-1. The 2-hour window runs from `assessments.created_at`. Absolute, never extended.
+1. The 3-hour window runs from `assessments.created_at`. Absolute, never extended.
 2. An attempt **cannot start with under 15 minutes left** in the window — otherwise someone opening at
    1h58m gets a two-minute test and a meaningless score. They see "ask for a fresh link."
 3. Once started: 15 minutes of active time. The timer pauses on `visibilitychange`.

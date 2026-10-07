@@ -117,7 +117,7 @@ export async function identify(
 
 /**
  * All failures for this token, not just recent ones. No time window is needed:
- * a token only lives two hours, so its whole history IS the recent window.
+ * a token only lives three hours, so its whole history IS the recent window.
  */
 async function failuresForToken(db: Db, token: string): Promise<number> {
   const { count } = await db

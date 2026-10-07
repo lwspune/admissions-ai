@@ -63,6 +63,9 @@ describe('computeActiveMs', () => {
   })
 })
 
+// Window-relative times, so the tests follow WINDOW_MS (3 hours since 0015).
+const W = WINDOW_MS / MIN
+
 // ── deadline ─────────────────────────────────────────────────────────────────
 
 describe('computeDeadline', () => {
@@ -79,12 +82,12 @@ describe('computeDeadline', () => {
     expect(deadline).toBe(at(22))
   })
 
-  it('never exceeds the 2-hour window — the window is the backstop', () => {
-    // Resuming at minute 115 leaves 5 minutes of window but 13 of active time.
+  it('never exceeds the 3-hour window — the window is the backstop', () => {
+    // Resuming 5 minutes before the window closes, with 13 of active time left.
     // The window must win, otherwise banked idle time is unbounded.
-    const deadline = computeDeadline({ startedAt: T0, events: [pause(2), resume(115)], now: at(115), windowEndsAt, limitMs: LIMIT_MS })
+    const deadline = computeDeadline({ startedAt: T0, events: [pause(2), resume(W - 5)], now: at(W - 5), windowEndsAt, limitMs: LIMIT_MS })
     expect(deadline).toBe(windowEndsAt)
-    expect(deadline).toBe(at(120))
+    expect(deadline).toBe(at(W))
   })
 
   it('returns now when the active limit is already spent', () => {
@@ -125,9 +128,9 @@ describe('attemptStatus', () => {
     expect(s.remainingMs).toBe(0)
   })
 
-  it('ends with reason "window" when the 2 hours elapse first', () => {
+  it('ends with reason "window" when the 3 hours elapse first', () => {
     // Long pauses mean only 5 active minutes are spent, but the window is gone.
-    const s = attemptStatus({ startedAt: T0, events: [pause(5), resume(119)], now: at(121), windowEndsAt, limitMs: LIMIT_MS })
+    const s = attemptStatus({ startedAt: T0, events: [pause(5), resume(W - 1)], now: at(W + 1), windowEndsAt, limitMs: LIMIT_MS })
     expect(s.ended).toBe(true)
     expect(s.reason).toBe('window')
   })
@@ -155,16 +158,16 @@ describe('canStart', () => {
   })
 
   it('allows a start with exactly 15 minutes left', () => {
-    expect(canStart(at(105), windowEndsAt, LIMIT_MS)).toBe(true)
+    expect(canStart(at(W - 15), windowEndsAt, LIMIT_MS)).toBe(true)
   })
 
   it('refuses a start with under 15 minutes left — a 2-minute test is meaningless', () => {
-    expect(canStart(at(106), windowEndsAt, LIMIT_MS)).toBe(false)
-    expect(canStart(at(118), windowEndsAt, LIMIT_MS)).toBe(false)
+    expect(canStart(at(W - 14), windowEndsAt, LIMIT_MS)).toBe(false)
+    expect(canStart(at(W - 2), windowEndsAt, LIMIT_MS)).toBe(false)
   })
 
   it('refuses a start after the window has closed', () => {
-    expect(canStart(at(121), windowEndsAt, LIMIT_MS)).toBe(false)
+    expect(canStart(at(W + 1), windowEndsAt, LIMIT_MS)).toBe(false)
   })
 })
 
@@ -184,7 +187,7 @@ describe('a 30-minute paper', () => {
   })
 
   it('needs 30 minutes left in the window to start', () => {
-    expect(canStart(at(90), windowEndsAt, THIRTY)).toBe(true)
-    expect(canStart(at(91), windowEndsAt, THIRTY)).toBe(false)
+    expect(canStart(at(W - 30), windowEndsAt, THIRTY)).toBe(true)
+    expect(canStart(at(W - 29), windowEndsAt, THIRTY)).toBe(false)
   })
 })

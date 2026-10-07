@@ -28,7 +28,7 @@ describe('issueMessage', () => {
   it('adds the syllabus and sample paper for the admitting class on its own line', () => {
     expect(issueMessage({ name: 'Asha', testUrl, classLevel: 10 })).toBe(
       'Hello, this is the aptitude test link for Asha. Please open it and hand the phone to them. ' +
-        `The link works for 2 hours: ${testUrl}\n\n` +
+        `The link works for 3 hours: ${testUrl}\n\n` +
         'Syllabus and a sample paper for the Class 10 test: ' +
         'https://admissions.example/parent-pack/reasoning-test-class-10.pdf',
     )

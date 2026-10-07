@@ -2,7 +2,7 @@
 
 Aptitude screening for NDA coaching admissions. Staff issue a 15-question,
 15-minute reasoning test to a candidate; the parent receives the link on
-WhatsApp, the candidate takes it within two hours, and it grades itself.
+WhatsApp, the candidate takes it within three hours, and it grades itself.
 
 - [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) — what it does and why
 - [SUGGESTIONS.md](SUGGESTIONS.md) — open items, traps, the gate

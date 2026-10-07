@@ -2,7 +2,7 @@ import { describe, it, expect, beforeEach, afterAll } from 'vitest'
 import { serviceClient } from './supabase'
 import { issueAssessment } from './assessments'
 import { openByToken, identify, startAttempt, saveAnswer, recordEvents, submitAttempt } from './attempt'
-import { limitMsFor } from '../lib/types'
+import { limitMsFor, WINDOW_MS } from '../lib/types'
 import { generateToken } from '../lib/token'
 
 // Integration tests against the real database (npm run test:integration).
@@ -116,10 +116,11 @@ describe('issueAssessment', () => {
     }
   })
 
-  it('sets a 2-hour window from creation', async () => {
+  it('sets a 3-hour window from creation', async () => {
     const { assessment } = await issueAssessment(db, { leadId })
     const span = new Date(assessment.expires_at).getTime() - new Date(assessment.created_at).getTime()
-    expect(span).toBe(2 * 60 * 60 * 1000)
+    expect(span).toBe(WINDOW_MS)
+    expect(WINDOW_MS).toBe(3 * 60 * 60 * 1000)
   })
 
   it('generates a distinct unguessable token each time', async () => {

@@ -63,7 +63,7 @@ export function computeActiveMs(startedAt: number, events: TimerEvent[], now: nu
 /**
  * The instant this attempt ends if it now runs without interruption.
  *
- * `min(now + remaining active time, window end)` — the 2-hour window is the
+ * `min(now + remaining active time, window end)` — the 3-hour window is the
  * hard backstop that keeps a pausing timer bounded. Never returns an instant
  * before `now`, so a caller can always treat it as a countdown target.
  */

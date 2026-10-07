@@ -71,7 +71,7 @@ export const SHAPE_30: PaperShape = {
 
 /** Active time a paper of this many minutes allows. */
 export const limitMsFor = (minutes: number) => minutes * 60 * 1000
-export const WINDOW_MS = 2 * 60 * 60 * 1000 // 2 hours from issue
+export const WINDOW_MS = 3 * 60 * 60 * 1000 // 3 hours from issue (migration 0015); the database sets it
 
 /** Marking. Spec §6. */
 export const MARK_CORRECT = 1

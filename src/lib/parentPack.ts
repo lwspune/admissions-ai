@@ -21,7 +21,7 @@ export function packMessage(siteUrl: string, classLevel: number): string {
 /**
  * The WhatsApp message for a freshly issued test. The test link comes first:
  * WhatsApp previews the first link, and the test is what the parent must act
- * on within two hours.
+ * on within three hours.
  */
 export function issueMessage({
   name,
@@ -32,7 +32,7 @@ export function issueMessage({
   testUrl: string
   classLevel: number | null
 }): string {
-  const test = `Hello, this is the aptitude test link for ${name}. Please open it and hand the phone to them. The link works for 2 hours: ${testUrl}`
+  const test = `Hello, this is the aptitude test link for ${name}. Please open it and hand the phone to them. The link works for 3 hours: ${testUrl}`
   if (classLevel === null) return test
   return `${test}\n\n${packMessage(testUrl, classLevel)}`
 }

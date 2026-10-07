@@ -77,7 +77,7 @@ export function useTelemetry(attemptId: string | null, startedAt: number | null,
  * Countdown that stops while the tab is hidden.
  *
  * The pause is a product decision (spec §1) and it is exploitable — close the
- * tab, look something up, come back. Two things bound it: the 2-hour window is
+ * tab, look something up, come back. Two things bound it: the 3-hour window is
  * a hard backstop, and every pause is reported alongside whether the answer to
  * the question on screen changed afterwards.
  *

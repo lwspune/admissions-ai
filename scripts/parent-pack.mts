@@ -379,7 +379,7 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   <h2>About the test</h2>
   <ul class="facts">
     ${facts}
-    <li>Taken online on a phone or computer, through a link sent to the parent's WhatsApp. The link works for 2 hours.</li>
+    <li>Taken online on a phone or computer, through a link sent to the parent's WhatsApp. The link works for 3 hours.</li>
     <li>Most questions have four options; a few ask for a number to be typed in.</li>
     <li>One mark for a correct answer. A quarter mark off for a wrong multiple-choice answer; nothing off for a wrong type-in answer or a blank.</li>
     <li>Answers can be changed before submitting. If the candidate leaves the page, the timer pauses.</li>
