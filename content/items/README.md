@@ -5,6 +5,15 @@ items:lint` checks every file, `npm run items:seed` upserts them by `ref` (never
 and `npm run items:seed -- --live --file <batch.json>` is the answer-key sign-off that promotes one
 reviewed batch.
 
+## Before writing a batch
+
+Read the parent samples for the same skills (`content/parent-pack/sample-papers.json`). Parents
+have those questions with their answers, so a bank item must not reuse a sample's target word,
+sentence frame, sequence or argument form. The lint and the parent-pack build refuse an identical
+stem and warn on shared wording, but a near copy can share few words: "vigilant" with three of
+the same four options, a series starting B, E, H, K. Word overlap cannot separate those from two
+ordinary questions of one type (both score 0.4–0.5), so this is a reading step, not a check.
+
 ## Fields
 
 | Field | Values | Meaning |
