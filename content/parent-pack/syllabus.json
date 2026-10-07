@@ -24,12 +24,11 @@
     { "key": "r-mixtures", "subject": "maths", "label": "Mixtures", "heading": "reasoning", "skills": ["mixture-replacement"], "reasoning": true },
     { "key": "r-sets", "subject": "maths", "label": "Venn diagrams", "heading": "reasoning", "skills": ["sets-and-overlap"], "reasoning": true },
 
-    { "key": "e-vocab", "subject": "english", "label": "Vocabulary", "skills": ["synonym-in-context", "antonym", "idiom-meaning"], "reasoning": true },
-    { "key": "e-grammar", "subject": "english", "label": "Grammar", "skills": ["subject-verb-agreement", "preposition-usage", "logical-connectors", "tense"], "reasoning": true },
+    { "key": "e-vocab", "subject": "english", "label": "Vocabulary", "skills": ["synonym-in-context", "antonym", "idiom-meaning", "one-word-substitution"], "reasoning": true },
+    { "key": "e-grammar", "subject": "english", "label": "Grammar", "skills": ["subject-verb-agreement", "preposition-usage", "logical-connectors", "tense", "error-identification"], "reasoning": true },
     { "key": "e-sentences", "subject": "english", "label": "Sentence completion and ordering", "skills": ["sentence-completion", "sentence-sequencing"], "reasoning": true },
     { "key": "e-verbal", "subject": "english", "label": "Analogies, odd one out, series and codes", "heading": "reasoning", "skills": ["analogy", "odd-one-out", "letter-series", "letter-coding", "anagram"], "reasoning": true },
     { "key": "e-reading", "subject": "english", "label": "Reading comprehension", "skills": ["inference", "reading-inference", "identifying-tone", "identifying-assumptions", "evaluating-an-argument", "supported-conclusion"], "reasoning": true },
-    { "key": "e-logic", "subject": "english", "label": "Logical deduction", "heading": "reasoning", "skills": ["syllogism", "logical-deduction", "quantifier-logic", "relationship-reasoning"], "reasoning": true },
 
     { "key": "s-water", "subject": "science", "label": "Matter and its changes", "skills": ["evaporation", "everyday-phenomenon"] },
     { "key": "s-changes", "subject": "science", "label": "Matter and its changes", "skills": ["chemical-and-physical-change", "conservation-of-mass"] },

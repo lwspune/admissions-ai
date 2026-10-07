@@ -236,6 +236,24 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-07 — English is language; logic puzzles left it.** The user spotted
+  a row-counting question and a syllogism labelled English on the parent sheet.
+  Syllogisms, seating and ranking, and family relations had been filed under
+  English as "logical deduction" (15 of 38 items were puzzles), though the spec's
+  English list never named them. By the user's choice seven live items were
+  retired and replaced with language questions at the same levels
+  (`english-batch-02`), and nine parent samples rewritten; analogies, odd one
+  out, series and codes stay, as the spec names them. Retired, not edited or
+  deleted: papers that drew them still show them. A file may now say
+  `"status": "retired"`, which the seed honours even inside a promoted batch,
+  and `items:lint` refuses the puzzle skills in English. Two of the seven were
+  written the same day in `basics-batch-01`, following the existing pattern
+  instead of the spec; the README now says to check English against it.
+- **2026-10-07 — Parent sheets print bare lists.** Basics as four numbered
+  lists of broad topic names (science grouped into six), the syllabus part as
+  numbered chapter names; no class, book, chapter number or intro. Parents
+  asked about the details more than they used them. The build still checks
+  every topic and chapter against the books the child used.
 - **2026-10-06 — The paper grows to 30 questions, half of maths and science
   from the class N−1 syllabus.** The user's call, after the parent pack: 10
   English, 10 maths, 10 science in 30 minutes. English is all basics (6/2/2);

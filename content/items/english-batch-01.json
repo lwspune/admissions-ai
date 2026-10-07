@@ -103,6 +103,7 @@
   },
   {
     "ref": "E-M-15",
+    "status": "retired",
     "subject": "english",
     "skill": "relationship-reasoning",
     "difficulty": "moderate",
@@ -171,6 +172,7 @@
   },
   {
     "ref": "E-D-19",
+    "status": "retired",
     "subject": "english",
     "skill": "logical-deduction",
     "difficulty": "difficult",
@@ -188,6 +190,7 @@
   },
   {
     "ref": "E-D-20",
+    "status": "retired",
     "subject": "english",
     "skill": "quantifier-logic",
     "difficulty": "difficult",

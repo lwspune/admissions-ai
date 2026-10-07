@@ -1,0 +1,121 @@
+[
+  {
+    "ref": "E-E-39",
+    "subject": "english",
+    "skill": "one-word-substitution",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Which word names a building where soldiers live?",
+    "options": {
+      "A": "hangar",
+      "B": "arsenal",
+      "C": "dockyard",
+      "D": "barracks"
+    },
+    "answer_key": "D",
+    "rationale": "Barracks are where soldiers live. A hangar houses aircraft, an arsenal stores weapons and a dockyard repairs ships: each a military building, so the item tests knowing the word, not guessing from the setting."
+  },
+  {
+    "ref": "E-M-40",
+    "subject": "english",
+    "skill": "error-identification",
+    "difficulty": "moderate",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Which part of this sentence has an error? \"The captain asked us that why we were late for parade.\"",
+    "options": {
+      "A": "The captain asked us",
+      "B": "that why we were",
+      "C": "late for parade",
+      "D": "No error"
+    },
+    "answer_key": "B",
+    "rationale": "A reported question already begins with \"why\", so \"that\" is not needed: \"The captain asked us why we were late.\" \"That\" is carried over from reported statements (\"he said that…\"), which is the slip this catches."
+  },
+  {
+    "ref": "E-M-41",
+    "subject": "english",
+    "skill": "sentence-sequencing",
+    "difficulty": "moderate",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Arrange in order. P. A week later, green shoots appeared. Q. Meena dug a pit in the garden. R. She sowed the seeds and covered them. S. She watered the spot every morning.",
+    "options": {
+      "A": "QRSP",
+      "B": "QSRP",
+      "C": "RQSP",
+      "D": "QRPS"
+    },
+    "answer_key": "A",
+    "rationale": "The pit comes first (Q), then the seeds go in it (R), then daily watering (S), and only after a week do shoots appear (P): QRSP. D puts the shoots before the watering that made them grow."
+  },
+  {
+    "ref": "E-D-42",
+    "subject": "english",
+    "skill": "reading-inference",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "When the inspection team arrived, the stores officer was waiting at the gate with his registers. Every shelf had a fresh label, and the floor was still wet from mopping. What can most reasonably be inferred?",
+    "options": {
+      "A": "The stores are always kept this clean",
+      "B": "The team found many faults",
+      "C": "The officer had joined that day",
+      "D": "The officer knew the team was coming"
+    },
+    "answer_key": "D",
+    "rationale": "Fresh labels, a floor still wet and the officer waiting at the gate all point to preparation just before the visit, so he knew it was coming. A goes beyond the passage: recent cleaning says nothing about every day. Nothing is said about faults or his joining."
+  },
+  {
+    "ref": "E-D-43",
+    "subject": "english",
+    "skill": "synonym-in-context",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "The colonel's remarks were pointed, and everyone knew whom he meant. As used here, \"pointed\" most nearly means",
+    "options": {
+      "A": "sharp-tipped",
+      "B": "clearly aimed",
+      "C": "long-winded",
+      "D": "very polite"
+    },
+    "answer_key": "B",
+    "rationale": "Remarks that are pointed are aimed at someone in particular, which is why everyone knew whom he meant. \"Sharp-tipped\" is the word's literal sense, the trap for a reader who ignores the context."
+  },
+  {
+    "ref": "E-D-44",
+    "subject": "english",
+    "skill": "error-identification",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Which part of this sentence has an error? \"Hardly had the bus left the stop than it began to rain.\"",
+    "options": {
+      "A": "Hardly had the bus",
+      "B": "left the stop",
+      "C": "than it began to rain",
+      "D": "No error"
+    },
+    "answer_key": "C",
+    "rationale": "\"Hardly\" is followed by \"when\", not \"than\": \"Hardly had the bus left the stop when it began to rain.\" \"Than\" is borrowed from \"no sooner … than\", the pair it is usually confused with. The inverted \"had the bus\" in A is correct after \"hardly\"."
+  },
+  {
+    "ref": "E-D-45",
+    "subject": "english",
+    "skill": "sentence-completion",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Though the plan looked ___ on paper, it proved ___ in the field.",
+    "options": {
+      "A": "simple … easy",
+      "B": "weak … useless",
+      "C": "clever … brilliant",
+      "D": "sound … unworkable"
+    },
+    "answer_key": "D",
+    "rationale": "\"Though\" sets up a contrast, so the two blanks must pull in opposite directions: good on paper, bad in practice. Only \"sound … unworkable\" does; A, B and C put two words of the same kind together."
+  }
+]

@@ -205,6 +205,7 @@
   },
   {
     "ref": "E-E-06",
+    "status": "retired",
     "subject": "english",
     "skill": "syllogism",
     "difficulty": "easy",

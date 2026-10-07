@@ -188,6 +188,7 @@
   },
   {
     "ref": "E-M-35",
+    "status": "retired",
     "subject": "english",
     "skill": "logical-deduction",
     "difficulty": "moderate",
@@ -222,6 +223,7 @@
   },
   {
     "ref": "E-D-37",
+    "status": "retired",
     "subject": "english",
     "skill": "quantifier-logic",
     "difficulty": "difficult",

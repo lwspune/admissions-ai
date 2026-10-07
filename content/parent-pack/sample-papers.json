@@ -160,19 +160,19 @@
   "paper": 8,
   "ref": "P8-E5",
   "subject": "english",
-  "skill": "syllogism",
+  "skill": "error-identification",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Some pilots are engineers. All engineers are graduates. Which statement must be true?",
+  "stem": "Which part of this sentence has an error? \"The new recruits were told to report at sharp 6 am.\"",
   "options": {
-   "A": "All pilots are graduates",
-   "B": "No pilot is a graduate",
-   "C": "Some pilots are graduates",
-   "D": "All graduates are pilots"
+   "A": "The new recruits",
+   "B": "were told to",
+   "C": "report at sharp 6 am",
+   "D": "No error"
   },
   "answer_key": "C",
-  "rationale": "The pilots who are engineers must be graduates, so at least some pilots are graduates. Nothing is said about the other pilots."
+  "rationale": "\"Sharp\" comes after the time: \"report at 6 am sharp\". Putting it before the time is a common slip in speech."
  },
  {
   "paper": 8,
@@ -335,19 +335,19 @@
   "paper": 8,
   "ref": "P8-E10",
   "subject": "english",
-  "skill": "logical-deduction",
+  "skill": "reading-inference",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "In a row of children, Asha is 7th from the left and 12th from the right. How many children are in the row?",
+  "stem": "Riya stepped out, looked up at the dark clouds and then at her new white shoes. She went back in and came out in her old ones. Why did she most likely change?",
   "options": {
-   "A": "17",
-   "B": "18",
-   "C": "19",
-   "D": "20"
+   "A": "She was late for school",
+   "B": "She expected rain and mud",
+   "C": "Her new shoes were too tight",
+   "D": "Her mother called her back"
   },
   "answer_key": "B",
-  "rationale": "Counting from both ends counts Asha twice, so the row has 7 + 12 − 1 = 18 children. Adding without subtracting gives 19."
+  "rationale": "She looked at the clouds, then at her white shoes, and changed into old ones: she expected rain and did not want to spoil them. Nothing in the passage mentions lateness, tight shoes or her mother."
  },
  {
   "paper": 8,
@@ -700,19 +700,19 @@
   "paper": 9,
   "ref": "P9-E5",
   "subject": "english",
-  "skill": "logical-deduction",
+  "skill": "identifying-tone",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Ali, Bina, Dev, Esha and Tara sit in a row of five. Tara is in the middle, Ali at the left end and Bina next to Ali. Dev is not next to Tara. Who is at the right end?",
+  "stem": "\"Despite repeated warnings, the gate was again left unlocked on Tuesday night.\" The writer's tone is",
   "options": {
-   "A": "Dev",
-   "B": "Esha",
-   "C": "Bina",
-   "D": "Cannot be determined"
+   "A": "critical",
+   "B": "amused",
+   "C": "hopeful",
+   "D": "indifferent"
   },
   "answer_key": "A",
-  "rationale": "Seats 1, 2 and 3 are Ali, Bina and Tara. Dev and Esha take seats 4 and 5; seat 4 is next to Tara, so Dev must be in seat 5."
+  "rationale": "\"Despite repeated warnings\" and \"again\" show the writer finds fault with whoever left the gate open, so the tone is critical. Nothing in the sentence is light-hearted, hopeful or careless."
  },
  {
   "paper": 9,
@@ -875,19 +875,19 @@
   "paper": 9,
   "ref": "P9-E10",
   "subject": "english",
-  "skill": "syllogism",
+  "skill": "one-word-substitution",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "All rifles in the store are cleaned weekly. Some weapons in the store are rifles. Which statement must be true?",
+  "stem": "Choose the one word for: a person who speaks many languages.",
   "options": {
-   "A": "All weapons are cleaned weekly",
-   "B": "Some weapons are cleaned weekly",
-   "C": "No weapon is cleaned weekly",
-   "D": "Everything cleaned is a rifle"
+   "A": "translator",
+   "B": "polyglot",
+   "C": "linguist",
+   "D": "orator"
   },
   "answer_key": "B",
-  "rationale": "The weapons that are rifles are cleaned weekly, so at least some weapons are. Nothing is said about the weapons that are not rifles."
+  "rationale": "A polyglot speaks many languages. A linguist studies how languages work and may speak only one; a translator turns one language into another; an orator is a fine public speaker."
  },
  {
   "paper": 9,
@@ -1410,19 +1410,19 @@
   "paper": 10,
   "ref": "P10-E10",
   "subject": "english",
-  "skill": "syllogism",
+  "skill": "error-identification",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "No soldier is careless. Some cadets are careless. Which statement must be true?",
+  "stem": "Which part of this sentence has an error? \"The officer gave us an useful piece of advice.\"",
   "options": {
-   "A": "No cadet is a soldier",
-   "B": "Some cadets are not soldiers",
-   "C": "All soldiers are cadets",
-   "D": "Some soldiers are careless"
+   "A": "The officer gave us",
+   "B": "an useful piece",
+   "C": "of advice",
+   "D": "No error"
   },
   "answer_key": "B",
-  "rationale": "The careless cadets cannot be soldiers, so at least some cadets are not soldiers. Nothing rules out other cadets being soldiers, so \"no cadet is a soldier\" goes too far."
+  "rationale": "\"Useful\" begins with a \"yoo\" sound, a consonant sound, so it takes \"a\": \"a useful piece of advice\". The choice between a and an goes by sound, not by the letter."
  },
  {
   "paper": 10,
@@ -1765,19 +1765,19 @@
   "paper": 11,
   "ref": "P11-E5",
   "subject": "english",
-  "skill": "syllogism",
+  "skill": "synonym-in-context",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "All cadets wake at 5 am. Nobody who wakes at 5 am misses breakfast. Arun misses breakfast. Which statement must be true?",
+  "stem": "The two teams were so close that the match went to a tie-breaker. As used here, \"close\" most nearly means",
   "options": {
-   "A": "Arun wakes at 5 am",
-   "B": "Arun is a cadet",
-   "C": "Some cadets miss breakfast",
-   "D": "Arun is not a cadet"
+   "A": "near each other",
+   "B": "friendly",
+   "C": "shut",
+   "D": "evenly matched"
   },
   "answer_key": "D",
-  "rationale": "Every cadet wakes at 5 am, and everyone who does has breakfast. Arun does not, so Arun cannot wake at 5 am and so cannot be a cadet."
+  "rationale": "A match that needs a tie-breaker was between teams of nearly equal strength, so \"close\" means evenly matched. \"Near each other\" is the everyday sense of the word, the trap here."
  },
  {
   "paper": 11,
@@ -1940,19 +1940,19 @@
   "paper": 11,
   "ref": "P11-E10",
   "subject": "english",
-  "skill": "logical-deduction",
+  "skill": "sentence-completion",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "P is taller than Q. R is shorter than Q. S is taller than P. Who is the second tallest?",
+  "stem": "The rescue was ___, but the team's ___ meant that nobody was hurt.",
   "options": {
-   "A": "S",
-   "B": "Q",
-   "C": "P",
-   "D": "R"
+   "A": "easy … carelessness",
+   "B": "quick … delay",
+   "C": "dangerous … caution",
+   "D": "simple … confusion"
   },
   "answer_key": "C",
-  "rationale": "Putting the statements together gives S > P > Q > R, so P is second tallest. S is the tallest and R the shortest."
+  "rationale": "\"But\" sets up a contrast: a risky rescue, yet nobody hurt, thanks to something good the team did. Only \"dangerous … caution\" gives that; the other second words would cause harm, not prevent it."
  },
  {
   "paper": 11,
@@ -2295,19 +2295,19 @@
   "paper": 12,
   "ref": "P12-E5",
   "subject": "english",
-  "skill": "relationship-reasoning",
+  "skill": "idiom-meaning",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Pointing to a young man, Neha said, \"His mother is the only daughter of my mother.\" How is the man related to Neha?",
+  "stem": "When the new rules were announced, the senior cadets took them with a pinch of salt. This means they",
   "options": {
-   "A": "Brother",
-   "B": "Son",
-   "C": "Nephew",
-   "D": "Cousin"
+   "A": "accepted them gladly",
+   "B": "did not fully believe them",
+   "C": "complained about them loudly",
+   "D": "followed them very strictly"
   },
   "answer_key": "B",
-  "rationale": "The only daughter of Neha's mother is Neha herself. So the man's mother is Neha, and he is her son. \"Nephew\" assumes a sister."
+  "rationale": "To take something with a pinch of salt is to doubt it, not to believe it fully. It says nothing about complaining aloud, and it is the opposite of accepting or strictly following."
  },
  {
   "paper": 12,
@@ -2470,19 +2470,19 @@
   "paper": 12,
   "ref": "P12-E10",
   "subject": "english",
-  "skill": "supported-conclusion",
+  "skill": "reading-inference",
   "difficulty": "difficult",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Every pilot in the squadron has passed the night-flying test. Arjun has not passed the night-flying test. Which statement must be true?",
+  "stem": "A notice on the mess door reads: \"Dinner will be served at 8 pm today instead of 7.30 pm.\" What does it most likely tell us?",
   "options": {
-   "A": "Arjun will pass the test later",
-   "B": "Arjun is not a pilot in the squadron",
-   "C": "Arjun is a pilot in the squadron",
-   "D": "No pilot in the squadron flies by day"
+   "A": "Dinner is usually at 8 pm",
+   "B": "Dinner is usually at 7.30 pm",
+   "C": "The cook is unwell today",
+   "D": "Dinner is cancelled today"
   },
   "answer_key": "B",
-  "rationale": "If Arjun were a pilot in the squadron he would have passed the test. He has not, so he is not one. Nothing is said about the future."
+  "rationale": "\"Today instead of 7.30 pm\" says 7.30 is the time dinner would normally be served, so the usual time is 7.30. The notice gives no reason, so the cook being unwell is a guess, and dinner is moved, not cancelled."
  },
  {
   "paper": 12,
