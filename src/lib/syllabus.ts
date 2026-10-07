@@ -112,12 +112,15 @@ export function syllabusFor(admittingTo: ClassLevel, input: SyllabusInput): Syll
 /**
  * The basics topics an admit to `admittingTo` can be asked, as the parent
  * sheet prints them: broad names under four headings, no class or book.
+ * Topics may share a name (one broad science chapter, several bank topics);
+ * it is listed once, where its first drawable topic falls.
  */
 export function basicsTopics(admittingTo: ClassLevel, topics: readonly SyllabusTopic[]): Record<Heading, string[]> {
   const ceiling = contentCeiling(admittingTo)
   const lists: Record<Heading, string[]> = { maths: [], english: [], science: [], reasoning: [] }
   for (const t of topics) {
-    if (t.taught_in !== null && t.taught_in <= ceiling) lists[t.heading ?? t.subject].push(t.label)
+    const list = lists[t.heading ?? t.subject]
+    if (t.taught_in !== null && t.taught_in <= ceiling && !list.includes(t.label)) list.push(t.label)
   }
   return lists
 }

@@ -127,6 +127,16 @@ describe('basicsTopics', () => {
     })
   })
 
+  it('lists a broad name once when several topics share it', () => {
+    const shared = [
+      { ...t('water', 'science', 6), label: 'Matter' },
+      { ...t('magnets', 'science', 6), label: 'Magnetism' },
+      { ...t('states', 'science', 9), label: 'Matter' },
+    ]
+    expect(basicsTopics(12, shared).science).toEqual(['Matter', 'Magnetism'])
+    expect(basicsTopics(8, shared).science).toEqual(['Matter', 'Magnetism'])
+  })
+
   it('leaves out a topic taught after class N−1, and one no bank item carries', () => {
     expect(basicsTopics(8, topics).maths).not.toContain('Label percent')
     expect(basicsTopics(9, topics).maths).toEqual(['Label patterns', 'Label percent'])
