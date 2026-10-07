@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { editionStudied, topicClass, unmappedSkills, syllabusFor, type SyllabusTopic, type SyllabusChapter } from './syllabus'
+import { editionStudied, topicClass, unmappedSkills, syllabusFor, basicsTopics, type SyllabusTopic, type SyllabusChapter } from './syllabus'
 
 // NCERT replaced its books class by class: a child's book for a given class
 // depends on the year they were in it. The sheets assume a cohort in class N−1
@@ -100,5 +100,36 @@ describe('syllabusFor', () => {
   it('lists reasoning topics apart and never as unplaced', () => {
     const sheet = syllabusFor(8, input)
     expect(sheet.reasoning.map((t) => t.key)).toEqual(['clocks'])
+  })
+})
+
+describe('basicsTopics', () => {
+  const t = (key: string, subject: SyllabusTopic['subject'], taught_in: number | null, heading?: SyllabusTopic['heading']): SyllabusTopic => ({
+    key, subject, label: `Label ${key}`, taught_in, reasoning: heading === 'reasoning', heading,
+  })
+  const topics = [
+    t('patterns', 'maths', 6),
+    t('clocks', 'maths', 6, 'reasoning'),
+    t('percent', 'maths', 8),
+    t('vocab', 'english', 6),
+    t('analogies', 'english', 6, 'reasoning'),
+    t('magnets', 'science', 6),
+    t('experiments', 'science', 6, 'reasoning'),
+    t('sound', 'science', null),
+  ]
+
+  it('lists each heading’s labels in file order, puzzles from every subject under reasoning', () => {
+    expect(basicsTopics(8, topics)).toEqual({
+      maths: ['Label patterns'],
+      english: ['Label vocab'],
+      science: ['Label magnets'],
+      reasoning: ['Label clocks', 'Label analogies', 'Label experiments'],
+    })
+  })
+
+  it('leaves out a topic taught after class N−1, and one no bank item carries', () => {
+    expect(basicsTopics(8, topics).maths).not.toContain('Label percent')
+    expect(basicsTopics(9, topics).maths).toEqual(['Label patterns', 'Label percent'])
+    expect(basicsTopics(12, topics).science).toEqual(['Label magnets'])
   })
 })

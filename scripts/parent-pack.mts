@@ -26,8 +26,8 @@ import { choosePaperShape, type PoolItem } from '../src/lib/assemble'
 import { CLASSES, contentCeiling, type ClassLevel } from '../src/lib/classes'
 import { SUBJECTS, DIFFICULTIES, SHAPE_30, type Subject, type Difficulty, type Part, type PaperShape } from '../src/lib/types'
 import {
-  syllabusFor, topicClass, unmappedSkills, editionStudied,
-  type SyllabusTopic, type SyllabusChapter, type SyllabusInput, type Edition,
+  syllabusFor, topicClass, unmappedSkills, editionStudied, basicsTopics,
+  type SyllabusTopic, type Heading, type SyllabusChapter, type SyllabusInput, type Edition,
 } from '../src/lib/syllabus'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
@@ -68,7 +68,7 @@ interface SyllabusPartChapter {
 interface SyllabusFile {
   cohortYear: number
   newFrom: Record<string, number>
-  topics: (Omit<SyllabusTopic, 'taught_in' | 'reasoning'> & { skills: string[]; reasoning?: boolean })[]
+  topics: (Omit<SyllabusTopic, 'taught_in' | 'reasoning' | 'heading'> & { skills: string[]; reasoning?: boolean; heading?: Heading })[]
   chapters: SyllabusChapter[]
   syllabusChapters: SyllabusPartChapter[]
 }
@@ -104,6 +104,7 @@ const syllabusInput: SyllabusInput = {
     subject: t.subject,
     label: t.label,
     reasoning: t.reasoning ?? false,
+    heading: t.heading,
     taught_in: topicClass(t.skills, basicsBank),
   })),
   chapters: syllabusFile.chapters,
@@ -282,57 +283,26 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   const thirty = shape === SHAPE_30
   const paper = ordered(items.filter((i) => i.paper === classLevel))
 
-  const sheet = syllabusFor(classLevel, syllabusInput)
-  const block = (s: Subject) => {
-    const rows: string[] = []
-    const chapters = sheet.chapters.filter((c) => c.subject === s)
-    for (const level of [...new Set(chapters.map((c) => c.classLevel))]) {
-      const inClass = chapters.filter((c) => c.classLevel === level)
-      const books = [...new Set(inClass.map((c) => c.book))]
-      for (const book of books) {
-        const list = inClass
-          .filter((c) => c.book === book)
-          .map((c) => {
-            const covers = c.covers.filter((label) => label.toLowerCase() !== c.title.toLowerCase())
-            const tail = covers.length > 0 ? ` <span class="covers">${escape(covers.join('; '))}</span>` : ''
-            return `<li><span class="chapter">${escape(c.title)}</span>${tail}</li>`
-          })
-        rows.push(`<div class="book"><p class="book-name">Class ${level} · ${escape(book)}</p><ul>${list.join('')}</ul></div>`)
-      }
-    }
-    const reasoning = sheet.reasoning.filter((t) => t.subject === s).map((t) => escape(t.label))
-    const unplaced = sheet.unplaced.filter((t) => t.subject === s).map((t) => escape(t.label))
-    if (reasoning.length > 0) {
-      const label = s === 'english'
-        ? '<span class="aside-label">Grammar, vocabulary and reasoning; nothing from the English reader:</span> '
-        : '<span class="aside-label">Reasoning, not a textbook chapter:</span> '
-      rows.push(`<p class="aside">${label}${reasoning.join(' · ')}</p>`)
-    }
-    if (unplaced.length > 0) {
-      rows.push(`<p class="aside"><span class="aside-label">Also asked, though the newer NCERT books teach it in a later class:</span> ${unplaced.join(' · ')}</p>`)
-    }
-    return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3>${rows.join('')}</div>`
-  }
+  // Broad names only. Classes, books and chapter numbers are checked by
+  // validate() but not printed: parents asked about them more than they helped.
+  const numbered = (heading: string, names: string[]) =>
+    names.length === 0
+      ? ''
+      : `<div class="subject-block"><h3>${escape(heading)}</h3><ol>${names.map((n) => `<li>${escape(n)}</li>`).join('')}</ol></div>`
+  const lists = basicsTopics(classLevel, syllabusInput.topics)
   // English is short and maths ends sooner than science, so English goes under maths.
-  const topics = `<div>${block('maths')}${block('english')}</div><div>${block('science')}</div>`
+  const topics = `<div>${numbered('Maths', lists.maths)}${numbered('English', lists.english)}</div>`
+    + `<div>${numbered('Science', lists.science)}${numbered('Reasoning', lists.reasoning)}</div>`
 
-  const syllabusBlock = (s: Subject) => {
+  // Class 11 science is two books: Physics first, then Chemistry, numbered on.
+  const chapterNames = (s: Subject) => {
     const chapters = firstTermChapters(classLevel).filter((c) => c.subject === s)
-    if (chapters.length === 0) return ''
-    // Class 11 science is two books, Physics and Chemistry; list each under its own name.
-    const books = [...new Set(chapters.map((c) => c.book))].map((book) => {
-      const list = chapters
-        .filter((c) => c.book === book)
-        .map((c) => `<li><span class="chapter">Ch ${c.chapter}. ${escape(c.title)}</span> <span class="covers">${escape(c.covers)}</span></li>`)
-        .join('')
-      return `<div class="book"><p class="book-name">Class ${ceiling} · ${escape(book)}</p><ul>${list}</ul></div>`
-    })
-    return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3>${books.join('')}</div>`
+    const books = [...new Set(chapters.map((c) => c.book))]
+    return books.flatMap((book) => chapters.filter((c) => c.book === book).map((c) => c.title))
   }
   const syllabusPart = thirty
     ? `<section class="syllabus-part"><h2>Class ${ceiling} syllabus questions</h2>
-  <p class="lead">Five maths and five science questions come from these Class ${ceiling} chapters only: the first-term chapters, because the test can be taken before the year ends.</p>
-  <div class="syllabus">${syllabusBlock('maths')}${syllabusBlock('science')}</div></section>`
+  <div class="syllabus">${numbered('Maths', chapterNames('maths'))}${numbered('Science', chapterNames('science'))}</div></section>`
     : ''
 
   const partLabel = (item: PackItem) => (thirty ? (isSyllabus(item) ? ` · Class ${ceiling}` : ' · Basics') : '')
@@ -373,16 +343,10 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   .lead { margin: 0 0 8pt; }
   .syllabus { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt 16pt; font-size: 8.75pt; line-height: 1.22; }
   .subject-block + .subject-block { margin-top: 8pt; }
-  .book { margin-bottom: 4pt; break-inside: avoid; }
   .syllabus-part { break-inside: avoid; }
-  .book-name { margin: 0 0 1pt; font-weight: 600; color: #333; }
-  .book ul { margin: 0; padding-left: 11pt; }
-  .book li { margin-bottom: 1pt; }
-  .chapter { font-style: italic; }
-  .covers { color: #555; }
-  .covers::before { content: "– "; }
-  .aside { margin: 4pt 0 0; color: #333; }
-  .aside-label { font-weight: 600; }
+  .syllabus > .subject-block + .subject-block { margin-top: 0; }
+  .subject-block ol { margin: 0; padding-left: 16pt; }
+  .subject-block li { margin-bottom: 1pt; }
   .note { margin: 0 0 10pt; color: #444; }
   ol.paper { margin: 0; padding-left: 20pt; }
   .question { margin-bottom: 11pt; break-inside: avoid; }
@@ -416,7 +380,7 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   </ul>
 
   <h2>What the test covers${thirty ? ': basics' : ''}</h2>
-  <p class="lead">${thirty ? 'Basics' : 'The'} questions test reasoning, not memory, using ideas taught up to Class ${ceiling}. Chapters are from the NCERT (CBSE) books a student joining Class ${classLevel} in ${syllabusInput.cohortYear + 1} will have used; other boards teach the same ideas under their own names.</p>
+  <p class="lead">${thirty ? 'Basics' : 'The'} questions test reasoning, not memory, on these topics.</p>
   <div class="syllabus">${topics}</div>
 
   ${syllabusPart}

@@ -16,7 +16,12 @@ export interface SyllabusTopic {
   taught_in: number | null
   /** Asked, but not a chapter in any school textbook (series, clocks, syllogisms). */
   reasoning: boolean
+  /** The list it is printed under on the parent sheet; its subject if absent. */
+  heading?: Heading
 }
+
+/** The parent sheet's basics lists: one per subject, and puzzles from all three. */
+export type Heading = Subject | 'reasoning'
 
 export interface SyllabusChapter {
   subject: Subject
@@ -102,4 +107,17 @@ export function syllabusFor(admittingTo: ClassLevel, input: SyllabusInput): Syll
     reasoning: drawable.filter((t) => t.reasoning),
     unplaced: drawable.filter((t) => !t.reasoning && !placed.has(t.key)),
   }
+}
+
+/**
+ * The basics topics an admit to `admittingTo` can be asked, as the parent
+ * sheet prints them: broad names under four headings, no class or book.
+ */
+export function basicsTopics(admittingTo: ClassLevel, topics: readonly SyllabusTopic[]): Record<Heading, string[]> {
+  const ceiling = contentCeiling(admittingTo)
+  const lists: Record<Heading, string[]> = { maths: [], english: [], science: [], reasoning: [] }
+  for (const t of topics) {
+    if (t.taught_in !== null && t.taught_in <= ceiling) lists[t.heading ?? t.subject].push(t.label)
+  }
+  return lists
 }

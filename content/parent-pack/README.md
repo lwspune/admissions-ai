@@ -1,8 +1,15 @@
 # Parent pack
 
 What staff send a parent who asks for the syllabus or a sample paper: one PDF per admitting class
-(`pdf/reasoning-test-class-N.pdf`). Each holds how the test works, the NCERT chapters the paper
-draws on for that class, a sample paper of the real shape, and the answers with working.
+(`pdf/reasoning-test-class-N.pdf`). Each holds how the test works, the basics topics and class N−1
+chapters the paper draws on for that class, a sample paper of the real shape, and the answers
+with working.
+
+**What a sheet prints is deliberately bare** (the user, 2026-10-07): basics as four numbered lists
+of broad topic names (Maths, English, Science, Reasoning) with no class, book or chapter; the
+syllabus part as numbered chapter names under Maths and Science, with no textbook numbers, book
+or intro. Classes, editions and chapters raised more questions from parents than they answered.
+The build still checks all of them; it only stops printing them.
 
 | File | What |
 |---|---|
@@ -14,7 +21,7 @@ draws on for that class, a sample paper of the real shape, and the answers with 
 
 **The build asks the live database which paper each class gets** (`live_pool` and
 `choosePaperShape`, exactly as issuing does), so it needs `.env.local`. A class on 30 questions
-gets the 30-question facts, a "Class N−1 syllabus questions" section listing its first-term
+gets the 30-question facts, a "Class N−1 syllabus questions" section naming its first-term
 chapters, and a 30-question sample: ten English basics, and five basics plus five class N−1
 first-term syllabus questions in each of maths and science, labelled as on the real paper. **When a
 class's syllabus batch goes live, the build stops** until that class has its 30-question sample and
@@ -24,16 +31,17 @@ syllabus bank item and sample must sit in a chapter of its own class and term.
 ## How a sheet is worked out
 
 A topic's class is the lowest `taught_in` among bank items with its skills, so a retag reaches the
-sheets on the next build. An admit to class N is shown every topic with class ≤ N−1, placed in
-the chapter of the NCERT book the child actually used for that class. `cohortYear` says which year
+sheets on the next build. An admit to class N is shown every topic with class ≤ N−1, and the
+build checks each against the chapter of the NCERT book the child actually used for that class. `cohortYear` says which year
 an admit to N is in class N−1, and `newFrom` says when each class got NCERT's new book, so for
 the 2027 joiners admits to 8 and 9 used only new books, admits to 10 used old books for classes 6–7
 and new ones for 8–9, and admits to 11 and 12 used only old books (`src/lib/syllabus.ts`).
 
-Topics marked `reasoning` (series and clocks in maths, all of English, reading an experiment in
-science) are listed apart as "not a textbook chapter". A drawable topic with no chapter in the
-child's books is printed as "also asked, though the newer NCERT books teach it in a later class",
-and the build warns. Each warning is a bank tag that the new books contradict; see the backfill
+A topic prints under its subject, or under Reasoning when it has `"heading": "reasoning"`
+(clocks, codes and word problems from maths; analogies, series and logical deduction from
+English; reading an experiment from science). Topics marked `reasoning` are not textbook chapters,
+so the chapter check skips them; that is why English vocabulary and grammar carry it too. A
+drawable topic with no chapter in the child's books makes the build warn. Each warning is a bank tag that the new books contradict; see the backfill
 ledger in SUGGESTIONS.md.
 
 ## Rules
