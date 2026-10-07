@@ -1,7 +1,7 @@
 # Basics batch 01 — 15 English, 5 difficult maths — 20 items
 
 **Date:** 2026-10-07
-**Status:** Awaiting review. Seeded at `review`; nothing here is drawn until promoted with
+**Status:** Signed off by the user 2026-10-07 and promoted with
 `npm run items:seed -- --live --file basics-batch-01.json`.
 **Composition:** English 9 easy / 3 moderate / 3 difficult, all MCQ; maths 5 difficult (1 numeric),
 `taught_in` 6 or 7. Every item: `part: basics`.
