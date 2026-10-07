@@ -1,0 +1,527 @@
+[
+  {
+    "ref": "M8-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "squares-and-cubes",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the square root of 196?",
+    "numeric_answer": 14,
+    "numeric_tolerance": 0,
+    "rationale": "14 × 14 = 196, so the square root is 14. A number ending in 6 has a square root ending in 4 or 6, which narrows it to 14 or 16."
+  },
+  {
+    "ref": "M8-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "squares-and-cubes",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which number below equals some whole number multiplied by itself three times?",
+    "options": {
+      "A": "81",
+      "B": "100",
+      "C": "144",
+      "D": "64"
+    },
+    "answer_key": "D",
+    "rationale": "64 = 4 × 4 × 4. 81, 100 and 144 are perfect squares (9², 10², 12²) but not cubes."
+  },
+  {
+    "ref": "M8-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "exponents",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the value of 2⁵?",
+    "options": {
+      "A": "10",
+      "B": "25",
+      "C": "32",
+      "D": "64"
+    },
+    "answer_key": "C",
+    "rationale": "2⁵ = 2 × 2 × 2 × 2 × 2 = 32. 10 multiplies 2 by 5; 25 is 5²; 64 is 2⁶."
+  },
+  {
+    "ref": "M8-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "exponents",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is equal to 3⁴ × 3²?",
+    "options": {
+      "A": "3⁶",
+      "B": "3⁸",
+      "C": "9⁶",
+      "D": "3²"
+    },
+    "answer_key": "A",
+    "rationale": "When powers of the same base are multiplied, the exponents add: 3⁴ × 3² = 3⁶. 3⁸ multiplies the exponents instead."
+  },
+  {
+    "ref": "M8-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "quadrilaterals",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "Three angles of a quadrilateral are 80°, 95° and 105°. What is the fourth angle, in degrees?",
+    "numeric_answer": 80,
+    "numeric_tolerance": 0,
+    "rationale": "The angles of a quadrilateral add up to 360°: 360 − (80 + 95 + 105) = 80°. Using 180° gives a negative angle."
+  },
+  {
+    "ref": "M8-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "quadrilaterals",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which quadrilateral has all its sides equal and all its angles 90°?",
+    "options": {
+      "A": "Rhombus",
+      "B": "Rectangle",
+      "C": "Trapezium",
+      "D": "Square"
+    },
+    "answer_key": "D",
+    "rationale": "A square has both: equal sides like a rhombus and right angles like a rectangle. A rhombus need not have right angles."
+  },
+  {
+    "ref": "M8-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "distributive-property",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which expression is equal to 6(a + 4)?",
+    "options": {
+      "A": "6a + 4",
+      "B": "6a + 24",
+      "C": "a + 24",
+      "D": "10a"
+    },
+    "answer_key": "B",
+    "rationale": "Multiply each term inside the bracket by 6: 6 × a + 6 × 4 = 6a + 24. 6a + 4 forgets to multiply the 4."
+  },
+  {
+    "ref": "M8-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "proportional-reasoning",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "If 5 notebooks cost ₹120, how much do 8 notebooks cost, in rupees?",
+    "numeric_answer": 192,
+    "numeric_tolerance": 0,
+    "rationale": "One notebook costs 120 ÷ 5 = ₹24, so 8 cost 8 × 24 = ₹192. Adding 3 × 5 or similar shortcuts breaks the proportion."
+  },
+  {
+    "ref": "M8-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "divisibility",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers is divisible by 9?",
+    "options": {
+      "A": "2,718",
+      "B": "1,234",
+      "C": "4,567",
+      "D": "5,555"
+    },
+    "answer_key": "A",
+    "rationale": "A number is divisible by 9 when its digits add up to a multiple of 9: 2 + 7 + 1 + 8 = 18. The others add up to 10, 22 and 20."
+  },
+  {
+    "ref": "M8-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "distributive-property",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Using (a + b)(a − b) = a² − b², find the value of 52 × 48.",
+    "numeric_answer": 2496,
+    "numeric_tolerance": 0,
+    "rationale": "52 × 48 = (50 + 2)(50 − 2) = 2500 − 4 = 2496. Writing 2500 + 4 adds the square instead of subtracting it."
+  },
+  {
+    "ref": "M8-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "exponents",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "What is the value of (2³)² ÷ 2⁴?",
+    "numeric_answer": 4,
+    "numeric_tolerance": 0,
+    "rationale": "(2³)² = 2⁶, and 2⁶ ÷ 2⁴ = 2² = 4. Reading (2³)² as 2⁵ gives 2 instead."
+  },
+  {
+    "ref": "M8-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "proportional-reasoning",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "₹600 is divided between A and B in the ratio 2 : 3. What is B's share?",
+    "options": {
+      "A": "₹240",
+      "B": "₹300",
+      "C": "₹360",
+      "D": "₹400"
+    },
+    "answer_key": "C",
+    "rationale": "There are 2 + 3 = 5 parts, each worth ₹120, so B gets 3 × 120 = ₹360. ₹240 is A's share; ₹400 takes 3 parts out of 4 + 0.5."
+  },
+  {
+    "ref": "M8-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "squares-and-cubes",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "What is the smallest number by which 72 must be multiplied to make it a perfect square?",
+    "numeric_answer": 2,
+    "numeric_tolerance": 0,
+    "rationale": "72 = 2 × 2 × 2 × 3 × 3. One 2 is unpaired, so multiplying by 2 gives 144 = 12². Multiplying by 3 leaves the 2 unpaired."
+  },
+  {
+    "ref": "M8-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "quadrilaterals",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "In a parallelogram ABCD, ∠A = 70°. What is ∠B?",
+    "options": {
+      "A": "70°",
+      "B": "110°",
+      "C": "90°",
+      "D": "140°"
+    },
+    "answer_key": "B",
+    "rationale": "Adjacent angles of a parallelogram add up to 180°, so ∠B = 110°. ∠C, opposite ∠A, is the one that equals 70°."
+  },
+  {
+    "ref": "M8-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "proportional-reasoning",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A car travels 180 km on 12 litres of petrol. At the same rate, how far will it travel on 20 litres, in kilometres?",
+    "numeric_answer": 300,
+    "numeric_tolerance": 0,
+    "rationale": "It covers 180 ÷ 12 = 15 km on each litre, so 20 litres take it 15 × 20 = 300 km. Adding 8 litres' worth wrongly gives 188."
+  },
+  {
+    "ref": "S8-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "microorganisms",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which microorganism turns milk into curd?",
+    "options": {
+      "A": "Bacteria",
+      "B": "Yeast cells",
+      "C": "Viruses",
+      "D": "Green algae"
+    },
+    "answer_key": "A",
+    "rationale": "Lactobacillus bacteria change milk into curd. Yeast is used to make bread rise; viruses cause disease rather than make food."
+  },
+  {
+    "ref": "S8-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "microorganisms",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Yeast is used in making bread because",
+    "options": {
+      "A": "it kills germs in the flour",
+      "B": "it gives off carbon dioxide",
+      "C": "it adds vitamins to the bread",
+      "D": "it makes the bread taste sweet"
+    },
+    "answer_key": "B",
+    "rationale": "Yeast respires and gives off carbon dioxide, and the gas bubbles make the dough rise and the bread soft. It does not sweeten or sterilise it."
+  },
+  {
+    "ref": "S8-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "health-and-immunity",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A vaccine protects us from a disease by",
+    "options": {
+      "A": "killing every germ in the body",
+      "B": "replacing blood lost in illness",
+      "C": "training the body to fight the germ",
+      "D": "supplying extra vitamins"
+    },
+    "answer_key": "C",
+    "rationale": "A vaccine shows the immune system a harmless form of the germ, so the body learns to fight it and is ready if the real germ comes."
+  },
+  {
+    "ref": "S8-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "effects-of-current",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "An electric fuse works because of the",
+    "options": {
+      "A": "magnetic effect of current",
+      "B": "chemical effect of current",
+      "C": "lighting effect of current",
+      "D": "heating effect of current"
+    },
+    "answer_key": "D",
+    "rationale": "Too much current heats the fuse wire until it melts and breaks the circuit. That is the heating effect of electric current."
+  },
+  {
+    "ref": "S8-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "effects-of-current",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "An electromagnet loses its magnetism when",
+    "options": {
+      "A": "the coil is warmed",
+      "B": "the current is switched off",
+      "C": "more turns are added",
+      "D": "the current is increased"
+    },
+    "answer_key": "B",
+    "rationale": "An electromagnet is magnetic only while current flows through its coil. More turns or more current make it stronger, not weaker."
+  },
+  {
+    "ref": "S8-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "forces",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is a non-contact force?",
+    "options": {
+      "A": "Friction",
+      "B": "Muscular force",
+      "C": "Magnetic force",
+      "D": "The push of a hand"
+    },
+    "answer_key": "C",
+    "rationale": "A magnet can pull a pin without touching it, so magnetic force is a non-contact force, like gravity. Friction and pushes need contact."
+  },
+  {
+    "ref": "S8-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "pressure-and-winds",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A force of 200 N acts on an area of 4 m². What pressure does it exert, in pascals?",
+    "numeric_answer": 50,
+    "numeric_tolerance": 0,
+    "rationale": "Pressure is force divided by area: 200 N ÷ 4 m² = 50 Pa. Multiplying (800) is the usual error."
+  },
+  {
+    "ref": "S8-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "particulate-nature",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In which state of matter are the particles farthest apart?",
+    "options": {
+      "A": "Solid",
+      "B": "Liquid",
+      "C": "All three equally",
+      "D": "Gas"
+    },
+    "answer_key": "D",
+    "rationale": "In a gas the particles are far apart and move freely, which is why gases can be compressed. In solids they are packed closest."
+  },
+  {
+    "ref": "S8-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "particulate-nature",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "The smell of a perfume spreads through a room mainly because of",
+    "options": {
+      "A": "diffusion",
+      "B": "condensation",
+      "C": "freezing",
+      "D": "melting"
+    },
+    "answer_key": "A",
+    "rationale": "The perfume's particles move about and mix with the air particles, spreading out from where it was sprayed: diffusion."
+  },
+  {
+    "ref": "S8-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "forces",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Why do sports shoes have grooved soles?",
+    "options": {
+      "A": "To reduce friction with the ground",
+      "B": "To make the shoes lighter to wear",
+      "C": "To increase friction and grip",
+      "D": "Only for decoration and style"
+    },
+    "answer_key": "C",
+    "rationale": "Grooves give the sole more grip on the ground, increasing friction so the player does not slip while running and turning."
+  },
+  {
+    "ref": "S8-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "pressure-and-winds",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Wind blows from a region of",
+    "options": {
+      "A": "high pressure to low pressure",
+      "B": "low pressure to high pressure",
+      "C": "low temperature to low pressure",
+      "D": "still air to cold air"
+    },
+    "answer_key": "A",
+    "rationale": "Air moves from where pressure is higher to where it is lower, and that moving air is wind. Uneven heating of the Earth sets up the difference."
+  },
+  {
+    "ref": "S8-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "microorganisms",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which of these diseases is caused by a virus?",
+    "options": {
+      "A": "Tuberculosis",
+      "B": "Typhoid",
+      "C": "Cholera",
+      "D": "Common cold"
+    },
+    "answer_key": "D",
+    "rationale": "The common cold is caused by viruses, which is why antibiotics do not cure it. Tuberculosis, typhoid and cholera are caused by bacteria."
+  },
+  {
+    "ref": "S8-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "pressure-and-winds",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A box weighing 300 N rests on a face measuring 0.5 m by 0.3 m. What pressure does it exert on the floor, in pascals?",
+    "numeric_answer": 2000,
+    "numeric_tolerance": 0,
+    "rationale": "The area is 0.5 × 0.3 = 0.15 m², so pressure = 300 ÷ 0.15 = 2,000 Pa. Using 0.5 + 0.3 = 0.8 as the area gives 375."
+  },
+  {
+    "ref": "S8-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "effects-of-current",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A heater coil glows red hot, but the copper wires connecting it stay almost cool, though the same current flows through both. The main reason is that the coil",
+    "options": {
+      "A": "carries more current",
+      "B": "has a much higher resistance",
+      "C": "is made of a magnetic metal",
+      "D": "is joined to the earth wire"
+    },
+    "answer_key": "B",
+    "rationale": "With the same current, the heat produced is greater where the resistance is greater. The heater coil is made of a high-resistance alloy; copper has very little."
+  },
+  {
+    "ref": "S8-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 8,
+    "skill": "particulate-nature",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "When sugar dissolves in a glass of water, the water level hardly rises. This is because",
+    "options": {
+      "A": "water particles shrink to make room for it",
+      "B": "the sugar disappears completely in the water",
+      "C": "sugar particles fill spaces between water particles",
+      "D": "the sugar turns into more particles of water"
+    },
+    "answer_key": "C",
+    "rationale": "Water is made of particles with spaces between them, and the sugar particles spread into those spaces. Nothing disappears: the water tastes sweet."
+  }
+]

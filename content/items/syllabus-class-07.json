@@ -1,0 +1,537 @@
+[
+  {
+    "ref": "M7-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "large-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "How is the number 3,05,00,000 read in the Indian system?",
+    "options": {
+      "A": "Three crore five lakh",
+      "B": "Three crore fifty lakh",
+      "C": "Thirty lakh five thousand",
+      "D": "Three lakh five thousand"
+    },
+    "answer_key": "A",
+    "rationale": "In the Indian system the commas mark crores, then lakhs, then thousands: 3,05,00,000 is 3 crore and 05 lakh. Fifty lakh would be 3,50,00,000."
+  },
+  {
+    "ref": "M7-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "large-numbers",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many lakhs make one crore?",
+    "numeric_answer": 100,
+    "numeric_tolerance": 0,
+    "rationale": "One lakh is 1,00,000 and one crore is 1,00,00,000, which is 100 times as much. Ten is the step from lakh to ten lakh."
+  },
+  {
+    "ref": "M7-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "arithmetic-expressions",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is the value of 18 − 3 × 4 + 2?",
+    "numeric_answer": 8,
+    "numeric_tolerance": 0,
+    "rationale": "Multiplication comes first: 3 × 4 = 12. Then 18 − 12 + 2 = 8. Working left to right without that rule gives 62."
+  },
+  {
+    "ref": "M7-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "arithmetic-expressions",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What is the value of 5 × (6 − 2) − 3?",
+    "options": {
+      "A": "25",
+      "B": "23",
+      "C": "7",
+      "D": "17"
+    },
+    "answer_key": "D",
+    "rationale": "Brackets first: 6 − 2 = 4. Then 5 × 4 = 20, and 20 − 3 = 17. Ignoring the brackets gives 5 × 6 − 2 − 3 = 25."
+  },
+  {
+    "ref": "M7-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "decimals",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers is the largest?",
+    "options": {
+      "A": "0.7",
+      "B": "0.65",
+      "C": "0.709",
+      "D": "0.69"
+    },
+    "answer_key": "C",
+    "rationale": "Compare place by place: 0.700, 0.650, 0.709 and 0.690. 0.709 is largest. A longer decimal is not automatically larger, nor smaller."
+  },
+  {
+    "ref": "M7-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "decimals",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is 2.5 + 0.75?",
+    "numeric_answer": 3.25,
+    "numeric_tolerance": 0,
+    "rationale": "Line up the decimal points: 2.50 + 0.75 = 3.25. Adding 25 and 75 as whole numbers (giving 1.00 or 10.0) is the usual slip."
+  },
+  {
+    "ref": "M7-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "algebraic-expressions",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "If a = 3 and b = 5, what is the value of 2a + b?",
+    "numeric_answer": 11,
+    "numeric_tolerance": 0,
+    "rationale": "2a means 2 × a = 6, and 6 + 5 = 11. Reading 2a as the two-digit number 23 gives 28."
+  },
+  {
+    "ref": "M7-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "lines-and-angles",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Two straight lines cross. One of the angles formed is 65°. What is the angle vertically opposite to it?",
+    "options": {
+      "A": "25°",
+      "B": "65°",
+      "C": "115°",
+      "D": "130°"
+    },
+    "answer_key": "B",
+    "rationale": "Vertically opposite angles are equal, so it is also 65°. 115° is the angle next to it, which together with 65° makes a straight line."
+  },
+  {
+    "ref": "M7-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "number-play",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "The sum of two odd numbers is always",
+    "options": {
+      "A": "odd",
+      "B": "even",
+      "C": "a multiple of 4",
+      "D": "a prime number"
+    },
+    "answer_key": "B",
+    "rationale": "Each odd number is one more than an even number, so the two extra ones make another pair: odd + odd is even. 3 + 3 = 6 is not a multiple of 4."
+  },
+  {
+    "ref": "M7-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "lines-and-angles",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Two parallel lines are cut by a transversal. One interior angle is 70°. What is the interior angle on the same side of the transversal?",
+    "options": {
+      "A": "110°",
+      "B": "70°",
+      "C": "20°",
+      "D": "140°"
+    },
+    "answer_key": "A",
+    "rationale": "Interior angles on the same side of a transversal between parallel lines add up to 180°, so the other is 110°. 70° is the alternate angle."
+  },
+  {
+    "ref": "M7-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "triangles",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Two angles of a triangle are 50° and 60°. What is the third angle, in degrees?",
+    "numeric_answer": 70,
+    "numeric_tolerance": 0,
+    "rationale": "The angles of a triangle add up to 180°, so the third is 180 − 50 − 60 = 70°. Using 360° (the quadrilateral total) gives 250."
+  },
+  {
+    "ref": "M7-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "algebraic-expressions",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which expression gives the perimeter of a square with side s?",
+    "options": {
+      "A": "s²",
+      "B": "2s",
+      "C": "4s",
+      "D": "s + 4"
+    },
+    "answer_key": "C",
+    "rationale": "A square has four equal sides, so its perimeter is s + s + s + s = 4s. s² is its area; s + 4 adds 4 instead of multiplying."
+  },
+  {
+    "ref": "M7-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "triangles",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Which set of three lengths can form a triangle?",
+    "options": {
+      "A": "2, 3, 6",
+      "B": "3, 4, 8",
+      "C": "4, 5, 9",
+      "D": "5, 6, 10"
+    },
+    "answer_key": "D",
+    "rationale": "Any two sides together must be longer than the third. 5 + 6 = 11 > 10 works. 4 + 5 = 9 only equals 9, which gives a flat line, not a triangle."
+  },
+  {
+    "ref": "M7-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "arithmetic-expressions",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Which expression has the same value as 7 × 48 − 7 × 8?",
+    "options": {
+      "A": "7 × 40",
+      "B": "7 × 56",
+      "C": "49 × 8",
+      "D": "7 + 40"
+    },
+    "answer_key": "A",
+    "rationale": "Seven is a common factor: 7 × 48 − 7 × 8 = 7 × (48 − 8) = 7 × 40 = 280. 7 × 56 adds the brackets instead of subtracting."
+  },
+  {
+    "ref": "M7-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "algebraic-expressions",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A pencil costs x rupees, and a pen costs 3 rupees more than twice a pencil. If x = 6, how much do 2 pens cost, in rupees?",
+    "numeric_answer": 30,
+    "numeric_tolerance": 0,
+    "rationale": "A pen costs 2x + 3 = 2 × 6 + 3 = 15 rupees, so 2 pens cost 30. Reading the pen as 2(x + 3) gives 18 each and 36 for two."
+  },
+  {
+    "ref": "S7-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "acids-bases-indicators",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What colour does blue litmus paper turn when dipped in lemon juice?",
+    "options": {
+      "A": "Red",
+      "B": "Blue",
+      "C": "Green",
+      "D": "Yellow"
+    },
+    "answer_key": "A",
+    "rationale": "Lemon juice is acidic, and acids turn blue litmus red. A basic solution would leave blue litmus blue and turn red litmus blue."
+  },
+  {
+    "ref": "S7-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "acids-bases-indicators",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is basic?",
+    "options": {
+      "A": "Vinegar",
+      "B": "Lemon juice",
+      "C": "Curd",
+      "D": "Soap solution"
+    },
+    "answer_key": "D",
+    "rationale": "Soap solution is basic: it feels soapy and turns red litmus blue. Vinegar, lemon juice and curd are all acidic and taste sour."
+  },
+  {
+    "ref": "S7-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "acids-bases-indicators",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Turmeric paper turns red when it is dipped in",
+    "options": {
+      "A": "an acidic solution",
+      "B": "a basic solution",
+      "C": "pure water",
+      "D": "a salt solution"
+    },
+    "answer_key": "B",
+    "rationale": "Turmeric is an indicator that turns red in a basic solution, which is why a turmeric stain turns red when washed with soap. Acids leave it yellow."
+  },
+  {
+    "ref": "S7-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "circuit-components",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "What does a switch do in an electric circuit?",
+    "options": {
+      "A": "Stores electric charge",
+      "B": "Produces the current",
+      "C": "Increases the voltage",
+      "D": "Opens or closes the circuit"
+    },
+    "answer_key": "D",
+    "rationale": "A switch completes or breaks the path of the current, turning the circuit on or off. The cell is what drives the current."
+  },
+  {
+    "ref": "S7-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "circuit-components",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is a good conductor of electricity?",
+    "options": {
+      "A": "Copper",
+      "B": "Rubber",
+      "C": "Plastic",
+      "D": "Wood"
+    },
+    "answer_key": "A",
+    "rationale": "Metals such as copper let current flow easily, which is why wires are made of them. Rubber, plastic and dry wood are insulators."
+  },
+  {
+    "ref": "S7-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "metals-and-non-metals",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which property of metals makes them useful for drawing into wires?",
+    "options": {
+      "A": "Brittleness",
+      "B": "Low melting point",
+      "C": "Dull surface",
+      "D": "Ductility"
+    },
+    "answer_key": "D",
+    "rationale": "Ductility is the ability to be drawn into thin wires. Metals are generally shiny and not brittle; brittleness is a property of many non-metals."
+  },
+  {
+    "ref": "S7-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "metals-and-non-metals",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Magnesium ribbon burns to form an ash. Dissolved in water, the ash turns red litmus blue. This shows that the oxide is",
+    "options": {
+      "A": "basic",
+      "B": "acidic",
+      "C": "neutral",
+      "D": "a non-metal"
+    },
+    "answer_key": "A",
+    "rationale": "Turning red litmus blue is the sign of a base. Metal oxides are generally basic, while the oxides of non-metals are generally acidic."
+  },
+  {
+    "ref": "S7-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "physical-chemical-changes",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these is a physical change?",
+    "options": {
+      "A": "Burning paper",
+      "B": "Melting ice",
+      "C": "Rusting iron",
+      "D": "Cooking an egg"
+    },
+    "answer_key": "B",
+    "rationale": "Melting changes only the state; the water can freeze back into ice. Burning, rusting and cooking make new substances, so they are chemical changes."
+  },
+  {
+    "ref": "S7-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "physical-chemical-changes",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "For iron to rust, it needs",
+    "options": {
+      "A": "only air, without water",
+      "B": "only water, without air",
+      "C": "both air and water",
+      "D": "only bright sunlight"
+    },
+    "answer_key": "C",
+    "rationale": "Rusting needs both oxygen from the air and moisture. Iron kept in dry air, or in boiled water sealed from air, does not rust."
+  },
+  {
+    "ref": "S7-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "circuit-components",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Three 1.5 V cells are joined in series, the positive end of one to the negative end of the next. What is their total voltage, in volts?",
+    "numeric_answer": 4.5,
+    "numeric_tolerance": 0,
+    "rationale": "In series the voltages add: 1.5 + 1.5 + 1.5 = 4.5 V. That is why a torch with more cells in a row can light a brighter bulb."
+  },
+  {
+    "ref": "S7-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "acids-bases-indicators",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A field's soil is too acidic for crops. Which substance should be added to neutralise it?",
+    "options": {
+      "A": "Vinegar",
+      "B": "Quicklime",
+      "C": "Lemon juice",
+      "D": "Sugar"
+    },
+    "answer_key": "B",
+    "rationale": "An acid is neutralised by a base. Quicklime (calcium oxide) is a base, so farmers add it to acidic soil. Vinegar and lemon juice would add more acid."
+  },
+  {
+    "ref": "S7-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "metals-and-non-metals",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Why is sodium stored under kerosene?",
+    "options": {
+      "A": "It is a soft metal that floats on water",
+      "B": "It melts quickly when left in warm air",
+      "C": "It reacts vigorously with air and water",
+      "D": "It dissolves slowly in kerosene oil"
+    },
+    "answer_key": "C",
+    "rationale": "Sodium is so reactive that it can catch fire in air and reacts violently with water. Kerosene keeps both away from it."
+  },
+  {
+    "ref": "S7-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "physical-chemical-changes",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Baking soda added to vinegar fizzes. The gas given off turns lime water milky. Which gas is it?",
+    "options": {
+      "A": "Hydrogen",
+      "B": "Sulphur dioxide",
+      "C": "Carbon dioxide",
+      "D": "Nitrogen dioxide"
+    },
+    "answer_key": "C",
+    "rationale": "Lime water turning milky is the test for carbon dioxide. A new gas forming shows that this is a chemical change."
+  },
+  {
+    "ref": "S7-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "circuit-components",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Two bulbs are connected one after the other in a circuit with a cell. One bulb fuses. What happens to the other bulb?",
+    "options": {
+      "A": "It glows brighter",
+      "B": "It goes out",
+      "C": "It glows dimmer",
+      "D": "Nothing changes"
+    },
+    "answer_key": "B",
+    "rationale": "With the bulbs one after the other there is only one path for the current. The fused filament breaks that path, so the other bulb goes out too."
+  },
+  {
+    "ref": "S7-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 7,
+    "skill": "physical-chemical-changes",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Sugar dissolved in water can be got back by evaporating the water, but burnt sugar cannot be turned back into sugar. Which statement is correct?",
+    "options": {
+      "A": "Both are chemical changes",
+      "B": "Both are physical changes",
+      "C": "Dissolving is chemical; burning is physical",
+      "D": "Dissolving is physical; burning is chemical"
+    },
+    "answer_key": "D",
+    "rationale": "Dissolving can be reversed and makes no new substance: a physical change. Burning forms new substances that cannot be turned back: a chemical change."
+  }
+]
