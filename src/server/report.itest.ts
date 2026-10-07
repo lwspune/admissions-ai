@@ -16,6 +16,7 @@ import { loadLeadReport } from './report'
 const db = serviceClient()
 const MOBILE = '9812345679'
 let leadId: string
+let questionCount: number
 
 beforeAll(async () => {
   await db.from('leads').delete().like('name', 'RptTest%')
@@ -28,6 +29,7 @@ beforeAll(async () => {
   leadId = data.id as string
 
   const { assessment } = await issueAssessment(db, { leadId })
+  questionCount = assessment.question_count
   await identify(db, { token: assessment.token, mobile: MOBILE })
   const { attempt } = await startAttempt(db, { token: assessment.token, context: {} })
   await submitAttempt(db, { attemptId: attempt.id, reason: 'manual' })
@@ -40,7 +42,7 @@ afterAll(async () => {
 describe('loadLeadReport question visibility', () => {
   it('gives a telecaller no question text at all', async () => {
     const report = await loadLeadReport(db, leadId, 'telecaller')
-    expect(report?.report?.questions).toHaveLength(15)
+    expect(report?.report?.questions).toHaveLength(questionCount)
     for (const question of report!.report!.questions) {
       expect(question.stem).toBe('')
     }
@@ -48,7 +50,7 @@ describe('loadLeadReport question visibility', () => {
 
   it('gives a counsellor the question text', async () => {
     const report = await loadLeadReport(db, leadId, 'counsellor')
-    expect(report?.report?.questions).toHaveLength(15)
+    expect(report?.report?.questions).toHaveLength(questionCount)
     for (const question of report!.report!.questions) {
       expect(question.stem.length).toBeGreaterThan(0)
     }

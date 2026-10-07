@@ -3,8 +3,7 @@ import { serviceClient } from './supabase'
 import { issueAssessment } from './assessments'
 import { openByToken, identify, startAttempt, saveAnswer, recordEvents, submitAttempt } from './attempt'
 import { limitMsFor } from '../lib/types'
-
-const LIMIT_MS = limitMsFor(15)
+import { generateToken } from '../lib/token'
 
 // Integration tests against the real database (npm run test:integration).
 // Mocks would not exercise the constraints, triggers and RPC that most of this
@@ -73,6 +72,24 @@ function basicsPaper(pool: PoolRow[], { skip = [], extra = [] }: { skip?: string
   return ids
 }
 
+/**
+ * A 15-question paper issued through the RPC. The draw gives one only when a
+ * class's pool cannot fill the 30-question shape, and since every class got
+ * its syllabus batch none can, so the 15-question rules are tested on a paper
+ * built by hand that the database still has to accept.
+ */
+async function issueFifteen(lead: string, classLevel = 11) {
+  const { data: pool } = await db.rpc('live_pool', { p_class: classLevel })
+  const { data, error } = await db.rpc('issue_assessment', {
+    p_lead_id: lead,
+    p_issued_by: null,
+    p_token: generateToken(),
+    p_item_ids: basicsPaper(pool as PoolRow[]),
+  })
+  if (error) throw new Error(`could not issue a 15-question paper: ${error.message}`)
+  return data as { id: string; token: string; question_count: number; limit_minutes: number; class_level: number }
+}
+
 afterAll(async () => {
   await db.from('leads').delete().like('name', 'ITest%')
 })
@@ -80,8 +97,9 @@ afterAll(async () => {
 // ── issuing ──────────────────────────────────────────────────────────────────
 
 describe('issueAssessment', () => {
-  it('issues a 15-question paper with the right composition', async () => {
+  it('issues a 30-question paper with the right composition', async () => {
     const { assessment } = await issueAssessment(db, { leadId })
+    expect(assessment.question_count).toBe(30)
 
     const { data: items } = await db
       .from('assessment_items')
@@ -89,12 +107,12 @@ describe('issueAssessment', () => {
       .eq('assessment_id', assessment.id)
       .order('position')
 
-    expect(items).toHaveLength(15)
-    expect(items!.map((i) => i.position)).toEqual(Array.from({ length: 15 }, (_, n) => n + 1))
+    expect(items).toHaveLength(30)
+    expect(items!.map((i) => i.position)).toEqual(Array.from({ length: 30 }, (_, n) => n + 1))
 
     for (const subject of ['maths', 'english', 'science']) {
       const forSubject = items!.filter((i) => (i.test_items as never as { subject: string }).subject === subject)
-      expect(forSubject).toHaveLength(5)
+      expect(forSubject).toHaveLength(10)
     }
   })
 
@@ -198,7 +216,7 @@ describe('issueAssessment — class scoping', () => {
       .from('assessment_items')
       .select('item_id, test_items(taught_in)')
       .eq('assessment_id', assessment.id)
-    expect(items).toHaveLength(15)
+    expect(items).toHaveLength(30)
     for (const row of items!) {
       expect((row.test_items as never as { taught_in: number }).taught_in).toBeLessThanOrEqual(8)
     }
@@ -211,7 +229,7 @@ describe('issueAssessment — class scoping', () => {
       .from('assessment_items')
       .select('item_id, test_items(taught_in)')
       .eq('assessment_id', assessment.id)
-    expect(items).toHaveLength(15)
+    expect(items).toHaveLength(30)
     for (const row of items!) {
       expect((row.test_items as never as { taught_in: number }).taught_in).toBeLessThanOrEqual(7)
     }
@@ -258,11 +276,9 @@ describe('issueAssessment — class scoping', () => {
 
 // ── the 30-question paper (migration 0014) ───────────────────────────────────
 //
-// Fixture: exactly one paper's worth of first-term class 7 syllabus items
-// (3/1/1 in maths and in science), so a class 8 admit can be drawn 30
-// questions. Class 8 because no real lead is a class 8 admit: a real paper
-// issued while these exist cannot pick one up. Plus two items that must NOT
-// be drawn for a class 8 admit: second-term class 7, and first-term class 8.
+// Against the real class 7 syllabus batch, which gives a class 8 admit 30
+// questions. Fixtures: two live items that must NOT be drawn for a class 8
+// admit, a second-term class 7 item and a first-term class 8 one.
 
 describe('the 30-question paper', () => {
   const SKILL = 'ITest-syllabus'
@@ -292,14 +308,6 @@ describe('the 30-question paper', () => {
 
   beforeEach(async () => {
     await removeFixtures()
-    const rows = []
-    for (const subject of ['maths', 'science']) {
-      rows.push(row(subject, 'easy'), row(subject, 'easy'), row(subject, 'easy'))
-      rows.push(row(subject, 'moderate'), row(subject, 'difficult'))
-    }
-    const { error } = await db.from('test_items').insert(rows)
-    if (error) throw new Error(`could not create syllabus fixtures: ${error.message}`)
-
     const { data: t2 } = await db
       .from('test_items')
       .insert(row('maths', 'easy', { term: 2, stem: 'ITest term 2' }))
@@ -319,7 +327,13 @@ describe('the 30-question paper', () => {
   it('live_pool offers a class 8 admit only first-term class 7 syllabus items', async () => {
     const { data } = await db.rpc('live_pool', { p_class: 8 })
     const syllabus = (data as PoolRow[]).filter((r) => r.part === 'syllabus')
-    expect(syllabus).toHaveLength(10)
+    expect(syllabus.length).toBeGreaterThanOrEqual(10)
+    const { data: tags } = await db
+      .from('test_items')
+      .select('taught_in, term')
+      .in('id', syllabus.map((r) => r.id))
+    expect(tags).toHaveLength(syllabus.length)
+    for (const t of tags!) expect(t).toEqual({ taught_in: 7, term: 1 })
     const ids = (data as PoolRow[]).map((r) => r.id)
     expect(ids).not.toContain(secondTermId)
     expect(ids).not.toContain(classEightId)
@@ -349,12 +363,12 @@ describe('the 30-question paper', () => {
     expect(count('science', 'syllabus')).toBe(5)
   })
 
-  it('keeps a class without syllabus items on the 15-question paper', async () => {
-    const lead9 = await freshLead(9)
-    const { assessment } = await issueAssessment(db, { leadId: lead9 })
-    expect(assessment.question_count).toBe(15)
-    expect(assessment.limit_minutes).toBe(15)
-    expect(assessment.class_level).toBe(9)
+  it('still accepts a 15-question paper, the fallback for a pool that cannot fill 30', async () => {
+    const lead8 = await freshLead(8)
+    const paper = await issueFifteen(lead8, 8)
+    expect(paper.question_count).toBe(15)
+    expect(paper.limit_minutes).toBe(15)
+    expect(paper.class_level).toBe(8)
   })
 
   it('tells the candidate 30 questions, 30 minutes and the syllabus class', async () => {
@@ -372,8 +386,9 @@ describe('the 30-question paper', () => {
     expect(remaining).toBeGreaterThan(limitMsFor(30) - 10_000)
     expect(questions.filter((q) => q.part === 'syllabus')).toHaveLength(10)
     const json = JSON.stringify(questions)
-    expect(json).not.toContain('taught_in')
-    expect(json).not.toContain('term')
+    // Keys, not words: a real stem may say "the 6th term".
+    expect(json).not.toContain('"taught_in":')
+    expect(json).not.toContain('"term":')
   })
 
   it('the database refuses 30 basics items: the syllabus part is part of the shape', async () => {
@@ -519,11 +534,11 @@ describe('identify', () => {
 // ── the attempt ──────────────────────────────────────────────────────────────
 
 describe('startAttempt', () => {
-  it('returns 15 questions with no answer key anywhere in the payload', async () => {
+  it('returns every question on the paper with no answer key anywhere in the payload', async () => {
     const { assessment } = await issueAssessment(db, { leadId })
     const { questions } = await startAttempt(db, { token: assessment.token, context: {} })
 
-    expect(questions).toHaveLength(15)
+    expect(questions).toHaveLength(30)
     const json = JSON.stringify(questions)
     expect(json).not.toContain('answer_key')
     expect(json).not.toContain('numeric_answer')
@@ -531,12 +546,21 @@ describe('startAttempt', () => {
     expect(json).not.toContain('difficulty')
   })
 
-  it('sets a deadline 15 minutes out, inside the window', async () => {
+  it('sets a deadline 30 minutes out, inside the window', async () => {
     const { assessment } = await issueAssessment(db, { leadId })
     const { attempt } = await startAttempt(db, { token: assessment.token, context: {} })
     const remaining = new Date(attempt.deadline_at).getTime() - Date.now()
-    expect(remaining).toBeGreaterThan(LIMIT_MS - 10_000)
-    expect(remaining).toBeLessThanOrEqual(LIMIT_MS)
+    expect(remaining).toBeGreaterThan(limitMsFor(30) - 10_000)
+    expect(remaining).toBeLessThanOrEqual(limitMsFor(30))
+  })
+
+  it('gives a 15-question paper its own 15 minutes', async () => {
+    const paper = await issueFifteen(leadId)
+    const { attempt, questions } = await startAttempt(db, { token: paper.token, context: {} })
+    expect(questions).toHaveLength(15)
+    const remaining = new Date(attempt.deadline_at).getTime() - Date.now()
+    expect(remaining).toBeGreaterThan(limitMsFor(15) - 10_000)
+    expect(remaining).toBeLessThanOrEqual(limitMsFor(15))
   })
 
   it('moves the assessment to started via the trigger', async () => {
@@ -617,9 +641,8 @@ describe('saveAnswer', () => {
   })
 
   it('the database refuses an answer to position 20 on a 15-question paper', async () => {
-    const { assessment } = await issueAssessment(db, { leadId })
-    expect(assessment.question_count).toBe(15)
-    const { attempt } = await startAttempt(db, { token: assessment.token, context: {} })
+    const paper = await issueFifteen(leadId)
+    const { attempt } = await startAttempt(db, { token: paper.token, context: {} })
     await expect(
       saveAnswer(db, { attemptId: attempt.id, position: 20, choice: 'A', activeMs: 0 }),
     ).rejects.toThrow(/not on this paper/)
@@ -662,11 +685,11 @@ describe('submitAttempt', () => {
 
     const result = await submitAttempt(db, { attemptId: attempt.id, reason: 'manual' })
 
-    expect(result.score).toBe(15)
-    expect(result.correct).toBe(15)
-    expect(result.sections.maths).toBe(5)
-    expect(result.sections.english).toBe(5)
-    expect(result.sections.science).toBe(5)
+    expect(result.score).toBe(30)
+    expect(result.correct).toBe(30)
+    expect(result.sections.maths).toBe(10)
+    expect(result.sections.english).toBe(10)
+    expect(result.sections.science).toBe(10)
   })
 
   it('scores an untouched paper at zero, not negative', async () => {
@@ -674,7 +697,7 @@ describe('submitAttempt', () => {
     const { attempt } = await startAttempt(db, { token: assessment.token, context: {} })
     const result = await submitAttempt(db, { attemptId: attempt.id, reason: 'timer' })
     expect(result.score).toBe(0)
-    expect(result.skipped).toBe(15)
+    expect(result.skipped).toBe(30)
   })
 
   it('moves the assessment to submitted via the trigger', async () => {
