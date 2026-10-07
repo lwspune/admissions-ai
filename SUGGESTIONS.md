@@ -9,16 +9,15 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 - [ ] **30-question paper (2026-10-06).** Phase 1 shipped 2026-10-06: migration 0014 applied,
       merged and deployed; the draw, test screens and both reports handle 15 or 30 questions.
-      **Phase 2 in progress: admits to class 10 are on 30 questions since 2026-10-07**
-      (`syllabus-class-09.json`, signed off and live; a test issue confirmed 30 questions with 5
-      class 9 first-term syllabus items each in maths and science). Not yet seen signed in: the
-      staff report and parent sheet with a part split — the first real class 10 submission is
-      the chance. Next batches: class 10 content (admits to 11), class 11 (admits to 12, physics
-      and chemistry), then 7 and 8 — about 15 per class per subject, each signed off; plus about
-      15 English basics (a 10-question English part reuses the 23 items too often). **Phase 3**:
-      the parent pack at 30 questions. Its chapter mapping reads basics items only for now; it
-      needs a "Class N−1 syllabus (first term)" section, and the class 10 sheet already
-      understates that paper.
+      **Phase 2 in progress: admits to classes 10 and 11 are on 30 questions since 2026-10-07**
+      (`syllabus-class-09.json` and `syllabus-class-10.json`, both signed off and live; a test
+      issue for each confirmed 30 questions with 5 class N−1 first-term syllabus items each in
+      maths and science). Next batches: class 11 (admits to 12, physics and chemistry), then 7
+      and 8 — about 15 per class per subject, each signed off; plus about 15 English basics (a
+      10-question English part reuses the 23 items too often). **Phase 3 shipped 2026-10-07**:
+      the parent-pack build reads each class's paper from the live pool, and the class 10 and 11
+      sheets are 30-question sheets with their first-term chapters. A class that moves to 30
+      stops the build until its sample and chapters exist, so write those with each batch.
 - [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
       75 new questions; every calculable key re-derived in code, the lint clean, each paper
       checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,
@@ -267,16 +266,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
-- [ ] **Two topics the new NCERT books teach later than the bank's tags say.** Found 2026-10-06
-      by the parent-pack build, which warns whenever a drawable topic has no chapter in the
-      child's books. (1) Averages: the mean first appears in *Ganita Prakash 8* ("Tales by Dots
-      and Lines"; absent from GP 6 and 7), but M-E-18, M-M-33, M-M-34 and M-D-44 are tagged 7, so
-      a class 8 admit on the new books can be asked them. Retagging them to 8 leaves class 8
-      maths/moderate 7 → 5 and maths/difficult 3 → 2, still fillable but thin. (2) Speed of
-      light and sound: *Curiosity 8* has no sound chapter (it is *Exploration 9*), but S-E-22 is
-      tagged 8; class 9 science/easy 11 → 10 if retagged, and sample P9-S1 would move with it.
-      Until then the class 8 and 9 sheets say "also asked, though the newer NCERT books teach it
-      in a later class". Awaiting the user's decision.
+- [x] **Two topics the new NCERT books teach later than the bank's tags said. RETAGGED
+      2026-10-07** with the user's go-ahead. Averages (the mean first appears in *Ganita Prakash
+      8*): M-E-18, M-M-33, M-M-34 and M-D-44 went 7 → 8. Speed of light and sound (*Curiosity 8*
+      has no sound chapter; it is *Exploration 9*): S-E-22 went 8 → 9, and the class 9 parent
+      sample P9-S1 was replaced with a food-chain question. Seeded and read back from production.
+      Class 8 maths is now moderate 5 and difficult 2 — every class still fills, but class 8
+      difficult maths is the thinnest cell in the bank (each item on about one paper in two).
+      The parent-pack build no longer warns "also asked" for any class.
 - [x] **Class tags followed the old NCERT books. RETAGGED 2026-10-06** with the user's
       go-ahead. NCERT's new books reached classes 6–8 by 2025–26 and class 9 in 2026–27 and
       moved topics later: percentages, profit and loss, interest (*Ganita Prakash 8* "Fractions

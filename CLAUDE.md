@@ -254,8 +254,9 @@ the connection is refused (2026-10-01).
   probability in class 9, while the bank said 6–8. A CBSE class 8 admit could be
   asked percentages they had never been taught. With the user's go-ahead eight
   items went to 8 and one to 9, seeded to production; the later class is the
-  fair direction for State Board admits too. Averages (4 items) and the speed of
-  sound (1) have the same problem and await a decision (SUGGESTIONS.md).
+  fair direction for State Board admits too. On 2026-10-07 the same reasoning
+  moved averages (4 items) to 8 and the speed of sound (1) to 9, also with the
+  user's go-ahead; class 8 difficult maths is down to 2 items as a result.
 - **2026-10-06 — Parents get a class-wise syllabus and sample paper, written
   apart from the bank.** One PDF per admitting class (`content/parent-pack/`):
   format, the NCERT chapters drawn on, 15 sample questions, answers with

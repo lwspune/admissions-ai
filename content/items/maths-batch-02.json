@@ -4,7 +4,7 @@
     "subject": "maths",
     "skill": "average",
     "difficulty": "easy",
-    "taught_in": 7,
+    "taught_in": 8,
     "format": "numeric",
     "stem": "A batsman scores 42, 35, 60, 28 and 50 runs in five innings. What is his average score per innings?",
     "numeric_answer": 43,
