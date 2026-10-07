@@ -330,9 +330,9 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
     return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3>${books.join('')}</div>`
   }
   const syllabusPart = thirty
-    ? `<h2>Class ${ceiling} syllabus questions</h2>
+    ? `<section class="syllabus-part"><h2>Class ${ceiling} syllabus questions</h2>
   <p class="lead">Five maths and five science questions come from these Class ${ceiling} chapters only: the first-term chapters, because the test can be taken before the year ends.</p>
-  <div class="syllabus">${syllabusBlock('maths')}${syllabusBlock('science')}</div>`
+  <div class="syllabus">${syllabusBlock('maths')}${syllabusBlock('science')}</div></section>`
     : ''
 
   const partLabel = (item: PackItem) => (thirty ? (isSyllabus(item) ? ` · Class ${ceiling}` : ' · Basics') : '')
@@ -374,6 +374,7 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   .syllabus { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt 16pt; font-size: 8.75pt; line-height: 1.22; }
   .subject-block + .subject-block { margin-top: 8pt; }
   .book { margin-bottom: 4pt; break-inside: avoid; }
+  .syllabus-part { break-inside: avoid; }
   .book-name { margin: 0 0 1pt; font-weight: 600; color: #333; }
   .book ul { margin: 0; padding-left: 11pt; }
   .book li { margin-bottom: 1pt; }
