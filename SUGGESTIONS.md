@@ -13,8 +13,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       (`syllabus-class-07.json` to `-11.json`, each signed off and live; a test issue for each
       class confirmed 30 questions with 5 class N−1 first-term syllabus items each in maths and
       science; class 11 science is Physics and Chemistry; *Curiosity* 7 ch. 6, Adolescence, left
-      out by choice). Still to write: about 15 English basics (a 10-question English part reuses
-      the 23 items too often), and difficult maths basics at class ≤ 7 (class 8 has 2). The
+      out by choice). Written and at review, awaiting sign-off: `basics-batch-01.json`, 15 English
+      basics (English 23 → 38) and 5 difficult maths basics at class ≤ 7 (class 8: 2 → 7). The
       15-question paper is now only a fallback for a pool that cannot fill 30; the integration
       suite issues one by hand to keep its rules tested. **Phase 3 shipped 2026-10-07**: the
       parent-pack build reads each class's paper from the live pool, and all five sheets are
