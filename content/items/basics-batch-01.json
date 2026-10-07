@@ -1,0 +1,337 @@
+[
+  {
+    "ref": "E-E-24",
+    "subject": "english",
+    "skill": "synonym-in-context",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "The soldiers lived on a meagre ration of rice for three days. As used here, \"meagre\" most nearly means",
+    "options": {
+      "A": "tasty",
+      "B": "small",
+      "C": "cooked",
+      "D": "daily"
+    },
+    "answer_key": "B",
+    "rationale": "Meagre means scanty, too little. The sentence stresses hardship, which points to a small ration. \"Daily\" and \"cooked\" describe rations in general, so they catch a reader who guesses from the setting."
+  },
+  {
+    "ref": "E-E-25",
+    "subject": "english",
+    "skill": "antonym",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "A generous person is the opposite of a ___ one.",
+    "options": {
+      "A": "miserly",
+      "B": "kind",
+      "C": "wealthy",
+      "D": "thankful"
+    },
+    "answer_key": "A",
+    "rationale": "Generous means giving freely, so its opposite is miserly, unwilling to give. \"Wealthy\" is what a generous person may be, and \"kind\" is close to the word itself, not its opposite."
+  },
+  {
+    "ref": "E-E-26",
+    "subject": "english",
+    "skill": "subject-verb-agreement",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Choose the correct word: The news from the front ___ good today.",
+    "options": {
+      "A": "are",
+      "B": "were",
+      "C": "is",
+      "D": "have"
+    },
+    "answer_key": "C",
+    "rationale": "\"News\" looks plural because it ends in -s, but it is singular, so the verb is \"is\". \"Are\" catches the reader who goes by the ending."
+  },
+  {
+    "ref": "E-E-27",
+    "subject": "english",
+    "skill": "preposition-usage",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Choose the correct word: The cadet was absent ___ the morning parade.",
+    "options": {
+      "A": "from",
+      "B": "into",
+      "C": "upon",
+      "D": "with"
+    },
+    "answer_key": "A",
+    "rationale": "\"Absent\" is followed by \"from\": absent from school, absent from parade. The others are not used with absent."
+  },
+  {
+    "ref": "E-E-28",
+    "subject": "english",
+    "skill": "idiom-meaning",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "The instructor said the written test would be a piece of cake. He meant that the test would be",
+    "options": {
+      "A": "sweet and pleasant",
+      "B": "held after lunch",
+      "C": "very short",
+      "D": "very easy"
+    },
+    "answer_key": "D",
+    "rationale": "\"A piece of cake\" means something very easy. \"Sweet and pleasant\" is the literal reading of cake; \"very short\" confuses easy with quick."
+  },
+  {
+    "ref": "E-E-29",
+    "subject": "english",
+    "skill": "tense",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Choose the correct words: Yesterday, while I ___ my homework, the lights went out.",
+    "options": {
+      "A": "do",
+      "B": "was doing",
+      "C": "have done",
+      "D": "will do"
+    },
+    "answer_key": "B",
+    "rationale": "An action in progress in the past, interrupted by another (the lights went out), takes the past continuous: \"was doing\". \"Have done\" and \"will do\" do not fit \"yesterday\"."
+  },
+  {
+    "ref": "E-E-30",
+    "subject": "english",
+    "skill": "analogy",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Carpenter is to wood as tailor is to ___",
+    "options": {
+      "A": "needle",
+      "B": "shirt",
+      "C": "cloth",
+      "D": "shop"
+    },
+    "answer_key": "C",
+    "rationale": "A carpenter works with wood as his material; a tailor works with cloth. The needle is a tool, the shirt a product and the shop a place, each a real link to a tailor but not the link the first pair sets up."
+  },
+  {
+    "ref": "E-E-31",
+    "subject": "english",
+    "skill": "odd-one-out",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Which one does not belong with the others?",
+    "options": {
+      "A": "Mercury",
+      "B": "Venus",
+      "C": "Moon",
+      "D": "Mars"
+    },
+    "answer_key": "C",
+    "rationale": "Mercury, Venus and Mars are planets; the Moon is a satellite of the Earth. All four are bodies seen in the night sky, so the grouping has to be found, not just recognised."
+  },
+  {
+    "ref": "E-E-32",
+    "subject": "english",
+    "skill": "letter-coding",
+    "difficulty": "easy",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "In a code, LAMP is written as PMAL. How is SHIP written in the same code?",
+    "options": {
+      "A": "PIHS",
+      "B": "SPIH",
+      "C": "HSPI",
+      "D": "IPHS"
+    },
+    "answer_key": "A",
+    "rationale": "The code writes the word backwards: L-A-M-P becomes P-M-A-L. SHIP backwards is PIHS. The other options are reshufflings that keep some letters in place."
+  },
+  {
+    "ref": "E-M-33",
+    "subject": "english",
+    "skill": "sentence-completion",
+    "difficulty": "moderate",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "The witness's account was so ___ that the investigators could not tell what had actually happened.",
+    "options": {
+      "A": "precise",
+      "B": "vague",
+      "C": "brief",
+      "D": "honest"
+    },
+    "answer_key": "B",
+    "rationale": "The investigators could not tell what happened, so the account lacked clear detail: vague. \"Brief\" is tempting, but a short account can still be clear; \"precise\" and \"honest\" would help, not hinder."
+  },
+  {
+    "ref": "E-M-34",
+    "subject": "english",
+    "skill": "letter-series",
+    "difficulty": "moderate",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Which letter pair comes next? AC, BE, CG, DI, ___",
+    "options": {
+      "A": "EJ",
+      "B": "FK",
+      "C": "EK",
+      "D": "FL"
+    },
+    "answer_key": "C",
+    "rationale": "The first letters run A, B, C, D, so the next is E. The second letters run C, E, G, I, two steps each time, so the next is K: EK. EJ moves the second letter only one step."
+  },
+  {
+    "ref": "E-M-35",
+    "subject": "english",
+    "skill": "logical-deduction",
+    "difficulty": "moderate",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Only cadets who have passed the swimming test may join the boating club. Karan is a member of the boating club. Which statement must be true?",
+    "options": {
+      "A": "Karan swims every single day",
+      "B": "Karan has passed the swimming test",
+      "C": "Every cadet who passed has joined the club",
+      "D": "Karan is the best swimmer in his batch"
+    },
+    "answer_key": "B",
+    "rationale": "Passing the test is a condition of joining, so a member must have passed it. C reverses the rule: passing allows joining but does not require it. A and D may be true but do not follow."
+  },
+  {
+    "ref": "E-D-36",
+    "subject": "english",
+    "skill": "evaluating-an-argument",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "A school says: \"Since we installed CCTV cameras, reported thefts have halved, so the cameras have deterred thieves.\" Which finding, if true, most weakens this conclusion?",
+    "options": {
+      "A": "The cameras were expensive to install",
+      "B": "Nearby schools also plan to install cameras",
+      "C": "Thefts were common before the cameras came",
+      "D": "Reporting a theft was made much harder then"
+    },
+    "answer_key": "D",
+    "rationale": "The evidence is about reported thefts. If reporting became harder at the same time, fewer reports need not mean fewer thefts, so the conclusion loses its support. The cost and other schools' plans say nothing about cause; C is what the school already assumes."
+  },
+  {
+    "ref": "E-D-37",
+    "subject": "english",
+    "skill": "quantifier-logic",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "Some cadets are athletes. Some athletes are swimmers. Which statement must be true?",
+    "options": {
+      "A": "Some cadets are swimmers",
+      "B": "All athletes are cadets",
+      "C": "No cadet is a swimmer",
+      "D": "None of these follows"
+    },
+    "answer_key": "D",
+    "rationale": "The athletes who are cadets and the athletes who swim may be different people, so nothing about cadets and swimmers follows. A is the tempting chain, but two \"some\" statements do not link; C is just as unsupported."
+  },
+  {
+    "ref": "E-D-38",
+    "subject": "english",
+    "skill": "supported-conclusion",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "In one class of 40 cadets, 30 said they prefer morning drills. The commanding officer concluded that most cadets across the whole academy prefer morning drills. The main weakness in this conclusion is that",
+    "options": {
+      "A": "a single class may not represent the academy",
+      "B": "thirty cadets is fewer than the whole class",
+      "C": "some cadets may have been absent that day",
+      "D": "morning drills are tiring for most cadets"
+    },
+    "answer_key": "A",
+    "rationale": "The survey covers one class, and the conclusion is about the whole academy; one class may differ from the rest. Thirty of forty is a clear majority of that class, so B misses the point, and C and D do not touch the step from one class to all."
+  },
+  {
+    "ref": "M-D-48",
+    "subject": "maths",
+    "skill": "hcf-and-lcm",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "numeric",
+    "stem": "Three lighthouses flash every 6, 8 and 12 seconds. They flash together at one moment. How many more times will they flash together in the next 3 minutes?",
+    "numeric_answer": 7,
+    "numeric_tolerance": 0,
+    "rationale": "They flash together every LCM(6, 8, 12) = 24 seconds. Three minutes is 180 seconds, and 180 ÷ 24 = 7.5, so they coincide 7 more times (at 24, 48, … 168 s). Rounding 7.5 up to 8, or using 6 × 8 × 12, are the errors this catches."
+  },
+  {
+    "ref": "M-D-49",
+    "subject": "maths",
+    "skill": "linear-equation",
+    "difficulty": "difficult",
+    "taught_in": 7,
+    "format": "mcq",
+    "stem": "The sum of three consecutive even numbers is 30 more than the smallest of them. What is the largest of the three numbers?",
+    "options": {
+      "A": "12",
+      "B": "14",
+      "C": "16",
+      "D": "18"
+    },
+    "answer_key": "C",
+    "rationale": "Let the numbers be x, x + 2 and x + 4. Then 3x + 6 = x + 30, so x = 12 and the numbers are 12, 14 and 16. The largest is 16; 12 is the smallest, the answer to a question not asked."
+  },
+  {
+    "ref": "M-D-50",
+    "subject": "maths",
+    "skill": "multi-step-arithmetic",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "A tank is 3/5 full. After 24 litres are drawn out, it is 1/3 full. What is the full capacity of the tank, in litres?",
+    "options": {
+      "A": "40",
+      "B": "60",
+      "C": "72",
+      "D": "90"
+    },
+    "answer_key": "D",
+    "rationale": "The 24 litres are 3/5 − 1/3 = 9/15 − 5/15 = 4/15 of the tank, so the tank holds 24 × 15/4 = 90 litres. 40 treats 24 litres as 3/5 of the tank and 72 as 1/3 of it."
+  },
+  {
+    "ref": "M-D-51",
+    "subject": "maths",
+    "skill": "clock-angles",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "What is the smaller angle between the hour hand and the minute hand of a clock at 4:40?",
+    "options": {
+      "A": "100°",
+      "B": "120°",
+      "C": "140°",
+      "D": "160°"
+    },
+    "answer_key": "A",
+    "rationale": "The minute hand is at 40 × 6° = 240°. The hour hand is past 4 by 40 minutes: 4 × 30° + 40 × 0.5° = 140°. The angle is 240° − 140° = 100°. 120° forgets that the hour hand moves; 140° is the hour hand's own position."
+  },
+  {
+    "ref": "M-D-52",
+    "subject": "maths",
+    "skill": "calendar-reasoning",
+    "difficulty": "difficult",
+    "taught_in": 6,
+    "format": "mcq",
+    "stem": "1 January 2027 is a Friday. On which day of the week does 1 March 2027 fall?",
+    "options": {
+      "A": "Sunday",
+      "B": "Monday",
+      "C": "Tuesday",
+      "D": "Wednesday"
+    },
+    "answer_key": "B",
+    "rationale": "January has 31 days and February 2027 has 28, so 1 March is 59 days after 1 January. 59 = 8 weeks + 3 days, and three days after Friday is Monday. Tuesday comes from giving February 29 days; 2027 is not a leap year."
+  }
+]
