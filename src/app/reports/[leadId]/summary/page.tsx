@@ -153,11 +153,18 @@ function SubjectCard({
         <span className={`block h-full rounded-full ${c.bar}`} style={{ width: `${share(counts.score, counts.outOf)}%` }} />
       </span>
       {counts.parts && syllabusClass !== undefined && (
-        <p className="mt-2 text-sm tabular-nums text-slate-700">
-          {counts.parts
-            .map((p) => `${p.part === 'syllabus' ? `Class ${syllabusClass}` : 'Basics'} ${p.score} / ${p.outOf}`)
-            .join(' · ')}
-        </p>
+        // One row per part, like the counts below: a single "Basics x / 5 ·
+        // Class 9 y / 5" line broke mid-phrase in a third-width card.
+        <dl className="mt-2 space-y-0.5 border-b border-slate-100 pb-2 text-sm text-slate-700">
+          {counts.parts.map((p) => (
+            <div key={p.part} className="flex justify-between">
+              <dt>{p.part === 'syllabus' ? `Class ${syllabusClass}` : 'Basics'}</dt>
+              <dd className="font-semibold tabular-nums text-slate-900">
+                {p.score} / {p.outOf}
+              </dd>
+            </div>
+          ))}
+        </dl>
       )}
       <dl className="mt-3 space-y-0.5 text-sm text-slate-600">
         <Row label="Correct" n={counts.correct} />
