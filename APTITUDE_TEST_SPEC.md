@@ -213,7 +213,8 @@ check on a telecaller coaching answers), per-item % correct, and the funnel — 
 
 **Skills.** *Maths:* number series, ratio, percentage, time–work–speed, averages, number properties.
 *English:* analogies, odd-one-out, sentence completion, sequencing, error identification, short-passage
-inference. *Science:* applying a principle to a scenario, cause and effect, classification, experimental
+inference. Not syllogisms, seating or ranking, or family-relation puzzles: they need logic, not
+English, and were moved out on 2026-10-07. *Science:* applying a principle to a scenario, cause and effect, classification, experimental
 reasoning, unit sense.
 
 **Excluded:** formula recall, definitions, dates, trivia, anything a 15-second search answers, anything

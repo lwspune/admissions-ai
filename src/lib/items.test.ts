@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { resolveSeedStatus, groupBank, keySkew, type ItemStatus } from './items'
+import { resolveSeedStatus, groupBank, keySkew, notEnglish, type ItemStatus } from './items'
 import { SUBJECTS, DIFFICULTIES, type Subject, type Difficulty } from './types'
 
 const row = (ref: string | null, subject: Subject, difficulty: Difficulty) =>
@@ -87,6 +87,14 @@ describe('resolveSeedStatus', () => {
 
   it('can bring a retired item back, since promotion is a deliberate act', () => {
     expect(resolveSeedStatus({ current: 'retired', promote: true })).toBe('live')
+  })
+
+  it('retires an item its file marks retired, even inside a promoted batch', () => {
+    // A batch is promoted as a whole; an item withdrawn from it must not come back with it.
+    for (const current of ['live', 'review', null] as const) {
+      expect(resolveSeedStatus({ current, promote: true, retired: true })).toBe('retired')
+      expect(resolveSeedStatus({ current, promote: false, retired: true })).toBe('retired')
+    }
   })
 
   it('never invents a status outside the database CHECK', () => {
@@ -317,5 +325,23 @@ describe('thirtyReadiness', () => {
   it('does not count second-term syllabus items', () => {
     const rows = bankFor10().map((r) => (r.part === 'syllabus' ? { ...r, term: 2 } : r))
     expect(forClass(rows, 10).ready).toBe(false)
+  })
+})
+
+// The spec's English is language: vocabulary, grammar, sentences, reading, and
+// verbal patterns. Syllogisms, seating and family-relation puzzles crept in
+// under English as "logical deduction"; the user moved them out (2026-10-07).
+describe('notEnglish', () => {
+  it('flags a logic-puzzle skill filed under English', () => {
+    for (const skill of ['syllogism', 'logical-deduction', 'quantifier-logic', 'relationship-reasoning']) {
+      expect(notEnglish('english', skill)).toBe(true)
+    }
+  })
+
+  it('passes language and verbal-pattern skills, and any skill in another subject', () => {
+    for (const skill of ['synonym-in-context', 'error-identification', 'reading-inference', 'analogy', 'letter-series']) {
+      expect(notEnglish('english', skill)).toBe(false)
+    }
+    expect(notEnglish('maths', 'logical-deduction')).toBe(false)
   })
 })

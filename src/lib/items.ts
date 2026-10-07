@@ -57,7 +57,10 @@ export function resolveSeedStatus(opts: {
   current: ItemStatus | null
   /** True only when the operator asked to promote, and this item is in scope. */
   promote: boolean
+  /** The item file marks it `"status": "retired"`: withdrawn for good. */
+  retired?: boolean
 }): ItemStatus {
+  if (opts.retired) return 'retired'
   if (opts.promote) return 'live'
   return opts.current ?? 'review'
 }
@@ -220,4 +223,16 @@ export function thirtyReadiness<
     }
     return { classLevel, ready: missing.length === 0, missing }
   })
+}
+
+/**
+ * Logic puzzles that were filed under English: syllogisms, seating and
+ * ranking, family relations. They test deduction, not language, so the
+ * English section takes none (2026-10-07). Analogies, odd one out, series and
+ * codes stay: the spec names them as English.
+ */
+const NOT_ENGLISH_SKILLS = new Set(['syllogism', 'logical-deduction', 'quantifier-logic', 'relationship-reasoning'])
+
+export function notEnglish(subject: string, skill: string): boolean {
+  return subject === 'english' && NOT_ENGLISH_SKILLS.has(skill)
 }

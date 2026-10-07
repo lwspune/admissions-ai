@@ -7,6 +7,12 @@ reviewed batch.
 
 ## Before writing a batch
 
+**English is language.** Vocabulary, grammar, error spotting, sentence completion and ordering,
+reading, and the verbal patterns the spec names (analogies, odd one out, series, codes). Not
+syllogisms, seating or ranking, or family relations: those need only logic, and the lint refuses
+their skills in English. Ask of each English item: would a candidate weak in English but good at
+puzzles get it right? If yes, it is not an English question.
+
 Read the parent samples for the same skills (`content/parent-pack/sample-papers.json`). Parents
 have those questions with their answers, so a bank item must not reuse a sample's target word,
 sentence frame, sequence or argument form. The lint and the parent-pack build refuse an identical
@@ -28,6 +34,7 @@ ordinary questions of one type (both score 0.4–0.5), so this is a reading step
 | `format` | `mcq` · `numeric` | An MCQ has `options` A–D and `answer_key`; a numeric item has `numeric_answer` and optional `numeric_tolerance` |
 | `stem` | ≤ 40 words | The question |
 | `rationale` | ≥ 60 chars | Why the key is right and what each distractor catches. The sign-off reads this |
+| `status` | `retired` (only) | Withdraws a live item for good: the seed sets it retired even inside a promoted batch, and the lint and parent pack leave it out. Papers that drew it still show it, which is why it is retired and not deleted or edited. Review and live are the seed's, never written in a file |
 
 ## `taught_in` — the class tag
 

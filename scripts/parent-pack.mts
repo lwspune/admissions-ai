@@ -81,16 +81,18 @@ const SIMILAR_SHARE = 0.6
 
 const items: PackItem[] = JSON.parse(readFileSync(join(PACK, 'sample-papers.json'), 'utf8'))
 const syllabusFile: SyllabusFile = JSON.parse(readFileSync(join(PACK, 'syllabus.json'), 'utf8'))
-const bank: { ref: string; stem: string; skill: string; taught_in: number; part?: string }[] = readdirSync(BANK)
+const bank: { ref: string; stem: string; skill: string; taught_in: number; part?: string; status?: string }[] = readdirSync(BANK)
   .filter((f) => f.endsWith('.json'))
   .flatMap((f) => JSON.parse(readFileSync(join(BANK, f), 'utf8')))
 
 // Basics and syllabus are described differently: basics by topic across every
 // class the child has done, syllabus by class N−1's first-term chapters. Every
-// bank stem, either part, counts for the copy check on the samples.
+// bank stem, either part, counts for the copy check on the samples, retired
+// ones too: they were on real papers. Only drawable items describe the paper.
 const isSyllabus = (i: { part?: string }) => i.part === 'syllabus'
-const basicsBank = bank.filter((b) => !isSyllabus(b))
-const syllabusBank = bank.filter(isSyllabus)
+const drawable = bank.filter((b) => b.status !== 'retired')
+const basicsBank = drawable.filter((b) => !isSyllabus(b))
+const syllabusBank = drawable.filter(isSyllabus)
 const basicsSamples = items.filter((i) => !isSyllabus(i))
 const syllabusSamples = items.filter(isSyllabus)
 

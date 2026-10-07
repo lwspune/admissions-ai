@@ -83,11 +83,13 @@ async function main(): Promise<number> {
 
   const items = []
   let promoting = 0
+  let retiring = 0
   for (const file of files) {
     const promote = live && inPromotionScope(file, only)
     for (const item of JSON.parse(readFileSync(join(DIR, file), 'utf8'))) {
-      const status = resolveSeedStatus({ current: current.get(item.ref) ?? null, promote })
+      const status = resolveSeedStatus({ current: current.get(item.ref) ?? null, promote, retired: item.status === 'retired' })
       if (status === 'live' && current.get(item.ref) !== 'live') promoting++
+      if (status === 'retired' && current.get(item.ref) !== 'retired') retiring++
       items.push({
         ref: item.ref,
         subject: item.subject,
@@ -112,7 +114,7 @@ async function main(): Promise<number> {
   }
 
   const held = items.filter((i) => i.status === 'review').length
-  console.log(`\nSeeding ${items.length} items · promoting ${promoting} to live · ${held} held at review`)
+  console.log(`\nSeeding ${items.length} items · promoting ${promoting} to live · retiring ${retiring} · ${held} held at review`)
   if (live && !only) console.log('  --live without --file promotes every batch, reviewed or not.')
 
   const res = await fetch(`${url}/rest/v1/test_items?on_conflict=ref`, {

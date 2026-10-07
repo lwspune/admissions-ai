@@ -11,7 +11,7 @@
 import { readFileSync, readdirSync } from 'node:fs'
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness } from '../src/lib/items'
+import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness, notEnglish } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
 import type { Subject, Difficulty } from '../src/lib/types'
 
@@ -39,6 +39,8 @@ interface RawItem {
   numeric_answer?: number | null
   numeric_tolerance?: number | null
   rationale?: string
+  /** Only ever "retired": withdrawn for good, kept so its ref is never reused. */
+  status?: string
   __file?: string
   __sample?: boolean
 }
@@ -89,6 +91,14 @@ export function lintItems(): number {
     if (!SUBJECTS.includes(item.subject ?? '')) err(ref, `invalid subject "${item.subject}"`)
     if (!DIFFICULTIES.includes(item.difficulty ?? '')) err(ref, `invalid difficulty "${item.difficulty}"`)
     if (!item.skill || !item.skill.trim()) err(ref, 'missing skill')
+
+    // A file sets no status except retirement; review and live are the seed's.
+    if (item.status != null && item.status !== 'retired') {
+      err(ref, `status in a file may only be "retired", got ${JSON.stringify(item.status)}`)
+    }
+    if (item.status !== 'retired' && notEnglish(item.subject ?? '', item.skill ?? '')) {
+      err(ref, `"${item.skill}" is a logic puzzle, not English: write a language question instead`)
+    }
 
     // The class in which the content is taught. Required, because a missing
     // tag would be seeded as the floor and quietly open a class 11 item to a
@@ -198,8 +208,9 @@ export function lintItems(): number {
   // sees a failure in front of staff. "thin" is the exposure warning: fewer
   // than twice the need means every paper for that class looks much the same.
   console.log('\nBank can fill the 15-question paper (basics) for every class')
+  // Retired items stay in their files but are never drawn.
   const shaped = items
-    .filter((i) => !i.__sample)
+    .filter((i) => !i.__sample && i.status !== 'retired')
     .filter((i) => SUBJECTS.includes(i.subject ?? '') && DIFFICULTIES.includes(i.difficulty ?? '') && Number.isInteger(i.taught_in))
     .map((i) => ({
       subject: i.subject as Subject,
@@ -248,7 +259,7 @@ export function lintItems(): number {
         .map((i) => ({ subject: i.subject as Subject, format: String(i.format), answer_key: i.answer_key ?? null })),
     )
   const skewed = [
-    ...skewOf(items.filter((i) => !i.__sample)).map((s) => ({ ...s, where: 'bank' })),
+    ...skewOf(items.filter((i) => !i.__sample && i.status !== 'retired')).map((s) => ({ ...s, where: 'bank' })),
     ...skewOf(items.filter((i) => i.__sample)).map((s) => ({ ...s, where: 'parent pack' })),
   ]
   for (const s of skewed) {
