@@ -9,15 +9,17 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 - [ ] **30-question paper (2026-10-06).** Phase 1 shipped 2026-10-06: migration 0014 applied,
       merged and deployed; the draw, test screens and both reports handle 15 or 30 questions.
-      **Phase 2 in progress: admits to classes 10, 11 and 12 are on 30 questions since 2026-10-07**
-      (`syllabus-class-09.json`, `-10.json` and `-11.json`, all signed off and live; a test
-      issue for each confirmed 30 questions with 5 class N−1 first-term syllabus items each in
-      maths and science; class 11 science is Physics and Chemistry). Next batches: content
-      classes 7 and 8 (admits to 8 and 9) — about 15 per class per subject, each signed off; plus about 15 English basics (a
-      10-question English part reuses the 23 items too often). **Phase 3 shipped 2026-10-07**:
-      the parent-pack build reads each class's paper from the live pool, and the class 10 and 11
-      sheets are 30-question sheets with their first-term chapters. A class that moves to 30
-      stops the build until its sample and chapters exist, so write those with each batch.
+      **Phase 2 done: every admitting class, 8 to 12, is on 30 questions since 2026-10-07**
+      (`syllabus-class-07.json` to `-11.json`, each signed off and live; a test issue for each
+      class confirmed 30 questions with 5 class N−1 first-term syllabus items each in maths and
+      science; class 11 science is Physics and Chemistry; *Curiosity* 7 ch. 6, Adolescence, left
+      out by choice). Still to write: about 15 English basics (a 10-question English part reuses
+      the 23 items too often), and difficult maths basics at class ≤ 7 (class 8 has 2). The
+      15-question paper is now only a fallback for a pool that cannot fill 30; the integration
+      suite issues one by hand to keep its rules tested. **Phase 3 shipped 2026-10-07**: the
+      parent-pack build reads each class's paper from the live pool, and all five sheets are
+      30-question sheets with their first-term chapters. A class that moves to 30 stops the
+      build until its sample and chapters exist, so write those with each batch.
 - [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
       75 new questions; every calculable key re-derived in code, the lint clean, each paper
       checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,

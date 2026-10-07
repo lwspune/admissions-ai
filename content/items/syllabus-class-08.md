@@ -1,13 +1,13 @@
 # Syllabus batch — Class 8 content (for admits to Class 9) — 30 items
 
 **Date:** 2026-10-07
-**Status:** Awaiting review. Seeded at `review`; nothing here is drawn until promoted with
+**Status:** Signed off by the user 2026-10-07 and promoted with
 `npm run items:seed -- --live --file syllabus-class-08.json`.
 **Composition:** maths 15, science 15; each 9 easy / 3 moderate / 3 difficult. 10 numeric, 20 MCQ.
 Every item: `part: syllabus`, `term: 1`, `taught_in: 8`.
 
-**When this goes live, admits to Class 9 move to the 30-question paper.** Their 15 extra parent
-sample questions wait in `content/parent-pack/pending-class-9.json`.
+**Admits to Class 9 are on the 30-question paper.** Their 15 extra parent
+sample questions are in `content/parent-pack/sample-papers.json`.
 
 ## 1. Sign off the first-term chapters
 

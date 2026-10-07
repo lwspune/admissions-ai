@@ -1,7 +1,7 @@
 # Admissions AI
 
-Gate 2 of an NDA coaching institute's admissions funnel: a 15-question,
-15-minute reasoning test. Staff issue it per candidate, the link goes to the
+Gate 2 of an NDA coaching institute's admissions funnel: a 30-question,
+30-minute reasoning test (15 and 15 only as a fallback). Staff issue it per candidate, the link goes to the
 **parent's** WhatsApp, the candidate takes it within two hours, it grades
 itself server-side.
 
@@ -246,7 +246,11 @@ the connection is refused (2026-10-01).
   user preferred that to two titled parts. A class keeps the 15-question paper
   until its syllabus batch is signed off and live, so nothing broke while the
   questions are written; the reports split each subject's score by part only
-  on a paper that has both. The v1 spec said 15; it now says either.
+  on a paper that has both. The v1 spec said 15; it now says either. By the
+  end of 2026-10-07 all five batches (content classes 7–11) were signed off and
+  live, so every admitting class is on 30; *Curiosity* 7's Adolescence chapter
+  was left out by choice. The integration suite issues a 15-question paper by
+  hand, since the draw no longer produces one.
 - **2026-10-06 — "Taught in" means the NCERT book this year's admits used,
   and nine items were retagged for it.** Mapping the syllabus to chapters found
   NCERT's new books (classes 6–8 by 2025–26, 9 in 2026–27) teach percentages,
