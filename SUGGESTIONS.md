@@ -9,11 +9,11 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 - [ ] **30-question paper (2026-10-06).** Phase 1 shipped 2026-10-06: migration 0014 applied,
       merged and deployed; the draw, test screens and both reports handle 15 or 30 questions.
-      **Phase 2 in progress: admits to classes 10 and 11 are on 30 questions since 2026-10-07**
-      (`syllabus-class-09.json` and `syllabus-class-10.json`, both signed off and live; a test
+      **Phase 2 in progress: admits to classes 10, 11 and 12 are on 30 questions since 2026-10-07**
+      (`syllabus-class-09.json`, `-10.json` and `-11.json`, all signed off and live; a test
       issue for each confirmed 30 questions with 5 class N−1 first-term syllabus items each in
-      maths and science). Next batches: class 11 (admits to 12, physics and chemistry), then 7
-      and 8 — about 15 per class per subject, each signed off; plus about 15 English basics (a
+      maths and science; class 11 science is Physics and Chemistry). Next batches: content
+      classes 7 and 8 (admits to 8 and 9) — about 15 per class per subject, each signed off; plus about 15 English basics (a
       10-question English part reuses the 23 items too often). **Phase 3 shipped 2026-10-07**:
       the parent-pack build reads each class's paper from the live pool, and the class 10 and 11
       sheets are 30-question sheets with their first-term chapters. A class that moves to 30

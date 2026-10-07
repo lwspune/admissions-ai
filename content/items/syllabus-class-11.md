@@ -1,7 +1,7 @@
 # Syllabus batch — Class 11 content (for admits to Class 12) — 30 items
 
 **Date:** 2026-10-07
-**Status:** Awaiting review. Seeded at `review`; nothing here is drawn until promoted with
+**Status:** Signed off by the user 2026-10-07 and promoted with
 `npm run items:seed -- --live --file syllabus-class-11.json`.
 **Composition:** maths 15; science 15 (Physics 8, Chemistry 7, as decided: no Biology). Each
 subject 9 easy / 3 moderate / 3 difficult. 13 numeric, 17 MCQ. Every item: `part: syllabus`,

@@ -1838,5 +1838,270 @@
   },
   "answer_key": "D",
   "rationale": "In parallel every bulb gets the full mains voltage and has its own path, so each can be switched on or off without affecting the others."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E6",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Asked about the mistake, the cadet gave a candid answer. As used here, \"candid\" most nearly means",
+  "options": {
+   "A": "honest",
+   "B": "short",
+   "C": "rude",
+   "D": "clever"
+  },
+  "answer_key": "A",
+  "rationale": "Candid means frank and truthful, saying things openly. A candid answer may also be short or blunt, but neither is the meaning of the word."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E7",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: One of my friends ___ a pilot.",
+  "options": {
+   "A": "are",
+   "B": "is",
+   "C": "were",
+   "D": "have been"
+  },
+  "answer_key": "B",
+  "rationale": "The subject is \"one\", which is singular, so the verb is \"is\". \"Friends\" is plural but only describes which group the one belongs to."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E8",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Hand is to glove as foot is to ___",
+  "options": {
+   "A": "toe",
+   "B": "sock",
+   "C": "walk",
+   "D": "leg"
+  },
+  "answer_key": "B",
+  "rationale": "A glove is worn on the hand to cover it; a sock is worn on the foot. A toe is part of the foot and walking is what it does."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E9",
+  "subject": "english",
+  "skill": "letter-coding",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "In a code, PEN is written as QFO. How is INK written in the same code?",
+  "options": {
+   "A": "HMJ",
+   "B": "KPM",
+   "C": "JOL",
+   "D": "JNL"
+  },
+  "answer_key": "C",
+  "rationale": "Each letter moves one step forward: P→Q, E→F, N→O. So I→J, N→O, K→L, giving JOL. HMJ moves each letter back instead."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-E10",
+  "subject": "english",
+  "skill": "supported-conclusion",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Every pilot in the squadron has passed the night-flying test. Arjun has not passed the night-flying test. Which statement must be true?",
+  "options": {
+   "A": "Arjun will pass the test later",
+   "B": "Arjun is not a pilot in the squadron",
+   "C": "Arjun is a pilot in the squadron",
+   "D": "No pilot in the squadron flies by day"
+  },
+  "answer_key": "B",
+  "rationale": "If Arjun were a pilot in the squadron he would have passed the test. He has not, so he is not one. Nothing is said about the future."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-MS1",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "sets",
+  "difficulty": "easy",
+  "format": "numeric",
+  "stem": "If A = {2, 4, 6} and B = {4, 6, 8, 10}, how many elements are there in A ∪ B?",
+  "numeric_answer": 5,
+  "numeric_tolerance": 0,
+  "rationale": "A ∪ B = {2, 4, 6, 8, 10}, which has 5 elements. Adding 3 + 4 = 7 counts 4 and 6 twice. This is a type-in question."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-MS2",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "radian-measure",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "How many radians is an angle of 90°?",
+  "options": {
+   "A": "π",
+   "B": "π/2",
+   "C": "π/3",
+   "D": "2π"
+  },
+  "answer_key": "B",
+  "rationale": "180° is π radians, so 90° is half of that: π/2. π is a straight angle and 2π a full turn."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-MS3",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "permutations",
+  "difficulty": "easy",
+  "format": "numeric",
+  "stem": "How many two-letter arrangements, with no letter repeated, can be made from the letters A, B, C and D?",
+  "numeric_answer": 12,
+  "numeric_tolerance": 0,
+  "rationale": "The first letter has 4 choices and the second 3, so ⁴P₂ = 4 × 3 = 12. Counting AB and BA as one gives 6, the number of selections."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-MS4",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "geometric-progression",
+  "difficulty": "moderate",
+  "format": "mcq",
+  "stem": "What is the 6th term of the geometric progression 5, 10, 20, …?",
+  "options": {
+   "A": "80",
+   "B": "120",
+   "C": "160",
+   "D": "320"
+  },
+  "answer_key": "C",
+  "rationale": "The nth term is arⁿ⁻¹ = 5 × 2⁵ = 160. 320 uses 2⁶, one doubling too many; 80 stops one too early."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-MS5",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "binomial-expansion",
+  "difficulty": "difficult",
+  "format": "numeric",
+  "stem": "What is the coefficient of x² in the expansion of (1 + x)⁵?",
+  "numeric_answer": 10,
+  "numeric_tolerance": 0,
+  "rationale": "The term in x² is ⁵C₂ x² = 10x², so the coefficient is 10. ⁵C₂ = 5 × 4 ÷ 2 = 10. This is a type-in question."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-SS1",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "straight-line-motion",
+  "difficulty": "easy",
+  "format": "numeric",
+  "stem": "A car speeds up uniformly from rest to 20 m/s in 4 seconds. How far does it travel in that time, in metres?",
+  "numeric_answer": 40,
+  "numeric_tolerance": 0,
+  "rationale": "Its average speed is (0 + 20) ÷ 2 = 10 m/s, so in 4 s it covers 40 m. Using the final speed for the whole time gives 80 m."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-SS2",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "mole-concept",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "What is the mass of 0.5 mol of carbon dioxide? (C = 12, O = 16)",
+  "options": {
+   "A": "11 g",
+   "B": "22 g",
+   "C": "44 g",
+   "D": "88 g"
+  },
+  "answer_key": "B",
+  "rationale": "The molar mass of CO₂ is 12 + 2 × 16 = 44 g/mol, so 0.5 mol is 22 g. 44 g is a whole mole; 88 g multiplies by 2 instead of halving."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-SS3",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "periodic-trends",
+  "difficulty": "easy",
+  "format": "mcq",
+  "stem": "Which of these elements, all in Group 1, has the largest atomic radius?",
+  "options": {
+   "A": "Lithium",
+   "B": "Sodium",
+   "C": "Potassium",
+   "D": "Rubidium"
+  },
+  "answer_key": "D",
+  "rationale": "Atomic radius increases down a group, as each element adds a new shell of electrons. Rubidium is lowest of the four, so it is largest."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-SS4",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "laws-of-motion",
+  "difficulty": "moderate",
+  "format": "mcq",
+  "stem": "A 1,000 kg car moving at 20 m/s is brought to rest in 5 seconds. What average braking force acts on it?",
+  "options": {
+   "A": "400 N",
+   "B": "2,000 N",
+   "C": "4,000 N",
+   "D": "100,000 N"
+  },
+  "answer_key": "C",
+  "rationale": "Force = change in momentum ÷ time = (1000 × 20) ÷ 5 = 4,000 N. 100,000 N multiplies by the time instead of dividing."
+ },
+ {
+  "paper": 12,
+  "ref": "P12-SS5",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "taught_in": 11,
+  "skill": "power",
+  "difficulty": "difficult",
+  "format": "numeric",
+  "stem": "A motor lifts a 50 kg load through 10 m in 5 seconds. Taking g = 10 m/s², what power does it deliver, in watts?",
+  "numeric_answer": 1000,
+  "numeric_tolerance": 0,
+  "rationale": "Work done = mgh = 50 × 10 × 10 = 5,000 J; power = work ÷ time = 5,000 ÷ 5 = 1,000 W. This is a type-in question."
  }
 ]
