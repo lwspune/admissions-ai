@@ -96,7 +96,7 @@ export function IssuePanel({
         </p>
       )}
 
-      {link && <IssuedLink name={lead.name} mobile={lead.contact_mobile} url={link} />}
+      {link && <IssuedLink name={lead.name} mobile={lead.contact_mobile} url={link} classLevel={lead.class_level} />}
     </section>
   )
 }

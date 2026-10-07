@@ -20,7 +20,7 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       parent-pack build reads each class's paper from the live pool, and all five sheets are
       30-question sheets with their first-term chapters. A class that moves to 30 stops the
       build until its sample and chapters exist, so write those with each batch.
-- [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `content/parent-pack/pdf/`.
+- [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `public/parent-pack/` (live at `/parent-pack/…`, linked from every issue message).
       75 new questions; every calculable key re-derived in code, the lint clean, each paper
       checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,
       for the April 2027 joiners. Nobody but the author has read the questions or the chapter

@@ -43,6 +43,7 @@ export function LeadsConsole({
           {/* Cosmetic only. Each page refuses the wrong role on its own, and
               the database refuses underneath: import_leads, RLS on test_items,
               the gate in src/server/staff.ts. */}
+          <NavLink href="/downloads">Downloads</NavLink>
           {canAssign && <NavLink href="/leads/import">Import</NavLink>}
           {staff.role === 'superadmin' && (
             <>

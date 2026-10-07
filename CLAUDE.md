@@ -53,8 +53,9 @@ identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit)
 
 **`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
-the latter guards itself with `CRON_SECRET`. `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/` and `staff/` (superadmin only) are staff, guarded by
+the latter guards itself with `CRON_SECRET`. The parents' PDFs in
+`public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/` and `staff/` (superadmin only), `downloads/` (every role) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -236,6 +237,14 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-07 — The parent PDFs are on the site, and go out with the test
+  link.** Staff had no way to get them from the app. They now build into
+  `public/parent-pack/`, open without a login (a parent has no session; the
+  files hold no candidate data or bank item), with `X-Robots-Tag: noindex`.
+  The issue message adds the admitting class's PDF after the test link, which
+  stays first because WhatsApp previews the first link; `/downloads` lists all
+  five for every staff role, for sending before a test too. Message wording
+  lives in `src/lib/parentPack.ts`, tested.
 - **2026-10-07 — English is language; logic puzzles left it.** The user spotted
   a row-counting question and a syllogism labelled English on the parent sheet.
   Syllogisms, seating and ranking, and family relations had been filed under

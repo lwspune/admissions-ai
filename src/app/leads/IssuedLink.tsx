@@ -1,11 +1,22 @@
 'use client'
 
 import { useState } from 'react'
+import { issueMessage, parentPackUrl } from '@/lib/parentPack'
 
 /** A freshly issued link, ready to send to the parent. */
-export function IssuedLink({ name, mobile, url }: { name: string | null; mobile: string; url: string }) {
+export function IssuedLink({
+  name,
+  mobile,
+  url,
+  classLevel,
+}: {
+  name: string | null
+  mobile: string
+  url: string
+  classLevel: number | null
+}) {
   const [copied, setCopied] = useState(false)
-  const message = `Hello, this is the aptitude test link for ${name}. Please open it and hand the phone to them. The link works for 2 hours: ${url}`
+  const message = issueMessage({ name, testUrl: url, classLevel })
 
   return (
     <div className="mt-3 rounded border border-slate-200 bg-slate-50 p-3">
@@ -13,6 +24,15 @@ export function IssuedLink({ name, mobile, url }: { name: string | null; mobile:
         Send this to the parent on WhatsApp. Any earlier link has stopped working.
       </p>
       <p className="mt-2 break-all rounded bg-white px-2 py-2 font-mono text-xs text-slate-800">{url}</p>
+      {classLevel !== null && (
+        <p className="mt-2 text-xs text-slate-700">
+          The message also links the{' '}
+          <a className="underline" href={parentPackUrl(url, classLevel)} target="_blank" rel="noopener noreferrer">
+            Class {classLevel} syllabus and sample paper
+          </a>
+          .
+        </p>
+      )}
       <div className="mt-2 flex gap-2">
         <button
           type="button"
