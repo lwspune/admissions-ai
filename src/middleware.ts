@@ -15,7 +15,11 @@ import { createServerClient } from '@supabase/ssr'
 // reporting 307s nobody reads. Those routes guard themselves with CRON_SECRET
 // and must — being on this list means the middleware protects them from
 // nothing at all.
-const PUBLIC = ['/login', '/t/', '/api/t/', '/api/cron/', '/robots.txt']
+//
+// /parent-pack/ is the parents' syllabus and sample-paper PDFs, linked from the
+// issue message: a parent has no session. They are static files holding no
+// candidate data and no bank item (src/lib/parentPack.ts).
+const PUBLIC = ['/login', '/t/', '/api/t/', '/api/cron/', '/robots.txt', '/parent-pack/']
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl

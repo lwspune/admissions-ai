@@ -1,7 +1,11 @@
 # Parent pack
 
-What staff send a parent who asks for the syllabus or a sample paper: one PDF per admitting class
-(`pdf/reasoning-test-class-N.pdf`). Each holds how the test works, the basics topics and class N−1
+What parents get for the syllabus and a sample paper: one PDF per admitting class, built into
+`public/parent-pack/reasoning-test-class-N.pdf` and served by the site **without a login**
+(`src/lib/parentPack.ts`, the `/parent-pack/` entry in `src/middleware.ts`). The issue message
+links the admitting class's PDF after the test link, and the staff `/downloads` page lists all
+five with Download, Copy link and WhatsApp. They hold no candidate data and no bank item, which
+is what makes them safe to leave open; keep it that way. Each holds how the test works, the basics topics and class N−1
 chapters the paper draws on for that class, a sample paper of the real shape, and the answers
 with working.
 
@@ -15,7 +19,7 @@ The build still checks all of them; it only stops printing them.
 |---|---|
 | `syllabus.json` | Topics (each a group of bank skills), the NCERT chapters that teach them in the old and new editions, the cohort the sheets are written for, and `syllabusChapters`: class N−1's chapters with their term and the syllabus skills each covers |
 | `sample-papers.json` | 15 questions per class, 30 for a class on the 30-question paper, in the item-bank format plus a `paper` field |
-| `pdf/` | The built PDFs. Rebuild after any change: `npm run parent-pack` |
+| `public/parent-pack/` | The built PDFs, live on the next deploy. Rebuild after any change: `npm run parent-pack` |
 
 ## 15 or 30 questions
 

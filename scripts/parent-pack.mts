@@ -1,6 +1,7 @@
 // Builds the parent pack: one PDF per admitting class, holding the test's
 // format, the syllabus that class is drawn from, a sample paper and its
-// answers. Staff forward the file on WhatsApp when a parent asks.
+// answers. The PDFs go to public/parent-pack/, served without a login: the
+// issue message links the admitting class's PDF, and /downloads lists all five.
 //
 //   npm run parent-pack              # validate, then write the PDFs
 //   npm run parent-pack -- --html    # validate, write HTML only (no browser)
@@ -17,7 +18,7 @@
 // shares most of its words with a bank item.
 
 import { readFileSync, readdirSync, writeFileSync, mkdirSync, existsSync, rmSync } from 'node:fs'
-import { join, dirname, resolve } from 'node:path'
+import { join, dirname, resolve, basename } from 'node:path'
 import { fileURLToPath, pathToFileURL } from 'node:url'
 import { tmpdir } from 'node:os'
 import { execFileSync } from 'node:child_process'
@@ -29,11 +30,14 @@ import {
   syllabusFor, topicClass, unmappedSkills, editionStudied, basicsTopics,
   type SyllabusTopic, type Heading, type SyllabusChapter, type SyllabusInput, type Edition,
 } from '../src/lib/syllabus'
+import { parentPackPath } from '../src/lib/parentPack'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const PACK = join(ROOT, 'content', 'parent-pack')
 const BANK = join(ROOT, 'content', 'items')
-const OUT = join(PACK, 'pdf')
+// Served by the site at parentPackPath(): file names come from there, so a
+// link in the issue message cannot point at a file the build did not write.
+const OUT = join(ROOT, 'public', 'parent-pack')
 
 interface PackItem {
   paper: number
@@ -427,13 +431,14 @@ async function main(): Promise<number> {
   }
 
   const htmlOnly = process.argv.includes('--html')
-  const htmlDir = htmlOnly ? OUT : join(tmpdir(), 'parent-pack')
+  // Never into OUT: anything there is public.
+  const htmlDir = join(tmpdir(), 'parent-pack')
   mkdirSync(htmlDir, { recursive: true })
   mkdirSync(OUT, { recursive: true })
   const browser = htmlOnly ? null : findBrowser()
 
   for (const classLevel of CLASSES) {
-    const name = `reasoning-test-class-${classLevel}`
+    const name = basename(parentPackPath(classLevel), '.pdf')
     const html = join(htmlDir, `${name}.html`)
     writeFileSync(html, render(classLevel, shapes.get(classLevel)!))
     if (browser) {

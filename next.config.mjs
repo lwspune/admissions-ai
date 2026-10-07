@@ -6,8 +6,11 @@ const nextConfig = {
   // the dev server silently broken until it is restarted.
   distDir: process.env.NEXT_DIST_DIR || '.next',
   async headers() {
+    // The parents' PDFs are open without a login; robots.txt already says
+    // stay out, and this keeps a PDF out of an index that ignores it.
+    const pack = { source: '/parent-pack/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] }
     // Preview deployments must never be indexed (spec 11).
-    if (process.env.VERCEL_ENV === 'production') return []
+    if (process.env.VERCEL_ENV === 'production') return [pack]
     return [{ source: '/:path*', headers: [{ key: 'X-Robots-Tag', value: 'noindex' }] }]
   },
 }
