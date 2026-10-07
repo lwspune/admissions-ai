@@ -319,10 +319,15 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   const syllabusBlock = (s: Subject) => {
     const chapters = firstTermChapters(classLevel).filter((c) => c.subject === s)
     if (chapters.length === 0) return ''
-    const list = chapters
-      .map((c) => `<li><span class="chapter">Ch ${c.chapter}. ${escape(c.title)}</span> <span class="covers">${escape(c.covers)}</span></li>`)
-      .join('')
-    return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3><div class="book"><p class="book-name">Class ${ceiling} · ${escape(chapters[0]!.book)}</p><ul>${list}</ul></div></div>`
+    // Class 11 science is two books, Physics and Chemistry; list each under its own name.
+    const books = [...new Set(chapters.map((c) => c.book))].map((book) => {
+      const list = chapters
+        .filter((c) => c.book === book)
+        .map((c) => `<li><span class="chapter">Ch ${c.chapter}. ${escape(c.title)}</span> <span class="covers">${escape(c.covers)}</span></li>`)
+        .join('')
+      return `<div class="book"><p class="book-name">Class ${ceiling} · ${escape(book)}</p><ul>${list}</ul></div>`
+    })
+    return `<div class="subject-block"><h3>${SUBJECT_LABEL[s]}</h3>${books.join('')}</div>`
   }
   const syllabusPart = thirty
     ? `<h2>Class ${ceiling} syllabus questions</h2>
