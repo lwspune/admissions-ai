@@ -238,6 +238,20 @@ async function main() {
   await rejects('test_items: rejects English syllabus content', 'test_items', syllabusItem({ subject: 'english' }))
   await rejects('test_items: rejects syllabus content below class 7', 'test_items', syllabusItem({ taught_in: 6 }))
 
+  console.log('\nHindi versions (migration 0016)')
+  const hindiItem = (over) => ({
+    subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'mcq', stem: 'probe hindi',
+    options: { A: '1', B: '2', C: '3', D: '4' }, answer_key: 'A', rationale: 'probe',
+    stem_hi: 'प्रश्न', options_hi: { A: '1', B: '2', C: '3', D: '4' }, ...over,
+  })
+  await accepts('test_items: accepts a whole Hindi MCQ', 'test_items', hindiItem({}))
+  await rejects('test_items: rejects Hindi on English', 'test_items', hindiItem({ subject: 'english' }))
+  await rejects('test_items: rejects Hindi options missing D', 'test_items', hindiItem({ options_hi: { A: '1', B: '2', C: '3' } }))
+  await rejects('test_items: rejects Hindi options without a Hindi stem', 'test_items', hindiItem({ stem_hi: null }))
+  await rejects('test_items: rejects Hindi options on a numeric item', 'test_items', hindiItem({
+    format: 'numeric', options: null, answer_key: null, numeric_answer: 5,
+  }))
+
   console.log('\nClass scoping (live_pool + issue_assessment)')
 
   // A live item taught in class 11: drawable for a class 12 admit and nobody

@@ -8,15 +8,18 @@
 // question. It cannot check whether an answer is actually correct — that is
 // what the rationale and human review are for.
 
-import { readFileSync, readdirSync } from 'node:fs'
+import { readFileSync, readdirSync, existsSync } from 'node:fs'
 import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness, notEnglish } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
-import type { Subject, Difficulty } from '../src/lib/types'
+import { translationProblems, hindiCoverage, type HindiEntry } from '../src/lib/hindi'
+import type { Subject, Difficulty, Format, Choice } from '../src/lib/types'
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
 const SAMPLES = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'parent-pack', 'sample-papers.json')
+// Hindi versions of maths and science items, one file per English batch (2026-10-11).
+export const HINDI_DIR = join(DIR, 'hi')
 
 const SUBJECTS = ['maths', 'english', 'science']
 const DIFFICULTIES = ['easy', 'moderate', 'difficult']
@@ -267,6 +270,65 @@ export function lintItems(): number {
     console.log(`  ERROR  ${s.where} ${s.subject}: ${s.count} of ${s.total} keys are ${s.letter}`)
   }
   if (skewed.length === 0) console.log('  ok     no letter holds more than 40% of any subject')
+
+  // Hindi shares the English item's key, numeric answer and option order, so
+  // a translation that drops a number or moves an option between letters is a
+  // wrong question that grades as a right one. The lint checks the mechanics;
+  // the reviewer's read of each batch is the sign-off.
+  console.log('\nHindi translations (content/items/hi)')
+  const bankByRef = new Map(items.filter((i) => !i.__sample && i.ref).map((i) => [i.ref!, i]))
+  const translated = new Set<string>()
+  const seenHindi = new Map<string, string>()
+  const hindiFiles = existsSync(HINDI_DIR) ? readdirSync(HINDI_DIR).filter((f) => f.endsWith('.hi.json')) : []
+  for (const file of hindiFiles) {
+    const entries = JSON.parse(readFileSync(join(HINDI_DIR, file), 'utf8')) as HindiEntry[]
+    if (!Array.isArray(entries)) {
+      err(file, 'is not a JSON array')
+      continue
+    }
+    let fileErrors = 0
+    for (const entry of entries) {
+      const ref = entry.ref ?? '(no ref)'
+      const fail = (msg: string) => { fileErrors++; err(`hi/${ref}`, msg) }
+      if (!entry.ref) { fail('missing ref'); continue }
+      if (seenHindi.has(entry.ref)) { fail(`translated twice, also in ${seenHindi.get(entry.ref)}`); continue }
+      seenHindi.set(entry.ref, file)
+      const en = bankByRef.get(entry.ref)
+      if (!en) { fail('no bank item has this ref'); continue }
+      if (en.status === 'retired') warn(`hi/${ref}`, 'the item is retired, so this translation is never shown')
+      const problems = translationProblems(
+        {
+          subject: en.subject as Subject,
+          format: en.format as Format,
+          stem: en.stem ?? '',
+          options: (en.options ?? null) as Record<Choice, string> | null,
+        },
+        entry,
+      )
+      for (const p of problems) fail(p)
+      if (problems.length === 0) translated.add(entry.ref)
+    }
+    console.log(`  ${fileErrors === 0 ? 'ok    ' : 'ERROR '} ${file}: ${entries.length} item(s)`)
+  }
+
+  // Not an error: a class short of complete simply offers no Hindi on a paper
+  // that draws an untranslated question.
+  const coverage = hindiCoverage(
+    items
+      .filter((i) => !i.__sample && i.ref && SUBJECTS.includes(i.subject ?? '') && Number.isInteger(i.taught_in))
+      .map((i) => ({
+        ref: i.ref!,
+        subject: i.subject as Subject,
+        taught_in: i.taught_in as number,
+        part: (i.part === 'syllabus' ? 'syllabus' : 'basics') as 'basics' | 'syllabus',
+        term: i.term ?? null,
+        status: i.status,
+      })),
+    translated,
+  )
+  for (const c of coverage) {
+    console.log(`  ${c.complete ? 'ready ' : 'part  '} class ${c.classLevel}: ${c.translated} of ${c.total} maths and science items in Hindi`)
+  }
 
   console.log(`\n${items.length} items · ${errors} error(s) · ${warnings} warning(s)\n`)
   return errors === 0 ? 0 : 1
