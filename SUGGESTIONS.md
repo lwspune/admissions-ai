@@ -230,10 +230,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       for ~12 months, so its first genuine run will be unobserved. Worth inserting a throwaway
       backdated lead once and letting the *scheduled* job take it, rather than trusting a manual
       curl of the same code path.
-- [ ] **Custom domain.** The production URL is `admissions-ai-omega.vercel.app` (the plain
-      `admissions-ai.vercel.app` belongs to someone else). A link from an unrecognised `vercel.app`
-      subdomain, arriving from an unknown number, is exactly what people are taught not to tap. A
-      subdomain of the institute's own domain would materially improve the open rate.
+- [ ] **Custom domain.** **Renamed 2026-10-11** to `aptitudetestai.vercel.app` (the old
+      `admissions-ai-omega.vercel.app` stays attached for links already sent). That fixes the odd
+      name, not the trust problem: a link from an unrecognised `vercel.app` subdomain, arriving
+      from an unknown number, is exactly what people are taught not to tap. A subdomain of the
+      institute's own domain would materially improve the open rate. The team owns no domain
+      today; it needs one CNAME record plus `NEXT_PUBLIC_APP_URL` and a rebuild, nothing in code.
 - [ ] **Vercel Hobby is licensed for non-commercial use.** This is a fee-charging institute's
       admissions pipeline. If enforced, candidate links go down mid-window with no warning to the
       telecaller. Decided on 2026-09-22 to stay on Hobby for now; revisit before a real intake.

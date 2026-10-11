@@ -104,5 +104,10 @@ Send me the URL and I will check:
 - [ ] Take the test on a real Android phone over mobile data. Still never done.
 - [ ] Custom domain, if the institute has one. A link from a recognisable
       domain gets opened; a `vercel.app` link from an unknown number does not.
+      Renamed to `aptitudetestai.vercel.app` on 2026-10-11 meanwhile. To move:
+      add the domain to the project, set production `NEXT_PUBLIC_APP_URL`, then
+      **rebuild** (`npx vercel redeploy <prod-url> --target production`); the
+      variable is baked in at build time. Keep the old domain attached: sent
+      messages point at it.
 - [ ] The 12-month purge job is specced but not built. It needs a Vercel Cron
       entry once it exists — that is what `CRON_SECRET` is for.

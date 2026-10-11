@@ -16,7 +16,8 @@ itself server-side.
 | [content/parent-pack/README.md](content/parent-pack/README.md) | The syllabus and sample-paper PDFs for parents |
 | [DECISIONS_HISTORY.md](DECISIONS_HISTORY.md) | Decisions older than the log below keeps |
 
-**Live:** https://admissions-ai-omega.vercel.app · repo `lwspune/admissions-ai` (private)
+**Live:** https://aptitudetestai.vercel.app (the old `admissions-ai-omega.vercel.app`
+still serves the same deployment) · repo `lwspune/admissions-ai` (private)
 Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
 
 **Git integration is connected: a push to `main` deploys to production.** Other
@@ -275,6 +276,15 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-11 — The address is `aptitudetestai.vercel.app`.** The user's pick;
+  `aptitudetest.vercel.app` belongs to someone else's aptitude site. Added as a
+  project domain beside `admissions-ai-omega.vercel.app`, which stays attached
+  because links and PDFs already sent on WhatsApp point at it. Only production
+  `NEXT_PUBLIC_APP_URL` changed, then a rebuild (`NEXT_PUBLIC_` is baked in at
+  build time, so changing the variable alone does nothing). Checked live: a link issued from a
+  lead page, its syllabus PDF and the WhatsApp text all carry the new address,
+  and it opens signed out on phone and desktop. Still a `vercel.app` link, so the
+  custom-domain item in SUGGESTIONS stays open.
 - **2026-10-11 — Maths and science in Hindi, by a switch; English stays English.**
   The user's call: Hindi only, a switch that starts in English, they review every batch, and the
   parent PDFs get Hindi editions too. A translated English question would test something else, so
