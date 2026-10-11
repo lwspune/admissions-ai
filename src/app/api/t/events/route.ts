@@ -3,7 +3,7 @@ import { serviceClient } from '@/server/supabase'
 import { recordEvents } from '@/server/attempt'
 import { ok } from '../../_lib/request'
 
-const KINDS = ['pause', 'resume', 'paste', 'copy', 'blur', 'focus', 'answer_set', 'nav', 'context']
+const KINDS = ['pause', 'resume', 'paste', 'copy', 'blur', 'focus', 'answer_set', 'nav', 'context', 'lang']
 
 export async function POST(req: NextRequest) {
   const body = await req.json().catch(() => null)

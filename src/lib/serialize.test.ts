@@ -22,6 +22,8 @@ function mcqRow(overrides: Partial<BankRow> = {}): BankRow {
     numeric_tolerance: 0,
     rationale: 'Differences are consecutive odd numbers, so 27 + 11 = 38.',
     status: 'live',
+    stem_hi: null,
+    options_hi: null,
     ...overrides,
   }
 }
@@ -90,7 +92,9 @@ describe('toCandidatePaper — the answer key never leaves the server', () => {
     // An allow-list, not a delete-list: a column added to the bank later must
     // not silently start reaching candidates.
     const out = toCandidatePaper(paper)
-    expect(Object.keys(out[0]!).sort()).toEqual(['format', 'options', 'part', 'position', 'stem', 'subject'])
+    expect(Object.keys(out[0]!).sort()).toEqual([
+      'format', 'options', 'optionsHi', 'part', 'position', 'stem', 'stemHi', 'subject',
+    ])
   })
 })
 
@@ -146,5 +150,67 @@ describe('toCandidatePaper — parts', () => {
     const bytes = JSON.stringify(toCandidatePaper([{ position: 1, item: mcqRow({ part: 'syllabus', taught_in: 9, term: 1 }) }]))
     expect(bytes).not.toContain('taught_in')
     expect(bytes).not.toContain('term')
+  })
+})
+
+// 2026-10-11: maths and science may carry a Hindi version. The Hindi travels
+// only when every maths and science question on the paper has one, so a
+// candidate who switches never finds some still in English. The answer key is
+// shared, so nothing about the Hindi may hint at it either.
+describe('toCandidatePaper — Hindi', () => {
+  const hindiMcq = (over: Partial<BankRow> = {}) =>
+    mcqRow({
+      stem_hi: 'अगली संख्या ज्ञात कीजिए: 3, 6, 11, 18, 27, ___',
+      options_hi: { A: '36', B: '38', C: '37', D: '40' },
+      ...over,
+    })
+  const hindiNumeric = (over: Partial<BankRow> = {}) =>
+    numericRow({ subject: 'science', stem_hi: 'विक्रय मूल्य रुपये में कितना है?', ...over })
+  const englishRow = () => mcqRow({ id: 'item-9', subject: 'english', stem: 'Pick the synonym of "big".' })
+
+  it('carries the Hindi stem and options when the whole paper has them', () => {
+    const out = toCandidatePaper([
+      { position: 1, item: hindiMcq() },
+      { position: 2, item: hindiNumeric() },
+      { position: 3, item: englishRow() },
+    ])
+    expect(out[0]!.stemHi).toContain('अगली संख्या')
+    expect(out[0]!.optionsHi).toEqual({ A: '36', B: '38', C: '37', D: '40' })
+    expect(out[1]!.stemHi).toContain('विक्रय मूल्य')
+    expect(out[1]!.optionsHi).toBeNull()
+  })
+
+  it('never gives an English question a Hindi version', () => {
+    const out = toCandidatePaper([
+      { position: 1, item: hindiMcq() },
+      { position: 2, item: mcqRow({ id: 'item-9', subject: 'english', stem_hi: 'नहीं', options_hi: { A: 'a', B: 'b', C: 'c', D: 'd' } }) },
+    ])
+    expect(out[1]!.stemHi).toBeNull()
+    expect(out[1]!.optionsHi).toBeNull()
+  })
+
+  it('sends no Hindi at all when one maths or science question lacks it', () => {
+    const bytes = JSON.stringify(
+      toCandidatePaper([
+        { position: 1, item: hindiMcq() },
+        { position: 2, item: numericRow({ subject: 'science' }) },
+      ]),
+    )
+    expect(bytes).not.toContain('अगली संख्या')
+    expect(bytes).not.toMatch(/[\u0900-\u097F]/)
+  })
+
+  it('leaks no answer through the Hindi fields', () => {
+    const bytes = JSON.stringify(toCandidatePaper([{ position: 1, item: hindiMcq() }, { position: 2, item: hindiNumeric() }]))
+    expect(bytes).not.toContain('answer_key')
+    expect(bytes).not.toContain('840')
+    expect(bytes).not.toContain('stem_hi')
+    expect(bytes).not.toContain('options_hi')
+  })
+
+  it('drops an unexpected Hindi option key rather than passing it through', () => {
+    const row = hindiMcq({ options_hi: { A: '1', B: '2', C: '3', D: '4', E: 'leak' } as never })
+    const bytes = JSON.stringify(toCandidatePaper([{ position: 1, item: row }]))
+    expect(bytes).not.toContain('leak')
   })
 })

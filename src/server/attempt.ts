@@ -5,7 +5,8 @@ import { mobilesMatch } from '../lib/mobile'
 import { toCandidatePaper, type BankRow, type CandidateQuestion } from '../lib/serialize'
 import { gradeAttempt, type GradeItem, type GradeAnswer } from '../lib/grade'
 import { computeActiveMs, computeDeadline, canStart, type TimerEvent } from '../lib/timer'
-import { limitMsFor, type Choice, type Subject } from '../lib/types'
+import { limitMsFor, type Choice, type Format, type Subject } from '../lib/types'
+import { paperHasHindi } from '../lib/hindi'
 
 const LIVE_STATES = ['issued', 'opened', 'started']
 
@@ -29,6 +30,8 @@ export interface PaperMeta {
   minutes: number
   /** Class N−1, named on syllabus questions. Null on a paper without them. */
   syllabusClass: number | null
+  /** Every maths and science question has a Hindi version, so the screens offer the switch. */
+  hindi: boolean
 }
 
 export type OpenResult =
@@ -66,6 +69,7 @@ export async function openByToken(db: Db, token: string): Promise<OpenResult> {
     expiresAt: row.expires_at,
     alreadySubmitted: false,
     ...paperMeta(row),
+    hindi: await paperOffersHindi(db, row.id),
   }
 }
 
@@ -370,7 +374,7 @@ function limitMsOf(row: Pick<AssessmentRow, 'limit_minutes'>): number {
   return limitMsFor(row.limit_minutes)
 }
 
-function paperMeta(row: AssessmentRow): PaperMeta {
+function paperMeta(row: AssessmentRow): Omit<PaperMeta, 'hindi'> {
   return {
     questionCount: row.question_count,
     minutes: row.limit_minutes,
@@ -400,6 +404,27 @@ async function loadPaper(db: Db, assessmentId: string): Promise<{ position: numb
     position: row.position as number,
     item: row.test_items as never as BankRow,
   }))
+}
+
+/** Whether the paper is fully translated. A yes or no, never the paper itself. */
+async function paperOffersHindi(db: Db, assessmentId: string): Promise<boolean> {
+  const { data, error } = await db
+    .from('assessment_items')
+    .select('test_items(subject, format, stem_hi, options_hi)')
+    .eq('assessment_id', assessmentId)
+
+  if (error) throw new Error(error.message)
+  return paperHasHindi(
+    (data ?? []).map(
+      (row) =>
+        row.test_items as never as {
+          subject: Subject
+          format: Format
+          stem_hi: string | null
+          options_hi: Record<Choice, string> | null
+        },
+    ),
+  )
 }
 
 async function loadAttempt(db: Db, assessmentId: string): Promise<Attempt | null> {
