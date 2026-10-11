@@ -70,8 +70,8 @@ writing its own classes.
 
 **`src/app/`** — `/` (the homepage), `t/[token]/` and `api/cron/` are the only
 unauthenticated routes; the list and the reason for each is `src/lib/publicPaths.ts`.
-The homepage is for other institutes: one line, an animation of the admin screens
-(`ProductTour`) and a "Get in touch" button that opens the contact form in a
+The homepage is for other institutes: one line, an animation cycling through the
+test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get in touch" button that opens the contact form in a
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
@@ -316,7 +316,9 @@ the connection is refused (2026-10-01).
   still, finished frames; everyone else gets a pause button. The first version
   had a hero, a four-screen tour and feature cards; the user cut it the same
   night to one line ("Aptitude testing and lead management for education
-  institutes"), the admin animation, and "Get in touch" opening the form.
+  institutes"), one animation, and "Get in touch" opening the form. The next day
+  the animation went from the admin screen alone to all four screens cycling in
+  one frame, with dots in place of tabs.
 
 - **2026-10-11 — The address is `aptitudetestai.vercel.app`.** The user's pick;
   `aptitudetest.vercel.app` belongs to someone else's aptitude site. Added as a
