@@ -13,11 +13,11 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       115/115 including the Hindi suite, rerun after loading. The staff report's "Answered in
       Hindi" row was seen on the live site the same day (a submitted test with three answers in
       Hindi, then removed). The real-phone check is folded into the Android item below.
-- [ ] **Hindi parent sheets (2026-10-11): built on `feat/hindi-parent-pack`, await the user's
-      read.** Five `-hi.pdf` editions (six pages each), the Hindi buttons on `/downloads`, and
-      `content/parent-pack/hindi-review.md` (topics, NCERT's Hindi chapter titles, 100 samples with
-      working, side by side). Once read: merge, check the deploy, and open one `-hi.pdf` on the
-      live site.
+- [x] **Hindi parent sheets (2026-10-11): LIVE.** Read and approved by the user, merged (`5ac2e79`,
+      "Deployment has completed"). Five `-hi.pdf` editions (six pages each, titled "Aptitude Test"
+      by the user's choice), the Hindi buttons on `/downloads`, and
+      `content/parent-pack/hindi-review.md`. All five live files match the committed ones byte for
+      byte, served with `X-Robots-Tag: noindex`.
       **Not yet done:** Hindi editions of the parent PDFs (agreed). **Unseen:** the switch on a real
       Android phone over mobile data (Devanagari font download), and the staff report's "Answered
       in Hindi" row in a browser (needs a signed-in staff session). The new-edition NCERT chapter
