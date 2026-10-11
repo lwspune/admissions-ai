@@ -294,7 +294,7 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   const numbered = (heading: string, names: string[]) =>
     names.length === 0
       ? ''
-      : `<div class="subject-block"><h3>${escape(heading)}</h3><ol>${names.map((n) => `<li>${escape(n)}</li>`).join('')}</ol></div>`
+      : `<div class="subject-block ${heading.toLowerCase()}"><h3>${escape(heading)}</h3><ol>${names.map((n) => `<li>${escape(n)}</li>`).join('')}</ol></div>`
   const lists = basicsTopics(classLevel, syllabusInput.topics)
   // English is short and maths ends sooner than science, so English goes under maths.
   const topics = `<div>${numbered('Maths', lists.maths)}${numbered('English', lists.english)}</div>`
@@ -311,21 +311,23 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
   <div class="syllabus">${numbered('Maths', chapterNames('maths'))}${numbered('Science', chapterNames('science'))}</div></section>`
     : ''
 
-  const partLabel = (item: PackItem) => (thirty ? (isSyllabus(item) ? ` · Class ${ceiling}` : ' · Basics') : '')
-  const questions = paper.map((item) => {
+  const partTag = (item: PackItem) =>
+    thirty ? `<span class="tag part">${isSyllabus(item) ? `Class ${ceiling}` : 'Basics'}</span>` : ''
+  const questions = paper.map((item, n) => {
     const body =
       item.format === 'mcq'
         ? `<ol class="options">${['A', 'B', 'C', 'D']
             .map((c) => `<li><span class="letter">${c}</span>${escape(item.options?.[c] ?? '')}</li>`)
             .join('')}</ol>`
         : `<p class="typein">Type-in answer: <span class="blank"></span></p>`
-    return `<li class="question"><p class="subject">${SUBJECT_LABEL[item.subject]}${partLabel(item)}</p><p class="stem">${escape(item.stem)}</p>${body}</li>`
+    return `<li class="question"><span class="qnum">${n + 1}</span><div class="qbody"><p class="tags"><span class="tag ${item.subject}">${SUBJECT_LABEL[item.subject]}</span>${partTag(item)}</p><p class="stem">${escape(item.stem)}</p>${body}</div></li>`
   }).join('')
 
   const answers = paper.map((item, n) =>
     `<tr><td class="num">${n + 1}</td><td class="ans">${escape(answerText(item))}</td><td>${escape(item.rationale)}</td></tr>`,
   ).join('')
 
+  const count = thirty ? 30 : 15
   const facts = thirty
     ? `<li>30 questions in 30 minutes: 10 each of maths, English and science, mixed together.</li>
     <li>Half the maths and science questions are from the Class ${ceiling} syllabus (the chapters listed below); the rest test reasoning. Each question is marked Basics or Class ${ceiling}.</li>`
@@ -335,46 +337,111 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<title>Reasoning test: admission to Class ${classLevel}</title>
+<title>Aptitude Test: admission to Class ${classLevel}</title>
+<!-- Inter, as on the site. Fetched at build time; Segoe UI or Arial if offline. -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap">
 <style>
-  @page { size: A4; margin: 12mm 14mm 13mm; }
+  /* The site's colours: indigo accent, and the parent score sheet's subject colours. */
+  :root {
+    --ink: #0f172a; --body: #334155; --muted: #64748b; --line: #e2e8f0; --tint: #f8fafc;
+    --brand: #4338ca; --brand-soft: #eef2ff;
+    --maths: #2563eb; --maths-soft: #dbeafe;
+    --english: #7c3aed; --english-soft: #ede9fe;
+    --science: #059669; --science-soft: #d1fae5;
+    --reasoning: #d97706; --reasoning-soft: #fef3c7;
+  }
+  @page {
+    size: A4; margin: 12mm 14mm 14mm;
+    @bottom-center { content: "Page " counter(page) " of " counter(pages); font: 7.5pt Inter, "Segoe UI", Arial, sans-serif; color: #64748b; }
+  }
   * { box-sizing: border-box; }
-  body { margin: 0; font-family: "Segoe UI", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1a1a1a; background: #fff; }
-  h1 { font-size: 18pt; margin: 0 0 2pt; }
-  h2 { font-size: 13pt; margin: 14pt 0 6pt; padding-bottom: 3pt; border-bottom: 1.5pt solid #1a1a1a; }
-  h3 { font-size: 10.5pt; margin: 0 0 4pt; }
-  .sub { margin: 0; color: #444; font-size: 11.5pt; }
-  ul.facts { margin: 0; padding-left: 16pt; font-size: 10pt; line-height: 1.35; }
-  ul.facts li { margin-bottom: 2pt; }
-  .lead { margin: 0 0 8pt; }
-  .syllabus { display: grid; grid-template-columns: 1fr 1fr; gap: 8pt 16pt; font-size: 8.75pt; line-height: 1.22; }
-  .subject-block + .subject-block { margin-top: 8pt; }
-  .syllabus-part { break-inside: avoid; }
+  html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  body { margin: 0; font-family: Inter, "Segoe UI", Arial, sans-serif; font-size: 10pt; line-height: 1.45; color: var(--body); background: #fff; }
+  h1, h2, h3 { color: var(--ink); }
+
+  .band { display: flex; align-items: center; gap: 12pt; padding: 15pt 18pt; border-radius: 10pt; color: #fff;
+    background: linear-gradient(135deg, #1e3a8a 0%, #4338ca 100%); }
+  .mark { width: 30pt; height: 30pt; border-radius: 7pt; display: grid; place-items: center; flex: none;
+    background: rgba(255,255,255,.15); border: 0.75pt solid rgba(255,255,255,.3); }
+  .eyebrow { margin: 0; font-size: 7.5pt; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: #c7d2fe; }
+  h1 { margin: 1pt 0 0; font-size: 20pt; font-weight: 700; letter-spacing: -.01em; color: #fff; }
+  .sub { margin: 1pt 0 0; font-size: 10.5pt; color: #e0e7ff; }
+
+  .stats { margin-left: auto; display: flex; gap: 6pt; }
+  .stat { min-width: 58pt; padding: 5pt 8pt; border-radius: 7pt; background: rgba(255,255,255,.12); border: 0.75pt solid rgba(255,255,255,.22); }
+  .stat b { display: block; font-size: 14pt; line-height: 1.15; font-weight: 700; color: #fff; }
+  .stat span { font-size: 7.5pt; color: #e0e7ff; }
+
+  h2 { font-size: 12pt; font-weight: 700; margin: 12pt 0 6pt; padding-left: 7pt; border-left: 3pt solid var(--brand); line-height: 1.2; }
+  h3 { font-size: 9.5pt; font-weight: 700; margin: 0 0 3pt; }
+  ul.facts { list-style: none; margin: 0; padding: 0; font-size: 9.5pt; line-height: 1.38; }
+  ul.facts li { position: relative; padding-left: 14pt; margin-bottom: 2.5pt; }
+  ul.facts li::before { content: ""; position: absolute; left: 1pt; top: 3.5pt; width: 6pt; height: 3pt;
+    border-left: 1.5pt solid var(--brand); border-bottom: 1.5pt solid var(--brand); transform: rotate(-45deg); }
+  .lead { margin: 0 0 7pt; }
+
+  .syllabus { display: grid; grid-template-columns: 1fr 1fr; gap: 7pt 10pt; font-size: 8.75pt; line-height: 1.25; }
+  .subject-block { border: 0.75pt solid var(--line); border-top: 2.5pt solid var(--brand); border-radius: 6pt; padding: 6pt 9pt 5pt; break-inside: avoid; }
+  .subject-block + .subject-block { margin-top: 7pt; }
   .syllabus > .subject-block + .subject-block { margin-top: 0; }
-  .subject-block ol { margin: 0; padding-left: 16pt; }
+  .subject-block.maths { border-top-color: var(--maths); } .subject-block.maths h3 { color: var(--maths); }
+  .subject-block.english { border-top-color: var(--english); } .subject-block.english h3 { color: var(--english); }
+  .subject-block.science { border-top-color: var(--science); } .subject-block.science h3 { color: var(--science); }
+  .subject-block.reasoning { border-top-color: var(--reasoning); } .subject-block.reasoning h3 { color: var(--reasoning); }
+  .subject-block ol { margin: 0; padding-left: 15pt; }
   .subject-block li { margin-bottom: 1pt; }
-  .note { margin: 0 0 10pt; color: #444; }
-  ol.paper { margin: 0; padding-left: 20pt; }
-  .question { margin-bottom: 11pt; break-inside: avoid; }
-  .subject { margin: 0; font-size: 8pt; text-transform: uppercase; letter-spacing: 0.06em; color: #555; }
-  .stem { margin: 1pt 0 4pt; }
-  ol.options { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2pt 14pt; }
-  .letter { display: inline-block; width: 14pt; font-weight: 600; }
-  .typein { margin: 0; color: #444; }
-  .blank { display: inline-block; width: 70pt; border-bottom: 1pt solid #1a1a1a; }
+  .subject-block li::marker { color: var(--muted); }
+  .syllabus-part { break-inside: avoid; }
+
+  .note { margin: 0 0 9pt; color: var(--muted); }
+  ol.paper { list-style: none; margin: 0; padding: 0; }
+  .question { display: flex; gap: 8pt; margin-bottom: 10pt; break-inside: avoid; }
+  .qnum { flex: none; width: 17pt; height: 17pt; border-radius: 50%; background: var(--brand-soft); color: var(--brand);
+    font-size: 8pt; font-weight: 700; display: grid; place-items: center; margin-top: 1pt; }
+  .qbody { flex: 1; min-width: 0; }
+  .tags { margin: 0 0 2pt; display: flex; gap: 4pt; }
+  .tag { font-size: 6.75pt; font-weight: 600; letter-spacing: .05em; text-transform: uppercase; padding: 1pt 5pt; border-radius: 6pt; }
+  .tag.maths { color: #1d4ed8; background: var(--maths-soft); }
+  .tag.english { color: #6d28d9; background: var(--english-soft); }
+  .tag.science { color: #047857; background: var(--science-soft); }
+  .tag.part { color: var(--body); background: #f1f5f9; }
+  .stem { margin: 0 0 4pt; color: var(--ink); }
+  ol.options { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 2.5pt 12pt; }
+  ol.options li { display: flex; align-items: baseline; gap: 5pt; }
+  .letter { flex: none; display: inline-grid; place-items: center; width: 12pt; height: 12pt; border-radius: 50%;
+    border: 0.75pt solid #cbd5e1; font-size: 7pt; font-weight: 700; color: var(--body); transform: translateY(-0.5pt); }
+  .typein { margin: 0; color: var(--muted); display: flex; align-items: center; gap: 6pt; }
+  .blank { display: inline-block; width: 80pt; height: 15pt; border: 0.75pt solid #cbd5e1; border-radius: 4pt; }
+
   .sample, .answers { break-before: page; }
   .sample h2, .answers h2 { margin-top: 0; }
-  ${thirty ? ".question { margin-bottom: 7pt; } .stem { margin: 0 0 3pt; } ol.options { gap: 1pt 14pt; } td { padding: 3pt 6pt; }" : ""}
+  ${thirty ? ".question { margin-bottom: 6.5pt; } .stem { margin: 0 0 3pt; } ol.options { gap: 1.5pt 12pt; } td { padding: 3.5pt 6pt; }" : ""}
+
   table { width: 100%; border-collapse: collapse; }
+  thead td { background: var(--brand-soft); color: var(--brand); font-size: 7.5pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
   tr { break-inside: avoid; }
-  td { vertical-align: top; padding: 4pt 6pt; border-bottom: 0.75pt solid #ccc; }
-  td.num { width: 22pt; font-weight: 600; }
-  td.ans { width: 120pt; font-weight: 600; }
+  td { vertical-align: top; padding: 4pt 6pt; border-bottom: 0.75pt solid var(--line); }
+  tbody tr:nth-child(even) td { background: var(--tint); }
+  td.num { width: 22pt; font-weight: 700; color: var(--muted); }
+  td.ans { width: 125pt; font-weight: 600; color: var(--brand); }
 </style>
 </head>
 <body>
-  <h1>Reasoning test</h1>
-  <p class="sub">For admission to Class ${classLevel}</p>
+  <header class="band">
+    <div class="mark"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 10 12 5 2 10l10 5 10-5zM6 12v5c3 3 9 3 12 0v-5"/></svg></div>
+    <div>
+      <p class="eyebrow">Syllabus and sample paper</p>
+      <h1>Aptitude Test</h1>
+      <p class="sub">For admission to Class ${classLevel}</p>
+    </div>
+    <div class="stats">
+      <div class="stat"><b>${count}</b><span>questions</span></div>
+      <div class="stat"><b>${count}</b><span>minutes</span></div>
+      <div class="stat"><b>3 hours</b><span>link stays open</span></div>
+    </div>
+  </header>
 
   <h2>About the test</h2>
   <ul class="facts">
@@ -399,7 +466,7 @@ function render(classLevel: ClassLevel, shape: PaperShape): string {
 
   <section class="answers">
     <h2>Answers</h2>
-    <table>${answers}</table>
+    <table><thead><tr><td class="num">#</td><td class="ans">Answer</td><td>Working</td></tr></thead><tbody>${answers}</tbody></table>
   </section>
 </body>
 </html>
@@ -448,6 +515,7 @@ async function main(): Promise<number> {
         '--headless',
         '--disable-gpu',
         '--no-pdf-header-footer',
+        '--virtual-time-budget=8000',
         `--print-to-pdf=${pdf}`,
         pathToFileURL(html).href,
       ], { stdio: 'ignore' })

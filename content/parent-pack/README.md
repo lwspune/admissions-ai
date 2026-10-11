@@ -15,6 +15,14 @@ syllabus part as numbered chapter names under Maths and Science, with no textboo
 or intro. Classes, editions and chapters raised more questions from parents than they answered.
 The build still checks all of them; it only stops printing them.
 
+**The sheets look like the site** (2026-10-11): titled "Aptitude Test" as on the test link and
+the score sheet (the file names keep `reasoning-test-`, because links already sent use them), the
+indigo band with the three numbers, and the score sheet's subject colours on the topic cards and
+question tags. Light tints only, so a black-and-white print still reads. The font is Inter, fetched
+from Google Fonts while the browser prints; offline, the build falls back to Segoe UI without
+complaint, so check page 1 after a rebuild. Every class must stay on six pages: page 1 is full for
+class 11 and 12, so anything added there pushes the syllabus chapters to a page of their own.
+
 | File | What |
 |---|---|
 | `syllabus.json` | Topics (each a group of bank skills), the NCERT chapters that teach them in the old and new editions, the cohort the sheets are written for, and `syllabusChapters`: class N−1's chapters with their term and the syllabus skills each covers |
