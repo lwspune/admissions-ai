@@ -3,12 +3,15 @@
 @tailwind utilities;
 
 @layer base {
-  :root { color-scheme: light dark; }
+  /* Light only. Declaring "light dark" with every colour written for light
+     turned form controls dark grey on a white page for anyone whose phone is
+     in dark mode — parents included. A dark theme is a decision, not a default. */
+  :root { color-scheme: light; }
 
   /* Visible focus on every interactive element (spec 10). Never remove this
      without replacing it — keyboard users have nothing else to go on. */
-  :where(a, button, input, select, textarea, [tabindex]):focus-visible {
-    outline: 3px solid #1d4ed8;
+  :where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+    outline: 3px solid #4338ca;
     outline-offset: 2px;
   }
 }

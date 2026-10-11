@@ -21,6 +21,18 @@ export const STAGE_LABEL: Record<Stage, string> = {
   not_interested: 'Not interested',
 }
 
+export type Tone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger'
+
+/** The colour of a stage's badge, by meaning; the classes live with the Badge. */
+export const STAGE_TONE: Record<Stage, Tone> = {
+  new: 'neutral',
+  cnr: 'warning',
+  contacted: 'info',
+  qualified: 'success',
+  in_eis: 'accent',
+  not_interested: 'danger',
+}
+
 /** Mirrors the CHECK on leads.interest. */
 export const INTERESTS = ['NDA', 'SPI'] as const
 export type Interest = (typeof INTERESTS)[number]

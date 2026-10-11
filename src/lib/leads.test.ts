@@ -7,6 +7,8 @@ import {
   prepareImport,
   formatStageChange,
   isStage,
+  STAGES,
+  STAGE_TONE,
   MAX_NOTE,
   parseLeadFilters,
   searchTerm,
@@ -304,5 +306,16 @@ describe('stages', () => {
 
   it('shows an unrecognised stage change as stored rather than hiding it', () => {
     expect(formatStageChange('garbled')).toBe('Stage: garbled')
+  })
+
+  it('gives every stage a badge tone, so a new stage cannot render unstyled', () => {
+    for (const s of STAGES) expect(STAGE_TONE[s]).toBeTruthy()
+  })
+
+  it('reads the two outcomes as outcomes and an unanswered call as needing another', () => {
+    expect(STAGE_TONE.qualified).toBe('success')
+    expect(STAGE_TONE.not_interested).toBe('danger')
+    expect(STAGE_TONE.cnr).toBe('warning')
+    expect(STAGE_TONE.new).toBe('neutral')
   })
 })

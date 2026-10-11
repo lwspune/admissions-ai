@@ -5,6 +5,12 @@
 export const ROLES = ['telecaller', 'counsellor', 'superadmin'] as const
 export type Role = (typeof ROLES)[number]
 
+export const ROLE_LABEL: Record<Role, string> = {
+  telecaller: 'Telecaller',
+  counsellor: 'Counsellor',
+  superadmin: 'Superadmin',
+}
+
 // 8 is the NIST SP 800-63B floor. Set by the institute; raise it if staff
 // accounts ever get more than superadmin's own data behind them.
 export const MIN_PASSWORD = 8
