@@ -10,7 +10,8 @@ export default {
       minWidth: { tap: '44px' },
       fontFamily: {
         // Set by next/font in the root layout, self-hosted at build time.
-        sans: ['var(--font-sans)', ...defaultTheme.fontFamily.sans],
+        // Devanagari comes second, for the Hindi questions (2026-10-11).
+        sans: ['var(--font-sans)', 'var(--font-hindi)', ...defaultTheme.fontFamily.sans],
       },
       colors: {
         // Indigo, the parent score sheet's colour, as the one accent.

@@ -28,6 +28,7 @@ export default async function TestPage({ params }: { params: Promise<{ token: st
       questionCount={result.questionCount}
       minutes={result.minutes}
       syllabusClass={result.syllabusClass}
+      hindi={result.hindi}
     />
   )
 }

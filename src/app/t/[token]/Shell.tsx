@@ -13,6 +13,8 @@ export function Shell({
   icon,
   tone = 'brand',
   step,
+  stepLabel,
+  aside,
   children,
 }: {
   title: string
@@ -20,18 +22,21 @@ export function Shell({
   tone?: 'brand' | 'success' | 'warning'
   /** 1–2 on the steps before the test; absent on the end screens. */
   step?: number
+  /** "Step 1 of 2" in the screen's language; English when absent. */
+  stepLabel?: string
+  /** On the band beside the mark: the language switch, when the paper has Hindi. */
+  aside?: React.ReactNode
   children: React.ReactNode
 }) {
   return (
     <div className="flex min-h-screen flex-col">
       <div className="bg-brand-gradient pb-20 pt-5 text-white">
-        <div className="mx-auto flex max-w-md items-center justify-between px-4">
+        <div className="mx-auto flex max-w-md flex-wrap items-center justify-between gap-3 px-4">
           <Mark onDark />
-          {step && (
-            <p className="text-sm font-medium text-indigo-100">
-              Step {step} of {STEPS}
-            </p>
-          )}
+          <div className="flex items-center gap-3">
+            {step && <p className="text-sm font-medium text-indigo-100">{stepLabel ?? `Step ${step} of ${STEPS}`}</p>}
+            {aside}
+          </div>
         </div>
       </div>
 

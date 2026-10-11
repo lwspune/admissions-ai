@@ -2,18 +2,24 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { useTelemetry, useCountdown, formatClock } from './hooks'
-import type { Choice } from '@/lib/types'
+import type { Choice, Subject } from '@/lib/types'
+import type { Lang } from '@/lib/hindi'
+import { CANDIDATE_TEXT, type CandidateText } from '@/lib/candidateText'
 import { Icon } from '@/components/icons'
 import { Alert, Avatar, Badge, Mark, btn, card, control, cx } from '@/components/ui'
-import { Shell } from './Shell'
+import { Shell, STEPS } from './Shell'
+import { LanguageSwitch } from './LanguageSwitch'
 
 interface Question {
   position: number
-  subject: string
+  subject: Subject
   part: 'basics' | 'syllabus'
   format: 'mcq' | 'numeric'
   stem: string
   options: Record<Choice, string> | null
+  /** Maths and science on a fully translated paper; null otherwise. */
+  stemHi: string | null
+  optionsHi: Record<Choice, string> | null
 }
 
 interface SavedAnswer {
@@ -28,6 +34,14 @@ const CHOICES: Choice[] = ['A', 'B', 'C', 'D']
 /** Countdown milestones announced to screen readers, in seconds. */
 const ANNOUNCE_AT = [300, 60, 30]
 
+/** The language a question is showing in: Hindi only where it has a Hindi version. */
+function shownIn(question: Question | undefined, lang: Lang): Lang {
+  return lang === 'hi' && question?.stemHi ? 'hi' : 'en'
+}
+
+/** Remembered per link, so a reload or a resume keeps the candidate's choice. */
+const langKey = (token: string) => `lang:${token}`
+
 export function CandidateFlow({
   token,
   candidateName,
@@ -35,6 +49,7 @@ export function CandidateFlow({
   questionCount,
   minutes,
   syllabusClass,
+  hindi,
 }: {
   token: string
   candidateName: string
@@ -43,8 +58,23 @@ export function CandidateFlow({
   minutes: number
   /** Class N−1 on a 30-question paper; null on the 15-question one. */
   syllabusClass: number | null
+  /** Every maths and science question has a Hindi version: offer the switch. */
+  hindi: boolean
 }) {
   const windowEndsAt = new Date(expiresAt).getTime()
+
+  // English unless the candidate switches (2026-10-11).
+  const [lang, setLang] = useState<Lang>('en')
+  useEffect(() => {
+    if (!hindi) return
+    try {
+      if (window.localStorage.getItem(langKey(token)) === 'hi') setLang('hi')
+    } catch {
+      /* storage blocked: start in English */
+    }
+  }, [hindi, token])
+  const shownLang: Lang = hindi ? lang : 'en'
+  const t = CANDIDATE_TEXT[shownLang]
 
   const [stage, setStage] = useState<Stage>('identity')
   const [error, setError] = useState('')
@@ -59,6 +89,20 @@ export function CandidateFlow({
 
   const [startedAt, setStartedAt] = useState<number | null>(null)
   const { record, flush } = useTelemetry(attemptId, startedAt)
+
+  const changeLang = (next: Lang) => {
+    if (next === lang) return
+    setLang(next)
+    try {
+      window.localStorage.setItem(langKey(token), next)
+    } catch {
+      /* the choice lasts this visit only */
+    }
+    // A plain fact for the report, unscored, like the others.
+    if (attemptId) record({ kind: 'lang', position: current, payload: { to: next } })
+  }
+  const languageSwitch = (onDark: boolean) =>
+    hindi ? <LanguageSwitch lang={lang} label={t.language} onChange={changeLang} onDark={onDark} /> : null
   const submitting = useRef(false)
   const questionEnteredAt = useRef(Date.now())
   const dwell = useRef<Record<number, number>>({})
@@ -136,10 +180,10 @@ export function CandidateFlow({
     for (const mark of ANNOUNCE_AT) {
       if (seconds <= mark && !announced.current.has(mark)) {
         announced.current.add(mark)
-        setAnnouncement(mark >= 60 ? `${mark / 60} minutes remaining` : `${mark} seconds remaining`)
+        setAnnouncement(mark >= 60 ? t.announce.minutes(mark / 60) : t.announce.seconds(mark))
       }
     }
-  }, [remainingMs])
+  }, [remainingMs, t])
 
   // ── answer saving ─────────────────────────────────────────────────────────
 
@@ -167,9 +211,13 @@ export function CandidateFlow({
     [attemptId],
   )
 
+  // Each answer carries the language its question was showing in, so the
+  // report can say which answers were given in Hindi.
+  const languageOf = (position: number) => shownIn(questions.find((q) => q.position === position), shownLang)
+
   const setChoice = (position: number, choice: Choice) => {
     setAnswers((prev) => ({ ...prev, [position]: { choice, numeric: '' } }))
-    record({ kind: 'answer_set', position, payload: { to: choice } })
+    record({ kind: 'answer_set', position, payload: { to: choice, lang: languageOf(position) } })
     void saveAnswer(position, choice, '')
   }
 
@@ -179,7 +227,7 @@ export function CandidateFlow({
 
   const commitNumeric = (position: number) => {
     const value = answers[position]?.numeric ?? ''
-    record({ kind: 'answer_set', position, payload: { to: value } })
+    record({ kind: 'answer_set', position, payload: { to: value, lang: languageOf(position) } })
     void saveAnswer(position, null, value)
   }
 
@@ -221,12 +269,12 @@ export function CandidateFlow({
       })
       const data = await res.json()
       if (!data.ok) {
-        setError(data.error ?? 'That number does not match this link.')
+        setError(data.locked ? t.identity.locked : t.identity.mismatch)
         return
       }
       setStage('instructions')
     } catch {
-      setError('Could not reach the server. Please check your connection and try again.')
+      setError(t.identity.offline)
     } finally {
       setBusy(false)
     }
@@ -243,7 +291,7 @@ export function CandidateFlow({
       })
       const data = await res.json()
       if (!data.ok) {
-        setError(data.error ?? 'Could not start the test.')
+        setError(data.error ?? t.instructions.startFailed)
         return
       }
 
@@ -264,7 +312,7 @@ export function CandidateFlow({
       setStartedAt(Date.now())
       setStage('running')
     } catch {
-      setError('Could not reach the server. Please check your connection and try again.')
+      setError(t.identity.offline)
     } finally {
       setBusy(false)
     }
@@ -275,29 +323,43 @@ export function CandidateFlow({
   // Consent is taken on the recorded call before the link is sent, so the
   // link opens on the number check (2026-10-11).
   if (stage === 'identity') {
-    return <Identity onSubmit={doIdentify} busy={busy} error={error} />
+    return (
+      <div lang={shownLang}>
+        <Identity t={t} aside={languageSwitch(true)} onSubmit={doIdentify} busy={busy} error={error} />
+      </div>
+    )
   }
   if (stage === 'instructions') {
     return (
-      <Instructions
-        name={candidateName}
-        expiresAt={windowEndsAt}
-        questionCount={questionCount}
-        minutes={minutes}
-        syllabusClass={syllabusClass}
-        onStart={doStart}
-        busy={busy}
-        error={error}
-      />
+      <div lang={shownLang}>
+        <Instructions
+          t={t}
+          aside={languageSwitch(true)}
+          name={candidateName}
+          expiresAt={windowEndsAt}
+          questionCount={questionCount}
+          minutes={minutes}
+          syllabusClass={syllabusClass}
+          onStart={doStart}
+          busy={busy}
+          error={error}
+        />
+      </div>
     )
   }
-  if (stage === 'done') return <Done />
+  if (stage === 'done') {
+    return (
+      <div lang={shownLang}>
+        <Done t={t} />
+      </div>
+    )
+  }
 
   const question = questions.find((q) => q.position === current)
   const answered = questions.filter((q) => isAnswered(answers[q.position])).length
 
   return (
-    <div className="flex min-h-screen flex-col">
+    <div lang={shownLang} className="flex min-h-screen flex-col">
       <div aria-live="polite" className="sr-only">
         {announcement}
       </div>
@@ -307,11 +369,17 @@ export function CandidateFlow({
           <span className="flex items-center gap-2.5">
             <Mark labelClassName="sr-only" />
             <span className="text-sm font-medium text-slate-700">
-              Question <span className="font-semibold tabular-nums text-slate-900">{current}</span> of{' '}
+              {t.running.question[0]}
+              <span className="font-semibold tabular-nums text-slate-900">{current}</span>
+              {t.running.question[1]}
               <span className="tabular-nums">{questions.length}</span>
+              {t.running.question[2]}
             </span>
           </span>
-          <TimerPill remainingMs={remainingMs} />
+          <span className="flex items-center gap-2">
+            {languageSwitch(false)}
+            <TimerPill remainingMs={remainingMs} />
+          </span>
         </div>
         <div aria-hidden="true" className="h-1 bg-slate-100">
           <div
@@ -324,12 +392,13 @@ export function CandidateFlow({
       <main className={`mx-auto w-full max-w-2xl flex-1 px-4 pt-4 ${reviewing ? 'pb-10' : 'pb-28'}`}>
         {hidden && (
           <Alert tone="warning" className="mb-4">
-            Timer paused.
+            {t.running.paused}
           </Alert>
         )}
 
         {reviewing ? (
           <Review
+            t={t}
             questions={questions}
             answers={answers}
             answered={answered}
@@ -340,6 +409,8 @@ export function CandidateFlow({
         ) : (
           question && (
             <QuestionView
+              t={t}
+              lang={shownLang}
               question={question}
               syllabusClass={syllabusClass}
               answer={answers[question.position]}
@@ -351,6 +422,7 @@ export function CandidateFlow({
         )}
 
         <Palette
+          t={t}
           questions={questions}
           answers={answers}
           answered={answered}
@@ -364,7 +436,7 @@ export function CandidateFlow({
           screen has its own buttons, so the bar steps aside for it. */}
       {!reviewing && (
         <nav
-          aria-label="Previous and next question"
+          aria-label={t.running.navLabel}
           className="fixed inset-x-0 bottom-0 z-20 border-t border-slate-200 bg-white/95 pb-[env(safe-area-inset-bottom)] backdrop-blur supports-[backdrop-filter]:bg-white/85"
         >
           <div className="mx-auto flex max-w-2xl gap-3 px-4 py-3">
@@ -375,16 +447,16 @@ export function CandidateFlow({
               disabled={current <= 1}
             >
               <Icon name="chevronLeft" className="h-5 w-5" />
-              Previous
+              {t.running.previous}
             </button>
             {current < questions.length ? (
               <button type="button" className={`${btn('primary', 'lg')} flex-1`} onClick={() => goTo(current + 1)}>
-                Next
+                {t.running.next}
                 <Icon name="chevronRight" className="h-5 w-5" />
               </button>
             ) : (
               <button type="button" className={`${btn('primary', 'lg')} flex-1`} onClick={() => setReviewing(true)}>
-                Review &amp; submit
+                {t.running.review}
               </button>
             )}
           </div>
@@ -430,18 +502,22 @@ function FieldError({ id, children }: { id?: string; children: React.ReactNode }
 }
 
 function Identity({
+  t,
+  aside,
   onSubmit,
   busy,
   error,
 }: {
+  t: CandidateText
+  aside: React.ReactNode
   onSubmit: (mobile: string) => void
   busy: boolean
   error: string
 }) {
   const [mobile, setMobile] = useState('')
   return (
-    <Shell title="Confirm your number" icon="phone" step={1}>
-      <p className={lead}>Enter the mobile number this link was sent to.</p>
+    <Shell title={t.identity.title} icon="phone" step={1} stepLabel={t.step(1, STEPS)} aside={aside}>
+      <p className={lead}>{t.identity.lead}</p>
       <form
         className="mt-5"
         onSubmit={(e) => {
@@ -450,7 +526,7 @@ function Identity({
         }}
       >
         <label htmlFor="mobile" className="sr-only">
-          Mobile number
+          {t.identity.label}
         </label>
         <input
           id="mobile"
@@ -458,7 +534,7 @@ function Identity({
           inputMode="numeric"
           autoComplete="tel"
           className={cx(control, 'block w-full py-3 text-lg tracking-wide')}
-          placeholder="10-digit mobile number"
+          placeholder={t.identity.placeholder}
           value={mobile}
           onChange={(e) => setMobile(e.target.value)}
           aria-describedby={error ? 'mobile-error' : undefined}
@@ -466,7 +542,7 @@ function Identity({
         />
         {error && <FieldError id="mobile-error">{error}</FieldError>}
         <button type="submit" className={fullWidth} disabled={busy}>
-          {busy ? 'Checking…' : 'Continue'}
+          {busy ? t.identity.checking : t.identity.submit}
         </button>
       </form>
     </Shell>
@@ -474,6 +550,8 @@ function Identity({
 }
 
 function Instructions({
+  t,
+  aside,
   name,
   expiresAt,
   questionCount,
@@ -483,6 +561,8 @@ function Instructions({
   busy,
   error,
 }: {
+  t: CandidateText
+  aside: React.ReactNode
   name: string
   expiresAt: number
   questionCount: number
@@ -494,41 +574,36 @@ function Instructions({
 }) {
   const closes = new Date(expiresAt).toLocaleTimeString('en-IN', { hour: '2-digit', minute: '2-digit' })
   return (
-    <Shell title="How the test works" icon="book" step={2}>
+    <Shell title={t.instructions.title} icon="book" step={2} stepLabel={t.step(2, STEPS)} aside={aside}>
       {/* Names who should answer: breaking that becomes a choice, not an ambiguity. */}
       <div className="mt-5 flex items-center gap-3 rounded-xl bg-brand-50 p-4 ring-1 ring-inset ring-brand-100">
         <Avatar name={name} className="h-11 w-11 bg-white text-sm" />
         <p className="text-sm leading-relaxed text-slate-700">
-          This test is for <span className="font-semibold text-slate-900">{name}</span>, who should answer it on their
-          own.
+          {t.instructions.forName[0]}
+          <span className="font-semibold text-slate-900">{name}</span>
+          {t.instructions.forName[1]}
         </p>
       </div>
       <dl className="mt-4 grid grid-cols-3 gap-2 text-center">
-        <Stat value={String(questionCount)} label="questions" />
-        <Stat value={String(minutes)} label="minutes" />
-        <Stat value={closes} label="link closes" />
+        <Stat value={String(questionCount)} label={t.instructions.stats.questions} />
+        <Stat value={String(minutes)} label={t.instructions.stats.minutes} />
+        <Stat value={closes} label={t.instructions.stats.closes} />
       </dl>
       <ul className="mt-5 space-y-3 text-sm leading-relaxed text-slate-700">
+        <Rule>{t.rules.paper(questionCount, minutes)}</Rule>
+        {syllabusClass !== null && <Rule>{t.rules.syllabus(syllabusClass)}</Rule>}
+        <Rule>{t.rules.marking}</Rule>
+        <Rule>{t.rules.change}</Rule>
         <Rule>
-          {questionCount} questions — maths, English and science — in {minutes} minutes.
+          {t.rules.leave[0]}
+          <span className="font-semibold text-slate-900">{closes}</span>
+          {t.rules.leave[1]}
         </Rule>
-        {syllabusClass !== null && (
-          <Rule>
-            Some maths and science questions are from the Class {syllabusClass} syllabus; each question is marked
-            either Basics or Class {syllabusClass}.
-          </Rule>
-        )}
-        <Rule>One mark for a correct answer. A quarter mark is deducted for a wrong multiple-choice answer; there is no penalty on the type-in questions, or for leaving one blank.</Rule>
-        <Rule>You can go back and change any answer before submitting.</Rule>
-        <Rule>
-          If you leave this page the timer pauses, but this link stops working at{' '}
-          <span className="font-semibold text-slate-900">{closes}</span> whatever happens.
-        </Rule>
-        <Rule>The timer starts when you press Start, not now.</Rule>
+        <Rule>{t.rules.timer}</Rule>
       </ul>
       {error && <FieldError>{error}</FieldError>}
       <button type="button" className={fullWidth} onClick={onStart} disabled={busy}>
-        {busy ? 'Starting…' : 'Start the test'}
+        {busy ? t.instructions.starting : t.instructions.start}
       </button>
     </Shell>
   )
@@ -552,10 +627,10 @@ function Rule({ children }: { children: React.ReactNode }) {
   )
 }
 
-function Done() {
+function Done({ t }: { t: CandidateText }) {
   return (
-    <Shell title="Thank you" icon="checkCircle" tone="success">
-      <p className={lead}>Your answers have been received. The institute will be in touch.</p>
+    <Shell title={t.done.title} icon="checkCircle" tone="success">
+      <p className={lead}>{t.done.body}</p>
     </Shell>
   )
 }
@@ -563,6 +638,8 @@ function Done() {
 // ── running-test pieces ─────────────────────────────────────────────────────
 
 function QuestionView({
+  t,
+  lang,
   question,
   syllabusClass,
   answer,
@@ -570,6 +647,8 @@ function QuestionView({
   onNumeric,
   onNumericCommit,
 }: {
+  t: CandidateText
+  lang: Lang
   question: Question
   syllabusClass: number | null
   answer: { choice: Choice | null; numeric: string } | undefined
@@ -577,25 +656,29 @@ function QuestionView({
   onNumeric: (position: number, value: string) => void
   onNumericCommit: (position: number) => void
 }) {
+  // The same question either way: the key letter is shared, so the options
+  // keep their order and only their words change.
+  const shown = shownIn(question, lang)
+  const stem = shown === 'hi' ? question.stemHi! : question.stem
+  const options = shown === 'hi' ? question.optionsHi : question.options
   return (
     <section className={`${card} p-5 sm:p-6`} aria-labelledby={`q-${question.position}`}>
       <p className="flex flex-wrap gap-2">
-        <Badge tone="brand" className="capitalize">
-          {question.subject}
-        </Badge>
+        <Badge tone="brand">{t.subject[question.subject]}</Badge>
         {syllabusClass !== null && (
           <Badge tone={question.part === 'syllabus' ? 'accent' : 'neutral'}>
-            {question.part === 'syllabus' ? `Class ${syllabusClass}` : 'Basics'}
+            {question.part === 'syllabus' ? t.part.syllabus(syllabusClass) : t.part.basics}
           </Badge>
         )}
       </p>
-      <h2 id={`q-${question.position}`} className="mt-3 text-[17px] leading-relaxed text-slate-900">
-        {question.stem}
+      {lang === 'hi' && shown === 'en' && <p className="mt-2 text-sm text-slate-600">{t.running.englishStays}</p>}
+      <h2 id={`q-${question.position}`} lang={shown} className="mt-3 text-[17px] leading-relaxed text-slate-900">
+        {stem}
       </h2>
 
-      {question.format === 'mcq' && question.options ? (
+      {question.format === 'mcq' && options ? (
         <fieldset className="mt-5 space-y-2.5">
-          <legend className="sr-only">Choose one answer</legend>
+          <legend className="sr-only">{t.running.chooseOne}</legend>
           {CHOICES.map((choice) => {
             const selected = answer?.choice === choice
             return (
@@ -621,9 +704,9 @@ function QuestionView({
                   >
                     {selected ? <Icon name="check" className="h-4 w-4" /> : choice}
                   </span>
-                  <span className="pt-0.5 text-slate-900">
+                  <span lang={shown} className="pt-0.5 text-slate-900">
                     <span className="sr-only">{choice}. </span>
-                    {question.options![choice]}
+                    {options[choice]}
                   </span>
                 </span>
               </label>
@@ -633,7 +716,7 @@ function QuestionView({
       ) : (
         <div className="mt-5">
           <label htmlFor={`n-${question.position}`} className="text-sm font-medium text-slate-700">
-            Type your answer as a number
+            {t.running.typeNumber}
           </label>
           <input
             id={`n-${question.position}`}
@@ -651,6 +734,7 @@ function QuestionView({
 }
 
 function Palette({
+  t,
   questions,
   answers,
   answered,
@@ -658,6 +742,7 @@ function Palette({
   onGoTo,
   reviewing,
 }: {
+  t: CandidateText
   questions: Question[]
   answers: Record<number, { choice: Choice | null; numeric: string }>
   answered: number
@@ -666,11 +751,15 @@ function Palette({
   reviewing: boolean
 }) {
   return (
-    <nav className={`${card} mt-4 p-4`} aria-label="Questions">
+    <nav className={`${card} mt-4 p-4`} aria-label={t.palette.label}>
       <div className="flex items-baseline justify-between gap-2">
-        <h2 className="text-sm font-semibold text-slate-900">All questions</h2>
+        <h2 className="text-sm font-semibold text-slate-900">{t.palette.title}</h2>
         <p className="text-xs text-slate-600">
-          <span className="font-semibold tabular-nums text-slate-900">{answered}</span> of {questions.length} answered
+          {t.palette.answered[0]}
+          <span className="font-semibold tabular-nums text-slate-900">{answered}</span>
+          {t.palette.answered[1]}
+          {questions.length}
+          {t.palette.answered[2]}
         </p>
       </div>
       <ul className="mt-3 grid grid-cols-[repeat(auto-fill,minmax(44px,1fr))] gap-2">
@@ -683,7 +772,7 @@ function Palette({
                 type="button"
                 onClick={() => onGoTo(q.position)}
                 aria-current={isCurrent ? 'true' : undefined}
-                aria-label={`Question ${q.position}, ${done ? 'answered' : 'not answered'}`}
+                aria-label={t.palette.button(q.position, done)}
                 className={`min-h-tap w-full rounded-lg text-sm font-semibold tabular-nums transition-colors ${
                   isCurrent
                     ? 'bg-brand-700 text-white shadow-sm'
@@ -700,13 +789,13 @@ function Palette({
       </ul>
       <ul aria-hidden="true" className="mt-3 flex flex-wrap gap-x-4 gap-y-1 text-xs text-slate-600">
         <li className="flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded bg-brand-700" /> Current
+          <span className="h-3 w-3 rounded bg-brand-700" /> {t.palette.current}
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded bg-brand-50 ring-1 ring-inset ring-brand-200" /> Answered
+          <span className="h-3 w-3 rounded bg-brand-50 ring-1 ring-inset ring-brand-200" /> {t.palette.answeredKey}
         </li>
         <li className="flex items-center gap-1.5">
-          <span className="h-3 w-3 rounded bg-white ring-1 ring-inset ring-slate-300" /> Not answered
+          <span className="h-3 w-3 rounded bg-white ring-1 ring-inset ring-slate-300" /> {t.palette.notAnswered}
         </li>
       </ul>
     </nav>
@@ -714,6 +803,7 @@ function Palette({
 }
 
 function Review({
+  t,
   questions,
   answers,
   answered,
@@ -721,6 +811,7 @@ function Review({
   onSubmit,
   onBack,
 }: {
+  t: CandidateText
   questions: Question[]
   answers: Record<number, { choice: Choice | null; numeric: string }>
   answered: number
@@ -731,21 +822,19 @@ function Review({
   const unanswered = questions.length - answered
   return (
     <section className={`${card} p-5 sm:p-6`}>
-      <h2 className="text-lg font-semibold tracking-tight text-slate-900">Ready to submit?</h2>
+      <h2 className="text-lg font-semibold tracking-tight text-slate-900">{t.review.title}</h2>
       <div className="mt-4 grid grid-cols-2 gap-2">
         <div className="rounded-xl bg-emerald-50 px-4 py-3 ring-1 ring-inset ring-emerald-200">
           <p className="text-2xl font-semibold tabular-nums text-emerald-800">{answered}</p>
-          <p className="text-xs text-emerald-800">answered</p>
+          <p className="text-xs text-emerald-800">{t.review.answered}</p>
         </div>
         <div className="rounded-xl bg-slate-50 px-4 py-3 ring-1 ring-inset ring-slate-200">
           <p className="text-2xl font-semibold tabular-nums text-slate-900">{unanswered}</p>
-          <p className="text-xs text-slate-600">not answered</p>
+          <p className="text-xs text-slate-600">{t.review.notAnswered}</p>
         </div>
       </div>
       <p className="mt-4 text-sm leading-relaxed text-slate-600">
-        {unanswered === 0
-          ? 'You have answered every question.'
-          : `${unanswered} question${unanswered === 1 ? '' : 's'} not answered. Blank answers score zero, but there is no penalty for them.`}
+        {unanswered === 0 ? t.review.all : t.review.unanswered(unanswered)}
       </p>
       {unanswered > 0 && (
         <ul className="mt-3 flex flex-wrap gap-2">
@@ -754,7 +843,7 @@ function Review({
             .map((q) => (
               <li key={q.position}>
                 <button type="button" className={btn('secondary', 'sm')} onClick={() => onGoTo(q.position)}>
-                  Go to {q.position}
+                  {t.review.goTo(q.position)}
                 </button>
               </li>
             ))}
@@ -762,10 +851,10 @@ function Review({
       )}
       <div className="mt-6 flex gap-3">
         <button type="button" className={`${btn('secondary', 'lg')} flex-1`} onClick={onBack}>
-          Keep working
+          {t.review.keepWorking}
         </button>
         <button type="button" className={`${btn('primary', 'lg')} flex-1`} onClick={onSubmit}>
-          Submit
+          {t.review.submit}
         </button>
       </div>
     </section>

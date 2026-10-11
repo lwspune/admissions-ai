@@ -2,43 +2,31 @@
 //
 // A parent reads these, often while the child is waiting. None of them should
 // read like an error, and each says what to do next rather than what went wrong.
+// They come before the paper is known, so they say it in English and Hindi at
+// once rather than offering a switch (2026-10-11).
 
 import type { IconName } from '@/components/icons'
+import { NOTICE_TEXT, type NoticeStatus } from '@/lib/candidateText'
 import { Shell } from './Shell'
 
-const MESSAGES: Record<string, { title: string; body: string; icon: IconName; tone: 'brand' | 'success' }> = {
-  not_found: {
-    title: 'This link is not available',
-    icon: 'link',
-    tone: 'brand',
-    body: 'It may have been replaced by a newer link. Please check the most recent message from the institute, or ask them to send a fresh one.',
-  },
-  expired: {
-    title: 'This link has expired',
-    icon: 'clock',
-    tone: 'brand',
-    body: 'Links stay open for three hours. Please contact the institute and they will send a new one.',
-  },
-  too_late: {
-    title: 'Not enough time left',
-    icon: 'clock',
-    tone: 'brand',
-    body: 'The test needs its full time without interruption, and this link is close to expiring. Please ask the institute for a fresh link.',
-  },
-  submitted: {
-    title: 'This test has already been completed',
-    icon: 'checkCircle',
-    tone: 'success',
-    body: 'Thank you — we have the answers. The institute will be in touch.',
-  },
+const LOOK: Record<NoticeStatus, { icon: IconName; tone: 'brand' | 'success' }> = {
+  not_found: { icon: 'link', tone: 'brand' },
+  expired: { icon: 'clock', tone: 'brand' },
+  too_late: { icon: 'clock', tone: 'brand' },
+  submitted: { icon: 'checkCircle', tone: 'success' },
 }
 
 export function Notice({ status }: { status: string }) {
-  const message = MESSAGES[status] ?? MESSAGES.not_found!
+  const key: NoticeStatus = status in NOTICE_TEXT ? (status as NoticeStatus) : 'not_found'
+  const { en, hi } = NOTICE_TEXT[key]
 
   return (
-    <Shell title={message.title} icon={message.icon} tone={message.tone}>
-      <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{message.body}</p>
+    <Shell title={en.title} icon={LOOK[key].icon} tone={LOOK[key].tone}>
+      <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{en.body}</p>
+      <div lang="hi" className="mt-5 border-t border-slate-200 pt-5">
+        <h2 className="text-lg font-semibold tracking-tight text-slate-900">{hi.title}</h2>
+        <p className="mt-2 text-[15px] leading-relaxed text-slate-600">{hi.body}</p>
+      </div>
     </Shell>
   )
 }
