@@ -50,13 +50,15 @@ translation meets, whether a paper offers Hindi, per-class coverage) · `candida
 candidate screen's words, English and Hindi) ·
 `parentPack` (the PDFs' public paths and the issue message) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
+`contact` (what a homepage message must hold) · `publicPaths` (what opens without a session) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
-`leads` (list and detail reads) · `leadImport` (preview and commit)
+`leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
+messages: send, list, mark read)
 
 **`src/components/`** — the shared look: `ui` (button, field, card, badge and
 alert styles, no hooks, so server and client pages share them), `icons` (inline
@@ -66,15 +68,19 @@ SVG, no icon package), `StaffShell` (the frame round every staff page),
 (`brand` is indigo, from the parent sheet); a page should reach for these before
 writing its own classes.
 
-**`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
-the latter guards itself with `CRON_SECRET`. The parents' PDFs in
+**`src/app/`** — `/` (the homepage), `t/[token]/` and `api/cron/` are the only
+unauthenticated routes; the list and the reason for each is `src/lib/publicPaths.ts`.
+The homepage is for other institutes: an animated tour of the signed-in product
+(`ProductTour`, `tourScenes`) and a contact form; staff who land on it go to `/leads`.
+`api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/` and `staff/` (superadmin only), `downloads/` (every role) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
 client so **RLS** decides access; the candidate API uses service role because
-it has no session to act for. A staff feature reaching for service role is a
+it has no session to act for, and so does the homepage's contact form, for the same
+reason. A staff feature reaching for service role is a
 bug — it moves the access rule out of the database and into an `if`. The one
 sanctioned exception is `src/server/staff.ts` (see Invariants): login accounts
 have no RLS path at all.
@@ -190,6 +196,18 @@ These are the things that quietly break everything if violated.
   `set_hindi()` (all or nothing). The paper's text is read live from `test_items`, so the
   `test_items_hindi_frozen` trigger refuses a Hindi change while a candidate is mid-test on it; a
   change of meaning is a retirement, not an edit. The staff report shows the English only.
+- **The homepage shows mock-ups, never data.** The tour is drawn from the app's
+  components with invented names; its question is P8-M1 from the public sample
+  paper, and must never be a bank item, whose answer would be published on the
+  page. `robots.ts` allows `/` exactly (`/$`) and nothing else; the root's match
+  in `publicPaths` is exact, because a prefix match on `/` opens every path.
+- **Homepage messages are superadmin's, and kept.** `contact_messages`
+  (migration 0017): written only on service role by the form's action, read only
+  by superadmin, and the one column anyone may change is `read_at` (a column
+  grant, not a policy). Nobody deletes them, by the user's choice: they are not
+  candidate data and the purge does not touch them. The rate limit (5 an hour
+  per address, 30 an hour in all) is a trigger, since serverless instances share
+  no memory.
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -223,6 +241,11 @@ IPv6-only; from this machine its lookup fails intermittently and, by address,
 the connection is refused (2026-10-01).
 
 ## Traps
+
+- **Class order does not settle a Tailwind conflict; the stylesheet does.**
+  `cx(input, 'border-rose-400')` stayed grey, because `border-slate-300` is
+  emitted later. Override a shared style with a variant (`aria-[invalid=true]:…`)
+  or change the shared style, never by appending a rival class.
 
 - **Never run `next build` while `next dev` is live.** It overwrites the
   `.next` the dev server serves from; every asset 404s with nothing explaining
@@ -275,6 +298,16 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-11 — A public homepage, to gauge interest from other institutes.**
+  The user's call, before deciding anything commercial: an animated tour of the
+  test, report, leads and admin screens, and a contact form whose messages
+  superadmin reads on `/messages`, with an unread count in the nav. The product is
+  named "Aptitude Test", with no institute name. Search engines may index `/`,
+  nothing else. The form asks name, phone, email and message (a phone or an email
+  is enough), and messages are never deleted. The tour is mock-ups, not
+  screenshots, so it does not go stale. A visitor who asks for less motion gets
+  still, finished frames; everyone else gets a pause button.
 
 - **2026-10-11 — The address is `aptitudetestai.vercel.app`.** The user's pick;
   `aptitudetest.vercel.app` belongs to someone else's aptitude site. Added as a

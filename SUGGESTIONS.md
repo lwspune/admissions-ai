@@ -177,6 +177,20 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
+- [ ] **The user asked (2026-10-11) that student data never be deleted. Not done; needs a 360
+      and their go-ahead.** It reverses an invariant: the 12-month purge (`/api/cron/purge`,
+      `RETENTION_MONTHS`) exists because that is what the parent consents to on the call, and
+      the two must move together. Open questions: what the call script then says about how
+      long data is kept; whether minors' data kept indefinitely fits DPDP's purpose-limitation
+      and erasure duties; whether "keep the score, drop the IPs and device details" would
+      serve. No row is due for deletion before 2027-09 (the first lead is from 2026-09-22),
+      so nothing is lost while this is decided.
+- [ ] **Homepage messages: what is deliberately not built (2026-10-11).** No email or WhatsApp
+      alert on a new message; the unread count in the nav is the signal. `/messages` shows
+      the newest 200. On a phone the staff nav scrolls sideways and Messages, with its count,
+      starts off-screen (Staff already did): scrolling the current tab into view would fix
+      both, and touches every staff page.
+
 - [ ] **Consent now lives only on the call (2026-10-11): check the call script says it.** The
       consent and handover screens were removed from the test link (the user's call, to cut
       friction). Everything the screen told the parent must now be said on the recorded call:
@@ -244,6 +258,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [ ] **Vercel Hobby is licensed for non-commercial use.** This is a fee-charging institute's
       admissions pipeline. If enforced, candidate links go down mid-window with no warning to the
       telecaller. Decided on 2026-09-22 to stay on Hobby for now; revisit before a real intake.
+      **2026-10-11:** the homepage now pitches the product to other institutes, which makes the
+      commercial use public. The user is gauging interest before doing anything commercial;
+      the plan (Pro, or a separate project for the sales page) is due before any paid use.
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
