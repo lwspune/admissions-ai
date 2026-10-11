@@ -7,11 +7,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **Hindi (2026-10-11): built on `feat/hindi`, migration 0016 applied, all 237 translations
-      signed off by the user and loaded.** Code: the switch, the paper's Hindi, the report fact, the
-      lint and `items:hindi` (unit 366, integration 115/115 including the Hindi suite, rerun after
-      loading). Every live maths and science item carries Hindi, but **main does not have the code
-      yet**, so no candidate sees a switch until `feat/hindi` is merged and its deploy checked.
+- [ ] **Hindi (2026-10-11): LIVE.** Migration 0016 applied, all 237 translations signed off by the
+      user and loaded, `feat/hindi` merged (`06fad9f`, "Deployment has completed"). A test issued
+      on production for a class 9 admit showed the switch on the live site. Unit 366, integration
+      115/115 including the Hindi suite, rerun after loading.
       **Not yet done:** Hindi editions of the parent PDFs (agreed). **Unseen:** the switch on a real
       Android phone over mobile data (Devanagari font download), and the staff report's "Answered
       in Hindi" row in a browser (needs a signed-in staff session). The new-edition NCERT chapter
