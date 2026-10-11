@@ -70,8 +70,9 @@ writing its own classes.
 
 **`src/app/`** — `/` (the homepage), `t/[token]/` and `api/cron/` are the only
 unauthenticated routes; the list and the reason for each is `src/lib/publicPaths.ts`.
-The homepage is for other institutes: an animated tour of the signed-in product
-(`ProductTour`, `tourScenes`) and a contact form; staff who land on it go to `/leads`.
+The homepage is for other institutes: one line, an animation of the admin screens
+(`ProductTour`) and a "Get in touch" button that opens the contact form in a
+`<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
 thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
@@ -196,10 +197,9 @@ These are the things that quietly break everything if violated.
   `set_hindi()` (all or nothing). The paper's text is read live from `test_items`, so the
   `test_items_hindi_frozen` trigger refuses a Hindi change while a candidate is mid-test on it; a
   change of meaning is a retirement, not an edit. The staff report shows the English only.
-- **The homepage shows mock-ups, never data.** The tour is drawn from the app's
-  components with invented names; its question is P8-M1 from the public sample
-  paper, and must never be a bank item, whose answer would be published on the
-  page. `robots.ts` allows `/` exactly (`/$`) and nothing else; the root's match
+- **The homepage shows mock-ups, never data.** The animation is drawn from the
+  app's components with invented names. A question shown there must come from
+  the public sample paper, never the bank, whose answer it would publish. `robots.ts` allows `/` exactly (`/$`) and nothing else; the root's match
   in `publicPaths` is exact, because a prefix match on `/` opens every path.
 - **Homepage messages are superadmin's, and kept.** `contact_messages`
   (migration 0017): written only on service role by the form's action, read only
@@ -307,7 +307,10 @@ the connection is refused (2026-10-01).
   nothing else. The form asks name, phone, email and message (a phone or an email
   is enough), and messages are never deleted. The tour is mock-ups, not
   screenshots, so it does not go stale. A visitor who asks for less motion gets
-  still, finished frames; everyone else gets a pause button.
+  still, finished frames; everyone else gets a pause button. The first version
+  had a hero, a four-screen tour and feature cards; the user cut it the same
+  night to one line ("Aptitude testing and lead management for education
+  institutes"), the admin animation, and "Get in touch" opening the form.
 
 - **2026-10-11 — The address is `aptitudetestai.vercel.app`.** The user's pick;
   `aptitudetest.vercel.app` belongs to someone else's aptitude site. Added as a
