@@ -50,3 +50,29 @@ describe('packMessage', () => {
     expect(issueMessage({ name: 'Asha', testUrl: 'https://admissions.example/t/AbCdEfGhIjKlMnOpQrStUv', classLevel: 9 }).endsWith(line)).toBe(true)
   })
 })
+
+// 2026-10-11: each class's sheet has a Hindi edition beside it. Staff send it
+// from /downloads; the issue message still sends the English one.
+describe('the Hindi edition', () => {
+  it('sits beside the English PDF, with -hi before the extension', () => {
+    expect(parentPackPath(10, 'hi')).toBe('/parent-pack/reasoning-test-class-10-hi.pdf')
+    expect(parentPackPath(10, 'en')).toBe(parentPackPath(10))
+  })
+
+  it('is linked on the same site', () => {
+    expect(parentPackUrl('https://admissions.example', 8, 'hi')).toBe(
+      'https://admissions.example/parent-pack/reasoning-test-class-8-hi.pdf',
+    )
+  })
+
+  it('is sent with a Hindi line naming the class', () => {
+    expect(packMessage('https://admissions.example', 9, 'hi')).toBe(
+      'कक्षा 9 की परीक्षा का पाठ्यक्रम और नमूना प्रश्नपत्र (हिंदी): https://admissions.example/parent-pack/reasoning-test-class-9-hi.pdf',
+    )
+  })
+
+  it('never changes the issue message, which sends the English PDF', () => {
+    const message = issueMessage({ name: 'Asha', testUrl: 'https://admissions.example/t/AbCdEfGhIjKlMnOpQrStUv', classLevel: 9 })
+    expect(message).not.toContain('-hi.pdf')
+  })
+})

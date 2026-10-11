@@ -93,6 +93,20 @@ function missingNumbers(en: string, hi: string): string[] {
   return [...new Set(numbersIn(en))].filter((n) => !inHindi.has(n))
 }
 
+/**
+ * Why a sample's worked answer in Hindi cannot be printed. The parent sheet
+ * prints the working, so every number of the English must survive.
+ */
+export function workingProblems(en: string, hi: string): string[] {
+  if (!filled(hi)) return ['the Hindi working is blank']
+  const problems: string[] = []
+  if (!DEVANAGARI.test(hi)) problems.push('the Hindi working has no Hindi in it')
+  if (DEVANAGARI_DIGIT.test(hi)) problems.push('use the digits 0–9 in the working, not Devanagari digits')
+  const missing = missingNumbers(en, hi)
+  if (missing.length) problems.push(`the working's ${missing.join(', ')} is missing from its Hindi`)
+  return problems
+}
+
 /** Why a translation cannot be loaded. Empty when it can. */
 export function translationProblems(en: EnglishText, hi: HindiEntry): string[] {
   const problems: string[] = []

@@ -13,13 +13,15 @@ import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness, notEnglish } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
-import { translationProblems, hindiCoverage, type HindiEntry } from '../src/lib/hindi'
+import { translationProblems, workingProblems, hindiCoverage, type HindiEntry } from '../src/lib/hindi'
 import type { Subject, Difficulty, Format, Choice } from '../src/lib/types'
 
 const DIR = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'items')
 const SAMPLES = join(dirname(fileURLToPath(import.meta.url)), '..', 'content', 'parent-pack', 'sample-papers.json')
 // Hindi versions of maths and science items, one file per English batch (2026-10-11).
 export const HINDI_DIR = join(DIR, 'hi')
+// The Hindi parent sheets' samples, with their worked answers.
+export const SAMPLES_HI = join(dirname(SAMPLES), 'sample-papers.hi.json')
 
 const SUBJECTS = ['maths', 'english', 'science']
 const DIFFICULTIES = ['easy', 'moderate', 'difficult']
@@ -309,6 +311,29 @@ export function lintItems(): number {
       if (problems.length === 0) translated.add(entry.ref)
     }
     console.log(`  ${fileErrors === 0 ? 'ok    ' : 'ERROR '} ${file}: ${entries.length} item(s)`)
+  }
+
+  // The parent sheets' samples in Hindi, worked answers included: the sheet
+  // prints the working, so its numbers are checked as well as the question's.
+  if (existsSync(SAMPLES_HI)) {
+    const sampleByRef = new Map(items.filter((i) => i.__sample && i.ref).map((i) => [i.ref!, i]))
+    const entries = JSON.parse(readFileSync(SAMPLES_HI, 'utf8')) as (HindiEntry & { rationale_hi?: string })[]
+    let sampleErrors = 0
+    for (const entry of entries) {
+      const fail = (msg: string) => { sampleErrors++; err(`hi/${entry.ref ?? '(no ref)'}`, msg) }
+      const en = entry.ref ? sampleByRef.get(entry.ref) : undefined
+      if (!en) { fail('no parent-pack sample has this ref'); continue }
+      const problems = [
+        ...translationProblems(
+          { subject: en.subject as Subject, format: en.format as Format, stem: en.stem ?? '', options: (en.options ?? null) as Record<Choice, string> | null },
+          entry,
+        ),
+        ...workingProblems(en.rationale ?? '', entry.rationale_hi ?? ''),
+      ]
+      for (const p of problems) fail(p)
+    }
+    const untranslated = [...sampleByRef.values()].filter((i) => i.subject !== 'english' && !entries.some((e) => e.ref === i.ref)).length
+    console.log(`  ${sampleErrors === 0 ? 'ok    ' : 'ERROR '} parent-pack/sample-papers.hi.json: ${entries.length} sample(s), ${untranslated} maths or science sample(s) without Hindi`)
   }
 
   // Not an error: a class short of complete simply offers no Hindi on a paper

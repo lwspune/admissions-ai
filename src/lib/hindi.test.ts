@@ -7,6 +7,7 @@ import {
   numbersIn,
   translationProblems,
   hindiCoverage,
+  workingProblems,
   type HindiEntry,
 } from './hindi'
 
@@ -207,5 +208,25 @@ describe('hindiCoverage', () => {
     const c = byClass(['M1', 'S1'])
     expect(c[8]).toMatchObject({ total: 2, translated: 2, complete: true })
     expect(c[10]).toMatchObject({ total: 2, translated: 1, complete: false })
+  })
+})
+
+// The parent sheets print each sample's worked answer. In Hindi it must keep
+// every number of the English working, or a parent checks a wrong sum.
+describe('workingProblems', () => {
+  const en = '48 = 24 × 2 and 72 = 24 × 3, so 24 is the largest.'
+
+  it('passes Hindi working that keeps every number', () => {
+    expect(workingProblems(en, '48 = 24 × 2 और 72 = 24 × 3, इसलिए 24 सबसे बड़ी है।')).toEqual([])
+  })
+
+  it('refuses working with a number missing', () => {
+    expect(workingProblems(en, '48 = 24 × 2, इसलिए 24 सबसे बड़ी है।')).toContainEqual(expect.stringMatching(/72/))
+  })
+
+  it('refuses blank working, working with no Hindi, and Devanagari digits', () => {
+    expect(workingProblems(en, ' ')).toContainEqual(expect.stringMatching(/blank/))
+    expect(workingProblems(en, en)).toContainEqual(expect.stringMatching(/no Hindi/))
+    expect(workingProblems('It is 5.', 'यह ५ है। 5')).toContainEqual(expect.stringMatching(/0–9/))
   })
 })
