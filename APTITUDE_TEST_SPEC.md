@@ -23,7 +23,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 | Time | 15 minutes of active time (30 for the 30-question paper; each paper records its own). Timer pauses when the tab is hidden |
 | Window | 3 hours from creation (2 until 2026-10-07, migration 0015). Hard backstop — the attempt dies with the window |
 | Delivery | Staff copy the link, paste into WhatsApp. **Sent to the parent's number.** No messaging API |
-| Identity | Candidate enters the number the link was sent to, then a handover screen names who should answer |
+| Identity | The number the link was sent to is entered, then the instructions screen names who should answer (a separate handover screen until 2026-10-11) |
 | Layout | One question per screen, Prev/Next, 15-dot palette, back-navigation allowed |
 | Saving | Per-question server save. Resume supported |
 | Marking | +1 correct · −0.25 wrong MCQ · 0 wrong numeric · 0 skipped |
@@ -31,7 +31,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 | Cut-off | **None in the system.** Scores are reported; the bar is set by a human, outside the app |
 | Fraud | Capture and display. Never block, never score |
 | Reissue | Max 3 per lead. Single-use, unguessable tokens |
-| Candidate sees | Consent → handover → test → "Thank you, we'll be in touch." No score on screen. Staff may later send the parent a score-only sheet (added 2026-10-06) — never questions or answers |
+| Candidate sees | Number → instructions → test → "Thank you, we'll be in touch." No score on screen. Staff may later send the parent a score-only sheet (added 2026-10-06) — never questions or answers |
 | Stack | Next.js (App Router) + TypeScript + Supabase, GitHub → Vercel |
 
 **Assumptions — correct me if wrong:** staff auth is Supabase Auth with role in `app_metadata`;
@@ -139,18 +139,20 @@ Public route `/t/[token]`. Mobile-first, must work on a 4-inch Android 8 screen 
 
 | Screen | |
 |---|---|
-| **Consent** | Addressed to the parent, who received the link. What's collected (answers, timing, device and network info), why, kept 12 months, internal-only. "I am the parent/guardian and I consent" |
 | **Identity** | "Enter the mobile number this link was sent to." Must match `contact_mobile`. Rate-limited: 5 tries per token, 20/hour per IP |
-| **Handover** | "Please hand the phone to **Rohan Patil**, who should answer on their own." Naming the expectation makes breaking it a choice rather than an ambiguity |
-| **Instructions** | 15 questions, 15 minutes, +1 / −0.25 on multiple-choice, no penalty on numeric, you can go back. The timer starts on Start, not on page load |
+| **Instructions** | "This test is for **Rohan Patil**, who should answer it on their own." Naming the expectation makes breaking it a choice rather than an ambiguity. Then 15 questions, 15 minutes, +1 / −0.25 on multiple-choice, no penalty on numeric, you can go back. The timer starts on Start, not on page load |
 | **Test** | One question per screen. Prev / Next. 15-dot palette. Countdown. Numeric items get `inputmode="numeric"` |
 | **Submit** | Palette overview, unanswered-count warning |
 | **Done** | "Thank you — we'll be in touch." No score, no answers, no review — that would leak the bank to the next candidate |
 
+Until 2026-10-11 the link opened on a **Consent** screen and a separate **Handover** screen came after the
+number. Both were removed to cut the steps before the first question to two: consent is taken on the
+recorded call before the link is sent (see DPDP below).
+
 Failure states each get a plain-language screen, never a raw error: link expired, already used, number
 doesn't match, window closing too soon, already submitted.
 
-**Resume** restores saved answers, palette state and server-computed remaining time. No re-consent.
+**Resume** restores saved answers, palette state and server-computed remaining time.
 
 ---
 
@@ -253,10 +255,13 @@ The token is 22 chars of `crypto.randomBytes` base62, single-use, killed on reis
 the public route goes through a service-role API with an explicit field allow-list. The service-role key
 is server-side only, never in a `NEXT_PUBLIC_` var. All candidate input is validated at the API boundary.
 
-**DPDP:** candidates are minors, a protected category. Sending the link to the parent's number puts the
-consent screen on the parent's device before the child sees a question; the telecaller also takes
-spoken consent on the recorded call. Consent is stored with number, timestamp and IP. Purpose-limited
-to admission screening — not reused for marketing. 12-month purge, scheduled.
+**DPDP:** candidates are minors, a protected category. Consent is taken from the parent on the
+recorded call before the link is sent, and since 2026-10-11 that is the only consent: the on-screen
+consent screen was removed by the user's decision, to reduce friction. The call is therefore what must
+tell the parent what is recorded, that it is kept 12 months, and that a score summary may be sent to
+them. The link still goes to the parent's number. Nothing in the app stores consent (`leads.consented_at`
+has never been written). Purpose-limited to admission screening — not reused for marketing. 12-month
+purge, scheduled.
 
 **Accessibility:** visible focus styles; ARIA labels on palette dots ("Question 7, answered"); WCAG AA
 contrast; keyboard navigation through the test; the countdown announced at 5 min, 1 min and 30 s via a

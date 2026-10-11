@@ -1,12 +1,13 @@
 // Data retention. Pure, so the rule that decides what gets deleted can be
 // tested without a database — and so it can be read in one place by anyone
-// checking the app against what the consent screen promises.
+// checking the app against what the parent consents to.
 
 /**
- * What the consent screen tells the parent: "kept for 12 months".
+ * What the parent is told: "kept for 12 months". Consent is taken on the
+ * recorded call; until 2026-10-11 a consent screen on the test link said so too.
  *
  * Changing this number changes a promise already made to people who have
- * agreed to it. The consent text in CandidateFlow must move with it.
+ * agreed to it. The call's consent script must move with it.
  */
 export const RETENTION_MONTHS = 12
 

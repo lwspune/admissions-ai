@@ -12,7 +12,7 @@ export interface PurgeReport {
 }
 
 /**
- * Deletes candidate data past the twelve months the consent screen promises.
+ * Deletes candidate data past the twelve months the parent consents to.
  *
  * Runs as service role: a cron has no session to act for, so there is no RLS
  * principal available. That is the one legitimate reason for a non-candidate

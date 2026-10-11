@@ -4,7 +4,7 @@ import { retentionCutoff, lastActivity, isExpired, RETENTION_MONTHS } from './re
 const at = (iso: string) => new Date(iso)
 
 describe('retentionCutoff', () => {
-  it('is twelve months, which is what the consent screen promises', () => {
+  it('is twelve months, which is what the parent consents to', () => {
     expect(RETENTION_MONTHS).toBe(12)
   })
 
