@@ -28,7 +28,7 @@ export default async function DownloadsPage() {
     <StaffShell staff={staff} width="narrow">
       <PageHeader
         title="Downloads"
-        description="Syllabus and sample paper for parents, one PDF per class the student is joining. The test link message already includes the right one."
+        description="Syllabus and sample paper for parents, in English and Hindi, for the class the student is joining. The test link message already includes the English one; send the Hindi one from here."
       />
 
       <ul className={`${card} mt-6 divide-y divide-slate-100 overflow-hidden`}>
