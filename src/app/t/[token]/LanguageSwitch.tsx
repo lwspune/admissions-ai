@@ -43,7 +43,7 @@ export function LanguageSwitch({
             aria-pressed={pressed}
             onClick={() => onChange(l)}
             className={cx(
-              'min-h-tap rounded-full px-3.5 text-sm font-semibold transition-colors focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2',
+              'min-h-tap rounded-full px-3 text-sm sm:px-3.5 font-semibold transition-colors focus-visible:outline focus-visible:outline-[3px] focus-visible:outline-offset-2',
               onDark ? 'focus-visible:outline-white' : 'focus-visible:outline-brand-700',
               pressed
                 ? onDark

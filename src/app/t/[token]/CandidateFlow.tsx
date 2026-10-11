@@ -367,8 +367,12 @@ export function CandidateFlow({
       <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/85">
         <div className="mx-auto flex max-w-2xl items-center justify-between gap-3 px-4 py-2.5">
           <span className="flex items-center gap-2.5">
-            <Mark labelClassName="sr-only" />
-            <span className="text-sm font-medium text-slate-700">
+            {/* With the language switch beside the timer, a 320px screen has no
+                room for the mark as well; it is decoration, so it goes. */}
+            <span className={hindi ? 'hidden sm:inline-flex' : 'inline-flex'}>
+              <Mark labelClassName="sr-only" />
+            </span>
+            <span className="whitespace-nowrap text-sm font-medium text-slate-700">
               {t.running.question[0]}
               <span className="font-semibold tabular-nums text-slate-900">{current}</span>
               {t.running.question[1]}
