@@ -1,29 +1,17 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
+import { isPublicPath } from '@/lib/publicPaths'
 
 // Refreshes the Supabase session cookie on every staff request and bounces
-// anyone without one to /login.
-//
-// The candidate route is deliberately excluded: /t/[token] is public by design
-// and the token plus the parent's number is its gate.
-
-// robots.txt must be reachable by a crawler that has no session — the
-// middleware was redirecting it to /login, so the rules never got read.
-//
-// /api/cron/ is here for the same reason: Vercel Cron carries no session, so
-// the middleware would redirect the purge to /login and it would never run,
-// reporting 307s nobody reads. Those routes guard themselves with CRON_SECRET
-// and must — being on this list means the middleware protects them from
-// nothing at all.
-//
-// /parent-pack/ is the parents' syllabus and sample-paper PDFs, linked from the
-// issue message: a parent has no session. They are static files holding no
-// candidate data and no bank item (src/lib/parentPack.ts).
-const PUBLIC = ['/login', '/t/', '/api/t/', '/api/cron/', '/robots.txt', '/parent-pack/']
+// anyone without one to /login. What opens without a session, and why, is in
+// src/lib/publicPaths.ts.
 
 export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl
-  if (PUBLIC.some((p) => pathname === p || pathname.startsWith(p))) {
+  // The homepage is public, but a session there is still refreshed: staff
+  // whose token has lapsed should reach /leads, not the page for visitors.
+  const home = pathname === '/'
+  if (isPublicPath(pathname) && !home) {
     return NextResponse.next()
   }
 
@@ -50,6 +38,7 @@ export async function middleware(req: NextRequest) {
   const { data } = await supabase.auth.getUser()
 
   if (!data.user) {
+    if (home) return res
     const url = req.nextUrl.clone()
     url.pathname = '/login'
     url.searchParams.set('next', pathname)
