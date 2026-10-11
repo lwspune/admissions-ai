@@ -279,7 +279,9 @@ the connection is refused (2026-10-01).
   the user's sign-off (migration 0016). A bad translation found later is corrected only when no test
   holding it is open, or retired and replaced if it changed the meaning; a retired item is never
   drawn again but stays on papers already issued. The switch and each answer's language are
-  recorded and shown to staff, unscored.
+  recorded and shown to staff, unscored. The parent PDFs got Hindi editions too (`-hi.pdf`, sent
+  from `/downloads`; the issue message keeps the English one), with chapter titles read from
+  NCERT's own Hindi-medium PDFs, not translated: study sites had several wrong.
 - **2026-10-11 — The test link opens on the number check; consent is the call.**
   The user's call: four screens before the first question was friction, and
   consent is already taken on the recorded call. The consent and handover

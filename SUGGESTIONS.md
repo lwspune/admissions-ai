@@ -7,10 +7,17 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **Hindi (2026-10-11): LIVE.** Migration 0016 applied, all 237 translations signed off by the
+- [x] **Hindi (2026-10-11): LIVE.** Migration 0016 applied, all 237 translations signed off by the
       user and loaded, `feat/hindi` merged (`06fad9f`, "Deployment has completed"). A test issued
       on production for a class 9 admit showed the switch on the live site. Unit 366, integration
-      115/115 including the Hindi suite, rerun after loading.
+      115/115 including the Hindi suite, rerun after loading. The staff report's "Answered in
+      Hindi" row was seen on the live site the same day (a submitted test with three answers in
+      Hindi, then removed). The real-phone check is folded into the Android item below.
+- [ ] **Hindi parent sheets (2026-10-11): built on `feat/hindi-parent-pack`, await the user's
+      read.** Five `-hi.pdf` editions (six pages each), the Hindi buttons on `/downloads`, and
+      `content/parent-pack/hindi-review.md` (topics, NCERT's Hindi chapter titles, 100 samples with
+      working, side by side). Once read: merge, check the deploy, and open one `-hi.pdf` on the
+      live site.
       **Not yet done:** Hindi editions of the parent PDFs (agreed). **Unseen:** the switch on a real
       Android phone over mobile data (Devanagari font download), and the staff report's "Answered
       in Hindi" row in a browser (needs a signed-in staff session). The new-edition NCERT chapter
@@ -125,7 +132,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       public. (2026-09-22: the one real run was desktop Chrome at 1536x864, and a later check
       faked a 390x844 screen via curl; neither is a phone.) The 4-inch / Android 8 / 3G case is
       exactly where per-question save and the pausing timer earn their keep. Background the tab
-      mid-question, return, submit.
+      mid-question, return, submit. **Also (2026-10-11):** tap हिंदी on a maths question and check
+      the Hindi letters render (the Devanagari font downloads only when Hindi is shown).
 - [x] ~~**Exercise the staff console buttons in a browser.**~~ **DONE 2026-09-22** — confirmed by
       the user. The database shows one lead with a **submitted** assessment, so Add candidate →
       Issue → the candidate flow → submit all ran end to end through the UI.

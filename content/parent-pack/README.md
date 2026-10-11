@@ -29,6 +29,26 @@ class 11 and 12, so anything added there pushes the syllabus chapters to a page 
 | `sample-papers.json` | 15 questions per class, 30 for a class on the 30-question paper, in the item-bank format plus a `paper` field |
 | `public/parent-pack/` | The built PDFs, live on the next deploy. Rebuild after any change: `npm run parent-pack` |
 
+## The Hindi edition (2026-10-11)
+
+Each class also gets `reasoning-test-class-N-hi.pdf`: the same sheet, same shape and six pages,
+with the sheet's words, the topic names, the chapter titles and every maths and science sample
+(question, options and working) in Hindi. English questions and their working stay English, as on
+the test. `/downloads` lists both editions; the issue message keeps sending the English one.
+
+| Where | What |
+|---|---|
+| `syllabus.json` `label_hi` | Each topic's Hindi name |
+| `syllabus.json` `title_hi` | Each first-term chapter's title **as printed in NCERT's Hindi-medium edition**. Checked on 2026-10-11 against the contents pages of NCERT's own PDFs (`ncert.nic.in/textbook/pdf/<code>ps.pdf`, e.g. `ghgp1ps` for *गणित प्रकाश* 7); study sites had several wrong. The class 10 and 11 books are the old editions, in a legacy font, so their PDFs' text reads as Latin garble but matches. Never translate a title yourself: read it from the book |
+| `sample-papers.hi.json` | `{ ref, source, stem_hi, options_hi, rationale_hi }` per maths and science sample |
+| `hindi-review.md` | English and Hindi side by side, written by `npm run parent-pack -- --sheet` |
+
+The build refuses a Hindi edition with anything untranslated, and `items:lint` checks each sample's
+Hindi like a bank item's (numbers kept per option, no Devanagari digits, a stale `source`) and its
+working too (every number of the English working). The letter-spacing on the band and tags is off in
+Hindi, because it pulls Devanagari conjuncts apart. The English HTML is unchanged by all of this:
+on 2026-10-11 it was byte-identical before and after.
+
 ## 15 or 30 questions
 
 **The build asks the live database which paper each class gets** (`live_pool` and
