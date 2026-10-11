@@ -30,3 +30,6 @@ supabase/.branches/
 
 # Personal Claude Code overrides; never shared.
 .claude/settings.local.json
+
+# Before/after screenshot sheets for UI reviews; local only.
+screenshots/

@@ -161,6 +161,16 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
+- [ ] **Consent now lives only on the call (2026-10-11): check the call script says it.** The
+      consent and handover screens were removed from the test link (the user's call, to cut
+      friction). Everything the screen told the parent must now be said on the recorded call:
+      what is recorded (answers, timing, device and network details), that it is kept 12
+      months, that only the institute sees it, and that a score summary may be sent to them.
+      Unverified: nobody has checked the call script against that list. `leads.consented_at`
+      has never been written by anything — no consent record exists in the app, before or
+      after this change. If a record is ever wanted, the telecaller ticking "consent taken"
+      before issuing is the natural place.
+
 - [ ] **Lead management: what is deliberately not built (2026-09-28).** EIS matching (the user
       will share the EIS Excel; decide then whether "in EIS" is a flag or carries EIS status);
       call-back reminders; automatic intake from Meta / Google forms; a per-row Source column in

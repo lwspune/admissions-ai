@@ -55,6 +55,14 @@ into a client bundle" into a build error. `supabase` (service-role client) ·
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit)
 
+**`src/components/`** — the shared look: `ui` (button, field, card, badge and
+alert styles, no hooks, so server and client pages share them), `icons` (inline
+SVG, no icon package), `StaffShell` (the frame round every staff page),
+`ConfirmDialog` (a native `<dialog>` in place of `window.confirm`) and
+`StaffLoading`. Colours, corners and shadows are set once in `tailwind.config.ts`
+(`brand` is indigo, from the parent sheet); a page should reach for these before
+writing its own classes.
+
 **`src/app/`** — `t/[token]/` and `api/cron/` are the only unauthenticated routes;
 the latter guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
@@ -80,8 +88,8 @@ These are the things that quietly break everything if violated.
   is an allow-list like `toCandidatePaper`: name, date, time used, total and
   per-subject score with correct / wrong / not-attempted counts. No question,
   answer, skill, integrity fact, percentile or verdict — its test checks the
-  bytes. The consent text says a summary may be sent to the parent; the two
-  move together.
+  bytes. The consent taken on the call must say a summary may be sent to the
+  parent; there is no on-screen consent since 2026-10-11.
 - **Constraints and triggers enforce, not application code.** The reissue cap,
   the MCQ/numeric item shape, answer idempotency, and the assessment state
   machine all live in Postgres. `npm run db:verify` proves the database
@@ -144,9 +152,10 @@ These are the things that quietly break everything if violated.
   vacuously. Coverage is a per-class property: `items:lint` refuses a bank that
   strands a class and `/items` shows the table. There is no overload of
   `live_pool()` without a class; a draw that does not name one cannot run.
-- **Candidate data is kept 12 months, because the consent screen says so.**
-  `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent text in
-  `CandidateFlow` must move together. A new table holding candidate data must
+- **Candidate data is kept 12 months, because that is what the parent consents to.**
+  `RETENTION_MONTHS` in `src/lib/retention.ts` and the consent taken on the
+  recorded call must move together; the app has shown no consent text since
+  2026-10-11. A new table holding candidate data must
   either cascade from `leads` or be added to `purgeExpired` by hand —
   `identify_attempts` has no foreign key and is the standing reminder.
   An imported lead's `created_at` is its import date, never the source's
@@ -248,6 +257,21 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-11 — The test link opens on the number check; consent is the call.**
+  The user's call: four screens before the first question was friction, and
+  consent is already taken on the recorded call. The consent and handover
+  screens are gone; the link is two steps, number then instructions, and the
+  instructions name who should answer (the handover's one job). This reverses
+  the 2026-09-22 reasoning that the on-screen consent was the DPDP verifiable
+  consent, so the call must now carry what the screen said: what is recorded,
+  12 months, and that a score summary may be sent to the parent.
+- **2026-10-11 — One look across the app.** Inter, an indigo accent taken from
+  the parent sheet, white cards on a tinted page, a shared staff frame, and
+  shared components in `src/components/`. Locked to light: the root declared
+  "light dark" while every colour was written for light, so a dark-mode phone
+  got dark grey inputs on a white page. Low-contrast `slate-400` text went with
+  it. No institute name on candidate screens, as on the parent sheet.
 
 - **2026-10-07 — A link stays open three hours, not two.** The user's call.
   The window is the time to start, not to take, the test; with the 30-minute
