@@ -7,31 +7,24 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **30-question paper (2026-10-06).** Phase 1 shipped 2026-10-06: migration 0014 applied,
-      merged and deployed; the draw, test screens and both reports handle 15 or 30 questions.
-      **Phase 2 done: every admitting class, 8 to 12, is on 30 questions since 2026-10-07**
-      (`syllabus-class-07.json` to `-11.json`, each signed off and live; a test issue for each
-      class confirmed 30 questions with 5 class N−1 first-term syllabus items each in maths and
-      science; class 11 science is Physics and Chemistry; *Curiosity* 7 ch. 6, Adolescence, left
-      out by choice). `basics-batch-01.json` signed off and live 2026-10-07: 15 English basics
-      (English 23 → 38) and 5 difficult maths basics at class ≤ 7 (class 8: 2 → 7). The
-      15-question paper is now only a fallback for a pool that cannot fill 30; the integration
-      suite issues one by hand to keep its rules tested. **Phase 3 shipped 2026-10-07**: the
-      parent-pack build reads each class's paper from the live pool, and all five sheets are
-      30-question sheets with their first-term chapters. A class that moves to 30 stops the
-      build until its sample and chapters exist, so write those with each batch.
+- [x] ~~**30-question paper (2026-10-06).**~~ **DONE 2026-10-07** — every admitting class (8–12) draws 30
+      questions: Basics plus 5 class N−1 first-term syllabus items each in maths and science
+      (`syllabus-class-07.json` to `-11.json`, each signed off; test issues confirmed). English is
+      19/10/9 and language-only (`basics-batch-01`, `english-batch-02`); class 8 difficult maths
+      2 → 7. The 15-question paper survives only as a fallback, kept tested by the integration
+      suite issuing one by hand. Parent PDFs are 30-question sheets. Decisions in CLAUDE.md.
 - [ ] **Parent pack (2026-10-06): read the five PDFs before staff send one.** `public/parent-pack/` (live at `/parent-pack/…`, linked from every issue message).
-      75 new questions; every calculable key re-derived in code, the lint clean, each paper
-      checked against its class ceiling. The syllabus names NCERT chapters, edition by edition,
-      for the April 2027 joiners. Nobody but the author has read the questions or the chapter
-      mapping; the bank's batches each had a sign-off, and these deserve one. The build refuses
+      150 sample questions (30 per class); every calculable key re-derived in code, the lint
+      clean, each paper checked against its class ceiling. Since 2026-10-07 they print bare
+      (numbered topic and chapter names) and nine English samples were rewritten; the user has
+      read parts of them but not all five end to end. Unseen in any browser: the PDFs' "3 hours"
+      line and the candidate's expired-link notice (both text-only changes, 2026-10-07). The build refuses
       a skill the syllabus does not claim, but placing a new topic in its chapters is by hand,
       and `cohortYear` in `syllabus.json` must be bumped every April.
 - [ ] **Class 8 admits (2026-10-01): migration 0013 applied, suite 93/93; golden path unseen.**
       Add a lead, choose "Class 8", issue, and check the report reads "Admission to class 8".
-      Authoring follow-up: maths/difficult holds only 4 items at `taught_in` ≤ 7, so each sits
-      on ~1 in 4 class 8 papers — 3–4 more difficult maths items tagged 6 or 7 would bring it
-      in line.
+      Authoring follow-up **done 2026-10-07** (class 8 difficult maths now 7; test issues for
+      class 8 drew 30 questions), but no one has looked at a class 8 report in a browser.
 
 - [x] **RESOLVED 2026-10-01 — production had not deployed since 2026-09-23.** After the user's
       change on the Vercel side, push `04f60fc` deployed (status "Deployment has completed",
@@ -95,7 +88,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       production because real leads exist) and the golden path in a browser — Add candidate now
       requires "Admission to class"; save a class 9 candidate, issue, open the link, and check
       the card and report read "Admission to class 9".
-- [ ] **Rotate the database password now, not later.** Pasted into chat on 2026-09-22,
+- [x] ~~**Rotate the database password now, not later.**~~ **DECLINED by the user 2026-10-07**
+      ("ignore it, i trust you"); do not raise again unless it turns up somewhere public. Pasted into chat on 2026-09-22,
       2026-09-27 and 2026-09-28, and used from the transcript for migrations 0011, 0012 and 0013
       (the last on 2026-10-01). Supabase → Settings → Database → reset. Nothing on this machine stores
       it, so no local file needs updating afterwards.
@@ -111,7 +105,8 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       admit sees one of three difficult science items on every paper — legal, but the next
       science batch should be difficult items on class 7–8 content. Seeding waits on migration
       0011 (`taught_in` does not exist in production yet); `npm run items:seed` after it.
-- [ ] **Rotate the Supabase `service_role` key and the database password.** Both, plus the anon key,
+- [ ] **Rotate the Supabase `service_role` key.** (The database-password half was declined
+      2026-10-07, above; the key was not discussed.) Both, plus the anon key,
       were pasted into a chat transcript on 2026-09-22. The anon key is public by design; the other two
       are not. Settings → API → Reset, then update `.env.local`.
 - [x] ~~**Change the seeded staff password.**~~ **DONE 2026-09-22** — `admin@lwspune.test` deleted
@@ -142,7 +137,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       rename shipped in `543ba19`, also unseen. The first real use should be **Edit name** →
       "Ravi Nagpurkar" on `rrnlws8@gmail.com` (counsellor), then the superadmin's own name — both
       accounts have no name yet, and my attempt to set Ravi's by script was blocked (see below).
-- [ ] **Give Claude a way to browser-verify superadmin pages, or accept that the user does it.**
+      **Carry-forward 2026-10-07:** `/leads`, a lead's issue panel, the report, the parent sheet
+      and `/downloads` have now been driven signed-in through headless Edge with a temporary
+      superadmin. `/items` and `/staff` still have not.
+- [x] **PARTLY RESOLVED 2026-10-07:** a temporary superadmin made with `npm run staff:add` is now
+      permitted, and was used to check staff pages, then removed. What remains is option (b)
+      below, which also stops the integration suite writing to production (see Known gaps).
+      Original entry: **Give Claude a way to browser-verify superadmin pages, or accept that the user does it.**
       2026-09-23: creating a temporary superadmin on production to drive `/staff` through Edge was
       blocked by the permission classifier — correctly, since it mints top-level access on the live
       project. There is only one Supabase project, so every signed-in check is against production.
@@ -174,7 +175,15 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       GitHub. Knowing which account holds the login link — Settings → Authentication in each — is
       what stops the next connect silently re-blocking this project. Until then, check every push:
       `gh api repos/lwspune/admissions-ai/commits/<sha>/status` must say "Deployment has completed".
-- [ ] **`db:verify` and `db:verify-rls` cannot see migrations 0012 or 0013.** Both refuse to run on a
+- [ ] **The integration suite is coupled to production content (2026-10-07).** It runs against
+      the live database and draws from the live pool, so a content change can turn it red with no
+      code change: after the class 10 batch went live, twelve tests still expected 15 questions,
+      and nobody noticed until two promotions later. Now a Trap in CLAUDE.md (rerun after every
+      promotion). **Why it matters:** a red suite that is red for content reasons trains people to
+      ignore it. **How to apply:** either option (b) under the browser-verify item (a separate
+      Supabase project seeded with fixed fixtures), or make the shape assertions follow
+      `choosePaperShape(live_pool)` instead of a literal 30.
+- [ ] **`db:verify` and `db:verify-rls` cannot see migrations 0012 onward (now up to 0015).** Both refuse to run on a
       database holding real leads, which production now does, so the lead rules are proven only by
       `leads.itest.ts`. This is the gap option (b) in "Give Claude a way to browser-verify" would
       close.
@@ -205,7 +214,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**The report does not exist.**~~ **DONE 2026-09-22** — `/reports/[leadId]`: score, section
       bars, the five facts, and an expandable per-question table. Question stems are hidden from
       telecallers. `src/lib/report.ts` is pure with 20 tests.
-- [ ] **The bank holds 105 items, not 300 — all live and signed off as of 2026-09-23.**
+- [ ] **Bank size, updated 2026-10-07: 275 live items** (maths 65/29/33, English 19/10/9, science
+      60/25/25 easy/moderate/difficult, of which 150 are syllabus items), 7 retired. Every class fills
+      the 30-question paper. The original entry below (105 items) is history.
+      Original: **The bank holds 105 items, not 300 — all live and signed off as of 2026-09-23.**
       Composition: maths 20/14/13, English 10/7/6, science 15/10/10 (easy/moderate/difficult
       against a 60/20/20 target per subject). Verified against the database, not the JSON files
       (re-verified 2026-09-27: still 105, nothing at review). Once items are class-tagged these
@@ -223,7 +235,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       live bank is 105 and, over 2,000 simulated draws from the database, **no item appears on
       every paper** and the most exposed is 32%. Re-run that simulation after any future batch;
       exposure is a per-stratum property and a healthy bank total can hide a starved stratum.
-- [ ] **36 answer keys rest on a rationale and a human read, with no machine check behind them.**
+- [ ] **Answer keys that rest on a rationale and a human read, with no machine check behind them.**
+      Updated 2026-10-07: every English item (38 live) and most science MCQs, including the
+      syllabus batches' judgement keys (each batch's review sheet lists them). Original count: 36.
       Every science and English MCQ. `items:lint` verifies shape, duplication and length tells; it
       cannot verify that "terse" means brief, or that the third-law partner of the Earth's pull on
       a book is the book's pull on the Earth (`S-D-30`) rather than the table's push. The maths
@@ -289,8 +303,11 @@ go-ahead before anything shipped is touched.
       0012: `assessments.issued_by` and `voided_by` reference `auth.users` with no `on delete`
       rule, so removing (via `/staff` or `staff:rm`) anyone who has issued a test most likely fails
       with "The change could not be saved". 0012 fixed the same shape on `leads.created_by`, which
-      it started filling in, and gave every new reference `on delete set null`. Not yet confirmed
-      on production; not yet analysed or fixed.
+      it started filling in, and gave every new reference `on delete set null`. **Confirmed on
+      production 2026-10-07:** `staff:rm` of a temporary superadmin failed with
+      `assessments_issued_by_fkey` until its test leads (and so their papers) were deleted. A
+      real staff member who has issued tests cannot be removed. Not yet analysed or fixed; the fix
+      is a migration giving `issued_by` and `voided_by` `on delete set null`.
 - [x] **Answer keys were piled on A. FIXED 2026-10-06.** Measured over the 83 MCQ items: A 73%,
       B 13%, C 11%, D 2% (science 27 of 28 on A). Options are served in authored order
       (`assemble.ts` shuffles items, not options), so answering A to everything scored 9–10 of
@@ -304,7 +321,7 @@ go-ahead before anything shipped is touched.
 ## Decisions taken that are worth revisiting once there is data
 
 - **The timer pauses when the tab is hidden**, which is exploitable: close, look it up, return. Bounded
-  by the 2-hour window and reported via answer-changed-after-pause. Revisit if the reports show it
+  by the 3-hour window (2 hours until 2026-10-07) and reported via answer-changed-after-pause. Revisit if the reports show it
   being used.
 - **Item exclusion on reissue is a preference, not a rule.** With a 15-item bank every reissue repeats
   everything. Becomes moot at 300 items.
