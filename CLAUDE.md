@@ -242,6 +242,12 @@ the connection is refused (2026-10-01).
 
 ## Traps
 
+- **`git add` stops at one bad path, and a chained commit takes what was staged.**
+  Naming a file already staged for deletion failed the add; the next
+  `add && commit` swept that deletion into a docs commit and pushed a build that
+  could not compile (df69aab, 2026-10-12; production stayed on the last good
+  deploy). Run `git status` before each commit, never `add … && commit` blind.
+
 - **Class order does not settle a Tailwind conflict; the stylesheet does.**
   `cx(input, 'border-rose-400')` stayed grey, because `border-slate-300` is
   emitted later. Override a shared style with a variant (`aria-[invalid=true]:…`)
