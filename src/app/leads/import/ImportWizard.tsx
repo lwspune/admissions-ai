@@ -4,10 +4,17 @@ import { useState, useTransition } from 'react'
 import Link from 'next/link'
 import { IMPORT_FIELDS, IMPORT_FIELD_LABEL, type ColumnMap, type SkippedRow } from '@/lib/leads'
 import type { ImportPreview, ImportResult } from '@/server/leadImport'
+import { Icon } from '@/components/icons'
+import { Alert, btn, card, cx, input, label } from '@/components/ui'
 import { inspectCsv, previewCsv, commitCsv } from './actions'
 
-const control = 'min-h-tap mt-1 w-full rounded border border-slate-300 bg-white px-3 py-2 text-base'
-const primary = 'min-h-tap rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50'
+const control = input
+const primary = btn('primary')
+const secondary = btn('secondary')
+const section = cx(card, 'p-5 sm:p-6')
+const heading = 'text-base font-semibold text-slate-900'
+const STEP_NAMES = ['File', 'Match columns', 'Check', 'Done'] as const
+const STEP_INDEX = { choose: 0, map: 1, preview: 2, done: 3 } as const
 const NEW = 'new'
 
 type Step =
@@ -73,21 +80,23 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
   }
 
   return (
-    <div className="mt-5 space-y-4">
+    <div className="mt-6 space-y-4">
+      <Stepper at={STEP_INDEX[step.at]} />
+
       {error && (
-        <p role="alert" className="rounded border border-red-300 bg-red-50 p-3 text-sm text-red-800">
+        <Alert tone="danger" role="alert">
           {error}
-        </p>
+        </Alert>
       )}
 
       {step.at === 'choose' && (
-        <section aria-labelledby="choose-heading" className="rounded-lg border border-slate-200 p-4">
-          <h2 id="choose-heading" className="text-sm font-semibold text-slate-900">
+        <section aria-labelledby="choose-heading" className={section}>
+          <h2 id="choose-heading" className={heading}>
             1. Source and file
           </h2>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             <div>
-              <label htmlFor="source" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="source" className={label}>
                 Where these leads came from
               </label>
               <select id="source" value={sourceId} onChange={(e) => setSourceId(e.target.value)} className={control}>
@@ -101,7 +110,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
             </div>
             {sourceId === NEW && (
               <div>
-                <label htmlFor="new-source" className="block text-sm font-medium text-slate-700">
+                <label htmlFor="new-source" className={label}>
                   New source name
                 </label>
                 <input
@@ -115,7 +124,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
               </div>
             )}
             <div className="sm:col-span-2">
-              <label htmlFor="file" className="block text-sm font-medium text-slate-700">
+              <label htmlFor="file" className={label}>
                 CSV file
               </label>
               <input
@@ -123,7 +132,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
                 type="file"
                 accept=".csv,text/csv"
                 onChange={(e) => readFile(e.target.files?.[0])}
-                className="mt-1 block w-full text-sm"
+                className="mt-1 block w-full rounded-lg border border-dashed border-slate-300 bg-slate-50 p-3 text-sm text-slate-700 file:mr-3 file:min-h-tap file:cursor-pointer file:rounded-lg file:border-0 file:bg-brand-700 file:px-4 file:text-sm file:font-medium file:text-white hover:file:bg-brand-800"
               />
             </div>
           </div>
@@ -134,17 +143,17 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
       )}
 
       {step.at === 'map' && (
-        <section aria-labelledby="map-heading" className="rounded-lg border border-slate-200 p-4">
-          <h2 id="map-heading" className="text-sm font-semibold text-slate-900">
+        <section aria-labelledby="map-heading" className={section}>
+          <h2 id="map-heading" className={heading}>
             2. Match the columns in {fileName}
           </h2>
           <p className="mt-1 text-sm text-slate-600">Only Mobile is required. Leave a field as “Not in this file” to skip it.</p>
-          <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          <div className="mt-4 grid gap-4 sm:grid-cols-2">
             {IMPORT_FIELDS.map((field) => (
               <div key={field}>
-                <label htmlFor={`map-${field}`} className="block text-sm font-medium text-slate-700">
+                <label htmlFor={`map-${field}`} className={label}>
                   {IMPORT_FIELD_LABEL[field]}
-                  {field === 'mobile' && <span aria-hidden="true"> *</span>}
+                  {field === 'mobile' && <span aria-hidden="true" className="text-rose-600"> *</span>}
                 </label>
                 <select
                   id={`map-${field}`}
@@ -164,9 +173,9 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
           </div>
 
           {step.sample.length > 0 && (
-            <div className="mt-4 overflow-x-auto">
+            <div className="mt-5 overflow-x-auto rounded-lg border border-slate-200">
               <table className="min-w-full text-left text-xs">
-                <caption className="mb-1 text-left text-xs text-slate-600">First rows of the file</caption>
+                <caption className="bg-slate-50 px-2 py-1.5 text-left text-xs font-medium text-slate-600">First rows of the file</caption>
                 <thead>
                   <tr>
                     {step.headers.map((h, i) => (
@@ -192,7 +201,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
           )}
 
           <div className="mt-4 flex gap-2">
-            <button type="button" onClick={() => setStep({ at: 'choose' })} className="min-h-tap rounded border border-slate-300 px-4 py-2 text-sm">
+            <button type="button" onClick={() => setStep({ at: 'choose' })} className={secondary}>
               Back
             </button>
             <button type="button" onClick={() => preview(step.headers)} disabled={pending} className={primary}>
@@ -203,11 +212,11 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
       )}
 
       {step.at === 'preview' && (
-        <section aria-labelledby="preview-heading" className="rounded-lg border border-slate-200 p-4">
-          <h2 id="preview-heading" className="text-sm font-semibold text-slate-900">
+        <section aria-labelledby="preview-heading" className={section}>
+          <h2 id="preview-heading" className={heading}>
             3. Check before importing into “{sourceLabel}”
           </h2>
-          <ul className="mt-2 space-y-1 text-sm text-slate-800">
+          <ul className="mt-3 space-y-1.5 text-sm text-slate-800">
             <li>{step.preview.create} new leads</li>
             <li>{step.preview.merge} already in the system — the source and remarks will be added to them</li>
             {step.preview.ambiguous.length > 0 && (
@@ -221,7 +230,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
             <button
               type="button"
               onClick={() => setStep({ at: 'map', headers: step.headers, sample: [] })}
-              className="min-h-tap rounded border border-slate-300 px-4 py-2 text-sm"
+              className={secondary}
             >
               Back
             </button>
@@ -238,17 +247,18 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
       )}
 
       {step.at === 'done' && (
-        <section aria-labelledby="done-heading" aria-live="polite" className="rounded-lg border border-green-300 bg-green-50 p-4">
-          <h2 id="done-heading" className="text-sm font-semibold text-green-900">
+        <section aria-labelledby="done-heading" aria-live="polite" className={cx(section, 'border-emerald-200')}>
+          <h2 id="done-heading" className={cx(heading, 'flex items-center gap-2 text-emerald-900')}>
+            <Icon name="checkCircle" className="h-5 w-5 text-emerald-700" />
             Imported
           </h2>
-          <p className="mt-1 text-sm text-green-900">
+          <p className="mt-1 text-sm text-slate-700">
             {step.result.created} new leads, {step.result.merged} added to existing leads.
           </p>
           <Ambiguous mobiles={step.result.ambiguous} />
           <Skipped rows={step.skipped} />
           <div className="mt-4 flex gap-2">
-            <Link href={`/leads?source=${step.sourceId}&assignee=none`} className={`${primary} inline-flex items-center`}>
+            <Link href={`/leads?source=${step.sourceId}&assignee=none`} className={primary}>
               Assign the new leads
             </Link>
             <button
@@ -258,7 +268,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
                 setCsv('')
                 setFileName('')
               }}
-              className="min-h-tap rounded border border-slate-300 px-4 py-2 text-sm"
+              className={secondary}
             >
               Import another file
             </button>
@@ -266,6 +276,28 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
         </section>
       )}
     </div>
+  )
+}
+
+/** Where the import has got to. Decorative: each section's heading says the same. */
+function Stepper({ at }: { at: number }) {
+  return (
+    <ol aria-hidden="true" className="flex items-center gap-2 text-xs font-medium sm:text-sm">
+      {STEP_NAMES.map((name, i) => (
+        <li key={name} className="flex items-center gap-2">
+          <span
+            className={cx(
+              'grid h-6 w-6 place-items-center rounded-full text-xs font-semibold',
+              i < at ? 'bg-brand-700 text-white' : i === at ? 'bg-brand-50 text-brand-800 ring-2 ring-brand-600' : 'bg-slate-100 text-slate-600',
+            )}
+          >
+            {i < at ? <Icon name="check" className="h-3.5 w-3.5" /> : i + 1}
+          </span>
+          <span className={cx('hidden sm:inline', i === at ? 'text-slate-900' : 'text-slate-600')}>{name}</span>
+          {i < STEP_NAMES.length - 1 && <span className="h-px w-4 bg-slate-300 sm:w-8" />}
+        </li>
+      ))}
+    </ol>
   )
 }
 

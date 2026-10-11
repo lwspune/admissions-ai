@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff } from '@/server/auth'
 import { listStaff } from '@/server/staff'
+import { StaffShell } from '@/components/StaffShell'
 import { StaffConsole } from './StaffConsole'
 
 export const dynamic = 'force-dynamic'
@@ -18,5 +19,9 @@ export default async function StaffPage() {
   const accounts = await listStaff(staff)
   const signInUrl = `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/login`
 
-  return <StaffConsole selfId={staff.id} accounts={accounts} signInUrl={signInUrl} />
+  return (
+    <StaffShell staff={staff}>
+      <StaffConsole selfId={staff.id} accounts={accounts} signInUrl={signInUrl} />
+    </StaffShell>
+  )
 }

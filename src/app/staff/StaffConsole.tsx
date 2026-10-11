@@ -1,17 +1,13 @@
 'use client'
 
 import { useRef, useState, useTransition } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
-import { ROLES, MIN_PASSWORD, MAX_NAME, validateName, type Role } from '@/lib/staff'
+import { ROLES, ROLE_LABEL, MIN_PASSWORD, MAX_NAME, validateName, type Role } from '@/lib/staff'
+import { Icon } from '@/components/icons'
+import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
+import { useConfirm } from '@/components/ConfirmDialog'
 import type { StaffAccount, StaffResult } from '@/server/staff'
 import { addStaffAction, changeRoleAction, renameAction, removeStaffAction } from './actions'
-
-const ROLE_LABEL: Record<Role, string> = {
-  telecaller: 'Telecaller',
-  counsellor: 'Counsellor',
-  superadmin: 'Superadmin',
-}
 
 const ROLE_HINT: Record<Role, string> = {
   telecaller: 'Adds candidates and issues tests. Never sees question text.',
@@ -37,48 +33,51 @@ export function StaffConsole({
   const [adding, setAdding] = useState(false)
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-6">
-      <Link href="/leads" className="text-sm text-slate-500 hover:underline">
-        ← Candidates
-      </Link>
-
-      <header className="mt-3 flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-4">
-        <div>
-          <h1 className="text-xl font-semibold text-slate-900">Staff</h1>
-          <p className="mt-1 text-sm text-slate-500">{accounts.length} account(s)</p>
-        </div>
-        <button
-          type="button"
-          className="min-h-tap rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white"
-          aria-expanded={adding}
-          onClick={() => setAdding((v) => !v)}
-        >
-          {adding ? 'Cancel' : 'Add staff'}
-        </button>
-      </header>
+    <>
+      <PageHeader
+        title="Staff"
+        description={`${accounts.length} account(s)`}
+        actions={
+          <button
+            type="button"
+            className={adding ? btn('secondary') : btn('primary')}
+            aria-expanded={adding}
+            onClick={() => setAdding((v) => !v)}
+          >
+            {adding ? (
+              'Cancel'
+            ) : (
+              <>
+                <Icon name="plus" className="h-4 w-4" />
+                Add staff
+              </>
+            )}
+          </button>
+        }
+      />
 
       {adding && <AddStaff signInUrl={signInUrl} />}
 
-      <dl className="mt-5 grid gap-1 text-xs text-slate-600 sm:grid-cols-3">
+      <dl className="mt-6 grid gap-3 sm:grid-cols-3">
         {ROLES.map((r) => (
-          <div key={r}>
-            <dt className="inline font-medium text-slate-800">{ROLE_LABEL[r]}: </dt>
-            <dd className="inline">{ROLE_HINT[r]}</dd>
+          <div key={r} className="rounded-xl border border-slate-200 bg-white/60 px-4 py-3">
+            <dt className="text-sm font-semibold text-slate-900">{ROLE_LABEL[r]}</dt>
+            <dd className="mt-0.5 text-xs leading-relaxed text-slate-600">{ROLE_HINT[r]}</dd>
           </div>
         ))}
       </dl>
 
-      <ul className="mt-5 space-y-3">
+      <ul className={cx(card, 'mt-6 divide-y divide-slate-100')}>
         {accounts.map((a) => (
           <StaffRow key={a.id} account={a} isSelf={a.id === selfId} />
         ))}
       </ul>
 
-      <p className="mt-6 text-xs text-slate-500">
+      <p className="mt-4 text-xs text-slate-600">
         A role change or removal takes effect on pages immediately, and fully within an hour, once
         that person&apos;s current sign-in token expires.
       </p>
-    </main>
+    </>
   )
 }
 
@@ -115,10 +114,11 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
     : ''
 
   return (
-    <form ref={form} className="mt-5 rounded-lg border border-slate-200 bg-slate-50 p-4" action={submit}>
-      <div className="grid gap-3 sm:grid-cols-2">
+    <form ref={form} className={cx(card, 'mt-6 p-4 sm:p-6')} action={submit}>
+      <h2 className="text-base font-semibold text-slate-900">New staff account</h2>
+      <div className="mt-4 grid gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor="name" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="name" className={label}>
             Full name<span aria-hidden="true"> *</span>
           </label>
           <input
@@ -128,11 +128,11 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
             required
             maxLength={MAX_NAME}
             autoComplete="off"
-            className="min-h-tap mt-1 w-full rounded border border-slate-300 px-3 py-2 text-base"
+            className={input}
           />
         </div>
         <div>
-          <label htmlFor="email" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="email" className={label}>
             Email<span aria-hidden="true"> *</span>
           </label>
           <input
@@ -141,11 +141,11 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
             type="email"
             required
             autoComplete="off"
-            className="min-h-tap mt-1 w-full rounded border border-slate-300 px-3 py-2 text-base"
+            className={input}
           />
         </div>
         <div>
-          <label htmlFor="role" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="role" className={label}>
             Role<span aria-hidden="true"> *</span>
           </label>
           <select
@@ -153,7 +153,7 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
             name="role"
             required
             defaultValue=""
-            className="min-h-tap mt-1 w-full rounded border border-slate-300 bg-white px-3 py-2 text-base"
+            className={input}
           >
             <option value="" disabled>
               Choose…
@@ -166,7 +166,7 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
           </select>
         </div>
         <div>
-          <label htmlFor="password" className="block text-sm font-medium text-slate-700">
+          <label htmlFor="password" className={label}>
             Password<span aria-hidden="true"> *</span>
           </label>
           {/* Plain text on purpose: the superadmin has to read it out or copy it
@@ -180,44 +180,48 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
             autoComplete="off"
             spellCheck={false}
             aria-describedby="password-hint"
-            className="min-h-tap mt-1 w-full rounded border border-slate-300 px-3 py-2 font-mono text-base"
+            className={cx(input, 'font-mono')}
           />
-          <p id="password-hint" className="mt-1 text-xs text-slate-500">
+          <p id="password-hint" className={hint}>
             At least {MIN_PASSWORD} characters. Share it with them privately.
           </p>
         </div>
       </div>
 
       {error && (
-        <p role="alert" className="mt-3 rounded border border-amber-300 bg-amber-50 p-3 text-sm text-amber-900">
+        <Alert tone="warning" role="alert" className="mt-4">
           {error}
-        </p>
+        </Alert>
       )}
 
       {created && (
-        <div role="status" className="mt-3 rounded border border-green-300 bg-green-50 p-3 text-sm">
-          <p className="font-medium text-green-900">Account created. Send them these details:</p>
-          <pre className="mt-2 whitespace-pre-wrap break-all font-mono text-green-900">{details}</pre>
+        <div role="status" className="mt-4 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4 text-sm">
+          <p className="flex items-center gap-2 font-medium text-emerald-900">
+            <Icon name="checkCircle" className="h-4 w-4" />
+            Account created. Send them these details:
+          </p>
+          <pre className="mt-3 whitespace-pre-wrap break-all rounded-lg bg-white p-3 font-mono text-xs text-slate-800 ring-1 ring-inset ring-emerald-200">
+            {details}
+          </pre>
           <button
             type="button"
-            className="min-h-tap mt-2 rounded border border-green-400 bg-white px-3 py-2 text-sm font-medium"
+            className={cx(btn('secondary', 'sm'), 'mt-3')}
             onClick={async () => {
               await navigator.clipboard.writeText(details)
               setCopied(true)
             }}
           >
+            <Icon name={copied ? 'check' : 'copy'} className="h-4 w-4" />
             {copied ? 'Copied' : 'Copy details'}
           </button>
         </div>
       )}
 
-      <button
-        type="submit"
-        className="min-h-tap mt-4 rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
-        disabled={pending}
-      >
-        {pending ? 'Creating…' : 'Create account'}
-      </button>
+      <div className="mt-6 flex justify-end">
+        <button type="submit" className={btn('primary')} disabled={pending}>
+          {pending ? 'Creating…' : 'Create account'}
+        </button>
+      </div>
     </form>
   )
 }
@@ -227,6 +231,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
   const [pending, start] = useTransition()
   const [role, setRole] = useState<string>(account.role ?? '')
   const [error, setError] = useState('')
+  const { confirm, dialog } = useConfirm()
 
   const [editingName, setEditingName] = useState(false)
   const [name, setName] = useState(account.name ?? '')
@@ -247,8 +252,10 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
   }
 
   return (
-    <li className="rounded-lg border border-slate-200 p-4">
+    <li className="px-4 py-4 sm:px-5">
       <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex min-w-0 items-start gap-3">
+        <Avatar name={account.name ?? account.email} className="mt-0.5" />
         <div className="min-w-0">
           {editingName ? (
             <form
@@ -269,19 +276,15 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
                 autoFocus
                 disabled={pending}
                 onChange={(e) => setName(e.target.value)}
-                className="min-h-tap rounded border border-slate-300 px-3 py-2 text-base"
+                className={control}
               />
-              <button
-                type="submit"
-                disabled={pending}
-                className="min-h-tap rounded bg-slate-900 px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
-              >
+              <button type="submit" disabled={pending} className={btn('primary', 'sm')}>
                 Save
               </button>
               <button
                 type="button"
                 disabled={pending}
-                className="min-h-tap rounded border border-slate-300 bg-white px-3 py-2 text-sm"
+                className={btn('secondary', 'sm')}
                 onClick={() => {
                   setName(account.name ?? '')
                   setEditingName(false)
@@ -292,21 +295,22 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
               </button>
             </form>
           ) : (
-            <p className="break-all font-medium text-slate-900">
-              {account.name ?? <span className="italic text-slate-600">No name</span>}
-              {isSelf && <span className="ml-2 text-sm font-normal text-slate-500">(you)</span>}
+            <p className="flex flex-wrap items-center gap-x-2 break-all font-semibold text-slate-900">
+              {account.name ?? <span className="font-normal italic text-slate-600">No name</span>}
+              {isSelf && <Badge tone="brand">You</Badge>}
               <button
                 type="button"
                 aria-label={`Edit name for ${account.email}`}
-                className="min-h-tap ml-2 rounded px-2 text-sm font-normal text-blue-800 underline"
+                className="min-h-tap inline-flex items-center gap-1 rounded px-1.5 text-sm font-medium text-brand-700 hover:text-brand-800"
                 onClick={() => setEditingName(true)}
               >
+                <Icon name="pencil" className="h-3.5 w-3.5" />
                 Edit name
               </button>
             </p>
           )}
           <p className="break-all text-sm text-slate-600">{account.email}</p>
-          <p className="text-xs text-slate-500">
+          <p className="mt-0.5 text-xs text-slate-600">
             {account.lastSignInAt
               ? `Last signed in ${new Date(account.lastSignInAt).toLocaleString('en-IN', {
                   dateStyle: 'medium',
@@ -320,9 +324,10 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
             </p>
           )}
         </div>
+        </div>
 
         {isSelf ? (
-          <p className="text-sm text-slate-700">{account.role ? ROLE_LABEL[account.role] : 'No role'}</p>
+          <Badge tone="neutral">{account.role ? ROLE_LABEL[account.role] : 'No role'}</Badge>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
             <label htmlFor={selectId} className="sr-only">
@@ -336,7 +341,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
               value={role}
               disabled={pending}
               onChange={(e) => setRole(e.target.value)}
-              className="min-h-tap rounded border border-slate-300 bg-white px-3 py-2 text-sm"
+              className={control}
             >
               {!account.role && (
                 <option value="" disabled>
@@ -354,7 +359,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
                 type="button"
                 disabled={pending}
                 aria-label={`Save role for ${who}`}
-                className="min-h-tap rounded bg-slate-900 px-3 py-2 text-sm font-medium text-white disabled:opacity-50"
+                className={btn('primary', 'sm')}
                 onClick={() => run(() => changeRoleAction(account.id, role))}
               >
                 Save
@@ -364,13 +369,21 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
               type="button"
               disabled={pending}
               aria-label={`Remove ${who}`}
-              className="min-h-tap rounded border border-red-300 bg-white px-3 py-2 text-sm text-red-800 disabled:opacity-50"
-              onClick={() => {
-                if (window.confirm(`Remove ${who} (${account.email})? They will no longer be able to sign in.`)) {
+              className={btn('danger', 'sm')}
+              onClick={async () => {
+                if (
+                  await confirm({
+                    title: 'Remove this account?',
+                    body: `Remove ${who} (${account.email})? They will no longer be able to sign in.`,
+                    confirm: 'Remove',
+                    danger: true,
+                  })
+                ) {
                   run(() => removeStaffAction(account.id))
                 }
               }}
             >
+              <Icon name="trash" className="h-4 w-4" />
               Remove
             </button>
           </div>
@@ -382,6 +395,7 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
           {error}
         </p>
       )}
+      {dialog}
     </li>
   )
 }

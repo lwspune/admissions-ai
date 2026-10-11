@@ -4,11 +4,11 @@ import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import type { TestAction } from '@/lib/leads'
+import { Icon } from '@/components/icons'
+import { btn } from '@/components/ui'
+import { useConfirm } from '@/components/ConfirmDialog'
 import { issueForLead } from './actions'
 import { IssuedLink } from './IssuedLink'
-
-const button =
-  'min-h-tap inline-flex shrink-0 items-center rounded px-3 py-1.5 text-sm font-medium disabled:opacity-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-slate-900'
 
 /**
  * A lead row's one test button, so issuing or reading the result does not
@@ -28,11 +28,21 @@ export function RowTest({
   const [pending, start] = useTransition()
   const [link, setLink] = useState('')
   const [error, setError] = useState('')
+  const { confirm, dialog } = useConfirm()
   const missing = !lead.name || !lead.class_level
   const who = lead.name ?? lead.contact_mobile
 
-  function issue() {
-    if (action === 'reissue' && !window.confirm(`Send ${who} a new link? The current link will stop working.`)) return
+  async function issue() {
+    if (
+      action === 'reissue' &&
+      !(await confirm({
+        title: 'Send a new link?',
+        body: `Send ${who} a new link? The current link will stop working.`,
+        confirm: 'Send new link',
+      }))
+    ) {
+      return
+    }
     setError('')
     setLink('')
     start(async () => {
@@ -45,19 +55,16 @@ export function RowTest({
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         {children}
         {action === 'report' && (
-          <Link
-            href={`/reports/${lead.id}/summary`}
-            aria-label={`Score report for ${who}`}
-            className={`${button} ml-auto bg-green-700 text-white`}
-          >
+          <Link href={`/reports/${lead.id}/summary`} aria-label={`Score report for ${who}`} className={btn('success', 'sm')}>
+            <Icon name="chart" className="h-4 w-4" />
             Report
           </Link>
         )}
         {(action === 'issue' || action === 'reissue') && (
-          <span className="ml-auto flex items-center gap-2">
+          <span className="flex items-center gap-2">
             {missing && (
               <span id={`missing-${lead.id}`} className="text-xs text-amber-800">
                 Add name and class first
@@ -69,19 +76,21 @@ export function RowTest({
               disabled={pending || missing}
               aria-label={`${action === 'issue' ? 'Issue a test link' : 'Reissue the test link'} for ${who}`}
               aria-describedby={missing ? `missing-${lead.id}` : undefined}
-              className={`${button} bg-slate-900 text-white`}
+              className={btn(action === 'issue' ? 'primary' : 'secondary', 'sm')}
             >
+              <Icon name={action === 'issue' ? 'link' : 'refresh'} className="h-4 w-4" />
               {pending ? 'Issuing…' : action === 'issue' ? 'Issue link' : 'Reissue'}
             </button>
           </span>
         )}
       </div>
       {error && (
-        <p role="alert" className="mt-2 text-sm text-red-700">
+        <p role="alert" className="mt-2 text-sm text-rose-700">
           {error}
         </p>
       )}
       {link && <IssuedLink name={lead.name} mobile={lead.contact_mobile} url={link} classLevel={lead.class_level} />}
+      {dialog}
     </>
   )
 }

@@ -6,6 +6,8 @@ import Link from 'next/link'
 import { issueForLead } from './actions'
 import { TEST_STATE_LABEL } from '@/lib/leads'
 import { IssuedLink } from './IssuedLink'
+import { Icon } from '@/components/icons'
+import { Badge, Eyebrow, btn, card, cx } from '@/components/ui'
 
 export interface IssueAssessment {
   id: string
@@ -45,37 +47,46 @@ export function IssuePanel({
   }
 
   return (
-    <section aria-labelledby="test-heading" className="rounded-lg border border-slate-200 bg-white p-4">
-      <h2 id="test-heading" className="text-sm font-semibold text-slate-900">
-        Aptitude test
-      </h2>
-      <p className="mt-1 text-sm text-slate-600">
-        {issues === 0 ? 'No test issued' : `Issue ${issues} of 3`}
-        {live && ` · ${TEST_STATE_LABEL[live.state]} · closes ${clock(live.expires_at)}`}
-        {done && ' · Completed'}
-      </p>
-
-      <div className="mt-3 flex flex-wrap items-center gap-2">
+    <section aria-labelledby="test-heading" className={cx(card, 'p-5')}>
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <Eyebrow id="test-heading">Aptitude test</Eyebrow>
+          <p className="mt-2 text-sm text-slate-700">
+            {issues === 0 ? 'No test issued' : `Issue ${issues} of 3`}
+            {live && ` · ${TEST_STATE_LABEL[live.state]} · closes ${clock(live.expires_at)}`}
+          </p>
+        </div>
         {done ? (
-          <Link
-            href={`/reports/${lead.id}`}
-            className="min-h-tap inline-flex items-center rounded bg-green-700 px-4 py-2 text-sm font-medium text-white"
-          >
+          <Badge tone="success" icon="check">
+            Completed
+          </Badge>
+        ) : live ? (
+          <Badge tone="info" icon="clock">
+            {TEST_STATE_LABEL[live.state]}
+          </Badge>
+        ) : null}
+      </div>
+
+      <div className="mt-4 flex flex-wrap items-center gap-2">
+        {done ? (
+          <Link href={`/reports/${lead.id}`} className={btn('success')}>
+            <Icon name="chart" className="h-4 w-4" />
             View report
           </Link>
         ) : (
           <>
             <button
               type="button"
-              className="min-h-tap rounded bg-slate-900 px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+              className={btn(issues === 0 ? 'primary' : 'secondary')}
               onClick={issue}
               disabled={pending || issues >= 3 || missing.length > 0}
               aria-describedby={missing.length ? 'issue-missing' : undefined}
             >
+              <Icon name={issues === 0 ? 'link' : 'refresh'} className="h-4 w-4" />
               {pending ? 'Issuing…' : issues === 0 ? 'Issue test' : 'Reissue'}
             </button>
             {issues > 0 && (
-              <Link href={`/reports/${lead.id}`} className="text-sm text-slate-600 hover:underline">
+              <Link href={`/reports/${lead.id}`} className={btn('ghost')}>
                 View report
               </Link>
             )}
@@ -84,14 +95,14 @@ export function IssuePanel({
       </div>
 
       {missing.length > 0 && !done && (
-        <p id="issue-missing" className="mt-2 text-sm text-amber-800">
-          Add {missing.join(' and ')} above before issuing a test.
+        <p id="issue-missing" className="mt-3 text-sm text-amber-800">
+          Add {missing.join(' and ')} under Details before issuing a test.
         </p>
       )}
-      {issues >= 3 && !done && <p className="mt-2 text-sm text-slate-600">All 3 links used. Contact the office.</p>}
+      {issues >= 3 && !done && <p className="mt-3 text-sm text-slate-600">All 3 links used. Contact the office.</p>}
 
       {error && (
-        <p role="alert" className="mt-3 text-sm text-red-700">
+        <p role="alert" className="mt-3 text-sm text-rose-700">
           {error}
         </p>
       )}

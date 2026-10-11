@@ -4,6 +4,7 @@ import { currentStaff, userClient } from '@/server/auth'
 import { loadLead } from '@/server/leads'
 import { listAssignees } from '@/server/staff'
 import { isUuid } from '@/lib/leads'
+import { StaffShell } from '@/components/StaffShell'
 import { LeadDetailView } from './LeadDetailView'
 
 export const dynamic = 'force-dynamic'
@@ -25,5 +26,9 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
   // Absent and not-yours look the same: RLS returns no row for either.
   if (!detail) notFound()
 
-  return <LeadDetailView detail={detail} me={staff.id} canAssign={canAssign} assignees={assignees} />
+  return (
+    <StaffShell staff={staff} width="wide">
+      <LeadDetailView detail={detail} me={staff.id} canAssign={canAssign} assignees={assignees} />
+    </StaffShell>
+  )
 }

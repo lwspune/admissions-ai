@@ -6,6 +6,9 @@ import { loadBank, type BankItem } from '@/server/items'
 import { groupBank, coverageByClass, thirtyReadiness, type ItemStatus, type CoverageCell, type Readiness } from '@/lib/items'
 import { CLASSES, TAUGHT_IN_MIN } from '@/lib/classes'
 import { CHOICES, SUBJECTS, DIFFICULTIES, type Subject } from '@/lib/types'
+import { Icon } from '@/components/icons'
+import { StaffShell } from '@/components/StaffShell'
+import { Alert, Badge, Eyebrow, PageHeader, card, cx } from '@/components/ui'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Questions', robots: { index: false, follow: false } }
@@ -19,10 +22,10 @@ const SUBJECT_LABEL: Record<Subject, string> = {
 const FILTERS = ['all', 'review', 'live', 'retired'] as const
 type Filter = (typeof FILTERS)[number]
 
-const STATUS_STYLE: Record<ItemStatus, string> = {
-  live: 'bg-green-100 text-green-900',
-  review: 'bg-amber-100 text-amber-900',
-  retired: 'bg-slate-200 text-slate-600',
+const STATUS_TONE: Record<ItemStatus, 'success' | 'warning' | 'neutral'> = {
+  live: 'success',
+  review: 'warning',
+  retired: 'neutral',
 }
 
 export default async function ItemsPage({
@@ -47,38 +50,35 @@ export default async function ItemsPage({
   const groups = groupBank(shown)
 
   return (
-    <main className="mx-auto max-w-4xl px-4 py-6">
-      <Link href="/leads" className="text-sm text-slate-500 hover:underline">
-        ← Candidates
-      </Link>
-
-      <header className="mt-3 border-b border-slate-200 pb-4">
-        <h1 className="text-xl font-semibold text-slate-900">Question bank</h1>
-        <p className="mt-1 text-sm text-slate-500">
-          {all.length} items · {all.filter((i) => i.status === 'live').length} live ·{' '}
-          {all.filter((i) => i.status === 'review').length} awaiting review
-        </p>
-        <p className="mt-2 text-xs text-slate-500">
-          Answer keys are shown. This page is visible to superadmins only — do not screenshot it.
-        </p>
-      </header>
+    <StaffShell staff={staff}>
+      <PageHeader
+        title="Question bank"
+        description={
+          <>
+            {all.length} items · {all.filter((i) => i.status === 'live').length} live ·{' '}
+            {all.filter((i) => i.status === 'review').length} awaiting review
+          </>
+        }
+      />
+      <Alert tone="warning" className="mt-4">
+        Answer keys are shown. This page is visible to superadmins only — do not screenshot it.
+      </Alert>
 
       <Coverage
         cells={coverageByClass(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))}
         readiness={thirtyReadiness(all.filter((i) => i.status === 'live').map((i) => ({ ...i, taught_in: i.taughtIn })))}
       />
 
-      <nav aria-label="Filter by status" className="mt-4 flex flex-wrap gap-2">
+      <nav aria-label="Filter by status" className="mt-6 inline-flex flex-wrap gap-1 rounded-xl bg-slate-200/60 p-1">
         {FILTERS.map((f) => (
           <Link
             key={f}
             href={f === 'all' ? '/items' : `/items?status=${f}`}
             aria-current={filter === f ? 'page' : undefined}
-            className={`min-h-tap inline-flex items-center rounded border px-3 py-2 text-sm capitalize ${
-              filter === f
-                ? 'border-slate-900 bg-slate-900 text-white'
-                : 'border-slate-300 bg-white text-slate-700'
-            }`}
+            className={cx(
+              'min-h-tap inline-flex items-center rounded-lg px-4 text-sm font-medium capitalize transition-colors',
+              filter === f ? 'bg-white text-slate-900 shadow-sm' : 'text-slate-600 hover:text-slate-900',
+            )}
           >
             {f}
           </Link>
@@ -86,20 +86,20 @@ export default async function ItemsPage({
       </nav>
 
       {groups.map((group) => (
-        <section key={`${group.subject}/${group.difficulty}`} className="mt-6">
+        <section key={`${group.subject}/${group.difficulty}`} className="mt-8">
           <h2 className="text-sm font-semibold text-slate-900">
             {SUBJECT_LABEL[group.subject]} · <span className="font-normal capitalize">{group.difficulty}</span>{' '}
-            <span className="font-normal text-slate-400">({group.items.length})</span>
+            <span className="font-normal text-slate-600">({group.items.length})</span>
           </h2>
 
           {group.items.length === 0 ? (
             // An empty stratum is the most useful thing this page can say to
             // whoever decides what to author next, so it is stated, not hidden.
-            <p className="mt-1 text-xs text-slate-400">
+            <p className="mt-1 text-xs text-slate-600">
               Nothing here{filter === 'all' ? '' : ` with status ${filter}`}.
             </p>
           ) : (
-            <ul className="mt-2 space-y-2">
+            <ul className="mt-3 space-y-3">
               {group.items.map((item) => (
                 <Item key={item.id} item={item} />
               ))}
@@ -107,14 +107,14 @@ export default async function ItemsPage({
           )}
         </section>
       ))}
-    </main>
+    </StaffShell>
   )
 }
 
 const COVERAGE_STYLE: Record<CoverageCell['status'], string> = {
   short: 'bg-red-100 text-red-900',
   thin: 'bg-amber-100 text-amber-900',
-  ok: 'text-slate-700',
+  ok: 'text-slate-800',
 }
 
 /**
@@ -128,18 +128,16 @@ function Coverage({ cells, readiness }: { cells: CoverageCell[]; readiness: Read
   const cell = (c: number, s: Subject, d: string) =>
     cells.find((x) => x.classLevel === c && x.subject === s && x.difficulty === d)!
   return (
-    <section className="mt-4 overflow-x-auto" aria-labelledby="coverage-heading">
-      <h2 id="coverage-heading" className="text-sm font-semibold text-slate-900">
-        Live items each class can draw from
-      </h2>
-      <p className="mt-1 text-xs text-slate-500">
+    <section className={cx(card, 'mt-6 overflow-x-auto p-5 sm:p-6')} aria-labelledby="coverage-heading">
+      <Eyebrow id="coverage-heading">Live items each class can draw from</Eyebrow>
+      <p className="mt-2 text-xs leading-relaxed text-slate-600">
         An admit to class N is tested on content taught up to class N−1. Red: that class cannot be issued a paper.
         Amber: fewer than twice a paper’s need, so its papers repeat. The counts are basics; Paper shows whether a
         class gets 30 questions, which needs its class N−1 first-term syllabus items live.
       </p>
-      <table className="mt-2 w-full text-xs">
+      <table className="mt-4 w-full text-xs">
         <thead>
-          <tr className="text-left text-slate-500">
+          <tr className="text-left text-slate-600">
             <th scope="col" className="py-1 pr-3 font-medium">Class</th>
             <th scope="col" className="py-1 pr-3 font-medium">Paper</th>
             {SUBJECTS.map((s) =>
@@ -197,45 +195,59 @@ function Coverage({ cells, readiness }: { cells: CoverageCell[]; readiness: Read
 
 function Item({ item }: { item: BankItem }) {
   return (
-    <li className="rounded-lg border border-slate-200 bg-white p-4">
-      <div className="flex flex-wrap items-baseline gap-2">
-        <span className="font-mono text-xs text-slate-500">{item.ref ?? 'no ref'}</span>
-        <span className={`rounded px-1.5 py-0.5 text-xs ${STATUS_STYLE[item.status]}`}>{item.status}</span>
-        <span className="text-xs text-slate-400">{item.skill}</span>
-        <span className="text-xs text-slate-400">{item.format}</span>
+    <li className={cx(card, 'p-4 sm:p-5')}>
+      <div className="flex flex-wrap items-center gap-2">
+        <span className="font-mono text-xs text-slate-600">{item.ref ?? 'no ref'}</span>
+        <Badge tone={STATUS_TONE[item.status]}>{item.status}</Badge>
+        <span className="text-xs text-slate-600">{item.skill}</span>
+        <span className="text-xs text-slate-600">{item.format}</span>
         {/* The floor means "open to every admit" and is what an untagged item
             carries, so it is shown as such rather than as a class number. */}
-        <span className="text-xs text-slate-400">
+        <span className="text-xs text-slate-600">
           {item.taughtIn <= TAUGHT_IN_MIN ? 'all classes' : `taught in class ${item.taughtIn}`}
         </span>
       </div>
 
-      <p className="mt-2 text-sm text-slate-900">{item.stem}</p>
+      <p className="mt-3 text-sm leading-relaxed text-slate-900">{item.stem}</p>
 
       {item.format === 'mcq' && item.options ? (
-        <ul className="mt-2 space-y-1">
+        <ul className="mt-3 space-y-1">
           {CHOICES.map((choice) => {
             const isKey = choice === item.answerKey
             return (
-              <li key={choice} className={`text-sm ${isKey ? 'font-medium text-green-800' : 'text-slate-600'}`}>
-                {choice}. {item.options?.[choice]}
-                {isKey && <span className="ml-2 text-xs uppercase tracking-wide">key</span>}
+              <li
+                key={choice}
+                className={cx(
+                  'flex items-start gap-2 rounded-lg px-2 py-1 text-sm',
+                  isKey ? 'bg-emerald-50 font-medium text-emerald-900' : 'text-slate-700',
+                )}
+              >
+                <span className="w-4 shrink-0 font-semibold">{choice}.</span>
+                <span className="min-w-0 flex-1">{item.options?.[choice]}</span>
+                {isKey && (
+                  <Badge tone="success" icon="check">
+                    key
+                  </Badge>
+                )}
               </li>
             )
           })}
         </ul>
       ) : (
-        <p className="mt-2 text-sm font-medium text-green-800">
+        <p className="mt-3 rounded-lg bg-emerald-50 px-2 py-1 text-sm font-medium text-emerald-900">
           Answer: {item.numericAnswer}
           {item.numericTolerance > 0 && (
-            <span className="ml-2 font-normal text-slate-500">± {item.numericTolerance}</span>
+            <span className="ml-2 font-normal text-slate-600">± {item.numericTolerance}</span>
           )}
         </p>
       )}
 
       {item.rationale && (
-        <details className="mt-2">
-          <summary className="min-h-tap cursor-pointer text-xs text-slate-500">Rationale</summary>
+        <details className="group mt-2">
+          <summary className="min-h-tap inline-flex cursor-pointer list-none items-center gap-1 rounded text-xs font-medium text-slate-600 hover:text-slate-900 [&::-webkit-details-marker]:hidden">
+            <Icon name="chevronRight" className="h-3.5 w-3.5 transition-transform group-open:rotate-90" />
+            Rationale
+          </summary>
           <p className="mt-1 text-xs leading-relaxed text-slate-600">{item.rationale}</p>
         </details>
       )}

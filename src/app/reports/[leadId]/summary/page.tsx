@@ -5,6 +5,7 @@ import { currentStaff, userClient } from '@/server/auth'
 import { loadParentReport } from '@/server/report'
 import type { ParentReport } from '@/lib/report'
 import type { Subject } from '@/lib/types'
+import { Icon } from '@/components/icons'
 import { PrintButton } from './PrintButton'
 
 export const dynamic = 'force-dynamic'
@@ -33,7 +34,7 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
 
   return (
     <main
-      className="min-h-screen bg-slate-100 px-4 py-6 print:min-h-0 print:bg-white print:p-0"
+      className="min-h-screen bg-canvas px-4 py-6 print:min-h-0 print:bg-white print:p-0"
       style={{ printColorAdjust: 'exact', WebkitPrintColorAdjust: 'exact' }}
     >
       {/* The browser's PDF names itself after the title. */}
@@ -42,13 +43,17 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
       <style>{'@page { size: A4 portrait; margin: 12mm; }'}</style>
 
       <div className="mx-auto mb-4 flex max-w-2xl items-center justify-between gap-3 print:hidden">
-        <Link href={`/leads/${leadId}`} className="text-sm text-slate-600 hover:underline">
-          ← Back to lead
+        <Link
+          href={`/leads/${leadId}`}
+          className="inline-flex min-h-tap items-center gap-1 rounded text-sm font-medium text-slate-600 hover:text-slate-900"
+        >
+          <Icon name="chevronLeft" className="h-4 w-4" />
+          Back to lead
         </Link>
         <PrintButton />
       </div>
 
-      <article className="mx-auto max-w-2xl overflow-hidden rounded-2xl bg-white shadow-sm print:max-w-none print:shadow-none">
+      <article className="mx-auto max-w-2xl overflow-hidden rounded-2xl bg-white shadow-raised print:max-w-none print:shadow-none">
         <header className="bg-gradient-to-br from-blue-900 to-indigo-700 px-5 py-7 text-white sm:px-8">
           <p className="text-xs uppercase tracking-[0.14em] text-indigo-200">Aptitude Test</p>
           <h1 className="mt-1 text-2xl font-bold">Score Report</h1>

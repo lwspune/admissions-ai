@@ -4,6 +4,7 @@ import { currentStaff, userClient } from '@/server/auth'
 import { listLeads, listSources, PAGE_SIZE } from '@/server/leads'
 import { listAssignees } from '@/server/staff'
 import { parseLeadFilters } from '@/lib/leads'
+import { StaffShell } from '@/components/StaffShell'
 import { LeadsConsole } from './LeadsConsole'
 
 export const dynamic = 'force-dynamic'
@@ -31,13 +32,15 @@ export default async function LeadsPage({
   ])
 
   return (
-    <LeadsConsole
-      staff={staff}
-      list={list}
-      filters={filters}
-      sources={sources}
-      assignees={assignees}
-      pageSize={PAGE_SIZE}
-    />
+    <StaffShell staff={staff} width="wide">
+      <LeadsConsole
+        staff={staff}
+        list={list}
+        filters={filters}
+        sources={sources}
+        assignees={assignees}
+        pageSize={PAGE_SIZE}
+      />
+    </StaffShell>
   )
 }

@@ -2,6 +2,8 @@
 
 import { useState } from 'react'
 import { issueMessage, parentPackUrl } from '@/lib/parentPack'
+import { Icon } from '@/components/icons'
+import { btn } from '@/components/ui'
 
 /** A freshly issued link, ready to send to the parent. */
 export function IssuedLink({
@@ -19,38 +21,43 @@ export function IssuedLink({
   const message = issueMessage({ name, testUrl: url, classLevel })
 
   return (
-    <div className="mt-3 rounded border border-slate-200 bg-slate-50 p-3">
-      <p className="text-xs font-medium text-slate-700">
+    <div className="mt-3 rounded-xl border border-emerald-200 bg-emerald-50/60 p-4">
+      <p className="flex items-center gap-2 text-sm font-medium text-emerald-900">
+        <Icon name="checkCircle" className="h-4 w-4" />
         Send this to the parent on WhatsApp. Any earlier link has stopped working.
       </p>
-      <p className="mt-2 break-all rounded bg-white px-2 py-2 font-mono text-xs text-slate-800">{url}</p>
+      <p className="mt-3 break-all rounded-lg bg-white px-3 py-2 font-mono text-xs text-slate-800 ring-1 ring-inset ring-emerald-200">
+        {url}
+      </p>
       {classLevel !== null && (
         <p className="mt-2 text-xs text-slate-700">
           The message also links the{' '}
-          <a className="underline" href={parentPackUrl(url, classLevel)} target="_blank" rel="noopener noreferrer">
+          <a className="font-medium text-brand-700 underline" href={parentPackUrl(url, classLevel)} target="_blank" rel="noopener noreferrer">
             Class {classLevel} syllabus and sample paper
           </a>
           .
         </p>
       )}
-      <div className="mt-2 flex gap-2">
+      <div className="mt-3 flex flex-wrap gap-2">
         <button
           type="button"
-          className="min-h-tap rounded border border-slate-300 bg-white px-3 py-2 text-sm"
+          className={btn('secondary', 'sm')}
           onClick={async () => {
             await navigator.clipboard.writeText(message)
             setCopied(true)
             setTimeout(() => setCopied(false), 2000)
           }}
         >
+          <Icon name={copied ? 'check' : 'copy'} className="h-4 w-4" />
           {copied ? 'Copied' : 'Copy message'}
         </button>
         <a
-          className="min-h-tap inline-flex items-center rounded border border-slate-300 bg-white px-3 py-2 text-sm"
+          className={btn('success', 'sm')}
           href={`https://wa.me/91${mobile}?text=${encodeURIComponent(message)}`}
           target="_blank"
           rel="noopener noreferrer"
         >
+          <Icon name="message" className="h-4 w-4" />
           Open in WhatsApp
         </a>
       </div>

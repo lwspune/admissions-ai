@@ -1,9 +1,10 @@
 import type { Metadata } from 'next'
 import { redirect } from 'next/navigation'
 import { headers } from 'next/headers'
-import Link from 'next/link'
 import { currentStaff } from '@/server/auth'
 import { CLASSES } from '@/lib/classes'
+import { StaffShell } from '@/components/StaffShell'
+import { PageHeader, card } from '@/components/ui'
 import { PackRow } from './PackRow'
 
 export const dynamic = 'force-dynamic'
@@ -24,24 +25,17 @@ export default async function DownloadsPage() {
   const site = process.env.NEXT_PUBLIC_APP_URL || `${host?.startsWith('localhost') ? 'http' : 'https'}://${host}`
 
   return (
-    <main className="mx-auto max-w-3xl px-4 py-6">
-      <Link href="/leads" className="text-sm text-slate-600 hover:underline">
-        ← Leads
-      </Link>
+    <StaffShell staff={staff} width="narrow">
+      <PageHeader
+        title="Downloads"
+        description="Syllabus and sample paper for parents, one PDF per class the student is joining. The test link message already includes the right one."
+      />
 
-      <header className="mt-3 border-b border-slate-200 pb-4">
-        <h1 className="text-xl font-semibold text-slate-900">Downloads</h1>
-        <p className="mt-1 text-sm text-slate-600">
-          Syllabus and sample paper for parents, one PDF per class the student is joining. The test link
-          message already includes the right one.
-        </p>
-      </header>
-
-      <ul className="mt-4 divide-y divide-slate-200 rounded-lg border border-slate-200">
+      <ul className={`${card} mt-6 divide-y divide-slate-100 overflow-hidden`}>
         {CLASSES.map((classLevel) => (
           <PackRow key={classLevel} classLevel={classLevel} site={site} />
         ))}
       </ul>
-    </main>
+    </StaffShell>
   )
 }
