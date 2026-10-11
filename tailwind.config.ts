@@ -39,6 +39,12 @@ export default {
         card: '0 1px 2px 0 rgb(15 23 42 / 0.04), 0 1px 3px 0 rgb(15 23 42 / 0.06)',
         raised: '0 2px 4px -1px rgb(15 23 42 / 0.05), 0 12px 32px -8px rgb(15 23 42 / 0.14)',
       },
+      // The homepage animation's one entrance. Always used as `motion-safe:`,
+      // so a visitor who asks for less motion gets the finished frame.
+      keyframes: {
+        'fade-up': { from: { opacity: '0', transform: 'translateY(8px)' }, to: { opacity: '1', transform: 'none' } },
+      },
+      animation: { 'fade-up': 'fade-up 450ms ease-out both' },
     },
   },
   plugins: [],
