@@ -208,6 +208,10 @@ npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
 ```
 
+Before/after screenshot sheets go in `screenshots/<date>-<topic>/` at the project root (the
+user's standing preference, 2026-10-11): the combined sheet(s) at the top, single shots in
+`shots/`. The folder is git-ignored; never point the user at a temp directory instead.
+
 Day-to-day staff management is the `/staff` page; the `staff:*` scripts are the
 break-glass path and the only way to create the first superadmin.
 
