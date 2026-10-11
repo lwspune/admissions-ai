@@ -107,7 +107,8 @@ Send me the URL and I will check:
       Renamed to `aptitudetestai.vercel.app` on 2026-10-11 meanwhile. To move:
       add the domain to the project, set production `NEXT_PUBLIC_APP_URL`, then
       **rebuild** (`npx vercel redeploy <prod-url> --target production`); the
-      variable is baked in at build time. Keep the old domain attached: sent
-      messages point at it.
+      variable is baked in at build time. Keep the old domain attached, as a
+      308 redirect to the new one (Settings → Domains → Edit → Redirect to):
+      sent messages point at it. Switch the redirect on when no test is open.
 - [ ] The 12-month purge job is specced but not built. It needs a Vercel Cron
       entry once it exists — that is what `CRON_SECRET` is for.

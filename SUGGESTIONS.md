@@ -230,8 +230,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       for ~12 months, so its first genuine run will be unobserved. Worth inserting a throwaway
       backdated lead once and letting the *scheduled* job take it, rather than trusting a manual
       curl of the same code path.
+- [ ] **Does the purge cron still run after the redirect?** On 2026-10-11 the old domain
+      became a 308 redirect, and `/api/cron/purge` on it now answers 308. If Vercel's scheduler
+      calls the old domain rather than the deployment, the purge stops silently. Check after
+      03:00 UTC on 2026-10-12: Vercel → Logs, `/api/cron/purge` should show a 200 and the
+      `purge: cutoff=… leads=…` line, not a 308.
 - [ ] **Custom domain.** **Renamed 2026-10-11** to `aptitudetestai.vercel.app` (the old
-      `admissions-ai-omega.vercel.app` stays attached for links already sent). That fixes the odd
+      `admissions-ai-omega.vercel.app` 308-redirects to it, path kept, for links already sent). That fixes the odd
       name, not the trust problem: a link from an unrecognised `vercel.app` subdomain, arriving
       from an unknown number, is exactly what people are taught not to tap. A subdomain of the
       institute's own domain would materially improve the open rate. The team owns no domain

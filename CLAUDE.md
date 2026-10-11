@@ -17,7 +17,7 @@ itself server-side.
 | [DECISIONS_HISTORY.md](DECISIONS_HISTORY.md) | Decisions older than the log below keeps |
 
 **Live:** https://aptitudetestai.vercel.app (the old `admissions-ai-omega.vercel.app`
-still serves the same deployment) · repo `lwspune/admissions-ai` (private)
+308-redirects to it, path kept) · repo `lwspune/admissions-ai` (private)
 Supabase project `ohcvimrxaeeqbmnucbcn` · Vercel team `apj-school`.
 
 **Git integration is connected: a push to `main` deploys to production.** Other
@@ -284,7 +284,11 @@ the connection is refused (2026-10-01).
   build time, so changing the variable alone does nothing). Checked live: a link issued from a
   lead page, its syllabus PDF and the WhatsApp text all carry the new address,
   and it opens signed out on phone and desktop. Still a `vercel.app` link, so the
-  custom-domain item in SUGGESTIONS stays open.
+  custom-domain item in SUGGESTIONS stays open. Later the same day, at the user's
+  request, the old domain became a 308 redirect to the new one (a Vercel domain
+  setting, path and query kept), switched on while no test was open: a page
+  loaded from the old host would have its answer saves redirected cross-origin.
+  Staff signed in on the old host sign in again, since the session cookie is per host.
 - **2026-10-11 — Maths and science in Hindi, by a switch; English stays English.**
   The user's call: Hindi only, a switch that starts in English, they review every batch, and the
   parent PDFs get Hindi editions too. A translated English question would test something else, so
