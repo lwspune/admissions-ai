@@ -199,6 +199,16 @@ function Facts({
       notable: identifyFailures >= 3,
     },
   ]
+  // Only on an attempt that used the switch. Not a warning: the difficulty
+  // levels were set in English, and whoever sets the bar should see it.
+  if (facts.languageSwitches > 0) {
+    const hindi = facts.answeredInHindi
+    rows.push({
+      label: 'Answered in Hindi',
+      value: `${hindi.length === 0 ? 'None' : `Q${hindi.join(', Q')}`} (switched ${facts.languageSwitches}×)`,
+      notable: false,
+    })
+  }
 
   return (
     <section className={cx(card, 'mt-4 p-5 sm:p-6')}>

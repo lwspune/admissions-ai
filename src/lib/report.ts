@@ -65,6 +65,10 @@ export interface IntegrityFacts {
    * present silence as a clean bill of health.
    */
   telemetrySeen: boolean
+  /** Times the candidate switched between English and Hindi (2026-10-11). */
+  languageSwitches: number
+  /** Answered positions whose final answer was given with the question in Hindi. */
+  answeredInHindi: number[]
 }
 
 export interface ReportQuestion {
@@ -214,7 +218,26 @@ function integrityFacts(input: ReportInput): IntegrityFacts {
     timeUsedMs: input.activeMs,
     timeAvailableMs: input.limitMs,
     telemetrySeen: events.length > 0,
+    languageSwitches: events.filter((e) => e.kind === 'lang').length,
+    answeredInHindi: answeredInHindi(events, input.answers),
   }
+}
+
+/**
+ * Each answer_set carries the language the question was showing in. The last
+ * one for a position is the answer that stands; a position with no saved
+ * answer is left out, whatever was clicked on the way.
+ */
+function answeredInHindi(events: ReportEvent[], answers: ReportAnswer[]): number[] {
+  const last = new Map<number, unknown>()
+  for (const e of events) {
+    if (e.kind === 'answer_set' && e.position !== null) last.set(e.position, e.payload.lang)
+  }
+  return answers
+    .filter((a) => a.choice !== null || a.numericValue !== null)
+    .map((a) => a.position)
+    .filter((p) => last.get(p) === 'hi')
+    .sort((a, b) => a - b)
 }
 
 // ── dwell for questions with no answer row ───────────────────────────────────

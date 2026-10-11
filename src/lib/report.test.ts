@@ -320,6 +320,8 @@ describe('toParentReport', () => {
       'telemetry',
       'position',
       'verdict',
+      'Hindi',
+      'lang',
     ]) {
       expect(bytes).not.toContain(leak)
     }
@@ -403,5 +405,60 @@ describe('toParentReport — parts', () => {
     const parent = toParentReport({ name: 'a', submittedAt: '', report: buildReport(input()), syllabusClass: 9 })
     expect('syllabusClass' in parent).toBe(false)
     expect(parent.subjects.some((s) => 'parts' in s)).toBe(false)
+  })
+})
+
+// 2026-10-11: maths and science can be read in Hindi. Which language a
+// question was answered in is a plain fact for staff, like the others here,
+// and unscored: the difficulty levels were set in English, so whoever sets
+// the bar should be able to see it.
+describe('buildReport — language', () => {
+  const answered = (position: number) => ({
+    position,
+    choice: 'B' as const,
+    numericValue: null,
+    activeMs: 20_000,
+    changeCount: 0,
+    changedAfterPause: false,
+  })
+
+  it('reports English throughout when the language never changed', () => {
+    const { facts } = buildReport(input({ answers: [answered(1)], events: [ev('answer_set', 10_000, 1, { to: 'B' })] }))
+    expect(facts.languageSwitches).toBe(0)
+    expect(facts.answeredInHindi).toEqual([])
+  })
+
+  it('counts each switch, and the questions whose final answer was given in Hindi', () => {
+    const { facts } = buildReport(
+      input({
+        answers: [answered(1), answered(3)],
+        events: [
+          ev('lang', 5_000, 1, { to: 'hi' }),
+          ev('answer_set', 10_000, 1, { to: 'B', lang: 'hi' }),
+          ev('lang', 20_000, 3, { to: 'en' }),
+          ev('answer_set', 30_000, 3, { to: 'B', lang: 'en' }),
+        ],
+      }),
+    )
+    expect(facts.languageSwitches).toBe(2)
+    expect(facts.answeredInHindi).toEqual([1])
+  })
+
+  it('goes by the last answer to a question, not the first', () => {
+    const { facts } = buildReport(
+      input({
+        answers: [answered(1)],
+        events: [
+          ev('answer_set', 10_000, 1, { to: 'A', lang: 'en' }),
+          ev('answer_set', 20_000, 1, { to: 'B', lang: 'hi' }),
+        ],
+      }),
+    )
+    expect(facts.answeredInHindi).toEqual([1])
+  })
+
+  it('leaves out a question with no answer, whatever was clicked', () => {
+    const { facts } = buildReport(input({ answers: [], events: [ev('answer_set', 10_000, 1, { to: 'B', lang: 'hi' })] }))
+    expect(facts.answeredInHindi).toEqual([])
   })
 })
