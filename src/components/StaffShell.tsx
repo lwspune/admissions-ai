@@ -1,5 +1,7 @@
 import Link from 'next/link'
 import { ROLE_LABEL, type Role } from '@/lib/staff'
+import { userClient } from '@/server/auth'
+import { unreadContactCount } from '@/server/contact'
 import { StaffNav, SignOutButton, type NavItem } from './StaffNav'
 import { Avatar, Mark, cx } from './ui'
 
@@ -9,7 +11,7 @@ import { Avatar, Mark, cx } from './ui'
  * the wrong role on its own, and the database refuses underneath (import_leads,
  * RLS on test_items, the gate in src/server/staff.ts).
  */
-export function StaffShell({
+export async function StaffShell({
   staff,
   width = 'default',
   children,
@@ -24,7 +26,13 @@ export function StaffShell({
   ]
   if (staff.role !== 'telecaller') items.push({ href: '/leads/import', label: 'Import', icon: 'upload' })
   if (staff.role === 'superadmin') {
-    items.push({ href: '/items', label: 'Questions', icon: 'book' }, { href: '/staff', label: 'Staff', icon: 'shield' })
+    // The unread count is read through RLS, so it is only ever asked for here.
+    const unread = await unreadContactCount(await userClient())
+    items.push(
+      { href: '/items', label: 'Questions', icon: 'book' },
+      { href: '/staff', label: 'Staff', icon: 'shield' },
+      { href: '/messages', label: 'Messages', icon: 'inbox', count: unread },
+    )
   }
   const role = ROLE_LABEL[staff.role as Role] ?? staff.role
 

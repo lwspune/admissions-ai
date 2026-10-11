@@ -10,6 +10,8 @@ export interface NavItem {
   href: string
   label: string
   icon: IconName
+  /** Shown as a pill when above zero: unread messages. */
+  count?: number
 }
 
 /** The staff pages' links, with the current one marked. */
@@ -37,6 +39,12 @@ export function StaffNav({ items }: { items: NavItem[] }) {
           >
             <Icon name={item.icon} className="h-4 w-4" />
             {item.label}
+            {item.count ? (
+              <span className="rounded-full bg-brand-700 px-1.5 py-0.5 text-[11px] font-semibold leading-none text-white tabular-nums">
+                {item.count}
+                <span className="sr-only"> unread</span>
+              </span>
+            ) : null}
           </Link>
         )
       })}
