@@ -44,7 +44,9 @@ logic worth testing lives, which is why it tests without a database.
 15-or-30 choice) · `serialize` (**the security boundary**) · `report` · `items`
 (seed-status rules incl. retirement, per-class coverage, 30-question readiness,
 the no-logic-puzzles-in-English rule) · `classes` (the N−1 content rule and the
-syllabus rule) · `syllabus` and `samplePaper` (the parent pack's contents) ·
+syllabus rule) · `syllabus` and `samplePaper` (the parent pack's contents) · `hindi` (the rules a
+translation meets, whether a paper offers Hindi, per-class coverage) · `candidateText` (every
+candidate screen's words, English and Hindi) ·
 `parentPack` (the PDFs' public paths and the issue message) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
@@ -177,6 +179,16 @@ These are the things that quietly break everything if violated.
   where it had none — stage and assignment are untouched. A number on several
   leads (siblings) is reported, not guessed at. `import_leads` is one
   transaction: a bad row writes none of the file.
+- **Hindi is a second rendering of a maths or science item, never a new item.**
+  `stem_hi` and `options_hi` sit on `test_items` and share its key, numeric answer and option order,
+  so moving an option between letters or dropping a number makes a wrong question that grades as a
+  right one; `items:lint` checks both, per option. English is never translated
+  (`test_items_hindi_shape`). A paper carries Hindi only when every maths and science question on it
+  has one (`paperHasHindi` in `toCandidatePaper`, the same allow-list). A plain `items:seed` never
+  writes the Hindi columns; only `items:hindi -- --file`, the reviewer's sign-off, does, through
+  `set_hindi()` (all or nothing). The paper's text is read live from `test_items`, so the
+  `test_items_hindi_frozen` trigger refuses a Hindi change while a candidate is mid-test on it; a
+  change of meaning is a retirement, not an edit. The staff report shows the English only.
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -189,6 +201,7 @@ npm run lint          npm run typecheck      npm test
 npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
+npm run items:hindi -- --stamp|--sheet|--file <batch>   (Hindi: fill source, review sheet, load)
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210 <8|9|10|11|12>
@@ -258,6 +271,15 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-11 — Maths and science in Hindi, by a switch; English stays English.**
+  The user's call: Hindi only, a switch that starts in English, they review every batch, and the
+  parent PDFs get Hindi editions too. A translated English question would test something else, so
+  English is never translated. The switch shows only on a fully translated paper. Translations are
+  drafted in `content/items/hi/` against NCERT's Hindi-medium terms and loaded batch by batch on
+  the user's sign-off (migration 0016). A bad translation found later is corrected only when no test
+  holding it is open, or retired and replaced if it changed the meaning; a retired item is never
+  drawn again but stays on papers already issued. The switch and each answer's language are
+  recorded and shown to staff, unscored.
 - **2026-10-11 — The test link opens on the number check; consent is the call.**
   The user's call: four screens before the first question was friction, and
   consent is already taken on the recorded call. The consent and handover

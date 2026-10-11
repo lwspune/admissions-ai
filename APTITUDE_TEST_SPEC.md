@@ -150,7 +150,16 @@ number. Both were removed to cut the steps before the first question to two: con
 recorded call before the link is sent (see DPDP below).
 
 Failure states each get a plain-language screen, never a raw error: link expired, already used, number
-doesn't match, window closing too soon, already submitted.
+doesn't match, window closing too soon, already submitted. They are shown in English and Hindi at
+once, because they come before the paper is known.
+
+**Hindi (added 2026-10-11).** Maths and science questions can be read in Hindi; English questions
+stay English, since they test English. Every screen carries an English / हिंदी switch, starting in
+English and remembered per link, but only on a paper whose maths and science questions all have a
+Hindi version, so nobody switches and finds some still in English. Switching changes the words,
+never the question: the key, the numeric answer and the order of the options are shared. Each switch
+is recorded, and the staff report says which answers were given in Hindi as a plain, unscored fact;
+the difficulty levels were set in English, so whoever sets the bar should see it.
 
 **Resume** restores saved answers, palette state and server-computed remaining time.
 
@@ -240,6 +249,13 @@ is written and **blocks the other 285** — getting the register wrong on item 1
 300 is the expensive failure. Items land as `status='review'`; you promote them to `live`. A lint before
 seeding checks the key is valid, options are four and distinct, no option is conspicuously longer than
 the others, and the stem is under 40 words.
+
+**Hindi versions** live in `content/items/hi/`, one file per English batch, and reach the bank
+only when a batch is loaded (`npm run items:hindi -- --file <batch>`), which is the reviewer's
+sign-off. The lint checks each translation against its item: every number kept, per option; no
+Devanagari digits; a whole shape; and a fingerprint of the English that goes stale when the English
+changes. The database refuses a change to a question's Hindi while a candidate is mid-test on it. A
+mistranslation that changes the meaning is not edited in place: the item is retired and replaced.
 
 Flag an item for retirement when % correct exceeds 0.95 (a free mark) or falls under 0.15 (likely
 miskeyed). **Flag for a human — never auto-retire**, or one weak cohort silently guts the bank.

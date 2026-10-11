@@ -20,6 +20,25 @@ stem and warn on shared wording, but a near copy can share few words: "vigilant"
 the same four options, a series starting B, E, H, K. Word overlap cannot separate those from two
 ordinary questions of one type (both score 0.4–0.5), so this is a reading step, not a check.
 
+## Hindi versions
+
+Maths and science items can carry a Hindi version (2026-10-11); English never does. Translations go
+in `hi/<batch>.hi.json`, one per English batch, each entry `{ ref, source, stem_hi, options_hi }`.
+
+- **Same question, other words.** The key letter, the numeric answer and the option order are the
+  English item's. Keep every number, in the same option; the lint checks this per option. Use the
+  digits 0–9, units as the English has them (km, m/s², g/cm3), and the terms of NCERT's Hindi-medium
+  books (क्षारकीय, तिर्यक रेखा, शीर्षाभिमुख कोण).
+- **`npm run items:hindi -- --stamp <batch>`** fills `source`, a fingerprint of the English, on new
+  entries. When the English changes the lint calls the translation stale; check the Hindi, then put
+  the new value it prints in `source` by hand.
+- **`--sheet <batch>`** writes `hi/<batch>.hi.md`, English and Hindi side by side with the key
+  marked, for the reviewer. **`--file <batch>`** loads the batch: that is the sign-off, as `--live`
+  is for keys. The database refuses it while a candidate is mid-test on one of its items; run it
+  again after.
+- A class's papers offer Hindi only once every maths and science item it can draw is loaded; the
+  lint prints the count per class.
+
 ## Fields
 
 | Field | Values | Meaning |
