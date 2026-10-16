@@ -7,6 +7,8 @@ import { limitMsFor } from '../lib/types'
 export interface LeadReport {
   lead: { id: string; name: string; contact_mobile: string; school: string | null; class_level: number | null }
   issue: {
+    /** The current assessment; empty when none was issued. */
+    id: string
     seq: number
     of: number
     createdAt: string
@@ -21,7 +23,13 @@ export interface LeadReport {
     mode: string
     paperNo: number | null
   }
-  attempt: { startedAt: string; submittedAt: string | null; submitReason: string | null } | null
+  attempt: {
+    startedAt: string
+    submittedAt: string | null
+    submitReason: string | null
+    /** On a scanned paper test: who filed it (2026-10-16). */
+    scannedByName: string | null
+  } | null
   report: ReturnType<typeof buildReport> | null
   /** Prior issues that were abandoned or replaced. Three of these is itself a finding. */
   priorIssues: { seq: number; state: string; createdAt: string }[]
@@ -59,6 +67,7 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
     return {
       lead,
       issue: {
+        id: '',
         seq: 0,
         of: 3,
         createdAt: '',
@@ -85,13 +94,14 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
 
   const { data: attempt } = await db
     .from('attempts')
-    .select('id, started_at, submitted_at, submit_reason, active_ms')
+    .select('id, started_at, submitted_at, submit_reason, active_ms, scanned_by_name')
     .eq('assessment_id', current.id)
     .maybeSingle()
 
   const base = {
     lead,
     issue: {
+      id: current.id as string,
       seq: current.issue_seq as number,
       of: 3,
       createdAt: current.created_at as string,
@@ -133,6 +143,7 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
       startedAt: attempt.started_at as string,
       submittedAt: attempt.submitted_at as string | null,
       submitReason: attempt.submit_reason as string | null,
+      scannedByName: (attempt.scanned_by_name as string | null) ?? null,
     },
     report: buildReport(input),
   }
@@ -150,6 +161,7 @@ export async function loadParentReport(db: Db, leadId: string, role: Role): Prom
     submittedAt: data.attempt.submittedAt,
     report: data.report,
     syllabusClass: data.issue.syllabusClass,
+    onPaper: data.issue.mode === 'paper',
   })
 }
 
@@ -195,7 +207,7 @@ async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<Repo
 async function loadAnswers(db: Db, attemptId: string) {
   const { data } = await db
     .from('attempt_answers')
-    .select('position, choice, numeric_value, active_ms, change_count, changed_after_pause')
+    .select('position, choice, numeric_value, active_ms, change_count, changed_after_pause, double_mark, by_hand')
     .eq('attempt_id', attemptId)
     .order('position')
 
@@ -206,6 +218,8 @@ async function loadAnswers(db: Db, attemptId: string) {
     activeMs: (a.active_ms as number) ?? 0,
     changeCount: (a.change_count as number) ?? 0,
     changedAfterPause: Boolean(a.changed_after_pause),
+    doubleMark: Boolean(a.double_mark),
+    byHand: Boolean(a.by_hand),
   }))
 }
 

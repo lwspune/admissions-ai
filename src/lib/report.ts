@@ -22,6 +22,10 @@ export interface ReportAnswer {
   activeMs: number
   changeCount: number
   changedAfterPause: boolean
+  /** A scanned sheet's two marks in one row (2026-10-16). */
+  doubleMark?: boolean
+  /** A scanned answer a person settled, not the reader. */
+  byHand?: boolean
 }
 
 export interface ReportEvent {
@@ -69,6 +73,8 @@ export interface IntegrityFacts {
   languageSwitches: number
   /** Answered positions whose final answer was given with the question in Hindi. */
   answeredInHindi: number[]
+  /** On a scanned paper test, the positions a person decided rather than the reader. */
+  decidedByHand: number[]
 }
 
 export interface ReportQuestion {
@@ -125,6 +131,7 @@ export function buildReport(input: ReportInput): {
       position: a.position,
       choice: a.choice,
       numericValue: a.numericValue,
+      doubleMark: a.doubleMark,
     })),
   )
   const verdicts = new Map(graded.perQuestion.map((q) => [q.position, q]))
@@ -220,6 +227,7 @@ function integrityFacts(input: ReportInput): IntegrityFacts {
     telemetrySeen: events.length > 0,
     languageSwitches: events.filter((e) => e.kind === 'lang').length,
     answeredInHindi: answeredInHindi(events, input.answers),
+    decidedByHand: input.answers.filter((a) => a.byHand).map((a) => a.position).sort((a, b) => a - b),
   }
 }
 
@@ -277,6 +285,7 @@ function dwellFromNav(events: ReportEvent[], activeMs: number): Map<number, numb
 /** "C. thirty seven" reads; "C" makes the reader open the item bank. */
 function display(item: ReportPaperItem, answer: ReportAnswer | undefined): string | null {
   if (!answer) return null
+  if (answer.doubleMark) return 'Two marks'
   if (item.format === 'mcq') {
     if (!answer.choice) return null
     return `${answer.choice}. ${item.options?.[answer.choice] ?? ''}`.trim()
@@ -320,8 +329,11 @@ export interface ParentCounts {
 export interface ParentReport {
   name: string
   testDate: string
-  timeUsedMs: number
+  /** Null on a paper test: it was timed in the room, not by the app. */
+  timeUsedMs: number | null
   timeAvailableMs: number
+  /** Sat on a printed paper and scanned (2026-10-16). */
+  onPaper: boolean
   total: ParentCounts
   subjects: (ParentCounts & { subject: Subject; parts?: (ParentCounts & { part: Part })[] })[]
   /** The class whose syllabus the paper drew on. Only on a paper that did. */
@@ -338,12 +350,14 @@ export function toParentReport({
   submittedAt,
   report,
   syllabusClass = null,
+  onPaper = false,
 }: {
   name: string
   submittedAt: string
   report: ReturnType<typeof buildReport>
   /** Class N−1 for the admit; shown only when the paper has a syllabus part. */
   syllabusClass?: number | null
+  onPaper?: boolean
 }): ParentReport {
   const count = (questions: ReportQuestion[]) => ({
     correct: questions.filter((q) => q.verdict === 'correct').length,
@@ -358,8 +372,9 @@ export function toParentReport({
   const sheet: ParentReport = {
     name: displayName(name),
     testDate: submittedAt,
-    timeUsedMs: Math.min(report.facts.timeUsedMs, report.facts.timeAvailableMs),
+    timeUsedMs: onPaper ? null : Math.min(report.facts.timeUsedMs, report.facts.timeAvailableMs),
     timeAvailableMs: report.facts.timeAvailableMs,
+    onPaper,
     total: { score: report.totals.score, outOf: report.totals.outOf, ...count(report.questions) },
     subjects: SECTION_ORDER.map((subject) => {
       const questions = report.questions.filter((q) => q.subject === subject)

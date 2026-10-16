@@ -19,7 +19,16 @@ const SUBJECT_BAR: Record<Subject, { bar: string; track: string }> = {
   science: { bar: 'bg-emerald-600', track: 'bg-emerald-100' },
 }
 
-export function ReportView({ data, role }: { data: LeadReport; role: string }) {
+export function ReportView({
+  data,
+  role,
+  photoUrl = null,
+}: {
+  data: LeadReport
+  role: string
+  /** A short-lived link to a scanned paper test's sheet photo; counsellors and superadmin. */
+  photoUrl?: string | null
+}) {
   const [showDetail, setShowDetail] = useState(false)
   const { lead, issue, attempt, report, priorIssues, identifyFailures } = data
 
@@ -101,7 +110,11 @@ export function ReportView({ data, role }: { data: LeadReport; role: string }) {
             </div>
           </section>
 
-          <Facts facts={report.facts} attempt={attempt} identifyFailures={identifyFailures} />
+          {attempt.submitReason === 'paper' ? (
+            <PaperFacts report={report} attempt={attempt} photoUrl={photoUrl} />
+          ) : (
+            <Facts facts={report.facts} attempt={attempt} identifyFailures={identifyFailures} />
+          )}
 
           {priorIssues.length > 0 && (
             <p className="mt-3 text-xs text-slate-600">
@@ -241,6 +254,55 @@ function Facts({
       <p className="mt-4 text-xs text-slate-600">
         These are observations, not a verdict. A pause can be an incoming call; a device change can
         be a dead battery. Read them alongside the call recording.
+      </p>
+    </section>
+  )
+}
+
+/**
+ * A scanned paper test records no timing or device facts — it was sat in the
+ * room — so it shows what the scan does record, as plain facts like the rest.
+ */
+function PaperFacts({
+  report,
+  attempt,
+  photoUrl,
+}: {
+  report: NonNullable<LeadReport['report']>
+  attempt: NonNullable<LeadReport['attempt']>
+  photoUrl: string | null
+}) {
+  const doubles = report.questions.filter((q) => q.givenDisplay === 'Two marks').map((q) => q.position)
+  const byHand = report.facts.decidedByHand
+  const rows = [
+    { label: 'Scanned by', value: attempt.scannedByName ?? 'Unknown' },
+    { label: 'Scanned on', value: attempt.submittedAt ? date(attempt.submittedAt) : '—' },
+    { label: 'Answers decided by hand', value: byHand.length === 0 ? 'None' : `Q${byHand.join(', Q')}` },
+    { label: 'Two marks in one row', value: doubles.length === 0 ? 'None' : `Q${doubles.join(', Q')}` },
+  ]
+  return (
+    <section className={cx(card, 'mt-4 p-5 sm:p-6')}>
+      <div className="flex flex-wrap items-baseline justify-between gap-2">
+        <Eyebrow>What the scan recorded</Eyebrow>
+        <p className="text-xs text-slate-600">taken on paper</p>
+      </div>
+      <dl className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
+        {rows.map((r) => (
+          <div key={r.label} className="flex justify-between gap-3 border-b border-slate-100 pb-2 text-sm">
+            <dt className="text-slate-600">{r.label}</dt>
+            <dd className="font-medium text-slate-900">{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+      {photoUrl && (
+        <a href={photoUrl} target="_blank" rel="noreferrer" className={cx(btn('secondary', 'sm'), 'mt-4')}>
+          <Icon name="camera" className="h-4 w-4" />
+          View scanned sheet
+        </a>
+      )}
+      <p className="mt-4 text-xs text-slate-600">
+        A paper test was timed in the room, so there are no pause, paste or device facts. Two marks in one row are
+        graded wrong, as a wrong answer is.
       </p>
     </section>
   )

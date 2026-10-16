@@ -33,7 +33,8 @@ export function StaffNav({ items }: { items: NavItem[] }) {
             href={item.href}
             aria-current={on ? 'page' : undefined}
             className={cx(
-              'min-h-tap inline-flex shrink-0 items-center gap-2 border-b-2 px-3 text-sm font-medium transition-colors',
+              // Narrower on a phone so a counsellor's four tabs fit 390px without scrolling.
+              'min-h-tap inline-flex shrink-0 items-center gap-2 border-b-2 px-2 text-sm font-medium transition-colors sm:px-3',
               on ? 'border-brand-700 text-brand-800' : 'border-transparent text-slate-600 hover:border-slate-300 hover:text-slate-900',
             )}
           >

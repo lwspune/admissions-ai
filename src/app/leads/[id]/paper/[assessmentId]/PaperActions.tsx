@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import type { AnswerSheet } from '@/lib/paperSheet'
 import { Icon } from '@/components/icons'
 import { btn } from '@/components/ui'
@@ -43,6 +44,10 @@ export function PaperActions({ sheet }: { sheet: AnswerSheet }) {
         <Icon name="download" className="h-4 w-4" />
         {busy ? 'Preparing…' : 'Download OMR sheet'}
       </button>
+      <Link href="/scan" className={btn('ghost')}>
+        <Icon name="camera" className="h-4 w-4" />
+        Scan filled sheet
+      </Link>
       {error && (
         <p role="alert" className="basis-full text-sm text-rose-700">
           {error}

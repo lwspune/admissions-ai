@@ -221,3 +221,21 @@ describe('gradeAttempt — per-question verdicts', () => {
     expect(r.perQuestion.map((q) => q.delta)).toEqual([1, 0, 0])
   })
 })
+
+describe('gradeAttempt — double marks on a scanned sheet', () => {
+  // Two bubbles in one row (2026-10-16). Graded wrong, as Evalbee does, even
+  // when one of the two is the key: a double mark is not an answer, and calling
+  // it unattempted would spare the candidate the penalty a wrong guess earns.
+  it('grades a double-marked multiple-choice question wrong, at -0.25', () => {
+    const r = gradeAttempt([mcq(1, 'maths', 'C')], [{ position: 1, choice: null, numericValue: null, doubleMark: true }])
+    expect(r.perQuestion[0]).toEqual({ position: 1, verdict: 'incorrect', delta: -0.25 })
+    expect(r.incorrect).toBe(1)
+    expect(r.score).toBe(-0.25)
+  })
+
+  it('grades a double-marked numeric question wrong, at 0', () => {
+    const r = gradeAttempt([numeric(1, 'science', 18)], [{ position: 1, choice: null, numericValue: null, doubleMark: true }])
+    expect(r.perQuestion[0]).toEqual({ position: 1, verdict: 'incorrect', delta: 0 })
+    expect(r.incorrect).toBe(1)
+  })
+})

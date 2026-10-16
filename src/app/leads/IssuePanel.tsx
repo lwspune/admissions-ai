@@ -122,10 +122,16 @@ export function IssuePanel({
               {pending ? 'Issuing…' : issues === 0 ? 'Issue test' : 'Reissue'}
             </button>
             {live?.mode === 'paper' && canPaper && (
-              <Link href={`/leads/${lead.id}/paper/${live.id}`} className={btn('primary')}>
-                <Icon name="printer" className="h-4 w-4" />
-                Print paper
-              </Link>
+              <>
+                <Link href={`/leads/${lead.id}/paper/${live.id}`} className={btn('primary')}>
+                  <Icon name="printer" className="h-4 w-4" />
+                  Print paper
+                </Link>
+                <Link href="/scan" className={btn('secondary')}>
+                  <Icon name="camera" className="h-4 w-4" />
+                  Scan sheet
+                </Link>
+              </>
             )}
             {canPaper && (
               <button

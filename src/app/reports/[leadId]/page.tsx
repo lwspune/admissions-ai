@@ -3,6 +3,7 @@ import { notFound, redirect } from 'next/navigation'
 import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadLeadReport } from '@/server/report'
+import { sheetPhotoUrl } from '@/server/paperScan'
 import { Icon } from '@/components/icons'
 import { StaffShell } from '@/components/StaffShell'
 import { ReportView } from './ReportView'
@@ -15,8 +16,12 @@ export default async function ReportPage({ params }: { params: Promise<{ leadId:
   if (!staff) redirect('/login')
 
   const { leadId } = await params
-  const data = await loadLeadReport(await userClient(), leadId, staff.role)
+  const db = await userClient()
+  const data = await loadLeadReport(db, leadId, staff.role)
   if (!data) notFound()
+  // Counsellors and superadmin only; null for anyone else and for an online test.
+  const photoUrl =
+    data.attempt?.submitReason === 'paper' ? await sheetPhotoUrl(db, data.issue.id, staff.role) : null
 
   return (
     <StaffShell staff={staff}>
@@ -27,7 +32,7 @@ export default async function ReportPage({ params }: { params: Promise<{ leadId:
         <Icon name="chevronLeft" className="h-4 w-4" />
         Back to lead
       </Link>
-      <ReportView data={data} role={staff.role} />
+      <ReportView data={data} role={staff.role} photoUrl={photoUrl} />
     </StaffShell>
   )
 }

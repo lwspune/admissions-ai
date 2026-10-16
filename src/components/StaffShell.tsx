@@ -24,7 +24,9 @@ export async function StaffShell({
     { href: '/leads', label: 'Leads', icon: 'users' },
     { href: '/downloads', label: 'Downloads', icon: 'download' },
   ]
-  if (staff.role !== 'telecaller') items.push({ href: '/leads/import', label: 'Import', icon: 'upload' })
+  if (staff.role !== 'telecaller') {
+    items.push({ href: '/leads/import', label: 'Import', icon: 'upload' }, { href: '/scan', label: 'Scan', icon: 'camera' })
+  }
   if (staff.role === 'superadmin') {
     // The unread count is read through RLS, so it is only ever asked for here.
     const unread = await unreadContactCount(await userClient())

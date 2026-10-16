@@ -22,6 +22,8 @@ export interface GradeAnswer {
   position: number
   choice: Choice | null
   numericValue: number | null
+  /** Two marks on a scanned sheet (2026-10-16): wrong, never skipped. */
+  doubleMark?: boolean
 }
 
 export type Verdict = 'correct' | 'incorrect' | 'skipped'
@@ -128,6 +130,9 @@ export function gradeAttempt(items: GradeItem[], answers: GradeAnswer[]): GradeR
  */
 function verdictFor(item: GradeItem, answer: GradeAnswer | undefined): Verdict {
   if (!answer) return 'skipped'
+  // Wrong even when the key is one of the two marks, as Evalbee grades it: a
+  // double mark is not an answer, and "skipped" would spare it the penalty.
+  if (answer.doubleMark) return 'incorrect'
 
   if (item.format === 'mcq') {
     if (answer.choice == null) return 'skipped'

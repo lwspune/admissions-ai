@@ -462,3 +462,43 @@ describe('buildReport — language', () => {
     expect(facts.answeredInHindi).toEqual([])
   })
 })
+
+describe('buildReport — a scanned paper test', () => {
+  const ans = (position: number, o: Record<string, unknown>) => ({
+    position,
+    choice: null,
+    numericValue: null,
+    activeMs: 0,
+    changeCount: 0,
+    changedAfterPause: false,
+    ...o,
+  })
+
+  it('shows a double mark as two marks, graded wrong', () => {
+    const r = buildReport(input({ answers: [ans(1, { doubleMark: true })] }))
+    const q = r.questions.find((x) => x.position === 1)!
+    expect(q.verdict).toBe('incorrect')
+    expect(q.givenDisplay).toBe('Two marks')
+    expect(q.delta).toBe(-0.25)
+  })
+
+  it('lists the answers a person decided, as a plain fact', () => {
+    const r = buildReport(input({ answers: [ans(1, { choice: 'B', byHand: true }), ans(3, { choice: 'A' })] }))
+    expect(r.facts.decidedByHand).toEqual([1])
+  })
+})
+
+describe('toParentReport — a paper test', () => {
+  it('reports no time used, since the paper was timed in the room', () => {
+    const parent = toParentReport({ name: 'a', submittedAt: '', report: buildReport(input()), onPaper: true })
+    expect(parent.timeUsedMs).toBeNull()
+    expect(parent.onPaper).toBe(true)
+  })
+
+  it('still reports the time used online', () => {
+    const parent = toParentReport({ name: 'a', submittedAt: '', report: buildReport(input()) })
+    expect(parent.timeUsedMs).toBe(5 * MIN)
+    expect(parent.onPaper).toBe(false)
+  })
+})
+

@@ -64,15 +64,20 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
           <dl className="grid gap-3 sm:grid-cols-3">
             <Detail label="Candidate">{report.name}</Detail>
             <Detail label="Test date">{longDate(report.testDate)}</Detail>
-            <Detail label="Time used">
-              {duration(report.timeUsedMs)} of {Math.round(report.timeAvailableMs / 60_000)} min
-              <span aria-hidden="true" className="mt-2 block h-1.5 overflow-hidden rounded-full bg-slate-200">
-                <span
-                  className="block h-full rounded-full bg-indigo-700"
-                  style={{ width: `${share(report.timeUsedMs, report.timeAvailableMs)}%` }}
-                />
-              </span>
-            </Detail>
+            {report.timeUsedMs === null ? (
+              // A paper test was timed in the room, so there is no time used to show.
+              <Detail label="Test taken">On paper · {Math.round(report.timeAvailableMs / 60_000)} min</Detail>
+            ) : (
+              <Detail label="Time used">
+                {duration(report.timeUsedMs)} of {Math.round(report.timeAvailableMs / 60_000)} min
+                <span aria-hidden="true" className="mt-2 block h-1.5 overflow-hidden rounded-full bg-slate-200">
+                  <span
+                    className="block h-full rounded-full bg-indigo-700"
+                    style={{ width: `${share(report.timeUsedMs, report.timeAvailableMs)}%` }}
+                  />
+                </span>
+              </Detail>
+            )}
           </dl>
 
           <section

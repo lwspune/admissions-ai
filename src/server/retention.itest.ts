@@ -69,6 +69,26 @@ describe('purgeExpired', () => {
     expect(items).toBe(0)
   })
 
+  // A sheet photo is in storage, which no cascade reaches (2026-10-16): the
+  // purge has to delete it by hand, like identify_attempts.
+  it('deletes an expired paper test’s sheet photo, which no cascade would reach', async () => {
+    const leadId = await makeLead('Paper')
+    const { assessment } = await issueAssessment(db, { leadId, mode: 'paper' })
+    const path = `${assessment.id}.jpg`
+    const { error: upErr } = await db.storage
+      .from('omr-sheets')
+      .upload(path, new Uint8Array([0xff, 0xd8, 0xff, 0xd9]), { contentType: 'image/jpeg' })
+    expect(upErr).toBeNull()
+    await backdate('leads', 'created_at', leadId, longAgo)
+    await backdate('assessments', 'created_at', assessment.id, longAgo)
+
+    const report = await purgeExpired(db)
+    expect(report.leadIds).toContain(leadId)
+    expect(report.sheetPhotos).toBeGreaterThanOrEqual(1)
+    const { data } = await db.storage.from('omr-sheets').list('', { search: assessment.id })
+    expect(data ?? []).toEqual([])
+  })
+
   it('keeps a recent lead', async () => {
     const leadId = await makeLead('Recent')
     await purgeExpired(db)

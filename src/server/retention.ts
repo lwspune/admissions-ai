@@ -7,6 +7,8 @@ export interface PurgeReport {
   dryRun: boolean
   leads: number
   identifyAttempts: number
+  /** Scanned sheet photos removed from storage with their leads. */
+  sheetPhotos: number
   /** Refs of what would go, capped — for the log, never for a response body. */
   leadIds: string[]
 }
@@ -24,6 +26,11 @@ export interface PurgeReport {
  * instances. Deleting a lead cascades through assessments, attempts, answers
  * and events, and leaves those IP rows untouched. A purge that only deleted
  * leads would quietly retain personal data forever while reporting success.
+ *
+ * The third is in storage: a paper test's scanned sheet photo (2026-10-16).
+ * Storage does not cascade either, so the photos of the expired leads' paper
+ * tests are removed by name before the leads are deleted, while the rows that
+ * name them still exist.
  */
 export async function purgeExpired(
   db: Db,
@@ -37,7 +44,7 @@ export async function purgeExpired(
   // ago and reissued last week is active — so the assessments are checked too.
   const { data: oldLeads, error: leadsError } = await db
     .from('leads')
-    .select('id, created_at, assessments(created_at)')
+    .select('id, created_at, assessments(id, created_at, mode)')
     .lt('created_at', cutoffIso)
 
   if (leadsError) throw new Error(`could not read leads for purge: ${leadsError.message}`)
@@ -50,6 +57,11 @@ export async function purgeExpired(
     )
   })
   const leadIds = expired.map((l) => l.id as string)
+  const photos = expired.flatMap((lead) =>
+    ((lead.assessments ?? []) as { id: string; mode: string }[])
+      .filter((a) => a.mode === 'paper')
+      .map((a) => `${a.id}.jpg`),
+  )
 
   const { count: staleIdentify, error: countError } = await db
     .from('identify_attempts')
@@ -63,10 +75,17 @@ export async function purgeExpired(
     dryRun,
     leads: leadIds.length,
     identifyAttempts: staleIdentify ?? 0,
+    sheetPhotos: photos.length,
     leadIds,
   }
 
   if (dryRun) return report
+
+  if (photos.length > 0) {
+    // Removing a name that was never uploaded is not an error.
+    const { error } = await db.storage.from('omr-sheets').remove(photos)
+    if (error) throw new Error(`could not delete expired sheet photos: ${error.message}`)
+  }
 
   if (leadIds.length > 0) {
     // Cascades to assessments, assessment_items, attempts, attempt_answers
