@@ -7,7 +7,7 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
-- [ ] **Paper tests (2026-10-16): issue, print and download are built; scanning is not.** Migration
+- [ ] **Paper tests (2026-10-16): issue, print and download are LIVE (`5ac7821`); scanning is not.** Migration
       0018 applied; `paper.itest.ts` 12/12, full integration 142/142, `db:probe` pass; golden path
       run as a temporary counsellor on local dev against production (issue → question paper →
       Hindi → OMR PDF built in the browser and read back), sheets in
@@ -239,7 +239,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       (`connectapjschool-4966`, `v22v1W7a…`) nor 09-27's `PJQRidKL…`. `72a1e0f` deployed hours
       earlier, so the link moved today. The status page gives no reason and `vercel inspect` says
       `UNKNOWN`; the reason is only in the API's deployment record
-      (`GET /v13/deployments/<id>` → `seatBlock`).
+      (`GET /v13/deployments/<id>` → `seatBlock`). Cleared the same day after the user changed
+      the link on the Vercel side: `5ac7821` deployed, and the paper test was issued, printed and
+      its OMR sheet built on the live site by a temporary counsellor (then removed).
 - [ ] **The integration suite is coupled to production content (2026-10-07).** It runs against
       the live database and draws from the live pool, so a content change can turn it red with no
       code change: after the class 10 batch went live, twelve tests still expected 15 questions,
