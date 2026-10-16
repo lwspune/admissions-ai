@@ -233,6 +233,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       GitHub. Knowing which account holds the login link — Settings → Authentication in each — is
       what stops the next connect silently re-blocking this project. Until then, check every push:
       `gh api repos/lwspune/admissions-ai/commits/<sha>/status` must say "Deployment has completed".
+      **It happened again 2026-10-16** (`2a89a01`, the paper tests): `readyState BLOCKED`,
+      `seatBlock TEAM_ACCESS_REQUIRED`, GitHub 265271616 now resolved to Vercel user
+      `ma9VhhCWbsoAhb4bcLWBT9To`, verified — a third account, neither this project's
+      (`connectapjschool-4966`, `v22v1W7a…`) nor 09-27's `PJQRidKL…`. `72a1e0f` deployed hours
+      earlier, so the link moved today. The status page gives no reason and `vercel inspect` says
+      `UNKNOWN`; the reason is only in the API's deployment record
+      (`GET /v13/deployments/<id>` → `seatBlock`).
 - [ ] **The integration suite is coupled to production content (2026-10-07).** It runs against
       the live database and draws from the live pool, so a content change can turn it red with no
       code change: after the class 10 batch went live, twelve tests still expected 15 questions,
