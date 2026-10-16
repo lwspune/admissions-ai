@@ -44,7 +44,8 @@ export default async function PaperTestPage({
   return (
     <main className="min-h-screen bg-canvas px-4 py-6 print:min-h-0 print:bg-white print:p-0">
       <title>{`Question paper ${paper.paperNo} — ${paper.name}`}</title>
-      <style>{'@page { size: A4 portrait; margin: 12mm; }'}</style>
+      {/* White body too: its bg-canvas class otherwise prints under a short last page, and a class outranks a plain body rule, hence !important. */}
+      <style>{'@page { size: A4 portrait; margin: 12mm; } @media print { body { background: #fff !important; } }'}</style>
 
       <div className="mx-auto mb-4 max-w-3xl space-y-3 print:hidden">
         <div className="flex flex-wrap items-center justify-between gap-3">
@@ -90,20 +91,22 @@ export default async function PaperTestPage({
         )}
       </div>
 
+      {/* Printed: 10 pt text, a 14 pt title, questions in two columns (2026-10-16). The screen
+          keeps its own sizes; every print change is a print: variant. */}
       <article
         lang={lang}
-        className="mx-auto max-w-3xl rounded-2xl bg-white px-5 py-6 shadow-raised sm:px-8 print:max-w-none print:rounded-none print:p-0 print:shadow-none"
+        className="mx-auto max-w-3xl rounded-2xl bg-white px-5 py-6 shadow-raised sm:px-8 print:max-w-none print:rounded-none print:p-0 print:text-[10pt] print:shadow-none"
       >
-        <header className="border-b border-slate-300 pb-4">
-          <p className="text-xs uppercase tracking-[0.14em] text-slate-600">Aptitude Test</p>
-          <h1 className="mt-1 text-2xl font-bold text-slate-900">{t.paper.title}</h1>
-          <p className="mt-1 text-sm text-slate-700">{t.paper.admission(paper.classLevel)}</p>
-          <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 print:grid-cols-2">
+        <header className="border-b border-slate-300 pb-4 print:pb-2">
+          <p className="text-xs uppercase tracking-[0.14em] text-slate-600 print:text-[8pt]">Aptitude Test</p>
+          <h1 className="mt-1 text-2xl font-bold text-slate-900 print:mt-0 print:text-[14pt]">{t.paper.title}</h1>
+          <p className="mt-1 text-sm text-slate-700 print:text-[10pt]">{t.paper.admission(paper.classLevel)}</p>
+          <dl className="mt-3 grid gap-x-6 gap-y-1 text-sm sm:grid-cols-2 print:mt-1.5 print:grid-cols-2 print:text-[10pt]">
             <Detail label={t.paper.name}>{paper.name}</Detail>
             <Detail label={t.paper.paperNo}>{paper.paperNo}</Detail>
             <Detail label={t.paper.date}>{issued}</Detail>
           </dl>
-          <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-800">
+          <ul className="mt-4 list-disc space-y-1 pl-5 text-sm text-slate-800 print:mt-2 print:space-y-0 print:text-[10pt]">
             <li>{t.rules.paper(paper.questions.length, paper.minutes)}</li>
             {paper.syllabusClass !== null && <li>{t.rules.syllabus(paper.syllabusClass)}</li>}
             <li className="font-semibold">{t.paper.answerSheet}</li>
@@ -111,24 +114,33 @@ export default async function PaperTestPage({
           </ul>
         </header>
 
-        <ol className="mt-2 divide-y divide-slate-200">
+        {/* Each question stays whole within a printed column. */}
+        <ol className="mt-2 divide-y divide-slate-200 print:mt-1 print:columns-2 print:gap-8">
           {paper.questions.map((q) => {
             const hindi = lang === 'hi' && q.stemHi !== null
             const stem = hindi ? q.stemHi! : q.stem
             const options = hindi ? q.optionsHi : q.options
             return (
-              <li key={q.position} className="break-inside-avoid py-4" lang={hindi ? 'hi' : 'en'}>
-                <div className="flex gap-3">
-                  <span className="w-7 shrink-0 text-right font-bold tabular-nums text-slate-900">{q.position}.</span>
+              <li
+                key={q.position}
+                className="break-inside-avoid py-4 print:py-1.5"
+                lang={hindi ? 'hi' : 'en'}
+              >
+                <div className="flex gap-3 print:gap-2">
+                  <span className="w-7 shrink-0 text-right font-bold tabular-nums text-slate-900 print:w-6">
+                    {q.position}.
+                  </span>
                   <div className="min-w-0 flex-1">
-                    <p className="text-xs font-medium uppercase tracking-wider text-slate-600">
+                    <p className="text-xs font-medium uppercase tracking-wider text-slate-600 print:text-[7.5pt]">
                       {t.subject[q.subject]}
                       {paper.syllabusClass !== null &&
                         ` · ${q.part === 'syllabus' ? t.part.syllabus(paper.syllabusClass) : t.part.basics}`}
                     </p>
-                    <p className="mt-1 whitespace-pre-line text-[15px] leading-relaxed text-slate-900">{stem}</p>
+                    <p className="mt-1 whitespace-pre-line text-[15px] leading-relaxed text-slate-900 print:mt-0.5 print:text-[10pt] print:leading-snug">
+                      {stem}
+                    </p>
                     {q.format === 'mcq' && options ? (
-                      <ol className="mt-2 grid gap-x-6 gap-y-1 text-[15px] text-slate-900 sm:grid-cols-2 print:grid-cols-2">
+                      <ol className="mt-2 grid gap-x-6 gap-y-1 text-[15px] text-slate-900 sm:grid-cols-2 print:mt-1 print:grid-cols-2 print:gap-x-4 print:gap-y-0.5 print:text-[10pt] print:leading-snug">
                         {CHOICES.map((c) => (
                           <li key={c} className="flex gap-2">
                             <span className="font-semibold">({c})</span>
@@ -137,7 +149,9 @@ export default async function PaperTestPage({
                         ))}
                       </ol>
                     ) : (
-                      <p className="mt-2 text-sm italic text-slate-700">{t.paper.numericBox(q.position)}</p>
+                      <p className="mt-2 text-sm italic text-slate-700 print:mt-1 print:text-[10pt]">
+                        {t.paper.numericBox(q.position)}
+                      </p>
                     )}
                   </div>
                 </div>
