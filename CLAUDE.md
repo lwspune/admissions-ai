@@ -52,6 +52,8 @@ candidate screen's words, English and Hindi) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
 `contact` (what a homepage message must hold) · `publicPaths` (what opens without a session) ·
 `omr/layout` (the paper test's answer sheet, **the contract with the scanner**) · `omr/sheetPdf` (its ink) ·
+`omr/detectSquares`, `omr/gridFit`, `omr/readBubbles`, `omr/liveCapture` (the reader, ported from nda-tracker) ·
+`omr/readAnswerSheet` (paper code, then answers) · `scanResult` (settling flags, the save, its validation) ·
 `paperSheet` (what the sheet may know, an allow-list) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
@@ -60,7 +62,8 @@ into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
-messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet)
+messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet) · `paperScan`
+(look a paper up by its number, file a scan, the sheet photo)
 
 **`src/components/`** — the shared look: `ui` (button, field, card, badge and
 alert styles, no hooks, so server and client pages share them), `icons` (inline
@@ -77,7 +80,7 @@ test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get i
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -223,6 +226,16 @@ These are the things that quietly break everything if violated.
   paper test holds at most 18 numeric questions (`NUMERIC_SLOTS`, checked in `issue_assessment`
   through `live_pool()`'s `format`), and `items:lint` refuses a numeric answer the box cannot hold
   (0–9999.99, two decimals).
+- **A scan is filed once, by a counsellor, and the database grades it.** `record_paper_scan`
+  (migration 0019, SECURITY DEFINER) refuses anyone but a counsellor or superadmin, an online
+  test, a second scan, a closed window, a missing photo and answers that do not fit the paper,
+  then grades the stored answers itself — the browser never sends a score, and
+  `paperScan.itest.ts` holds the SQL to `grade.ts`'s numbers. A double mark (`double_mark`) grades
+  wrong, never blank. The reader never guesses: an unclear bubble, a double mark or an unclear
+  numeric column goes to a person, and Save stays off until none is left. The sheet photo is
+  `omr-sheets/<assessment id>.jpg`, private, read by counsellors and superadmin only, writable
+  only while the paper is still open, so a filed scan's photo is its record; the purge deletes it
+  by name, since storage does not cascade (`retention.itest.ts`).
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -282,6 +295,10 @@ the connection is refused (2026-10-01).
   what `db:verify-rls` is for — it signs in as a real staff member.
 - **`.vercel link` appends `.env*` to `.gitignore`**, which would untrack
   `.env.example`. A `!.env.example` negation guards it.
+- **A headless check that clicks before React hydrates tests nothing.** Twice the scan page's
+  camera button and the login form were clicked while `next dev` was still compiling: the form
+  submitted natively (`GET /login?`) and the button had no handler, which read as app bugs. Wait
+  for `__reactProps` on the element before driving it.
 - **Check exit codes, not pipe output.** `cmd | tail && echo $?` reports
   `tail`'s status. This hid a red lint through one commit.
 - **Do not infer that an integration is absent from having used a manual path.**
@@ -324,6 +341,16 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-16 — Scanning paper tests: a live viewfinder, a photo fallback, the photo kept.** The
+  user's calls: the live camera scanner as well as a photo per sheet, a saved scan is final like a
+  submitted online test, and the sheet photo is kept 12 months. The reader is nda-tracker's
+  (validated on real phone photos there) in TypeScript; this sheet is read in two steps — the
+  printed paper code first, from the frame every paper shares, then that paper's answers — and
+  both ways up, accepting only the one whose code reads cleanly. Checked on a photo of the real
+  PDF with pen marks, perspective and shadow (all 30 answers exact, every planted double mark and
+  part-filled bubble flagged) and through Edge's fake camera; a real phone and a real printer are
+  still the user's to try. The printed layout did not change, since a sheet was already printed.
 
 - **2026-10-16 — Paper tests, for candidates who sit the test at the institute.** The
   user's call: some candidates come in, so a counsellor or superadmin can issue the test on

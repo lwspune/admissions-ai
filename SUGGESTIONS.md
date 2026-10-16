@@ -7,6 +7,24 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Scanning paper tests (2026-10-16): built, not yet tried on paper.** Migration 0019 applied;
+      unit 532, `paperScan.itest.ts` 14/14, retention 9/9 (the photo purge goes red when removed).
+      Read correctly off a photo of the real PDF with pen marks, perspective and a shadow, filed
+      through `/scan` by photo and by Edge's fake camera, scores matching `grade.ts`.
+      **Needs the user:** a printed sheet filled by hand, scanned with the live viewfinder on a
+      real phone — print scaling, real ink, glare, hands. Paper #100032 ("Test test") is open
+      until 19 Oct; scanning it files that lead's result for good.
+      **Consent — the user's call:** the call consent lists what is recorded (answers, timing,
+      device and network details). A photo of the candidate's handwritten answer sheet is now kept
+      12 months; the script probably needs a line for it. Nothing on screen was changed.
+      **Known limits:** a double mark always needs a tap to confirm (never guessed), so a sheet
+      with one is offered for review, not auto-filed; a filed scan cannot be undone (the user's
+      choice) — a misread caught after saving has no path back yet. A lead deleted any way but the
+      purge (the dashboard, a test suite's cleanup) leaves its sheet photo in `omr-sheets`; the app
+      deletes leads only in the purge, which removes them, and a trigger cannot (deleting the
+      `storage.objects` row leaves the file). Seen 2026-10-16: two test photos orphaned when the
+      integration suite swept `ITest%` leads; removed by hand.
+
 - [ ] **Paper tests (2026-10-16): issue, print and download are LIVE (`5ac7821`); scanning is not.** Migration
       0018 applied; `paper.itest.ts` 12/12, full integration 142/142, `db:probe` pass; golden path
       run as a temporary counsellor on local dev against production (issue → question paper →
