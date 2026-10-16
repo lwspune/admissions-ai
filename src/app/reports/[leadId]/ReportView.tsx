@@ -35,12 +35,12 @@ export function ReportView({ data, role }: { data: LeadReport; role: string }) {
         <p className="mt-1 text-xs text-slate-600">
           {issue.state === 'none'
             ? 'No test issued'
-            : `Issue ${issue.seq} of ${issue.of} · ${issue.state} · ${date(issue.createdAt)}`}
+            : `Issue ${issue.seq} of ${issue.of} · ${issue.mode === 'paper' ? `paper test ${issue.paperNo} · ` : ''}${issue.state} · ${date(issue.createdAt)}`}
         </p>
       </header>
 
       {!report || !attempt ? (
-        <NotTakenYet state={issue.state} priorIssues={priorIssues} />
+        <NotTakenYet state={issue.state} paper={issue.mode === 'paper'} priorIssues={priorIssues} />
       ) : (
         <>
           {/* ── the one screen (spec §8) ────────────────────────────────── */}
@@ -323,9 +323,11 @@ function Detail({
 
 function NotTakenYet({
   state,
+  paper,
   priorIssues,
 }: {
   state: string
+  paper: boolean
   priorIssues: { seq: number; state: string }[]
 }) {
   return (
@@ -336,7 +338,9 @@ function NotTakenYet({
       <p className="mt-3 text-sm font-medium text-slate-700">
         {state === 'none'
           ? 'No test has been issued for this candidate yet.'
-          : 'The test has been issued but not completed.'}
+          : paper
+            ? 'The test was issued on paper; the result appears once the answer sheet is scanned.'
+            : 'The test has been issued but not completed.'}
       </p>
       {priorIssues.length > 0 && (
         <p className="mt-2 text-xs text-slate-600">

@@ -268,6 +268,11 @@ describe('testStatus', () => {
   it('shows the latest issue when none is live', () => {
     expect(testStatus([a('expired', 1)])).toBe('Expired · issue 1 of 3')
   })
+
+  it('says a paper test is on paper, since no link was sent', () => {
+    expect(testStatus([{ ...a('issued', 1), mode: 'paper' }])).toBe('Paper test issued · issue 1 of 3')
+    expect(testStatus([{ ...a('issued', 1), mode: 'online' }])).toBe('Link sent · issue 1 of 3')
+  })
 })
 
 describe('testAction', () => {

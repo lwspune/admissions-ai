@@ -7,7 +7,7 @@ import type { TestAction } from '@/lib/leads'
 import { Icon } from '@/components/icons'
 import { btn } from '@/components/ui'
 import { useConfirm } from '@/components/ConfirmDialog'
-import { issueForLead } from './actions'
+import { issueForLead, issuePaperForLead } from './actions'
 import { IssuedLink } from './IssuedLink'
 
 /**
@@ -18,10 +18,13 @@ import { IssuedLink } from './IssuedLink'
 export function RowTest({
   lead,
   action,
+  canPaper,
   children,
 }: {
   lead: { id: string; name: string | null; contact_mobile: string; class_level: number | null }
   action: TestAction
+  /** Counsellors and superadmin may issue the test on paper (2026-10-16). */
+  canPaper: boolean
   children: React.ReactNode
 }) {
   const router = useRouter()
@@ -53,6 +56,29 @@ export function RowTest({
     })
   }
 
+  async function issuePaper() {
+    if (
+      action === 'reissue' &&
+      !(await confirm({
+        title: 'Issue a paper test?',
+        body: `Issue ${who} a paper test? The current test will stop working.`,
+        confirm: 'Issue paper test',
+      }))
+    ) {
+      return
+    }
+    setError('')
+    setLink('')
+    start(async () => {
+      const r = await issuePaperForLead(lead.id)
+      if (r.ok && r.paperUrl) router.push(r.paperUrl)
+      else {
+        setError(r.error ?? 'Could not issue the paper test.')
+        router.refresh()
+      }
+    })
+  }
+
   return (
     <>
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
@@ -81,6 +107,19 @@ export function RowTest({
               <Icon name={action === 'issue' ? 'link' : 'refresh'} className="h-4 w-4" />
               {pending ? 'Issuing…' : action === 'issue' ? 'Issue link' : 'Reissue'}
             </button>
+            {canPaper && (
+              <button
+                type="button"
+                onClick={issuePaper}
+                disabled={pending || missing}
+                aria-label={`Issue a paper test for ${who}`}
+                aria-describedby={missing ? `missing-${lead.id}` : undefined}
+                className={btn('secondary', 'sm')}
+              >
+                <Icon name="fileText" className="h-4 w-4" />
+                Paper
+              </button>
+            )}
           </span>
         )}
       </div>

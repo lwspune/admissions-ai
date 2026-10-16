@@ -294,7 +294,7 @@ function Results({
                 )}
                 <Avatar name={lead.name} className="mt-0.5 hidden sm:grid" />
                 <div className="min-w-0 flex-1">
-                  <RowTest lead={lead} action={lead.testAction}>
+                  <RowTest lead={lead} action={lead.testAction} canPaper={canAssign}>
                     {/* Full width on a phone, so the button drops below rather than squeezing the details. */}
                     <div className="min-w-0 flex-1 basis-full sm:basis-0">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">

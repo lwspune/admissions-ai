@@ -59,7 +59,7 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
   const ids = leads.map((l) => l.id)
   const [origins, assessments, notes] = await Promise.all([
     db.from('lead_origins').select('lead_id, lead_sources(name)').in('lead_id', ids),
-    db.from('assessments').select('lead_id, state, issue_seq').in('lead_id', ids),
+    db.from('assessments').select('lead_id, state, issue_seq, mode').in('lead_id', ids),
     db
       .from('lead_comments')
       .select('lead_id, kind, body, author_name, created_at')
@@ -77,7 +77,9 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
     return map
   }
   const originsBy = group((origins.data ?? []) as unknown as { lead_id: string; lead_sources: { name: string } | null }[])
-  const assessmentsBy = group((assessments.data ?? []) as { lead_id: string; state: string; issue_seq: number }[])
+  const assessmentsBy = group(
+    (assessments.data ?? []) as { lead_id: string; state: string; issue_seq: number; mode: string }[],
+  )
   const notesBy = group((notes.data ?? []) as (NonNullable<LeadListRow['lastNote']> & { lead_id: string })[])
 
   return {
@@ -118,7 +120,15 @@ export interface LeadDetail {
   }
   origins: { source: string; source_date: string | null; imported_at: string }[]
   comments: { id: number; kind: string; body: string; author_name: string | null; created_at: string }[]
-  assessments: { id: string; issue_seq: number; state: string; created_at: string; expires_at: string }[]
+  assessments: {
+    id: string
+    issue_seq: number
+    state: string
+    created_at: string
+    expires_at: string
+    mode: string
+    paper_no: number | null
+  }[]
 }
 
 /** One lead and its history, or null when it does not exist or is not this person's to see. */
@@ -140,7 +150,7 @@ export async function loadLead(db: Db, id: string): Promise<LeadDetail | null> {
       .order('id', { ascending: false }),
     db
       .from('assessments')
-      .select('id, issue_seq, state, created_at, expires_at')
+      .select('id, issue_seq, state, created_at, expires_at, mode, paper_no')
       .eq('lead_id', id)
       .order('issue_seq', { ascending: false }),
   ])

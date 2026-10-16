@@ -17,6 +17,9 @@ export interface LeadReport {
     minutes: number
     /** Class N−1 on a paper with a syllabus part; null otherwise. */
     syllabusClass: number | null
+    /** 'paper' for a test sat on a printed paper (2026-10-16), with its sheet's number. */
+    mode: string
+    paperNo: number | null
   }
   attempt: { startedAt: string; submittedAt: string | null; submitReason: string | null } | null
   report: ReturnType<typeof buildReport> | null
@@ -44,7 +47,7 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
 
   const { data: assessments } = await db
     .from('assessments')
-    .select('id, token, issue_seq, state, created_at, expires_at, question_count, limit_minutes, class_level')
+    .select('id, token, issue_seq, state, created_at, expires_at, question_count, limit_minutes, class_level, mode, paper_no')
     .eq('lead_id', leadId)
     .order('issue_seq', { ascending: false })
 
@@ -55,7 +58,18 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
   if (!current) {
     return {
       lead,
-      issue: { seq: 0, of: 3, createdAt: '', expiresAt: '', state: 'none', questionCount: 0, minutes: 0, syllabusClass: null },
+      issue: {
+        seq: 0,
+        of: 3,
+        createdAt: '',
+        expiresAt: '',
+        state: 'none',
+        questionCount: 0,
+        minutes: 0,
+        syllabusClass: null,
+        mode: 'online',
+        paperNo: null,
+      },
       attempt: null,
       report: null,
       priorIssues: [],
@@ -87,6 +101,8 @@ export async function loadLeadReport(db: Db, leadId: string, role: Role): Promis
       minutes: current.limit_minutes as number,
       syllabusClass:
         current.question_count === 30 && current.class_level != null ? (current.class_level as number) - 1 : null,
+      mode: current.mode as string,
+      paperNo: (current.paper_no as number | null) ?? null,
     },
     priorIssues: all
       .filter((a) => a.id !== current.id)

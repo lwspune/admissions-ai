@@ -45,6 +45,17 @@ export interface CandidateText {
   }
   subject: Record<Subject, string>
   part: { basics: string; syllabus: (classLevel: number) => string }
+  /** The printed question paper of a paper test (2026-10-16). */
+  paper: {
+    title: string
+    name: string
+    admission: (classLevel: number) => string
+    date: string
+    paperNo: string
+    answerSheet: string
+    marking: string
+    numericBox: (position: number) => string
+  }
   running: {
     question: [string, string, string]
     paused: string
@@ -113,6 +124,17 @@ const en: CandidateText = {
   },
   subject: { maths: 'Maths', english: 'English', science: 'Science' },
   part: { basics: 'Basics', syllabus: (c) => `Class ${c}` },
+  paper: {
+    title: 'Question paper',
+    name: 'Name',
+    admission: (c) => `Admission to Class ${c}`,
+    date: 'Date',
+    paperNo: 'Paper No',
+    answerSheet: 'Mark every answer on the OMR answer sheet, not on this paper.',
+    marking:
+      'One mark for a correct answer. A quarter mark is deducted for a wrong multiple-choice answer; there is no penalty on the numeric questions, or for leaving one blank.',
+    numericBox: (q) => `Write the answer in box Q${q} on the answer sheet.`,
+  },
   running: {
     question: ['Question ', ' of ', ''],
     paused: 'Timer paused.',
@@ -185,6 +207,17 @@ const hi: CandidateText = {
   },
   subject: { maths: 'गणित', english: 'अंग्रेज़ी', science: 'विज्ञान' },
   part: { basics: 'बुनियादी', syllabus: (c) => `कक्षा ${c}` },
+  paper: {
+    title: 'प्रश्न पत्र',
+    name: 'नाम',
+    admission: (c) => `कक्षा ${c} में प्रवेश`,
+    date: 'दिनांक',
+    paperNo: 'प्रश्न पत्र संख्या',
+    answerSheet: 'सभी उत्तर OMR उत्तर पत्रक पर अंकित करें, इस प्रश्न पत्र पर नहीं।',
+    marking:
+      'सही उत्तर पर एक अंक। बहुविकल्पीय प्रश्न के गलत उत्तर पर चौथाई अंक कटेगा; संख्या लिखने वाले प्रश्नों में, या कोई प्रश्न छोड़ने पर, कोई अंक नहीं कटेगा।',
+    numericBox: (q) => `इसका उत्तर उत्तर पत्रक पर बॉक्स Q${q} में लिखें।`,
+  },
   running: {
     question: ['प्रश्न ', ' / ', ''],
     paused: 'टाइमर रुका हुआ है।',

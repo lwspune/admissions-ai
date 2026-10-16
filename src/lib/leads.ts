@@ -317,12 +317,17 @@ export const TEST_STATE_LABEL: Record<string, string> = {
 const LIVE_STATES = ['issued', 'opened', 'started']
 
 /** One line on where a lead's test stands. */
-export function testStatus(assessments: { state: string; issue_seq: number }[]): string {
+export function testStatus(assessments: { state: string; issue_seq: number; mode?: string }[]): string {
   if (assessments.length === 0) return 'No test'
   if (assessments.some((a) => a.state === 'submitted')) return 'Test completed'
   const latest = [...assessments].sort((a, b) => b.issue_seq - a.issue_seq)[0]!
   const current = assessments.find((a) => LIVE_STATES.includes(a.state)) ?? latest
-  return `${TEST_STATE_LABEL[current.state] ?? current.state} · issue ${current.issue_seq} of 3`
+  // A paper test is never sent, so "Link sent" would be wrong (2026-10-16).
+  const label =
+    current.mode === 'paper' && current.state === 'issued'
+      ? 'Paper test issued'
+      : (TEST_STATE_LABEL[current.state] ?? current.state)
+  return `${label} · issue ${current.issue_seq} of 3`
 }
 
 export type TestAction = 'issue' | 'reissue' | 'report' | null

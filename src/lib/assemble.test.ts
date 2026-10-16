@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { assemblePaper, choosePaperShape, StratumExhaustedError, type PoolItem } from './assemble'
+import { assemblePaper, assembleForAnswerSheet, choosePaperShape, StratumExhaustedError, type PoolItem } from './assemble'
 import { SUBJECTS, SHAPE_15, SHAPE_30, type Difficulty, type Subject, type Part } from './types'
 
 // ── helpers ──────────────────────────────────────────────────────────────────
@@ -330,5 +330,36 @@ describe('choosePaperShape', () => {
   it('falls back when English basics cannot fill 6 easy for the longer paper', () => {
     const thin = fullPool(20).filter((i) => !(i.subject === 'english' && i.difficulty === 'easy' && Number(i.id.split('-')[2]) >= 5))
     expect(choosePaperShape(thin)).toBe(SHAPE_15)
+  })
+})
+
+describe('assembleForAnswerSheet', () => {
+  // A paper test's OMR sheet has a fixed number of numeric boxes (2026-10-16),
+  // so its draw is redrawn until it fits — the same shape, the same rules.
+  const withFormats = (items: PoolItem[], numeric: (i: PoolItem, n: number) => boolean): PoolItem[] =>
+    items.map((i, n) => ({ ...i, format: numeric(i, n) ? 'numeric' : 'mcq' }))
+  const numericCount = (paper: PoolItem[]) => paper.filter((i) => i.format === 'numeric').length
+
+  it('keeps the numeric questions within the sheet, and the paper its shape', () => {
+    const items = withFormats(fullPool(20), (i, n) => i.subject !== 'english' && n % 2 === 0)
+    for (let seed = 1; seed <= 20; seed++) {
+      const paper = assembleForAnswerSheet({ pool: items, shape: SHAPE_30, rng: seeded(seed), maxNumeric: 8 })
+      expect(paper).toHaveLength(30)
+      expect(numericCount(paper)).toBeLessThanOrEqual(8)
+      expect(countPart(paper, 'maths', 'syllabus')).toBe(5)
+    }
+  })
+
+  it('fails loudly when the pool cannot make a paper that fits', () => {
+    const items = withFormats(fullPool(20), (i) => i.subject !== 'english')
+    expect(() => assembleForAnswerSheet({ pool: items, shape: SHAPE_30, rng: seeded(3), maxNumeric: 18 })).toThrow(
+      /numeric/,
+    )
+  })
+
+  it('refuses a pool that does not say which items are numeric', () => {
+    expect(() => assembleForAnswerSheet({ pool: fullPool(20), shape: SHAPE_30, rng: seeded(4), maxNumeric: 18 })).toThrow(
+      /format/,
+    )
   })
 })

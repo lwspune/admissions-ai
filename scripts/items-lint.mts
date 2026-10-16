@@ -13,6 +13,7 @@ import { join, dirname, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { parseOptionValue, coverageByClass, keySkew, thirtyReadiness, notEnglish } from '../src/lib/items'
 import { TAUGHT_IN_MIN, TAUGHT_IN_MAX } from '../src/lib/classes'
+import { fitsAnswerBox } from '../src/lib/omr/layout'
 import { translationProblems, workingProblems, hindiCoverage, type HindiEntry } from '../src/lib/hindi'
 import type { Subject, Difficulty, Format, Choice } from '../src/lib/types'
 
@@ -198,6 +199,10 @@ export function lintItems(): number {
       if (item.answer_key != null) err(ref, 'numeric item carries an answer_key')
       if (typeof item.numeric_answer !== 'number' || !Number.isFinite(item.numeric_answer)) {
         err(ref, 'numeric_answer must be a finite number')
+      } else if (!fitsAnswerBox(item.numeric_answer)) {
+        // A paper test's OMR box holds 0 to 9999.99 (2026-10-16). An answer
+        // it cannot hold could never be bubbled, so it could never score.
+        err(ref, `numeric_answer ${item.numeric_answer} does not fit the answer sheet: 0 to 9999.99, at most two decimals`)
       }
       if (item.numeric_tolerance != null &&
           (typeof item.numeric_tolerance !== 'number' || item.numeric_tolerance < 0)) {

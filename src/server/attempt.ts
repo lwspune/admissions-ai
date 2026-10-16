@@ -387,6 +387,9 @@ async function loadByToken(db: Db, token: string): Promise<AssessmentRow | null>
     .from('assessments')
     .select('id, expires_at, state, question_count, limit_minutes, class_level, leads(name, contact_mobile)')
     .eq('token', token)
+    // A paper test's token is never sent and must open nothing (2026-10-16).
+    // Open, identify and start all come through here.
+    .eq('mode', 'online')
     .maybeSingle()
 
   return (data as AssessmentRow | null) ?? null

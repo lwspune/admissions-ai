@@ -1,8 +1,11 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { assemblePaper, choosePaperShape, type PoolItem } from '../lib/assemble'
+import { assembleForAnswerSheet, assemblePaper, choosePaperShape, type PoolItem } from '../lib/assemble'
+import { NUMERIC_SLOTS } from '../lib/omr/layout'
 import { parseClassLevel, type ClassLevel } from '../lib/classes'
 import { generateToken } from '../lib/token'
+
+export type TestMode = 'online' | 'paper'
 
 export interface Assessment {
   id: string
@@ -15,6 +18,10 @@ export interface Assessment {
   question_count: number
   limit_minutes: number
   class_level: number | null
+  /** 'paper' for a test sat at the institute on a printed paper (2026-10-16). */
+  mode: TestMode
+  /** The six-digit number printed on a paper test's answer sheet; null online. */
+  paper_no: number | null
   superseded_by: string | null
   voided_reason: string | null
 }
@@ -29,10 +36,14 @@ export interface Assessment {
  *
  * The class's pool picks the paper: 30 questions once its syllabus batch is
  * live, 15 until then (2026-10-06).
+ *
+ * A paper test is the same draw, kept within the OMR sheet's numeric boxes.
+ * Only a counsellor or superadmin may issue one; the database enforces that
+ * (migration 0018), so a telecaller's call fails there.
  */
 export async function issueAssessment(
   db: Db,
-  { leadId, issuedBy }: { leadId: string; issuedBy?: string | null },
+  { leadId, issuedBy, mode = 'online' }: { leadId: string; issuedBy?: string | null; mode?: TestMode },
 ): Promise<{ assessment: Assessment }> {
   // Fail before the draw, not after. The RPC re-checks both conditions inside
   // the transaction — that is the real guard — but reaching it via a
@@ -47,13 +58,17 @@ export async function issueAssessment(
   const seen = await itemsAlreadySeen(db, leadId)
 
   const shape = choosePaperShape(pool)
-  const paper = assemblePaper({ pool, shape, excludeItemIds: seen, forClass: classLevel })
+  const draw = { pool, shape, excludeItemIds: seen, forClass: classLevel }
+  const paper = mode === 'paper' ? assembleForAnswerSheet({ ...draw, maxNumeric: NUMERIC_SLOTS }) : assemblePaper(draw)
 
   const { data, error } = await db.rpc('issue_assessment', {
     p_lead_id: leadId,
     p_issued_by: issuedBy ?? null,
     p_token: generateToken(),
     p_item_ids: paper.map((item) => item.id),
+    // Named only when it is not the default, so an online issue is the same
+    // call it was before migration 0018.
+    ...(mode === 'paper' ? { p_mode: 'paper' } : {}),
   })
 
   if (error) throw new Error(error.message)
@@ -106,7 +121,7 @@ async function admittingClass(db: Db, leadId: string): Promise<ClassLevel> {
 
 /**
  * Every live item this class may be shown, as the draw needs it: id, subject,
- * difficulty and part, and no answer.
+ * difficulty, part and format, and no answer.
  *
  * Goes through `live_pool()` rather than selecting test_items, because SELECT
  * on that table is scoped to items a staff member has already seen on a paper

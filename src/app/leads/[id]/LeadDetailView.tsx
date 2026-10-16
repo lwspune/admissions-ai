@@ -68,7 +68,8 @@ export function LeadDetailView({
       {/* On a phone the test and stage come first; on a wide screen they sit beside the history. */}
       <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <aside className="space-y-4 lg:order-2">
-          <IssuePanel lead={lead} assessments={assessments} />
+          {/* Those who assign are those who may print a paper test: everyone but a telecaller. */}
+          <IssuePanel lead={lead} assessments={assessments} canPaper={canAssign} />
           <StageControl leadId={lead.id} stage={lead.stage} />
           {canAssign ? (
             <AssignControl leadId={lead.id} assignedTo={lead.assigned_to} assignees={assignees} />

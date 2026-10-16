@@ -12,6 +12,8 @@ export interface ActionResult {
   error?: string
   /** The candidate link, when an issue succeeded. */
   url?: string
+  /** Where a paper test's question paper and answer sheet are printed from. */
+  paperUrl?: string
   /** Leads on this number that this person can see, when a create needs a decision. */
   duplicates?: { id: string; name: string | null }[]
   /** Leads on this number assigned to someone else, which this person cannot see. */
@@ -103,6 +105,29 @@ export async function issueForLead(leadId: string): Promise<ActionResult> {
     return { ok: true, url: `${base}/t/${assessment.token}` }
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : 'Could not issue the test.' }
+  }
+}
+
+/**
+ * Issues a paper test (2026-10-16): the same frozen paper, printed with an OMR
+ * sheet, for a candidate sitting it at the institute. Returns where to print
+ * it from. Counsellors and superadmin only — the database refuses anyone else
+ * (migration 0018); this check only saves a telecaller a confusing error.
+ */
+export async function issuePaperForLead(leadId: string): Promise<ActionResult> {
+  const staff = await requireStaff()
+  if (staff.role === 'telecaller') return { ok: false, error: 'Only a counsellor can issue a paper test.' }
+  if (!isUuid(leadId)) return { ok: false, error: 'Unknown lead.' }
+  const db = await userClient()
+
+  try {
+    const { assessment } = await issueAssessment(db, { leadId, issuedBy: staff.id, mode: 'paper' })
+    revalidatePath('/leads')
+    revalidatePath(`/leads/${leadId}`)
+    return { ok: true, paperUrl: `/leads/${leadId}/paper/${assessment.id}` }
+  } catch (e) {
+    console.error('leads: issue paper test failed:', e)
+    return { ok: false, error: e instanceof Error ? e.message : 'Could not issue the paper test.' }
   }
 }
 

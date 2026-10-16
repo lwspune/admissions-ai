@@ -1,4 +1,4 @@
-import { SHAPE_15, SHAPE_30, type Subject, type Difficulty, type Part, type PaperShape } from './types'
+import { SHAPE_15, SHAPE_30, type Subject, type Difficulty, type Part, type PaperShape, type Format } from './types'
 import type { ClassLevel } from './classes'
 
 export interface PoolItem {
@@ -6,6 +6,8 @@ export interface PoolItem {
   subject: Subject
   difficulty: Difficulty
   part: Part
+  /** From `live_pool()` since migration 0018; a paper test's draw needs it. */
+  format?: Format
 }
 
 export interface AssembleInput {
@@ -103,6 +105,25 @@ export function assemblePaper(input: AssembleInput): PoolItem[] {
   // which is the sectioned paper we decided against — for parts as well as
   // subjects (2026-10-06: every question labelled, all mixed).
   return shuffle(picked, rng)
+}
+
+/**
+ * A paper test's draw (2026-10-16): the same draw, repeated until its numeric
+ * questions fit the OMR sheet's fixed boxes. Across 20,000 simulated class 12
+ * draws one in about 1,300 came to more than 12 and none to more than 15, so
+ * with 18 boxes this almost never draws twice; the cap exists so the rare
+ * paper that would not fit is never issued. `issue_assessment` checks it too.
+ */
+export function assembleForAnswerSheet(input: AssembleInput & { maxNumeric: number; tries?: number }): PoolItem[] {
+  const { maxNumeric, tries = 200, ...draw } = input
+  if (draw.pool.some((item) => item.format === undefined)) {
+    throw new Error('the pool does not give each item’s format, so the numeric questions cannot be counted')
+  }
+  for (let n = 0; n < tries; n++) {
+    const paper = assemblePaper(draw)
+    if (paper.filter((item) => item.format === 'numeric').length <= maxNumeric) return paper
+  }
+  throw new Error(`no paper with at most ${maxNumeric} numeric questions in ${tries} draws`)
 }
 
 /**
