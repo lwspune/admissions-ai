@@ -51,6 +51,8 @@ candidate screen's words, English and Hindi) ·
 `parentPack` (the PDFs' public paths and the issue message) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
 `contact` (what a homepage message must hold) · `publicPaths` (what opens without a session) ·
+`omr/layout` (the paper test's answer sheet, **the contract with the scanner**) · `omr/sheetPdf` (its ink) ·
+`paperSheet` (what the sheet may know, an allow-list) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
@@ -58,7 +60,7 @@ into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
-messages: send, list, mark read)
+messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet)
 
 **`src/components/`** — the shared look: `ui` (button, field, card, badge and
 alert styles, no hooks, so server and client pages share them), `icons` (inline
@@ -75,7 +77,7 @@ test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get i
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -208,6 +210,19 @@ These are the things that quietly break everything if violated.
   candidate data and the purge does not touch them. The rate limit (5 an hour
   per address, 30 an hour in all) is a trigger, since serverless instances share
   no memory.
+- **A paper test is a counsellor's, and its sheet's frame never moves.** `assessments.mode` is
+  `online` or `paper` (migration 0018). The `assessments_paper_guard` trigger — not the issue
+  function, since staff may write `assessments` directly — refuses a paper test from anyone but a
+  counsellor or superadmin (printing shows every question), draws `paper_no` from `paper_no_seq`
+  whatever the client sent, and refuses any later change to mode or number (a paper test flipped
+  online would make its unsent token a link). `loadByToken` opens only `online` tokens, and
+  `loadPaperTest` returns nothing to a telecaller; `paper.itest.ts` holds both. The OMR sheet's
+  geometry is the same on every paper — registration grid, code block, 30 rows, 18 numeric
+  slots — because the scanner reads the paper code before it knows the paper; only which rows get
+  A–D bubbles and which slots are drawn changes. Change the frame only with `LAYOUT_VERSION`. A
+  paper test holds at most 18 numeric questions (`NUMERIC_SLOTS`, checked in `issue_assessment`
+  through `live_pool()`'s `format`), and `items:lint` refuses a numeric answer the box cannot hold
+  (0–9999.99, two decimals).
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -219,6 +234,7 @@ npm run dev                                  npm run build:check
 npm run lint          npm run typecheck      npm test
 npm run test:integration                     npm run items:lint
 npm run db:verify     npm run db:verify-rls -- <email> <password>
+npm run db:probe [-- <name>]                 (rollback-only SQL probes, safe on production)
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run items:hindi -- --stamp|--sheet|--file <batch>   (Hindi: fill source, review sheet, load)
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
@@ -257,7 +273,11 @@ the connection is refused (2026-10-01).
   `.next` the dev server serves from; every asset 404s with nothing explaining
   why. `npm run build:check` writes to `.next-verify`.
 - **The two database probes skip (exit 2) when real leads exist.** They write
-  rows. Development tools, not a production health check.
+  rows. Development tools, not a production health check — and production always
+  has leads now, so `db:verify` proves nothing there. A rule that needs rows the
+  real data cannot supply goes in `supabase/probes/` (`npm run db:probe`): one
+  `DO` block that always ends by raising, so everything it wrote rolls back and
+  no other session ever sees it.
 - **`db:verify` runs as service role and proves nothing about RLS.** That is
   what `db:verify-rls` is for — it signs in as a real staff member.
 - **`.vercel link` appends `.env*` to `.gitignore`**, which would untrack
@@ -304,6 +324,19 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-16 — Paper tests, for candidates who sit the test at the institute.** The
+  user's call: some candidates come in, so a counsellor or superadmin can issue the test on
+  paper — the same frozen draw, class rule, shape and three-issue cap — print the question paper
+  from the browser and download an OMR answer sheet. Scanning the filled sheet comes next; until
+  it ships a paper test has no score. A paper test stays open three days for the scan, has no
+  working link, and its six-digit number is printed and pre-bubbled on the sheet. The sheet is
+  ported from nda-tracker's OMR layout but fixed for every paper: 2.5 mm bubbles, 30 rows, 18
+  numeric boxes (four digits, a printed point, two decimals), because 20,000 simulated draws per
+  class gave 4–7 numeric questions typically and never more than 15, and a paper-test draw is
+  redrawn past 18. jsPDF (4.2.1, as nda-tracker) draws the sheet in exact millimetres, loaded
+  only on download; the question paper is browser print, which handles Hindi. Telecallers see
+  neither button: printing shows every question.
 
 - **2026-10-11 — A public homepage, to gauge interest from other institutes.**
   The user's call, before deciding anything commercial: an animated tour of the

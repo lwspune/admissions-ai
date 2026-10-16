@@ -7,6 +7,24 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Paper tests (2026-10-16): issue, print and download are built; scanning is not.** Migration
+      0018 applied; `paper.itest.ts` 12/12, full integration 142/142, `db:probe` pass; golden path
+      run as a temporary counsellor on local dev against production (issue → question paper →
+      Hindi → OMR PDF built in the browser and read back), sheets in
+      `screenshots/2026-10-16-paper-test/`. Until the scanner ships a paper test has **no score**,
+      and after three days it cannot be scanned at all — do not hand one to a real candidate before
+      then unless the result can wait. **Needs the user's review:** the new Hindi lines of the
+      question paper (`CANDIDATE_TEXT.hi.paper`: title, labels, "mark answers on the OMR sheet",
+      "write in box Q n"); the marking line reuses reviewed Hindi. **Unverified:** a real printer
+      at 100% scale (the sheet's geometry assumes it; "fit to page" shrinks it, which the
+      registration grid should absorb but nobody has scanned one), and the OMR file actually
+      saving in a real browser — headless Edge cancels every blob download, a five-byte control
+      included, so the PDF was checked by capturing the blob the button made, not the saved file.
+      **For the scanner:** read the code block with the fixed frame first (`buildAnswerSheetLayout`
+      puts it in the same place on every paper), then rebuild the paper's layout from its formats;
+      a double mark is wrong, not blank (nda-tracker OMR.md §4); a blank numeric box is a skip and
+      a written 0 is "0 in the units column".
+
 - [x] **Hindi (2026-10-11): LIVE.** Migration 0016 applied, all 237 translations signed off by the
       user and loaded, `feat/hindi` merged (`06fad9f`, "Deployment has completed"). A test issued
       on production for a class 9 admit showed the switch on the live site. Unit 366, integration
@@ -331,6 +349,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
+
+- [ ] **`db:verify`'s probes no longer run anywhere (2026-10-16).** They refuse a database holding
+      leads, and the only database is production, which always holds leads now — so every check in
+      `verify-schema.mjs` (MCQ shape, class ceilings, Hindi shape, reissue cap…) has been inert
+      since the first real lead, while the docs still cite it as the proof. `npm run db:probe`
+      runs rollback-only probes safely on production; porting those checks into
+      `supabase/probes/` would make them live again. Not yet analysed (360 needed: most are also
+      covered by the integration suite, so the real gap may be small).
 
 - [x] **Two topics the new NCERT books teach later than the bank's tags said. RETAGGED
       2026-10-07** with the user's go-ahead. Averages (the mean first appears in *Ganita Prakash
