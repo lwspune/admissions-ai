@@ -1,0 +1,4252 @@
+[
+  {
+    "source_ref": "0dd44125-68c7-456c-851b-e9092228b033",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following statements is correct regarding a detergent sodium lauryl sulphate?",
+    "options": {
+      "A": "It is anionic detergent and is used in toothpaste.",
+      "B": "It is cationic detergent and is used as household detergent.",
+      "C": "It is cationic detergent and is used as hair conditioner.",
+      "D": "It is an ether and used as liquid detergent."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4eb08ae1-5b19-491c-aa43-92831578c7dc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Among the isomers of butanol, which has the highest boiling point?",
+    "options": {
+      "A": "n-Butyl alcohol",
+      "B": "sec-Butyl alcohol",
+      "C": "iso-Butyl alcohol",
+      "D": "tert-Butyl alcohol"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "821375e5-d3ed-466e-95ba-7f07ace9c7f3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following is obtained as major product when methoxybenzene is treated with nitrating mixture?",
+    "options": {
+      "A": "2-Nitroanisole",
+      "B": "4-Nitroanisole",
+      "C": "4-Nitrophenol",
+      "D": "2-Nitrophenol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9d70d3ca-3342-454b-a346-7070afa64c48",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the the major product of bromination of anisole in presence of acetic acid.",
+    "options": {
+      "A": "o-bromoanisole",
+      "B": "p-bromoanisole",
+      "C": "m-bromoanisole",
+      "D": "di-orthobromoanisole"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9fad4753-34ba-42ab-b66c-681cfc9818b1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compounds is formed when ether is dissolved in cold concentrated sulphuric acid?",
+    "options": {
+      "A": "Alkanol",
+      "B": "Alkanoic acid",
+      "C": "Alkyl hydrogen sulphate",
+      "D": "Ox onium salt"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ac158a55-b0ba-48e7-91b5-355dfec679aa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following is primary allylic alcohol?",
+    "options": {
+      "A": "\\(\\text{H}_2\\text{C}=\\text{CH}-\\text{CH(CH}_3)-\\text{OH}\\) (but-3-en-2-ol, secondary allylic)",
+      "B": "\\(\\text{H}_2\\text{C}=\\text{CH}-\\text{CH}_2-\\text{OH}\\) (prop-2-en-1-ol, allyl alcohol, primary allylic)",
+      "C": "\\(\\text{H}_2\\text{C}=\\text{CH}-\\text{C(CH}_3)_2-\\text{OH}\\) (2-methylbut-3-en-2-ol, tertiary allylic)",
+      "D": "\\(\\text{CH}_3-\\text{CH}=\\text{CH}-\\text{CH(CH}_3)-\\text{OH}\\) (pent-3-en-2-ol, secondary allylic)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ada29726-26bc-4569-b12f-a2f2a9c44b99",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product obtained when phenol is heated with Zn dust.",
+    "options": {
+      "A": "Benzene (structure)",
+      "B": "Cyclohexane (structure)",
+      "C": "3CH≡CH",
+      "D": "Phenol derivative"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b190a665-9ef4-47b5-a1d9-c45e3acee329",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 16th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which among the following has the highest melting point?",
+    "options": {
+      "A": "Phenol",
+      "B": "p-Nitrophenol",
+      "C": "p-Cresol",
+      "D": "o-Nitrophenol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d5814e65-dd82-4548-840e-efc3d8a48d5e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following ether, on hydrolysis, gives two different products that are successive members of the homologous series?",
+    "options": {
+      "A": "Methoxymethane",
+      "B": "Methoxypropane",
+      "C": "Ethoxypropane",
+      "D": "1-Methoxypropane"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d792101c-0d62-42bc-a9e6-ab86ec6a9536",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify product 'B' in the following reaction. Sodium phenoxide \\(\\xrightarrow{\\text{CO}_2,\\ 398\\text{K},\\ 6\\ \\text{atm}} A \\xrightarrow{\\text{H}_3\\text{O}^+} B\\)",
+    "options": {
+      "A": "Picric acid",
+      "B": "Sulphonic acid",
+      "C": "Salicylic acid",
+      "D": "Salicylaldehyde"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "de008197-d4bf-4647-94f5-2672661532ad",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following compounds is a trihydric alcohol?",
+    "options": {
+      "A": "Quinol",
+      "B": "Catechol",
+      "C": "Propylene glycerol",
+      "D": "Resorcinol"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e3d923dd-3d6e-4b11-92b6-77a410c39b8f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Alcohols, Phenols and Ethers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following is NOT a dihydric compound?",
+    "options": {
+      "A": "Crotonyl alcohol",
+      "B": "Resorcinol",
+      "C": "Ethylene glycol",
+      "D": "Quinol"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "054b64e1-300a-49fb-9057-437c1686c396",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product obtained when benzonitrile is reduced by stannous chloride in presence of hydrochloric acid followed by acid hydrolysis.",
+    "options": {
+      "A": "Benzal chloride",
+      "B": "Benzoyl chloride",
+      "C": "Benzophenone",
+      "D": "Benzaldehyde"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "056e3f05-37a7-4270-becc-3d7899f69ed3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following is the strongest carboxylic acid?",
+    "options": {
+      "A": "\\(\\mathrm{CH_3COOH}\\)",
+      "B": "HCOOH",
+      "C": "\\(\\mathrm{CH_3CH_2\\text{-}COOH}\\)",
+      "D": "\\(\\mathrm{ClCH_2COOH}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0ea992de-2b76-4ccb-9b6b-0e8217830bb9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the reaction type: Aldehyde → Alkane",
+    "options": {
+      "A": "Zn-Hg / conc. HCl / \\(\\Delta\\) reduction (Clemmensen)",
+      "B": "LiAlH4 reduction",
+      "C": "Wolff-Kishner reduction",
+      "D": "Rosenmund reduction"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "161da994-0fd9-4b2d-8980-4dfab8eac697",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product ' B ' in following reaction. Ethanal \\(\\xrightarrow{\\text{~dil~}NaOH}A\\xrightarrow[H_{2}O]{\\mathrm{\\Delta}}B\\)",
+    "options": {
+      "A": "3-Hydroxybutanal",
+      "B": "4-Hydroxybutanal",
+      "C": "But-2-enal",
+      "D": "But-3-enal"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5194c55a-b2f3-40a6-8f0c-51c8d2f25931",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What types of compounds are formed when alkanones react with ethane-1,2-diol?",
+    "options": {
+      "A": "hemiacetals",
+      "B": "cyclic ketals",
+      "C": "cyclic acetals",
+      "D": "acetals"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "75e31e1f-d4c6-4b8e-b9d8-a308cc9ff7c1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the substrate ' \\(A\\) ' in the following conversion.\n\\(A\\xrightarrow[H_{3}O^{+}]{AlH( - B)_{2}}\\) Pent-3-enal",
+    "options": {
+      "A": "Pentane nitrile",
+      "B": "Pent-3-enenitrile",
+      "C": "Pent-3-en-1-amine",
+      "D": "Pent-3-ynenitrile"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a62ecadd-3f34-4670-a037-737c2722cd7d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which among the following reactions does NOT correctly match with its reagent?",
+    "options": {
+      "A": "Stephen reaction: SnCl2, HCl",
+      "B": "Etard reaction: CrO2Cl2",
+      "C": "Gattermann–Koch formulation: CrO3/CH3CO2O",
+      "D": "Rosenmund reduction: H2/Pd–BaSO4"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b56c677d-6d62-4f48-95a8-40cf40c4845d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following statements regarding aldol condensation is TRUE?",
+    "options": {
+      "A": "It is a nucleophilic addition elimination reaction.",
+      "B": "It is self redox reaction.",
+      "C": "It is a disproportionation reaction.",
+      "D": "It is exhibited by lower aldehydes only."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d0e895ae-8c8e-4f4c-8fc5-57a46e40ce34",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2021 · May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Aldehydes are readily oxidised to yield carboxylic acids but ketones are inert to oxidation. Which is the most likely explanation regarding this difference in reactivity?",
+    "options": {
+      "A": "Aldehydes have a proton attached to the carbonyl that is abstracted during oxidation. Ketones lack this proton and so, cannot be oxidised.",
+      "B": "Reducing agents like HNO\\(_3\\) are sterically hindered by ketone's carbonyl carbon.",
+      "C": "Aldehydes and ketones are of similar hybridisation.",
+      "D": "The rate of the forward oxidation reaction is equal to the rate of the reverse reduction reaction in ketones."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e6a92200-71f9-4ddf-aa7c-1b9ef09d83db",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the 'product' in the following reaction.\nPent - 3 - enenitrile \\(\\mathrm{\\xrightarrow[H_3O^+]{Al\\,H(i{-}Bu)_2}}\\) Product",
+    "options": {
+      "A": "Pent - 3 - en - 1 - amine",
+      "B": "Pentanal",
+      "C": "Pent - 3 - enal",
+      "D": "Pent - 3 - en -1 - ol"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f0dab1d3-60a2-4a93-8e84-c4e78e730324",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Acetone on heating with \\(\\mathrm{CrO_3}\\) mainly forms,",
+    "options": {
+      "A": "Acetic acid",
+      "B": "Ethyl alcohol",
+      "C": "Toluene",
+      "D": "Dimethyl ether"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "20878929-62f2-4262-87c1-6ed0f2c2e859",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product ' \\(Z\\) ' in the following series of reactions. Ethanol \\(\\xrightarrow[\\Delta]{\\text{SOCl}_2} X \\xrightarrow[\\text{Dry ether}]{\\text{Mg}} Y \\xrightarrow{\\text{NH}_3} Z + \\text{Mg(NH}_2)\\text{Cl}\\)",
+    "options": {
+      "A": "Ethyl chloride",
+      "B": "Ethyl magnesium chloride",
+      "C": "Ethyl amine",
+      "D": "Ethane"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "95edd996-3b2a-48e9-9685-ff8331065cb8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product obtained when 2- Chloro - 2 - methylbutane is reacted with sodium metal in presence of dry ether?",
+    "options": {
+      "A": "\\(2, 2, 3, 3-\\) tetramethyloctane",
+      "B": "\\(3, 3, 4, 4-\\) tetramethyloctane",
+      "C": "\\(2, 2, 3, 3-\\) tetramethylhexane",
+      "D": "\\(3, 3, 4, 4-\\) tetramethylhexane"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d44ea9f8-2a67-44d2-b1d7-9984ae90b5de",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from the following compounds is not obtained when methyl bromide is treated with ethyl bromide in presence of sodium metal in dry ether?",
+    "options": {
+      "A": "n-Butane",
+      "B": "Ethane",
+      "C": "Propane",
+      "D": "2-methyl propane"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "517133b2-8687-48e9-808e-3ac6a6db885f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Alkenes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify major product A in following reaction: 3-Bromo-2-methylpentane \\(\\xrightarrow{\\text{alc. KOH},\\Delta}\\) A",
+    "options": {
+      "A": "2-Methylpentan-3-ol",
+      "B": "2-Methylpent-2-ene",
+      "C": "4-Methylpent-3-ene",
+      "D": "4-Methylpentan-3-ol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a1fc87ad-913b-4974-8c7b-9d4df0ca9115",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Alkenes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the compound formed when But-2-ene is treated with \\(\\mathrm{KMnO_4}\\) in dilute \\(\\mathrm{H_2SO_4}\\).",
+    "options": {
+      "A": "Butanoic acid",
+      "B": "Acetic acid",
+      "C": "Butanal",
+      "D": "Butanol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cadc91b7-3d14-4b07-84ac-3c89f8a40524",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Alkenes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compounds is formed as major product in the following reaction. 2-Methylbut-2-ene \\(\\xrightarrow[\\text{~Peroxide~}]{HBr}\\) Product",
+    "options": {
+      "A": "3-Bromo-2-methylbutane",
+      "B": "2-Bromo-2-methylbutane",
+      "C": "2-Bromo-3-methylbutane",
+      "D": "2-Bromobutane"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d0394807-34a6-43c7-a02f-d813a687a54f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Alkenes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product of ozonolysis of but-2-ene from following:",
+    "options": {
+      "A": "Acetone and formaldehyde",
+      "B": "Acetaldehyde and formaldehyde",
+      "C": "Acetone",
+      "D": "Acetaldehyde"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "75a7b927-81d5-47a6-a6a2-d2b35b15d6b9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Alkynes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of moles of \\(sp^2\\) hybrid carbon atoms in one mole of hexa-1, 4 diyne?",
+    "options": {
+      "A": "5",
+      "B": "3",
+      "C": "4",
+      "D": "Zero"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "08d8fe24-2131-420a-8b9f-971e65a37b50",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following is the most stable species?",
+    "options": {
+      "A": "\\({NH}_{4}^{+}\\)",
+      "B": "\\(\\ R - \\overset{+}{N}H_{3}\\)",
+      "C": "\\(\\ R_{2}\\overset{+}{N}H_{2}\\)",
+      "D": "\\(\\ R_{3}\\overset{+}{N}H\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1265b768-6a83-4f60-8f25-40f87246fd0c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compounds is NOT obtained at any stage of Gabriel phthalimide synthesis?",
+    "options": {
+      "A": "Potassium salt of phthalimide",
+      "B": "N-alkyl phthalimide",
+      "C": "Phthalic acid",
+      "D": "Primary amine"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "24e7dd08-1888-41c9-be6c-fca203925849",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the expected order of basic strength of different compounds from following.",
+    "options": {
+      "A": "\\(R_{3}\\text{ }N < R_{2}NH < R - {NH}_{2} < {NH}_{3}\\)",
+      "B": "\\({NH}_{3} < R - {NH}_{2} < R_{2}NH < R_{3}\\text{ }N\\)",
+      "C": "\\(R_{2}NH < R_{3}\\text{ }N < R - {NH}_{2} < {NH}_{3}\\)",
+      "D": "\\({NH}_{3} < R_{3}\\text{ }N < R_{2}NH < R - {NH}_{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "30e46c12-7fda-423e-8cf7-1cf74515191e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following pair of compounds on heating gives butane nitrile?",
+    "options": {
+      "A": "Propanol and alcoholic KCN",
+      "B": "Butanol and alcoholic KCN",
+      "C": "n-Butyl chloride and alcoholic KCN",
+      "D": "n-Propyl chloride and alcoholic KCN"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3a669d8b-831c-48eb-85b6-bc0da8d75482",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product 'Z' in the following series of reactions. Ethanol \\(\\xrightarrow{\\text{SOCl}_2, \\Delta} X \\xrightarrow{\\text{Mg, dry ether}} Y \\xrightarrow{\\text{NH}_3} Z\\)",
+    "options": {
+      "A": "Ethylchloride",
+      "B": "Ethyl magnesium chloride",
+      "C": "Ethyl amine",
+      "D": "Ethane"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "54e5bffa-f811-4d6b-bc04-324cf47d3c6d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify product A in following reaction. \\[C_{6}H_{5}\\overset{+}{N_{2}}Cl^{-}\\xrightarrow{C_{2}H_{5}OH}A +N_{2}+CH_{3}CHO + HCl\\]",
+    "options": {
+      "A": "\\(C_{6}H_{6}\\)",
+      "B": "\\(C_{6}H_{5}{NH}_{2}\\)",
+      "C": "\\(C_{6}H_{5}COOH\\)",
+      "D": "\\(C_{6}H_{5}Cl\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5a565c47-3ce0-478f-a44f-6a8121ebfeb5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of moles of hydrogen atoms required to reduce one mole of nitroethane completely using Sn and HCl ?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "6"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5ab7dceb-b982-41b2-a6fb-76e75055a35d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following amines has lowest \\(pK_{b}\\) value?",
+    "options": {
+      "A": "\\(C_{2}H_{5}{NH}_{2}\\)",
+      "B": "\\(\\left( {CH}_{3} \\right)_{3}\\text{ }N\\)",
+      "C": "\\(C_{6}H_{5}{NH}_{2}\\)",
+      "D": "\\(C_{6}H_{5}{CH}_{2}{NH}_{2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8e9c46a9-37f9-4bfe-9e3c-336b930003d4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify ' \\(B\\) ' in the following sequence of reactions. Acetic acid \\(\\xrightarrow[\\Delta]{\\text{~Thionylchloride~}}A\\xrightarrow{\\text{~Ammonia~}}B\\)",
+    "options": {
+      "A": "Ethyl amine",
+      "B": "Ammonium acetate",
+      "C": "Acetyl chloride",
+      "D": "Acetamide"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d0007a57-c7c4-4463-95bf-6aca87568ba9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following compounds can be obtained by azo coupling reaction.",
+    "options": {
+      "A": "Benzenediazonium chloride",
+      "B": "Fluoroarene",
+      "C": "p-Hydroxyazobenzene",
+      "D": "N-Ethylbenzene sulfonamide"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "22b63e9c-9106-44eb-8bd9-cfbe05872fd5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Aromatic Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following is a non-benzenoid aromatic compound?",
+    "options": {
+      "A": "Aniline",
+      "B": "Tropone",
+      "C": "Naphthalene",
+      "D": "Phenol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7d3fa448-df54-406a-8c43-08023d7566ec",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Aromatic Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product of the following reaction: phenol \\(\\xrightarrow{\\text{CrO}_3}\\) product.",
+    "options": {
+      "A": "Benzene",
+      "B": "Benzoic acid",
+      "C": "Benzaldehyde",
+      "D": "p-Benzoquinone"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a67a66e8-b91c-49e0-bcd6-22a20bcedb27",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Aromatic Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the percentage of p-bromoanisole formed in the bromination of anisole with bromine in acetic acid?",
+    "options": {
+      "A": "10%",
+      "B": "30%",
+      "C": "60%",
+      "D": "90%"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c602dce1-b9d4-4013-a0f4-b669d9ae66f7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2021 · May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Aromatic Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The major product obtained in the following reaction: Chlorobenzene + Chlorine \\(\\to\\) Product (Major)",
+    "options": {
+      "A": "1,2-dichlorobenzene",
+      "B": "1,3,5-trichlorobenzene",
+      "C": "1,4-dichlorobenzene",
+      "D": "1,3-dichlorobenzene"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "30c662d1-1ac9-4842-b57f-309efc02f8d1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Basic Principles of Organic Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product formed in the following reaction. \\( \\text{CH}_{3}\\text{CH}_{2}\\text{MgBr} \\xrightarrow{\\text{i) dry ice/dry ether, ii) dil HCl}} \\) product",
+    "options": {
+      "A": "Ethanoic acid",
+      "B": "Propanoic acid",
+      "C": "2-Methylpropanoic acid",
+      "D": "Butanoic acid"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "eebf474c-ef58-457c-8f4d-ac248198e612",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Basic Principles of Organic Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following pairs of compounds is an example of metamerism?",
+    "options": {
+      "A": "But-2-ene and But-1-ene",
+      "B": "n-Butane and 2-Methylpropane",
+      "C": "Ethoxyethane and methoxypropane",
+      "D": "Dimethyl ether and ethyl alcohol"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f1ba2ac5-e88f-4502-a339-73e7a62eaa03",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Basic Principles of Organic Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compounds does NOT have a stereocenter?",
+    "options": {
+      "A": "Propan-2-ol",
+      "B": "Butan-2-ol",
+      "C": "2-Bromo-1-chlorobutane",
+      "D": "2-Bromopentane"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "21980d65-968c-40a0-8466-ccb347f4533f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following statements are correct?\nA) \\(\\alpha\\) - amino acids present in protein is L- amino acid.\nB) Amino acids contain \\(\\mathrm{NH_2}\\) as well as COOH group.\nC) Number of amino group and carboxylic group are same in amino acids always.\nD) Tryosine was firstly obtained from cheese.\nChoose the correct alternatives from below:",
+    "options": {
+      "A": "A and B only",
+      "B": "A, B and C only",
+      "C": "B, C and D only",
+      "D": "A, B and D only"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "34d34dc7-653c-4226-a8a2-ce9125b8a744",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following compounds is obtained when glucose is heated with HI for longer time?",
+    "options": {
+      "A": "Glucose cyanohydrin",
+      "B": "Glucose oxime",
+      "C": "n-Hexane",
+      "D": "Saccharic acid"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "77cb3c3f-a72b-439b-828c-a932731ab826",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the total number of -OH groups present in ribonucleoside?",
+    "options": {
+      "A": "5",
+      "B": "4",
+      "C": "3",
+      "D": "2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "95ad37d5-6476-4fea-88c1-96f63d711058",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of following is NOT correct about fructose?",
+    "options": {
+      "A": "It is ketohexose.",
+      "B": "It is reducing sugar.",
+      "C": "It is laevorotatory",
+      "D": "Its ring structure is hemiacetal."
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e386f76e-81e6-4612-8148-070d28877183",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 16th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of moles of oxygen and number of moles of N atoms respectively present in one mole thymine?",
+    "options": {
+      "A": "2 and 2",
+      "B": "1 and 5",
+      "C": "1 and 3",
+      "D": "2 and 3"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f82e43bd-23b9-40f2-8364-a29926aa43db",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which nitrogen atom of pyrimidine base numbered from 1 to 6 is bonded with furanose sugar?",
+    "options": {
+      "A": "4",
+      "B": "2",
+      "C": "1",
+      "D": "5"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1a55cd3b-2dac-450d-9d78-cd9f3f37d960",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which is the correct decreasing order for ionic character of halides, where M is a monovalent metal?",
+    "options": {
+      "A": "\\(\\mathrm{MF > MCl > MBr > MI}\\)",
+      "B": "\\(\\mathrm{MI > MBr > MCl > MF}\\)",
+      "C": "\\(\\mathrm{MI > MCl > MBr > MF}\\)",
+      "D": "\\(\\mathrm{MF > MBr > MCl > MI}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "33e5f5db-dc79-45b2-b581-1a8366a2d1ad",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following hydrocarbons has stronger London dispersion forces ?",
+    "options": {
+      "A": "Methane",
+      "B": "Ethane",
+      "C": "n-pentane",
+      "D": "neo-pentane"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5888ba44-5bab-42e3-a0c9-e0e17aa10845",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compound has square pyramidal structure?",
+    "options": {
+      "A": "\\(\\mathrm{XeF_4}\\)",
+      "B": "\\(\\mathrm{XeF_6}\\)",
+      "C": "\\(\\mathrm{XeO_3}\\)",
+      "D": "\\(\\mathrm{XeOF_4}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "59452c73-2f87-4843-ab73-92bcd2c195fc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the shape of a molecule if it has two lone pairs and three bonding pairs of electrons?",
+    "options": {
+      "A": "trigonal planar",
+      "B": "tetrahedral",
+      "C": "bent",
+      "D": "T-shape"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a6ce01c3-3c0c-48ec-88db-9de79127be49",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following is more polar?",
+    "options": {
+      "A": "\\(H_{2}\\text{ }S\\)",
+      "B": "\\({NH}_{3}\\)",
+      "C": "\\(\\ {NF}_{3}\\)",
+      "D": "\\({CHCl}_{3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d72ea724-528e-4683-9277-1e07fde6b387",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of lone pair of electrons involved in IF molecule?",
+    "options": {
+      "A": "3",
+      "B": "2",
+      "C": "1",
+      "D": "Zero"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "efd293fa-36a9-44e2-b6e8-17c48c75627c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following compounds is most covalent?",
+    "options": {
+      "A": "\\(\\text{SbCl}_3\\)",
+      "B": "\\(\\text{PbCl}_2\\)",
+      "C": "\\(\\text{SnCl}_4\\)",
+      "D": "\\(\\text{SnCl}_2\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "236c42a1-b73f-4566-b498-b795ccccf100",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For the reaction \\(\\text{A} + 3\\text{B} \\to 2\\text{C}\\), if \\(-\\frac{d[\\text{A}]}{dt} = 1.4\\,\\text{mol dm}^{-3}\\,\\text{s}^{-1}\\), find \\(\\frac{d[\\text{C}]}{dt}\\).",
+    "options": {
+      "A": "\\(0.7\\,\\text{mol dm}^{-3}\\text{s}^{-1}\\)",
+      "B": "\\(1.4\\,\\text{mol dm}^{-3}\\text{s}^{-1}\\)",
+      "C": "\\(2.8\\,\\text{mol dm}^{-3}\\text{s}^{-1}\\)",
+      "D": "\\(4.2\\,\\text{mol dm}^{-3}\\text{s}^{-1}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "26d70568-af03-4f17-8ec4-0cfca53685c2",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A first order reaction takes \\(23.03\\) minutes for \\(20\\%\\) decomposition. Calculate its rate constant.",
+    "options": {
+      "A": "\\(5.6 \\times 10^{-3}\\) min⁻¹",
+      "B": "\\(4.5 \\times 10^{-3}\\) min⁻¹",
+      "C": "\\(6.5 \\times 10^{-3}\\) min⁻¹",
+      "D": "\\(9.69 \\times 10^{-3}\\) min⁻¹"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "27e05e03-a431-4fbc-ab2c-e9d9e70993a0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The rate constant for a first order reaction is \\(0.58{\\text{ }s}^{- 1}\\) at 300 K and \\(0.026{\\text{ }s}^{- 1}\\) at 290 K . What is the energy of activation? ( \\(R = 8.314\\text{ }J{\\text{ }K}^{- 1}{\\text{ }mol}^{- 1}\\) )",
+    "options": {
+      "A": "124.48 kJ",
+      "B": "224.55 kJ",
+      "C": "348.18 kJ",
+      "D": "513.21 kJ"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2984561d-4ab4-4150-acfa-f8c374b1cfe3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The half life of a first order reaction is \\(600\\) second. How long will it take for \\(20\\%\\) of the reactant to react?",
+    "options": {
+      "A": "\\(193.2\\) s",
+      "B": "\\(150.5\\) s",
+      "C": "\\(300.0\\) s",
+      "D": "\\(170.4\\) s"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "600348eb-9f4b-4e44-8dc0-ac4d9fff7033",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the catalyst (A) used in following reaction. \\(CO + H_2O \\underset{}{\\rightleftharpoons} CO_2 + H_2\\)",
+    "options": {
+      "A": "Platinised asbestos",
+      "B": "\\(MnO_2\\)",
+      "C": "Co-Th alloy",
+      "D": "Fe-Cr"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "72d75861-d7a9-4890-bc0a-c23959063589",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 16th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For the reaction, \\(\\text{H}_2(g) + \\text{Br}_2(s) \\rightarrow 2\\text{HBr}(g)\\), \\(r = k[\\text{H}_2][\\text{Br}_2]^{1/2}\\). What is the molecularity and order of reaction respectively?",
+    "options": {
+      "A": "Monomolecular and \\(\\frac{1}{2}\\)",
+      "B": "Monomolecular and \\(1\\)",
+      "C": "Monomolecular and \\(\\frac{3}{2}\\)",
+      "D": "Bimolecular and \\(\\frac{3}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "82fd49fe-492e-40d7-801d-d5aa158f491c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the amount of reactant in percent that remains after 60 minutes involved in first order reaction (\\(k=0.02303\\,min^{-1}\\))",
+    "options": {
+      "A": "25%",
+      "B": "50%",
+      "C": "75%",
+      "D": "12.5%"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a50b0d40-2e4c-4004-897e-35fb4a8b4aa6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The rate of reaction, \\(A + B \\rightarrow C\\) is \\(3.6 \\times 10^{-2}\\ \\mathrm{mol\\,dm^{-3}\\,s^{-1}}\\) when \\([A] = [B] = 0.2\\ \\mathrm{mol\\,dm^{-3}}\\). Calculate the rate constant if the reaction is first order in A and second order in B.",
+    "options": {
+      "A": "\\(4.5\\ \\mathrm{mol^{-2}\\,dm^6\\,s^{-1}}\\)",
+      "B": "\\(3.6\\ \\mathrm{mol^{-2}\\,dm^6\\,s^{-1}}\\)",
+      "C": "\\(5.4\\ \\mathrm{mol^{-2}\\,dm^6\\,s^{-1}}\\)",
+      "D": "\\(2.7\\ \\mathrm{mol^{-2}\\,dm^6\\,s^{-1}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "aab48e31-fe1a-4123-910d-2e6a65d9dc2d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the rate constant of the first order reaction if 80% of the reactant reacted in 15 minutes.",
+    "options": {
+      "A": "\\(0.11\\text{ min}^{-1}\\)",
+      "B": "\\(0.22\\text{ min}^{-1}\\)",
+      "C": "\\(0.34\\text{ min}^{-1}\\)",
+      "D": "\\(0.42\\text{ min}^{-1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b75a4f88-d6cf-4e29-90e5-81adc7b39a68",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What time is required for 100 g of reactant to reduce to 25 g in a first order reaction having half-life 5760 year?",
+    "options": {
+      "A": "4760 year",
+      "B": "8640.26 year",
+      "C": "2880.15 year",
+      "D": "11526.48 year"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c98a348e-25b3-4f8a-83e8-69ed21c07a59",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Half-life of a zero order reaction is directly proportional to",
+    "options": {
+      "A": "temperature",
+      "B": "rate constant",
+      "C": "amount of product formed",
+      "D": "initial concentration of reactant"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e4facb60-cb2e-479c-9dba-70513c6b7077",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2021 · May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the rate constant of a first order reaction, if 0.08 mole of reactant reduces to 0.02 mole in 23.03 minutes?",
+    "options": {
+      "A": "\\(1.6021\\ \\text{min}^{-1}\\)",
+      "B": "\\(0.2303\\ \\text{min}^{-1}\\)",
+      "C": "\\(0.4031\\ \\text{min}^{-1}\\)",
+      "D": "\\(0.06020\\ \\text{min}^{-1}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e57d3e98-6156-41f4-9501-318161edb3c3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A first order reaction complete \\(60\\%\\) in \\(20\\) minutes. How long will the reaction take to complete \\(84\\%\\)?",
+    "options": {
+      "A": "\\(54\\) min",
+      "B": "\\(68\\) min",
+      "C": "\\(40\\) min",
+      "D": "\\(76\\) min"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "eac9de90-71d2-4763-a221-4020aac5c03b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the rate constant of first order reaction if the concentration of the reactant decreases by 90% in 30 minutes.",
+    "options": {
+      "A": "\\(7.7 \\times 10^{-2}\\) min\\(^{-1}\\)",
+      "B": "\\(4.2 \\times 10^{-2}\\) min\\(^{-1}\\)",
+      "C": "\\(2.1 \\times 10^{-2}\\) min\\(^{-1}\\)",
+      "D": "\\(3.5 \\times 10^{-2}\\) min\\(^{-1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0d62d344-c025-4f2f-9aa9-16cf96463411",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate Gibbs energy change for a reaction having \\(\\Delta H=31400\\ \\text{J},\\ \\Delta S=32\\ \\text{J K}^{-1}\\) at \\(1000^\\circ\\text{C}\\).",
+    "options": {
+      "A": "\\(-4668\\ \\text{J}\\)",
+      "B": "\\(-9336\\ \\text{J}\\)",
+      "C": "\\(-4073\\ \\text{J}\\)",
+      "D": "\\(-2334\\ \\text{J}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1469e90d-cbb6-4780-b36a-a63dc67ecad1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the enthalpy of vaporization of ethanol if 11.5 g of ethanol is completely vaporized by supplying 11.8 kJ of heat.",
+    "options": {
+      "A": "\\(21.7\\text{ }kJ{\\text{ }mol}^{- 1}\\)",
+      "B": "\\(47.2\\text{ }kJ{\\text{ }mol}^{- 1}\\)",
+      "C": "\\(65.1\\text{ }kJ{\\text{ }mol}^{- 1}\\)",
+      "D": "\\(39.0\\text{ }kJ{\\text{ }mol}^{- 1}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "25b1df32-1d30-419a-a8ce-6eca3aca14f8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the work done in following reaction at \\(27^{\\circ}C\\).\n\\(4SO_{2(g)}+ 2O_{2(g)}\\longrightarrow 4SO_{3(g)}\\), (\\(R = 8.314\\text{ }J{\\text{ }K}^{- 1}{\\text{ }mol}^{- 1}\\))",
+    "options": {
+      "A": "4988.4 J",
+      "B": "2494.2 J",
+      "C": "1247.1 J",
+      "D": "3741.3"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "25c088cb-68a7-40fe-8dd0-3c64d0e49a6f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the enthalpy change for the following reaction, using given bond energy (kJ/mol) (C-H = \\(414\\), H-O = \\(463\\), H-Cl = \\(431\\), C-Cl = \\(326\\) and C-O = \\(335\\))\n\\(\\mathrm{CH_3OH}_{(g)} + \\mathrm{HCl}_{(g)} \\rightarrow \\mathrm{CH_3Cl}_{(g)} + \\mathrm{H_2O}_{(g)}\\)",
+    "options": {
+      "A": "\\(-23\\ \\mathrm{kJmol^{-1}}\\)",
+      "B": "\\(-42\\ \\mathrm{kJmol^{-1}}\\)",
+      "C": "\\(-59\\ \\mathrm{kJmol^{-1}}\\)",
+      "D": "\\(-51\\ \\mathrm{kJmol^{-1}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2ec3c2d5-25a1-40d0-bac0-b1caaf910982",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following processes has \\(\\Delta S\\) negative?",
+    "options": {
+      "A": "Dissolving Sugar in Water",
+      "B": "Adsorption of a Gas on a Solid Surface",
+      "C": "\\(2\\mathrm{NH_3}(g) \\rightarrow \\mathrm{N_2}(g) + 3\\mathrm{H_2}(g)\\)",
+      "D": "Sublimation of Dry Ice"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4102bfef-ded4-4b84-b80d-4b0960a02bdc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\(\\Delta\\mathrm{H}\\) for the following reaction at 300 K\n\\(\\mathrm{2C_{(s)} + 3H_{2(g)} \\longrightarrow C_2H_{6(g)}}\\) if \\(\\Delta\\mathrm{U}\\) for the reaction is \\(-80\\) kJ (\\(\\mathrm{R} = 8.314\\ \\mathrm{JK^{-1}mol^{-1}}\\))",
+    "options": {
+      "A": "\\(-85.00\\) kJ",
+      "B": "\\(-43.00\\) kJ",
+      "C": "\\(-128.00\\) kJ",
+      "D": "\\(-170.00\\) kJ"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "43a650b8-c707-46c1-82a9-1fb553048e0f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the work done in the following reaction\n\\(\\mathrm{NH_4NO_{3(s)} \\rightarrow N_2O_{(g)} + 2H_2O_{(g)}}\\) at \\(300\\) K.\n[\\(R = 8.314\\ \\mathrm{J\\ K^{-1}\\ mol^{-1}}\\)]",
+    "options": {
+      "A": "\\(-7.483\\ \\mathrm{kJ\\ mol^{-1}}\\)",
+      "B": "\\(-3.741\\ \\mathrm{kJ\\ mol^{-1}}\\)",
+      "C": "\\(-11.224\\ \\mathrm{kJ\\ mol^{-1}}\\)",
+      "D": "\\(-14.966\\ \\mathrm{kJ\\ mol^{-1}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4c99e036-0dc3-4142-a241-ea7e0f7e8bb6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\(\\Delta S_{\\text{total~}}\\) for a certain reaction at 298 K if \\(\\Delta H^{\\circ}= - 208.6\\text{ }kJ\\) and \\(\\Delta S^{\\circ}= - 36\\text{ }J{\\text{ }K}^{- 1}\\)",
+    "options": {
+      "A": "\\(664\\text{ }J{\\text{ }K}^{- 1}\\)",
+      "B": "\\(834\\text{ }J{\\text{ }K}^{- 1}\\)",
+      "C": "\\(926\\text{ }J{\\text{ }K}^{- 1}\\)",
+      "D": "\\(736\\text{ }J{\\text{ }K}^{- 1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "662cb1b4-008c-47a4-86d2-b5db62699a16",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For a certain reaction, \\(\\Delta H^0\\) is \\(-345\\) kJ and \\(\\Delta S^0\\) is \\(-123\\ \\mathrm{JK^{-1}}\\). At what temperature the change over from spontaneous to nonspontaneous will occur?",
+    "options": {
+      "A": "\\(1052\\) K",
+      "B": "\\(1956\\) K",
+      "C": "\\(2568\\) K",
+      "D": "\\(2805\\) K"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9f5859bb-836a-4dd7-b84a-161caaf417ad",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In a particular reaction 'x' kJ of heat is released by the system and 'y' kJ of work done is done on the system. What is internal energy change?",
+    "options": {
+      "A": "\\(x - y\\text{ kJ}\\)",
+      "B": "\\(y - x\\text{ kJ}\\)",
+      "C": "\\(x + y\\text{ kJ}\\)",
+      "D": "\\(xy\\text{ kJ}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c5be4bc3-485a-44d5-8980-1aa8fcc2d264",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\(\\Delta U\\) for 1 mole of an ideal gas undergoing irreversible expansion against \\(P_{ext} = 2\\,\\text{atm}\\) from 100 L to 200 L at constant temperature if \\(Q = 302.6\\,\\text{J}\\).",
+    "options": {
+      "A": "\\(-19,962\\,\\text{J}\\)",
+      "B": "\\(-20,265\\,\\text{J}\\)",
+      "C": "\\(302.6\\,\\text{J}\\)",
+      "D": "\\(20,265\\,\\text{J}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e470a9da-b8f4-48ed-83b8-c773d273d2a4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate standard enthalpy change of reaction\n\\(C_{2}H_{2(\\text{ }g)}+\\frac{5}{2}O_{2(\\text{ }g)}\\longrightarrow 2CO_{2(\\text{ }g)}+H_{2}O_{(l)}\\), if\n\\[{\\Delta_{f}H^{\\circ}\\left( CO_{2} \\right)= - 393\\text{ }kJ{\\text{ }mol}^{- 1} }{\\Delta_{f}H^{\\circ}\\left( H_{2}O \\right)= - 286\\text{ }kJ{\\text{ }mol}^{- 1} }{\\Delta_{f}H^{\\circ}\\left( C_{2}H_{2} \\right)= 227\\text{ }kJ{\\text{ }mol}^{- 1} }\\]",
+    "options": {
+      "A": "-650 kJ",
+      "B": "-1950 kJ",
+      "C": "-1299 kJ",
+      "D": "-2598 kJ"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f561f4e8-8445-41cc-ad87-71598403f32f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify from following reactions that exhibits negative work done.",
+    "options": {
+      "A": "\\(2H_{2}O_{2(\\mathcal{l)}} \\rightarrow 2H_{2}O_{\\mathcal{(l)}} + O_{2(g)}\\)",
+      "B": "\\({NH}_{3(\\text{ }g)} + {HCl}_{(g)} \\rightarrow {NH}_{4}{Cl}_{(s)}\\)",
+      "C": "\\(H_{2(g)} + {Cl}_{2(g)} \\rightarrow {HCl}_{(g)}\\)",
+      "D": "\\(N_{2(g)} + 3H_{2(g)} \\rightarrow 2{NH}_{3(g)}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fe4cd6ab-cbee-4f87-8184-d9fe1b190cba",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "2 moles of an ideal gas expand isothermally and reversibly from \\(10\\) L to \\(50\\) L at \\(298\\) K. Calculate the work done during this expansion. \\((R = 8.314\\ \\mathrm{JK^{-1}\\ mol^{-1}})\\)",
+    "options": {
+      "A": "\\(-79.756\\) J",
+      "B": "\\(-7.9756\\) J",
+      "C": "\\(-7975\\) kJ",
+      "D": "\\(-7.975\\) kJ"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fee5b5c4-e3d6-42a5-b8c4-a48123f4c341",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2021 · May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics and Energetics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is enthalpy of formation of NH\\(_3\\), if bond enthalpies are (N≡N) = 941 kJ/mol, (H-H) = 436 kJ/mol and (N-H) = 389 kJ/mol?",
+    "options": {
+      "A": "-84.5 kJ/mol",
+      "B": "-63.45 kJ/mol",
+      "C": "-21.25 kJ/mol",
+      "D": "-42.5 kJ/mol"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "155fac17-768e-40b8-b654-57bef8ab037e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following cations forms least stable complex with same ligand?",
+    "options": {
+      "A": "\\({Co}^{2 +}\\)",
+      "B": "\\({Fe}^{2 +}\\)",
+      "C": "\\({Cd}^{2 +}\\)",
+      "D": "\\({Cu}^{2 +}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "22184f6a-ee0a-44c6-bb53-dc656b166e2e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following ligands is able to form linkage isomers?",
+    "options": {
+      "A": "Aqua",
+      "B": "Ammine",
+      "C": "Iodo",
+      "D": "Nitro"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4be92551-7a43-4e81-b11b-182184ff8351",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the formula of Bis(ethylenediamine)dithiocyanatoplatinum(IV)ion from following.",
+    "options": {
+      "A": "\\([\\mathrm{Pt(en)_2(NCS)}]^{2+}\\)",
+      "B": "\\(\\mathrm{Pt[(en)_2(SCN)_2]^{4+}}\\)",
+      "C": "\\([\\mathrm{Pt(en)_2(SCN)_2}]^{2+}\\)",
+      "D": "\\(\\mathrm{Pt[(en)_3(SCN)_2]^{4+}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "594ce0a1-eaed-408c-bed3-7eaa2df83f1d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of unpaired electrons in \\([\\text{Co(NH}_3)_6]^{3+}\\) complex?",
+    "options": {
+      "A": "Four",
+      "B": "Two",
+      "C": "Zero",
+      "D": "Six"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "65fdb1b0-7b47-4169-b9a8-fe0d0ef437d9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of unpaired electrons present in \\(CoF_6^{3-}\\)?",
+    "options": {
+      "A": "4",
+      "B": "3",
+      "C": "2",
+      "D": "1"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "86939b27-eea8-4285-a646-37aa3d7c1a94",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from the following statements about \\([\\text{Co(NH}_3)_6]^{3+}\\) complex is NOT correct?",
+    "options": {
+      "A": "Prior to hybridization Co³⁺ possesses four unpaired electrons.",
+      "B": "This complex has all electrons paired.",
+      "C": "It is a high spin complex.",
+      "D": "It is a diamagnetic complex."
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b8bc795a-b946-45cd-8388-ba21e65e6e24",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the type of isomerism exhibited by [Co(NH\\(_3\\))\\(_5\\)Br]SO\\(_4\\) and [Co(NH\\(_3\\))\\(_5\\)SO\\(_4\\)]Br.",
+    "options": {
+      "A": "Linkage isomerism",
+      "B": "Ionization isomerism",
+      "C": "Coordination isomerism",
+      "D": "Geometrical isomerism"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c5e0fe60-4ae8-401a-9778-620e51d9a702",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Find EAN of element in following complex \\(\\mathrm{K_3[Cr(C_2O_4)_3]}\\).",
+    "options": {
+      "A": "\\(31\\)",
+      "B": "\\(65\\)",
+      "C": "\\(33\\)",
+      "D": "\\(48\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cead3c17-3402-477b-b891-39cc255919aa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following cations will form most stable complex with same ligand?",
+    "options": {
+      "A": "\\({Cu}^{2 +}\\)",
+      "B": "\\({Co}^{2 +}\\)",
+      "C": "\\({Mn}^{2 +}\\)",
+      "D": "\\({Fe}^{2 +}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ced96d3f-f74e-417d-bcb8-9049218dbd02",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following complexes contains only neutral ligands in it?",
+    "options": {
+      "A": "Pentaammineaquacobalt(III) chloride",
+      "B": "Triamminetrithiocyanatorhodium(III)",
+      "C": "Bis(ethylenediamine)dithiocyanatoplatinum(IV)",
+      "D": "Triamminetrinitrocobalt(III)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ed0293a7-2418-4a80-9c43-8348b3f50fe3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the coordination entity having square planar geometry from following.",
+    "options": {
+      "A": "\\([\\text{Co(NH}_3)_5\\text{H}_2\\text{O]I}_3\\)",
+      "B": "\\([\\text{Co(NH}_3)_5\\text{CO}_3\\text{]Cl}\\)",
+      "C": "\\([\\text{Ni(CN)}_4]^{2-}\\)",
+      "D": "\\([\\text{Co(NH}_3)_3(\\text{NO}_2)_3]\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1f0c6edc-ea6d-4fae-bdb5-ae890ec41338",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is molar conductivity at zero concentration in \\(\\Omega^{- 1}{\\text{ }cm}^{2}{\\text{ }mol}^{- 1}\\) for aluminium sulphate, if molar ionic conductivities at zero concentration of \\(Al^{+ 3}\\) and \\(SO_{4}^{- 2}\\) are \\(189\\Omega^{- 1}{\\text{ }cm}^{2}{\\text{ }mol}^{- 1}\\) and \\(50.1\\Omega^{- 1}{\\text{ }cm}^{2}{\\text{ }mol}^{- 1}\\) respectively?",
+    "options": {
+      "A": "239.1",
+      "B": "428.1",
+      "C": "478.2",
+      "D": "528.3"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "227fc744-6dae-47d7-ab68-802313901699",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\(\\Lambda^0\\) of CH\\(_2\\)ClCOOH if \\(\\Lambda^0\\) for HCl, KCl and CH\\(_2\\)ClCOOK are 4.2, 1.5 and 1.1 \\(\\Omega^{-1}\\) cm\\(^2\\) mol\\(^{-1}\\) respectively?",
+    "options": {
+      "A": "\\(2.7\\ \\Omega^{-1}\\text{ cm}^2\\text{ mol}^{-1}\\)",
+      "B": "\\(3.8\\ \\Omega^{-1}\\text{ cm}^2\\text{ mol}^{-1}\\)",
+      "C": "\\(1.9\\ \\Omega^{-1}\\text{ cm}^2\\text{ mol}^{-1}\\)",
+      "D": "\\(4.2\\ \\Omega^{-1}\\text{ cm}^2\\text{ mol}^{-1}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2ed08116-beca-4ccc-b19c-f3635b019746",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is reduction potential of hydrogen gas electrode when pure hydrogen gas is at 1 atmospheric pressure and platinum electrode is in contact with HCl solution of pH 1 at 298 K ?",
+    "options": {
+      "A": "-0.1184 V",
+      "B": "-0.0592 V",
+      "C": "-0.0296 V",
+      "D": "-0.592 V"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "36df16c5-dd00-4d73-8926-bdd61effac8c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If molar conductance at infinite dilution for \\(\\mathrm{CH_3COO^-}\\) and \\(\\mathrm{H^+}\\) ions are \\(50\\ \\mathrm{S\\,cm^2\\,mol^{-1}}\\) and \\(350\\ \\mathrm{S\\,cm^2\\,mol^{-1}}\\) respectively, molar conductivity of \\(5 \\times 10^{-2}\\) M \\(\\mathrm{CH_3COOH}\\) is \\(20\\ \\mathrm{S\\,cm^2mol^{-1}}\\). What is the hydrogen ion concentration in \\(\\mathrm{mol/dm^3}\\) of \\(\\mathrm{CH_3COOH}\\)?",
+    "options": {
+      "A": "\\(5 \\times 10^{-2}\\)",
+      "B": "\\(5 \\times 10^{-3}\\)",
+      "C": "\\(2.5 \\times 10^{-3}\\)",
+      "D": "\\(2.5 \\times 10^{-4}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "62534fdc-d9ee-40b1-9ad4-75e78a5f0523",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Standard potential ( \\(E^{\\circ}\\) ) of\n\\(Zn_{(aq)}^{+ 2}+ 2e^{-}\\longrightarrow Zn_{(s)}\\) is -0.76 V . What is standard potential of reaction\n\\(2Zn_{(s)}\\longrightarrow 2Zn_{(aq)}^{+ 2}+ 4e^{-}\\)?",
+    "options": {
+      "A": "-1.52 V",
+      "B": "+1.52 V",
+      "C": "-0.76 V",
+      "D": "+0.76 V"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "641c3af5-eeb9-45fd-ac11-74bbb76d4016",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the concentration of an electrolyte solution to have molar conductivity of \\(101\\ \\Omega^{-1}\\ \\text{cm}^2\\ \\text{mol}^{-1}\\) and conductivity of \\(1.01\\times10^{-2}\\ \\Omega^{-1}\\ \\text{cm}^{-1}\\) at 298 K?",
+    "options": {
+      "A": "0.05 M",
+      "B": "0.1 M",
+      "C": "0.15 M",
+      "D": "0.2 M"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6d3b2a32-21db-48b3-9239-fbd9c0ae415b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 13th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from the following expression represents molar conductivity of an electrolyte \\(\\text{A}_2\\text{B}_3\\) type?",
+    "options": {
+      "A": "\\(2\\lambda_{A^{3+}}^0+3\\lambda_{B^{2-}}^0\\)",
+      "B": "\\(3\\lambda_{A^{3+}}^0+2\\lambda_{B^{2-}}^0\\)",
+      "C": "\\(2\\lambda_{A^+}^0+\\lambda_{B^-}^0\\)",
+      "D": "\\(\\lambda_{A^{3+}}^0+3\\lambda_{B^{2-}}^0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b4d94990-dafa-4462-a6a9-e9ec726fc199",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The conductivity of 0.02 M KCl solution is \\(0.00250\\) ohm\\(^{-1}\\) cm\\(^{-1}\\). What is its molar conductivity?",
+    "options": {
+      "A": "\\(125\\) ohm\\(^{-1}\\) cm\\(^{2}\\) mol\\(^{-1}\\)",
+      "B": "\\(0.05\\) ohm\\(^{-1}\\) cm\\(^{2}\\) mol\\(^{-1}\\)",
+      "C": "\\(725\\) ohm\\(^{-1}\\) cm\\(^{2}\\) mol\\(^{-1}\\)",
+      "D": "\\(800\\) ohm\\(^{-1}\\) cm\\(^{2}\\) mol\\(^{-1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bcffd2d3-92f4-468c-9307-ecb1d1ad0935",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The standard electrode potential for \\(\\mathrm{Ag^+_{(aq)} + e^- \\rightarrow Ag_{(s)}}\\) is \\(0.79\\) V. What is the stranded potential for the reaction: \\(\\mathrm{2Ag_{(s)} \\rightarrow 2Ag^+_{(aq)} + 2e^-}\\).",
+    "options": {
+      "A": "\\(+1.58\\) V",
+      "B": "\\(-1.58\\) V",
+      "C": "\\(+0.79\\) V",
+      "D": "\\(-0.79\\) V"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c1cb9cd7-74a7-446d-a85e-0a36b24ce68e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For the cell reaction, \\(A_{(s)}+B_{(aq)}^{+ 2}\\longrightarrow{\\text{ }A}_{(aq)}^{+ 2}+B_{(s)}\\) if equilibrium constant of reaction is \\(10^{4}\\) at 298 K . What is standard emf of cell?",
+    "options": {
+      "A": "0.0592 V",
+      "B": "0.1184 V",
+      "C": "0.1776 V",
+      "D": "0.2368 V"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cca1e405-b6e8-4bc1-b916-c1242d2861fb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following changes takes place at positive electrode during recharging of lead accumulator?",
+    "options": {
+      "A": "\\(\\ Pb\\) is oxidised to \\({PbSO}_{4}\\)",
+      "B": "\\(\\ {PbSO}_{4}\\) is oxidised to \\({PbO}_{2}\\)",
+      "C": "\\(\\ {PbSO}_{4}\\) is reduced to Pb",
+      "D": "\\(\\ {PbO}_{2}\\) is reduced to \\({PbSO}_{4}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "dd546cdb-830f-4d7e-b6eb-198fd948c82d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If standard reduction potential \\((E^0)\\) of \\(\\left(\\mathrm{Al^{+3}_{(aq)}|Al_{(s)}}\\right)\\), \\(\\left(\\mathrm{Fe^{+2}_{(aq)}|Fe_{(s)}}\\right)\\), \\(\\left(\\mathrm{Cu^{+2}_{(aq)}|Cu_{(s)}}\\right)\\) and \\(\\left(\\mathrm{Ag^{+1}_{(aq)}|Ag_{(s)}}\\right)\\) are \\(-1.66\\) V, \\(-0.44\\) V, \\(+0.34\\) V and \\(+0.79\\) V respectively. Which of the following reaction is non spontaneous ?",
+    "options": {
+      "A": "\\(\\mathrm{2Ag_{(s)} + Fe^{+2}_{(aq)} \\rightarrow 2Ag^{+1}_{(aq)} + Fe_{(s)}}\\)",
+      "B": "\\(\\mathrm{2Al_{(s)} + 3Cu^{+2}_{(aq)} \\rightarrow 2Al^{+3}_{(aq)} + 3Cu_{(s)}}\\)",
+      "C": "\\(\\mathrm{Fe_{(s)} + Cu^{+2}_{(aq)} \\rightarrow Fe^{+2}_{(aq)} + Cu_{(s)}}\\)",
+      "D": "\\(\\mathrm{2Al_{(s)} + 3Fe^{+2}_{(aq)} \\rightarrow 2Al^{+3}_{(aq)} + 3Fe_{(s)}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e2736d54-5194-4fa0-8ae7-613d8c25dfc0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following species acts as reducing agent during working of hydrogen-oxygen fuel cell?",
+    "options": {
+      "A": "\\(H_{2}\\)",
+      "B": "\\(O_{2}\\)",
+      "C": "\\(H^{+}\\)",
+      "D": "NaOH"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "57cecff1-aa50-4665-aa87-4edd30d4cd9d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 1 and 2",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the catalyst used in following reaction at \\(500^{\\circ}C\\) ?\n\\[CO +H_{2}O \\rightleftharpoons CO_{2}+H_{2} \\]",
+    "options": {
+      "A": "\\(Fe - Cr\\)",
+      "B": "Ni",
+      "C": "\\(Co - Th\\)",
+      "D": "Platinized asbestos"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d878161b-5d48-43de-b615-6d04907c5340",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 1 and 2",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following compounds is obtained as by product in synthesis of sodium carbonate by Solvay process?",
+    "options": {
+      "A": "Ammonium carbonate",
+      "B": "Sodium bicarbonate",
+      "C": "Calcium Chloride",
+      "D": "Ammonium Chloride"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8b2d546e-229c-43ca-afcc-e02c9d264662",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 16, 17 and 18",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following xenon compound has chlorine pentafluoride like structure?",
+    "options": {
+      "A": "\\({XeF}_{4}\\)",
+      "B": "\\({XeF}_{6}\\)",
+      "C": "\\({XeO}_{3}\\)",
+      "D": "\\({XeOF}_{4}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c6247653-219a-4f67-a10e-e239b26d6b74",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 16, 17 and 18",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the products obtained when chlorine reacts with hot and conc. NaOH.",
+    "options": {
+      "A": "\\(\\text{NaClO}_3\\), NaCl and \\(\\text{H}_2\\text{O}\\)",
+      "B": "NaCl and HOCl",
+      "C": "\\(\\text{Na}_2\\text{O}\\) and NaCl",
+      "D": "NaOCl and \\(\\text{H}_2\\text{O}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d7eddffc-ba41-4d7e-a3f9-a6c875b0fff5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 16, 17 and 18",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the correct order of bond dissociation enthalpy of halogens from following.",
+    "options": {
+      "A": "\\(\\mathrm{I\\text{-}I > Br\\text{-}Br > Cl\\text{-}Cl > F\\text{-}F}\\)",
+      "B": "\\(\\mathrm{Cl\\text{-}Cl > Br\\text{-}Br > F\\text{-}F > I\\text{-}I}\\)",
+      "C": "\\(\\mathrm{I\\text{-}I > Br\\text{-}Br > Cl\\text{-}Cl > F\\text{-}F}\\)",
+      "D": "\\(\\mathrm{Br\\text{-}Br > F\\text{-}F > I\\text{-}I > Cl\\text{-}Cl}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ef2fc2e2-b637-4a81-97f4-8f8086a6f5b6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 16, 17 and 18",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Find the number of allotropic forms of Tellurium under normal conditions.",
+    "options": {
+      "A": "\\(2\\)",
+      "B": "\\(3\\)",
+      "C": "\\(6\\)",
+      "D": "\\(8\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "eff58705-e497-45e7-9993-69bd8cf54d1e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Elements of Group 16, 17 and 18",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following statements is false about oxygen and Sulphur?",
+    "options": {
+      "A": "Atoms of oxygen and sulphur consist two unpaired electrons in valence shell.",
+      "B": "Oxygen and sulphur show -2, +4 and +6 oxidation states.",
+      "C": "Oxygen is gas while sulphur is solid at room temperature.",
+      "D": "Hydride of oxygen is more stable than hydride of sulphur."
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6c31e7d9-8f2e-4f27-baf7-d8622c230416",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Green Chemistry and Nanochemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the last step in wet chemical synthesis of nanomaterial.",
+    "options": {
+      "A": "Formation of oxide or alcohol-bridged network.",
+      "B": "Dehydration.",
+      "C": "Aging of the gel.",
+      "D": "Drying of the gel."
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "05ed76dc-562e-4c33-8494-ac40957d0096",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the reagent A in the following conversion: Alkyl halide \\(\\xrightarrow{A}\\) Alkyl nitrite",
+    "options": {
+      "A": "\\(KNO_3\\)",
+      "B": "\\(NaNO_3\\)",
+      "C": "\\(AgNO_2\\)",
+      "D": "\\(KNO_2\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2456f540-0a70-4821-bcf2-dfd8d692aedb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the product obtained in the following reaction. \\( \\text{CH}_{3}\\text{CH}_{2}\\text{Br} + \\text{CH}_{3}\\text{COOAg} \\xrightarrow{\\Delta} x + \\text{AgBr} \\)",
+    "options": {
+      "A": "\\( \\text{CH}_{3}\\text{CH}_{2}\\text{COOCH}_{3} \\)",
+      "B": "\\( \\text{CH}_{3}\\text{COOCH}_{2}\\text{CH}_{3} \\)",
+      "C": "\\( \\text{CH}_{3}\\text{COOCH}_{3} \\)",
+      "D": "\\( \\text{CH}_{3}\\text{CH}_{2}\\text{COOCH}_{2}\\text{CH}_{3} \\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "245b0d98-1049-4069-bfe5-78db0b1eb8c8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following isomers of C\\(_4\\)H\\(_9\\)Br is a chiral molecule?",
+    "options": {
+      "A": "n-Butyl bromide",
+      "B": "sec-Butyl bromide",
+      "C": "Isobutyl bromide",
+      "D": "tert-Butyl bromide"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "29b0ecdd-1cd8-414d-bbcc-08bde24ccffb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The correct order of reactivity for reactions involving cleavage of C-Cl bond in following compounds is [Compound I: chlorobenzene; II: 2,4-dinitrochlorobenzene; III: 2,4,6-trinitrochlorobenzene]",
+    "options": {
+      "A": "I > II > III",
+      "B": "II > III > I",
+      "C": "III > I > II",
+      "D": "III > II > I"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "57242d60-73f6-4fed-b4c2-56bf97f54ad7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following compounds is obtained when alkyl halides reacted with silver nitrite?",
+    "options": {
+      "A": "Nitroalkanes",
+      "B": "Alkyl nitrite",
+      "C": "Alkyl isocyanide",
+      "D": "Alkyl cyanide"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "813687a5-29a1-4dca-b6b2-844208b83182",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which among the following is NOT Allylic halide?",
+    "options": {
+      "A": "\\({CH}_{2} = CH - {CH}_{2} - X\\)",
+      "B": "\\({CH}_{3} - CH = CH - {CH}_{2} - X\\)",
+      "C": "\\({CH}_{3} - {CH}_{2} - CH = CH - {CH}_{2} - X\\)",
+      "D": "\\({CH}_{3} - CH = CH - {CH}_{2} - {CH}_{2} - X\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8ce449b4-aa8b-4f56-abb6-6ca1b916c6ee",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Halogen Derivatives of Alkanes",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the major product formed when 2-bromopentane reacts with alcoholic KOH?",
+    "options": {
+      "A": "Pent-1-ene",
+      "B": "Pent-2-ene",
+      "C": "Pentane",
+      "D": "Pentan-2-ol"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7182aa85-b5b7-4d5c-b4e3-0ddc14cddecc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Introduction to Polymer Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the polymer used to obtain LCD screen from following.",
+    "options": {
+      "A": "Polyacrylamide",
+      "B": "Buna-N",
+      "C": "Polycarbonate",
+      "D": "Perspex"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "aab1c9b9-ed42-40cc-bdbe-26a1f4fb3e96",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Introduction to Polymer Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the monomers used in preparation of Nylon 2- nylon 6",
+    "options": {
+      "A": "Glycine and \\(\\varepsilon\\) amino caproic acid",
+      "B": "\\(\\ \\beta\\) - hydroxy butyric acid and \\(\\beta\\) - hydroxy valeric acid",
+      "C": "Ethylene glycol and phthalic acid",
+      "D": "Acrylamide and vinyl chloride"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "de7d3e78-68bb-445c-b62b-edd072a21df2",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Introduction to Polymer Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following statements about neoprene is false?",
+    "options": {
+      "A": "It is a copolymer and polymerization occurs in presence of MgO.",
+      "B": "It is a synthetic rubber.",
+      "C": "It is used to prepare hose pipes for transport of gasoline.",
+      "D": "The monomer involved in its preparation is unsaturated."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2490c04f-c1d6-4299-9cba-8bae6ad8cd8c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The solubility product of a sparingly soluble salt \\(\\mathrm{BA_2}\\) is \\(1.08 \\times 10^{-10}\\). Calculate its solubility in g \\(\\mathrm{dm^{-3}}\\) if the molar mass of salt is \\(175\\ \\mathrm{g\\ mol^{-1}}\\).",
+    "options": {
+      "A": "\\(5.25 \\times 10^{-2}\\ \\mathrm{g\\ dm^{-3}}\\).",
+      "B": "\\(1.75 \\times 10^{-2}\\ \\mathrm{g\\ dm^{-3}}\\)",
+      "C": "\\(3.50 \\times 10^{-2}\\ \\mathrm{g\\ dm^{-3}}\\).",
+      "D": "\\(7.00 \\times 10^{-3}\\ \\mathrm{g\\ dm^{-3}}\\)."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2b2097ef-b035-4831-a4ae-d25863ab381b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\([\\text{H}_3\\text{O}^+]\\) in 0.02 M solution of monobasic acid if dissociation constant is \\(1.8\\times10^{-5}\\).",
+    "options": {
+      "A": "\\(3.0\\times10^{-4}\\ \\text{M}\\)",
+      "B": "\\(6.0\\times10^{-4}\\ \\text{M}\\)",
+      "C": "\\(2.0\\times10^{-4}\\ \\text{M}\\)",
+      "D": "\\(4.0\\times10^{-4}\\ \\text{M}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "34eb4fab-776d-4ff0-93b1-bbdee9c1fa38",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar concentration of weak monobasic acid if \\(K_a = 1.8 \\times 10^{-5}\\) and degree of dissociation is \\(0.01\\) ?",
+    "options": {
+      "A": "\\(1.8 \\times 10^{-1}\\)",
+      "B": "\\(1.8 \\times 10^{-2}\\)",
+      "C": "\\(5.55 \\times 10^{-3}\\)",
+      "D": "\\(5.55 \\times 10^{-4}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "387e32c0-2b8e-4835-a67b-870e5fd35ea4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The solubility product of a sparingly soluble salt BA is \\(6.4 \\times 10^{-13}\\). Calculate it's solubility in g \\(\\mathrm{dm^{-3}}\\). Molar mass of salt is 190 g \\(\\mathrm{mol^{-1}}\\) .",
+    "options": {
+      "A": "\\(1.52 \\times 10^{-4}\\)",
+      "B": "\\(1.25 \\times 10^{-4}\\)",
+      "C": "\\(2.1 \\times 10^{-4}\\)",
+      "D": "\\(1.9 \\times 10^{-4}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7cc19c39-bf73-4d1e-b9b5-8b46bf0b684e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate \\([\\text{H}_3\\text{O}^+]\\) of a monobasic acid if it is 0.04% dissociated in 0.05 M solution.",
+    "options": {
+      "A": "\\(1 \\times 10^{-5}\\)",
+      "B": "\\(1.5 \\times 10^{-5}\\)",
+      "C": "\\(2.0 \\times 10^{-5}\\)",
+      "D": "\\(3.0 \\times 10^{-5}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "867f4337-f49c-4dd1-80dd-477e75b9cee4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following salt solutions turns red litmus blue?",
+    "options": {
+      "A": "NH\\(_4\\)CN",
+      "B": "NH\\(_4\\)Cl",
+      "C": "NH\\(_4\\)NO\\(_3\\)",
+      "D": "NaNO\\(_3\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "98ec09cf-eee6-4237-a1cc-35cdcd7018b3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate '\\(\\alpha\\)' for 0.1 M acetic acid \\([K_a=1.0\\times10^{-5}]\\)",
+    "options": {
+      "A": "\\(10^{-2}\\)",
+      "B": "\\(10^{-3}\\)",
+      "C": "\\(10^{-4}\\)",
+      "D": "\\(10^{-5}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "99c82725-96eb-420f-afa3-cb8df57f0157",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which among the following salt turns blue litmus red in its aqueous solution?",
+    "options": {
+      "A": "\\({CuSO}_{4}\\)",
+      "B": "\\(\\ {Na}_{2}{CO}_{3}\\)",
+      "C": "\\({Na}_{2}{SO}_{4}\\)",
+      "D": "\\(\\ {NaNO}_{3}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a5da721f-82bd-44dd-b0a7-9b965c1a64c0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following salt undergoes anionic hydrolysis ?",
+    "options": {
+      "A": "\\(\\mathrm{CuSO_4}\\)",
+      "B": "\\(\\mathrm{Na_2CO_3}\\)",
+      "C": "\\(\\mathrm{NH_4Cl}\\)",
+      "D": "\\(\\mathrm{FeCl_3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b35cefcc-9354-408a-a0a4-2db730793270",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The dissociation constant of weak acid HA is \\(1.5 \\times 10^{-5}\\). Find the percent dissociation, containing \\(0.2\\) moles per \\(2\\) liters of solution.",
+    "options": {
+      "A": "\\(1.22\\%\\)",
+      "B": "\\(1.18\\%\\)",
+      "C": "\\(1.14\\%\\)",
+      "D": "\\(1.26\\%\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ebc4a60a-9a78-4043-8da1-18d602944b9f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A weak monobasic acid is \\(18\\ \\%\\) dissociated in \\(0.05\\) M solution. Calculate the concentration of solution if it is \\(10\\ \\%\\) dissociated .",
+    "options": {
+      "A": "\\(0.162\\) M.",
+      "B": "\\(0.141\\) M.",
+      "C": "\\(0.184\\) M.",
+      "D": "\\(0.125\\) M."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f5172630-049b-45f6-a14c-13c267eddf1e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate pH of 0.002 M KOH solution.",
+    "options": {
+      "A": "10.4",
+      "B": "11.3",
+      "C": "12.4",
+      "D": "13.2"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f76b0167-3e75-456a-b74f-dffa2ad63aaf",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Ionic Equilibria",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The solubility product of the sparingly soluble salt \\(AB_{2}\\) is \\(2.56 \\times10^{- 10}\\) at 298 K . Calculate its solubility in \\(moldm^{- 3}\\) at the same temperature?",
+    "options": {
+      "A": "\\(1 \\times 10^{- 4}\\)",
+      "B": "\\(2 \\times 10^{- 4}\\)",
+      "C": "\\(4 \\times 10^{- 4}\\)",
+      "D": "\\(3 \\times 10^{- 2}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2c820cd6-87ab-491f-801a-d65889b45a1d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "chemistry",
+    "chapter": "Redox Reactions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which one of the following conversions does NOT involve either oxidation or reduction?",
+    "options": {
+      "A": "\\(\\text{Na} \\rightarrow \\text{Na}^+\\)",
+      "B": "\\(\\text{VO}^{2+} \\rightarrow \\text{V}_2\\text{O}_3\\)",
+      "C": "\\(\\text{Zn}^{2+} \\rightarrow \\text{Zn}\\)",
+      "D": "\\(\\text{CrO}_4^{2-} \\rightarrow \\text{Cr}_2\\text{O}_7^{2-}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "62f20abc-45c7-434a-9cac-a5db85daa916",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Redox Reactions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the oxidation number of sulfur in \\(\\text{H}_2\\text{SO}_5\\)?",
+    "options": {
+      "A": "+4",
+      "B": "+6",
+      "C": "+8",
+      "D": "+5"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8d7865fe-4de4-4fed-aca1-2954b07148b7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Redox Reactions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of electrons gained by Cl atom when \\(n\\) mole of \\(\\mathrm{ClO_4^-}\\) is transformed into \\(n\\) mole of \\(\\mathrm{ClO_2^-}\\) ion?",
+    "options": {
+      "A": "\\(3n\\)",
+      "B": "\\(4n\\)",
+      "C": "\\(n\\)",
+      "D": "\\(2n\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fd6b88bf-9487-4951-9026-11d1ef0596f8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Redox Reactions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which among the following species is reduced by tin easily?",
+    "options": {
+      "A": "Iodine",
+      "B": "Iron",
+      "C": "Zinc",
+      "D": "Sodium"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "25f174ac-91dd-489d-9a9e-c63c8d1815e3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A compound forms hcp structure. What is the number of tetrahedral voids formed in 0.8 mol of it.",
+    "options": {
+      "A": "\\(4.818 \\times 10^{23}\\)",
+      "B": "\\(9.635 \\times 10^{23}\\)",
+      "C": "\\(7.227 \\times 10^{23}\\)",
+      "D": "\\(2.410 \\times 10^{23}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2f4f8a22-14e7-409a-8442-65c641f82295",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A metal crystallizes to form fcc unit cells. Calculate the void volume of a unit cell if the edge length of the unit cell is \\(390\\) pm.",
+    "options": {
+      "A": "\\(2.847 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "B": "\\(1.898 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "C": "\\(1.542 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "D": "\\(5.932 \\times 10^{-23}\\ \\mathrm{cm^3}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4353ea17-d6ce-4f3f-8738-3898f0845cc6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the volume of one particle in BCC structure if 'a' is edge length?",
+    "options": {
+      "A": "\\(\\frac{\\pi a^3}{3\\sqrt{2}}\\)",
+      "B": "\\(\\frac{\\pi a^3}{12\\sqrt{2}}\\)",
+      "C": "\\(\\frac{\\sqrt{3}\\pi a^3}{16}\\)",
+      "D": "\\(\\frac{\\sqrt{3}\\pi a^3}{8}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "43ead8b1-d52e-489e-8505-5eaf5601ede4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the total volume of simple cubic unit cell in \\(\\mathrm{cm^3}\\) if void volume is \\(2.0 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+    "options": {
+      "A": "\\(4.2 \\times 10^{-23}\\)",
+      "B": "\\(3.8 \\times 10^{-23}\\)",
+      "C": "\\(3.4 \\times 10^{-23}\\)",
+      "D": "\\(4.6 \\times 10^{-23}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4734e779-05f2-48d4-833b-2ddc6f5bb14e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the total volume occupied by all atoms in simple cubic unit cell if radius of atom is \\(3 \\times 10^{-8}\\) cm.",
+    "options": {
+      "A": "\\( 1.13\\times10^{-22} \\) cm\\(^3\\)",
+      "B": "\\( 2.25\\times10^{-22} \\) cm\\(^3\\)",
+      "C": "\\( 3.15\\times10^{-22} \\) cm\\(^3\\)",
+      "D": "\\( 4.37\\times10^{-22} \\) cm\\(^3\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4afd2ec2-5a7f-45f4-bdb6-fdbbe834decd",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following solids exhibits isotropic properties?",
+    "options": {
+      "A": "Diamond",
+      "B": "Graphite",
+      "C": "Sodium",
+      "D": "Metallic glass"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5e5d22ab-5dbc-4e6d-82dc-a51183821279",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the number of unit cells in \\(1\\ \\text{cm}^3\\) volume of an element if unit cell edge length is \\(4.0 \\times 10^{-8}\\ \\text{cm}\\).",
+    "options": {
+      "A": "\\(2.63 \\times 10^{22}\\)",
+      "B": "\\(1.56 \\times 10^{22}\\)",
+      "C": "\\(3.34 \\times 10^{22}\\)",
+      "D": "\\(4.50 \\times 10^{22}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6ecab743-a3da-44d3-9ae6-0e2c56fcc3cc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A metal forms fcc structure. Calculate the volume of fcc unit cell in \\(\\mathrm{cm^3}\\) if void volume is \\(1.66 \\times 10^{-23}\\ \\mathrm{cm^3}\\).",
+    "options": {
+      "A": "\\(4.912 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "B": "\\(8.151 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "C": "\\(9.346 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "D": "\\(6.385 \\times 10^{-23}\\ \\mathrm{cm^3}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "836ce897-34b4-40fb-a64d-440ea45d0612",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the number of atoms present in unit cell of an element having molar mass \\(190\\,g\\,mol^{-1}\\) and density \\(20\\,g\\,cm^{-3}\\), \\(a^3 N_A = 38\\,cm^3\\,mol^{-1}\\)",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "6",
+      "D": "4"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bfa81bf1-05e2-46da-b06e-5f7c4e7a569e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar mass of an element having density 5.6 g cm\\(^{-3}\\) that forms bcc structure. \\(a^3 \\times N_A = 75\\) cm\\(^3\\) mol\\(^{-1}\\)",
+    "options": {
+      "A": "198 g mol\\(^{-1}\\)",
+      "B": "210 g mol\\(^{-1}\\)",
+      "C": "118 g mol\\(^{-1}\\)",
+      "D": "225 g mol\\(^{-1}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c08cd29c-4016-4021-8717-acc488d1756b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the volume occupied by a particle in fcc unit cell if volume of unit cell is \\(1.6 \\times 10^{-23}\\ \\mathrm{cm^3}\\).",
+    "options": {
+      "A": "\\(5.44 \\times 10^{- 24}{\\text{ }cm}^{3}\\)",
+      "B": "\\(2.96 \\times 10^{- 24}{\\text{ }cm}^{3}\\)",
+      "C": "\\(8.37 \\times 10^{- 24}{\\text{ }cm}^{3}\\)",
+      "D": "\\(6.15 \\times 10^{- 24}{\\text{ }cm}^{3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cd20fc00-7e26-48ee-9b9a-751b88d9e07c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following pair of compounds exhibits isomorphism?",
+    "options": {
+      "A": "Calcite and aragonite",
+      "B": "\\(\\alpha\\)-quartz and cristobalite",
+      "C": "Sodium nitrate and calcium carbonate",
+      "D": "Diamond and fullerene"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "daed1c48-0198-4dbd-abee-18813b18df2a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the void volume of bcc unit cell if volume of unit cell is \\(8.0 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+    "options": {
+      "A": "\\(3.08 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "B": "\\(4.16 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "C": "\\(5.44 \\times 10^{-23}\\ \\mathrm{cm^3}\\)",
+      "D": "\\(2.56 \\times 10^{-23}\\ \\mathrm{cm^3}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fc5ae8eb-f8ae-4611-ae42-678f868a1404",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the number of unit cells in 1cm\\(^3\\) of metal if it forms simple cubic structure with unit cell edge length 500 pm.",
+    "options": {
+      "A": "\\(4.0 \\times 10^{21}\\)",
+      "B": "\\(2.0 \\times 10^{21}\\)",
+      "C": "\\(8.0 \\times 10^{21}\\)",
+      "D": "\\(3.0 \\times 10^{21}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1b6797ff-ebd5-432a-99f5-60cee7003f4c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Assuming complete ionisation, arrange the following solutions in order of increasing osmotic pressure. (A) 0.5 m Li\\(_2\\)SO\\(_4\\) (B) 0.5 m KCl (C) 0.5 m Al\\(_2\\)(SO\\(_4\\))\\(_3\\) (D) 0.1 m BaCl\\(_2\\)",
+    "options": {
+      "A": "D < B < A < C",
+      "B": "B < D < C < A",
+      "C": "A < D < C < B",
+      "D": "C < D < B < A"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1ee595d5-222d-49fd-a638-d4d14878dbc1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate van't Hoff factor of aqueous solution of 0.18 m electrolyte that freezes at \\(-0.54^{\\circ}C\\). ( \\(K_{f}\\) for solvent \\(= 1.86\\text{ }K\\text{ }kg{\\text{ }mol}^{- 1}\\) )",
+    "options": {
+      "A": "1.126",
+      "B": "2.449",
+      "C": "1.612",
+      "D": "2.150"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "21c055fc-a61d-45b6-aec2-02ea760332ca",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "When 0.01 mole of nonvolatile solute is dissolved in certain solvent calculate the mass of solvent in kg if \\(\\Delta T_{b}= 0.6\\text{ }K\\) and \\(K_{b}\\) for solvent = \\(2\\text{ }K\\text{ }kg{\\text{ }mol}^{- 1}\\)",
+    "options": {
+      "A": "0.014 kg",
+      "B": "0.028 kg",
+      "C": "0.033 kg",
+      "D": "0.045 kg"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "310f7aca-68fa-4135-b698-24f92c88cd4d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar mass of a nonvolatile solute if 6.4 g of it dissolved in 100 g water produces a relative lowering in vapour pressure of \\(0.016\\) at 300 K.",
+    "options": {
+      "A": "\\(60\\ \\mathrm{gmol^{-1}}\\)",
+      "B": "\\(66\\ \\mathrm{gmol^{-1}}\\)",
+      "C": "\\(72\\ \\mathrm{gmol^{-1}}\\)",
+      "D": "\\(84\\ \\mathrm{gmol^{-1}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "39280e98-0267-4d0b-accc-6dc2fd0822b7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the depression in freezing point of solution when 4 g nonvolatile solute of molar mass \\(126\\,\\text{g mol}^{-1}\\) is dissolved in 80 ml water. [Cryoscopic constant of water \\(=1.86\\,\\text{K kg mol}^{-1}\\)]",
+    "options": {
+      "A": "0.55 K",
+      "B": "0.74 K",
+      "C": "0.86 K",
+      "D": "0.98 K"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4aa0e694-dd5f-4ffe-8072-441d9a76b0a8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar mass of nonvolatile solute when 4 g of it is dissolved in 100 g solvent that boils at 319.4 K [\\(K_b\\) = 2.4 K kg \\(\\mathrm{mol^{-1}}\\); B.P of pure solvent = 319 K]",
+    "options": {
+      "A": "\\(220\\ \\mathrm{gmol^{-1}}\\)",
+      "B": "\\(230\\ \\mathrm{gmol^{-1}}\\)",
+      "C": "\\(240\\ \\mathrm{gmol^{-1}}\\)",
+      "D": "\\(250\\ \\mathrm{gmol^{-1}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5f7e9381-a242-4e00-a728-31a041988ef8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is vapour pressure of a solution containing 1 mol of a non-volatile solute in 36 g of water \\((P_1^0 = 32\\) mmHg)?",
+    "options": {
+      "A": "8.14 mm Hg",
+      "B": "12.31 mm Hg",
+      "C": "16.08 mm Hg",
+      "D": "21.44 mm Hg"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "75a6f7ea-f4f8-4f68-beac-008d9eb25f3f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The relative lowering of vapor pressure obtained by dissolving \\(72\\) g of solute in \\(1000\\) g of water is \\(7.2 \\times 10^{-3}\\). Determine the molar mass of the solute",
+    "options": {
+      "A": "\\(158\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "B": "\\(180\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "C": "\\(192\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "D": "\\(164\\ \\mathrm{g\\,mol^{-1}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "81d209af-6a91-46e5-9c72-280584eff14c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "One litre of glucose solution have osmotic pressure \\(1.5\\) atmosphere is mixed with other \\(2\\) litre glucose solution of osmotic pressure \\(2.5\\) atmosphere. Then find resultant osmotic pressure of the solution.",
+    "options": {
+      "A": "\\(0.217\\) atm",
+      "B": "\\(2.17\\) atm",
+      "C": "\\(21.0\\) atm",
+      "D": "\\(216\\) atm"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "81fca7c3-e1c9-4639-89a8-282bd0d55f84",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar mass of nonelectrolyte solute when 6 gram of it is dissolved in 1 \\(\\mathrm{dm^3}\\) water has osmotic pressure \\(2.4\\ \\mathrm{atm}\\) at 300 K \\((R = 0.0821\\ \\mathrm{atm\\,dm^3\\,K^{-1}\\,mol^{-1}})\\)",
+    "options": {
+      "A": "\\(45.0\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "B": "\\(74.12\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "C": "\\(61.58\\ \\mathrm{g\\,mol^{-1}}\\)",
+      "D": "\\(90.28\\ \\mathrm{g\\,mol^{-1}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8d208c71-eb3e-4882-b7e8-b63647858909",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the van't Hoff factor of a centimolar solution of potassium ferrocyanide if it is \\(60\\%\\) dissociated at \\(300\\) K.",
+    "options": {
+      "A": "\\(3.4\\)",
+      "B": "\\(3.9\\)",
+      "C": "\\(3.1\\)",
+      "D": "\\(3.7\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a1d8433c-fd97-42f4-83c2-8b3f21948de0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For NaCl(s) enthalpy of solution is \\(4\\) kJ mol\\(^{-1}\\) and lattice enthalpy is \\(790\\) kJ mol\\(^{-1}\\). What is hydration enthalpy of NaCl?",
+    "options": {
+      "A": "786 kJ",
+      "B": "794 kJ",
+      "C": "−786 kJ",
+      "D": "−794 kJ"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ab504731-97d6-4bbf-be86-8a253becac9a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate vapour pressure of pure volatile liquid \\(B\\) at given temperature if mole faction of liquid \\(B\\) and vapour pressure of pure volatile liquid A are 0.4 and 400 mm Hg respectively.\n\\[\\left\\lbrack P_{\\text{total~}}= 600\\text{ }mmHg \\right\\rbrack \\]",
+    "options": {
+      "A": "750 mm Hg",
+      "B": "800 mm Hg",
+      "C": "850 mm Hg",
+      "D": "900 mm Hg"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b5e14333-7389-4f8b-8e8d-31e06ddcb7a1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the molar mass of nonvolatile solute when 1.5 g of it is dissolved in 90 g solvent decreases its freezing point by 0.25 K. [\\(K_f=1.2\\ \\text{K kg mol}^{-1}\\)]",
+    "options": {
+      "A": "\\(72\\ \\text{g mol}^{-1}\\)",
+      "B": "\\(80\\ \\text{g mol}^{-1}\\)",
+      "C": "\\(88\\ \\text{g mol}^{-1}\\)",
+      "D": "\\(96\\ \\text{g mol}^{-1}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ca75d566-8bd2-4f15-8ba4-2e47dd467c2b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the relative lowering of vapor pressure of solution containing 0.56 g nonvolatile solute in 100 g water [molar mass of solute \\(= 60\\text{ }g{\\text{ }mol}^{- 1}\\) ]",
+    "options": {
+      "A": "0.0024",
+      "B": "0.0017",
+      "C": "0.0120",
+      "D": "0.0221"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cb5db09f-a604-4b96-aa28-e93c25a89cb5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Solutions and Colligative Properties",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following aqueous solutions exhibits lowest freezing point depression assuming complete dissociation?",
+    "options": {
+      "A": "0.1 m NaCl",
+      "B": "\\(0.05\\text{ }m{MgSO}_{4}\\)",
+      "C": "\\(0.08\\text{ }m{AlPO}_{4}\\)",
+      "D": "\\(0.06\\text{ }m{Al}_{2}\\left( {SO}_{4} \\right)_{3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a7a608b2-2a33-48b0-b8dd-5ea3934fb569",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the mass of \\(100\\) molecules of oxygen in amu and in grams.",
+    "options": {
+      "A": "\\(3200\\) u and \\(5.314 \\times 10^{-21}\\) g",
+      "B": "\\(1600\\) u and \\(2.657 \\times 10^{-21}\\) g",
+      "C": "\\(32\\) u and \\(1.328 \\times 10^{-21}\\) g",
+      "D": "\\(8\\) u and \\(3.978 \\times 10^{-21}\\) g"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bc00dd01-2b46-41a3-bc79-630a4b784a76",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following pair of compounds does not demonstrate the law of multiple proportions?",
+    "options": {
+      "A": "\\(\\text{CuO},\\ \\text{Cu}_2\\text{O}\\)",
+      "B": "\\(\\text{NaNO}_3,\\ \\text{CaCO}_3\\)",
+      "C": "\\(\\text{CO},\\ \\text{CO}_2\\)",
+      "D": "\\(\\text{N}_2\\text{O}_4,\\ \\text{N}_2\\text{O}_5\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fac4d032-925b-43ea-94b0-0e1d02990dc3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the quantity of water (expressed in different terms) that contains highest number of water molecules in it.",
+    "options": {
+      "A": "\\(18\\) mL of water",
+      "B": "\\(10^{-3}\\) mol of water",
+      "C": "\\(0.18\\) g of water",
+      "D": "\\(0.00224\\) L of water vapour at \\(1\\) atmp. and \\(273\\)K"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "81535d42-2f27-4c7d-ac0d-13d8bbde694d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "States of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "3.4 moles of an ideal gas occupies volume of 68 mL at 300 K. What would be the pressure of gas? \\(R = 8.314\\text{ J K}^{-1}\\text{ mol}^{-1}\\)",
+    "options": {
+      "A": "\\(1.247 \\times 10^2\\text{ kPa}\\)",
+      "B": "\\(2.431 \\times 10^3\\text{ kPa}\\)",
+      "C": "\\(1.031 \\times 10^5\\text{ kPa}\\)",
+      "D": "\\(3.247 \\times 10^5\\text{ kPa}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9771a142-feae-4867-b170-fee47ee465f7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "chemistry",
+    "chapter": "States of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A container contains equal masses of \\(H_{2},He\\), \\(CO_{2}\\) and Ne at a certain temperature. Which of the following gas exerts maximum partial pressure?",
+    "options": {
+      "A": "\\(H_{2}\\)",
+      "B": "He",
+      "C": "\\(\\ {CO}_{2}\\)",
+      "D": "Ne"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d4d4a9fe-8811-49be-8c0f-0d4e5f095ce0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "States of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the partial pressure exerted by dioxygen from a mixture of 32 g O\\(_2\\), 80 g Ar (mol. mass 40) and 4 g dihydrogen \\( P_{\\text{total}} = 10 \\) bar.",
+    "options": {
+      "A": "1 bar",
+      "B": "2 bar",
+      "C": "4 bar",
+      "D": "5 bar"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "48b1e4cd-8e70-4306-8832-eb621bd2a59a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Calculate the energy associated with third orbit of \\(He^{+}\\).",
+    "options": {
+      "A": "\\(- 4.8 \\times 10^{- 19}\\text{ }J\\)",
+      "B": "\\(- 1.45 \\times 10^{- 19}\\text{ }J\\)",
+      "C": "\\(\\ - 19.36 \\times 10^{- 19}\\text{ }J\\)",
+      "D": "\\(- 9.69 \\times 10^{- 19}\\text{ }J\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9ce7cb45-adce-4fa8-993a-3d3444a7993f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Find the number of unpaired electrons for copper in ground state configuration.",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b3bf89c8-a731-44ff-a229-4b0dc8c585e0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the wave number of photon emitted during transition from orbit \\(n = 4\\) to \\(n = 2\\) in hydrogen atom? (\\(R_H = 109677\\) cm\\(^{-1}\\))",
+    "options": {
+      "A": "\\(20564.44\\) cm\\(^{-1}\\)",
+      "B": "\\(23032.17\\) cm\\(^{-1}\\)",
+      "C": "\\(15354.78\\) cm\\(^{-1}\\)",
+      "D": "\\(25225.7\\) cm\\(^{-1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bd4f071d-aff2-462e-98ed-8c4d9971aff8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify degenerate orbitals from following for hydrogen atom.",
+    "options": {
+      "A": "1s and 2s",
+      "B": "1s and 2p",
+      "C": "2s and 2p",
+      "D": "3s and 2p"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "32b8a283-1095-46f3-824e-37fe58437d7a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "chemistry",
+    "chapter": "Surface Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following anions has greater power for coagulation of positive sol?",
+    "options": {
+      "A": "\\(\\mathrm{Cl^-}\\)",
+      "B": "\\([\\mathrm{Fe(CN)_6}]^{4-}\\)",
+      "C": "\\(\\mathrm{PO_4^{2-}}\\)",
+      "D": "\\(\\mathrm{SO_4^{2-}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7a1cef56-ca52-4b2e-9cd8-c2df54537973",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "chemistry",
+    "chapter": "Surface Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following statements is NOT true regarding oil in water emulsion?",
+    "options": {
+      "A": "The oil is dispersed phase and water is dispersion medium.",
+      "B": "If water is added, it will be miscible with the emulsion.",
+      "C": "The addition of a small amount of an electrolyte has no effect on conducting power.",
+      "D": "Water is a continuous phase."
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bfa962c7-cec2-46c9-b616-229657f991e7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Surface Chemistry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of the following ion has greater coagulating power for negatively charged sol.?",
+    "options": {
+      "A": "\\([\\text{Fe}(\\text{CN})_6]^{4-}\\)",
+      "B": "\\(\\text{PO}_4^{3-}\\)",
+      "C": "\\(\\text{Ba}^{2+}\\)",
+      "D": "\\(\\text{Al}^{3+}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0914d463-a736-4389-af5c-b62c01438bb6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the element from following having six unpaired electrons in observed electronic configuration?",
+    "options": {
+      "A": "Cu",
+      "B": "Zn",
+      "C": "Cr",
+      "D": "Ti"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "466fc26a-fbab-4416-b913-8c7aea5e49cc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 16th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following elements has completely filled 4f orbital at expected ground state configuration?",
+    "options": {
+      "A": "W",
+      "B": "Yb",
+      "C": "Eu",
+      "D": "Cd"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5535780a-7eec-4e72-8e56-654ab43ec1ba",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following is used as catalyst in Fisher Tropsch process for the synthesis of gasoline?",
+    "options": {
+      "A": "\\(Fe - Cr\\)",
+      "B": "\\(Co - Th\\)",
+      "C": "Mo",
+      "D": "Ni"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6c5c53cf-e8b4-491d-b4ce-54af8c704c83",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the position of lanthanum in terms of the following blocks in the modern periodic table?",
+    "options": {
+      "A": "f block",
+      "B": "p block",
+      "C": "s block",
+      "D": "d block"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "811c14da-8abb-409b-b21a-91b29d163908",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which of following reactions occur at zone of reduction in blast furnace for extraction of iron?",
+    "options": {
+      "A": "\\(\\mathrm{C + \\dfrac{1}{2}O_2 \\rightarrow CO_{(g)}}\\)",
+      "B": "\\(\\mathrm{Fe_2O_3 + 3CO \\rightarrow 2Fe + 3CO_2}\\)",
+      "C": "\\(\\mathrm{CaCO_3\\ (heat) \\rightarrow CaO + CO_2}\\)",
+      "D": "\\(\\mathrm{CaO + SiO_2 \\rightarrow CaSiO_3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bb995de1-8369-4df1-a1de-7a97984273c5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Identify the alloy used for construction of gas turbine engines.",
+    "options": {
+      "A": "Nichrome",
+      "B": "Bronze",
+      "C": "Stainless steel",
+      "D": "Cupra-nickel"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d07f3533-e9b5-4b1a-ba87-ef0675e18624",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift I",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which one of the following ions exhibits d-d transition and paramagnetism?",
+    "options": {
+      "A": "\\(\\mathrm{MnO_4^-}\\)",
+      "B": "\\(\\mathrm{MnO_4^{-2}}\\)",
+      "C": "\\(\\mathrm{CrO_4^{-2}}\\)",
+      "D": "\\(\\mathrm{Cr_2O_7^{-2}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e8f01464-4614-4ec8-8231-d43d9ba123d2",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "chemistry",
+    "chapter": "Transition and Inner Transition Elements",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which from following pair of elements in their respective oxidation states develops same value of calculated spin only magnetic moment ?",
+    "options": {
+      "A": "\\(\\mathrm{Ti^{3+}}\\) and \\(\\mathrm{Zn^{2+}}\\)",
+      "B": "\\(\\mathrm{Cr^{2+}}\\) and \\(\\mathrm{Fe^{2+}}\\)",
+      "C": "\\(\\mathrm{Cr^{3+}}\\) and \\(\\mathrm{Ti^{3+}}\\)",
+      "D": "\\(\\mathrm{Zn^{2+}}\\) and \\(\\mathrm{Cu^{2+}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a522e9d7-3beb-466e-9f8c-b16f79fda3ed",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 July 2022",
+    "subject": "chemistry",
+    "chapter": "Aldehydes, Ketones and Carboxylic Acids",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of stereoisomers formed in a reaction of \\(( \\pm )Ph(C = O)C(OH)(CN)Ph\\) with \\(HCN\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "6cb6ac5c-e4e2-42ad-9317-5e0a31916a30",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 22 Jan 2026 Shift 2",
+    "subject": "chemistry",
+    "chapter": "Amines",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The mass of benzanilide obtained from the benzoylation reaction of 5.8 g of aniline, if yield of product is \\(82\\%\\), is \\(\\_\\_\\_\\_\\) g (nearest integer). (Given molar mass in \\(g{mol}^{- 1}H:1,C:12,\\text{ }N:14\\), O:16)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 10
+  },
+  {
+    "source_ref": "183d913c-3fe9-4347-b8be-3375a7f932bf",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2022 — 25 June",
+    "subject": "chemistry",
+    "chapter": "Biomolecules",
+    "format": "numeric",
+    "direction": null,
+    "stem": "How many of the given compounds will give a positive Biuret test _ ? Glycine, Glycylalanine, Tripeptide, Biuret",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "3910f865-80da-4fc6-92f6-e48bfba0bbde",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2023",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of molecules or ions from the following, which do not have odd number of electrons are (A) \\(NO_{2}\\) (B) \\(ICl_{4}^{-}\\) (C) \\(BrF_{3}\\) (D) \\(ClO_{2}\\) (E) \\(NO_{2}^{+}\\) (F) NO",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "5a9adc8c-e186-40ba-bbf2-032f128a65c7",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 July 2022",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Amongst the following the number of oxide(s) which are paramagnetic in nature is \\[Na_{2}O,KO_{2},NO_{2},{\\text{ }N}_{2}O,ClO_{2},NO,SO_{2},Cl_{2}O\\]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "aa40477d-fcc9-4bea-863b-945e46733454",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2024",
+    "subject": "chemistry",
+    "chapter": "Chemical Bonding and Molecular Structure",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of species from the following in which the central atom uses \\(sp^{3}\\) hybrid orbitals in its bonding is _______ . \\[NH_{3},SO_{2},SiO_{2},BeCl_{2},CO_{2},H_{2}O,CH_{4},BF_{3}\\]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "43e98c0c-571d-4d7f-abe7-3e6acd807f8b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Time required for completion of \\(99.9\\%\\) of a First order reaction is ____ times of half life \\(\\left( t_{1/2} \\right)\\) of the reaction.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 10
+  },
+  {
+    "source_ref": "4ceeced1-5013-4820-a322-8b3580ee7c1d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 24 Jan 2025",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Consider a complex reaction taking place in three steps with rate constants \\(k_{1},k_{2}\\) and \\(k_{3}\\) respectively. The overall rate constant \\(k\\) is given by the expression \\(k =\\sqrt{\\frac{k_{1}k_{3}}{k_{2}}}\\). If the activation energies of the three steps are 60,30 and \\(10\\text{ }kJ{\\text{ }mol}^{- 1}\\) respectively, then the overall energy of activation in \\(kJmol^{- 1}\\) is \\(\\_\\_\\_\\_\\_\\_\\) . (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 20
+  },
+  {
+    "source_ref": "4efc8cb8-5126-4c49-9e4e-f4d4be5eb0ab",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 5 Apr 2026 Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If the half-life of a first order reaction is 6.93 minutes then the time required for completion of \\(99\\%\\) of the reaction will be \\(\\_\\_\\_\\_\\) minutes. (Given : \\(\\log2 = 0.3010\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 46
+  },
+  {
+    "source_ref": "799ec4ab-0798-4e5a-b37f-34f12930d768",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 17",
+    "subject": "chemistry",
+    "chapter": "Chemical Kinetics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "For the first order reaction \\(A \\rightarrow 2\\text{ }B,1\\) mole of reactant A gives 0.2 moles of \\(B\\) after 100 minutes. The half life of the reaction is \\(\\_\\_\\_\\_\\) min. (Round off to the nearest integer). [Use: \\(\\ln2 = 0.69,\\ln10 = 2.3\\) Properties of logarithms: \\(\\ln x^{y}= ylnx\\); \\[\\left. \\ \\ln\\left( \\frac{x}{y} \\right)= \\ln x - \\ln y \\right\\rbrack\\] (Round off to the nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 300
+  },
+  {
+    "source_ref": "3802d4fd-83d4-4062-9699-66da19463912",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 3 Apr 2025",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Given : \\[\\begin{matrix} & \\Delta H_{sub}^{\\ominus}\\lbrack C(\\text{~graphite~})\\rbrack = 710\\text{ }kJ{\\text{ }mol}^{- 1} \\\\ & \\Delta_{C - H}H^{\\ominus} = 414\\text{ }kJ{\\text{ }mol}^{- 1} \\\\ & \\Delta_{H - H}H^{\\ominus} = 436\\text{ }kJ{\\text{ }mol}^{- 1} \\\\ & \\Delta_{C = C}H^{\\ominus} = 611\\text{ }kJ{\\text{ }mol}^{- 1} \\end{matrix}\\] The \\(\\Delta H_{f}^{\\ominus}\\) for \\({CH}_{2} = {CH}_{2}\\) is ____ \\(kJ{mol}^{- 1}\\) (nearest integer value)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 25
+  },
+  {
+    "source_ref": "4626944d-f030-4473-acc2-117b64cddd3c",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 July 2022",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "When \\(600\\text{ }mL\\) of \\(0.2MHNO_{3}\\) is mixed with \\(400\\text{ }mL\\) of \\(0.1MNaOH\\) solution in a flask, the rise in temperature of the flask is \\(\\_\\_\\_\\_\\) \\(\\times10^{- 2}\\ ^{\\circ}C\\). (Enthalpy of neutralisation \\(= 57\\text{ }kJ{\\text{ }mol}^{- 1}\\) and Specific heat of water \\(= 4.2JK^{- 1}{\\text{ }g}^{- 1}\\) ) (Neglect heat capacity of flask)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 54
+  },
+  {
+    "source_ref": "9f7006fd-0059-4500-87c5-d6bcd330ee0a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of endothermic process/es from the following is___ A. \\(I_{2}(\\text{ }g) \\rightarrow 2I(g)\\) B. \\(HCl(g) \\rightarrow H(g) + Cl(g)\\) C. \\(H_{2}O(l) \\rightarrow H_{2}O(g)\\) D. \\(C(s) +O_{2}(\\text{ }g) \\rightarrow CO_{2}(\\text{ }g)\\) E. Dissolution of ammonium chloride in water",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "f5b8a443-f21c-4dd3-ab36-53087e56d11d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2 Apr 2026 Shift 1",
+    "subject": "chemistry",
+    "chapter": "Chemical Thermodynamics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "At the transition temperature \\(T,A \\rightleftharpoons B\\) and \\(\\Delta G^{0} = 105 - 35\\log\\text{ }T\\) where A and B are two states of substance X . The transition temperature in \\(\\ ^{\\circ}C\\) when pressure is 1 atm is \\(\\_\\_\\_\\_\\) . (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 727
+  },
+  {
+    "source_ref": "d86acf7e-1c07-43e1-a65c-6ada5f3dc91a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 6 Apr 2026 Shift 1",
+    "subject": "chemistry",
+    "chapter": "Classification of Elements and Periodicity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "First and second ionization enthalpies of lithium are \\(520\\text{ }kJ{\\text{ }mol}^{- 1}\\) and \\(7297\\text{ }kJ{\\text{ }mol}^{- 1}\\) respectively. Energy required to convert 3.5 mg lithium (g) into \\({Li}^{2 +}(g)\\left\\lbrack Li(g) \\rightarrow {Li}^{2 +}(g) \\right\\rbrack\\) is \\(\\_\\_\\_\\_\\) \\(kJ\\). (nearest integer) [Molar mass of \\(Li = 7\\text{ }g{\\text{ }mol}^{- 1}\\) ]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "20539e29-1fe9-49fa-8ad7-c3082bb9a2ee",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 21",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of optical isomers possible for \\(\\left\\lbrack Cr\\left( C_{2}O_{4} \\right)_{3} \\right\\rbrack^{3 -}\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "2b1c3bef-4892-48f4-9341-95cc7a7613d4",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 July 2022",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Total number of relatively more stable isomer(s) possible for octahedral complex \\(\\left\\lbrack Cu(en)_{2}(SCN)_{2} \\right\\rbrack\\) will be",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "8cb03fab-0ee9-4347-a3ff-b4c43eb30e34",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 April 2025",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A metal complex with a formula \\({MCl}_{4} \\cdot 3{NH}_{3}\\) is involved in \\({sp}^{3}{\\text{ }d}^{2}\\) hybridisation. It upon reaction with excess of \\({AgNO}_{3}\\) solution gives ' x ' moles of AgCl . Consider ' x ' is equal to the number of lone pairs of electron present in central atom of \\({BrF}_{5}\\). Then the number of geometrical isomers exhibited by the complex is ____ .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "addaa218-c130-48ae-a932-b799a738f4dd",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 7 Apr 2025",
+    "subject": "chemistry",
+    "chapter": "Coordination Compounds",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of paramagnetic complex among \\(\\left\\lbrack {FeF}_{6} \\right\\rbrack^{3 -},\\left\\lbrack Fe(CN)_{6} \\right\\rbrack^{3 -},\\left\\lbrack Mn(CN)_{6} \\right\\rbrack^{3 -},\\left\\lbrack Co\\left( C_{2}O_{4} \\right)_{3} \\right\\rbrack^{3 -}\\), \\(\\left\\lbrack {MnCl}_{6} \\right\\rbrack^{3 -}\\) and \\(\\left\\lbrack {CoF}_{6} \\right\\rbrack^{3 -}\\), which involved \\(d^{2}{sp}^{3}\\) hybridization is ____",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "295637dc-32b8-484b-94d0-feb7fdc8627b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The cell potential for the following cell \\(Pt\\left| H_{2}(\\text{ }g) \\right|H^{+}(aq)||Cu^{2 +}(0.01M) \\mid Cu(s)\\) is \\(0.576\\text{ }V\\) at \\(298\\text{ }K\\). The \\(pH\\) of the solution is (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "ca8125c4-a82a-4d46-82c9-f0180b5a69eb",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 11 April 2023",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of correct statements from the following is : (A) \\(E_{\\text{cell~}}\\) is an intensive parameter. (B) A negative \\(E^{\\Theta}\\) means that the redox couple is a stronger reducing agent than the \\(H^{+}/H_{2}\\) couple. (C) The amount of electricity required for oxidation or reduction depends on the stoichiometry of the electrode reaction. (D) The amount of chemical reaction which occurs at any electrode during electrolysis by a current is proportional to the quantity of electricity passed through the electrolyte.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "cd1305c1-67b9-474a-8322-29dd2fdd0d7f",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 June 2022",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The limiting molar conductivities of \\(NaI,NaNO_{3}\\) and \\(AgNO_{3}\\) are 12.7, 12.0 and \\(13.3\\ mS\\ m^{2}\\ mol^{-1}\\), respectively (all at \\(25^{\\circ}C\\) ). The limiting molar conductivity of AgI at this temperature is \\(\\_\\_\\_\\_\\ mS\\ m^{2}\\ mol^{-1}\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 14
+  },
+  {
+    "source_ref": "d7ab4bcd-8b46-4e4c-a6b4-555c46f6d3be",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2023",
+    "subject": "chemistry",
+    "chapter": "Electrochemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "At what \\(pH\\), given half cell \\(MnO_{4}^{-}(0.1M) \\mid Mn^{2 +}(0.001M)\\) will have electrode potential of \\(1.282\\text{ }V\\) ? (Nearest Integer) \\[\\text{~Given~}E_{MnO_{4 \\mid}^{-}Mn^{+ 2}}^{o}= 1.54\\text{ }V,\\frac{2.303RT}{F}= 0.059\\text{ }V\\]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "23bef3d4-fe34-4ebf-9c05-51bc625972df",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 July 2022",
+    "subject": "chemistry",
+    "chapter": "Equilibrium",
+    "format": "numeric",
+    "direction": null,
+    "stem": "At \\(600\\text{ }K,2\\text{ }mol\\) of \\(NO\\) are mixed with \\(1\\text{ }mol\\) of \\(O_{2}\\). \\[2NO_{(g)}+O_{2}(\\text{ }g) \\rightleftarrows 2NO_{2}(\\text{ }g)\\] The reaction occurring as above comes to equilibrium under a total pressure of 1 atm. Analysis of the system shows that \\(0.6\\text{ }mol\\) of oxygen are present at equilibrium. The equilibrium constant for the reaction is____ (Nearest integer).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "b5723f0b-4f72-46fb-b37b-e2f0f486719d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 June 2022",
+    "subject": "chemistry",
+    "chapter": "Equilibrium",
+    "format": "numeric",
+    "direction": null,
+    "stem": "\\(pH\\) value of \\(0.001MNaOH\\) solution is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 11
+  },
+  {
+    "source_ref": "c70611df-87b9-4724-a11e-a126aacb1004",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 July 2022",
+    "subject": "chemistry",
+    "chapter": "Equilibrium",
+    "format": "numeric",
+    "direction": null,
+    "stem": "At \\(310\\text{ }K\\), the solubility of \\(CaF_{2}\\) in water is \\(2.34 \\times 10^{-3}\\text{ }g/100\\text{ }mL\\). The solubility product of \\(CaF_{2}\\) is \\(\\_\\_\\_\\_\\) \\(\\times 10^{-10}(\\text{ }mol/L)^{3}\\). (Given molar mass: \\(CaF_{2}= 78\\text{ }g{\\text{ }mol}^{-1}\\))",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1
+  },
+  {
+    "source_ref": "e3cf363a-7bfc-4a92-b82d-1d4bc2289a1c",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 April 2025",
+    "subject": "chemistry",
+    "chapter": "Equilibrium",
+    "format": "numeric",
+    "direction": null,
+    "stem": "\\(x\\ mg\\) of \\(Mg(OH)_{2}\\) (molar mass \\(= 58\\) ) is required to be dissolved in 1.0 L of water to produce a pH of 10.0 at 298 K . The value of \\(x\\) is \\(\\_\\_\\_\\_\\) mg. (Nearest integer) (Given : \\(Mg(OH)_{2}\\) is assumed to dissociate completely in \\(H_{2}O\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "312736c1-d305-4511-b42e-1924656944a5",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "chemistry",
+    "chapter": "Hydrocarbons",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The major product 'A' of the following given reaction has \\(\\underline{\\phantom{000}}\\) \\(sp^{2}\\) hybridized carbon atoms. 2,7-Dimethyl-2,6-octadiene \\(\\overset{H^{+}}{\\rightarrow}\\) A (Major Product)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "262f0134-79cd-41ec-9255-a3f5feb0792e",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 June 2022",
+    "subject": "chemistry",
+    "chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Kjeldahl's method was used for the estimation of nitrogen in an organic compound. The ammonia evolved from \\(0.55\\text{ }g\\) of the compound neutralised \\(12.5\\text{ }mL\\) of \\(1MH_{2}SO_{4}\\) solution. The percentage of nitrogen in the compound is (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 64
+  },
+  {
+    "source_ref": "90a09cb1-02f3-4549-96e9-20f4749fee28",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 23",
+    "subject": "chemistry",
+    "chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The transformation occurring in Dumas' method is given below: \\(C_{2}H_{7}\\text{ }N +\\left( 2x +\\frac{y}{2} \\right)CuO \\rightarrow xCO_{2}+\\frac{y}{2}H_{2}O +\\frac{z}{2}{\\text{ }N}_{2}+\\left( 2x +\\frac{y}{2} \\right)Cu\\) The value of \\(y\\) is . (Integer answer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "f39db2cb-1ea5-4936-9c3a-c1b420d2429f",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 Apr 2026 Shift 2",
+    "subject": "chemistry",
+    "chapter": "Organic Chemistry - Some Basic Principles and Techniques",
+    "format": "numeric",
+    "direction": null,
+    "stem": "In Sulphur estimation, \\(2.0 \\times 10^{- 3}\\text{ }mol\\) of an organic compound (X) (molar mass \\(76\\text{ }g{\\text{ }mol}^{- 1}\\) ) gave 0.4813 g of barium sulphate (molar mass \\(233{gmol}^{- 1}\\) ). The percentage of sulphur in the compound ( X ) is \\(\\_\\_\\_\\_\\) \\(\\times 10^{- 1}\\%\\) (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 435
+  },
+  {
+    "source_ref": "6d4d1484-21dd-4e39-8eb5-cb0e64ff46aa",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "chemistry",
+    "chapter": "Solid State",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Atoms of element \\(X\\) form hcp lattice and those of element Y occupy \\(\\frac{2}{3}\\) of its tetrahedral voids. The percentage of element \\(X\\) in the lattice is (Nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 43
+  },
+  {
+    "source_ref": "066cc02d-2a27-425e-8d16-8f074f8688cd",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 July 2022",
+    "subject": "chemistry",
+    "chapter": "Solutions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "When a certain amount of solid A is dissolved in \\(100\\text{ }g\\) of water at \\(25^{\\circ}C\\) to make a dilute solution, the vapour pressure of the solution is reduced to one-half of that of pure water. The vapour pressure of pure water is \\(23.76mmHg\\). The number of moles of solute \\(A\\) added is (Nearest Integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "4a7da43d-d584-4741-bc21-6debf6b659c4",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 5 Apr 2026 Shift 2",
+    "subject": "chemistry",
+    "chapter": "Solutions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "20 g hemoglobin in a 1 L aqueous solution (A) at 300 K is separated from pure water by semi permeable membrane. At equilibrium the height of solution in a tube dipped in a solution (A) is found to be 80.0 mm higher than the tube dipped in water. The molar mass of hemoglobin is \\(\\_\\_\\_\\_\\) \\(kg{mol}^{- 1}\\).(Nearest integer) (Given : \\(g = 10{\\text{ }ms}^{- 2},R = 8.3kPa{dm}^{3}{\\text{ }K}^{- 1}{\\text{ }mol}^{- 1}\\), density of solution \\(= 1000\\text{ }kg{\\text{ }m}^{- 3}\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 62
+  },
+  {
+    "source_ref": "abcabc8d-a18b-4fed-adbc-b6bad70c9f97",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2024",
+    "subject": "chemistry",
+    "chapter": "Solutions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The osmotic pressure of a dilute solution is \\(7 \\times 10^{5}\\text{ }Pa\\) at \\(273\\text{ }K\\). Osmotic pressure of the same solution at \\(283\\text{ }K\\) is _____ \\(\\times 10^{4}Nm^{- 2}\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 73
+  },
+  {
+    "source_ref": "130e0705-02c7-406a-9673-c93e67d936e2",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 9 April 2024",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Molarity (M) of an aqueous solution containing \\(xg\\) of anhyd. \\(CuSO_{4}\\) in \\(500\\text{ }mL\\) solution at \\(32\\ ^{\\circ}C\\) is \\(2 \\times10^{- 1}M\\). Its molality will be _____ \\(\\times10^{- 3}\\text{ }m\\). (nearest integer). [Given density of the solution \\(= 1.25\\text{ }g/mL\\).]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 164
+  },
+  {
+    "source_ref": "13e6abfb-a0e2-4665-abd9-a0cb12c5151a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 23 January 2025",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "When 81.0 g of aluminium is allowed to react with 128.0 g of oxygen gas, the mass of aluminium oxide produced in grams is \\(\\_\\_\\_\\_\\) . (Nearest integer) Given : Molar mass of Al is \\(27.0\\text{ }g{\\text{ }mol}^{- 1}\\) Molar mass of O is \\(16.0\\text{ }g{\\text{ }mol}^{- 1}\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 153
+  },
+  {
+    "source_ref": "40c70c41-7ca8-41b5-9a0e-85f6cde9fb6a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2023",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Assume carbon burns according to following equation: \\[2C_{(s)}+O_{2(\\text{ }g)}\\rightarrow 2CO(g)\\] when \\(\\ 12\\text{ }g\\) carbon is burnt in \\(48\\text{ }g\\) of oxygen, the volume of carbon monoxide produced is \\(\\times\\) \\(10^{- 1}\\text{ }L\\) at STP [ nearest integer ] [Given: Assume co as ideal gas, Mass of c is \\(12\\text{ }g{\\text{ }mol}^{- 1}\\), Mass of \\(O\\) is \\(16\\text{ }g{\\text{ }mol}^{- 1}\\) and molar volume of an ideal gas STP is \\(22.7\\text{ }L{\\text{ }mol}^{- 1}\\) ]",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 227
+  },
+  {
+    "source_ref": "49a59bac-510b-486e-872a-61660e7980da",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 23 Jan 2026 Shift 1",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "x mg of pure HCl was used to make an aqueous solution. 25.0 mL of \\(0.1MBa(OH)_{2}\\) solution is used when the HCl solution was titrated against it. The numerical value of \\(x\\) is \\(\\_\\_\\_\\_\\) \\(\\times 10^{- 1}\\). (Nearest integer) Given : Molar mass of HCl and \\(Ba(OH)_{2}\\) are 36.5 and \\(171.0\\text{ }g{\\text{ }mol}^{- 1}\\) respectively.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1825
+  },
+  {
+    "source_ref": "b4bc0370-38f0-4dea-b3ce-35f91857dbed",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 January 2025",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Quantitative analysis of an organic compound (X) shows following % composition. C : 14.5% Cl : 64.46% H: 1.8%, the rest being oxygen. The empirical formula mass of the compound (X) is \\(\\_\\_\\_\\_\\_\\) \\(\\times10^{- 1}\\) (Given molar mass in \\(gmol^{- 1}\\) of \\(C:12,H:1\\), \\(O:16,Cl:35.5)\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1655
+  },
+  {
+    "source_ref": "b9c7f3f1-fade-4fcc-ac3d-559dc91099c3",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 April 2025",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The amount of calcium oxide produced on heating 150 kg limestone ( \\(75\\%\\) pure) is kg . (Nearest integer).Given : Molar mass (in \\(g{mol}^{- 1}\\) ) of \\(Ca - 40,O - 16,C - 12\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 63
+  },
+  {
+    "source_ref": "c7c82ce0-7cd4-45bb-829f-76ece6acefb4",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2024",
+    "subject": "chemistry",
+    "chapter": "Some Basic Concepts of Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Consider the following reaction: \\[3PbCl_{2}+ 2\\left( NH_{4} \\right)_{3}PO_{4}\\rightarrow Pb_{3}\\left( PO_{4} \\right)_{2}+ 6NH_{4}Cl\\] If \\(72mmol\\) of \\(PbCl_{2}\\) is mixed with \\(50mmol\\) of \\(\\left( NH_{4} \\right)_{3}PO_{4}\\), then amount of \\(Pb_{3}\\left( PO_{4} \\right)_{2}\\) formed is ...... mmol. (nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 24
+  },
+  {
+    "source_ref": "05b9a629-4430-4cd7-a8e6-94b3945a1e6e",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 5 Apr 2024",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The value of Rydberg constant \\(\\left( R_{H} \\right)\\) is \\(2.18 \\times10^{- 18}\\text{ }J\\). The velocity of electron having mass \\(9.1 \\times10^{- 31}\\text{ }kg\\) in Bohr's first orbit of hydrogen atom \\(= \\ldots\\ldots\\ldots \\times10^{5}{\\text{ }ms}^{- 1}\\) (nearest integer)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 22
+  },
+  {
+    "source_ref": "7fca552f-52a9-4af8-bc02-6cf2f8d98ef1",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of incorrect statement/s about the black body from the following is (A) Emit or absorb energy in the form of electromagnetic radiation (B) Frequency distribution of the emitted radiation depends on temperature (C) At a given temperature, intensity vs frequency curve passes through a maximum value (D) The maximum of the intensity vs frequency curve is at a higher frequency at higher temperature compared to that at lower temperature",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 0
+  },
+  {
+    "source_ref": "9424e677-3adb-494a-9a3f-0620a5b5ff75",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "chemistry",
+    "chapter": "Structure of Atom",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of electrons present in all the completely filled subshells having \\(n = 4\\) and \\(s = +\\frac{1}{2}\\) is _____ . (Where \\(n =\\) principal quantum number and \\(s =\\) spin quantum number)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 16
+  },
+  {
+    "source_ref": "f3eaa0a9-33f2-48ca-a7c4-a8358b27b07b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 25 Jan 2023",
+    "subject": "chemistry",
+    "chapter": "Surface Chemistry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of incorrect statement/s from the following is/are A. Water vapours are adsorbed by anhydrous calcium chloride. B. There is a decrease in surface energy during adsorption. C. As the adsorption proceeds, \\(\\Delta H\\) becomes more and more negative. D. Adsorption is accompanied by decrease in entropy of the system.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "0bce6368-a601-4bbe-81e3-72c89a2735fc",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 15 Apr 2023",
+    "subject": "chemistry",
+    "chapter": "The d- and f-Block Elements",
+    "format": "numeric",
+    "direction": null,
+    "stem": "In Chromyl chloride, the oxidation state of chromium is (+)____",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 6
+  },
+  {
+    "source_ref": "5338b2d9-8038-4302-ae03-0b49a86254b7",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 22",
+    "subject": "chemistry",
+    "chapter": "The d- and f-Block Elements",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Consider the sulphides \\(HgS,PbS,CuS,Sb_{2}{\\text{ }S}_{3}\\), \\(As_{2}{\\text{ }S}_{3}\\) and CdS. Number of these sulphides soluble in \\(50\\%HNO_{3}\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "ca1e1692-b378-47af-b306-9db4857326b6",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 21 Jan 2026 Shift 1",
+    "subject": "chemistry",
+    "chapter": "The d- and f-Block Elements",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Consider the following reactions: \\[{NaCl + K_{2}{Cr}_{2}O_{7} + H_{2}{SO}_{4} \\rightarrow \\text{ }A + {KHSO}_{4} + {NaHSO}_{4} + H_{2}O }{A + NaOH \\rightarrow B + NaCl + H_{2}O }{B + H_{2}{SO}_{4} + H_{2}O_{2} \\rightarrow C + {Na}_{2}{SO}_{4} + H_{2}O }\\]In the product ' C ', ' X ' is the number of \\(O_{2}^{2 -}\\) units, ' Y ' is the total number oxygen atoms present and ' \\(Z\\) ' is the oxidation state of Cr . The value of \\(X + Y + Z\\) is ____.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 13
+  },
+  {
+    "source_ref": "a2a970dd-ab93-4246-a5d9-a8a262b0734a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 January 2025",
+    "subject": "chemistry",
+    "chapter": "The p-Block Elements",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A group 15 element forms \\(d\\pi - d\\pi\\) bond with transition metals. It also forms hydride, which is a strongest base among the hydrides of other group members that form \\(d\\pi - d\\pi\\) bond. The atomic number of the element is_____",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 15
+  }
+]

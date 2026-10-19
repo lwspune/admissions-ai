@@ -1,0 +1,4252 @@
+[
+  {
+    "source_ref": "2282fc7b-d94e-4673-b3d0-cb4e6438c027",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The power factor of an R-L circuit is \\(\\frac{1}{\\sqrt{2}}\\). If the frequency of AC is doubled the power factor will now be",
+    "options": {
+      "A": "\\(\\frac{1}{\\sqrt{3}}\\)",
+      "B": "\\(\\frac{1}{\\sqrt{5}}\\)",
+      "C": "\\(\\frac{1}{\\sqrt{7}}\\)",
+      "D": "\\(\\frac{1}{\\sqrt{11}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3c4ae354-28ea-4287-ad52-cc3d90c0e3ea",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 16th May Shift 2",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A light bulb connected in series with a capacitor and an a.c. source is glowing with a certain brightness. On reducing the capacity of capacitance and frequency of source, the brightness of the lamp (respectively)",
+    "options": {
+      "A": "is reduced, is increased",
+      "B": "is reduced, is reduced",
+      "C": "is increased, is reduced",
+      "D": "is increased, is increased"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "53579c52-18bc-44b5-abf0-fb1a4943d9fe",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A coil having inductance \\(\\frac{1}{\\pi}\\,\\text{H}\\) is connected in series with resistance \\(300\\,\\Omega\\). If 20 V from a 200 Hz source are impressed, the phase angle between the voltage and the current is",
+    "options": {
+      "A": "\\(\\tan^{-1}\\left(\\frac{5}{4}\\right)\\)",
+      "B": "\\(\\tan^{-1}\\left(\\frac{4}{5}\\right)\\)",
+      "C": "\\(\\tan^{-1}\\left(\\frac{3}{4}\\right)\\)",
+      "D": "\\(\\tan^{-1}\\left(\\frac{4}{3}\\right)\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6469845e-1936-43d9-ac99-3f86ab57df61",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In series LCR resonant circuit, R=800 \\(\\Omega\\), C = 2 \\(\\mu\\)F and voltage across resistance is 200 V. The angular frequency is 250 rad/s. At resonance the voltage across the capacitance is",
+    "options": {
+      "A": "\\(250\\) V",
+      "B": "\\(500\\) V",
+      "C": "\\(1000\\) V",
+      "D": "\\(750\\) V"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6b00506f-accc-4bf8-abe8-b8b95ac5b896",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A transformer having efficiency 90% is working on 200 V and 3 kW power supply. If the current in the secondary coil is 6 A, the voltage across the secondary coil and the current in the primary coil are respectively",
+    "options": {
+      "A": "300 V, 15 A",
+      "B": "450 V, 15 A",
+      "C": "450 V, 13.5 A",
+      "D": "600 V, 15 A"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a378c911-71f1-4657-bf9f-a70d01c76dfa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An e.m.f. \\(E=E_0\\cos\\omega t\\) is applied to the L-R circuit. The inductive reactance is equal to the resistance 'R' of the circuit. The power consumed in the circuit is",
+    "options": {
+      "A": "\\(\\frac{E_0^2}{\\sqrt{2}R}\\)",
+      "B": "\\(\\frac{E_0^2}{2R}\\)",
+      "C": "\\(\\frac{E_0^2}{4R}\\)",
+      "D": "\\(\\frac{E_0^2}{R}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "aea8f24b-b252-4e03-814f-ded6a2164334",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A resistance of \\(200\\Omega\\) and an inductor of \\(\\frac{1}{2\\pi}H\\) are connected in series to a.c. voltage of 40 V and 100 Hz frequency. The phase angle between the voltage and current is",
+    "options": {
+      "A": "\\(\\tan^{- 1}(1/5)\\)",
+      "B": "\\(\\tan^{- 1}(1/4)\\)",
+      "C": "\\(\\tan^{- 1}(1/3)\\)",
+      "D": "\\(\\tan^{- 1}(0.5)\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c0bf1966-4c82-4c0c-9bc3-4cf92a84f5d9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A resistor of 100 \\(\\Omega\\), inductor of self inductance \\(\\left(\\dfrac{4}{\\pi^2}\\right)\\) H and a capacitor of unknown capacity are connected in series to an a.c. source of 200 V and 50 Hz. When the current and voltage are in phase, the value of capacity is",
+    "options": {
+      "A": "\\(40\\ \\mu F\\)",
+      "B": "\\(50\\ \\mu F\\)",
+      "C": "\\(20\\ \\mu F\\)",
+      "D": "\\(25\\ \\mu F\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c9a5bb80-b413-4ff1-ba94-e05714e76329",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 2",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An alternating voltage \\(E = 200\\sqrt{2}\\sin(100t)\\) volt is connected to a \\(1\\,\\mu F\\) capacitor through an AC ammeter. The reading of the ammeter shall be",
+    "options": {
+      "A": "10 mA",
+      "B": "20 mA",
+      "C": "40 mA",
+      "D": "80 mA"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cd86e11e-5911-4200-9375-3513a776f50c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An e.m.f. \\(e = E_0\\cos\\omega t\\) is applied to a circuit containing L, C and R in series where \\(X_L = 4R\\) and \\(X_C = R\\). The average power dissipated in the circuit is",
+    "options": {
+      "A": "\\(\\dfrac{E_0^2}{20R}\\)",
+      "B": "\\(\\dfrac{E_0^2}{10R}\\)",
+      "C": "\\(\\dfrac{E_0^2}{5R}\\)",
+      "D": "\\(\\dfrac{E_0^2}{2R}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d54acee3-f2a3-40d8-80b7-893049c6429e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A coil of self-inductance \\(L\\) is connected in series with a bulb and an a.c. source. Brightness of the bulb decreases when",
+    "options": {
+      "A": "an iron rod is inserted in the coil.",
+      "B": "frequency of a.c. source is decreased.",
+      "C": "number of turns in the coil is reduced.",
+      "D": "a capacitance of reactance \\(\\left( X_{C} - X_{L} \\right)\\) is included in the same circuit."
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "df704333-1f80-4596-8106-5dedce477bda",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In series LCR circuit, the voltage across the inductance and the capacitance are \\(\\underline{\\text{not}}\\)",
+    "options": {
+      "A": "Out of phase with the voltage across the resistance by \\(90^\\circ\\).",
+      "B": "Equal in magnitude at resonance.",
+      "C": "Out of phase with each other by \\(180^\\circ\\).",
+      "D": "In phase with the source voltage."
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f581d379-72bc-411f-a3a7-450da288f00d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "physics",
+    "chapter": "AC Circuits",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In series LCR resonant circuit, \\(R = 800\\Omega\\), \\(C = 2\\mu\\text{ }F\\) and voltage across resistance is 200 V . The angular frequency is \\(250rad/s\\). At resonance, the voltage across the inductance is",
+    "options": {
+      "A": "400 V",
+      "B": "250 V",
+      "C": "1000 V",
+      "D": "500 V"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "05ba527c-a814-4cb5-bbae-0e524f6c888f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In a potentiometer circuit when two cells of emf \\(1.6\\) V and \\(1.3\\) V are connected to assist each other, the balancing length is \\(290\\) cm. What will be the balancing length in cm when these two cells are connected in opposition?",
+    "options": {
+      "A": "\\(70\\)",
+      "B": "\\(80\\)",
+      "C": "\\(65\\)",
+      "D": "\\(30\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "237ac801-bc0c-4fcf-be5e-3eb8418f7206",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In potentiometer experiments, two cells of e.m.f. \\(E_1\\) and \\(E_2\\) are connected in series \\(E_1 > E_2\\), the balancing length is 64 cm of the wire. If the polarity of \\(E_2\\) is reversed, the balancing length becomes 32 cm. The ratio \\(E_1/E_2\\) is",
+    "options": {
+      "A": "3:2",
+      "B": "2:3",
+      "C": "1:3",
+      "D": "3:1"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4613dac4-2cbc-47c7-ba1e-083964cf3268",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Resistances in the left gap and right gap of a meter bridge are \\(10\\,\\Omega\\) and \\(30\\,\\Omega\\) respectively. If the resistances in the two gaps are interchanged, the balance point will shift to right by",
+    "options": {
+      "A": "30 cm.",
+      "B": "40 cm.",
+      "C": "50 cm.",
+      "D": "60 cm."
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "671b51cd-ac69-4a38-8c87-3cb6458fe14e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The length of a potentiometer wire is ' \\(L\\) '. A cell of e.m.f. \\(E\\) is balanced at a length \\(\\frac{L}{5}\\) from the positive end of the wire. If the length of the wire is increased by \\(\\frac{L}{2}\\), the same cell will give balance point at distance ' \\(x\\) '. The value of ' \\(x\\) ' is",
+    "options": {
+      "A": "\\(\\frac{5\\text{ }L}{12}\\)",
+      "B": "\\(\\frac{4\\text{ }L}{15}\\)",
+      "C": "\\(\\frac{3\\text{ }L}{10}\\)",
+      "D": "\\(\\frac{2\\text{ }L}{15}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "87dfcc37-ea62-4f54-beae-bc570f612259",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two cells \\(E_{1}\\) and \\(E_{2}\\) having equal e.m. \\(f^{'}E\\) ' and internal resistances \\(r_{1}\\) and \\(r_{2}\\left( r_{1}>r_{2} \\right)\\) respectively are connected in series. This combination is connected to an external resistance ' R '. It is observed that the potential difference across the cell \\(E_{1}\\) becomes zero. The value of \\(R\\) will be",
+    "options": {
+      "A": "\\(r_{1} - r_{2}\\)",
+      "B": "\\(\\ r_{1} + r_{2}\\)",
+      "C": "\\(\\frac{r_{1} - r_{2}}{2}\\)",
+      "D": "\\(\\frac{r_{1} + r_{2}}{2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a4f7d944-93fa-4f49-96f3-d6d6273df4d8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "When cell of e.m.f. '\\(E_1\\)' is connected to potentiometer wire, the balancing length is '\\(l_1\\)'. Another cell of e.m.f. '\\(E_2\\)' \\((E_1 > E_2)\\) is connected so that two cells oppose each other, the balancing length is '\\([l_2]\\)'. The ratio \\(E_1 : E_2\\) is",
+    "options": {
+      "A": "\\(\\frac{l_{1}}{l_{1} + l_{2}}\\)",
+      "B": "\\(\\frac{l_{1}}{l_{1} - l_{2}}\\)",
+      "C": "\\(\\frac{l_{1} - l_{2}}{l_{1}}\\)",
+      "D": "\\(\\frac{l_{1} + l_{2}}{l_{1} - l_{2}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f0e693b8-9037-45ff-a343-c1de33c42f2a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two wires A and B of equal lengths are connected in left and right gap respectively of a metre bridge, null point is obtained at 40 cm from left end. Diameters of the wires A and B are in the ratio 3:1 respectively, the ratio of specific resistance of A to that of B is",
+    "options": {
+      "A": "\\(2 : 1\\)",
+      "B": "\\(3 : 1\\)",
+      "C": "\\(6 : 1\\)",
+      "D": "\\(12 : 1\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0b0ac91c-911d-42f0-aee8-56610a7a0ffa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift II",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "According to de-Broglie hypothesis, the ratio of the wave-length of a photon and that of an electron having same energy 'E' is (m = mass of electron, c = velocity of light)",
+    "options": {
+      "A": "\\(\\dfrac{1}{C}\\sqrt{\\dfrac{E}{2m}}\\)",
+      "B": "\\(C\\sqrt{\\dfrac{E}{2m}}\\)",
+      "C": "\\(C\\sqrt{\\dfrac{2m}{E}}\\)",
+      "D": "\\(\\sqrt{\\dfrac{2mC}{E}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c07f28ce-b6cf-4f4e-b31e-bae9259b49eb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "When photons of energy \\(hv\\) fall on a photosensitive surface of work function \\(E_0\\), photoelectrons of maximum energy \\(k\\) are emitted. If the frequency of radiation is doubled the maximum kinetic energy will be equal to",
+    "options": {
+      "A": "\\(k\\)",
+      "B": "\\(2k\\)",
+      "C": "\\(k+E_0\\)",
+      "D": "\\(k+hv\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c6055d2a-af03-4765-96b6-d95257586bd4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The maximum velocity of the photoelectrons emitted by a metal surface is \\(9\\times10^{5}\\,m/s\\). The value of ratio of charge (e) to mass (m) of the photoelectron is \\(1.8\\times10^{11}\\,C/kg\\). The value of stopping potential in volt is",
+    "options": {
+      "A": "2.00",
+      "B": "2.25",
+      "C": "2.50",
+      "D": "3.00"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ce2ef7cc-c3e2-4315-a7a5-1023bbd3a82a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An electron moving with velocity \\(1.6 \\times 10^7\\) m/s has wavelength of 0.4 Å. The required accelerating voltage for the electron motion is [charge on electron \\(= 1.6\\times10^{-19}\\) C, mass of electron \\(= 9\\times10^{-31}\\) kg]",
+    "options": {
+      "A": "\\(7.2 \\times 10^3\\) V",
+      "B": "\\(7.2 \\times 10^2\\) V",
+      "C": "\\(7.2\\) V",
+      "D": "\\(7.2 \\times 10^{-2}\\) V"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e56021e7-92e4-433e-90dc-d8c2cac963c5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The ratio of the accelerating potentials required to accelerate (i) an \\(\\alpha\\)-particle and (ii) a proton to have the same de Broglie wavelength associated with them is\n(mass of \\(\\alpha\\) - particle = \\(6.4 \\times 10^{-27}\\) kg, mass of proton = \\(1.6 \\times 10^{-27}\\) kg)",
+    "options": {
+      "A": "\\(1 : 8\\)",
+      "B": "\\(1 : 4\\)",
+      "C": "\\(8 : 1\\)",
+      "D": "\\(4 : 1\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f9bd7287-2f44-4c29-b952-73e159028991",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "On a photosensitive material, when frequency of incident radiation is increased by \\(20\\%\\), maximum kinetic energy of emitted photoelectrons increases from 0.4 eV to 0.7 eV . The work function of the material is",
+    "options": {
+      "A": "3.5 eV",
+      "B": "1.1 eV",
+      "C": "0.48 eV",
+      "D": "0.22 eV"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "02346834-27b4-4829-b556-74e2285b4180",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift I",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two similar circular loops carry equal currents in the same direction. On moving coils further apart, the electric current will",
+    "options": {
+      "A": "increase in both",
+      "B": "decrease in both",
+      "C": "remain unchanged",
+      "D": "increase in one coil and decrease in second coil"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0ae2163c-19df-4a34-aae6-c677d9688907",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A long rectangular conducting loop of width '\\(l\\)' mass '\\(m\\)' and resistance '\\(R\\)' is placed partly in a perpendicular magnetic field '\\(B\\)'. With what velocity should it be pushed downwards so that it may continue to fall without any acceleration? (\\(g\\) = acceleration due to gravity)",
+    "options": {
+      "A": "\\(\\dfrac{B^2l^2R^2}{mg}\\)",
+      "B": "\\(\\dfrac{mgR}{B^2l^2}\\)",
+      "C": "\\(\\dfrac{mgl}{B^2R^2}\\)",
+      "D": "\\(\\dfrac{mgR^2}{Bl}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "15a3301b-8fcb-4336-80b5-5239ae00dd65",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 1",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A metal rod of length \\(l\\) rotates about one of its ends in a plane perpendicular to a magnetic field of induction \\(B\\). If the e.m.f. induced between the ends of the rod is \\(e\\), then the number of revolutions made by the rod per second is",
+    "options": {
+      "A": "\\(\\frac{eB}{\\pi^2 l}\\)",
+      "B": "\\(\\frac{e}{\\pi B l^2}\\)",
+      "C": "\\(\\frac{B^2 e}{\\pi l}\\)",
+      "D": "\\(\\frac{\\pi l^2 e}{B}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5ca29d28-ecf2-431e-8b50-196dfdc5bcec",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift II",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A coil of ' \\(n\\) ' turns and resistance \\(R\\Omega\\) is connected in series with a resistance \\(\\frac{R}{2}\\). The combination is moved for time ' \\(t\\) ' second through magnetic flux \\(\\phi_{1}\\) to \\(\\phi_{2}\\). The induced current in the circuit is",
+    "options": {
+      "A": "\\(\\frac{n\\left( \\phi_{1} - \\phi_{2} \\right)}{3Rt}\\)",
+      "B": "\\(\\frac{2n\\left( \\phi_{1} - \\phi_{2} \\right)}{3Rt}\\)",
+      "C": "\\(\\frac{2n\\left( \\phi_{1} - \\phi_{2} \\right)}{Rt}\\)",
+      "D": "\\(\\frac{n\\left( \\phi_{1} - \\phi_{2} \\right)}{Rt}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "710f586f-4e18-459a-9cec-34f1b7463f87",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift I",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two different coils have self-inductance \\(3L\\) and \\(L\\). The current in both the coils is increased at the same constant rate. At certain instant of time, the power given to the two coils is same. At that time there was current and voltage induced in the two coils. At the same instant, the ratio of energy stored in the first coil to that in the second coil is",
+    "options": {
+      "A": "\\(1 : 9\\)",
+      "B": "\\(1 : 3\\)",
+      "C": "\\(3 : 1\\)",
+      "D": "\\(9 : 1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "860995d9-e6d7-4a34-9bf0-fa74d7225af7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two concentric circular coils having radii \\(r_1\\) and \\(r_2\\) \\((r_2\\ll r_1)\\) are placed co-axially with centres coinciding. The mutual inductance of the arrangement is (Both coils have single turn, \\(\\mu_0=\\) permeability of free space)",
+    "options": {
+      "A": "\\(\\dfrac{\\mu_0\\pi r_2^2}{2r_1}\\)",
+      "B": "\\(\\dfrac{\\mu_0\\pi r_2}{2r_1}\\)",
+      "C": "\\(\\dfrac{\\mu_0\\pi r_2^2}{2r_1^2}\\)",
+      "D": "\\(\\dfrac{\\mu_0\\pi r_2}{2r_1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b21e7fdb-80de-4def-a6af-382a42bdcca9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 2",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An air cored coil has a self-inductance 0.1 H. A soft iron core of relative permeability 1000 is introduced and the number of turns is reduced \\(\\frac{1}{10}\\)th. The value of self-inductance is",
+    "options": {
+      "A": "0.1 H",
+      "B": "1 mH",
+      "C": "1 H",
+      "D": "10 mH"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c4c8ce25-b37f-4dd5-ae0c-750d84f82641",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A coil of radius \\(r\\) is placed on another coil (whose radius is \\(R\\) and current flowing through it is changing) so that their centres coincide \\((R \\gg r)\\). If both the coils are coplanar then the mutual inductance between them is (\\(\\mu_0\\) = permeability of free space)",
+    "options": {
+      "A": "\\(\\frac{\\mu_0 \\pi R^2}{2r}\\)",
+      "B": "\\(\\frac{\\mu_0 \\pi r^2}{2R}\\)",
+      "C": "\\(\\frac{\\mu_0 \\pi r^2}{R}\\)",
+      "D": "\\(\\frac{\\mu_0 \\pi R^2}{r}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f3ec9a51-251b-4779-9b65-686bc81edfdb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift II",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The self induced e.m.f. of a coil is \\(25\\) V. When the current in it is changed at uniform rate from \\(10\\) A to \\(25\\) A in \\(1\\) s, the change in the energy of the inductance is",
+    "options": {
+      "A": "\\(437.5\\) J",
+      "B": "\\(740\\) J",
+      "C": "\\(6375\\) J",
+      "D": "\\(540\\) J"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ff75420f-269e-4ec0-83fe-4523f5fe6b65",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two solenoids A and B of equal number of turns have their lengths and radii in the same ratio \\(1 : 3\\). The ratio of the self-inductance of solenoid A to that of B will be",
+    "options": {
+      "A": "\\(1 : 1\\)",
+      "B": "\\(1 : 3\\)",
+      "C": "\\(1 : 9\\)",
+      "D": "\\(3 : 1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "16b0b817-2d51-44a4-98b1-061da2de3ea6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A parallel plate air capacitor has a uniform electric field \\(E\\) in the space between the plates. Area of each plate is \\(A\\) and the distance between the plates is \\(d\\). The energy stored in the capacitor is (\\(\\varepsilon_0\\) = permittivity of free space)",
+    "options": {
+      "A": "\\(2\\varepsilon_0 E A d\\)",
+      "B": "\\(\\frac{1}{2}\\varepsilon_0 E^2 A d\\)",
+      "C": "\\(\\frac{\\varepsilon_0 E^2}{2A d}\\)",
+      "D": "\\(\\frac{E^2 A d}{2\\varepsilon_0}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1f0884d1-5e79-46e3-b8dc-e3df9d46ece5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A small particle carrying a negative charge of \\(1.6 \\times 10^{-19}\\) C is suspended in equilibrium between two horizontal metal plates 8 cm apart having a potential difference of 980 V across them. The mass of the particle is \\(g = 9.8\\) m/s\\(^2\\)",
+    "options": {
+      "A": "\\(2 \\times 10^{-16}\\) kg",
+      "B": "\\(2.2 \\times 10^{-16}\\) kg",
+      "C": "\\(20 \\times 10^{-16}\\) kg",
+      "D": "\\(4 \\times 10^{-16}\\) kg"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3f7d3e6b-2122-4d94-8fb0-0ee38f580c45",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two parallel plate air capacitors of same capacity ' C ' are connected in parallel to a battery of e.m.f. ' E '. Then one of the capacitors is completely filled with dielectric material of constant ' K '. The change in the effective capacity of the parallel combination is",
+    "options": {
+      "A": "\\(\\frac{C}{(K - 1)}\\)",
+      "B": "\\(\\frac{KC}{K - 1}\\)",
+      "C": "\\(KC + 1\\)",
+      "D": "\\(C(K - 1)\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4b97e0b7-0d43-45ce-9b7c-b35f994b9e26",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift II",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two concentric spheres kept in air have radii \\(R\\) and \\(r\\). They have similar charge and equal surface charge density \\(\\sigma\\). The electric potential at their common centre is (\\(\\epsilon_0\\) = permittivity of free space)",
+    "options": {
+      "A": "\\(\\dfrac{\\sigma(R + r)}{\\epsilon_0}\\)",
+      "B": "\\(\\dfrac{\\sigma(R - r)}{\\epsilon_0}\\)",
+      "C": "\\(\\dfrac{\\sigma(R + r)}{2\\epsilon_0}\\)",
+      "D": "\\(\\dfrac{\\sigma(R + r)}{4\\epsilon_0}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "50c39c22-18b9-49cf-a85c-436d7654e1a0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift II",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A parallel plate capacitor of plate separation \\(2\\) mm and plate area \\(40\\ \\mathrm{cm^2}\\) is filled with dielectric whose area is same as plates of capacitor. Thickness is \\(1\\) mm and dielectric constant is \\(5\\). New capacitance is (\\(\\epsilon_0\\) = permittivity of free space)",
+    "options": {
+      "A": "\\(\\dfrac{3\\epsilon_0}{10}\\ F\\)",
+      "B": "\\(\\dfrac{10\\epsilon_0}{3}\\ F\\)",
+      "C": "\\(\\dfrac{20\\epsilon_0}{3}\\ F\\)",
+      "D": "\\(\\dfrac{3\\epsilon_0}{20}\\ F\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "56c33409-e908-4b29-89a6-2685fc3b2e7a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the charge on the capacitor is increased by 3C, the energy stored in it increases by \\(21\\%\\). The original charge on the capacitor is",
+    "options": {
+      "A": "6 C",
+      "B": "3C",
+      "C": "30 C",
+      "D": "90 C"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "771a06b6-c2c5-40ae-96bb-840b76348e73",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A parallel combination of two capacitors of capacities \\(2C\\) and \\(C\\) is connected across 5 V battery. When they are fully charged, \\(\\frac{E_1 - E_2}{Q_1 - Q_2}\\) J/C is (capacity in Farad, charge in Coulomb, energy in J)",
+    "options": {
+      "A": "\\(\\frac{5}{4}\\)",
+      "B": "\\(\\frac{4}{5}\\)",
+      "C": "\\(\\frac{5}{2}\\)",
+      "D": "\\(\\frac{2}{5}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7d8eb673-fcd0-4b77-af68-61468cf97a74",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A charge \\(Q\\) is placed at each corner of a cube of side \\(r\\). The potential at the centre of the cube is (\\(\\epsilon_0\\) = permittivity of free space)",
+    "options": {
+      "A": "\\(\\dfrac{4Q}{\\pi\\epsilon_0r\\sqrt{3}}\\)",
+      "B": "\\(\\dfrac{8Q}{\\pi\\epsilon_0r\\sqrt{3}}\\)",
+      "C": "\\(\\dfrac{16Q}{3\\pi\\epsilon_0r}\\)",
+      "D": "\\(\\dfrac{32Q}{\\pi\\epsilon_0r\\sqrt{3}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "840a3917-f87b-4f3b-bea6-e70a7b33a147",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Three point charges \\(+q, +2q\\) and \\(+Q\\) are placed at the three vertices of an equilateral triangle. If the potential energy of the system of three charges is zero, the value of Q in terms of q is",
+    "options": {
+      "A": "\\(Q = -\\frac{2q}{3}\\)",
+      "B": "\\(Q = -\\frac{1}{3}q\\)",
+      "C": "\\(Q = \\frac{3q}{2}\\)",
+      "D": "\\(Q = \\frac{q}{2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8896092a-a0ee-4ca7-b31b-8679826aad14",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Three-point charges \\(+Q, + 2Q\\) and \\(q\\) are placed at the vertices of an equilateral triangle. The value of charge \\(q\\) in terms of \\(Q\\), so that electrical potential energy of the system is zero, is given by",
+    "options": {
+      "A": "\\(q = \\frac{1}{3}Q\\)",
+      "B": "\\(q = \\frac{2}{3}Q\\)",
+      "C": "\\(q = - \\frac{2}{3}Q\\)",
+      "D": "\\(q = - \\frac{3}{2}Q\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "965b8ad8-fc60-40ea-9981-80a7c2576b9d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the charge on the capacitor is increased by 3 coulomb, the energy stored in it increases by 44%. The original charge on the capacitor is",
+    "options": {
+      "A": "10 C",
+      "B": "15 C",
+      "C": "20 C",
+      "D": "25 C"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b7636b08-33ba-47bd-8d50-c6be18d0df8f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two capacitors, \\(C_1\\) and \\(C_2\\) have their capacitances in the ratio 1:2. \\(V_s\\) and \\(V_p\\) are the potential differences applied across the series and parallel combination of \\(C_1\\) and \\(C_2\\) respectively, so that the energy stored in the two cases becomes same. The ratio \\(V_s\\) to \\(V_p\\) is",
+    "options": {
+      "A": "\\(\\sqrt{2} : 3\\)",
+      "B": "\\(3 : \\sqrt{2}\\)",
+      "C": "\\(2 : \\sqrt{3}\\)",
+      "D": "\\(\\sqrt{3} : 2\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "dbe4a1d3-6734-466b-85e5-a402af6047ce",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two point charges (A and B) \\(+4q\\) and \\(-4q\\) are placed along a line separated by a distance 'r'. Force acting between them is F. If 25% of charge from point A is transferred to that at point B, the force between the charges now becomes",
+    "options": {
+      "A": "\\(\\frac{3}{4}F\\)",
+      "B": "\\(\\frac{4}{3}F\\)",
+      "C": "\\(\\frac{9}{16}F\\)",
+      "D": "\\(\\frac{16}{9}F\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "dfe9745f-481e-4f04-9c8e-ca8ab450ce82",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A parallel plate capacitor is charged and then isolated. If the separation between the plates is increased, which one of the following statement is NOT correct?",
+    "options": {
+      "A": "Charge remains constant after it is isolated.",
+      "B": "Potential difference across the plates decreases.",
+      "C": "Potential difference across the plates increases.",
+      "D": "Capacitance of capacitor decreases."
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f389d6e5-93b5-473a-af82-34268d734afb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A uniformly charged conducting sphere of diameter 14 cm has surface charge density of \\(40\\,\\mu\\text{C m}^{-2}\\). The total electric flux leaving the surface of the sphere is nearly (Permittivity of free space \\(= 8.85 \\times 10^{-12}\\) SI unit)",
+    "options": {
+      "A": "40 kWb",
+      "B": "140 kWb",
+      "C": "240 kWb",
+      "D": "280 kWb"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "121f21b5-b4f0-4486-b321-67e94e8e8e1f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A body weighs 45 N on the surface of the earth. The gravitational force on a body due to earth at a height equal to half the radius of earth will be",
+    "options": {
+      "A": "20 N",
+      "B": "22.5 N",
+      "C": "30 N",
+      "D": "36 N"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "14309396-bf73-4677-b407-843bb07500bd",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A satellite is revolving around a planet in a circular orbit close to its surface. Let '\\(\\rho\\)' be the mean density and 'R' be the radius of the planet. Then the period of the satellite is (G = universal constant of gravitation)",
+    "options": {
+      "A": "\\(\\sqrt{\\frac{4\\pi}{\\rho G}}\\)",
+      "B": "\\(\\sqrt{\\frac{\\pi}{\\rho G}}\\)",
+      "C": "\\(\\sqrt{\\frac{3\\pi}{\\rho G}}\\)",
+      "D": "\\(\\sqrt{\\frac{2\\pi}{\\rho G}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1acd0c86-58d9-491a-acca-164ff0d0d0d0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift I",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Water rises up to height ' \\(x\\) ' in a capillary tube immersed vertically in water. When the whole arrangement is taken to a depth 'd' in a mine, the water level rises up to height Y . If R is the radius of the earth then the ratio \\(Y:x\\) is",
+    "options": {
+      "A": "\\(R:(R + d)\\)",
+      "B": "\\(R:(R - d)\\)",
+      "C": "\\(R:(R - d)^{2}\\)",
+      "D": "\\(R:(R + d)^{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "23347395-f98d-4371-9ee2-67eac2f2323e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The depth 'd' at which the value of acceleration due to gravity becomes \\(\\frac{1}{n-1}\\) times the value at the earth's surface is (R = radius of the earth)",
+    "options": {
+      "A": "\\(\\frac{Rn}{n-1}\\)",
+      "B": "\\(\\frac{R(n-2)}{n-1}\\)",
+      "C": "\\(\\frac{R(2n-1)}{n}\\)",
+      "D": "\\(\\frac{R(n-1)}{2n-1}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4bec004e-dd69-41c8-9171-53c3ae06a445",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 2",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The radius of the orbit of a geostationary satellite is (mean radius of earth is 'R', angular velocity about own axis is '\\(\\omega\\)' and acceleration due to gravity on earth's surface is 'g')",
+    "options": {
+      "A": "\\(\\left(\\frac{gR^2}{\\omega^2}\\right)^{1/3}\\)",
+      "B": "\\(\\left(\\frac{gR^2}{\\omega^2}\\right)^{2/3}\\)",
+      "C": "\\(\\left(\\frac{gR^2}{\\omega^2}\\right)^{1/2}\\)",
+      "D": "\\(\\frac{gR^2}{\\omega^2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5962c347-201a-4b6c-9ea2-b74071c7b620",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The radius of the planet is double that of the earth, but their average densities are same. \\(V_P\\) and \\(V_E\\) are the escape velocities of planet and earth respectively. If \\(\\frac{V_P}{V_E} = x\\), the value of 'x' is",
+    "options": {
+      "A": "\\(\\frac{1}{4}\\)",
+      "B": "\\(\\frac{1}{2}\\)",
+      "C": "2",
+      "D": "4"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fda25736-6840-493d-9bad-ae605ce21565",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Water rises up to height \\(X\\) in a capillary tube immersed vertically in water. When the whole arrangement is taken to a depth \\(d\\) in a mine, the water level rises up to height \\(Y\\). If \\(R\\) is the radius of earth, then the ratio \\(\\frac{Y}{X}\\) is",
+    "options": {
+      "A": "\\(\\left(1-\\frac{d}{R}\\right)^{-1}\\)",
+      "B": "\\(1-\\frac{d}{R}\\)",
+      "C": "\\(\\left(1+\\frac{d}{R}\\right)^{-1}\\)",
+      "D": "\\(1+\\frac{d}{R}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "048c1a38-d000-46ac-84e6-5f700c66e81e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift II",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two cylinders A and B fitted with piston contain equal amount of an ideal diatomic gas at temperature T K. The piston of cylinder A is free to move while that of cylinder B is held fixed. The same amount of heat is given to the gas in each cylinder. If the rise of temperature of the gas in A is \\(dT_{A}\\), then the rise in temperature of the gas in B is \\(\\left( \\gamma=\\frac{C_{p}}{C_{v}} \\right)\\)",
+    "options": {
+      "A": "\\(\\ \\frac{{dT}_{A}}{2}\\)",
+      "B": "\\(\\frac{{dT}_{A}}{\\gamma}\\)",
+      "C": "\\(\\ \\gamma{dT}_{A}\\)",
+      "D": "\\(2{dT}_{A}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "09442ffe-4f0d-4cd2-81ad-55d1befbcd2e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift II",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Energy of a gas/litre is \\(600\\) joule, then what will be its pressure?",
+    "options": {
+      "A": "\\(4 \\times 10^5\\ \\mathrm{N/m^2}\\)",
+      "B": "\\(10^5\\ \\mathrm{N/m^2}\\)",
+      "C": "\\(6 \\times 10^5\\ \\mathrm{N/m^2}\\)",
+      "D": "\\(3 \\times 10^5\\ \\mathrm{N/m^2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "442fe5f4-2a7a-4259-a240-f9e7509d3507",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift I",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The volume of given mass of a gas is increased by \\(7\\%\\) at constant temperature. The pressure should be increased by",
+    "options": {
+      "A": "\\(7\\%\\)",
+      "B": "\\(14\\%\\)",
+      "C": "\\(7.52\\%\\)",
+      "D": "\\(6.5\\%\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ac2c953a-0c66-414f-8641-4c912a0bffd9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 2",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A fixed mass of gas at constant pressure occupies a volume 'V'. The gas undergoes a rise in temperature so that the r.m.s. velocity of the molecules is doubled. The new volume will be",
+    "options": {
+      "A": "\\(\\frac{V}{2}\\)",
+      "B": "\\(V\\sqrt{2}\\)",
+      "C": "\\(2V\\)",
+      "D": "\\(4V\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b70c4772-f194-438e-8c50-ba7995f562e6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The mean kinetic energy of the molecules of an ideal gas at \\(399^{\\circ}C\\) is ' E '. The temperature at which the mean kinetic energy of its molecules will be ' \\(E/2\\) ', is",
+    "options": {
+      "A": "\\(336^{\\circ}C\\)",
+      "B": "\\(276^{\\circ}C\\)",
+      "C": "\\(123^{\\circ}C\\)",
+      "D": "\\(63^{\\circ}C\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e53193f5-066f-49d0-872f-e378e49da673",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Kinetic Theory of Gases",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An insulated container contains a diatomic gas of molar mass 'm'. The container is moving with velocity 'V', if it is stopped suddenly, the change in temperature is (R = gas constant)",
+    "options": {
+      "A": "\\(\\frac{mV^2}{3R}\\)",
+      "B": "\\(\\frac{mV^2}{5R}\\)",
+      "C": "\\(\\frac{mV^2}{7R}\\)",
+      "D": "\\(\\frac{5mV^2}{3R}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0aa9c07f-74ae-4e2c-bd3a-b11c8ebe61d6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Laws of Motion",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A force acting on a body of mass 5 Kg is \\((4\\widehat{i}- 2\\widehat{j}+ 3\\widehat{k})N\\). If the body is initially at rest then the magnitude of its velocity at the end of 10 second in \\(m/s\\) will be",
+    "options": {
+      "A": "\\(3\\sqrt{35}\\)",
+      "B": "\\(2\\sqrt{29}\\)",
+      "C": "\\(\\sqrt{19}\\)",
+      "D": "\\(3\\sqrt{23}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5666705b-57ca-4450-9020-9b76d271e152",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Laws of Motion",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A constant force acts on two different masses independently and produces accelerations \\(A_{1}\\) and \\(A_{2}\\). When the same force acts on their combined mass, the acceleration produced is",
+    "options": {
+      "A": "\\(\\ A_{1} - A_{2}\\)",
+      "B": "\\(A_{1} + A_{2}\\)",
+      "C": "\\(\\frac{A_{1}A_{2}}{A_{1} + A_{2}}\\)",
+      "D": "\\(\\sqrt{A_{1}^{2} + A_{2}^{2}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "73bee884-a0fa-4547-881e-1e9c7c357c00",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 1",
+    "subject": "physics",
+    "chapter": "Laws of Motion",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In the system of two particles of masses \\(m_1\\) and \\(m_2\\), the first particle is moved by a distance \\(d\\) towards the centre of mass. To keep the centre of mass unchanged, the second particle will have to be moved by a distance",
+    "options": {
+      "A": "\\(\\frac{m_2}{m_1}d\\), towards the centre of mass.",
+      "B": "\\(\\frac{m_1}{m_2}d\\), away from the centre of mass.",
+      "C": "\\(\\frac{m_1}{m_2}d\\), towards the centre of mass.",
+      "D": "\\(\\frac{m_2}{m_1}d\\), away from the centre of mass."
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "18548b48-2cf0-494e-8c7f-76a2b58bffca",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two long straight wires \\(A\\) and \\(B\\) carrying equal current 'I' were kept parallel to each other at distance 'd' apart. Magnitude of magnetic force experienced by length \\(L\\) of wire \\(A\\) is ' \\(F\\) '. If the distance between the wires is made half and currents are doubled, force \\(F_{2}\\) on length \\(L\\) of wire \\(A\\) will be",
+    "options": {
+      "A": "2 F",
+      "B": "F",
+      "C": "8 F",
+      "D": "4 F"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5f65d487-0201-41fd-a0fd-881c6519b065",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two concentric circular coils of 10 turns each are situated in the same plane. Their radii are 20 cm and 40 cm and they carry respectively 0.2 A and 0.3 A current in opposite direction. The magnetic field at the centre is (\\(\\mu_0 = 4\\pi \\times 10^{-7}\\) SI units)",
+    "options": {
+      "A": "\\(4\\pi \\times 10^{-7}\\) T",
+      "B": "\\(5\\pi \\times 10^{-7}\\) T",
+      "C": "\\(2\\pi \\times 10^{-5}\\) T",
+      "D": "\\(7\\pi \\times 10^{-6}\\) T"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9b4d58e4-9a8e-48cf-9c59-e55721c4b832",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 25 April Shift II",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A circular coil carrying current ' T ' has a radius ' \\(r\\) ' and ' \\(n\\) ' turns. The magnetic field along the axis of a coil at a distance ' \\(2\\sqrt{2}r\\) ' from its centre is (\\(\\mu_{0}=\\) permeability of free space, \\(n\\) is very small)",
+    "options": {
+      "A": "\\(\\frac{\\mu_{0}nI}{9r}\\)",
+      "B": "\\(\\frac{\\mu_{0}nI}{18r}\\)",
+      "C": "\\(\\frac{\\mu_{0}nI}{54r}\\)",
+      "D": "\\(\\frac{\\mu_{0}nI}{27r}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a177f996-8262-42b6-a6ad-a7f2c32f1141",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift II",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A charged particle \\(q\\) is accelerated by a potential difference of \\(V\\) enters a region of uniform magnetic field of induction \\(B\\) at right angles to the direction of the field. The charged particle completes semi circle of the radius \\(r\\) inside the magnetic field. The mass of the charged particle is (all quantities are in SI units)",
+    "options": {
+      "A": "\\(q^2r^2B^2/2V\\)",
+      "B": "\\(qr^2B^2/2V\\)",
+      "C": "\\(qBr/V\\)",
+      "D": "\\(q^2r^2B/2V\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e19f4a93-c60a-4be9-b34b-4511c7f3f592",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A coil of 'n' turns and radius 'R' carries a current 'I'. It is unwound and rewound again to make another coil of radius \\(\\frac{R}{3}\\), current remaining the same. The ratio of magnetic moment of the new coil to that of original coil is",
+    "options": {
+      "A": "3:1",
+      "B": "1:3",
+      "C": "9:1",
+      "D": "1:9"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e219c7c1-2230-491b-a917-467c5b3978c8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A rectangular coil of effective area \\(0.04\\ \\mathrm{m^2}\\) is suspended freely in a radial magnetic field of \\(0.02\\ \\mathrm{Wb/m^2}\\). The torsional constant of the suspension fibre is \\(5 \\times 10^{-9}\\ \\mathrm{Nm/degree}\\). If a current of \\(250\\ \\mu\\mathrm{A}\\) is passed through it, then the angle through which it rotates is",
+    "options": {
+      "A": "\\(30^\\circ\\)",
+      "B": "\\(40^\\circ\\)",
+      "C": "\\(45^\\circ\\)",
+      "D": "\\(50^\\circ\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f454dcfe-9679-4ba1-a916-3cb51da6e2fa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift II",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A circular coil of N turns and diameter D carries current I. It is unwound and rewound to make another coil of diameter 2D, current I remaining the same. The ratio of magnetic moments of the original coil to the new coil is",
+    "options": {
+      "A": "\\(2 : 1\\)",
+      "B": "\\(4 : 1\\)",
+      "C": "\\(1 : 2\\)",
+      "D": "\\(1 : 4\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fbd68c10-87df-4adc-a154-3d4566f6518f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Fields Due to Electric Current",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A long wire carrying a steady current is bent into a circle of single turn. The magnetic field at the centre of the coil is ' B '. If it is bent into a circular loop of radius ' \\(r_{1}\\) ' having ' n ' turns, the magnetic field at the center of the coil for same current is",
+    "options": {
+      "A": "\\(\\frac{B}{n^{2}}\\)",
+      "B": "\\(\\frac{B}{n}\\)",
+      "C": "\\(n^{2}B\\)",
+      "D": "nB"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6af31bf3-e552-44e2-a194-a5c936a1c184",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Materials",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The region inside a current carrying toroid is filled with a material (Niobium) having susceptibility \\(\\chi = 2.6 \\times 10^{-5}\\). The percentage increase in the magnetic field in the presence of Niobium over that without it, is",
+    "options": {
+      "A": "\\(2.6 \\times 10^{-5}\\)",
+      "B": "\\(2.6 \\times 10^{-4}\\)",
+      "C": "\\(2.6 \\times 10^{-3}\\)",
+      "D": "\\(2.6 \\times 10^{2}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ba7ef60b-8f1f-46c2-8749-9e3c13d57119",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Materials",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The frequency of oscillation of a small magnet in a magnetic field of induction 'B' is '\\(n\\)'. If the frequency of oscillations of the same magnet in a field of induction 'X' falls to \\(\\left(\\dfrac{n}{3}\\right)\\), the value of 'X' is",
+    "options": {
+      "A": "\\(3B\\)",
+      "B": "\\(9B\\)",
+      "C": "\\(\\dfrac{B}{3}\\)",
+      "D": "\\(\\dfrac{B}{9}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c686b392-4e8b-4ac6-8690-ea65aa92ebfb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift I",
+    "subject": "physics",
+    "chapter": "Magnetic Materials",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The magnetic moment produced in a sample of 2 gram is \\(8 \\times 10^{-7}\\ \\mathrm{A/m^2}\\). If its density is 4 \\(\\mathrm{g/cm^3}\\) then the magnetization of the sample is",
+    "options": {
+      "A": "\\(1.6\\)",
+      "B": "\\(1.2\\)",
+      "C": "\\(1.4\\)",
+      "D": "\\(1.8\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "130e4e65-d68b-4207-b9ac-c62f6396aafb",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The excess pressure inside a spherical drop of water A is four times that of another drop B. Then the ratio of mass of drop A to that of drop B is",
+    "options": {
+      "A": "1:4",
+      "B": "1:8",
+      "C": "1:16",
+      "D": "1:64"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1a102158-fbbc-4fad-889e-9cbc3878daa8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift II",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The velocity of a small ball of mass \\(M\\) and density \\(d\\) when dropped in a container filled with glycerine becomes constant after some time. If density of glycerine is \\(\\dfrac{d}{2}\\) then the viscous force acting on the ball will be (\\(g\\)=acceleration due to gravity)",
+    "options": {
+      "A": "\\(Mg\\)",
+      "B": "\\(\\dfrac{3Mg}{2}\\)",
+      "C": "\\(2Mg\\)",
+      "D": "\\(\\dfrac{Mg}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "32a6692c-83a3-402b-8e35-c79cb8af79ef",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A lead sphere of mass 'm' falls in viscous liquid with terminal velocity \\(V_0\\). Another lead sphere of mass '8m' but of same material will fall through the same liquid with terminal velocity",
+    "options": {
+      "A": "\\(V_0\\)",
+      "B": "\\(4V_0\\)",
+      "C": "\\(8V_0\\)",
+      "D": "\\(64V_0\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "365b1970-0aab-478e-9e9d-22d3d27225d6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The excess pressure inside a spherical water drop A is four times that of another water drop B. Then, the ratio of the mass of water drop A to that of drop B is",
+    "options": {
+      "A": "\\(1 : 8\\)",
+      "B": "\\(1 : 16\\)",
+      "C": "\\(1 : 32\\)",
+      "D": "\\(1 : 64\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "47536a34-76b0-4053-9dcf-f04635ed35a9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift II",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A horizontal pipe carries water in a streamline flow. At point along the pipe, where the cross-sectional area is \\(A_1\\), the velocity of water is \\(V_1\\) and the pressure is \\(P_1\\). What is the pressure of water at another point where the cross-sectional area is \\(A_2\\)?",
+    "options": {
+      "A": "\\(P_1 - \\dfrac{\\varrho V_2^2}{2A_1^2}(A_2^2 - A_1^2)\\)",
+      "B": "\\(P_1 + \\dfrac{\\varrho V_1^2}{2A_2^2}(A_2^2 - A_1^2)\\)",
+      "C": "\\(P_1\\varrho V_1^2(A_1^2 - A_2^2)\\)",
+      "D": "\\(P/\\varrho V_1^2A_2^2\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6cf3cc6e-a591-4a01-842e-567df01c299b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A vessel contains oil (density \\(= 0.8\\ \\mathrm{gm/cm^3}\\)) over mercury (density \\(= 13.6\\ \\mathrm{gm/cm^3}\\)). A homogeneous sphere floats with half of its volume immersed in mercury and the other half in oil. The density of the material of the sphere in \\(\\mathrm{gm/cm^3}\\) is",
+    "options": {
+      "A": "\\(12.8\\)",
+      "B": "\\(7.2\\)",
+      "C": "\\(6.4\\)",
+      "D": "\\(3.3\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "729a1f96-876d-49d7-860c-2ba40d70657d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A streamline flow of a liquid of density \\(\\rho\\) is passing through a horizontal pipe of cross-sectional area \\(A_1\\) and \\(A_2\\) at two ends. If the pressure of liquid is \\(P\\) at a point where flow speed is \\(v\\), then pressure at another point where the flow speed becomes \\(3v\\) is",
+    "options": {
+      "A": "\\(P - \\frac{3}{4}\\rho v^2\\)",
+      "B": "\\(P - 2\\rho v^2\\)",
+      "C": "\\(P - 3\\rho v^2\\)",
+      "D": "\\(P - 4\\rho v^2\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7be9c204-e2ab-41d8-bc41-47819dc7334e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A metal sphere of mass '\\(m\\)' and density '\\(\\sigma_1\\)' falls with terminal velocity through a container containing liquid. The density of liquid is '\\(\\sigma_2\\)'. The viscous force acting on the sphere is",
+    "options": {
+      "A": "\\(mg\\!\\left(1+\\dfrac{\\sigma_2}{\\sigma_1}\\right)\\)",
+      "B": "\\(mg\\!\\left(1-\\dfrac{\\sigma_1}{\\sigma_2}\\right)\\)",
+      "C": "\\(mg\\!\\left(1-\\dfrac{\\sigma_2}{\\sigma_1}\\right)\\)",
+      "D": "\\(mg\\!\\left(1+\\dfrac{\\sigma_1}{\\sigma_2}\\right)\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "845688ab-769d-457f-a5fe-8e2cbd29243a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A wind with speed \\(50\\,\\text{m/s}\\) blows parallel to the roof of a house. The area of the roof is \\(300\\,\\text{m}^2\\). Assume that the pressure inside the house is atmospheric pressure. Density of air is \\(1.2\\,\\text{kg/m}^3\\). The magnitude of the force exerted by the wind on the roof will be",
+    "options": {
+      "A": "\\(1.5 \\times 10^{5}\\text{ }N\\)",
+      "B": "\\(3.0 \\times 10^{5}\\text{ }N\\)",
+      "C": "\\(4.5 \\times 10^{5}\\text{ }N\\)",
+      "D": "\\(9.0 \\times 10^{5}\\text{ }N\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8be0cb94-8081-4005-bdab-e7a67d575f87",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 13th May Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If work done in blowing a soap bubble of volume 'V' is W then the work done in blowing the bubble of volume 2V from same soap solution is:",
+    "options": {
+      "A": "\\(\\frac{W}{2}\\)",
+      "B": "\\(2W\\)",
+      "C": "\\(2^{1/3}W\\)",
+      "D": "\\(4^{1/3}W\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8d8875df-727b-4757-901c-7845c18e3b82",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A square frame of each side L is dipped in a soap solution and taken out, the force acting on the film formed is ( T = surface tension of soap solution)",
+    "options": {
+      "A": "\\(4TL\\)",
+      "B": "\\(8TL\\)",
+      "C": "\\(12TL\\)",
+      "D": "\\(16TL\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a5f24fc8-307c-486b-9987-0a2e8bc807ae",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Eight small drops of mercury each of radius '\\(r\\)' coalesce to form a large single drop. The ratio of total surface energy before and after the change is",
+    "options": {
+      "A": "2:1",
+      "B": "1:1",
+      "C": "1:4",
+      "D": "1:8"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b8068da8-00d5-4730-98fd-faefe9bbd456",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The pressure inside a soap bubble A is 1.01 atmosphere and that in a soap bubble B is 1.02 atmosphere. The ratio of volume of A to that of B is",
+    "options": {
+      "A": "2:1",
+      "B": "8:1",
+      "C": "101:102",
+      "D": "102:101"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d4fa2839-e61c-46c7-b8f3-7ad7c1cc1434",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A closed pipe containing a liquid showed a pressure \\(P_1\\) by gauge. When the valve was opened, pressure was reduced to \\(P_2\\). The speed of water flowing out of the pipe is (\\(\\rho=\\) density of water)",
+    "options": {
+      "A": "\\(\\left(\\frac{4P_1-P_2}{\\rho}\\right)^{1/2}\\)",
+      "B": "\\(\\left(\\frac{4P_2-P_1}{\\rho}\\right)^{1/2}\\)",
+      "C": "\\(\\left(\\frac{2(P_1-P_2)}{\\rho}\\right)^{1/2}\\)",
+      "D": "\\(\\left(\\frac{2(P_2-P_1)}{\\rho}\\right)^{1/2}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d6a32a7d-defe-41e6-bfe4-45c93ca63547",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift I",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The pressures inside two soap bubbles A and B are \\(1.02\\) atmosphere and \\(1.04\\) atmosphere respectively. The ratio of volume of bubble A to that of bubble B is (outside pressure \\(= 1\\) atmosphere)",
+    "options": {
+      "A": "\\(1 : 8\\)",
+      "B": "\\(8 : 1\\)",
+      "C": "\\(4 : 1\\)",
+      "D": "\\(1 : 4\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "64ae36f2-02de-43d5-bc65-7a798a321627",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Solids",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A ball of mass '\\(m\\)' is dropped from a height '\\(s\\)' on a horizontal platform fixed at the top of a vertical spring. The platform is depressed by a distance '\\(h\\)'. The spring constant is (\\(g=\\) acceleration due to gravity)",
+    "options": {
+      "A": "\\(\\dfrac{2mg(s-h)}{h^2}\\)",
+      "B": "\\(\\dfrac{2mg(s+h)}{h^2}\\)",
+      "C": "\\(\\dfrac{mg(s-h)}{h}\\)",
+      "D": "\\(\\dfrac{mg(s+h)}{h}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8cc33a26-adae-4ee0-aa43-332bb4c5a87d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "At any time ' \\(t\\) ', the co-ordinates of moving particle are \\(x = at^{2}\\) and \\(y = bt^{2}\\). The speed of the particle is",
+    "options": {
+      "A": "\\(\\ 2t\\sqrt{a^{2} + b^{2}}\\)",
+      "B": "\\(\\ 2t\\sqrt{a^{2} - b^{2}}\\)",
+      "C": "\\(2t(a + b)\\)",
+      "D": "\\(\\frac{2t}{\\sqrt{a^{2} + b^{2}}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b68a1037-1992-4bdf-865a-df6f3906124f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2022 · Shift 1",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A bucket containing water is revolved in a vertical circle of radius \\(r\\). To prevent the water from falling down, the minimum frequency of revolution required is (\\(g\\) = acceleration due to gravity)",
+    "options": {
+      "A": "\\(2\\pi\\sqrt{\\frac{\\pi}{8}}\\)",
+      "B": "\\(\\frac{1}{2\\pi}\\sqrt{\\frac{\\pi}{8}}\\)",
+      "C": "\\(\\frac{1}{2\\pi}\\sqrt{\\frac{g}{r}}\\)",
+      "D": "\\(2\\pi\\sqrt{\\frac{g}{r}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d041eedf-5aeb-4789-b6af-5cfd4e6db41c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A boy throws a ball vertically upwards from a bridge with velocity \\(5\\,\\text{m/s}\\). It strikes water surface after 2 s. The height of the bridge is (Take \\(g = 10\\,\\text{m/s}^2\\))",
+    "options": {
+      "A": "20 m",
+      "B": "15 m",
+      "C": "12 m",
+      "D": "10 m"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d5626578-44f5-417e-a595-bc5dd5964461",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift II",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The minute hand of a wall-clock is \\(10\\) cm long. The average velocity of the tip of the minute hand between \\(6.00\\) am to \\(7.30\\) am is",
+    "options": {
+      "A": "zero",
+      "B": "\\(\\dfrac{1}{270}\\) cm/s",
+      "C": "\\(\\dfrac{1}{180}\\) cm/s",
+      "D": "\\(\\dfrac{1}{90}\\) cm/s"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "db9b7c2a-a76c-450a-99d6-97da0dc5c0d5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two cars start from a point at the same time in a straight line and their positions are represented by \\(x_1(t) = at+bt^2\\) and \\(x_2(t) = Ft-t^2\\). At what time do the cars have the same velocity?",
+    "options": {
+      "A": "\\(\\frac{a+F}{2(b-1)}\\)",
+      "B": "\\(\\frac{a-F}{1+b}\\)",
+      "C": "\\(\\frac{a+F}{2(1+b)}\\)",
+      "D": "\\(\\frac{F-a}{2(1+b)}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ea916a97-1f80-429a-81b1-cbaaa3868e04",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 13th May Shift 2",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A stone is projected at angle '\\(\\theta\\)' with velocity '\\(u\\)'. If it executes nearly a circular motion at its maximum point for short time, the radius of the circular path will be (\\(g=\\) acceleration due to gravity)",
+    "options": {
+      "A": "\\(\\frac{u^2}{g}\\)",
+      "B": "\\(\\frac{u^2\\cos^2\\theta}{g}\\)",
+      "C": "\\(\\frac{u^2\\sin^2\\theta}{g}\\)",
+      "D": "\\(\\frac{u^2\\cos^2\\theta}{2g}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f299c7f2-7a72-42da-8e3e-d9269a62ed3f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 2",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A ball is released from the top of a tower of height \\(H\\) m. It takes \\(T\\) seconds to reach the ground. The height of the ball from the ground after \\(\\frac{T}{4}\\) seconds is",
+    "options": {
+      "A": "\\(\\frac{13H}{14}\\)",
+      "B": "\\(\\frac{15H}{16}\\)",
+      "C": "\\(\\frac{11H}{12}\\)",
+      "D": "\\(\\frac{9H}{10}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3f1963a3-5929-467c-9422-fe582118f134",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift I",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For a thin prism, \\(\\delta_{1}\\) is the angle of deviation produced, when prism is placed in air. When the prism is immersed in water, the angle of deviation produced is \\(\\delta_{2}\\). Given \\(\\ _{a}\\mu_{g}=\\frac{3}{2}\\) and \\(\\ _{a}\\mu_{w}=\\frac{4}{3}\\). The ratio \\(\\delta_{2}:\\delta_{1}\\) is",
+    "options": {
+      "A": "\\(1:2\\)",
+      "B": "\\(1:4\\)",
+      "C": "\\(1:8\\)",
+      "D": "\\(4:1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a99069a5-adac-4dc7-9f21-ce239e6fe527",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift II",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A thin prism in air produces the angle of minimum deviation \\(\\delta\\). If the prism is immersed in water, the angle of minimum deviation for the same ray is (refractive index of water is \\(4/3\\) and that of glass prism is \\(3/2\\))",
+    "options": {
+      "A": "\\(\\delta\\)",
+      "B": "\\(\\dfrac{\\delta}{2}\\)",
+      "C": "\\(\\dfrac{\\delta}{4}\\)",
+      "D": "\\(2\\delta\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b4ce83d2-1796-411c-a522-67e2289bf622",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 14th May Shift 1",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The angle of deviation produced by a thin prism when placed in air is '\\(\\delta_1\\)' and that when immersed in water is '\\(\\delta_2\\)'. The refractive index of glass and water are \\(\\dfrac{3}{2}\\) and \\(\\dfrac{4}{3}\\) respectively. The ratio \\(\\delta_1:\\delta_2\\) is",
+    "options": {
+      "A": "1:2",
+      "B": "2:1",
+      "C": "1:4",
+      "D": "4:1"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b8260466-7bcc-4fb1-a46b-bd5451e7ccfa",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A convex lens of focal length \\(\\frac{1}{3}\\text{ }m\\) forms a real, inverted image twice the size of the object. The distance of the object from the lens is",
+    "options": {
+      "A": "0.5 m",
+      "B": "0 .166 m",
+      "C": "0.33 m",
+      "D": "1 m"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d7f3a172-ef36-4ba3-8a28-391a830c427d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two thin lenses having \\(R_{1},R_{2}\\) as the radii of curved surfaces are kept coaxially together. Their power is proportional to",
+    "options": {
+      "A": "\\(R_{1} + R_{2}\\)",
+      "B": "\\(\\ R_{1} - R_{2}\\)",
+      "C": "\\(\\frac{R_{1}R_{2}}{R_{1} + R_{2}}\\)",
+      "D": "\\(\\frac{R_{1} + R_{2}}{R_{1}R_{2}}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ebdccfcf-b8d4-4e06-b8dd-4d125969e4b0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift II",
+    "subject": "physics",
+    "chapter": "Optics (Ray)",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A convex lens of focal length \\(F\\) produces a real image \\('n'\\) times the size of the object. The image distance is",
+    "options": {
+      "A": "\\(\\dfrac{F}{(n + 1)}\\)",
+      "B": "\\(\\dfrac{F}{(n - 1)}\\)",
+      "C": "\\(F(n - 1)\\)",
+      "D": "\\(F(n + 1)\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3452b8fe-718b-4187-bf9c-2644766b26f5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle performing S.H.M. with maximum velocity 'V'. If the amplitude doubles and periodic time is made \\(\\frac{1}{3}\\)rd, then the maximum velocity is",
+    "options": {
+      "A": "\\(6V\\)",
+      "B": "\\(V\\sqrt{3}\\)",
+      "C": "\\(3V\\sqrt{2}\\)",
+      "D": "\\(2V\\sqrt{3}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "414cbbed-0afb-497a-a5fb-9eb45a73bea6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle performing linear S.H.M. has period 8 seconds. At time \\(t = 0\\), it is in the mean position. The ratio of the distances travelled by the particle in the \\(1^{\\text{st~}}\\) and \\(2^{\\text{nd~}}\\) second is \\(\\left( \\cos45^{\\circ}= 1/\\sqrt{2} \\right)\\)",
+    "options": {
+      "A": "\\(1:(\\sqrt{2} - 1)\\)",
+      "B": "\\(1:2\\)",
+      "C": "\\(2:1\\)",
+      "D": "\\(1:(\\sqrt{2} + 1)\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "750e9a3f-0a69-4613-902a-4ea9523dd0d9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 2",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The upper end of the spring is fixed and a mass 'm' is attached to its lower end. When mass is slightly pulled down and released, it oscillates with time period 3 second. If mass 'm' is increased by 1 kg, the time period becomes 5 second. The value of 'm' is (mass of spring is negligible)",
+    "options": {
+      "A": "\\(\\frac{3}{8}\\) kg",
+      "B": "\\(\\frac{5}{9}\\) kg",
+      "C": "\\(\\frac{8}{13}\\) kg",
+      "D": "\\(\\frac{9}{16}\\) kg"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "774c2781-54fe-4e6d-bdd0-1154a01ee4d5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A spring executes S.H.M. with mass 1 kg attached to it. The force constant of the spring is \\(4\\,\\text{N/m}\\). If at any instant its velocity is \\(20\\,\\text{cm/s}\\), the displacement at that instant is (Amplitude of S.H.M. is 0.4 m )",
+    "options": {
+      "A": "\\(\\sqrt{0.11}\\text{ }m\\)",
+      "B": "\\(\\sqrt{0.15}\\text{ }m\\)",
+      "C": "\\(\\sqrt{0.17}\\text{ }m\\)",
+      "D": "\\(\\sqrt{0.19}\\text{ }m\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7b083f94-61e3-4e76-bfa9-0cbc371b1957",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A musical instrument 'P' produces sound waves of frequency 'n' and amplitude 'A'. Another musical instrument 'Q' produces sound waves of frequency \\(\\frac{n}{4}\\). The waves produced by 'P' and 'Q' have equal energies. If the amplitude of waves produced by 'P' is '\\(A_P\\)', the amplitude of waves produced by 'Q' will be",
+    "options": {
+      "A": "\\(2 \\cdot A_P\\)",
+      "B": "\\(4 A_P\\)",
+      "C": "\\(6 A_P\\)",
+      "D": "\\(9 A_P\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7e348831-b776-42ba-b4e1-30fcb7acaa3d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The velocity of a particle executing S.H.M. varies with displacement \\((x)\\) as \\(4V^2 = 50 - x^2\\). The time period of oscillation is \\(\\frac{x}{7}\\) second. The value of \\(x\\) is (Take \\(\\pi = \\frac{22}{7}\\))",
+    "options": {
+      "A": "22",
+      "B": "44",
+      "C": "66",
+      "D": "88"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8224048f-34cd-4189-80bc-4480cd9269d5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The minimum phase difference between two simple harmonic motions is\n\\(x_1 = \\dfrac{1}{\\sqrt{2}}\\sin\\omega t + \\dfrac{1}{\\sqrt{2}}\\cos\\omega t\\)\n\\(x_2 = \\sin\\omega t + \\cos\\omega t\\) \\(\\left[\\sin\\dfrac{\\pi}{4} = \\cos\\dfrac{\\pi}{4} = \\dfrac{1}{\\sqrt{2}}\\right]\\)",
+    "options": {
+      "A": "zero",
+      "B": "\\(\\dfrac{\\pi^C}{3}\\)",
+      "C": "\\(\\dfrac{\\pi^C}{4}\\)",
+      "D": "\\(\\dfrac{\\pi^C}{5}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8612a731-2ef5-4cc2-b734-a2063246116f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle executes S.H.M. starting from the mean position. Its amplitude is ' \\(a\\) ' and its periodic time is ' \\(T\\) '. At a certain instant, its speed ' \\(u\\) ' is half that of maximum speed \\(V_{\\text{max~}}\\). The displacement of the particle at that instant is",
+    "options": {
+      "A": "\\(\\frac{2a}{\\sqrt{3}}\\)",
+      "B": "\\(\\frac{\\sqrt{2}a}{3}\\)",
+      "C": "\\(\\frac{3a}{\\sqrt{2}}\\)",
+      "D": "\\(\\frac{\\sqrt{3}a}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b1f29f0c-975a-4ee3-adda-b30fb1ce900d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For a particle performing S.H.M., the total energy is ' \\(n\\) ' times the kinetic energy, when the displacement of a particle from mean position is \\(\\frac{\\sqrt{3}}{2}\\text{ }A\\), where A is the amplitude of S.H.M. The value of ' \\(n\\) ' is",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "6"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bb8d612d-165a-4eeb-a811-30fc6993c9f4",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A light spring is suspended with mass '\\(m_1\\)' at its lower end and its upper end is fixed to a rigid support. The mass is pulled down a short distance and then released. The period of oscillation is T second. When a mass '\\(m_2\\)' is added to '\\(m_1\\)' and the system is made to oscillate the period is found to be \\(\\dfrac{3}{2}\\) T. The ratio \\(\\left(\\dfrac{m_1}{m_2}\\right)\\) is",
+    "options": {
+      "A": "\\(2 : 3\\)",
+      "B": "\\(3 : 4\\)",
+      "C": "\\(4 : 5\\)",
+      "D": "\\(5 : 6\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "de740c61-983a-428d-bcd3-f42fca3f7c48",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle is vibrating in S.H.M. with an amplitude of 4 cm. At what displacement from the equilibrium position is its energy half potential and half kinetic?",
+    "options": {
+      "A": "1 cm",
+      "B": "\\(\\sqrt{2}\\) cm",
+      "C": "2 cm",
+      "D": "\\(2\\sqrt{2}\\) cm"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f6e96953-7b04-4d3e-b591-01a17d611628",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The time period of a simple pendulum inside a stationary lift is \\(T\\). When the lift starts accelerating upwards with an acceleration \\(\\frac{g}{3}\\), the time period of the pendulum will be",
+    "options": {
+      "A": "\\(\\frac{\\sqrt{5}}{2}\\,T\\)",
+      "B": "\\(\\frac{\\sqrt{3}}{2}\\,T\\)",
+      "C": "\\(\\frac{2T}{\\sqrt{3}}\\)",
+      "D": "\\(\\frac{2T}{\\sqrt{5}}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0fb53716-577a-4d7b-91a3-99fabb08ba5d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 2nd May Shift 1",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle at rest starts moving with a constant angular acceleration of \\(4\\,\\text{rad/s}^2\\) in a circular path. The time at which magnitudes of its centripetal acceleration and tangential acceleration will be equal, is (in second)",
+    "options": {
+      "A": "\\(\\frac{1}{4}\\)",
+      "B": "\\(\\frac{1}{3}\\)",
+      "C": "\\(\\frac{1}{2}\\)",
+      "D": "\\(\\frac{2}{3}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1bacc55e-829d-42de-a71c-6576d1a233a8",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The angular momentum of a rotating body is 'L'. When the frequency of rotating body is tripled and its kinetic energy is made one-third, the new angular momentum becomes",
+    "options": {
+      "A": "\\(9L\\)",
+      "B": "\\(6L\\)",
+      "C": "\\(\\dfrac{L}{3}\\)",
+      "D": "\\(\\dfrac{L}{9}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2ef3bf37-2998-4e7c-b707-584cd9e278f5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A bucket containing water is revolved in vertical circle of radius r. To prevent the water from falling down, the period of revolution required is (\\(g\\) = gravitational acceleration)",
+    "options": {
+      "A": "\\(2\\pi\\sqrt{\\dfrac{g}{r}}\\)",
+      "B": "\\(2\\pi\\sqrt{\\dfrac{r}{g}}\\)",
+      "C": "\\(2\\pi\\sqrt{rg}\\)",
+      "D": "\\(\\dfrac{\\sqrt{rg}}{2\\pi}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4dd33487-b0c4-4a76-9406-f061b85b21ff",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If force \\(\\overrightarrow{F}= - 3\\widehat{i}+\\widehat{j}+ 5\\widehat{k}\\) acts along \\(\\overrightarrow{r}= 7\\widehat{i}+ 3\\widehat{j}+\\widehat{k}\\) then the torque acting at that point is",
+    "options": {
+      "A": "\\((14\\widehat{i} - 38\\widehat{j} + 16\\widehat{k})\\)",
+      "B": "\\(( - 14\\widehat{i} + 34\\widehat{j} - 16\\widehat{k})\\)",
+      "C": "\\((21\\widehat{i} + 4\\widehat{j} + 4\\widehat{k})\\)",
+      "D": "\\((4\\widehat{i} + 4\\widehat{j} + 6\\widehat{k})\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6c8991f7-394c-4e0d-afa2-544a1c964d60",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift II",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two bodies rotate with kinetic energies \\(E_1\\) and \\(E_2\\), moment of inertia about their axes of rotation is \\(I_1\\) and \\(I_2\\). If \\(3I_1 = I_2\\) and \\(E_1 = 27E_2\\) then the ratio of the angular momenta \\(L_1\\) to \\(L_2\\) is",
+    "options": {
+      "A": "\\(9 : 1\\)",
+      "B": "\\(3 : 1\\)",
+      "C": "\\(27 : 1\\)",
+      "D": "\\(1 : 1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "74cfd098-5a32-4dec-9e46-60249d28edca",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A body of mass 100 gram is tied to a spring of spring constant \\(8\\text{ }N/m\\), while the other end of a spring is fixed. If the body moves in a circular path on smooth horizontal surface with constant angular speed \\(8rad/s\\) then the ratio of extension in the spring to its natural length will be",
+    "options": {
+      "A": "\\(1:1\\)",
+      "B": "\\(8:1\\)",
+      "C": "\\(2:1\\)",
+      "D": "\\(4:1\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7be01fd1-a007-4ba3-82be-a7437a19aff3",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A solid cylinder of mass ' \\(M\\) ' and radius ' \\(R\\) ' is rotating about its geometrical axis. A solid sphere of same mass and same radius is also rotating about its diameter with an angular speed half that of the cylinder. The ratio of the kinetic energy of rotation of the sphere to that of the cylinder will be",
+    "options": {
+      "A": "\\(2:3\\)",
+      "B": "\\(3:2\\)",
+      "C": "\\(1:5\\)",
+      "D": "\\(5:1\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "91171fdc-1041-4eba-9b00-1e8dcdcbb0c7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 2",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two solid spheres (A and B) are made of metals having densities \\(\\rho_A\\) and \\(\\rho_B\\) respectively. If their masses are equal then ratio of their moments of inertia \\(\\frac{I_B}{I_A}\\) about their respective diameter is",
+    "options": {
+      "A": "\\(\\left(\\frac{\\rho_B}{\\rho_A}\\right)^{2/3}\\)",
+      "B": "\\(\\left(\\frac{\\rho_A}{\\rho_B}\\right)^{2/3}\\)",
+      "C": "\\(\\frac{\\rho_A}{\\rho_B}\\)",
+      "D": "\\(\\frac{\\rho_B}{\\rho_A}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "94c9781d-a4c7-45c3-aee0-b2ce026f0aef",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A disc of radius 0.4 m and mass 1 kg rotates about an axis passing through its centre and perpendicular to its plane. The angular acceleration is 10 rad/\\(\\mathrm{s^2}\\). The tangential force applied to the rim of the disc is",
+    "options": {
+      "A": "\\(1\\) N",
+      "B": "\\(2\\) N",
+      "C": "\\(3\\) N",
+      "D": "\\(4\\) N"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "986c1424-ff2c-422a-a2a6-603e2d1e4d6f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A thin uniform metal rod of mass \\( M \\) and length \\( L \\) is swinging about a horizontal axis passing through its end. Its maximum angular velocity is \\( \\omega \\). Its centre of mass rises to a maximum height of (\\( g= \\) Acceleration due to gravity)",
+    "options": {
+      "A": "\\( \\frac{L^{2}\\omega^{2}}{3g} \\)",
+      "B": "\\( \\frac{L^{2}\\omega^{2}}{2g} \\)",
+      "C": "\\( \\frac{L^{2}\\omega^{2}}{6g} \\)",
+      "D": "\\( \\frac{L^{2}\\omega^{2}}{4g} \\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ad265a5c-3dff-460b-acf7-670e42a62d74",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A body slides down a smooth inclined plane of inclination \\(\\theta\\) and reaches the bottom with velocity V. If the same body is a ring which rolls down the same inclined plane then linear velocity at the bottom of plane is",
+    "options": {
+      "A": "\\(\\frac{V}{\\sqrt{2}}\\)",
+      "B": "V",
+      "C": "2 V",
+      "D": "\\(\\frac{V}{2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b0a2af62-1d15-407b-91b8-d0cdbb93eb53",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 2",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A thin uniform circular disc of mass 'M' and radius 'R' is rotating with angular velocity '\\(\\omega\\)' in a horizontal plane about an axis passing through its centre and perpendicular to its plane. Another disc of same radius but of mass \\(\\frac{M}{3}\\) is placed gently on the first disc co-axially. The new angular velocity will be",
+    "options": {
+      "A": "\\(\\frac{2}{3}\\omega\\)",
+      "B": "\\(\\frac{3}{4}\\omega\\)",
+      "C": "\\(\\frac{4}{3}\\omega\\)",
+      "D": "\\(\\frac{5}{4}\\omega\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "efefb78e-7e0a-4cf0-8d4e-ba0c6efe7a1b",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A particle at rest starts moving with constant angular acceleration \\(4\\) rad/s\\(^2\\) in circular path. At what time the magnitudes of its tangential acceleration and centripetal acceleration will be equal?",
+    "options": {
+      "A": "0.4 s",
+      "B": "0.5 s",
+      "C": "0.8 s",
+      "D": "1.0 s"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f15eb099-d3a4-4c41-98d4-12f6a2631de5",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Rotational Dynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In \\(p\\)th second a particle describes angular displacement of '\\(\\beta\\)' rad. If it starts from rest, the angular acceleration is",
+    "options": {
+      "A": "\\(\\frac{\\beta}{p}\\)",
+      "B": "\\(\\frac{\\beta}{p-1}\\)",
+      "C": "\\(\\frac{2\\beta}{2p-1}\\)",
+      "D": "\\(\\frac{2\\beta+1}{2p-1}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3d029d17-8428-4a7f-aa74-46b5ec5dc2df",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 12 May Shift I",
+    "subject": "physics",
+    "chapter": "Semiconductor Devices",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In one branch, \\(40\\,\\Omega\\) resistance and a p-n junction diode are connected in series and in another branch, \\(40\\,\\Omega\\) resistance is connected. Both the branches are connected in parallel to each other. The total resistance of the circuit when a) diode is forward biased and when b) diode is reverse biased respectively are {consider the p-n junction diode as an ideal diode}",
+    "options": {
+      "A": "\\(40\\,\\Omega\\) and \\(20\\,\\Omega\\)",
+      "B": "\\(60\\,\\Omega\\) and \\(30\\,\\Omega\\)",
+      "C": "\\(20\\,\\Omega\\) and \\(40\\,\\Omega\\)",
+      "D": "\\(30\\,\\Omega\\) and \\(60\\,\\Omega\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4b965498-ecbc-4c97-8c9c-4463684dcf49",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "Semiconductor Devices",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In a transistor (common emitter configuration) the ratio of power gain to voltage gain is ( \\(\\alpha\\) and \\(\\beta\\) are current ratios)",
+    "options": {
+      "A": "\\(\\frac{\\beta}{\\alpha}\\)",
+      "B": "\\(\\alpha\\beta\\)",
+      "C": "\\(\\alpha\\)",
+      "D": "\\(\\beta\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f7e07339-f3d5-451c-854e-a33047f6cb50",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift II",
+    "subject": "physics",
+    "chapter": "Semiconductor Devices",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A pure silicon crystal at temperature \\(300\\) K has electron and hole concentration \\((n_i)\\) \\(10^{16}\\) per \\(\\mathrm{m^3}\\) each and \\(10^{21}\\) phosphorus atoms \\((n_e)\\) are added per cubic metre. The new hole concentration in silicon crystal is",
+    "options": {
+      "A": "\\(10^{19}\\) per \\(\\mathrm{m^3}\\)",
+      "B": "\\(10^{21}\\) per \\(\\mathrm{m^3}\\)",
+      "C": "\\(10^{5}\\) per \\(\\mathrm{m^3}\\)",
+      "D": "\\(10^{11}\\) per \\(\\mathrm{m^3}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "262c2b45-bea5-477d-9ab5-04a6b62a87df",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Sound",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Prong of a vibrating tuning fork is in contact with water surface. It produces concentric circular waves on the surface of water. The distance between five consecutive crests is 0.8 m and the velocity of wave on the water surface is 56 m/s. The frequency of tuning fork is",
+    "options": {
+      "A": "256 Hz",
+      "B": "280 Hz",
+      "C": "341 Hz",
+      "D": "512 Hz"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b130709e-a182-454e-99f8-f0e98ab9ef65",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Sound",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An observer moves towards a stationary source of sound with a velocity of one-fifth of the velocity of sound. The percentage increase in the apparent frequency is",
+    "options": {
+      "A": "5%",
+      "B": "10%",
+      "C": "20%",
+      "D": "25%"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "be21d23b-de8a-4752-a5b3-ad756df93f7c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 16 April Shift I",
+    "subject": "physics",
+    "chapter": "Sound",
+    "format": "mcq",
+    "direction": null,
+    "stem": "When the observer moves towards a stationary source with velocity '\\(V_1\\)', the apparent frequency of the emitted note is '\\(F_1\\)'. When the observer moves away from the source with velocity '\\(V_1\\)', the apparent frequency is '\\(F_2\\)'. If 'V' is the speed of sound in air and \\(F_1/F_2 = 2\\), then \\(V/V_1 =\\)",
+    "options": {
+      "A": "\\(2\\)",
+      "B": "\\(3\\)",
+      "C": "\\(6\\)",
+      "D": "\\(8\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c02f301f-b287-4f1c-a0ab-9272f08d9284",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Sound",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A car sounding a horn of frequency 1000 Hz passes a stationary observer. The ratio of frequencies of the horn noted by the observer before and after passing the car is \\(11:9\\). If the speed of sound is \\(v\\), the speed of the car is",
+    "options": {
+      "A": "\\(v\\)",
+      "B": "\\(\\frac{v}{2}\\)",
+      "C": "\\(\\frac{v}{5}\\)",
+      "D": "\\(\\frac{v}{10}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "13914610-e475-4e0e-9e5a-260f0b689169",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If 'E' and 'L' denote the magnitude of total energy and angular momentum of revolving electron in \\(n^{th}\\) Bohr orbit then",
+    "options": {
+      "A": "\\(E \\propto L\\)",
+      "B": "\\(E \\propto L^{-1}\\)",
+      "C": "\\(E \\propto L^{-2}\\)",
+      "D": "\\(E \\propto L^2\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1bcd96c9-a044-4178-8c26-c31897f06391",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For wavelength of visible radiation of Hydrogen spectrum, Balmer gave an equation as \\(\\lambda = \\dfrac{xm^2}{m^2 - 4}\\), where m is the integer value. The value of x in terms of Rydberg's constant R is",
+    "options": {
+      "A": "\\(\\dfrac{R}{4}\\)",
+      "B": "\\(\\dfrac{4}{R}\\)",
+      "C": "\\(2R\\)",
+      "D": "\\(4R\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "33330e1b-7d26-4349-92e5-469476e7576a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift II",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A radioactive nucleus \\({}_Z^AX\\) undergoes spontaneous decay in the sequence\n\\({}_Z^AX \\rightarrow {}_{Z-1}B \\rightarrow {}_{Z-3}C \\rightarrow {}_{Z-2}D\\) where \\(Z\\) is the atomic number of element. The possible decay particles in the sequence are",
+    "options": {
+      "A": "\\(\\alpha,\\ \\beta^+,\\ \\beta\\)",
+      "B": "\\(\\beta^+,\\ \\alpha,\\ \\beta\\)",
+      "C": "\\(\\beta,\\ \\alpha,\\ \\beta^+\\)",
+      "D": "\\(\\alpha,\\ \\beta,\\ \\beta^+\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4d13f790-978a-42b2-b7a4-45501b494a15",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 1",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In the uranium radioactive series, the initial nucleus is \\(_{92}^{238}\\text{U}\\) and the final nucleus is \\(_{82}^{206}\\text{Pb}\\). The number of \\(\\alpha\\)-particles and \\(\\beta\\)-particles emitted are",
+    "options": {
+      "A": "\\(4\\alpha,5\\beta\\)",
+      "B": "\\(5\\alpha,3\\beta\\)",
+      "C": "\\(6\\alpha,7\\beta\\)",
+      "D": "\\(8\\alpha,6\\beta\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "515a91e5-df63-46c4-bc60-5e942157b488",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "When the electron orbiting in hydrogen atom in its ground state moves to the third excited state, the de-Broglie wavelength associated with it",
+    "options": {
+      "A": "will decrease",
+      "B": "will increase",
+      "C": "will remain same",
+      "D": "will be zero"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "55710a21-bac4-4062-9e25-7ec28bc448d0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two different radioactive elements with half lives '\\(T_1\\)' and '\\(T_2\\)' have undecayed atoms '\\(N_1\\)' and '\\(N_2\\)' respectively present at a given instant. The ratio of their activities at that instant is",
+    "options": {
+      "A": "\\(\\frac{N_1 T_1}{N_2 T_2}\\)",
+      "B": "\\(\\frac{N_2 T_2}{N_1 T_1}\\)",
+      "C": "\\(\\frac{N_1 T_2}{N_2 T_1}\\)",
+      "D": "\\(\\frac{N_1 T_2}{N_1 T_2}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6ebb4792-2cdc-4596-91c1-962d4e7fd77f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An electron is revolving in a circular orbit of radius 'r' in hydrogen atom. Using Bohr's theory, the angular momentum of the electron is\n(M = magnetic dipole moment, m = mass of electron)",
+    "options": {
+      "A": "\\(\\dfrac{mM}{e}\\)",
+      "B": "\\(\\dfrac{e}{mM}\\)",
+      "C": "\\(\\dfrac{2mM}{e}\\)",
+      "D": "\\(\\dfrac{e}{2mM}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d2dcaf49-3d75-42fc-9c46-9836112f5553",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 1",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In hydrogen atom, ratio of the shortest wavelength in the Balmer series to that in the Paschen series is",
+    "options": {
+      "A": "\\(9:4\\)",
+      "B": "\\(3:1\\)",
+      "C": "\\(4:9\\)",
+      "D": "\\(1:3\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f11a5639-dcbb-49de-a25f-98bdbb769283",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The frequency of revolution of an electron in the \\(n^{\\text{th~}}\\) orbit of hydrogen atom is",
+    "options": {
+      "A": "directly proportional to \\(n^{2}\\)",
+      "B": "inversely proportional to \\(n^{2}\\)",
+      "C": "directly proportional to \\(n^{3}\\)",
+      "D": "inversely proportional to \\(n^{3}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fb79999e-f265-4ac2-a083-ea3837a114c0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "physics",
+    "chapter": "Structure of Atoms and Nuclei",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Paschen series, wavelength of first line is '\\(\\lambda_{1}\\)' and for Brackett series, wavelength of first line is '\\(\\lambda_{2}\\)' then ratio \\(\\frac{\\lambda_{1}}{\\lambda_{2}}\\) is",
+    "options": {
+      "A": "\\(\\frac{7}{400}\\)",
+      "B": "\\(\\frac{9}{144}\\)",
+      "C": "\\(\\frac{81}{175}\\)",
+      "D": "\\(\\frac{108}{509}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0db0d23f-f98b-4e8b-9ff9-1dfa63052cf0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift II",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two sirens situated one km apart are producing sound of frequency \\(330\\) Hz. The observer starts moving from one siren to the other with a speed of \\(2\\) m/s. If the speed of sound is \\(330\\) m/s, What will be the beat frequency heard by the observer?",
+    "options": {
+      "A": "\\(8\\) Hz",
+      "B": "\\(4\\) Hz",
+      "C": "\\(6\\) Hz",
+      "D": "\\(1\\) Hz"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "19659e85-6461-4bea-b5c7-9c12b496f154",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 21 April Shift II",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equation of a progressive wave is \\(Y= 3\\sin\\left\\lbrack \\pi\\left( \\frac{t}{3}-\\frac{x}{5} \\right)+\\frac{\\pi}{4} \\right\\rbrack\\) where \\(x\\) and \\(y\\) are in meter and time in second. Which of the following is correct?",
+    "options": {
+      "A": "Wavelength \\(= 10\\text{ }m\\)",
+      "B": "Velocity \\(= 1.5\\text{ }m/s\\)",
+      "C": "Amplitude \\(= 3\\text{ }cm\\)",
+      "D": "Frequency \\(= 0.2\\text{ }Hz\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3ef3a746-d64d-4f17-8e99-ec4679845923",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equations of two waves are given as \\(y_1 = a\\sin(\\omega t + \\phi_1)\\), \\(y_2 = a\\sin(\\omega t + \\phi_2)\\). If amplitude and time period of resultant wave is same as the individual waves, then \\(\\phi_1 - \\phi_2\\) is",
+    "options": {
+      "A": "\\(\\cos^{-1}\\left(-\\frac{1}{2}\\right)\\)",
+      "B": "\\(\\cos^{-1}\\left(-\\frac{1}{4}\\right)\\)",
+      "C": "\\(\\cos^{-1}\\left(-\\frac{1}{6}\\right)\\)",
+      "D": "\\(\\cos^{-1}\\left(-\\frac{1}{8}\\right)\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "42baeed5-c869-4cfb-8638-f8a8ac8666e0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The frequency of two tuning forks A and B are respectively 1.4% more and 2.6% less than that of the tuning fork C. When A and B are sounded together, 10 beats are produced in 1 second. The frequency of tuning fork C is",
+    "options": {
+      "A": "250 Hz",
+      "B": "300 Hz",
+      "C": "340 Hz",
+      "D": "400 Hz"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "543d345f-99fe-4c09-91d2-9e3020f20518",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The end correction of resonance tube is 1 cm. If the shortest length resonating with a tuning fork is 15 cm, the next resonating length will be",
+    "options": {
+      "A": "35 cm",
+      "B": "40 cm",
+      "C": "47 cm",
+      "D": "64 cm"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6cbff9dc-a923-40e7-be8a-9908a265fc75",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 11th May Shift 1",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A transverse wave \\(Y = 2\\sin(0.01x + 30t)\\) moves on a stretched string from one end to another end in 0.5 second. If x and y are in cm and t in second, then the length of the string is",
+    "options": {
+      "A": "5 cm",
+      "B": "10 m",
+      "C": "15 m",
+      "D": "20 m"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7301a7ce-2239-4cf2-908c-ea476e5ac8c7",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 1",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A uniform string is vibrating with a fundamental frequency \\(n\\). If radius and length of string both are doubled keeping tension constant then the new frequency of vibration is",
+    "options": {
+      "A": "\\(2n\\)",
+      "B": "\\(3n\\)",
+      "C": "\\(\\frac{n}{4}\\)",
+      "D": "\\(\\frac{n}{3}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "83b092d5-b353-4d21-b70f-54b599567a34",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equation of wave is \\(y= 60\\sin(1200t- 6x)\\), where ' \\(y\\) ' is in micron, ' \\(t\\) ' is in second and ' \\(x\\) ' is in metre. The ratio of maximum particle velocity to the wave velocity of wave propagation is",
+    "options": {
+      "A": "36",
+      "B": "\\(3.6 \\times 10^{- 5}\\)",
+      "C": "\\(3.6 \\times 10^{- 4}\\)",
+      "D": "\\(3.6 \\times 10^{- 6}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a5fc4d8e-5e0c-446d-8761-9098218e8698",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 11th May Shift 2",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A wire of length 'L' and linear density 'm' is stretched between two rigid supports with tension 'T'. It is observed that wire resonates in the Pth harmonic at a frequency of 320 Hz and resonates again at next higher frequency of 400 Hz. The value of 'p' is",
+    "options": {
+      "A": "2",
+      "B": "4",
+      "C": "8",
+      "D": "10"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ac81210b-02fc-4b91-adfb-d5fc6dd308b2",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 2",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Stationary wave is produced along the stretched string of length 80 cm. The resonant frequencies of string are 90 Hz, 150 Hz and 210 Hz. The speed of transverse wave in the string is",
+    "options": {
+      "A": "45 m/s",
+      "B": "75 m/s",
+      "C": "48 m/s",
+      "D": "80 m/s"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b6b5aa57-c97f-4ac7-bb69-8bf6fadb1605",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift II",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The lengths of the two organ pipes open at both ends are ' L ' and \\(\\left( L +L_{1} \\right)\\). If they are sounded together, the beat frequency will be ( \\(v =\\) velocity of sound in air)",
+    "options": {
+      "A": "\\(\\frac{2vL_{1}}{L\\left( L + L_{1} \\right)}\\)",
+      "B": "\\(\\frac{2\\text{ }L\\left( \\text{ }L + L_{1} \\right)}{{vL}_{1}}\\)",
+      "C": "\\(\\frac{{VL}_{1}}{\\text{ }L\\left( \\text{ }L + L_{1} \\right)}\\)",
+      "D": "\\(\\frac{{vL}_{1}}{2\\text{ }L\\left( \\text{ }L + L_{1} \\right)}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c329d5bb-02cb-4ccf-bf65-e818cf743382",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The length of closed and open pipe is same. The ratio of frequency of \\(n^{\\text{th~}}\\) overtone for closed pipe to that of open pipe is (Neglect end correction)",
+    "options": {
+      "A": "\\(\\frac{(2n + 1)}{2(n + 1)}\\)",
+      "B": "\\(\\frac{(n + 1)}{(2n + 1)}\\)",
+      "C": "\\(\\frac{(2n - 1)}{2(n + 1)}\\)",
+      "D": "\\(\\ \\frac{(n - 1)}{2(n + 1)}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c9c0ac81-2373-47a9-8c45-367484e79697",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift II",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "To increase the frequency of transverse oscillations of a stretched string by 40%, the tension must be increased by",
+    "options": {
+      "A": "\\(100\\%\\)",
+      "B": "\\(40\\%\\)",
+      "C": "\\(96\\%\\)",
+      "D": "\\(140\\%\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d17260e3-d44a-41b4-8d3b-c2250c257889",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A pipe open at both ends produces a fundamental frequency \\(n_{1}\\). When the pipe is kept with \\(\\frac{3^{\\text{th~}}}{4}\\) of its length in water, it produces a note of fundamental frequency \\(n_{2}\\). The ratio of \\(\\frac{n_{1}}{n_{2}}\\) is",
+    "options": {
+      "A": "\\(\\frac{4}{3}\\)",
+      "B": "\\(\\frac{3}{4}\\)",
+      "C": "2",
+      "D": "\\(\\frac{1}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f52f291c-e687-4a76-8872-0fe353165593",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 18 April Shift I",
+    "subject": "physics",
+    "chapter": "Superposition of Waves",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The lengths of the two pipes open at both ends are L and \\((L + L_1)\\). If they are sounded together, the beat frequency will be\n(\\(v\\) = velocity of sound in air)",
+    "options": {
+      "A": "\\(\\dfrac{vL_1}{L(L + L_1)}\\)",
+      "B": "\\(\\dfrac{2vL_1}{L(L + L_1)}\\)",
+      "C": "\\(\\dfrac{2L(L + L_1)}{vL_1}\\)",
+      "D": "\\(\\dfrac{vL_1}{2L(L + L_1)}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2b0721ca-4afc-4d58-b234-2ca3bc947c1d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A black body is at temperature of 5780 K. The energy of radiation emitted by the body at wavelength 300 nm is \\(U_1\\), at wavelength 500 nm is \\(U_2\\) and that at 900 nm is \\(U_3\\) respectively. Wien's constant \\(b = 2.89 \\times 10^6\\) nmK. This shows that",
+    "options": {
+      "A": "\\(U_1 < U_2 < U_3\\)",
+      "B": "\\(U_1 > U_2 > U_3\\)",
+      "C": "\\(U_1 < U_2 > U_3\\)",
+      "D": "\\(U_1 > U_2 < U_3\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4ddb3845-fec3-4b60-a0ac-7792053e63f1",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "An ordinary body cools from \\(4\\theta\\) to \\(3\\theta\\) in 't' minutes. The temperature of the body after next 't' minutes is (Assume Newton's law of cooling and room temperature as \\(\\theta\\))",
+    "options": {
+      "A": "\\(\\dfrac{2\\theta}{3}\\)",
+      "B": "\\(\\dfrac{7\\theta}{3}\\)",
+      "C": "\\(\\dfrac{5\\theta}{3}\\)",
+      "D": "\\(\\dfrac{8\\theta}{3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "552c2240-7dd0-49a6-805e-28c28e6804dc",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2021 · May Shift 1",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "540 g of ice at \\(0^\\circ\\text{C}\\) is mixed with 540 g of water at \\(80^\\circ\\text{C}\\). The final temperature of the mixture will be",
+    "options": {
+      "A": "\\(53.3^\\circ\\text{C}\\)",
+      "B": "\\(56.6^\\circ\\text{C}\\)",
+      "C": "\\(60.6^\\circ\\text{C}\\)",
+      "D": "\\(62.3^\\circ\\text{C}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5625fdba-b771-4383-b992-d16b290e525d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 23 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A thermometer bulb has volume \\(10^{-6}\\,\\text{m}^3\\) and cross-section of the stem is \\(0.002\\,\\text{cm}^2\\). The bulb is filled with mercury at \\(0^\\circ C\\). If the thermometer reads temperature as \\(100^\\circ C\\), then the length of mercury column is (coefficient of cubical expansion of mercury \\(=18\\times10^{-5}/{}^\\circ C\\))",
+    "options": {
+      "A": "90 cm",
+      "B": "9 cm",
+      "C": "9 mm",
+      "D": "0.9 mm"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5d603dab-d6e2-4e76-aa7a-e5a3d245e7a6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 12th May Shift 2",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A black body radiates maximum energy at wavelength '\\(\\lambda\\)' and its emissive power is '\\(E\\)'. Now due to a change in temperature of that body, it radiates maximum energy at wavelength \\(\\frac{\\lambda}{3}\\). At that temperature emissive power is",
+    "options": {
+      "A": "16:1",
+      "B": "256:1",
+      "C": "81:1",
+      "D": "128:1"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5f0252fd-6d40-4b51-9f38-29c84cdd4289",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 10th May Shift 1",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Ordinary bodies P and Q radiate maximum energy with wavelength difference \\(3\\,\\mu m\\). The absolute temperature of body P is four times that of Q. The wavelength at which body Q radiates maximum energy is",
+    "options": {
+      "A": "\\(2\\,\\mu m\\)",
+      "B": "\\(4\\,\\mu m\\)",
+      "C": "\\(6\\,\\mu m\\)",
+      "D": "\\(8\\,\\mu m\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "72eff41a-f534-407f-bb0b-06438993f464",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 April Shift II",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "\\(15\\) g of ice at \\(0\\ ^\\circ\\mathrm{C}\\) is added to a vessel containing water at \\(40\\ ^\\circ\\mathrm{C}\\). The mass of water and water equivalent of the vessel is \\(60\\) g. Assuming that negligible heat is taken from the surroundings, the final temperature of the mixture will be\n[ \\(L_{\\mathrm{ice}} = 80\\) cal/g , \\(S_{\\mathrm{water}} = 1\\) cal/g ]",
+    "options": {
+      "A": "\\(30\\ ^\\circ\\mathrm{C}\\)",
+      "B": "\\(22\\ ^\\circ\\mathrm{C}\\)",
+      "C": "\\(16\\ ^\\circ\\mathrm{C}\\)",
+      "D": "\\(10\\ ^\\circ\\mathrm{C}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7de6e8c7-0f30-4be7-93c0-4eb7e9dca2d6",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A piece of metal of 850 K is dropped into 1 kg of water at 300 K. If equilibrium temperature of water is 350 K then the heat capacity of the metal expressed in \\(\\dfrac{J}{K}\\) is \\(\\left(\\text{Sp. heat of water} = 1\\ \\dfrac{\\mathrm{cal}}{\\mathrm{g\\,^\\circ C}}\\right)\\)",
+    "options": {
+      "A": "\\(420\\)",
+      "B": "\\(240\\)",
+      "C": "\\(100\\)",
+      "D": "\\(24\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "880fb3eb-0c62-4471-bbc8-4b7a6dabfa06",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A black disc has a radius 'R' and wavelength corresponding to the maximum intensity is '\\(\\lambda\\)'. The emissive power (E) for the different radii and maximum wavelengths is directly proportional to",
+    "options": {
+      "A": "\\(R, \\lambda\\)",
+      "B": "\\(R^2, \\lambda^{-4}\\)",
+      "C": "\\(R^2, \\lambda^{-2}\\)",
+      "D": "\\(R^2, \\lambda\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f5c6d13f-014a-4aad-a248-72890a75a3dd",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The wavelength of maximum intensity of radiation emitted by a star is \\(289.8\\) nm. The radiation intensity of the star is (Stefan's constant = \\(5.67 \\times 10^{-8}\\) SI unit, Wein's constant \\(2898\\ \\mu\\mathrm{mk}\\))",
+    "options": {
+      "A": "\\(5.67 \\times 10^{8}\\ W/m^2\\)",
+      "B": "\\(5.67 \\times 10^{-12}\\ W/m^2\\)",
+      "C": "\\(10.67 \\times 10^{7}\\ W/m^2\\)",
+      "D": "\\(10.67 \\times 10^{11}\\ W/m^2\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "08574e5f-7c0e-408a-8908-829e213e36b2",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A monoatomic gas is heated at constant pressure. The percentage of total heat used for doing external work is",
+    "options": {
+      "A": "30%",
+      "B": "40%",
+      "C": "50%",
+      "D": "60%"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4eca483b-4c26-4ecb-bedb-7d25d2c7456f",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The ratio of work done by an ideal rigid diatomic gas to the heat supplied by the gas in an isobaric process is",
+    "options": {
+      "A": "\\( \\frac{3}{7} \\)",
+      "B": "\\( \\frac{2}{7} \\)",
+      "C": "\\( \\frac{4}{7} \\)",
+      "D": "\\( \\frac{5}{7} \\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "99d0ddb8-a7af-4bd4-9f77-f6438a469723",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 15th May Shift 1",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The internal energy of an ideal diatomic gas corresponding to volume \\( V \\) and pressure \\( p \\), is 2.5 PV. The gas expands from 1 litre to 2 litre at a constant pressure of \\( 10^{5} \\) N/m\\(^{2}\\). The heat supplied to the gas is",
+    "options": {
+      "A": "350 J",
+      "B": "300 J",
+      "C": "250 J",
+      "D": "200 J"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a2209bfc-8b4f-457f-b874-2f01b8e3e45d",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The change in internal energy of the mass of gas, when the volume changes from V to 2V at constant pressure P is (\\(\\gamma\\) is the ratio of specific heat at constant pressure to that of volume)\n\\(\\left(\\gamma = \\dfrac{C_p}{C_v}\\right)\\)",
+    "options": {
+      "A": "\\(\\dfrac{PV}{\\gamma - 1}\\)",
+      "B": "\\(\\dfrac{PV}{\\gamma + 1}\\)",
+      "C": "\\(\\dfrac{(\\gamma - 1)}{PV}\\)",
+      "D": "\\(\\dfrac{(\\gamma + 1)}{PV}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b5339917-6e9c-4365-8211-d8f28943b457",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A rigid diatomic gas \\(\\left(\\gamma = \\dfrac{7}{5}\\right)\\) is compressed adiabatically to volume \\(\\left(\\dfrac{V_i}{32}\\right)\\), where \\(V_i\\) is the initial volume. The initial temperature of the gas is '\\(T_i\\)' K and the final temperature is '\\(xT_i\\)' K. The value of \\(x\\) is",
+    "options": {
+      "A": "\\(2\\)",
+      "B": "\\(3\\)",
+      "C": "\\(4\\)",
+      "D": "\\(5\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e7d4cb60-00c2-4b64-813a-0e77bfbe2457",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift I",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A Carnot engine, whose efficiency is 40% takes heat from a source maintained at temperature 600K. To have an efficiency 60%, the intake temperature for the same exhaust temperature should be",
+    "options": {
+      "A": "\\(1800\\) K",
+      "B": "\\(900\\) K",
+      "C": "\\(720\\) K",
+      "D": "\\(360\\) K"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e836e86f-847c-4f24-a780-14b3c5473b67",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 17 April Shift II",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A carnot engine having efficiency \\(\\dfrac{1}{6}\\), operates between the source temperature \\(T_H\\) and the sink temperature \\(T_C\\). Its efficiency increases to \\(\\dfrac{1}{3}\\), when \\(T_C\\) is decreased by 64 K. The temperatures \\(T_H\\) and \\(T_C\\) are repectively",
+    "options": {
+      "A": "\\(374\\) K , \\(310\\) K",
+      "B": "\\(384\\) K , \\(320\\) K",
+      "C": "\\(384\\) K , \\(340\\) K",
+      "D": "\\(320\\) K , \\(256\\) K"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f402378a-ad0d-4365-845d-68d534f7d454",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 4th May Shift 1",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In an isobaric process of an ideal gas, the ratio of work done by the system to the heat supplied \\(\\frac{W}{Q}\\) is",
+    "options": {
+      "A": "\\(\\frac{1}{\\gamma-1}\\)",
+      "B": "\\(\\gamma\\)",
+      "C": "\\(\\frac{\\gamma}{\\gamma-1}\\)",
+      "D": "\\(\\frac{\\gamma-1}{\\gamma}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2a52be75-970e-40b4-a063-5bcc27cd7f74",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 22 April Shift I",
+    "subject": "physics",
+    "chapter": "Units and Measurement",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The period of oscillating simple pendulum is \\(T = 2\\pi\\sqrt{\\frac{l}{\\text{ }g}}\\) where length ' \\(l\\) ' is 100 cm with error 1 mm. Period is 2 second. The time of 100 oscillations is measured by a stopwatch of least count 0.1 s. The percentage error in gravitational acceleration ' \\(g\\) ' is",
+    "options": {
+      "A": "\\(0.2\\%\\)",
+      "B": "\\(0.1\\%\\)",
+      "C": "\\(1\\%\\)",
+      "D": "\\(2\\%\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6360cd1d-4c5f-402e-a8b0-f575dd76f7c9",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 11 April Shift I",
+    "subject": "physics",
+    "chapter": "Units and Measurement",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The period of oscillation of a simple pendulum is given by \\(T = 2\\pi\\sqrt{\\dfrac{l}{g}}\\) where \\(l\\) is about \\(80\\) cm and is known to have \\(0.1\\) cm accuracy. The period is about \\(1.5\\) s. The time of \\(50\\) oscillations is measured by a stop watch of least count \\(0.1\\) s. The percentage error in \\(g\\) is nearly",
+    "options": {
+      "A": "\\(0.8\\)",
+      "B": "\\(0.4\\)",
+      "C": "\\(0.1\\)",
+      "D": "\\(1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fa772e91-e10b-4b6e-892f-19697764f26e",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Units and Measurement",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The period of oscillation of a simple pendulum is \\(T = 2\\pi(L/g)^{1/2}\\). Measured value of 'L' is 10 cm known to 1 mm accuracy and time for 100 oscillations is 50 second, using a watch of 1 second resolution. The percentage error in the measurement of 'g' is",
+    "options": {
+      "A": "\\(2\\%\\)",
+      "B": "\\(4\\%\\)",
+      "C": "\\(5\\%\\)",
+      "D": "\\(8\\%\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0cdcbb63-fbca-489e-a6ed-b8926837b5cd",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Young's experiment, one of the slit is covered with a transparent sheet of thickness \\(3.6 \\times 10^{-3}\\) cm due to which position of central image shifts to a position originally occupied by \\(30^{th}\\) bright fringe. The refractive index of the sheet is \\((\\lambda = 6000\\ \\mathrm{\\mathring{A}})\\)",
+    "options": {
+      "A": "\\(1.5\\)",
+      "B": "\\(1.2\\)",
+      "C": "\\(1.3\\)",
+      "D": "\\(1.7\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2694985f-2ae0-4a86-8bb8-d5ec0117a110",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 20 April Shift II",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Young's double slit experiment with monochromatic light of wavelength 600 nm , the distance between the slits is \\(10^{- 3}\\text{ }m\\). For changing the fringe width by \\(3 \\times10^{- 5}\\text{ }m\\)\n(A) the screen is moved away from the slit by 5 cm . (B) the screen is moved 5 cm towards the slits. (C) the screen is moved 3 cm towards the slits. (D) the screen is moved away from the slits by 3 cm .",
+    "options": {
+      "A": "both (C) and (D)",
+      "B": "both (A) and (B)",
+      "C": "only (A)",
+      "D": "only (C)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3530d2b8-d7c7-4ca9-897d-e5ce9707d5da",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 9th May Shift 2",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Young's double slit experiment using monochromatic light of wavelength '\\(\\lambda\\)', the maximum intensity of light at a point on the screen is 'K' units. The intensity of light at a point where the path difference is '\\(\\frac{\\lambda}{6}\\)', is \\(\\cos 60^\\circ = \\sin 30^\\circ = 0.5, \\sin 60^\\circ = \\cos 30^\\circ = \\frac{\\sqrt{3}}{2}\\)",
+    "options": {
+      "A": "\\(\\frac{3K}{4}\\)",
+      "B": "\\(\\frac{K}{4}\\)",
+      "C": "\\(\\frac{K}{2}\\)",
+      "D": "K"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "36884137-3c84-4c99-9df8-8e90e8d50998",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 15 May Shift II",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Three polaroid sheets are co-axially placed such that pass axis of polaroids \\(2\\) and \\(3\\) make \\(30^\\circ\\) and \\(90^\\circ\\) with pass axis of sheet. If \\(I_0\\) is the intensity of unpolarised light entering first sheet, the intensity of the emergent light through \\(3^{rd}\\) sheet is",
+    "options": {
+      "A": "zero",
+      "B": "\\(\\dfrac{3I_0}{32}\\)",
+      "C": "\\(\\dfrac{3I_0}{8}\\)",
+      "D": "\\(\\dfrac{3I_0}{16}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "37042ade-fc73-4b5c-98e3-f1210d235f00",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 13th May Shift 2",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The path difference between two identical light waves at a point Q on the screen is 3 μm [the paper leaves the number out; 3 μm is the value its answer requires]. If the wavelength of the waves is 5000 Å, then at point Q there is",
+    "options": {
+      "A": "3rd dark band",
+      "B": "4th bright band",
+      "C": "5th dark band",
+      "D": "6th bright band"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "516fcf65-2bf3-43a7-9050-3009ea763913",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If fringe width is \\(0.4\\) mm, the distance between fifth bright and third dark band on the same side in interference pattern of Young's double slit experiment is (in mm)",
+    "options": {
+      "A": "\\(1\\)",
+      "B": "\\(2\\)",
+      "C": "\\(3\\)",
+      "D": "\\(4\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "55e5ba0f-7702-4564-9e95-b9733c7a3d7a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 19 May Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In the diffraction pattern due to a single slit of width '\\(a\\)' with incident light of wavelength '\\(\\lambda\\)', at an angle of diffraction '\\(\\theta\\)', the condition for the second maximum is",
+    "options": {
+      "A": "\\(a\\sin\\theta = 2\\lambda\\)",
+      "B": "\\(2\\lambda\\sin\\theta = 3a\\)",
+      "C": "\\(5\\lambda\\sin\\theta = 3a\\)",
+      "D": "\\(2a\\sin\\theta = 5\\lambda\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "66e0ce1d-ad73-4bd6-8e50-363892e5af35",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2023 · 3rd May Shift 2",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A screen is placed at 50 cm from a single slit, which is illuminated with light of wavelength 600 nm. If separation between the 1st and 3rd minima in the diffraction pattern is 3 mm then slit width is",
+    "options": {
+      "A": "0.2 mm",
+      "B": "0.02 mm",
+      "C": "2 mm",
+      "D": "20 mm"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "83ea9d39-de11-4074-af67-f395b85f132c",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2024 · 9th May Shift 1",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In a single slit experiment, the width of the slit is doubled. Which one of the following statements is correct?",
+    "options": {
+      "A": "The intensity and width of the central maximum are unaffected.",
+      "B": "The intensity remains same and angular width becomes half.",
+      "C": "The intensity and angular width both are doubled.",
+      "D": "The intensity increases by a factor 4 and the angular width decreases by a factor of 1/2"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a6a473f1-1fdd-47a5-8eb9-db38e23279c0",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2025 · 26 April Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Young's double slit experiment, the distance between the slits is 2 mm and the slits are 1 m away, from the screen. Two interference patterns can be obtained on the screen due to light of wavelength ' \\(\\lambda_{1}\\) ' and ' \\(\\lambda_{2}\\) ' respectively. The separation on the screen between the \\(3^{\\text{rd~}}\\) order bright fringes on the two interference patterns is (\\(\\lambda_{2}= 1.5\\lambda_{1}\\))",
+    "options": {
+      "A": "\\(\\left( 0.75 \\times 10^{+ 3} \\right)\\lambda_{1}\\)",
+      "B": "\\(\\left( 1.75 \\times 10^{+ 3} \\right)\\lambda_{1}\\)",
+      "C": "\\(\\left( 2.00 \\times 10^{+ 3} \\right)\\lambda_{1}\\)",
+      "D": "\\(\\left( 2.25 \\times 10^{+ 3} \\right)\\lambda_{1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bd580b29-868b-4a7c-b14f-cdc627398e27",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 April Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Young's double slit experiment, the angular width of a fringe is found to be \\(0.2^\\circ\\) on a screen placed 1m away. The wavelength of light used in 600 nm. If the entire apparatus is immersed in water of refractive index 4/3. the angular width of the fringe will be",
+    "options": {
+      "A": "\\(0.10^\\circ\\)",
+      "B": "\\(0.15^\\circ\\)",
+      "C": "\\(0.20^\\circ\\)",
+      "D": "\\(0.25^\\circ\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ce2f8ed5-8fcf-4835-93d2-4432d978cf98",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 20 April Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Light of wavelength \\(580\\) nm is incident normally on a slit of width '\\(a\\)'. The distance between slit and screen is \\(2.5\\) m and the distance of the second order maximum from the centre of the screen is \\(14.5\\) mm in a diffraction pattern. The value of '\\(a\\)' is",
+    "options": {
+      "A": "\\(0.12 \\times 10^{-3}\\) m",
+      "B": "\\(0.25 \\times 10^{-3}\\) m",
+      "C": "\\(0.36 \\times 10^{-3}\\) m",
+      "D": "\\(0.50 \\times 10^{-3}\\) m"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e965a45d-13af-493d-8d69-560b1b7b7b3a",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 13 May Shift II",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A double slit experiment is performed with light of wavelength \\(500\\) nm. A thin film of thickness \\(2\\ \\mu\\mathrm{m}\\) and refractive index \\(1.5\\) is introduced in the path of the upper beam. The location of the central maximum",
+    "options": {
+      "A": "remain unshifted",
+      "B": "shift downward by nearly two fringes",
+      "C": "shift upward by nearly two fringes",
+      "D": "shift downward by 10 fringes"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "eb3a39aa-c9ac-4ccc-949d-fbc6622918ba",
+    "source": "mht-cet",
+    "paper": "MHT-CET 2026 · 14 May Shift I",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A parallel beam of light of intensity \\(I_0\\) is incident on a glass plate, \\(25\\%\\) of light is reflected by upper surface \\((I_1)\\) and \\(50\\%\\) of light is reflected from lower surface \\((I_2)\\). The ratio \\(I_2\\) to \\(I_1\\) is",
+    "options": {
+      "A": "\\(1 : 4\\)",
+      "B": "\\(3 : 2\\)",
+      "C": "\\(2 : 3\\)",
+      "D": "\\(4 : 1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "67efafe8-81b6-4619-88b7-6d6367de22f5",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 9 April 2024",
+    "subject": "physics",
+    "chapter": "Alternating Current",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A capacitor of reactance \\(4\\sqrt{3}\\Omega\\) and a resistor of resistance \\(4\\Omega\\) are connected in series with an ac source of peak value \\(8\\sqrt{2}\\text{ }V\\). The power dissipation in the circuit is________ W.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "b4298bfd-6493-4a1d-9783-5fd9f0c83b05",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 6 April 2024",
+    "subject": "physics",
+    "chapter": "Alternating Current",
+    "format": "numeric",
+    "direction": null,
+    "stem": "For a given series LCR circuit it is found that maximum current is drawn when value of variable capacitance is \\(2.5nF\\). If resistance of \\(200\\Omega\\) and \\(100mH\\) inductor is being used in the given circuit. The frequency of ac source is ____ \\(\\times10^{3}\\text{ }Hz\\). (given \\(\\pi^{2}= 10\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 10
+  },
+  {
+    "source_ref": "a3b44ee4-d1ec-48d5-b895-9f738fdfb267",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 11 April 2023",
+    "subject": "physics",
+    "chapter": "Atoms",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A monochromatic light is incident on a hydrogen sample in ground state. Hydrogen atoms absorb a fraction of light and subsequently emit radiation of six different wavelengths. The frequency of incident light is \\(x \\times10^{15}\\text{ }Hz\\). The value of \\(x\\) is ____. (Given \\(\\left. \\ h = 4.25 \\times10^{- 15}eVs \\right)\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "fd3cffa6-daf0-4107-a30c-2cd10ee14840",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 June 2022",
+    "subject": "physics",
+    "chapter": "Atoms",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A beam of monochromatic light is used to excite the electron in \\(Li^{+ +}\\)from the first orbit to the third orbit. The wavelength of monochromatic light is found to be \\(x \\times10^{- 10}\\text{ }m\\). The value of \\(x\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 114
+  },
+  {
+    "source_ref": "78a8a3d8-ef1c-4324-918b-1de35c644ca0",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 25",
+    "subject": "physics",
+    "chapter": "Communication Systems",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The maximum and minimum amplitude of an amplitude modulated wave is \\(16\\text{ }V\\) and \\(8\\text{ }V\\) respectively. The modulation index for this amplitude modulated wave is \\(x\\times10^{- 2}\\). The value of \\(x\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 33
+  },
+  {
+    "source_ref": "772d04ac-5f6f-4251-8d10-a12983488a04",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2023",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two identical cells, when connected either in parallel or in series gives same current in an external resistance \\(5\\Omega\\). The internal resistance of each cell will be____ \\(\\Omega\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "8e329a17-9517-4e6c-bf52-eea4d76a4548",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2022 — 25 June",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A resistor develops \\(300\\text{ }J\\) of thermal energy in \\(15\\text{ }s\\), when a current of \\(2\\text{ }A\\) is passed through it. If the current increases to \\(3\\text{ }A\\), the energy developed in 10 s is \\(\\_\\_\\_\\_\\) J.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 450
+  },
+  {
+    "source_ref": "a518ed1f-942e-4687-9d61-08338ba48337",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 12 Apr 2023",
+    "subject": "physics",
+    "chapter": "Current Electricity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The current flowing through a conductor connected across a source is \\(2\\text{ }A\\) and \\(1.2\\text{ }A\\) at \\(0^{\\circ}C\\) and \\(100^{\\circ}C\\) respectively. The current flowing through the conductor at \\(50^{\\circ}C\\) will be___ \\(\\times10^{2}\\text{ }mA\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 15
+  },
+  {
+    "source_ref": "a69f5c1c-7676-4908-8110-191c80d57fca",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 26",
+    "subject": "physics",
+    "chapter": "Dual Nature of Radiation and Matter",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two stream of photons, possessing energies equal to twice and ten times the work function of metal are incident on the metal surface successively. The value of ratio of maximum velocities of the photoelectrons emitted in the two respective cases is \\(x:y\\). The value of \\(x\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1
+  },
+  {
+    "source_ref": "72ac7555-2548-4c86-b5f9-2a5e07a118a7",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2022 — 25 June",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The current in a coil of self- inductance \\(2.0H\\) is increasing according to \\(I= 2\\sin\\left( t^{2} \\right)A\\). The amount of energy spent during the period when current changes from 0 to \\(2\\text{ }A\\) is \\(\\_\\_\\_\\_\\) J.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "f68860bb-d4b5-4e59-8476-98c7c064c8f4",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 5 Apr 2024",
+    "subject": "physics",
+    "chapter": "Electromagnetic Induction",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The current in an inductor is given by \\(I = (3t + 8)\\) where \\(t\\) is in second. The magnitude of induced emf produced in the inductor is \\(12mV\\). The self-inductance of the inductor is \\(\\_\\_\\_\\_\\) \\(mH\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "645ec79c-2c39-47ab-9b7a-cfa907cc3c00",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2023",
+    "subject": "physics",
+    "chapter": "Electromagnetic Waves",
+    "format": "numeric",
+    "direction": null,
+    "stem": "In a medium the speed of light wave decreases to 0.2 times to its speed in free space The ratio of relative permittivity to the refractive index of the medium is \\(x:1\\). The value of \\(x\\) is (Given speed of light in free space \\(= 3 \\times10^{8}\\text{ }m{\\text{ }s}^{- 1}\\) and for the given medium \\(\\mu_{r}= 1\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "68c9e43d-e0b8-4b17-be93-d7e855906a54",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2023",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "For a charged spherical ball, electrostatic potential inside the ball varies with \\(r\\) as \\(V = 2ar^{2}+ b\\). Here, \\(a\\) and \\(b\\) are constant and \\(r\\) is the distance from the center. The volume charge density inside the ball is \\(- \\lambda a\\varepsilon\\). The value of \\(\\lambda\\) is_____ \\(\\varepsilon =\\) permittivity of the medium",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 12
+  },
+  {
+    "source_ref": "89c3451b-710b-43a9-a960-ab97a6514fbb",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two charges of \\(- 4\\mu C\\) and \\(+ 4\\mu C\\) are placed at the points \\(A(1,0,4)m\\) and \\(B(2, - 1,5)m\\) located in an electric field \\(\\overrightarrow{E}= 0.20\\widehat{i}V/cm\\). The magnitude of the torque acting on the dipole is \\(8\\sqrt{\\alpha}\\times10^{- 5}Nm\\), Where \\(\\alpha =\\) . ________",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "a5aa8986-2265-4df7-a544-de7c5c1e027b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "physics",
+    "chapter": "Electrostatics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The electric potential at the surface of an atomic nucleus \\((z = 50)\\) of radius \\(9 \\times10^{- 13}\\text{ }cm\\) is _____ \\(\\times10^{6}\\) V.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 8
+  },
+  {
+    "source_ref": "bc16a061-0160-49ad-97b6-740782609a68",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2021 Compilation Paper 16",
+    "subject": "physics",
+    "chapter": "Gravitation",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two planets \\(A\\) and \\(B\\) of masses \\(M\\) and \\(9M\\) with radii \\(R\\) and \\(2R\\) respectively are present 8 \\(R\\) distance away from each other. Minimum velocity with which a particle is projected from surface of A such that it reaches planet B is given by \\(\\sqrt{\\frac{aGM}{7R}}\\). Value of ' \\(a\\) ' is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "c0c7adf6-558d-4598-a551-ca76693a677f",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2 Apr 2025",
+    "subject": "physics",
+    "chapter": "Kinetic Theory",
+    "format": "numeric",
+    "direction": null,
+    "stem": "\\(\\gamma_{A}\\) is the specific heat ratio of monoatomic gas A having 3 translational degrees of freedom. \\(\\gamma_{B}\\) is the specific heat ratio of polyatomic gas \\(B\\) having 3 translational, 3 rotational degrees of freedom and 1 vibrational mode. If \\(\\frac{\\gamma_{A}}{\\gamma_{B}} = \\left( 1 + \\frac{1}{n} \\right)\\), then the value of \\(n\\) is .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "6176ace3-c554-48e2-87e9-3117f7d0ea96",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2024",
+    "subject": "physics",
+    "chapter": "Magnetism and Matter",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The magnetic potential due to a magnetic dipole at a point on its axis situated at a distance of \\(20\\text{ }cm\\) from its center is \\(1.5 \\times10^{- 5}Tm\\). The magnetic moment of the dipole is _____ \\(Am^{2}\\). (Given: \\(\\frac{\\mu_{0}}{4\\pi}=10^{- 7}TmA^{- 1}\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 6
+  },
+  {
+    "source_ref": "4fcc3ba3-38b7-4ce5-876e-f8e28c898e60",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 21 Jan 2026 Shift 2",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The terminal velocity of a metallic ball of radius 6 mm in a viscous fluid is \\(20\\text{ }cm/s\\). The terminal velocity of another ball of same material and having radius 3 mm in the same fluid will be \\(\\_\\_\\_\\_\\) \\(cm/s\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "c8bc7b0a-2103-4a93-9738-3d200c3b6689",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 12 Apr 2023",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Fluids",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Glycerine of density \\(1.25 \\times10^{3}\\text{ }kg{\\text{ }m}^{- 3}\\) is flowing through the conical section of pipe. The area of cross-section of the pipe at its ends is \\(10{\\text{ }cm}^{2}\\) and \\(5{\\text{ }cm}^{2}\\) and pressure drop across its length is \\(3Nm^{- 2}\\). The rate of flow of glycerine through the pipe is \\(x \\times10^{- 5}{\\text{ }m}^{3}{\\text{ }s}^{- 1}\\). The value of \\(x\\) is___",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "81bc878d-d739-44ce-8ee1-e2627b3592c0",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 July 2022",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Solids",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A metal wire of length \\(0.5\\text{ }m\\) and cross-sectional area \\(10^{- 4}{\\text{ }m}^{2}\\) has breaking stress \\(5 \\times10^{8}Nm^{- 2}\\). A block of \\(10\\text{ }kg\\) is attached at one end of the wire and is rotating in a horizontal circle. The maximum linear velocity of the block will be \\(\\_\\_\\_\\_\\ ms^{- 1}\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 50
+  },
+  {
+    "source_ref": "d2d5a358-b922-4358-b842-2cd8b9637e40",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "physics",
+    "chapter": "Mechanical Properties of Solids",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The elastic potential energy stored in a steel wire of length \\(20\\text{ }m\\) stretched through \\(2\\text{ }cm\\) is \\(80\\text{ }J\\). The cross-sectional area of the wire is ___ \\(mm^{2}\\). (Given, \\(y = 2.0 \\times10^{11}Nm^{- 2}\\) )",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 40
+  },
+  {
+    "source_ref": "1b165654-c247-4962-a948-58df8b8adf33",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2024",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A ball rolls off the top of a stairway with horizontal velocity \\(u\\). The steps are \\(0.1\\text{ }m\\) high and \\(0.1\\text{ }m\\) wide. The minimum velocity \\(u\\) with which that ball just hits the step 5 of the stairway will be \\(\\sqrt{x}ms^{- 1}\\) where \\(x =\\) _____ [use \\(g = 10\\text{ }m/s^{2}\\) ].",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "895335ba-dd34-411f-b8b6-51ada5860256",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2022 — 25 June",
+    "subject": "physics",
+    "chapter": "Motion in a Plane",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A curve in a level road has a radius \\(75\\text{ }m\\). The maximum speed of a car turning this curved road can be \\(30\\text{ }m/s\\) without skidding. If radius of curved road is changed to \\(48\\text{ }m\\) and the coefficient of friction between the tyres and the road remains same, then maximum allowed speed would be \\(\\_\\_\\_\\_\\) \\(m/s\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 24
+  },
+  {
+    "source_ref": "30c5c628-d922-4261-b313-20cb2fbd0d0a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2024",
+    "subject": "physics",
+    "chapter": "Motion in a Straight Line",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A particle initially at rest starts moving from reference point. \\(x = 0\\) along \\(x\\)-axis, with velocity \\(v\\) that varies as \\(v = 4\\sqrt{x}m/s\\). The acceleration of the particle is _______ \\(ms^{- 2}\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 8
+  },
+  {
+    "source_ref": "adbd1fcc-13c7-4cbd-b77d-ac5916a12f8a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 8 Apr 2026 Shift 2",
+    "subject": "physics",
+    "chapter": "Motion in a Straight Line",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two masses of 3.4 kg and 2.5 kg are accelerated from an initial speed of \\(5\\text{ }m/s\\) and \\(12\\text{ }m/s\\), respectively. The distances traversed by the masses in the \\(5^{\\text{th~}}\\) second are 104 m and 129 m , respectively. The ratio of their momenta after 10 s is \\(\\frac{x}{8}\\). The value of \\(x\\) is \\(\\_\\_\\_\\_\\) .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 9
+  },
+  {
+    "source_ref": "00574d07-aaf2-4598-8b33-199b2eb8b5f2",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 22 Jan 2025",
+    "subject": "physics",
+    "chapter": "Moving Charges and Magnetism",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A proton is moving undeflected in a region of crossed electric and magnetic fields at a constant speed of \\(2 \\times10^{5}{\\text{ }ms}^{- 1}\\). When the electric field is switched off, the proton moves along a circular path of radius 2 cm . The magnitude of electric field is \\(x \\times10^{4}\\text{ }N/C\\). the value of x is \\(\\_\\_\\_\\_\\_\\_\\) Take the mass of the proton \\(= 1.6 \\times10^{- 27}\\text{ }kg\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "dfd7a310-d507-4220-9ec1-9e3a7cb048ee",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "physics",
+    "chapter": "Moving Charges and Magnetism",
+    "format": "numeric",
+    "direction": null,
+    "stem": "When a resistance of \\(5\\Omega\\) is shunted with a moving coil galvanometer, it shows a full-scale deflection for a current of \\(250\\text{ }mA\\), however when \\(1050\\Omega\\) resistance is connected with it in series, it gives full scale deflection for 25 volt. The resistance of galvanometer is____ \\(\\Omega\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 50
+  },
+  {
+    "source_ref": "e31159cb-9aa7-4c43-b3a5-992da24fd5ca",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 24 Jan 2025",
+    "subject": "physics",
+    "chapter": "Moving Charges and Magnetism",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A current of 5 A exists in a square loop of side \\(\\frac{1}{\\sqrt{2}}\\text{ }m\\). Then the magnitude of the magnetic field \\(B\\) at the centre of the square loop will be \\(p \\times10^{- 6}\\text{ }T\\). where, value of p is \\(\\_\\_\\_\\_\\_\\) \\(\\left\\lbrack Take\\ \\mu_{0} \\right.\\) \\(= 4\\pi\\times10^{- 7}\\text{ }T{\\text{ }mA}^{- 1}\\) ].",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 8
+  },
+  {
+    "source_ref": "277ca784-7477-43d3-9ff7-fdab06b21ca6",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2024",
+    "subject": "physics",
+    "chapter": "Nuclei",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The radius of a nucleus of mass number 64 is 4.8 fermi. Then the mass number of another nucleus having radius of 4 fermi is \\(\\frac{1000}{x}\\), where \\(x\\) is ______ .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 27
+  },
+  {
+    "source_ref": "c451df1c-6c89-4755-bd85-7beab68d3fc5",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2023",
+    "subject": "physics",
+    "chapter": "Nuclei",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A radioactive element \\(\\ _{92}^{242}X\\) emits two \\(\\alpha\\)-particles, one electron and two positrons. The product nucleus is represented by \\(\\ _{P}^{234}Y\\). The value of \\(P\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 87
+  },
+  {
+    "source_ref": "99bb4db5-cf82-4598-bdbd-67a9e83a83cc",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A rectangular block of mass \\(5\\text{ }kg\\) attached to a horizontal spiral spring executes simple harmonic motion of amplitude \\(1\\text{ }m\\) and time period \\(3.14\\text{ }s\\). The maximum force exerted by spring on block is___ \\(N\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 20
+  },
+  {
+    "source_ref": "d7a7b438-2722-45c4-acc4-a5969ad7bf83",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 30 January 2023",
+    "subject": "physics",
+    "chapter": "Oscillations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The velocity of a particle executing SHM varies with displacement \\(\\left( x \\right)\\) as \\(4v^{2}= 50 -x^{2}\\). The time period of oscillations is \\(\\frac{x}{7}s\\). The value of \\(x\\) is____ (Take \\(\\left. \\ \\pi =\\frac{22}{7} \\right)\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 88
+  },
+  {
+    "source_ref": "5840a58c-2931-4a7e-9f45-c933abc9a920",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 April 2025",
+    "subject": "physics",
+    "chapter": "Ray Optics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Distance between object and its image (magnified by \\(- \\frac{1}{3}\\) ) is 30 cm . The focal length of the mirror used is \\(\\left( \\frac{x}{4} \\right)cm\\), where magnitude of value of \\(x\\) is \\(\\_\\_\\_\\_\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 45
+  },
+  {
+    "source_ref": "8d4a4fe3-9018-4d59-a561-807fbab13e78",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2 Apr 2025",
+    "subject": "physics",
+    "chapter": "Ray Optics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A ray of light suffers minimum deviation when incident on a prism having angle of the prism equal to \\(60^{\\circ}\\). The refractive index of the prism material is \\(\\sqrt{2}\\). The angle of incidence (in degrees) is \\(\\_\\_\\_\\_\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 45
+  },
+  {
+    "source_ref": "4009d3e6-48f6-4652-9d56-e6b8251030b0",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A light rope is wound around a hollow cylinder of mass \\(5\\text{ }kg\\) and radius \\(70\\text{ }cm\\). The rope is pulled with a force of \\(52.5\\text{ }N\\). The angular acceleration of the cylinder will be___ \\({rad\\text{ }s}^{- 2}\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 15
+  },
+  {
+    "source_ref": "a8a8d667-b466-4782-811c-4fdc80d6d10b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 25 Jan 2023",
+    "subject": "physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If a solid sphere of mass \\(5\\text{ }kg\\) and a disc of mass \\(4\\text{ }kg\\) have the same radius. Then the ratio of moment of inertia of the disc about a tangent in its plane to the moment of inertia of the sphere about its tangent will be \\(\\frac{x}{7}\\). The value of \\(x\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "b99835f7-190e-46df-8d82-8e56189f42b2",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A force of \\(- P\\widehat{k}\\) acts on the origin of the coordinate system. The torque about the point \\((2, - 3)\\) is \\(P(a\\widehat{i}+ b\\widehat{j})\\), the ratio of \\(\\frac{a}{b}\\) is \\(\\frac{x}{2}\\). The value of \\(x\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "c2eb0b08-3aaa-411b-ad26-52ad69b31633",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "physics",
+    "chapter": "System of Particles and Rotational Motion",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A ring and a solid sphere roll down the same inclined plane without slipping. They start from rest. The radii of both bodies are identical and the ratio of their kinetic energies is \\(\\frac{7}{x}\\) where \\(x\\) is ______",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "86b349fb-2756-4695-abe8-85c47ed3db65",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 5 Apr 2026 Shift 2",
+    "subject": "physics",
+    "chapter": "Thermal Properties of Matter",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The heat extracted out of x gram of water initially at \\(50^{\\circ}C\\) to cool it down to \\(0^{\\circ}C\\) is sufficient to evaporate (\\(1000 - x\\)) gram of water also initially at \\(50^{\\circ}C\\). The value of x (closest integer) is \\(\\_\\_\\_\\_\\) . (Take latent heat of water \\(2256\\text{ }kJ/kg\\), specific heat capacity of water \\(4200\\text{ }J/kg\\ K\\))",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 922
+  },
+  {
+    "source_ref": "ed74e4e9-d68b-4448-ae4e-30f5dd036b4f",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "physics",
+    "chapter": "Thermodynamics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A monoatomic gas performs a work of \\(\\frac{Q}{4}\\) where \\(Q\\) is the heat supplied to it. The molar heat capacity of the gas will be \\(\\_\\_\\_\\_\\ R\\) during this transformation. Where \\(R\\) is the gas constant.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "8021aa15-f1ba-48b1-9554-f31dd0a6162b",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 19",
+    "subject": "physics",
+    "chapter": "Units and Measurements",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The acceleration due to gravity is found upto an accuracy of \\(4\\%\\) on a planet. The energy supplied to a simple pendulum to known mass ' \\(m\\) ' to undertake oscillations of time period \\(T\\) is being estimated. If time period is measured to an accuracy of \\(3\\%\\), the accuracy to which \\(E\\) is known is ______ \\(\\%\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 14
+  },
+  {
+    "source_ref": "7d11220c-192e-4bfc-994a-ffd683a259a3",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2024",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two waves of intensity ratio \\(1:9\\) cross each other at a point. The resultant intensities at the point, when (a) Waves are incoherent is \\(I_{1}\\) (b) Waves are coherent is \\(I_{2}\\) and differ in phase by \\(60^{\\circ}\\). If \\(\\frac{I_{1}}{I_{2}}=\\frac{10}{x}\\) then \\(x =\\) ______ .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 13
+  },
+  {
+    "source_ref": "8a642b17-5bf3-412e-be25-b4881e7a1275",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 9 April 2024",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Monochromatic light of wavelength \\(500\\text{ }nm\\) is used in Young's double slit experiment. An interference pattern is obtained on a screen. When one of the slits is covered with a very thin glass plate (refractive index \\(= 1.5\\) ), the central maximum is shifted to a position previously occupied by the \\(4^{\\text{th~}}\\) bright fringe. The thickness of the glass-plate is ______ \\(\\mu m\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "d03479ac-9caa-4316-8233-00a6db040e24",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 23 Jan 2026 Shift 1",
+    "subject": "physics",
+    "chapter": "Wave Optics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "In two separate Young's double-slit experimental set-ups, two monochromatic light sources of different wavelengths are used to get fringes of equal width. The ratios of the slit separations and that of the wavelengths of light used are \\(2:1\\) and \\(1:2\\) respectively. The corresponding ratio of the distances between the slits and the respective screens ( \\(D_{1}/D_{2}\\) ) is \\(\\_\\_\\_\\_\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "8e782da4-e89f-4ef0-b4da-8d17080d4f5a",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 20",
+    "subject": "physics",
+    "chapter": "Waves",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Two cars \\(X\\) and \\(Y\\) are approaching each other with velocities \\(36\\text{ }km/h\\) and \\(72\\text{ }km/h\\) respectively. The frequency of a whistle sound as emitted by a passenger in car \\(X\\), heard by the passenger in car \\(Y\\) is \\(1320\\text{ }Hz\\). If the velocity of sound in air is \\(340\\text{ }m/s\\), the actual frequency of the whistle sound produced is \\(\\_\\_\\_\\_\\) Hz.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1210
+  },
+  {
+    "source_ref": "af3322ae-b86e-41b1-b21f-69f17eb92663",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 June 2022",
+    "subject": "physics",
+    "chapter": "Waves",
+    "format": "numeric",
+    "direction": null,
+    "stem": "In an experiment to determine the velocity of sound in air at room temperature using a resonance is observed when the air column has a length of 20.0 \\(cm\\) for a tuning fork of frequency \\(400\\text{ }Hz\\) is used. The velocity of the sound at room temperature is \\(336{\\text{ }ms}^{- 1}\\). The third resonance is observed when the air column has a length of \\(\\_\\_\\_\\_\\) cm.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 104
+  },
+  {
+    "source_ref": "c62b91a9-29ef-4fd8-8f8d-1e0d88b7dc47",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "physics",
+    "chapter": "Waves",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A transverse harmonic wave on a string is given by \\(y(x,t) = 5\\sin(6t + 0.003x)\\) where \\(x\\) and \\(y\\) are in \\(cm\\) and \\(t\\) in sec. The wave velocity is__ \\(ms^{- 1}\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 20
+  },
+  {
+    "source_ref": "e3562f7e-dec3-4435-84c9-bd6b27774964",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 11 April 2023",
+    "subject": "physics",
+    "chapter": "Work, Energy and Power",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A block of mass \\(5\\text{ }kg\\) starting from rest pulled up on a smooth incline plane making an angle of \\(30^{\\circ}\\) with horizontal with an affective acceleration of 1 \\(ms^{- 2}\\). The power delivered by the pulling force at \\(t = 10\\text{ }s\\) from the start is ____W. [Use \\(g = 10{\\text{ }ms}^{- 2}\\) ] (calculate the nearest integer value)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 300
+  },
+  {
+    "source_ref": "fd7c2aa3-93c2-4f68-a606-6371b9211a80",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 8 Apr 2023",
+    "subject": "physics",
+    "chapter": "Work, Energy and Power",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A body of mass \\(5\\text{ }kg\\) is moving with a momentum of \\(10\\text{ }kg{\\text{ }ms}^{- 1}\\). Now a force of \\(2\\text{ }N\\) acts on the body in the direction of its motion for \\(5\\text{ }s\\). The increase in the Kinetic energy of the body is ___J.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 30
+  }
+]

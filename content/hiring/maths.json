@@ -1,0 +1,4252 @@
+[
+  {
+    "source_ref": "14d831de-041b-404b-b316-21002752e5ce",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the length of the diameter of the sphere whose centre is at \\((1,-2,3)\\) and which touches the plane \\(6x-3y+2z-4=0\\)?",
+    "options": {
+      "A": "1 unit",
+      "B": "2 units",
+      "C": "3 units",
+      "D": "4 units"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2e0fc07c-965a-434f-b02f-324eb87c916e",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The points \\(P(3, 2, 4)\\), \\(Q(4, 5, 2)\\), \\(R(5, 8, 0)\\) and \\(S(2, -1, 6)\\) are",
+    "options": {
+      "A": "vertices of a rhombus which is not a square",
+      "B": "non-coplanar",
+      "C": "collinear",
+      "D": "coplanar but not collinear"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "42fe3a06-0ab6-44d2-bc05-9e3c447954a4",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\alpha\\), \\(\\beta\\) and \\(\\gamma\\) are the angles which the vector \\(\\overrightarrow{OP}\\) (\\(O\\) being the origin) makes with the positive direction of the coordinate axes, then which of the following are correct?\n1. \\(\\cos^2\\alpha + \\cos^2\\beta = \\sin^2\\gamma\\)\n2. \\(\\sin^2\\alpha + \\sin^2\\beta = \\cos^2\\gamma\\)\n3. \\(\\sin^2\\alpha + \\sin^2\\beta + \\sin^2\\gamma = 2\\)\nSelect the correct answer using the code given below.",
+    "options": {
+      "A": "1 and 2 only",
+      "B": "2 and 3 only",
+      "C": "1 and 3 only",
+      "D": "1, 2 and 3"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5e91c99d-506e-4ac6-9573-2e9f3ed5ceaf",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the points A(2, 4, 6), B(−2, −4, −2), C(4, 6, 4) and D(8, 14, 12). Which of the following statements is/are correct?\r\n1. The points are the vertices of a rectangle ABCD.\r\n2. The mid-point of AC is the same as that of BD.\r\nSelect the correct answer using the code given below:",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "aba5e5ea-e129-402f-907a-47e841a93fb3",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\n1. A line in space can have infinitely many direction ratios.\n2. It is possible for certain line that the sum of the squares of direction cosines can be equal to sum of its direction cosines.\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d8576695-fb8e-4783-bef0-9996274c5e0a",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equation of the plane passing through the line of intersection of the planes \\(x + y + z = 1\\), \\(2x + 3y + 4z = 7\\) and perpendicular to the plane \\(x - 5y + 3z = 5\\) is given by",
+    "options": {
+      "A": "\\(x + 2y + 3z - 6 = 0\\)",
+      "B": "\\(x + 2y + 3z + 6 = 0\\)",
+      "C": "\\(3x + 4y + 5z - 8 = 0\\)",
+      "D": "\\(3x + 4y + 5z + 8 = 0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d8d9f4d9-540e-4e91-8ee5-1357ac6a52bd",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "3D Geometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\langle l,m,n\\rangle\\) are the direction cosines of a normal to the plane \\(2x-3y+6z+4=0\\), then what is the value of \\(49(7l^2+m^2-n^2)\\)?",
+    "options": {
+      "A": "\\(0\\)",
+      "B": "\\(1\\)",
+      "C": "\\(3\\)",
+      "D": "\\(71\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "077bab37-13d4-403a-8085-1433813dc0c0",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the minimum value of \\([x(x-1)+1]^{\\frac{1}{3}}\\), where \\(0\\leq x\\leq 1\\)?",
+    "options": {
+      "A": "\\(\\left(\\frac{3}{4}\\right)^{\\frac{1}{3}}\\)",
+      "B": "\\(1\\)",
+      "C": "\\(\\frac{1}{2}\\)",
+      "D": "\\(\\left(\\frac{3}{8}\\right)^{\\frac{1}{3}}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0f2ce6a6-71c1-45fb-82c3-81255ed845fd",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the minimum value of \\(a^2x+b^2y\\) where \\(xy=c^2\\)?",
+    "options": {
+      "A": "abc",
+      "B": "2abc",
+      "C": "3abc",
+      "D": "4abc"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "52e031cf-16a0-4749-9909-86d68f2d5cb1",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(f(x) = \\int xe^x dx\\). Then \\(f(x)\\) decreases in the interval",
+    "options": {
+      "A": "\\((-\\infty, 0)\\)",
+      "B": "\\((0, \\infty)\\)",
+      "C": "\\((-\\infty, -1)\\)",
+      "D": "\\((-1, \\infty)\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a062ee1d-870d-477d-888b-7bbb598037cd",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements regarding the function \\(f(x)=\\dfrac{1}{x-5}\\):\nStatement-I: \\(f(x)\\) is decreasing on the intervals \\(x<5\\) and \\(x>5\\).\nStatement-II: \\(f'(x)>0\\) for all \\(x\\neq5\\). Which one of the following is correct?",
+    "options": {
+      "A": "Both Statement-I and Statement-II are correct and Statement-II explains Statement-I",
+      "B": "Both Statement-I and Statement-II are correct but Statement-II does not explain Statement-I",
+      "C": "Statement-I is correct but Statement-II is not correct",
+      "D": "Statement-I is not correct but Statement-II is correct"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a86d65e9-d83c-478d-a89b-e0c8ba4326fa",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "How many extreme values does \\(\\sin4x+2x\\), where \\(0<x<\\frac{\\pi}{2}\\), have?",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "4",
+      "D": "8"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b66499bc-ceac-4a26-bc2e-341fc4b5b547",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For the curve \\(y = xe^{2x}\\)",
+    "options": {
+      "A": "minimum occurs at \\(x = -2\\)",
+      "B": "minimum occurs at \\(x = -1\\)",
+      "C": "minimum occurs at \\(x = -1/2\\)",
+      "D": "maximum occurs at \\(x = -1/2\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d6603eac-055d-4cc3-934d-f2508a7d66a3",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the derivative of the function \\(f(x)=\\frac{m}{x}+2nx+1\\) vanishes at \\(x=2\\), then what is the value of \\(m+8n\\)?",
+    "options": {
+      "A": "-2",
+      "B": "0",
+      "C": "2",
+      "D": "Cannot be determined due to insufficient data"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "895c1a5c-2a5d-4a4a-8323-b98d34774b7c",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "Applications of Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the area of the region bounded by \\(x - |y| = 0\\) and \\(x - 2 = 0\\)?",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "4",
+      "D": "8"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c0aa2cc4-9520-455e-86dc-d288da7b3f6e",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Applications of Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the area bounded by \\(y=[x]\\), where \\([\\cdot]\\) is the greatest integer function, the \\(x\\)-axis and the lines \\(x=-1.5\\) and \\(x=-1.8\\)?",
+    "options": {
+      "A": "0.3 square unit",
+      "B": "0.4 square unit",
+      "C": "0.6 square unit",
+      "D": "0.8 square unit"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cd912bdb-d3b4-48c1-9c42-749f06868e45",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binary Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(x=(1111)_2,\\ y=(1001)_2\\) and \\(z=(110)_2\\), then what is \\(x^3-y^3-z^3-3xyz\\) equal to?",
+    "options": {
+      "A": "\\((1111001)_2\\)",
+      "B": "\\((1001111)_2\\)",
+      "C": "\\((1)_2\\)",
+      "D": "\\((0)_2\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "07aae3d6-64a4-44ae-93ea-a467413668fa",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Distribution",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In eight throws of a die, 5 or 6 is considered a success. The mean and standard deviation of total number of successes is respectively given by",
+    "options": {
+      "A": "\\(\\dfrac{8}{3},\\dfrac{16}{9}\\)",
+      "B": "\\(\\dfrac{8}{3},\\dfrac{4}{3}\\)",
+      "C": "\\(\\dfrac{4}{3},\\dfrac{4}{3}\\)",
+      "D": "\\(\\dfrac{4}{3},\\dfrac{16}{9}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ba5454bf-a538-4822-902f-98eeacc23825",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Distribution",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The mean and standard deviation of a binomial distribution are 12 and 2 respectively. What is the number of trials?",
+    "options": {
+      "A": "2",
+      "B": "12",
+      "C": "18",
+      "D": "24"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e0d3e485-41ad-4282-8164-9c1f6b7c9e60",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Distribution",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In Binomial distribution, mean is three times variance. What is the probability of exactly 3 successes in 5 trials?",
+    "options": {
+      "A": "80/243",
+      "B": "40/243",
+      "C": "20/243",
+      "D": "10/243"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e476a3e7-c17e-499e-87e1-d231828fc19e",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Binomial Distribution",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In a binomial distribution, if the mean is 6 and the standard deviation is \\(\\sqrt{2}\\), then what are the values of the parameters \\(n\\) and \\(p\\) respectively?",
+    "options": {
+      "A": "\\(18\\) and \\(\\dfrac{1}{3}\\)",
+      "B": "\\(9\\) and \\(\\dfrac{1}{3}\\)",
+      "C": "\\(18\\) and \\(\\dfrac{2}{3}\\)",
+      "D": "\\(9\\) and \\(\\dfrac{2}{3}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2ebd9095-e61c-4388-a49d-5743a558605b",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "mcq",
+    "direction": null,
+    "stem": "How many terms are there in the expansion of \\((1 + 2x + x^{2})^{5} + (1 + 4y + 4y^{2})^{5}\\) ?",
+    "options": {
+      "A": "12",
+      "B": "20",
+      "C": "21",
+      "D": "22"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "302705b9-1490-4aa7-9904-55761cefa933",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the sum of the last five coefficients in the expansion of \\((1+x)^9\\) when it is expanded in ascending powers of \\(x\\)?",
+    "options": {
+      "A": "256",
+      "B": "512",
+      "C": "1024",
+      "D": "2048"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c8495f6e-0df0-4d41-9875-8fb178181526",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the coefficient of \\(x^{2n}\\) in the expansion of the following?\n\\((1 + x)^{2n} \\left(1 + \\frac{1}{x}\\right)^{2n}\\)",
+    "options": {
+      "A": "1",
+      "B": "\\(2n(2n - 1)(2n - 2) \\ldots (n + 1)n\\)",
+      "C": "\\(4n(4n - 1)(4n - 2) \\ldots (2n + 1)(2n)\\)",
+      "D": "Such term does not exist"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e67d2787-63ce-4c76-a955-8413cd9f7581",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The expansion of \\((x-y)^n\\), \\(n \\geq 5\\) is done in descending powers of \\(x\\). If the sum of the fifth and sixth terms is zero, then \\(\\dfrac{x}{y}\\) is equal to",
+    "options": {
+      "A": "\\(\\dfrac{n-5}{6}\\)",
+      "B": "\\(\\dfrac{n-4}{5}\\)",
+      "C": "\\(\\dfrac{5}{n-4}\\)",
+      "D": "\\(\\dfrac{6}{n-5}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f516f536-61e5-420d-bb56-83452447ddb5",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(C(n,1)+C(n,2)+\\cdots+C(n,n)\\) equal to?",
+    "options": {
+      "A": "\\(2+2^2+2^3+\\cdots+2^n\\)",
+      "B": "\\(1+2+2^2+2^3+\\cdots+2^n\\)",
+      "C": "\\(1+2+2^2+2^3+\\cdots+2^{n-1}\\)",
+      "D": "\\(2+2^2+2^3+\\cdots+2^{n-1}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c621a004-fe3a-4d98-b597-4ccf335ac54d",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Circles",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The circle \\(x^2+y^2-2kx-2ky+k^2=0\\) touches the \\(x\\)-axis at \\(P\\) and \\(y\\)-axis at \\(Q\\). What is \\(PQ\\) equal to?",
+    "options": {
+      "A": "\\(\\sqrt{2}k\\)",
+      "B": "\\(2k\\)",
+      "C": "\\(2\\sqrt{2}k\\)",
+      "D": "\\(4k\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d8eb9ed6-7a27-4d05-88a1-fc78b31d1a30",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Circles",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The two circles \\(x^2+y^2=r^2\\) and \\(x^2+y^2-10x+16=0\\) intersect at two distinct points. Then which one of the following is correct?",
+    "options": {
+      "A": "\\(2<r<8\\)",
+      "B": "\\(r=2\\) or \\(r=8\\)",
+      "C": "\\(r<2\\)",
+      "D": "\\(r>2\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "12dd2ccb-7d4a-4206-884c-5073b7068d7e",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(z = x + iy\\) be such that \\(\\left| \\frac{z + \\lambda i}{z - \\lambda i} \\right| = 1\\), where \\(i = \\sqrt{-1}\\) and \\(\\lambda\\) is a positive real number, then which of the following statements is/are correct?\nI. \\(z\\) lies on the line \\(y = x\\).\nII. The amplitude of \\(z\\) is \\(\\frac{\\pi}{4}\\).\nSelect the answer using the code given below.",
+    "options": {
+      "A": "I only",
+      "B": "II only",
+      "C": "Both I and II",
+      "D": "Neither I nor II"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2c0a456b-b9ce-46ee-a645-ca91eddd217f",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(A = \\{x \\in \\mathbb{Z} : x^3 - 1 = 0\\}\\) and \\(B = \\{x \\in \\mathbb{Z} : x^2 + x + 1 = 0\\}\\), where Z is set of complex numbers, then what is \\(A \\cap B\\) equal to?",
+    "options": {
+      "A": "Null set",
+      "B": "\\(\\left\\{\\frac{-1+\\sqrt{3}\\,i}{2},\\, \\frac{-1-\\sqrt{3}\\,i}{2}\\right\\}\\)",
+      "C": "\\(\\left\\{\\frac{-1+\\sqrt{3}\\,i}{4},\\, \\frac{-1-\\sqrt{3}\\,i}{4}\\right\\}\\)",
+      "D": "\\(\\left\\{\\frac{1+\\sqrt{3}\\,i}{2},\\, \\frac{1-\\sqrt{3}\\,i}{2}\\right\\}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "76be5d9c-8cad-403d-8329-cc0bde41d658",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(|z+4| \\leq 3\\), then the maximum value of \\(|z+1|\\) is",
+    "options": {
+      "A": "0",
+      "B": "4",
+      "C": "6",
+      "D": "10"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "93e952ef-7802-4b18-b55a-16111c9e3474",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the argument of the complex number \\(\\frac{1-i\\sqrt{3}}{1+i\\sqrt{3}}\\), where \\(i=\\sqrt{-1}\\)?",
+    "options": {
+      "A": "\\(240°\\)",
+      "B": "\\(210°\\)",
+      "C": "\\(120°\\)",
+      "D": "\\(60°\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c160e5e4-9ed5-4080-9c63-4ec657af5c01",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\left(\\dfrac{1-i}{1+i}\\right)^{2m}\\left(\\dfrac{1+i}{1-i}\\right)^{2n}=1\\) where \\(i=\\sqrt{-1}\\), then what is the smallest positive value of \\((m-n)\\)?",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "4",
+      "D": "8"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e6475545-0b56-451f-8a30-1a1765cb0ad1",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements in respect of the roots of the equation \\(x^{3}-8=0\\):\n1. The roots are non-collinear.\n2. The roots lie on a circle of unit radius.\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f1db1a64-6269-425d-b811-5f3629d04070",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The modulus and principal argument of the complex number \\(\\dfrac{1+2i}{1-(1-i)^2}\\) are respectively",
+    "options": {
+      "A": "\\(1, 0\\)",
+      "B": "\\(1, 1\\)",
+      "C": "\\(2, 0\\)",
+      "D": "\\(2, 1\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4f521bba-b815-42f5-8142-2b0c193cc9e8",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Conics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The second degree equation \\(x^2 + 4y^2 - 2x - 4y + 2 = 0\\) represents",
+    "options": {
+      "A": "A point",
+      "B": "An ellipse of semi-major axis 1",
+      "C": "An ellipse with eccentricity \\(\\frac{\\sqrt{3}}{2}\\)",
+      "D": "None of the above"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5d6036fe-f0a7-4921-8664-f24ff3240513",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Conics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If any point on a hyperbola is \\((3\\tan\\theta, 2\\sec\\theta)\\), then what is the eccentricity of the hyperbola?",
+    "options": {
+      "A": "\\(\\frac{3}{2}\\)",
+      "B": "\\(\\frac{5}{2}\\)",
+      "C": "\\(\\frac{\\sqrt{11}}{2}\\)",
+      "D": "\\(\\frac{\\sqrt{13}}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9a0413fc-f577-4df7-888d-76797ffefd4d",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Conics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If any point on an ellipse is \\((3\\sin\\alpha, 5\\cos\\alpha)\\), then what is the eccentricity of the ellipse?",
+    "options": {
+      "A": "\\(\\frac{4}{3}\\)",
+      "B": "\\(\\frac{4}{5}\\)",
+      "C": "\\(\\frac{3}{4}\\)",
+      "D": "\\(\\frac{1}{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0534c2bd-b918-4db8-b601-781d95f7f290",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int_{1}^{e}x\\ln x\\,dx\\) equal to?",
+    "options": {
+      "A": "\\(\\frac{e+1}{4}\\)",
+      "B": "\\(\\frac{e^2+1}{4}\\)",
+      "C": "\\(\\frac{e-1}{4}\\)",
+      "D": "\\(\\frac{e^2-1}{4}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0886bac8-80a0-4464-ad51-5f0b1382d20b",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int_{-\\pi/2}^{\\pi/2}(e^{\\cos x}\\sin x+e^{\\sin x}\\cos x)\\,dx\\) equal to?",
+    "options": {
+      "A": "\\(\\frac{e^2-1}{e}\\)",
+      "B": "\\(\\frac{e^2+1}{e}\\)",
+      "C": "\\(\\frac{1-e^2}{e}\\)",
+      "D": "\\(0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "79f247bd-0a1d-4db7-abf2-c1813d55aed7",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "\\(\\displaystyle\\int_0^{\\pi/2}|\\sin x-\\cos x|\\,dx\\) is equal to",
+    "options": {
+      "A": "\\(0\\)",
+      "B": "\\(2(\\sqrt{2}-1)\\)",
+      "C": "\\(2\\sqrt{2}\\)",
+      "D": "\\(2(\\sqrt{2}+1)\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "85e0b0d6-df31-4bcb-a493-23b077d6144c",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(I_1=\\int_e^{e^2}\\dfrac{dx}{\\ln x}\\) and \\(I_2=\\int_1^2\\dfrac{e^x}{x}\\,dx\\), then which one of the following is correct?",
+    "options": {
+      "A": "\\(I_1-I_2=0\\)",
+      "B": "\\(I_1+I_2=0\\)",
+      "C": "\\(I_1-2I_2=0\\)",
+      "D": "\\(2I_1-I_2=0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e8ec2159-34f8-4930-b8b5-2247faebd00a",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int_0^{\\pi/2}\\dfrac{d\\theta}{1+\\cos\\theta}\\) equal to?",
+    "options": {
+      "A": "\\(\\dfrac{1}{2}\\)",
+      "B": "\\(1\\)",
+      "C": "\\(\\sqrt{3}\\)",
+      "D": "None of the above"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "13f0e1f4-50e3-45c9-9d8f-1617aec8a3b1",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the solution of (1+2x) dy - (1-2y) dx = 0?",
+    "options": {
+      "A": "x-y-2xy=c",
+      "B": "y-x-2xy=c",
+      "C": "y+x-2xy=c",
+      "D": "x+y+2xy=c"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "48eed135-6a92-4550-a62d-c4de082b7fbe",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Which differential equation has a periodic solution?",
+    "options": {
+      "A": "\\(\\frac{d^2x}{dt^2}+\\mu x=0\\)",
+      "B": "\\(\\frac{d^2x}{dt^2}-\\mu x=0\\)",
+      "C": "\\(x\\frac{dx}{dt}+\\mu t=0\\)",
+      "D": "\\(\\frac{dx}{dt}+\\mu xt=0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7626dcb9-785e-4322-9fa9-d092ffa7ab65",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The differential equation of minimum order by eliminating the arbitrary constants \\(A\\) and \\(C\\) in the equation \\(y = A[\\sin(x+C) + \\cos(x+C)]\\) is",
+    "options": {
+      "A": "\\(y'' + (\\sin x + \\cos x)y' = 1\\)",
+      "B": "\\(y'' = (\\sin x + \\cos x)y'\\)",
+      "C": "\\(y'' = (y')^2 + \\sin x\\cos x\\)",
+      "D": "\\(y'' + y = 0\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a2746e71-66be-47e2-9f76-94c206385817",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the degree of the differential equation \\(\\left(\\dfrac{d^2y}{dx^2}\\right)^{3/2}=\\left(\\dfrac{dy}{dx}\\right)^{5/2}\\)?",
+    "options": {
+      "A": "3",
+      "B": "2",
+      "C": "\\(\\dfrac{5}{2}\\)",
+      "D": "\\(\\dfrac{3}{2}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f85c99f8-8966-4fc4-b472-ff64b6a5a3e1",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the differential equation of the family of parabolas having vertex at origin and axis along positive y-axis?",
+    "options": {
+      "A": "\\(x\\frac{dy}{dx}+2y=0\\)",
+      "B": "\\(x\\frac{dy}{dx}-2y=0\\)",
+      "C": "\\(y\\frac{dx}{dy}+2x=0\\)",
+      "D": "\\(y\\frac{dx}{dy}-2x=0\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fe421244-5a75-41cd-b6cd-6cb6d42aba1d",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A solution of the differential equation \\(\\left(\\dfrac{dy}{dx}\\right)^{2}-x\\dfrac{dy}{dx}=0\\) is",
+    "options": {
+      "A": "\\(y=2x\\)",
+      "B": "\\(y=2x+4\\)",
+      "C": "\\(y=x^{2}-1\\)",
+      "D": "\\(y=\\dfrac{x^{2}-2}{2}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "156bca06-013d-4aa8-a4f6-fc393be77c80",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For \\(f(x)=x^2\\ln|x|\\) (\\(x\\ne0\\)), \\(f(0)=0\\), what is \\(f'(0)\\)?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "-1",
+      "D": "It does not exist"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "35463eb2-c9f5-451b-aa83-1ed1b617b679",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(x^m y^n=a^{m+n}\\), then what is \\(\\frac{dy}{dx}\\) equal to?",
+    "options": {
+      "A": "\\(\\frac{my}{nx}\\)",
+      "B": "\\(-\\frac{my}{nx}\\)",
+      "C": "\\(\\frac{mx}{ny}\\)",
+      "D": "\\(-\\frac{ny}{mx}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7c66ccee-6b1b-4beb-8d3d-2833a10da2d0",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the derivative of \\(f(x)=e^{\\tan x}+\\ln(\\sec x)-e^{\\ln x}\\) at \\(x=\\pi/4\\)?",
+    "options": {
+      "A": "\\(e/2\\)",
+      "B": "\\(e\\)",
+      "C": "2e",
+      "D": "4e"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "860ebf1a-20f0-4cbb-b82f-105f21ffa579",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(y = \\sec^{-1}\\!\\left(\\dfrac{x+1}{x-1}\\right) + \\sin^{-1}\\!\\left(\\dfrac{x-1}{x+1}\\right)\\), then \\(\\dfrac{dy}{dx}\\) is equal to",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "\\(\\dfrac{x-1}{x+1}\\)",
+      "D": "\\(\\dfrac{x+1}{x-1}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a71b980e-f033-43be-81d7-a3d0b77b5ae5",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the derivative of \\(e^x\\) with respect to \\(x^e\\)?",
+    "options": {
+      "A": "\\(\\frac{xe^x}{ex^e}\\)",
+      "B": "\\(\\frac{e^x}{x^e}\\)",
+      "C": "\\(\\frac{xe^x}{x^e}\\)",
+      "D": "\\(\\frac{e^x}{ex^e}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c2dbb163-38ea-4cb4-b027-67d0aa6a05aa",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let the slope of the curve \\(y=\\cos^{-1}(\\sin x)\\) be \\(\\tan\\theta\\). Then the value of \\(\\theta\\) in the interval \\((0,\\pi)\\) is",
+    "options": {
+      "A": "\\(\\frac{\\pi}{6}\\)",
+      "B": "\\(\\frac{3\\pi}{4}\\)",
+      "C": "\\(\\frac{\\pi}{4}\\)",
+      "D": "\\(\\frac{\\pi}{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ebf6073e-30b3-4ca8-bde9-a1512340a99e",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(y = \\cos^{-1}\\!\\left(\\dfrac{2x}{1+x^2}\\right)\\), then \\(\\dfrac{dy}{dx}\\) is equal to",
+    "options": {
+      "A": "\\(-\\dfrac{2}{1+x^2}\\) for all \\(|x| < 1\\)",
+      "B": "\\(-\\dfrac{2}{1+x^2}\\) for all \\(|x| > 1\\)",
+      "C": "\\(\\dfrac{2}{1+x^2}\\) for all \\(|x| < 1\\)",
+      "D": "None of the above"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "06ca7e0e-670c-4f3b-953d-62034ddc82dc",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A mapping \\(f:A\\to B\\) defined as \\(f(x)=\\dfrac{2x+3}{3x+5}\\), \\(x\\in A\\). If \\(f\\) is to be onto, then what are \\(A\\) and \\(B\\) equal to?",
+    "options": {
+      "A": "\\(A=R\\setminus\\left\\{-\\frac{5}{3}\\right\\}\\) and \\(B=R\\setminus\\left\\{-\\frac{2}{3}\\right\\}\\)",
+      "B": "\\(A=R\\) and \\(B=R\\setminus\\left\\{-\\frac{5}{3}\\right\\}\\)",
+      "C": "\\(A=R\\setminus\\left\\{-\\frac{3}{2}\\right\\}\\) and \\(B=R\\setminus\\{0\\}\\)",
+      "D": "\\(A=R\\setminus\\left\\{-\\frac{5}{3}\\right\\}\\) and \\(B=R\\setminus\\left\\{\\frac{2}{3}\\right\\}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0966e9fe-7685-461b-b63a-2f75a36f780d",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The domain of the function \\(f(x)=\\sqrt{(2-x)(x-3)}\\) is",
+    "options": {
+      "A": "\\((0,\\infty)\\)",
+      "B": "\\([0,\\infty)\\)",
+      "C": "\\([2,3]\\)",
+      "D": "\\((2,3)\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0ba2a8b1-3171-4db7-99bc-e36a4fcad3df",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(2f(x)+f(1-x)=x\\), then what is \\(f(x)\\) equal to?",
+    "options": {
+      "A": "\\(x-1\\)",
+      "B": "\\(x-\\dfrac{1}{3}\\)",
+      "C": "\\(2x\\)",
+      "D": "\\(2x-1\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "23a57a18-2a62-41dc-bdbe-204e3f0ad6df",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(f(x)=[x]^2-30[x]+221=0\\), where \\([x]\\) is the greatest integer function, then what is the sum of all integer solutions?",
+    "options": {
+      "A": "\\(13\\)",
+      "B": "\\(17\\)",
+      "C": "\\(27\\)",
+      "D": "\\(30\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "54c319fd-4b22-4d87-97ea-e4db6c457889",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\n1. A function \\(f:\\mathbb{Z}\\to\\mathbb{Z}\\), defined by \\(f(x)=x+1\\), is one-one as well as onto.\n2. A function \\(f:\\mathbb{N}\\to\\mathbb{N}\\), defined by \\(f(x)=x+1\\), is one-one but not onto.\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8f6e39ef-3d6a-4f1a-a70e-8b74899e6bcc",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(z=[y]\\) and \\(y=[x]-x\\), where \\([\\cdot]\\) is the greatest integer function. If \\(x\\) is not an integer but positive, then what is the value of \\(z\\)?",
+    "options": {
+      "A": "\\(-1\\)",
+      "B": "\\(0\\)",
+      "C": "\\(1\\)",
+      "D": "\\(2\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "96daf187-92cd-4736-9603-d5f126d0856b",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The inverse of the function \\(y = 5^{\\ln x}\\) is",
+    "options": {
+      "A": "\\(x = y^{\\frac{1}{\\ln 5}},\\ y > 0\\)",
+      "B": "\\(x = y^{\\ln 5},\\ y > 0\\)",
+      "C": "\\(x = y^{\\frac{1}{\\ln 5}},\\ y < 0\\)",
+      "D": "\\(x = 5\\ln y,\\ y > 0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "99f007c4-1d8a-4235-8b7a-8be60ea40b7c",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(A=\\{x\\in\\mathbb{R}:-1<x<1\\}\\). Which of the following is/are bijective functions from \\(A\\) to itself?\n(A) \\(f(x)=x|x|\\)\n(B) \\(g(x)=\\cos(\\pi x)\\)\nSelect the correct answer using the code given below:",
+    "options": {
+      "A": "A only",
+      "B": "B only",
+      "C": "Both A and B",
+      "D": "Neither A nor B"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d006d014-6601-46c3-9056-671b677718f6",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(f(x) = \\dfrac{4x+x^4}{1+4x^3}\\) and \\(g(x) = \\ln\\!\\left(\\dfrac{1+x}{1-x}\\right)\\), then what is the value of \\(f \\circ g\\!\\left(\\dfrac{e-1}{e+1}\\right)\\) equal to?",
+    "options": {
+      "A": "2",
+      "B": "1",
+      "C": "0",
+      "D": "\\(\\dfrac{1}{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fca60a82-71a6-4c9f-8bc3-2e943962dc4d",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Functions",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For \\(f(x)=\\frac{1}{\\sqrt{|x|-x}}\\), what is the domain of f?",
+    "options": {
+      "A": "\\((-\\infty,0)\\)",
+      "B": "\\((0,\\infty)\\)",
+      "C": "\\((-\\infty,\\infty)\\)",
+      "D": "\\((-\\infty,0]\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "87f679f5-989c-44b4-bbb5-90ad736d6316",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Height & Distance",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A balloon is directly above one end of a bridge. The angle of depression of the other end of the bridge from the balloon is 48°. If the height of the balloon above the bridge is 122 m, then what is the length of the bridge?",
+    "options": {
+      "A": "\\(122\\sin 48°\\) m",
+      "B": "\\(122\\tan 42°\\) m",
+      "C": "\\(122\\cos 48°\\) m",
+      "D": "\\(122\\tan 48°\\) m"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "08b42f44-f2cc-4a59-96e8-c645a1566411",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the integral of \\(f(x)=1+x^{2}+x^{4}\\) with respect to \\(x^{2}\\)?",
+    "options": {
+      "A": "\\(x+\\frac{x^{3}}{3}+\\frac{x^{5}}{5}+C\\)",
+      "B": "\\(\\frac{x^{3}}{3}+\\frac{x^{5}}{5}+C\\)",
+      "C": "\\(x^{2}+\\frac{x^{4}}{4}+\\frac{x^{6}}{6}+C\\)",
+      "D": "\\(x^{2}+\\frac{x^{4}}{2}+\\frac{x^{6}}{3}+C\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "450c847a-0715-48d7-a48d-916d0d94065e",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\int\\sqrt{1-\\sin 2x}\\,dx=A\\sin x+B\\cos x+C\\), where \\(0<x<\\frac{\\pi}{4}\\), then which one of the following is correct?",
+    "options": {
+      "A": "\\(A+B=0\\)",
+      "B": "\\(A+B-2=0\\)",
+      "C": "\\(A+B+2=0\\)",
+      "D": "\\(A+B-1=0\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "54e985e5-1981-45b0-b53f-9dd59c37dd04",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int\\frac{dx}{x(x^n+1)}\\) equal to?",
+    "options": {
+      "A": "\\(\\frac{1}{n}\\ln\\left(\\frac{x^n}{x^n+1}\\right)+c\\)",
+      "B": "\\(\\ln\\left(\\frac{x^n+1}{x^n}\\right)+c\\)",
+      "C": "\\(\\ln\\left(\\frac{x^n}{x^n+1}\\right)+c\\)",
+      "D": "\\(\\frac{1}{n}\\ln\\left(\\frac{x^n+1}{x^n}\\right)+c\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6ed95dee-7fc5-4d66-8750-f491a000e4a9",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int(\\sin x)^{-1/2}(\\cos x)^{-3/2}\\,dx\\) equal to?",
+    "options": {
+      "A": "\\(\\sqrt{\\tan x}+c\\)",
+      "B": "\\(2\\sqrt{\\tan x}+c\\)",
+      "C": "\\(\\sqrt{\\cot x}+c\\)",
+      "D": "\\(\\sqrt{2\\tan x}+c\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "96698925-b52a-4f64-92e1-beb3d189d5b5",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\int e^{x \\ln 10} e^x \\, dx\\) equal to?",
+    "options": {
+      "A": "\\(\\frac{(10e)^x}{1 + \\ln 10} + c\\)",
+      "B": "\\(\\frac{10e^x}{1 + \\ln 10} + c\\)",
+      "C": "\\(\\frac{e^{2x}}{2} + c\\)",
+      "D": "\\(\\frac{e^{2x}}{4} + c\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7337cfb2-48d4-4016-be80-2dde1d76efa8",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Inverse Trigonometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(3\\sin^{-1}x+\\cos^{-1}x=\\pi\\), then what is \\(x\\) equal to?",
+    "options": {
+      "A": "0",
+      "B": "\\(\\frac{1}{2}\\)",
+      "C": "\\(\\frac{1}{\\sqrt{2}}\\)",
+      "D": "\\(\\frac{1}{\\sqrt{3}}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "932e69d7-f6d6-4a83-9bf3-c0b70ed58ef9",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Inverse Trigonometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\tan^{-1}\\!\\left(\\frac{1}{4}\\right) + \\tan^{-1}\\!\\left(\\frac{3}{5}\\right)\\) equal to?",
+    "options": {
+      "A": "0",
+      "B": "\\(\\pi/4\\)",
+      "C": "\\(\\pi/3\\)",
+      "D": "\\(\\pi/2\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d2e1933e-efa4-475d-995b-297f4fb3a09d",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Inverse Trigonometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\tan\\left\\{2\\tan^{-1}\\left(\\dfrac{1}{3}\\right)\\right\\}\\) equal to ?",
+    "options": {
+      "A": "\\(\\dfrac{2}{3}\\)",
+      "B": "\\(\\dfrac{3}{4}\\)",
+      "C": "\\(\\dfrac{3}{8}\\)",
+      "D": "\\(\\dfrac{1}{9}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fc626d57-d6f7-4912-bfaf-1faf86b7062b",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Inverse Trigonometry",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\tan^2\\left(\\frac{1}{2} \\cos^{-1} \\frac{1}{3}\\right)\\) equal to?",
+    "options": {
+      "A": "\\(1/2\\)",
+      "B": "\\(1\\)",
+      "C": "\\(2\\)",
+      "D": "\\(4\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2907d6f4-77fa-446b-a2b1-3f56a9c61fa6",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\lim_{x\\to1}\\frac{x^3-1}{\\sqrt{x}-1}\\) equal to?",
+    "options": {
+      "A": "0",
+      "B": "3",
+      "C": "6",
+      "D": "Limit does not exist"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "86e2a9c0-d620-44bd-827b-9f6a95f0a301",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\lim_{x\\to\\frac{\\pi}{6}}\\frac{2\\sin^2x+\\sin x-1}{2\\sin^2x-3\\sin x+1}\\) equal to?",
+    "options": {
+      "A": "\\(-\\frac{1}{2}\\)",
+      "B": "\\(-\\frac{1}{3}\\)",
+      "C": "\\(-2\\)",
+      "D": "\\(-3\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9071c519-7748-4d01-a9df-d9a53c9b8003",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\lim_{x\\to0}\\frac{\\sin x\\log(1-x)}{x^2}\\) equal to?",
+    "options": {
+      "A": "\\(-1\\)",
+      "B": "Zero",
+      "C": "\\(-e\\)",
+      "D": "\\(-\\frac{1}{e}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "985919d9-3c61-47f5-9256-099c7894d1b0",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\lim_{x\\to0}\\frac{3^x+3^{-x}-2}{x}\\) equal to?",
+    "options": {
+      "A": "0",
+      "B": "\\(-1\\)",
+      "C": "1",
+      "D": "Limit does not exist"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a5fd82d4-4138-46bb-a55b-a47bb798e713",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(f(x)=\\begin{cases}1+\\frac{x}{2k},&0<x<2\\\\kx,&2\\le x<4\\end{cases}\\). If \\(\\lim_{x\\to2}f(x)\\) exists, then what is the value of \\(k\\)?",
+    "options": {
+      "A": "\\(-2\\)",
+      "B": "\\(-1\\)",
+      "C": "\\(0\\)",
+      "D": "\\(1\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c26a7896-65ae-428c-9c25-cda60bf465f3",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Limits & Continuity",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\lim_{x \\to \\infty} (\\sqrt{x + \\sqrt{x}} - \\sqrt{x})\\) equal to?",
+    "options": {
+      "A": "\\(-1/2\\)",
+      "B": "0",
+      "C": "\\(1/2\\)",
+      "D": "1"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8996bf3c-9193-4def-ab6e-9620ab7f862e",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Linear Inequalities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\left|x^{2}-3x+2\\right| > x^{2}-3x+2\\), then which one of the following is correct ?",
+    "options": {
+      "A": "\\(x \\leq 1\\) or \\(x \\geq 2\\)",
+      "B": "\\(1 \\leq x \\leq 2\\)",
+      "C": "\\(1 < x < 2\\)",
+      "D": "\\(x\\) is any real value except 3 and 4"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0672c2ad-776d-4c22-926b-94cfa54d31fc",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\nStatement I: If the line segment joining the points P(m, n) and Q(r, s) subtends an angle \\(\\alpha\\) at the origin, then \\(\\cos\\alpha=\\frac{ms-nr}{\\sqrt{(m^2+n^2)(r^2+s^2)}}\\).\nStatement II: In any triangle ABC, it is true that \\(a^2=b^2+c^2-2bc\\cos A\\). Which one of the following is correct in respect of the above two statements?",
+    "options": {
+      "A": "Both Statement I and Statement II are true and Statement II is the correct explanation of Statement I",
+      "B": "Both Statement I and Statement II are true, but Statement II is not the correct explanation of Statement I",
+      "C": "Statement I is true, but Statement II is false",
+      "D": "Statement I is false, but Statement II is true"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0c0b5471-0f18-4e3a-8e70-0c56125851d7",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equation of the line passing through the point \\((2, 3)\\) and the point of intersection of lines \\(2x - 3y + 7 = 0\\) and \\(7x + 4y + 2 = 0\\) is",
+    "options": {
+      "A": "\\(21x + 46y - 180 = 0\\)",
+      "B": "\\(21x - 46y + 96 = 0\\)",
+      "C": "\\(46x + 21y - 155 = 0\\)",
+      "D": "\\(46x - 21y - 29 = 0\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1532b938-ffe3-498f-82e0-bfeed796d1f8",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The angle between the two lines \\(lx + my + n = 0\\) and \\(l'x + m'y + n' = 0\\) is given by \\(\\tan^{-1}\\theta\\). What is \\(\\theta\\) equal to?",
+    "options": {
+      "A": "\\(\\left|\\frac{lm'-l'm}{ll'+mm'}\\right|\\)",
+      "B": "\\(\\left|\\frac{lm'+l'm}{ll'+mm'}\\right|\\)",
+      "C": "\\(\\left|\\frac{lm'-l'm}{ll'+mm'}\\right|\\)",
+      "D": "\\(\\left|\\frac{lm'+l'm}{ll'-mm'}\\right|\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1fe2822e-d6ee-49d6-82e6-7feb39d7dd71",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "ABC is an equilateral triangle and AD is the altitude on BC. If the coordinates of A are \\((1, 2)\\) and that of D are \\((-2, 6)\\), then what is the equation of BC?",
+    "options": {
+      "A": "\\(3x + 4y - 18 = 0\\)",
+      "B": "\\(4x + 3y - 1 = 0\\)",
+      "C": "\\(4x - 3y + 26 = 0\\)",
+      "D": "\\(3x - 4y + 30 = 0\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2662c5ad-ec55-468c-912f-f8ec8f8622bd",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A line \\((\\sin \\theta) x + (\\cos \\theta) y = \\sin 2\\theta\\) cuts the coordinate axes at points \\(P\\) and \\(Q\\). Let \\(M\\) be the midpoint of the line segment \\(PQ\\). What is the distance of \\(M\\) from the origin?",
+    "options": {
+      "A": "2",
+      "B": "1",
+      "C": "\\(\\cos \\theta + \\sin \\theta\\)",
+      "D": "\\(\\cos \\theta - \\sin \\theta\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2f6bf043-1e52-43cd-ac74-329aa8c8b435",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The points \\((1,3)\\) and \\((5,1)\\) are two opposite vertices of a rectangle. The other two vertices lie on the line \\(y=2x+c\\). What is the value of c?",
+    "options": {
+      "A": "\\(2\\)",
+      "B": "\\(-2\\)",
+      "C": "\\(4\\)",
+      "D": "\\(-4\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "51dd9efc-d4fb-4b39-870d-4c7ce885b4f9",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the equation of straight line passing through the point of intersection of the lines \\(\\frac{x}{2}+\\frac{y}{3}=1\\) and \\(\\frac{x}{3}+\\frac{y}{2}=1\\), and parallel to the line \\(4x+5y-6=0\\)?",
+    "options": {
+      "A": "\\(20x+25y-54=0\\)",
+      "B": "\\(25x+20y-54=0\\)",
+      "C": "\\(4x+5y-54=0\\)",
+      "D": "\\(4x+5y-45=0\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9af33235-0707-4e5d-9b3e-e85733c27d4b",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the centroid of a triangle formed by \\((7, x)\\), \\((y, -6)\\) and \\((9, 10)\\) is \\((6, 3)\\), then the values of \\(x\\) and \\(y\\) are respectively",
+    "options": {
+      "A": "5, 2",
+      "B": "2, 5",
+      "C": "1, 0",
+      "D": "0, 0"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b099724d-b160-4b80-b653-38759b6fcad5",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A ray of light passing through the point \\(P(1, 2)\\) reflects on the \\(x\\)-axis at point \\(N\\) and the reflected ray passes through the point \\(Q(5, 3)\\). What is the distance of the point \\(N\\) from the origin?",
+    "options": {
+      "A": "3 units",
+      "B": "14 / 5 units",
+      "C": "13 / 5 units",
+      "D": "2 units"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c5b0c644-1e55-425a-917e-ef2e17c00d8d",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 2",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The line \\(x+y=4\\) cuts the line joining \\(P(-1,1)\\) and \\(Q(5,7)\\) at \\(R\\). What is \\(PR:RQ\\) equal to?",
+    "options": {
+      "A": "1:1",
+      "B": "1:2",
+      "C": "2:1",
+      "D": "1:3"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "dedf9d15-1b5b-4cab-ac7c-cb1dccd80efd",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Lines",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the equation of the line through the intersection of \\(x+2y-3=0\\) and \\(2x-y+5=0\\), parallel to \\(y-x+10=0\\)?",
+    "options": {
+      "A": "\\(7x-7y+18=0\\)",
+      "B": "\\(5x-7y+18=0\\)",
+      "C": "\\(5x-5y+18=0\\)",
+      "D": "\\(x-y+5=0\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "041f166d-bf0b-4070-87e8-40d5a59d5e83",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Logarithms",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(x + \\log_{10}(1 + 2^x) = x\\log_{10} 5 + \\log_{10} 6\\), then \\(x\\) is equal to",
+    "options": {
+      "A": "2, -3",
+      "B": "2 only",
+      "C": "1",
+      "D": "3"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "96f19014-9e10-4efc-b79a-d54157e0be47",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Logarithms",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\((0.2)^x = 2\\) and \\(\\log_{10} 2 = 0.3010\\), then what is the value of x to the nearest tenth?",
+    "options": {
+      "A": "-10.0",
+      "B": "-0.5",
+      "C": "-0.4",
+      "D": "-0.2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e2ac4105-59e5-479b-96ac-530dcaceeac5",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Logarithms",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the value of \\(\\frac{1}{10}\\log_5 1024 - \\log_5 10 + \\frac{1}{5}\\log_5 3125\\)?",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "2",
+      "D": "3"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0022099b-9399-4c08-ab2d-ae8a377a9c5d",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If matrix \\(A = \\begin{pmatrix} 1-i & i \\\\ -i & 1-i \\end{pmatrix}\\) where \\(i = \\sqrt{-1}\\), then which one of the following is correct?",
+    "options": {
+      "A": "A is hermitian",
+      "B": "A is skew-hermitian",
+      "C": "\\((\\bar{A})^T + A\\) is hermitian",
+      "D": "\\((\\bar{A})^T + A\\) is skew-hermitian"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "02adb29f-e764-4688-a0fe-2a53f6ed9ba3",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\begin{vmatrix}a-b & p-q & x-y\\\\b-c & q-r & y-z\\\\c-a & r-p & z-x\\end{vmatrix}=k\\begin{vmatrix}a & b & c\\\\p & q & r\\\\x & y & z\\end{vmatrix}\\), then what is the value of \\(k\\)?",
+    "options": {
+      "A": "-1",
+      "B": "0",
+      "C": "\\(\\dfrac{1}{2}\\)",
+      "D": "1"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "05630201-75ea-494a-8f24-f693334484f5",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\Delta_1 = \\begin{vmatrix}1 & p & q\\\\1 & q & r\\\\1 & r & p\\end{vmatrix}\\) and \\(\\Delta_2 = \\begin{vmatrix}1 & 1 & 1\\\\q & r & p\\\\r & p & q\\end{vmatrix}\\) where \\(p \\neq q \\neq r\\), then \\(\\Delta_1 + \\Delta_2\\) is",
+    "options": {
+      "A": "0",
+      "B": "always positive",
+      "C": "always negative",
+      "D": "positive if \\(p, q, r\\) are positive else negative"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0b464bdf-ecab-427b-b86d-e23725d05182",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(A\\), \\(B\\) and \\(C\\) are square matrices of order 3 and \\(\\det(BC) = 2\\det(A)\\), then what is the value of \\(\\det(2A^{-1}BC)\\)?",
+    "options": {
+      "A": "16",
+      "B": "8",
+      "C": "4",
+      "D": "2"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1da3625a-ca00-4fc9-9dfd-8530a9347b00",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The system of equations \\(2x + y - 3z = 5\\), \\(3x - 2y + 2z = 5\\) and \\(5x - 3y - z = 16\\)",
+    "options": {
+      "A": "is inconsistent",
+      "B": "is consistent, with a unique solution",
+      "C": "is consistent, with infinitely many solutions",
+      "D": "has its solution lying along x-axis in three-dimensional space"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1f144181-e08f-47aa-9329-27b52b43e2ec",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(A = \\begin{pmatrix}2\\sin\\theta & \\cos\\theta & 0\\\\-2\\cos\\theta & \\sin\\theta & 0\\\\-1 & 1 & 1\\end{pmatrix}\\), then what is \\(A(\\text{adj}A)\\) equal to?",
+    "options": {
+      "A": "Null matrix",
+      "B": "\\(-I\\)",
+      "C": "I",
+      "D": "2I"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "221e8350-71d7-4600-972a-78a6775d559b",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(M=\\begin{pmatrix}2&0&0\\\\0&2&0\\\\0&0&2\\end{pmatrix}\\), then what is the value of \\(|M|\\cdot|\\text{adj}M|\\)?",
+    "options": {
+      "A": "8",
+      "B": "64",
+      "C": "256",
+      "D": "512"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "22271da5-dc63-497c-8544-9dbbc49f0fc1",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "With the numbers 2, 4, 6, 8, all the possible determinants with these four different elements are constructed. What is the sum of the values of all such determinants?",
+    "options": {
+      "A": "128",
+      "B": "64",
+      "C": "32",
+      "D": "0"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5c12d97b-3297-469b-a255-1d5e9ddc8fa5",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the adjoint of the matrix \\(\\begin{pmatrix} \\cos(-\\theta) & -\\sin(-\\theta) \\\\ -\\sin(-\\theta) & \\cos(-\\theta) \\end{pmatrix}\\)?",
+    "options": {
+      "A": "\\(\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ -\\sin\\theta & \\cos\\theta \\end{pmatrix}\\)",
+      "B": "\\(\\begin{pmatrix} \\cos\\theta & \\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}\\)",
+      "C": "\\(\\begin{pmatrix} \\cos\\theta & \\sin\\theta \\\\ -\\sin\\theta & \\cos\\theta \\end{pmatrix}\\)",
+      "D": "\\(\\begin{pmatrix} \\cos\\theta & -\\sin\\theta \\\\ \\sin\\theta & \\cos\\theta \\end{pmatrix}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6ac6d285-b829-41d8-ab80-02850d005a28",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements about the matrix \\(M=\\begin{pmatrix}71&23&48\\\\57&28&29\\\\65&17&48\\end{pmatrix}\\):\nStatement-I: The inverse of \\(M\\) does not exist.\nStatement-II: \\(M\\) is non-singular. Which one of the following is correct?",
+    "options": {
+      "A": "Both Statement-I and Statement-II are correct and Statement-II explains Statement-I",
+      "B": "Both Statement-I and Statement-II are correct but Statement-II does not explain Statement-I",
+      "C": "Statement-I is correct but Statement-II is not correct",
+      "D": "Statement-I is not correct but Statement-II is correct"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6acf2c72-3ed7-41b8-b1b6-ced8f1a6b593",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "How many matrices of different orders are possible with elements comprising all prime numbers less than 30?",
+    "options": {
+      "A": "2",
+      "B": "3",
+      "C": "4",
+      "D": "6"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "771d677e-1b0f-4f27-ac56-c30f03b13e41",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The equations \\(x+2y+3z=1\\), \\(2x+y+3z=2\\), \\(5x+5y+9z=4\\)",
+    "options": {
+      "A": "have the unique solution",
+      "B": "have infinitely many solutions",
+      "C": "are inconsistent",
+      "D": "None of the above"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "82db3496-dd60-45b1-8906-07068f7734b8",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "In obtaining the solution of the system of equations \\(x+y+z=7\\), \\(x+2y+3z=16\\) and \\(x+3y+4z=22\\) by Cramer's rule, the value of \\(y\\) is obtained by dividing \\(D\\) by \\(D_2\\), where \\(D=\\begin{vmatrix}1&1&1\\\\1&2&3\\\\1&3&4\\end{vmatrix}\\). What is the value of the determinant \\(D_2\\)?",
+    "options": {
+      "A": "-13",
+      "B": "-3",
+      "C": "3",
+      "D": "13"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8771baff-655e-4b90-a4b7-636ccf90745b",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(A = \\begin{pmatrix} 1 & 2 & 2 \\\\ 2 & 1 & 2 \\\\ 2 & 2 & 1 \\end{pmatrix}\\) then what is \\(A^2 - 4A\\) equal to? (where \\(I_3\\) is the identity matrix of order 3)",
+    "options": {
+      "A": "\\(-5I_3\\)",
+      "B": "\\(-I_3\\)",
+      "C": "\\(I_3\\)",
+      "D": "\\(5I_3\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "90f4bc8f-0c62-44a8-b275-fa0c88349c7e",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If in a triangle \\(ABC\\), \\(\\sin^3A+\\sin^3B+\\sin^3C=3\\sin A\\sin B\\sin C\\), then what is the value of the determinant \\(\\begin{vmatrix}a&b&c\\\\b&c&a\\\\c&a&b\\end{vmatrix}\\)?",
+    "options": {
+      "A": "\\(a+b+c\\)",
+      "B": "\\(ab+bc+ca\\)",
+      "C": "\\((a+b)(b+c)(c+a)\\)",
+      "D": "\\(0\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ca983083-fa6c-4a8e-ada8-a7353e9cd668",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the determinant \\(\\begin{vmatrix}x & 1 & 3\\\\0 & 0 & 1\\\\1 & x & 4\\end{vmatrix} = 0\\), then what is \\(x\\) equal to?",
+    "options": {
+      "A": "\\(-2\\) or \\(2\\)",
+      "B": "\\(-3\\) or \\(3\\)",
+      "C": "\\(-1\\) or \\(1\\)",
+      "D": "\\(3\\) or \\(4\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cb96362c-a449-43bf-8896-bef877b5f6f2",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\nStatement-I: If \\(X\\) is an \\(n\\times n\\) matrix, then \\(\\det(mX)=m^n\\det(X)\\), where \\(m\\) is a scalar.\nStatement-II: If \\(Y\\) is a matrix obtained from \\(X\\) by multiplying any row or column by a scalar \\(m\\), then \\(\\det(Y)=m\\det(X)\\). Which one of the following is correct in respect of the above statements?",
+    "options": {
+      "A": "Both Statement-I and Statement-II are correct and Statement-II explains Statement-I",
+      "B": "Both Statement-I and Statement-II are correct but Statement-II does not explain Statement-I",
+      "C": "Statement-I is correct but Statement-II is not correct",
+      "D": "Statement-I is not correct but Statement-II is correct"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ff90c302-2337-4aee-a432-6cccae6692ac",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Matrices & Determinants",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(p=(x+y+z)\\) and \\(q=xyz\\). If \\(\\begin{vmatrix}x&1&1\\\\1&y&1\\\\1&1&z\\end{vmatrix}\\) is positive, then which one of the following is correct?",
+    "options": {
+      "A": "\\(q>p\\)",
+      "B": "\\(q+1>p\\)",
+      "C": "\\(q+2>p\\)",
+      "D": "\\(q+2\\geq p\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1ed91ebc-2507-4bd6-92bd-294552cb7db6",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\n1. \\(\\frac{n!}{3!}\\) is divisible by 6, where \\(n>3\\)\n2. \\(\\frac{n!}{3!}+3\\) is divisible by 7, where \\(n>3\\)\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "24d1c6ed-90df-4008-ae0d-931ec7dd0dca",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "From 6 programmers and 4 typists, an office wants to recruit 5 people. What is the number of ways this can be done so as to recruit at least one typist?",
+    "options": {
+      "A": "209",
+      "B": "210",
+      "C": "246",
+      "D": "242"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "254cf562-a34d-4ded-b57d-234a100afbc7",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "How many permutations are there of the letters of the word 'TIGER' in which the vowels should not occupy the even positions?",
+    "options": {
+      "A": "72",
+      "B": "36",
+      "C": "18",
+      "D": "12"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b75344a4-cbb4-4b5f-b46b-5854b25b222c",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The letters of the word **EQUATION** are arranged in such a way that all vowels as well as consonants are together. How many such arrangements are there?",
+    "options": {
+      "A": "\\(240\\)",
+      "B": "\\(720\\)",
+      "C": "\\(1440\\)",
+      "D": "\\(1620\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c434c6f1-80fd-4fcb-a7ee-5e8a471be282",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the number of triangles that can be formed by choosing vertices from 12 points, 7 of which lie on the same line?",
+    "options": {
+      "A": "185",
+      "B": "175",
+      "C": "115",
+      "D": "105"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e74e8756-6f0d-4937-bf97-fd136a8ff0c7",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the digits 3, 5, 7, 9. What is the number of 5-digit numbers formed by these digits in which each of these four digits appears?",
+    "options": {
+      "A": "240",
+      "B": "180",
+      "C": "120",
+      "D": "60"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f38046f2-e736-457b-8384-5ce83731cd32",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Permutation & Combination",
+    "format": "mcq",
+    "direction": null,
+    "stem": "\\(m\\) parallel lines cut \\(n\\) parallel lines giving rise to 60 parallelograms. What is the value of \\((m+n)\\)?",
+    "options": {
+      "A": "6",
+      "B": "7",
+      "C": "8",
+      "D": "9"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "067c3c32-1bdc-41ab-a913-5bb7b178db2d",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Three fair dice are thrown. What is the probability of getting a total greater than or equal to 15?",
+    "options": {
+      "A": "\\(\\frac{19}{216}\\)",
+      "B": "\\(\\frac{1}{12}\\)",
+      "C": "\\(\\frac{17}{216}\\)",
+      "D": "\\(\\frac{5}{54}\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "231635ab-b2bc-43a5-affc-a2419520c300",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements :\n1. If \\(A\\) and \\(B\\) are mutually exclusive events, then it is possible that \\(P(A) = P(B) = 0.6\\).\n2. If \\(A\\) and \\(B\\) are any two events such that \\(P(A|B) = 1\\), then \\(P(\\bar{B}|\\bar{A}) = 1\\).\nWhich of the above statements is/are correct ?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3816d58a-dc1f-42ce-a192-ada8606a4379",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A husband and wife appear in an interview for two vacancies for the same post. The probability of the husband's selection is \\(\\frac{1}{7}\\) and that of the wife's selection is \\(\\frac{1}{5}\\). If the events are independent, then the probability of which one of the following is \\(\\frac{11}{35}\\)?",
+    "options": {
+      "A": "At least one of them will be selected",
+      "B": "Only one of them will be selected",
+      "C": "None of them will be selected",
+      "D": "Both of them will be selected"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4739a578-de05-4d18-b2ae-03dceeeb1aad",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A Mathematics problem is given to two students \\(X\\) and \\(Y\\) to solve. The odds in favour of \\(X\\) solving the problem are 6 to 9 and the odds against \\(Y\\) in solving the problem are 6 to 5. What is the probability that the problem will be solved if both \\(X\\) and \\(Y\\) try to solve the problem?",
+    "options": {
+      "A": "27/55",
+      "B": "31/55",
+      "C": "37/55",
+      "D": "39/55"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4b80dbfa-83e4-4219-bbe4-7e5ee5be31e7",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "There are n socks in a drawer, of which 3 socks are red. If 2 of the socks are chosen randomly and the probability that both selected socks are red is \\(\\dfrac{1}{2}\\), then what is the value of n?",
+    "options": {
+      "A": "3",
+      "B": "4",
+      "C": "5",
+      "D": "6"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "61731eaf-3347-41f1-9bad-7b820ea2eb38",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If two fair dice are rolled then what is the conditional probability that the first dice lands on 6 given that the sum of numbers on the dice is 8?",
+    "options": {
+      "A": "\\(\\dfrac{1}{3}\\)",
+      "B": "\\(\\dfrac{1}{4}\\)",
+      "C": "\\(\\dfrac{1}{5}\\)",
+      "D": "\\(\\dfrac{1}{6}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7b45bb44-aca3-4bce-b52a-dd1e0e5e6cfb",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Out of 50 consecutive natural numbers, two integers are chosen at random. What is the probability that their sum is odd?",
+    "options": {
+      "A": "1/2",
+      "B": "24/49",
+      "C": "1/4",
+      "D": "25/49"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "80b23020-9b3f-40b8-a0b9-438e49ffff3a",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(A\\) and \\(B\\) be two independent events such that \\(P(\\bar{A})=0.7\\), \\(P(\\bar{B})=k\\), \\(P(A\\cup B)=0.8\\). What is the value of \\(k\\)?",
+    "options": {
+      "A": "\\(\\dfrac{5}{7}\\)",
+      "B": "\\(\\dfrac{4}{7}\\)",
+      "C": "\\(\\dfrac{2}{7}\\)",
+      "D": "\\(\\dfrac{1}{7}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "841cf73b-50e8-498e-9057-a10a7cbd4495",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two symmetric dice flipped with each dice having two sides painted red, two painted black, one painted yellow and the other painted white. What is the probability that both land on the same colour?",
+    "options": {
+      "A": "\\(\\dfrac{3}{18}\\)",
+      "B": "\\(\\dfrac{2}{9}\\)",
+      "C": "\\(\\dfrac{5}{18}\\)",
+      "D": "\\(\\dfrac{1}{3}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8a8ce8d0-35d7-4b03-b9c4-8ec82dda1e03",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let two events \\(A\\) and \\(B\\) be such that \\(P(A)=L\\) and \\(P(B)=M\\). Which one of the following is correct?",
+    "options": {
+      "A": "\\(P(A|B) < \\frac{L+M-1}{M}\\)",
+      "B": "\\(P(A|B) > \\frac{L+M-1}{M}\\)",
+      "C": "\\(P(A|B) \\geq \\frac{L+M-1}{M}\\)",
+      "D": "\\(P(A|B) = \\frac{L+M-1}{M}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "94310278-bf16-4eab-872f-b268dd57c776",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A fair coin is tossed 4 times. What is the probability that two heads do not occur consecutively?",
+    "options": {
+      "A": "1/8",
+      "B": "3/8",
+      "C": "7/16",
+      "D": "1/2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "acbd03b2-dd64-4c1e-9d73-6f173ae0004d",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(P(A\\cup B)=\\frac{5}{6}\\), \\(P(A\\cap B)=\\frac{1}{3}\\) and \\(P(\\text{not }A)=\\frac{1}{2}\\), then which one of the following is \\(\\textbf{\\text{not}}\\) correct?",
+    "options": {
+      "A": "\\(P(B)=\\frac{2}{3}\\)",
+      "B": "\\(P(A\\cap B)=P(A)P(B)\\)",
+      "C": "\\(P(A\\cup B)>P(A)+P(B)\\)",
+      "D": "\\(P(\\text{not A and not B})=P(\\text{not A})P(\\text{not B})\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b4faca73-53c5-4637-8579-6e2763d88b47",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let A, B and C be three mutually exclusive and exhaustive events associated with a random experiment. If \\(P(B)=1.5\\,P(A)\\) and \\(P(C)=0.5\\,P(B)\\), then P(A) is equal to",
+    "options": {
+      "A": "\\(\\frac{3}{4}\\)",
+      "B": "\\(\\frac{4}{13}\\)",
+      "C": "\\(\\frac{2}{3}\\)",
+      "D": "\\(\\frac{1}{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cc2d9eac-05a9-4a61-9027-c55ae285d2a5",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Three cooks X, Y and Z bake a special kind of cake, and with respective probabilities 0·02, 0·03 and 0·05, it fails to rise. In the restaurant where they work, X bakes 50%, Y bakes 30% and Z bakes 20% of cakes. What is the proportion of failures caused by X?",
+    "options": {
+      "A": "\\(\\frac{9}{29}\\)",
+      "B": "\\(\\frac{10}{29}\\)",
+      "C": "\\(\\frac{19}{29}\\)",
+      "D": "\\(\\frac{28}{29}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cf9da122-b2ee-4ce8-9173-8fe0c2299c92",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If two dice are thrown and at least one of the dice shows 5, then the probability that the sum is 10 or more is",
+    "options": {
+      "A": "\\(\\frac{1}{6}\\)",
+      "B": "\\(\\frac{4}{11}\\)",
+      "C": "\\(\\frac{3}{11}\\)",
+      "D": "\\(\\frac{2}{11}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "cff0dd34-2df0-45a6-9470-450a91ab307f",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the probability that at least two persons out of a group of three persons were born in the same month (disregard year)?",
+    "options": {
+      "A": "\\(\\dfrac{33}{144}\\)",
+      "B": "\\(\\dfrac{17}{72}\\)",
+      "C": "\\(\\dfrac{1}{144}\\)",
+      "D": "\\(\\dfrac{2}{9}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "dce3763d-29e5-4f46-b504-f5a5edc8b335",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If three dice are rolled under the condition that no two dice show the same face, then what is the probability that one of the faces is having the number 6?",
+    "options": {
+      "A": "\\(\\frac{5}{6}\\)",
+      "B": "\\(\\frac{5}{9}\\)",
+      "C": "\\(\\frac{1}{2}\\)",
+      "D": "\\(\\frac{5}{12}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "71080148-6ac4-4a33-9219-8c63260ad810",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "Properties of Triangle",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\nA. In a triangle \\(ABC\\), if \\(\\cot A\\cdot\\cot B\\cdot\\cot C>0\\), then the triangle is an acute angled triangle.\nB. In a triangle \\(ABC\\), if \\(\\tan A\\cdot\\tan B\\cdot\\tan C>0\\), then the triangle is an obtuse angled triangle.\nWhich of the statements given above is/are correct?",
+    "options": {
+      "A": "A Only",
+      "B": "B Only",
+      "C": "Both A and B",
+      "D": "Neither A nor B"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "793b1627-e00a-49c5-b378-6cfd49077659",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Properties of Triangle",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The angles A, B and C of a triangle are in the ratio 1:1:4. If the longest side of the triangle is 3 units, then what is the perimeter of the triangle?",
+    "options": {
+      "A": "\\(3+\\sqrt{3}\\) units",
+      "B": "\\(3+2\\sqrt{3}\\) units",
+      "C": "\\(3+3\\sqrt{3}\\) units",
+      "D": "\\(6+\\sqrt{3}\\) units"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "afc74373-cb7a-4a02-a6d8-dff336fe36b5",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Properties of Triangle",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The roots of the equation \\(7x^2-6x+1=0\\) are \\(\\tan\\alpha\\) and \\(\\tan\\beta\\), where \\(2\\alpha\\) and \\(2\\beta\\) are the angles of a triangle. Which one of the following is correct?",
+    "options": {
+      "A": "The triangle is equilateral",
+      "B": "The triangle is isosceles but not right-angled",
+      "C": "The triangle is right-angled",
+      "D": "The triangle is right-angled isosceles"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e6a17968-ca4e-4dd9-a040-ca681c35232c",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Properties of Triangle",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The sides of a triangle are \\(m\\), \\(n\\) and \\(\\sqrt{m^2+n^2+mn}\\). What is the sum of the acute angles of the triangle?",
+    "options": {
+      "A": "45°",
+      "B": "60°",
+      "C": "75°",
+      "D": "90°"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "01ec3259-7d26-4ce2-9aa8-ebcb6c627d69",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the value of \\(k\\) for which the sum of the squares of the roots of \\(2x^{2} - 2(k-2)x - (k+1) = 0\\) is minimum ?",
+    "options": {
+      "A": "-1",
+      "B": "1",
+      "C": "\\(\\frac{3}{2}\\)",
+      "D": "2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0b373f1b-bac1-47e3-9632-b730be7e4f20",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 1",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(k\\) is one of the roots of the equation \\(x(x+1)+1=0\\), then what is its other root?",
+    "options": {
+      "A": "1",
+      "B": "\\(-k\\)",
+      "C": "\\(k^2\\)",
+      "D": "\\(-k^2\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1db5da44-88f7-4e27-9263-c6df6502ec76",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(x^2 - 2x\\cos\\theta + 1 = 0\\), then what is the magnitude of \\(x\\)?",
+    "options": {
+      "A": "\\(-1\\)",
+      "B": "0",
+      "C": "1",
+      "D": "\\(\\sqrt{2}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "77926910-7f17-4aed-ac8c-581c7fba79f6",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If one root of the equation \\(x^2 - kx + k = 0\\) exceeds the other by \\(2\\sqrt{3}\\), then which one of the following is a value of \\(k\\)?",
+    "options": {
+      "A": "\\(3\\)",
+      "B": "\\(6\\)",
+      "C": "\\(9\\)",
+      "D": "\\(12\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c950779c-6801-4568-988a-d0304b9194a8",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The roots of the equation \\((q-r)x^2 + (r-p)x + (p-q) = 0\\) are",
+    "options": {
+      "A": "\\(\\dfrac{r-p}{q-r},\\ \\dfrac{1}{2}\\)",
+      "B": "\\(\\dfrac{p-q}{q-r},\\ 1\\)",
+      "C": "\\(\\dfrac{q-r}{p-q},\\ 1\\)",
+      "D": "\\(\\dfrac{r-p}{p-q},\\ \\dfrac{1}{2}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "32ee872f-accc-46d3-9709-9c322b9ba4e1",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(p^2\\), \\(q^2\\) and \\(r^2\\) (where \\(p,q,r>0\\)) are in GP, then which of the following is/are correct?\n1. \\(p\\), \\(q\\) and \\(r\\) are in GP.\n2. \\(\\ln p\\), \\(\\ln q\\) and \\(\\ln r\\) are in AP.\nSelect the correct answer using the code given below:",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "68d4d26f-2137-4846-b115-352a4f557f9b",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the second term of a GP is 2 and the sum of its infinite terms is 8, then the GP is",
+    "options": {
+      "A": "\\(8, 2, \\frac{1}{2}, \\frac{1}{8}, \\cdots\\)",
+      "B": "\\(10, 2, \\frac{2}{5}, \\frac{2}{25}, \\cdots\\)",
+      "C": "\\(4, 2, 1, \\frac{1}{2}, \\frac{1}{2^2}, \\cdots\\)",
+      "D": "\\(6, 3, \\frac{3}{2}, \\frac{3}{4}, \\cdots\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b05e5dc6-a9da-4e69-8a75-ddf9f6dd6c9a",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the value of \\(2 + \\dfrac{1}{2 + \\dfrac{1}{2 + \\dfrac{1}{2 + \\cdots \\infty}}}\\) ?",
+    "options": {
+      "A": "\\(\\sqrt{2}-1\\)",
+      "B": "\\(\\sqrt{2}+1\\)",
+      "C": "3",
+      "D": "4"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "b57bae8c-01a6-4ef9-a764-24e675183c02",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(a_{n}=n(n!)\\), then what is \\(a_{1}+a_{2}+a_{3}+\\cdots+a_{10}\\) equal to?",
+    "options": {
+      "A": "\\(10!-1\\)",
+      "B": "\\(11!+1\\)",
+      "C": "\\(10!+1\\)",
+      "D": "\\(11!-1\\)"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ba3af742-61d2-4b37-a413-022ccbb939e0",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let p, q and r be three unequal numbers such that p, q and r are in AP. If \\((q-p)\\), \\((r-q)\\) and \\(p\\) are in GP, then \\((p+q):(q+r):(r+p)\\) equals",
+    "options": {
+      "A": "1:2:3",
+      "B": "3:4:5",
+      "C": "3:5:4",
+      "D": "1:3:2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e8ce6cf2-b19d-4fe3-a8c1-49f5e781d02d",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(x\\), \\(y\\), \\(z\\) are in GP, then which of the following is/are correct?\n1. \\(\\ln(3x)\\), \\(\\ln(3y)\\), \\(\\ln(3z)\\) are in AP\n2. \\(xyz + \\ln(x)\\), \\(xyz + \\ln(y)\\), \\(xyz + \\ln(z)\\) are in HP\nSelect the correct answer using the code given below.",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ed27705f-ddb0-4c85-8f5c-397f21aacfcd",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(S_{k}\\) denote the sum of first \\(k\\) terms of an AP. What is \\(\\frac{S_{30}}{S_{20}-S_{10}}\\) equal to?",
+    "options": {
+      "A": "1",
+      "B": "2",
+      "C": "3",
+      "D": "4"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f0e6f0c2-b3ce-4682-b74a-e4c08c946447",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\((a+b),\\ 2b,\\ (b+c)\\) are in HP, then which one of the following is correct?",
+    "options": {
+      "A": "\\(a\\), \\(b\\) and \\(c\\) are in AP",
+      "B": "\\(a-b\\), \\(b-c\\) and \\(c-a\\) are in AP",
+      "C": "\\(a\\), \\(b\\) and \\(c\\) are in GP",
+      "D": "\\(a-b\\), \\(b-c\\) and \\(c-a\\) are in GP"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "f4a26e0a-30d4-452a-b5f2-43da315efa4b",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sequence & Series",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If 5th, 7th and 13th terms of an AP are in GP, then what is the ratio of its first term to its common difference?",
+    "options": {
+      "A": "\\(-3\\)",
+      "B": "\\(-2\\)",
+      "C": "\\(2\\)",
+      "D": "\\(3\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1c431386-3947-436c-8343-52b2581f7ce0",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(A=\\{1,2,\\ldots,20\\}\\). Define \\(R=\\{(x,y):4x-3y=1\\},\\ x,y\\in A\\). Which statements are correct?\n(1) Domain of \\(R\\) is \\(\\{1,4,7,10,13,16\\}\\).\n(2) Range of \\(R\\) is \\(\\{1,5,9,13,17\\}\\).\n(3) Range of \\(R\\) equals codomain.",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "1 and 2",
+      "D": "2 and 3"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "371fd0fa-795d-429d-91bc-f431d0cb5b37",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(S\\) be the set of all real numbers and \\(R\\) be a relation on \\(S\\) defined by \\(xRy \\Rightarrow |x| \\le y\\). Then \\(R\\) is",
+    "options": {
+      "A": "reflexive only",
+      "B": "transitive only",
+      "C": "both reflexive and transitive",
+      "D": "neither reflexive nor transitive"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3fec3a58-1019-438a-92de-9340f26379b7",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let A and B be subsets of X and \\(C = (A \\cap B') \\cup (A' \\cap B)\\), where A' and B' are complements of A and B in X. What is C equal to?",
+    "options": {
+      "A": "\\((A \\cup B') - (A \\cap B')\\)",
+      "B": "\\((A' \\cup B) - (A' \\cap B)\\)",
+      "C": "\\((A \\cup B) - (A \\cap B)\\)",
+      "D": "\\((A' \\cup B') - (A' \\cap B')\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "69fd4eb0-a3c1-49ac-a116-b18a0dabe672",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\((((A\\cap B)\\cup(A-B))-((A\\cap B)\\cup(B-A)))\\cup A\\) equal to?",
+    "options": {
+      "A": "\\(\\varphi\\)",
+      "B": "A",
+      "C": "B",
+      "D": "\\(A \\cup B\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "77370722-65a8-4c48-bf51-3366436fe241",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let R be a relation on the set N of natural numbers defined by \\(R=\\{(x,y):x,y\\in N\\text{ and }x=y^3\\}\\). Which of the following statements is/are correct?\nI. R is symmetric relation.\nII. R is transitive relation. Select the answer using the code given below.",
+    "options": {
+      "A": "I only",
+      "B": "II only",
+      "C": "Both I and II",
+      "D": "Neither I nor II"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d031dd73-3ad7-488a-980f-b481c1180842",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(E\\) is the universal set and \\(A = B \\cup C\\), then the set \\(E-(E-(E-(E-(E-A))))\\) is the same as the set",
+    "options": {
+      "A": "\\(B' \\cup C'\\)",
+      "B": "\\(B \\cup C\\)",
+      "C": "\\(B' \\cap C'\\)",
+      "D": "\\(B \\cap C\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ee2f770c-09c5-4259-ba85-bb00ab899191",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Sets & Relations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements in respect of two non-empty sets \\(A\\) and \\(B\\):\n1. \\(A\\cup B = A\\cap B\\) iff \\(A=B\\)\n2. \\(A\\triangle B=\\varphi\\) iff \\(A=B\\)\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0fbb3130-9810-4d11-92d0-80cf829089d7",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Median of: 4.6, 0, 9.3, -4.8, 7.6, 2.3, 12.7, 3.5, 8.2, 6.1, 3.9, 5.2?",
+    "options": {
+      "A": "3.8",
+      "B": "4.9",
+      "C": "5.7",
+      "D": "6.0"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "10a8853a-ad59-462c-96b2-8b6359ede381",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The mean and variance of five observations are 14 and 13.2 respectively. Three of the five observations are 11, 16 and 20. What are the other two observations?",
+    "options": {
+      "A": "8 and 15",
+      "B": "9 and 14",
+      "C": "10 and 13",
+      "D": "11 and 12"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "28c1b7f9-8cf0-4e54-96ae-acea8a9c956f",
+    "source": "nda",
+    "paper": "NDA 2023 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The observations 4, 1, 4, 3, 6, 2, 1, 3, 4, 5, 1, 6 are outputs of 12 dices thrown simultaneously. If \\(m\\) and \\(M\\) are means of lowest 8 observations and highest 4 observations respectively, then what is \\((2m+M)\\) equal to?",
+    "options": {
+      "A": "10",
+      "B": "12",
+      "C": "17",
+      "D": "21"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "2c209a5a-5b0f-45b1-ab9f-7a6edcfe5b1f",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The sum of deviations of \\(n\\) number of observations measured from \\(2.5\\) is 50. The sum of deviations of the same set of observations measured from \\(3.5\\) is \\(-50\\). What is the value of \\(n\\)?",
+    "options": {
+      "A": "50",
+      "B": "60",
+      "C": "80",
+      "D": "100"
+    },
+    "answer_key": "D",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4bd4c8d9-c625-4b44-b09e-da16e52b7b49",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the arithmetic mean of \\(8^2, 9^2, 10^2, \\ldots, 15^2\\)?",
+    "options": {
+      "A": "\\(133.5\\)",
+      "B": "\\(135.5\\)",
+      "C": "\\(137.5\\)",
+      "D": "\\(139.5\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "93168259-096e-499b-95f8-37cd3a7e1993",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A sample of 5 observations has mean 32 and median 33. Later it is found that an observation was recorded incorrectly as 40 instead of 35. If we correct the data, then which one of the following is correct?",
+    "options": {
+      "A": "The mean and median remain the same",
+      "B": "The median remains the same but the mean will decrease",
+      "C": "The mean and median both will decrease",
+      "D": "The mean remains the same but median will decrease"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "9f3e0ebf-23db-458c-a5c1-269640631b5d",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the data are moderately non-symmetrical, then which one of the following empirical relationships is correct?",
+    "options": {
+      "A": "\\(2\\times\\) Standard deviation \\(=5\\times\\) Mean deviation",
+      "B": "\\(5\\times\\) Standard deviation \\(=2\\times\\) Mean deviation",
+      "C": "\\(4\\times\\) Standard deviation \\(=5\\times\\) Mean deviation",
+      "D": "\\(5\\times\\) Standard deviation \\(=4\\times\\) Mean deviation"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "a57a8209-3c3e-4576-9ee5-3748a7a8974e",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If all the natural numbers between 1 and 20 are multiplied by 3, then what is the variance of the resulting series?",
+    "options": {
+      "A": "99.75",
+      "B": "199.75",
+      "C": "299.25",
+      "D": "399.25"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "bee0b30b-51b4-4f98-a8e9-4c1fb27a1a02",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the regression coefficient of \\(x\\) on \\(y\\) and \\(y\\) on \\(x\\) are \\(-\\dfrac{1}{2}\\) and \\(-\\dfrac{1}{8}\\) respectively, then what is the correlation coefficient between \\(x\\) and \\(y\\)?",
+    "options": {
+      "A": "\\(-\\dfrac{1}{4}\\)",
+      "B": "\\(-\\dfrac{1}{16}\\)",
+      "C": "\\(\\dfrac{1}{16}\\)",
+      "D": "\\(\\dfrac{1}{4}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d19941a3-ca26-4545-ba03-2e0aade525c0",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the regression coefficient of Y on X is \\(-6\\), and the correlation coefficient between X and Y is \\(-\\frac{1}{2}\\), then the regression coefficient of X on Y would be",
+    "options": {
+      "A": "\\(\\frac{1}{24}\\)",
+      "B": "\\(-\\frac{1}{24}\\)",
+      "C": "\\(-\\frac{1}{6}\\)",
+      "D": "\\(\\frac{1}{6}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e4690c78-3549-4eba-a12b-f5d8cc8d1573",
+    "source": "nda",
+    "paper": "NDA 2025 · NDA 1",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "mcq",
+    "direction": null,
+    "stem": "The sum and the sum of squares of observations corresponding to length X (in cm) and weight Y (in gm) of 50 tropical tubers are given as \\(\\Sigma X = 200, \\Sigma Y = 250, \\Sigma X^2 = 900\\) and \\(\\Sigma Y^2 = 1400\\). Which one of the following is correct?",
+    "options": {
+      "A": "Variance (X) \\(>\\) Variance (Y)",
+      "B": "Variance (X) \\(<\\) Variance (Y)",
+      "C": "Variance (X) \\(=\\) Variance (Y)",
+      "D": "Cannot be determined from the given data"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6f86d8d9-cbff-4c2f-8b68-9dc0d8d06f02",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the roots of the equation \\(x^2 + px + q = 0\\) are \\(\\tan19°\\) and \\(\\tan26°\\), then which one of the following is correct?",
+    "options": {
+      "A": "\\(q - p = 1\\)",
+      "B": "\\(p - q = 1\\)",
+      "C": "\\(p + q = 2\\)",
+      "D": "\\(p + q = 3\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "8b62bf6c-db7d-44a8-9b83-f082f66b2fce",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\sin2\\theta = \\cos3\\theta\\), where \\(0 < \\theta < \\dfrac{\\pi}{2}\\), then what is \\(\\sin\\theta\\) equal to?",
+    "options": {
+      "A": "\\(\\dfrac{\\sqrt{5}+1}{4}\\)",
+      "B": "\\(\\dfrac{\\sqrt{5}-1}{4}\\)",
+      "C": "\\(\\dfrac{\\sqrt{5}+1}{16}\\)",
+      "D": "\\(\\dfrac{\\sqrt{5}-1}{16}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "c4de8316-3799-4495-ab20-78f62f6f26d1",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Trigonometric Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\sin\\theta\\) and \\(\\cos\\theta\\) are the roots of the equation \\(ax^{2}+bx+c=0\\), then which one of the following is correct?",
+    "options": {
+      "A": "\\(a^{2}+b^{2}-2ac=0\\)",
+      "B": "\\(-a^{2}+b^{2}+2ac=0\\)",
+      "C": "\\(a^{2}-b^{2}+2ac=0\\)",
+      "D": "\\(a^{2}+b^{2}+2ac=0\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "e5bdd0fe-e114-4dd0-8c91-dc7703d284b1",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Equations",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(\\sin2\\theta=\\cos3\\theta\\), where \\(\\theta\\) is acute. What is the value of \\(1+4\\sin\\theta\\)? (given that \\(\\sin18°=\\frac{\\sqrt5-1}{4}\\))",
+    "options": {
+      "A": "\\(\\sqrt3\\)",
+      "B": "2",
+      "C": "\\(\\sqrt5\\)",
+      "D": "3"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "0ecc8ca0-b486-421b-8a76-bc4ce63b72a1",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(f(\\theta)=\\dfrac{1}{1+\\tan\\theta}\\) and \\(\\alpha+\\beta=\\dfrac{5\\pi}{4}\\), then what is the value of \\(f(\\alpha)\\cdot f(\\beta)\\)?",
+    "options": {
+      "A": "\\(-\\dfrac{1}{2}\\)",
+      "B": "\\(\\dfrac{1}{2}\\)",
+      "C": "\\(1\\)",
+      "D": "\\(2\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "167fd0a7-6dc0-4495-ad7e-30c437e26e90",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements :\n1. \\(\\cos\\theta + \\sec\\theta\\) can never be equal to 1.5.\n2. \\(\\tan\\theta + \\cot\\theta\\) can never be less than 2.\nWhich of the above statements is/are correct ?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "1d13d642-65e0-4018-a960-bb9a5eea2ce8",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is\n\\(\\tan(1125^\\circ) \\cot(405^\\circ) + \\tan(765^\\circ) \\cot(675^\\circ)\\)\nequal to?",
+    "options": {
+      "A": "\\(2\\)",
+      "B": "\\(1\\)",
+      "C": "\\(0\\)",
+      "D": "\\(-2\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "3053d523-d1b3-4a8c-b94b-9fea0b70d329",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\sin 105° + \\cos 105°\\) equal to?",
+    "options": {
+      "A": "\\(\\sin 50°\\)",
+      "B": "\\(\\cos 50°\\)",
+      "C": "\\(1/\\sqrt{2}\\)",
+      "D": "0"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4e52447f-8084-4f61-984d-a5144a8bc4f4",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(\\sin^2\\left(\\frac{\\pi}{4}+\\theta\\right)-\\sin^2\\left(\\frac{\\pi}{4}-\\theta\\right)\\) equal to?",
+    "options": {
+      "A": "\\(\\sin2\\theta\\)",
+      "B": "\\(\\cos2\\theta\\)",
+      "C": "\\(2\\sin\\theta\\)",
+      "D": "\\(2\\cos\\theta\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "4ffce1f3-9710-463a-95e8-b99619346ace",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\tan A - \\tan B = x\\) and \\(\\cot B - \\cot A = y\\), then what is the value of \\(\\cot(A - B)\\) ?",
+    "options": {
+      "A": "\\(\\dfrac{1}{x} + \\dfrac{1}{y}\\)",
+      "B": "\\(\\dfrac{1}{y} - \\dfrac{1}{x}\\)",
+      "C": "\\(\\dfrac{xy}{x+y}\\)",
+      "D": "\\(1 + \\dfrac{1}{xy}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "5c175a38-d402-4427-acf3-0680d64b9242",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 2",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the value of \\(\\tan^2 165° + \\cot^2 165°\\)?",
+    "options": {
+      "A": "7",
+      "B": "14",
+      "C": "\\(4\\sqrt{3}\\)",
+      "D": "\\(8\\sqrt{3}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "6a51a453-87ca-4bc1-979c-9b6f6cf89d3b",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\cot\\alpha\\) and \\(\\cot\\beta\\) are the roots of the equation \\(x^2 + bx + c = 0\\) with \\(b \\neq 0\\), then the value of \\(\\cot(\\alpha+\\beta)\\) is",
+    "options": {
+      "A": "\\(\\dfrac{c-1}{b}\\)",
+      "B": "\\(\\dfrac{1-c}{b}\\)",
+      "C": "\\(\\dfrac{b}{c-1}\\)",
+      "D": "\\(\\dfrac{b}{1-c}\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "79d3b97a-599d-4cae-b033-bf60ea04a9de",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is the value of \\(\\tan65°+2\\tan45°-2\\tan40°-\\tan25°\\)?",
+    "options": {
+      "A": "\\(0\\)",
+      "B": "\\(1\\)",
+      "C": "\\(2\\)",
+      "D": "\\(4\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "ff47e393-f250-4946-92b9-c408e820112e",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 1",
+    "subject": "maths",
+    "chapter": "Trigonometric Identities",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If \\(\\cos\\theta=\\dfrac{1}{3}\\), then what is the value of \\(\\sin\\!\\left(\\dfrac{\\theta}{2}\\right)\\sin\\!\\left(\\dfrac{3\\theta}{2}\\right)\\)?",
+    "options": {
+      "A": "\\(\\dfrac{5}{9}\\)",
+      "B": "\\(\\dfrac{7}{9}\\)",
+      "C": "\\(\\dfrac{10}{9}\\)",
+      "D": "\\(\\dfrac{11}{9}\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "23dd6f2e-b5aa-4fb1-9760-a3344d958db2",
+    "source": "nda",
+    "paper": "NDA 2021 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the position vectors of \\(A\\) and \\(B\\) are \\((\\sqrt{2}-1)\\hat{i}-\\hat{j}\\) and \\(\\hat{i}+(\\sqrt{2}+1)\\hat{j}\\) respectively, then what is the magnitude of \\(\\overrightarrow{AB}\\)?",
+    "options": {
+      "A": "\\(2\\sqrt{2}\\)",
+      "B": "\\(3\\sqrt{2}\\)",
+      "C": "\\(2\\sqrt{3}\\)",
+      "D": "\\(3\\sqrt{3}\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "46c6888e-6b85-4012-944c-60db61d1e9ad",
+    "source": "nda",
+    "paper": "NDA 2019 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements :\n1. The magnitude of \\(\\vec{a} \\times \\vec{b}\\) is same as the area of a triangle with sides \\(\\vec{a}\\) and \\(\\vec{b}\\).\n2. If \\(\\vec{a} \\times \\vec{b} = \\vec{0}\\) where \\(\\vec{a} \\neq \\vec{0}\\), \\(\\vec{b} \\neq \\vec{0}\\), then \\(\\vec{a} = \\lambda\\vec{b}\\).\nWhich of the above statements is/are correct ?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "51e73578-7f06-4eb5-aeca-922d1e193a08",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "What is \\(3\\alpha+2\\beta\\) equal to if \\((2\\hat{i}+6\\hat{j}+27\\hat{k})\\times(\\hat{i}+\\alpha\\hat{j}+\\beta\\hat{k})\\) is a null vector?",
+    "options": {
+      "A": "\\(36\\)",
+      "B": "\\(33\\)",
+      "C": "\\(30\\)",
+      "D": "\\(27\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "687c01b9-37bb-4633-84aa-a47d53fbd399",
+    "source": "nda",
+    "paper": "NDA 2026 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "How much angle does\n\\(\\vec{r} = (\\cos\\theta)\\hat{i} + (\\sin\\theta)\\hat{j} + \\hat{k}\\)\nmake with the positive direction of \\(z\\)-axis?",
+    "options": {
+      "A": "\\(\\pi/2\\)",
+      "B": "\\(\\pi/3\\)",
+      "C": "\\(\\pi/4\\)",
+      "D": "\\(\\pi/6\\)"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "73cfe5d8-0f99-4cef-99b1-e5473a685edc",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(\\vec{a}, \\vec{b}, \\vec{c}\\) be three non-zero vectors such that \\(\\vec{a}\\times\\vec{b}=\\vec{c}\\). Consider the following statements:\n1. \\(\\vec{a}\\) is unique if \\(\\vec{b}\\) and \\(\\vec{c}\\) are given\n2. \\(\\vec{c}\\) is unique if \\(\\vec{a}\\) and \\(\\vec{b}\\) are given\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "Both 1 and 2",
+      "D": "Neither 1 nor 2"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "75643f23-8608-46b6-aca4-8464271b780e",
+    "source": "nda",
+    "paper": "NDA 2024 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Let \\(ABCDEF\\) be a regular hexagon. If \\(\\overrightarrow{AD}=m\\overrightarrow{BC}\\) and \\(\\overrightarrow{CF}=n\\overrightarrow{AB}\\), then what is \\(mn\\) equal to?",
+    "options": {
+      "A": "\\(-4\\)",
+      "B": "\\(-2\\)",
+      "C": "\\(2\\)",
+      "D": "\\(4\\)"
+    },
+    "answer_key": "A",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "7f22ba11-54a0-457b-aeea-e3fa04c49764",
+    "source": "nda",
+    "paper": "NDA 2018 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "A spacecraft located at \\(\\hat{i}+2\\hat{j}+3\\hat{k}\\) is subjected to a force \\(\\lambda\\hat{k}\\) by firing a rocket. The spacecraft is subjected to a moment of magnitude",
+    "options": {
+      "A": "\\(\\lambda\\)",
+      "B": "\\(\\sqrt{3}\\lambda\\)",
+      "C": "\\(\\sqrt{5}\\lambda\\)",
+      "D": "None of the above"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "aeafc6c5-d565-41b0-9d86-18f329fdcd2a",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "If the vectors \\(a\\hat{i}+\\hat{j}+\\hat{k}\\), \\(\\hat{i}+b\\hat{j}+\\hat{k}\\) and \\(\\hat{i}+\\hat{j}+c\\hat{k}\\) (\\(a, b, c \\neq 1\\)) are coplanar, then the value of \\(\\dfrac{1}{1-a}+\\dfrac{1}{1-b}+\\dfrac{1}{1-c}\\) is",
+    "options": {
+      "A": "0",
+      "B": "1",
+      "C": "\\(a+b+c\\)",
+      "D": "\\(abc\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d1bde17a-c097-46bd-aec3-986eb5d1bb05",
+    "source": "nda",
+    "paper": "NDA 2020 · NDA 1",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Two adjacent sides of a parallelogram are \\(2\\hat{i}-4\\hat{j}+5\\hat{k}\\) and \\(\\hat{i}-2\\hat{j}-3\\hat{k}\\). What is the magnitude of dot product of vectors which represent its diagonals?",
+    "options": {
+      "A": "21",
+      "B": "25",
+      "C": "31",
+      "D": "36"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "d7ab42e8-647c-4f4a-ab41-f10571332818",
+    "source": "nda",
+    "paper": "NDA 2022 · NDA 1",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "Consider the following statements:\n1. Dot product over vector addition is distributive\n2. Cross product over vector addition is distributive\n3. Cross product of vectors is associative\nWhich of the above statements is/are correct?",
+    "options": {
+      "A": "1 only",
+      "B": "2 only",
+      "C": "1 and 2 only",
+      "D": "1, 2 and 3"
+    },
+    "answer_key": "C",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "fdede7ec-e9de-40f0-9b05-ae48f81fc926",
+    "source": "nda",
+    "paper": "NDA 2017 · NDA 2",
+    "subject": "maths",
+    "chapter": "Vectors",
+    "format": "mcq",
+    "direction": null,
+    "stem": "For any vector \\(\\vec{a}\\), \\(|\\vec{a}\\times\\hat{i}|^2 + |\\vec{a}\\times\\hat{j}|^2 + |\\vec{a}\\times\\hat{k}|^2\\) is equal to",
+    "options": {
+      "A": "\\(|\\vec{a}|^2\\)",
+      "B": "\\(2|\\vec{a}|^2\\)",
+      "C": "\\(3|\\vec{a}|^2\\)",
+      "D": "\\(4|\\vec{a}|^2\\)"
+    },
+    "answer_key": "B",
+    "numeric_answer": null
+  },
+  {
+    "source_ref": "90d776ef-f91b-4d7e-8454-56126a6586f9",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 24 Jan 2026 Shift 1",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\((2\\alpha,\\alpha)\\) be the largest interval in which the function \\(f(t) = \\frac{|t + 1|}{t^{2}},t < 0\\), is strictly decreasing. Then the local maximum value of the function \\(g(x) = 2\\log_{e}(x - 2) + \\alpha x^{2} + 4x - \\alpha,x > 2\\), is \\(\\_\\_\\_\\_\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 4
+  },
+  {
+    "source_ref": "a6f3b1d2-9031-4aa4-a3c2-ed593205682d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "maths",
+    "chapter": "Application of Derivatives",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let quadratic curve passing through the point \\(( - 1,0)\\) and touching the line \\(y = x\\) at \\((1,1)\\) be \\(=\\) \\(f(x)\\). Then the \\(x\\)-intercept of the normal to the curve at the point \\((\\alpha,\\alpha + 1)\\) in the first quadrant is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 11
+  },
+  {
+    "source_ref": "caf6f816-135d-4dc4-b3cb-e8abc476c60d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "maths",
+    "chapter": "Application of Integrals",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If the area of the region \\(\\left\\{ (x,y):0 \\leq y \\leq min\\left\\{ 2x,6x -x^{2} \\right\\} \\right\\}\\) is \\(A\\), then \\(12A\\) is equal to.........",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 304
+  },
+  {
+    "source_ref": "cff770ab-ab00-475f-a3c6-0e8a7a38d7cf",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 30 January 2023",
+    "subject": "maths",
+    "chapter": "Application of Integrals",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\alpha\\) be the area of the larger region bounded by the curve \\(y^{2}= 8x\\) and the lines \\(y = x\\) and \\(x = 2\\), which lies in the first quadrant. Then the value of \\(3\\alpha\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 22
+  },
+  {
+    "source_ref": "80ce24df-dd00-4245-b3bb-a5dda29c2791",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2023",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If the co-efficient of \\(x^{9}\\) in \\(\\left( \\alpha x^{3}+\\frac{1}{\\beta x} \\right)^{11}\\) and the co-efficient of \\(x^{- 9}\\) in \\(\\left( \\alpha x -\\frac{1}{\\beta x^{3}} \\right)^{11}\\) are equal, then \\((\\alpha\\beta)^{2}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1
+  },
+  {
+    "source_ref": "d4acd8ea-d839-4879-be95-d980807efaef",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 25 Jan 2023",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The constant term in the expansion of \\(\\left( 2x +\\frac{1}{x^{7}}+ 3x^{2} \\right)^{5}\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1080
+  },
+  {
+    "source_ref": "e658340a-7d83-4aac-a7c7-e0f2d29817f5",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2024",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let the coefficient of \\(x^{r}\\) in the expansion of \\[\\begin{matrix} & \\ (x + 3)^{n - 1}+ (x + 3)^{n - 2}(x + 2) + \\\\ & \\ (x + 3)^{n - 3}(x + 2)^{2}+ \\ldots\\ldots.. + (x + 2)^{n - 1} \\end{matrix}\\] be \\(\\alpha_{r}\\). If \\(\\sum_{r = 0}^{n} \\alpha_{r}=\\beta^{n}-\\gamma^{n},\\beta,\\gamma \\in N\\), then the value of \\(\\beta^{2}+\\gamma^{2}\\) equals",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 25
+  },
+  {
+    "source_ref": "ff8d967d-8735-425e-9f36-a1506634c7db",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 10",
+    "subject": "maths",
+    "chapter": "Binomial Theorem",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\,^{n}C_{r}\\) denote the binomial coefficient of \\(x^{r}\\) in the expansion of \\((1 + x)^{n}\\). If \\(\\sum_{k = 0}^{10} \\left( 2^{2}+ 3k \\right)\\,^{10}C_{k} = \\alpha\\cdot 3^{10}+\\beta\\cdot 2^{10},\\ \\alpha,\\beta\\in R\\), then \\(\\alpha+\\beta\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 19
+  },
+  {
+    "source_ref": "520d8f58-2421-4ecd-92b3-c6a2fdc13ef1",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 January 2023",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\alpha_{1},\\alpha_{2},\\ldots.,\\alpha_{7}\\) be the roots of the equation \\(x^{7}+ 3x^{5}- 13x^{3}- 15x = 0\\) and \\(\\left| \\alpha_{1} \\right|\\geq\\left| \\alpha_{2} \\right|\\geq \\cdots \\geq\\) \\(\\left| \\alpha_{7} \\right|\\). Then \\(\\alpha_{1}\\alpha_{2}-\\alpha_{3}\\alpha_{4}+\\alpha_{5}\\alpha_{6}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 9
+  },
+  {
+    "source_ref": "ec81cde7-9ae8-457b-b674-e22bc6809c73",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 25",
+    "subject": "maths",
+    "chapter": "Complex Numbers",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The sum of \\(162^{\\text{th~}}\\) power of the roots of the equation \\(x^{3}- 2x^{2}+ 2x- 1 = 0\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 3
+  },
+  {
+    "source_ref": "4faf3d0b-025a-4d6f-bc6b-f9f11ba2624c",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 25 June 2022",
+    "subject": "maths",
+    "chapter": "Conic Sections",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let the abscissae of the two points \\(P\\) and \\(Q\\) be the roots of \\(2x^{2}- rx + p = 0\\) and the ordinates of \\(P\\) and \\(Q\\) be the roots of \\(x^{2}- sx - q = 0\\). If the equation of the circle described on \\(PQ\\) as diameter is \\(2\\left( x^{2}+y^{2} \\right)- 11x - 14y - 22 = 0\\), then \\(2r + s - 2q + p\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "844b754e-5f9a-42d4-a431-b68a6621a60b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "maths",
+    "chapter": "Conic Sections",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(P_{1}\\) be a parabola with vertex \\(\\left( 3,2 \\right)\\) and focus \\(\\left( 4,4 \\right)\\) and \\(P_{2}\\) be its mirror image with respect to the line \\(x+ 2y= 6\\). Then the directrix of \\(P_{2}\\) is \\(x+ 2y=\\)",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 10
+  },
+  {
+    "source_ref": "9a8610d3-2554-4cdf-8ecb-bace67871a42",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 July 2022",
+    "subject": "maths",
+    "chapter": "Conic Sections",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(AB\\) be a chord of length 12 of the circle \\((x - 2)^{2}+ (y + 1)^{2}=\\frac{169}{4}\\). If tangents drawn to the circle at points \\(A\\) and \\(B\\) intersect at the point \\(P\\), then five times the distance of point \\(P\\) from chord \\(AB\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 72
+  },
+  {
+    "source_ref": "cb0e2f2a-9fb9-4c52-bbaa-2a23ea6e467d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 14 June 2022",
+    "subject": "maths",
+    "chapter": "Conic Sections",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let a circle \\(C:(x - h)^{2}+ (y - k)^{2}=r^{2},k > 0\\), touch the \\(x\\)-axis at \\((1,0)\\). If the line \\(x + y = 0\\) intersects the circle \\(C\\) at \\(P\\) and \\(Q\\) such that the length of the chord \\(PQ\\) is 2 , then the value of \\(h + k + r\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "ef2211d5-fe9b-41d2-b3cb-fa383012b7ff",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 6 Apr 2026 Shift 1",
+    "subject": "maths",
+    "chapter": "Conic Sections",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let the centre of the circle \\(x^{2} + y^{2} + 2gx + 2fy + 25 = 0\\) be in the first quadrant and lie on the line \\(2x - y = 4\\). Let the area of an equilateral triangle inscribed in the circle be \\(27\\sqrt{3}\\). Then the square of the length of the chord of the circle on the line \\(x = 1\\) is\\(\\_\\_\\_\\_\\) .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 80
+  },
+  {
+    "source_ref": "9341798d-d883-46fb-bb92-bf79f7173686",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 24 Jan 2026 Shift 2",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If \\(f(x)\\) satisfies the relation \\(f(x) = e^{x} + \\int_{0}^{1} \\left( y + {xe}^{x} \\right)f(y)dy\\), then \\(e + f(0)\\) is equal to \\(\\_\\_\\_\\_\\) .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "9b1f94af-5430-44b0-a440-f95b5ee1c52b",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(f_{n}=\\int_{0}^{\\frac{\\pi}{2}} \\left( \\sum_{k = 1}^{n} \\sin^{k - 1}x \\right)\\left( \\sum_{k = 1}^{n} (2k - 1)\\sin^{k - 1}x \\right)\\cos x\\) \\(dx,n \\in N\\). Then \\(f_{21}-f_{20}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 41
+  },
+  {
+    "source_ref": "a29d0508-5ef1-4d7d-bf67-a5a55a1975bb",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 24 Jan 2023",
+    "subject": "maths",
+    "chapter": "Definite Integration",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The value of \\(12\\int_{0}^{3} \\left| x^{2}- 3x + 2 \\right|dx\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 22
+  },
+  {
+    "source_ref": "48ef183c-f114-45e4-9d04-dce07943a394",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2024",
+    "subject": "maths",
+    "chapter": "Determinants",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(A\\) be a \\(3 \\times 3\\) matrix and \\(det(A) = 2\\). If \\(n = \\det(\\mathrm{adj}(\\mathrm{adj}(\\ldots(\\mathrm{adj}\\,A)\\ldots)))\\), where adj is applied 2024 times, then the remainder when \\(n\\) is divided by 9 is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "5ed460ff-2eaa-4444-b467-96a04886cdd7",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 30 Jan 2024",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(Y = Y(X)\\) be a curve lying in the first quadrant such that the area enclosed by the line \\(Y - y =Y^{'}(x)(X - x)\\) and the co-ordinate axes, where ( \\(x,y\\) ) is any point on the curve, is always \\(\\frac{-y^{2}}{2Y^{'}(x)}+ 1,Y^{'}(x) \\neq 0\\). If \\(Y(1) = 1\\), then \\(12Y(2)\\) equals",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 20
+  },
+  {
+    "source_ref": "f078c475-aefc-42cd-9eec-6f03797190ca",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 23 Jan 2026 Shift 1",
+    "subject": "maths",
+    "chapter": "Differential Equations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let f be a twice differentiable non-negative function such that \\((f(x))^{2} = 25 + \\int_{0}^{x} \\left( (f(t))^{2} + \\left( f'(t) \\right)^{2} \\right)dt\\). Then the mean of \\(f\\left( \\log_{e}(1) \\right),f\\left( \\log_{e}(2) \\right),\\ldots..,f\\left( \\log_{e}(625) \\right)\\) is equal to \\(\\_\\_\\_\\_\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1565
+  },
+  {
+    "source_ref": "12b624ec-315a-4f40-a649-5ba3c0c7455d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 July 2022",
+    "subject": "maths",
+    "chapter": "Differentiation",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If \\(\\lbrack t\\rbrack\\) denotes the greatest integer \\(\\leq t\\), then number of points, at which the function \\(f(x) = 4|2x + 3| +\\) \\(9\\left\\lbrack x +\\frac{1}{2} \\right\\rbrack- 12\\lbrack x + 20\\rbrack\\) is not differentiable in the open interval \\(( - 20,20)\\), is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 79
+  },
+  {
+    "source_ref": "0df26c5d-9f7e-43da-9779-41e55bd25642",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 8 April 2024",
+    "subject": "maths",
+    "chapter": "Indefinite Integration",
+    "format": "numeric",
+    "direction": null,
+    "stem": "If \\(\\int\\frac{1}{\\sqrt[5]{(x - 1)^{4}(x + 3)^{6}}}dx = A\\left( \\frac{\\alpha x - 1}{\\beta x + 3} \\right)^{B}+ C\\), where \\(C\\) is the constant of integration, then the value of \\(\\alpha+\\beta+ 20AB\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 7
+  },
+  {
+    "source_ref": "3cb96257-0770-4a7c-aa62-73cf2d559661",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 29 Jan 2025",
+    "subject": "maths",
+    "chapter": "Inverse Trigonometric Functions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(S=\\{x:\\cos^{-1}x=\\pi+\\sin^{-1}x+\\sin^{-1}(2x+1)\\}\\). Then \\(\\sum_{x\\in S}(2x-1)^{2}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "5916bce2-f52b-4972-ab76-d45ccb0661c8",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2021 Compilation Paper 16",
+    "subject": "maths",
+    "chapter": "Limits and Continuity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "\\(f(x) =\\) minimum \\(\\{ x - \\lbrack x\\rbrack,\\ 1 + \\lbrack x\\rbrack - x\\}\\), \\(\\lbrack 0,3\\rbrack \\rightarrow R\\), \\(p\\) is the number of points where it is discontinuous, \\(q\\) is the number of points where it is not differentiable. Find \\(p+q\\).",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 5
+  },
+  {
+    "source_ref": "a6142233-0e9f-4cc8-8829-33cf9369043a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 2021 Compilation Paper 15",
+    "subject": "maths",
+    "chapter": "Limits and Continuity",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(P(x)\\) be a polynomial with \\(P^{''}(x)\\) constant, and let \\(f(x) =\\frac{P(x)}{\\sin(x- 2)}\\), \\(x\\neq 2\\), be continuous at \\(x = 2\\) with \\(f(2) = 7\\). If \\(P(3) = 9\\), then \\(P(5)\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 39
+  },
+  {
+    "source_ref": "c9b07f43-f73a-4636-aad0-0021a4158a3b",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 6",
+    "subject": "maths",
+    "chapter": "Matrices",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(A=\\begin{bmatrix} a_{1} \\\\ a_{2} \\end{bmatrix}\\) and \\(B=\\begin{bmatrix} b_{1} \\\\ b_{2} \\end{bmatrix}\\) be two \\(2 \\times 1\\) matrices with real entries such that \\(A=XB\\), where \\(X=\\frac{1}{\\sqrt{3}}\\begin{bmatrix} 1 & - 1 \\\\ 1 & k \\end{bmatrix}\\), and \\(k\\in R\\). If \\(a_{1}^{2}+a_{2}^{2}=\\frac{2}{3}\\left( b_{1}^{2}+b_{2}^{2} \\right)\\) and \\(\\left( k^{2}+ 1 \\right)b_{2}^{2}\\neq - 2b_{1}b_{2}\\), then the value of \\(k\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1
+  },
+  {
+    "source_ref": "d0f95e31-329f-43d3-95b2-1db83ec8e13e",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 Jan 2025",
+    "subject": "maths",
+    "chapter": "Matrices",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let M denote the set of all real matrices of order \\(3 \\times 3\\) and let \\(\\mathbf{S = \\{ - 3, - 2, - 1,1,2\\}}\\). Let \\(S_{1}=\\left\\{ A =\\left\\lbrack a_{ij} \\right\\rbrack\\in M:A =A^{T} \\right.\\) and \\(\\left. \\ a_{ij}\\in S,\\forall i,j \\right\\}\\) \\(S_{2}=\\left\\{ A =\\left\\lbrack a_{ij} \\right\\rbrack\\in M:A = -A^{T} \\right.\\) and \\(\\left. \\ a_{ij}\\in S,\\forall i,j \\right\\}\\) \\(S_{3}=\\left\\{ A =\\left\\lbrack a_{ij} \\right\\rbrack\\in M:a_{11}+a_{22}+a_{33}= 0 \\right.\\) and \\(\\left. \\ a_{ij}\\in S,\\forall i,j \\right\\}\\) If \\(n\\left( S_{1}\\cup S_{2}\\cup S_{3} \\right)= 125\\alpha\\), then \\(\\alpha\\) equals.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1613
+  },
+  {
+    "source_ref": "385ec4cc-d0e3-49f7-80dd-ec6c3e18a176",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2024",
+    "subject": "maths",
+    "chapter": "Permutations and Combinations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of elements in the set \\(\\mathbf{S = \\{(x,y,z):x,y,z \\in Z,x + 2y + 3z = 42,x,y,z}\\) \\(\\geq 0\\}\\) equals",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 169
+  },
+  {
+    "source_ref": "5daa1116-ada2-41ce-805f-1170440eda61",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "maths",
+    "chapter": "Permutations and Combinations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Some couples participated in a mixed doubles badminton tournament. If the number of matches played, so that no couple played in a match, is 840, then the total numbers of persons, who participated in the tournament, is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 16
+  },
+  {
+    "source_ref": "8a92c780-395b-4c09-9fb7-f800b1265bf3",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 22 Jan 2026 Shift 1",
+    "subject": "maths",
+    "chapter": "Permutations and Combinations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let ABC be a triangle. Consider four points \\(p_{1},p_{2}\\), \\(p_{3},p_{4}\\) on the side AB , five points \\(p_{5},p_{6},p_{7},p_{8},p_{9}\\) on the side BC and four points \\(p_{10},p_{11},p_{12},p_{13}\\) on the side AC . None of these points is a vertex of the triangle ABC . Then the total number of pentagons, that can be formed by taking all the vertices from the points \\(p_{1},p_{2},\\ldots.p_{13}\\), is \\(\\_\\_\\_\\_\\) .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 660
+  },
+  {
+    "source_ref": "c7ae60c9-4206-4049-81ba-4dcd6c5ccc82",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 6 April 2023",
+    "subject": "maths",
+    "chapter": "Permutations and Combinations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of 4-letter words, with or without meaning, each consisting of 2 vowels and 2 consonants, which can be formed from the letters of the word UNIVERSE without repetition is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 432
+  },
+  {
+    "source_ref": "40c43df0-6551-4efc-8247-cc3c090f01d8",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 22",
+    "subject": "maths",
+    "chapter": "Probability",
+    "format": "numeric",
+    "direction": null,
+    "stem": "An electric instrument consists of two units. Each unit must function independently for the instrument to operate. The probability that the first unit functions is 0.9 and that of the second unit is 0.8 . The instrument is switched on and it fails to operate. If the probability that only the first unit failed and second unit is functioning is p, then \\(98p\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 28
+  },
+  {
+    "source_ref": "772a661b-0b86-49e3-acaa-a5f3f964ae80",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 25",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of solutions of the equation \\(\\log_{4}(x- 1) =\\log_{2}(x- 3)\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1
+  },
+  {
+    "source_ref": "b9969a8c-bdb9-4dfa-b33e-061f272b5c5e",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 2",
+    "subject": "maths",
+    "chapter": "Quadratic Equations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The number of the real roots of the equation \\((x+ 1)^{2}+ |x- 5| =\\frac{27}{4}\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 2
+  },
+  {
+    "source_ref": "190f38f4-f878-423f-b3e5-0b953342dc6a",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 June 2022",
+    "subject": "maths",
+    "chapter": "Relations and Functions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(S\\mathbf{= \\{ 1,2,3,4,5,6,7,8,9,10\\}}\\). Define \\(f:S\\rightarrow S\\) as \\(f(n) =\\left\\{ \\begin{matrix} 2n, & \\text{~if~}n= 1,2,3,4,5 \\\\ 2n- 11 & \\text{~if~}n= 6,7,8,9,10 \\end{matrix} \\right.\\). Let \\(g:S \\rightarrow S\\) be a function such that \\(fog(n) =\\left\\{ \\begin{matrix} n+ 1 & \\text{, if~}n\\text{~is odd~} \\\\ n- 1 & \\text{, if~}n\\text{~is even~} \\end{matrix} \\right.\\), then \\(g(10)((g(1) + g(2) + g(3) + g(4) + g(5))\\) is equal to:",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 190
+  },
+  {
+    "source_ref": "3b19093f-e37a-4774-a273-0ad2ae017b0e",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 1 February 2024",
+    "subject": "maths",
+    "chapter": "Relations and Functions",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\mathbf{A = \\{ 1,2,3,\\ldots 20\\}}\\). Let \\(R_{1}\\) and \\(R_{2}\\) two relation on A such that \\(R_{1}\\mathbf{= \\{(a,b):b}\\) is divisible by \\(a\\}\\) \\(R_{2}\\mathbf{= \\{(a,b)}\\) : \\(a\\) is an integral multiple of \\(b\\}\\). Then, number of elements in \\(R_{1}-R_{2}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 46
+  },
+  {
+    "source_ref": "0de2830d-b8e4-4ae9-a92e-1a44092b1778",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "maths",
+    "chapter": "Sequences and Series",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The sum to 20 terms of the series \\(2.2^{2}-3^{2}+2.4^{2}-5^{2}+2.6^{2}-\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1310
+  },
+  {
+    "source_ref": "3e37de80-0509-4b4b-9743-8eda91a2c360",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 13 April 2023",
+    "subject": "maths",
+    "chapter": "Sequences and Series",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\lbrack\\alpha\\rbrack\\) denote the greatest integer \\(\\leq \\alpha\\). Then \\(\\lbrack\\sqrt{1}\\rbrack + \\lbrack\\sqrt{2}\\rbrack + \\lbrack\\sqrt{3}\\rbrack + \\ldots\\ldots + \\lbrack\\sqrt{120}\\rbrack\\) is equal to.",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 825
+  },
+  {
+    "source_ref": "515dad50-d88d-499f-b774-238d8a1a7a16",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 23 Jan 2025",
+    "subject": "maths",
+    "chapter": "Sequences and Series",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The roots of the quadratic equation \\(3x^{2}-px+q=0\\) are the \\(10^{\\text{th}}\\) and \\(11^{\\text{th}}\\) terms of an arithmetic progression with common difference \\(\\frac{3}{2}\\). If the sum of the first 11 terms of this arithmetic progression is 88, then \\(q-2p\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 474
+  },
+  {
+    "source_ref": "67b9d554-cf15-46fe-9868-4996322754e4",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 10 April 2023",
+    "subject": "maths",
+    "chapter": "Sequences and Series",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The sum of all those terms, of the arithmetic progression \\(3,8,13,\\ldots\\ldots.373\\), which are not divisible by 3 , is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 9525
+  },
+  {
+    "source_ref": "22658fe8-e15a-4c93-abe1-6c8c0c27000e",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 28 June 2022",
+    "subject": "maths",
+    "chapter": "Statistics",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The mean and standard deviation of 15 observations are found to be 8 and 3 respectively. On rechecking it was found that, in the observations, 20 was misread as 5 . Then, the correct variance is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 17
+  },
+  {
+    "source_ref": "3d0d5c4e-8db4-4e6a-8b01-04fa9da63110",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 4 Apr 2026 Shift 2",
+    "subject": "maths",
+    "chapter": "Straight Lines",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(A,B\\) be points on the two half-lines \\(x - \\sqrt{3}|y| = \\alpha,\\alpha > 0\\) at a distance of \\(\\alpha\\) from their point of intersection P. The line segment AB meets the angle bisector of the given half-lines at the point Q. If \\(PQ = \\frac{9}{2}\\) and R is the radius of the circumcircle of \\(\\bigtriangleup PAB\\), then \\(\\frac{\\alpha^{2}}{R}\\) is equal to \\(\\_\\_\\_\\_\\) .",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 9
+  },
+  {
+    "source_ref": "10fb6271-5d97-4b17-9b46-ab0e12df233d",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2023",
+    "subject": "maths",
+    "chapter": "Three Dimensional Geometry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let the line \\(L:\\frac{x - 1}{2}=\\frac{y + 1}{- 1}=\\frac{z - 3}{1}\\) intersect the plane \\(2x + y + 3z = 16\\) at the point \\(P\\). Let the point \\(Q\\) be the foot of perpendicular from the point \\(R(1, - 1, - 3)\\) on the line \\(L\\). If \\(\\alpha\\) is the area of triangle \\(PQR\\), then \\(\\alpha^{2}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 180
+  },
+  {
+    "source_ref": "64feefa9-ca1d-4c99-bd52-8d64ac3c00bf",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 21",
+    "subject": "maths",
+    "chapter": "Three Dimensional Geometry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(S\\) be the mirror image of the point \\(Q(1,3,4)\\) with respect to the plane \\(2x - y + z + 3 = 0\\) and let \\(R(3,5,\\gamma)\\) be a point of this plane. Then the square of the length of the line segment \\(SR\\) is",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 72
+  },
+  {
+    "source_ref": "d824386a-91bf-4aad-b580-827a1af67107",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 27 Jan 2024",
+    "subject": "maths",
+    "chapter": "Three Dimensional Geometry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "The lines \\(\\frac{x- 2}{2}=\\frac{y}{- 2}=\\frac{z- 7}{16}\\) and \\(\\frac{x+ 3}{4}=\\frac{y+ 2}{3}=\\frac{z+ 2}{1}\\) intersect at the point \\(P\\). If the distance of \\(P\\) from the line \\(\\frac{x + 1}{2}=\\frac{y - 1}{3}=\\frac{z - 1}{1}\\) is \\(l\\), then \\(14l^{2}\\) is equal to.......",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 108
+  },
+  {
+    "source_ref": "e209091b-1474-49df-9cfc-0d9cd7f44e0c",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 4",
+    "subject": "maths",
+    "chapter": "Three Dimensional Geometry",
+    "format": "numeric",
+    "direction": null,
+    "stem": "A line ' \\(\\mathcal{l}\\) ' passing through origin is perpendicular to the lines \\[\\begin{matrix} & \\mathcal{l}_{1}:\\overrightarrow{r}= (3 + t)\\widehat{i}+ ( - 1 + 2t)\\widehat{j}+ (4 + 2t)\\widehat{k} \\\\ & \\mathcal{l}_{2}:\\overrightarrow{r}= (3 + 2s)\\widehat{i}+ (3 + 2s)\\widehat{j}+ (2 + s)\\widehat{k} \\end{matrix}\\] If the co-ordinates of the point in the first octant on ' \\(\\mathcal{l}_{2}\\) ' at a distance of \\(\\sqrt{17}\\) from the point of intersection of ' \\(\\mathcal{l}\\) ' and ' \\(\\mathcal{l}_{1}\\) ' are \\((a,b,c)\\), then \\(18(a + b + c)\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 44
+  },
+  {
+    "source_ref": "3c983487-4ce9-4582-b9ac-67989b9ad751",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 21",
+    "subject": "maths",
+    "chapter": "Trigonometric Equations",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(S\\) be the sum of all solutions (in radians) of the equation \\(\\sin^{4}\\theta+\\cos^{4}\\theta- \\sin\\theta \\cos\\theta= 0\\) in \\(\\lbrack 0,4\\pi\\rbrack\\). Then \\(\\frac{8\\text{ }S}{\\pi}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 56
+  },
+  {
+    "source_ref": "40f2976e-389b-4760-ab73-eb264f43f45f",
+    "source": "jee-mains",
+    "paper": "JEE Mains · 31 January 2024",
+    "subject": "maths",
+    "chapter": "Vector Algebra",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\overrightarrow{a}\\) and \\(\\overrightarrow{b}\\) be two vectors such that \\(|\\overrightarrow{a}| = 1,|\\overrightarrow{b}| = 4\\) and \\(\\overrightarrow{a}\\cdot\\overrightarrow{b}= 2\\). If \\(\\overrightarrow{c}= (2\\overrightarrow{a}\\times\\overrightarrow{b}) - 3\\overrightarrow{b}\\) and the angle between \\(\\overrightarrow{b}\\) and \\(\\overrightarrow{c}\\) is \\(\\alpha\\), then \\(192\\sin^{2}\\alpha\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 48
+  },
+  {
+    "source_ref": "5224c96e-07f8-4ab7-805a-eb37693f08fb",
+    "source": "jee-mains",
+    "paper": "JEE Mains 2021 · Paper 24",
+    "subject": "maths",
+    "chapter": "Vector Algebra",
+    "format": "numeric",
+    "direction": null,
+    "stem": "Let \\(\\overrightarrow{a}= 2\\widehat{i}-\\widehat{j}+ 2\\widehat{k}\\) and \\(\\overrightarrow{b}=\\widehat{i}+ 2\\widehat{j}-\\widehat{k}\\). Let a vector \\(\\overrightarrow{v}\\) be in the plane containing \\(\\overrightarrow{a}\\) and \\(\\overrightarrow{b}\\). If \\(\\overrightarrow{v}\\) is perpendicular to the vector \\(3\\widehat{i}+ 2\\widehat{j}-\\widehat{k}\\) and its projection on \\(\\overrightarrow{a}\\) is 19 units, then \\(|2\\overrightarrow{v}|^{2}\\) is equal to",
+    "options": null,
+    "answer_key": null,
+    "numeric_answer": 1494
+  }
+]
