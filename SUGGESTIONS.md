@@ -400,6 +400,15 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
+- [ ] **Some times are formatted without India's zone (2026-10-19).** Found live on /hiring: the
+      server runs on UTC, so "added 08:47 am" was 2:17 pm. Hiring now uses `istTime`/`istDay`, and
+      the unit suite runs on UTC (`vitest.config.ts`) so a zoneless format fails there instead of
+      passing on an India-time laptop. Four shipped client components format without a zone —
+      `IssuePanel.tsx:181`, `ReportView.tsx:440`, `StaffConsole.tsx:316`, `CandidateFlow.tsx:579`
+      (the "start by" time a parent reads). They render first on the server in UTC, then in the
+      browser in IST, so the text can disagree between the two (a hydration mismatch React patches
+      up, or shows UTC). Not yet analysed (360 needed: the fix is one option per call).
+
 - [ ] **An assessment's state can move backwards (2026-10-19).** Found in the hiring test's browser
       check: a submitted test read `opened` again, so its link showed the number screen instead
       of "submitted". The page load marks a test opened with an unconditional update; a slow load
