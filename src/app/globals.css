@@ -15,3 +15,16 @@
     outline-offset: 2px;
   }
 }
+
+/* Display maths in a hiring question (mathToHtml in src/lib/mathText.ts): its
+   own line, centred. It wraps between terms; only a single term too wide for
+   the screen scrolls. Outside @layer so it is never purged: the class lives
+   in HTML the server builds, not in markup Tailwind scans. */
+.math-block {
+  display: block;
+  margin: 0.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.25rem 0;
+  text-align: center;
+}

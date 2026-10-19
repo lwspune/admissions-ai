@@ -25,5 +25,14 @@ describe('isPublicPath', () => {
   it('does not open a path that merely starts with a public word', () => {
     expect(isPublicPath('/loginx')).toBe(false)
     expect(isPublicPath('/tx')).toBe(false)
+    expect(isPublicPath('/hiring')).toBe(false)
+  })
+
+  // The teacher screening test's link (2026-10-19): an applicant has no session.
+  it("opens an applicant's link and its API, but not the hiring staff pages", () => {
+    expect(isPublicPath('/h/abc123')).toBe(true)
+    expect(isPublicPath('/api/h/start')).toBe(true)
+    expect(isPublicPath('/hiring/questions')).toBe(false)
+    expect(isPublicPath('/h')).toBe(false)
   })
 })

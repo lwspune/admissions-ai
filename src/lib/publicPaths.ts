@@ -7,6 +7,10 @@
 // /t/ and /api/t/ — the candidate route. The token plus the parent's number is
 // its gate.
 //
+// /h/ and /api/h/ — the teacher screening test's link (2026-10-19). The token
+// plus the applicant's number is its gate, checked again at start
+// (src/server/hiringAttempt.ts). /hiring, the staff side, is not under /h/.
+//
 // /api/cron/ — Vercel Cron carries no session, so the middleware would
 // redirect the purge to /login and it would never run, reporting 307s nobody
 // reads. Those routes guard themselves with CRON_SECRET.
@@ -16,7 +20,7 @@
 // /parent-pack/ — the parents' syllabus and sample-paper PDFs, linked from the
 // issue message: a parent has no session. Static files holding no candidate
 // data and no bank item (src/lib/parentPack.ts).
-const PREFIXES = ['/login', '/t/', '/api/t/', '/api/cron/', '/robots.txt', '/parent-pack/']
+const PREFIXES = ['/login', '/t/', '/api/t/', '/h/', '/api/h/', '/api/cron/', '/robots.txt', '/parent-pack/']
 
 // The homepage, for signed-out visitors (2026-10-11): mock-ups and a contact
 // form, nothing read from the database. Matched exactly — the root is a prefix
