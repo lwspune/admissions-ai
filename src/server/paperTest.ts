@@ -1,5 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
+import { canManageLeads } from '../lib/staff'
 import type { Role } from './auth'
 import { toCandidatePaper, type BankRow, type CandidateQuestion } from '../lib/serialize'
 import { toAnswerSheet, type AnswerSheet } from '../lib/paperSheet'
@@ -34,7 +35,7 @@ export interface PaperTest {
  * the columns those need are selected at all.
  */
 export async function loadPaperTest(db: Db, assessmentId: string, role: Role): Promise<PaperTest | null> {
-  if (role === 'telecaller' || !isUuid(assessmentId)) return null
+  if (!canManageLeads(role) || !isUuid(assessmentId)) return null
 
   const { data: a, error } = await db
     .from('assessments')

@@ -2,13 +2,53 @@
 // The superadmin gate itself lives in src/server/staff.ts, beside the admin
 // API calls it protects.
 
-export const ROLES = ['telecaller', 'counsellor', 'superadmin'] as const
+export const ROLES = ['telecaller', 'counsellor', 'superadmin', 'teacher'] as const
 export type Role = (typeof ROLES)[number]
 
 export const ROLE_LABEL: Record<Role, string> = {
   telecaller: 'Telecaller',
   counsellor: 'Counsellor',
   superadmin: 'Superadmin',
+  teacher: 'Teacher',
+}
+
+// Who may do what, as allow-lists. Checks once read "not a telecaller", which
+// would have waved through the teacher role (2026-10-19) and any role after it;
+// these name who is let in. The database refuses the same people underneath
+// (is_staff, can_hire, the triggers) — these keep the pages honest.
+
+/** Telecallers, counsellors and superadmin: the admissions side. Mirrors is_staff(). */
+export function isAdmissionsStaff(role: unknown): boolean {
+  return role === 'telecaller' || role === 'counsellor' || role === 'superadmin'
+}
+
+/** Counsellors and superadmin: assign, import, paper tests, scanning. */
+export function canManageLeads(role: unknown): boolean {
+  return role === 'counsellor' || role === 'superadmin'
+}
+
+/** Teachers and superadmin: the teacher screening test. Mirrors can_hire(). */
+export function canHire(role: unknown): boolean {
+  return role === 'superadmin' || role === 'teacher'
+}
+
+/** Where a role lands after signing in. */
+export function homeFor(role: Role): string {
+  return role === 'teacher' ? '/hiring' : '/leads'
+}
+
+const isHiringPath = (path: string) => path === '/hiring' || path.startsWith('/hiring/')
+
+/**
+ * Whether a signed-in role may open a staff path. The middleware asks this:
+ * a teacher sees /hiring and nothing else, and /hiring is for teachers and
+ * superadmin. Everything else stays as each page decides.
+ */
+export function roleMayOpen(role: unknown, path: string): boolean {
+  if (!isRole(role)) return false
+  if (role === 'teacher') return isHiringPath(path)
+  if (isHiringPath(path)) return canHire(role)
+  return true
 }
 
 // 8 is the NIST SP 800-63B floor. Set by the institute; raise it if staff

@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { canManageLeads } from '@/lib/staff'
 import { userClient, requireStaff } from '@/server/auth'
 import { issueAssessment } from '@/server/assessments'
 import { normalizeMobile } from '@/lib/mobile'
@@ -116,7 +117,7 @@ export async function issueForLead(leadId: string): Promise<ActionResult> {
  */
 export async function issuePaperForLead(leadId: string): Promise<ActionResult> {
   const staff = await requireStaff()
-  if (staff.role === 'telecaller') return { ok: false, error: 'Only a counsellor can issue a paper test.' }
+  if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor can issue a paper test.' }
   if (!isUuid(leadId)) return { ok: false, error: 'Unknown lead.' }
   const db = await userClient()
 
@@ -169,7 +170,7 @@ export async function setStage(leadId: string, stage: string): Promise<ActionRes
  */
 export async function assignLeads(leadIds: string[], assignee: string): Promise<ActionResult> {
   const staff = await requireStaff()
-  if (staff.role === 'telecaller') return { ok: false, error: 'Only a counsellor or superadmin can assign leads.' }
+  if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor or superadmin can assign leads.' }
   if (!Array.isArray(leadIds) || leadIds.length === 0) return { ok: false, error: 'Select at least one lead.' }
   if (leadIds.length > 500 || !leadIds.every(isUuid)) return { ok: false, error: 'Unknown lead.' }
   if (assignee !== '' && !isUuid(assignee)) return { ok: false, error: 'Choose a telecaller.' }

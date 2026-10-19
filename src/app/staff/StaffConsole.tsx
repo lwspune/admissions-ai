@@ -12,7 +12,8 @@ import { addStaffAction, changeRoleAction, renameAction, removeStaffAction } fro
 const ROLE_HINT: Record<Role, string> = {
   telecaller: 'Adds candidates and issues tests. Never sees question text.',
   counsellor: 'Everything a telecaller does, plus full reports with questions.',
-  superadmin: 'Everything, including answer keys and managing staff.',
+  superadmin: 'Everything, including answer keys, managing staff and teacher hiring.',
+  teacher: 'Screens teacher applicants on Hiring, seeing only the ones they add. Nothing of admissions.',
 }
 
 /** The name as the server stored it, for echoing back after a create. */
@@ -58,7 +59,7 @@ export function StaffConsole({
 
       {adding && <AddStaff signInUrl={signInUrl} />}
 
-      <dl className="mt-6 grid gap-3 sm:grid-cols-3">
+      <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {ROLES.map((r) => (
           <div key={r} className="rounded-xl border border-slate-200 bg-white/60 px-4 py-3">
             <dt className="text-sm font-semibold text-slate-900">{ROLE_LABEL[r]}</dt>

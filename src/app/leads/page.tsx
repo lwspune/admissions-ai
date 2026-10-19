@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { canManageLeads } from '@/lib/staff'
 import { redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { listLeads, listSources, PAGE_SIZE } from '@/server/leads'
@@ -20,7 +21,7 @@ export default async function LeadsPage({
 
   const filters = parseLeadFilters(await searchParams)
   const db = await userClient()
-  const canAssign = staff.role !== 'telecaller'
+  const canAssign = canManageLeads(staff.role)
 
   // Every read here goes through the session-bound client, so RLS decides what
   // this person can see — a telecaller's list is theirs because the database

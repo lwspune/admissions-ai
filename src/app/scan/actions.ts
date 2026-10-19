@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { canManageLeads } from '@/lib/staff'
 import { requireStaff, userClient } from '@/server/auth'
 import { lookupPaperForScan, recordPaperScan, type ScanPaper, type ScanResult } from '@/server/paperScan'
 import { isUuid } from '@/lib/leads'
@@ -13,7 +14,7 @@ export type FileResult = { ok: true; result: ScanResult } | { ok: false; error: 
 /** The paper a sheet's printed number belongs to. Counsellors and superadmin only. */
 export async function findPaper(paperNo: number): Promise<FindResult> {
   const staff = await requireStaff()
-  if (staff.role === 'telecaller') return { ok: false, error: 'Only a counsellor can scan answer sheets.' }
+  if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor can scan answer sheets.' }
   if (!Number.isInteger(paperNo) || paperNo < 100_000 || paperNo > 999_999) {
     return { ok: false, error: 'That is not a paper number.' }
   }
@@ -32,7 +33,7 @@ export async function findPaper(paperNo: number): Promise<FindResult> {
  */
 export async function fileScan(assessmentId: string, answers: ScanAnswer[]): Promise<FileResult> {
   const staff = await requireStaff()
-  if (staff.role === 'telecaller') return { ok: false, error: 'Only a counsellor can scan answer sheets.' }
+  if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor can scan answer sheets.' }
   if (!isUuid(assessmentId)) return { ok: false, error: 'Unknown paper test.' }
   try {
     const result = await recordPaperScan(await userClient(), { assessmentId, answers }, staff.role)

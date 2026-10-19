@@ -1,6 +1,7 @@
 import { NextResponse, type NextRequest } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { isPublicPath } from '@/lib/publicPaths'
+import { isRole, roleMayOpen, homeFor } from '@/lib/staff'
 
 // Refreshes the Supabase session cookie on every staff request and bounces
 // anyone without one to /login. What opens without a session, and why, is in
@@ -42,6 +43,18 @@ export async function middleware(req: NextRequest) {
     const url = req.nextUrl.clone()
     url.pathname = '/login'
     url.searchParams.set('next', pathname)
+    return NextResponse.redirect(url)
+  }
+
+  // A teacher works on /hiring and nothing else; /hiring is for teachers and
+  // superadmin (src/lib/staff.ts). One gate here, ahead of every page, server
+  // action and API route under it. The role is app_metadata, which only the
+  // admin API writes; the database refuses the same people underneath.
+  const role = data.user.app_metadata?.role
+  if (!home && isRole(role) && !roleMayOpen(role, pathname)) {
+    const url = req.nextUrl.clone()
+    url.pathname = homeFor(role)
+    url.search = ''
     return NextResponse.redirect(url)
   }
 

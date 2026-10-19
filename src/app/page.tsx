@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { homeFor } from '@/lib/staff'
 import Link from 'next/link'
 import { redirect } from 'next/navigation'
 import { currentStaff } from '@/server/auth'
@@ -19,7 +20,8 @@ export const dynamic = 'force-dynamic'
 export default async function Home() {
   // Staff come here to work, not to read about the product: a signed-in
   // member who lands on the root goes straight to the console.
-  if (await currentStaff()) redirect('/leads')
+  const staff = await currentStaff()
+  if (staff) redirect(homeFor(staff.role))
 
   return (
     <div className="flex min-h-screen flex-col">

@@ -1,6 +1,7 @@
 'use server'
 
 import { revalidatePath } from 'next/cache'
+import { canManageLeads } from '@/lib/staff'
 import { userClient, requireStaff } from '@/server/auth'
 import { previewImport, importLeads, type ImportPreview, type ImportResult } from '@/server/leadImport'
 import { parseCsv, CsvError } from '@/lib/csv'
@@ -34,7 +35,7 @@ export type CommitResult = { ok: true; sourceId: string; result: ImportResult; s
 
 async function importer() {
   const staff = await requireStaff()
-  if (staff.role === 'telecaller') throw new Error('Only a counsellor or superadmin can import leads.')
+  if (!canManageLeads(staff.role)) throw new Error('Only a counsellor or superadmin can import leads.')
   return userClient()
 }
 

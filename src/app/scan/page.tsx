@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { canManageLeads } from '@/lib/staff'
 import { redirect } from 'next/navigation'
 import { currentStaff } from '@/server/auth'
 import { StaffShell } from '@/components/StaffShell'
@@ -15,7 +16,7 @@ export const metadata: Metadata = { title: 'Scan sheets', robots: { index: false
 export default async function ScanPage() {
   const staff = await currentStaff()
   if (!staff) redirect('/login?next=/scan')
-  if (staff.role === 'telecaller') redirect('/leads')
+  if (!canManageLeads(staff.role)) redirect('/leads')
 
   return (
     <StaffShell staff={staff}>

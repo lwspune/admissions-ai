@@ -1,5 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
+import { canManageLeads } from '../lib/staff'
 import type { Role } from './auth'
 import { buildReport, toParentReport, type ParentReport, type ReportInput, type ReportPaperItem } from '../lib/report'
 import { limitMsFor } from '../lib/types'
@@ -172,7 +173,7 @@ async function loadPaper(db: Db, assessmentId: string, role: Role): Promise<Repo
     .eq('assessment_id', assessmentId)
     .order('position')
 
-  const hideStems = role === 'telecaller'
+  const hideStems = !canManageLeads(role)
 
   return (data ?? []).map((row) => {
     const item = row.test_items as never as {

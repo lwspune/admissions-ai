@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { canManageLeads } from '@/lib/staff'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadLead } from '@/server/leads'
@@ -17,7 +18,7 @@ export default async function LeadPage({ params }: { params: Promise<{ id: strin
   if (!isUuid(id)) notFound()
 
   const db = await userClient()
-  const canAssign = staff.role !== 'telecaller'
+  const canAssign = canManageLeads(staff.role)
   const [detail, assignees] = await Promise.all([
     loadLead(db, id),
     canAssign ? listAssignees(staff) : Promise.resolve([]),

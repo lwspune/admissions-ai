@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useTransition } from 'react'
+import { canManageLeads } from '@/lib/staff'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { CLASSES } from '@/lib/classes'
@@ -28,7 +29,7 @@ export function LeadsConsole({
   pageSize: number
 }) {
   const [adding, setAdding] = useState(false)
-  const canAssign = staff.role !== 'telecaller'
+  const canAssign = canManageLeads(staff.role)
 
   return (
     <>

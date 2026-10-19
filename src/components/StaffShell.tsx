@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ROLE_LABEL, type Role } from '@/lib/staff'
+import { ROLE_LABEL, canHire, canManageLeads, homeFor, isAdmissionsStaff, isRole, type Role } from '@/lib/staff'
 import { userClient } from '@/server/auth'
 import { unreadContactCount } from '@/server/contact'
 import { StaffNav, SignOutButton, type NavItem } from './StaffNav'
@@ -20,13 +20,14 @@ export async function StaffShell({
   width?: 'narrow' | 'default' | 'wide'
   children: React.ReactNode
 }) {
-  const items: NavItem[] = [
-    { href: '/leads', label: 'Leads', icon: 'users' },
-    { href: '/downloads', label: 'Downloads', icon: 'download' },
-  ]
-  if (staff.role !== 'telecaller') {
+  const items: NavItem[] = []
+  if (isAdmissionsStaff(staff.role)) {
+    items.push({ href: '/leads', label: 'Leads', icon: 'users' }, { href: '/downloads', label: 'Downloads', icon: 'download' })
+  }
+  if (canManageLeads(staff.role)) {
     items.push({ href: '/leads/import', label: 'Import', icon: 'upload' }, { href: '/scan', label: 'Scan', icon: 'camera' })
   }
+  if (canHire(staff.role)) items.push({ href: '/hiring', label: 'Hiring', icon: 'user' })
   if (staff.role === 'superadmin') {
     // The unread count is read through RLS, so it is only ever asked for here.
     const unread = await unreadContactCount(await userClient())
@@ -36,13 +37,14 @@ export async function StaffShell({
       { href: '/messages', label: 'Messages', icon: 'inbox', count: unread },
     )
   }
+  const home = isRole(staff.role) ? homeFor(staff.role) : '/leads'
   const role = ROLE_LABEL[staff.role as Role] ?? staff.role
 
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
         <div className="mx-auto flex max-w-6xl items-center gap-4 px-4">
-          <Link href="/leads" aria-label="Aptitude Test — leads" className="min-h-tap flex items-center rounded-lg py-2">
+          <Link href={home} aria-label={`Aptitude Test — ${home === '/hiring' ? 'hiring' : 'leads'}`} className="min-h-tap flex items-center rounded-lg py-2">
             <Mark labelClassName="hidden sm:inline" />
           </Link>
           <div className="hidden flex-1 self-stretch md:flex md:items-end">

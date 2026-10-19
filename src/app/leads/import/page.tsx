@@ -1,4 +1,5 @@
 import type { Metadata } from 'next'
+import { canManageLeads } from '@/lib/staff'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { listSources } from '@/server/leads'
@@ -13,7 +14,7 @@ export default async function ImportPage() {
   const staff = await currentStaff()
   if (!staff) redirect('/login?next=/leads/import')
   // Cosmetic: import_leads refuses a telecaller in the database regardless.
-  if (staff.role === 'telecaller') notFound()
+  if (!canManageLeads(staff.role)) notFound()
 
   const sources = await listSources(await userClient())
 
