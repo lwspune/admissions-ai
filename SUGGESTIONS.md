@@ -277,6 +277,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       (`GET /v13/deployments/<id>` → `seatBlock`). Cleared the same day after the user changed
       the link on the Vercel side: `5ac7821` deployed, and the paper test was issued, printed and
       its OMR sheet built on the live site by a temporary counsellor (then removed).
+      **Again 2026-10-19** (`e44c81c`, the teacher screening test): `BLOCKED`, `TEAM_ACCESS_REQUIRED`,
+      GitHub 265271616 resolved to the same `ma9VhhCWbsoAhb4bcLWBT9To` as 10-16 — so the 10-16 fix did
+      not hold. Production stayed on `6f4321b`; migrations 0020–0022 were already applied, which the
+      old code ignores (new tables only). Read the reason with the CLI's own token:
+      `GET https://api.vercel.com/v6/deployments?app=admissions-ai&limit=3&slug=apj-school`, then
+      `GET /v13/deployments/<uid>?slug=apj-school` → `seatBlock`.
 - [ ] **The integration suite is coupled to production content (2026-10-07).** It runs against
       the live database and draws from the live pool, so a content change can turn it red with no
       code change: after the class 10 batch went live, twelve tests still expected 15 questions,
