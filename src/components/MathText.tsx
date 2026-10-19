@@ -34,7 +34,7 @@ function Tex({ tex, block }: { tex: string; block: boolean }) {
   }
   return (
     <span
-      className={cx(block && 'my-2 block overflow-x-auto overflow-y-hidden')}
+      className={cx(block && 'my-2 block overflow-x-auto overflow-y-hidden py-1 text-center')}
       dangerouslySetInnerHTML={{ __html: html }}
     />
   )

@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseMathText, mathErrors } from './mathText'
+import { parseMathText, mathErrors, renderTex } from './mathText'
 
 // Hiring questions come from PYQ Vault, which stores maths as LaTeX zones in
 // plain text. This is the subset of its parser (src/components/math/parseLatex.ts
@@ -51,6 +51,23 @@ describe('parseMathText', () => {
 
   it('returns nothing for empty text', () => {
     expect(parseMathText('')).toEqual([])
+  })
+})
+
+describe('renderTex', () => {
+  // A display equation in KaTeX's display mode never wraps, so on a phone
+  // the end of a long one sat off-screen ("… + CH3CHO +", hiding "HCl").
+  it('draws display maths at display size but able to wrap between terms', () => {
+    const html = renderTex(String.raw`A + N_{2} + CH_{3}CHO + HCl`, true)
+    expect(html).not.toContain('katex-display')
+    expect((html.match(/class="base"/g) ?? []).length).toBeGreaterThan(1)
+    // \displaystyle keeps display-size symbols: a sum is KaTeX's large operator.
+    expect(renderTex(String.raw`\sum_{k=1}^{n} k`, true)).toContain('large-op')
+  })
+
+  it('draws inline maths as inline, at text size', () => {
+    expect(renderTex('x^2', false)).not.toContain('katex-display')
+    expect(renderTex(String.raw`\sum_{k=1}^{n} k`, false)).not.toContain('large-op')
   })
 })
 

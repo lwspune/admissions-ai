@@ -85,9 +85,17 @@ export function parseMathText(input: string): MathRun[] {
   return runs
 }
 
-/** Render one zone to HTML. KaTeX escapes its input, so the markup is safe to set. */
-export function renderTex(tex: string, displayMode: boolean): string {
-  return katex.renderToString(tex, { displayMode, throwOnError: true, strict: false, output: 'html' })
+/**
+ * Render one zone to HTML. KaTeX escapes its input, so the markup is safe to set.
+ *
+ * Display maths is drawn in inline mode under \displaystyle: the same large
+ * symbols, but able to break between terms. KaTeX's display mode never wraps,
+ * so on a phone the end of a long equation sat off-screen. The page centres it
+ * on its own line.
+ */
+export function renderTex(tex: string, block: boolean): string {
+  const source = block ? `\\displaystyle ${tex}` : tex
+  return katex.renderToString(source, { displayMode: false, throwOnError: true, strict: false, output: 'html' })
 }
 
 /** Every maths zone in the text that KaTeX refuses, quoted. Empty when all draw. */
