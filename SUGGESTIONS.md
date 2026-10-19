@@ -7,6 +7,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Teacher screening test: the hiring bank is at review (2026-10-19).** 1,050 questions from
+      PYQ Vault, none drawable until a subject is signed off (`npm run hiring:seed -- --live --file
+      <subject>`); the user reviews at `/hiring/questions` or in `content/hiring/*.json`.
+      **Flagged for that review:** chemistry #37 (`54e5bffa`, MHT-CET 2025 · 21 April Shift I,
+      Amines, "Identify product A…"). On a phone it read "… + CH₃CHO +", which looked truncated; the
+      stored text ends "+ HCl". The cause was display maths that could not wrap and ran off-screen,
+      fixed the same day (`renderTex` draws it wrapping). Confirm it reads whole on a phone.
+
 - [ ] **Scanning paper tests (2026-10-16): built, not yet tried on paper.** Migration 0019 applied;
       unit 532, `paperScan.itest.ts` 14/14, retention 9/9 (the photo purge goes red when removed).
       Read correctly off a photo of the real PDF with pen marks, perspective and a shadow, filed
