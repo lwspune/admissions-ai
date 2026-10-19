@@ -226,6 +226,21 @@ begin
   end;
   v_out := v_out || 'answers guarded, graded 2.75 in SQL, locked after submit; ';
 
+  -- The state only moves forward (migration 0022): a late "opened" from a
+  -- slow page load must not reopen a submitted test, nor revive a voided one.
+  begin
+    update public.hiring_tests set state = 'opened' where id = v_t3rd.id;
+    v_fail := true; v_out := v_out || 'SUBMITTED WENT BACK TO OPENED; ';
+  exception when check_violation then null;
+  end;
+  begin
+    update public.hiring_tests set state = 'issued' where id = v_test.id;
+    v_fail := true; v_out := v_out || 'VOIDED CAME BACK; ';
+  exception when check_violation then null;
+  end;
+  update public.hiring_tests set state = 'submitted' where id = v_t3rd.id; -- the same state is a no-op
+  v_out := v_out || 'state only moves forward; ';
+
   -- ── an attempt past its deadline is closed as timed out ──────────────────
   -- A fresh applicant, issued and started, with the clock moved back.
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
