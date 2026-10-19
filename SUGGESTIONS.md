@@ -377,6 +377,15 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
+- [ ] **`items:seed` reads the bank's statuses in one request, and the API stops at 1000 rows
+      (2026-10-19).** Found building `hiring:seed`: its first run counted 1000 of 1050 rows, and
+      the same read decides which questions keep `live`. Past 1000 items, a plain re-seed would
+      treat every unread item as new and demote it to `review` — the trap the status rule exists
+      to prevent, and nothing would say so until a paper could not be filled. `hiring:seed` pages
+      its reads. `scripts/seed-items.mts` (the `existingRows` and `inBank` fetches) and
+      `loadBank` in `src/server/items.ts` do not; the student bank is far below 1000 today, so
+      nothing is wrong yet. Not yet analysed (360 needed).
+
 - [ ] **`db:verify`'s probes no longer run anywhere (2026-10-16).** They refuse a database holding
       leads, and the only database is production, which always holds leads now — so every check in
       `verify-schema.mjs` (MCQ shape, class ceilings, Hindi shape, reissue cap…) has been inert

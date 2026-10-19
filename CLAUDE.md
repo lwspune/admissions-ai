@@ -9,6 +9,7 @@ itself server-side.
 | Doc | For |
 |---|---|
 | [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) | What it does and why. The v1 contract |
+| [HIRING_TEST_SPEC.md](HIRING_TEST_SPEC.md) | The teacher screening test, a second track (2026-10-19) |
 | [SUGGESTIONS.md](SUGGESTIONS.md) | Open items, traps, what is unverified |
 | [BRAINSTORM.md](BRAINSTORM.md) | The wider funnel this sits inside |
 | [DEPLOY.md](DEPLOY.md) | Deployment and credential rotation |
@@ -55,6 +56,8 @@ candidate screen's words, English and Hindi) ·
 `omr/detectSquares`, `omr/gridFit`, `omr/readBubbles`, `omr/liveCapture` (the reader, ported from nda-tracker) ·
 `omr/readAnswerSheet` (paper code, then answers) · `scanResult` (settling flags, the save, its validation) ·
 `paperSheet` (what the sheet may know, an allow-list) ·
+`hiring` (the teacher screening test: which PYQ Vault questions it can carry, the pool pick, the bank lint) ·
+`mathText` (LaTeX in question text, ported from PYQ Vault's parser; KaTeX) ·
 `csv` (the reader) · `mobile` · `token` · `ip` · `types`
 
 **`src/server/` — service layer.** Marked `server-only`, which turns "imported
@@ -63,13 +66,13 @@ into a client bundle" into a build error. `supabase` (service-role client) ·
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
 messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet) · `paperScan`
-(look a paper up by its number, file a scan, the sheet photo)
+(look a paper up by its number, file a scan, the sheet photo) · `hiring` (the teacher test's bank)
 
 **`src/components/`** — the shared look: `ui` (button, field, card, badge and
 alert styles, no hooks, so server and client pages share them), `icons` (inline
 SVG, no icon package), `StaffShell` (the frame round every staff page),
-`ConfirmDialog` (a native `<dialog>` in place of `window.confirm`) and
-`StaffLoading`. Colours, corners and shadows are set once in `tailwind.config.ts`
+`ConfirmDialog` (a native `<dialog>` in place of `window.confirm`),
+`StaffLoading` and `MathText` (KaTeX drawn on the server; the hiring questions). Colours, corners and shadows are set once in `tailwind.config.ts`
 (`brand` is indigo, from the parent sheet); a page should reach for these before
 writing its own classes.
 
@@ -80,7 +83,7 @@ test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get i
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/` and `messages/` (superadmin only), `downloads/` (every role) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/`, `messages/` and `hiring/questions` (superadmin only), `downloads/` (every role) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -236,6 +239,13 @@ These are the things that quietly break everything if violated.
   `omr-sheets/<assessment id>.jpg`, private, read by counsellors and superadmin only, writable
   only while the paper is still open, so a filed scan's photo is its record; the purge deletes it
   by name, since storage does not cascade (`retention.itest.ts`).
+- **The teacher screening test is a second track that shares no table with admissions.**
+  `hiring_items` (migration 0020) holds real exam questions from PYQ Vault; `can_hire()` (teacher
+  or superadmin) is its gate. `is_staff()` lists telecaller, counsellor and superadmin only, so a
+  teacher is refused by every admissions policy without one being touched — never add teacher to
+  it. App code that checks `role !== 'telecaller'` treats any other role as senior staff; when the
+  teacher role reaches `ROLES` (step 3), every such check must be read again. The bank's shape
+  rules are constraints (`npm run db:probe -- 0020`); signed-in users only read it.
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -254,6 +264,8 @@ npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Ful
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
+npm run hiring:import [-- <subject>]         (PYQ Vault → content/hiring/<subject>.json; reads its public API)
+npm run hiring:seed  [-- --live --file <subject>]   (load the hiring bank; --live promotes one reviewed subject)
 ```
 
 Before/after screenshot sheets go in `screenshots/<date>-<topic>/` at the project root (the
@@ -341,6 +353,17 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-19 — A screening test for teacher applicants, built here beside admissions.** The
+  user's calls: hiring screens applicants before anyone calls them, many are out of station, and
+  copying is acceptable because the interview grills them. Fifteen moderate real-exam questions in
+  20–25 minutes — maths from NDA, physics and chemistry from MHT-CET, three typed answers from JEE
+  Mains, English from CDS — and no two applicants get the same set. A new teacher role issues it
+  and sees only the applicants they added. Built in Admissions AI rather than as unlisted PYQ Vault
+  mocks (which were offered), as its own tables. Step 1 (2026-10-19): the bank — 1,050 questions
+  imported from PYQ Vault's public API, seeded at review, shown at `/hiring/questions`. v1 leaves
+  out figures, tables, shared stems and English passages; every pool still had hundreds to spare.
+  KaTeX 0.16.45 (PYQ Vault's version) is the one new package: the questions are LaTeX.
 
 - **2026-10-16 — Scanning paper tests: a live viewfinder, a photo fallback, the photo kept.** The
   user's calls: the live camera scanner as well as a photo per sheet, a saved scan is final like a
