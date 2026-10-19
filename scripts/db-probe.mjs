@@ -9,6 +9,11 @@
 // other session ever sees its rows, and its message carries the result. A
 // file passes when that message says PROBE-PASS.
 //
+// To prove a probe can fail, copy it and break the rule INSIDE its DO block
+// (`execute 'drop index …'` right after `begin`): the closing raise rolls the
+// break back with everything else. Never as a separate statement before the
+// block — that is a schema change on production if it ever runs on its own.
+//
 // Connects through the IPv4 session pooler with SUPABASE_DB_PASSWORD from
 // .env.local (see CLAUDE.md, Commands). The connection string is never printed.
 
