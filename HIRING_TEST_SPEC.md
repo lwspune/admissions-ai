@@ -1,8 +1,9 @@
 # Teacher Screening Test — Specification (v1)
 
-**Date:** 2026-10-19 · **Status:** The bank (step 1) and the test itself (step 2) are built. The staff
-side — the teacher role and the `/hiring` page — is next; until then a test can be issued only through
-the database function.
+**Date:** 2026-10-19 · **Status:** Built (steps 1–3, 2026-10-19), on branch `feat/teacher-screening`. Not usable until a
+subject's questions are signed off (`npm run hiring:seed -- --live --file <subject>`) and the branch
+ships; create teacher accounts only after it ships — the live code before it shows a teacher as "No
+role".
 
 A screen, not a judgement: an applicant for a teaching post sits fifteen moderate questions from real
 exam papers before anyone calls them. Many applicants are out of station, so it is taken remotely on a
@@ -88,8 +89,24 @@ Proven by `npm run db:probe -- 0020`.
 
 Proven by `npm run db:probe -- 0021` and `src/server/hiring.itest.ts`.
 
-## 4. Still to build
+### The staff side (step 3)
 
-- **Step 3 — the staff side.** The teacher role (`/staff`, `staff:add`); the middleware keeps a
-  teacher on `/hiring`; the `/hiring` page (add an applicant, issue, the WhatsApp message, score, time
-  used, each question right or wrong); the purge.
+- **The teacher role** is in `ROLES`, created on `/staff` or with `staff:add`. The middleware keeps a
+  teacher on `/hiring` (every other path redirects there) and keeps telecallers and counsellors off
+  it. Role checks that once read "not a telecaller" are allow-lists (`canManageLeads`,
+  `isAdmissionsStaff`, `canHire` in `src/lib/staff.ts`), so a new role is refused until named.
+- **`/hiring`** (teacher and superadmin): add an applicant (name, number, subject), send the link —
+  the WhatsApp message names the subject, the minutes and that the clock does not stop — resend the
+  live link, or issue a new one (asks first: the old link stops). Each applicant shows where they
+  stand and, once submitted, the score out of 15, right/wrong/skipped and time used. Superadmin sees
+  who added each applicant.
+- **`/hiring/[id]`**: the score and every question with the answer chosen, the key and the verdict.
+- **The purge** deletes an applicant 12 months after their last activity (added, or last issued),
+  with everything under them (`purgeExpired`, `hiring.itest.ts`).
+
+## 4. Open
+
+- Sign off each subject's questions; until then no paper can be drawn.
+- The defaults marked above (24-hour window, two reissues, no score shown) and the choices in step 2
+  (the clock does not pause; starting re-checks the number; a started paper keeps its full time) are
+  the builder's, awaiting the owner's word.

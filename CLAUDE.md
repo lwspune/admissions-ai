@@ -84,7 +84,8 @@ test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get i
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/`, `messages/` and `hiring/questions` (superadmin only), `downloads/` (every role) are staff, guarded by
+thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/`, `messages/` and `hiring/questions` (superadmin only), `downloads/` (admissions roles), `hiring/` and
+`hiring/[id]` (teacher and superadmin) are staff, guarded by
 `src/middleware.ts`.
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
@@ -244,8 +245,9 @@ These are the things that quietly break everything if violated.
   `hiring_items` (migration 0020) holds real exam questions from PYQ Vault; `can_hire()` (teacher
   or superadmin) is its gate. `is_staff()` lists telecaller, counsellor and superadmin only, so a
   teacher is refused by every admissions policy without one being touched — never add teacher to
-  it. App code that checks `role !== 'telecaller'` treats any other role as senior staff; when the
-  teacher role reaches `ROLES` (step 3), every such check must be read again. The bank's shape
+  it. In app code the middleware keeps a teacher on `/hiring` (`roleMayOpen`), and role checks are
+  allow-lists (`canManageLeads`, `isAdmissionsStaff`, `canHire` in `src/lib/staff.ts`): never write
+  `role !== 'telecaller'` again — it lets every role added later through. The bank's shape
   rules are constraints (`npm run db:probe -- 0020`); signed-in users only read it.
   An applicant belongs to whoever added them (stamped from the session) and a teacher sees only
   their own; `issue_hiring_test()` is the only way a test is made and draws the paper itself, and
@@ -267,7 +269,7 @@ npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run db:probe [-- <name>]                 (rollback-only SQL probes, safe on production)
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run items:hindi -- --stamp|--sheet|--file <batch>   (Hindi: fill source, review sheet, load)
-npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin> ["Full Name"]
+npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin|teacher> ["Full Name"]
 npm run staff:list    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
@@ -377,6 +379,8 @@ the connection is refused (2026-10-01).
   24-hour window says. The browser check found a stale page load writing "opened" over a submitted
   test; the state now only moves forward (0022), and the same race in the admissions test is in
   the backfill ledger.
+  Step 3 (same day): the teacher role, `/hiring` and `/hiring/[id]`, and the purge. Teacher
+  accounts wait until the branch ships: the live code before it shows one as "No role".
 
 - **2026-10-16 — Scanning paper tests: a live viewfinder, a photo fallback, the photo kept.** The
   user's calls: the live camera scanner as well as a photo per sheet, a saved scan is final like a

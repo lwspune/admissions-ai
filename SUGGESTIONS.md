@@ -7,6 +7,15 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Teacher screening test: built, not yet in use (2026-10-19).** All three steps on branch
+      `feat/teacher-screening`; migrations 0020–0022 applied. Verified in headless Edge on local dev
+      against production: a teacher kept to /hiring, adds an applicant, sends the link; the applicant
+      takes it on a phone; the score and per-question report read back. **Needs the user:** sign off
+      a subject's questions (below), merge, then create teacher logins (`/staff`) — not before, as
+      the live code shows a teacher as "No role". Then a real WhatsApp send and a real phone.
+      **Defaults awaiting the user's word:** 24-hour window, two reissues, no score shown to the
+      applicant, the clock does not pause, starting re-checks the number.
+
 - [ ] **Teacher screening test: the hiring bank is at review (2026-10-19).** 1,050 questions from
       PYQ Vault, none drawable until a subject is signed off (`npm run hiring:seed -- --live --file
       <subject>`); the user reviews at `/hiring/questions` or in `content/hiring/*.json`.
