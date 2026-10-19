@@ -7,7 +7,11 @@ import {
   toHiringItem,
   pickPool,
   lintHiringBank,
+  toApplicantPaper,
+  parseTypedAnswer,
+  validateApplicant,
   type HiringItem,
+  type HiringItemRow,
   type SourceRow,
 } from './hiring'
 
@@ -234,6 +238,100 @@ describe('lintHiringBank', () => {
       'x4: only English carries a direction',
       expect.stringMatching(/^x5: maths KaTeX cannot draw/),
     ])
+  })
+})
+
+describe('toApplicantPaper', () => {
+  const row = (position: number, over: Partial<HiringItemRow> = {}): { position: number; item: HiringItemRow } => ({
+    position,
+    item: {
+      id: 'a1b2c3d4-0000-4000-8000-00000000beef',
+      source_ref: 'SRC-REF-7319',
+      source: 'nda',
+      paper: 'NDA 2019 · PAPER-LABEL',
+      subject: 'maths',
+      chapter: 'CHAPTER-NAME',
+      format: 'mcq',
+      direction: null,
+      stem: String.raw`Find \(x\).`,
+      options: { A: 'one', B: 'two', C: 'three', D: 'four' },
+      answer_key: 'C',
+      numeric_answer: null,
+      status: 'live',
+      ...over,
+    },
+  })
+
+  // The applicant's browser must never receive the key, nor anything that
+  // finds the question in PYQ Vault (its id, paper or chapter). Checked on the
+  // serialized bytes, since a property check is defeated by nesting.
+  it('sends no key, answer, id, source, paper or chapter', () => {
+    const bytes = JSON.stringify(
+      toApplicantPaper([
+        row(1),
+        row(2, { format: 'numeric', options: null, answer_key: null, numeric_answer: 7319, stem: 'How many?' }),
+      ]),
+    )
+    for (const secret of ['answer_key', 'numeric_answer', '7319', 'beef', 'SRC-REF', 'PAPER-LABEL', 'CHAPTER-NAME', ':"C"', 'source', 'status']) {
+      expect(bytes).not.toContain(secret)
+    }
+  })
+
+  it('sends the question as HTML with maths drawn, in position order', () => {
+    const paper = toApplicantPaper([row(2, { stem: 'second' }), row(1)])
+    expect(paper.map((q) => q.position)).toEqual([1, 2])
+    expect(paper[0]!.stem).toContain('class="katex"')
+    expect(paper[0]!.options).toEqual({ A: 'one', B: 'two', C: 'three', D: 'four' })
+    expect(paper[1]!.stem).toBe('second')
+  })
+
+  it('sends a typed-answer question without options, and an English direction', () => {
+    const [typed] = toApplicantPaper([row(1, { format: 'numeric', options: null, answer_key: null, numeric_answer: 4 })])
+    expect(typed).toMatchObject({ format: 'numeric', options: null, direction: null })
+    const [eng] = toApplicantPaper([row(1, { subject: 'english', direction: 'Directions: spot the <error>.' })])
+    expect(eng!.direction).toBe('Directions: spot the &lt;error&gt;.')
+  })
+
+  it('copies only A to D from the stored options', () => {
+    const [q] = toApplicantPaper([row(1, { options: { A: 'a', B: 'b', C: 'c', D: 'd', E: 'stray' } as never })])
+    expect(Object.keys(q!.options!)).toEqual(['A', 'B', 'C', 'D'])
+  })
+})
+
+describe('validateApplicant', () => {
+  it('normalises the number and trims the name', () => {
+    expect(validateApplicant({ name: '  Asha Rao ', mobile: '+91 98765 43210', subject: 'physics' })).toEqual({
+      ok: true,
+      value: { name: 'Asha Rao', mobile: '9876543210', subject: 'physics' },
+    })
+  })
+
+  it('says what is wrong, one thing at a time', () => {
+    expect(validateApplicant({ name: '', mobile: '9876543210', subject: 'maths' })).toEqual({ ok: false, error: 'Enter the applicant’s name.' })
+    expect(validateApplicant({ name: 'x'.repeat(101), mobile: '9876543210', subject: 'maths' })).toEqual({
+      ok: false,
+      error: 'The name is too long.',
+    })
+    expect(validateApplicant({ name: 'A', mobile: '12345', subject: 'maths' })).toEqual({ ok: false, error: 'Enter a 10-digit mobile number.' })
+    expect(validateApplicant({ name: 'A', mobile: '9876543210', subject: 'biology' })).toEqual({ ok: false, error: 'Choose a subject.' })
+  })
+})
+
+describe('parseTypedAnswer', () => {
+  it('reads a whole number from 0 to 9999', () => {
+    expect(parseTypedAnswer('42')).toBe(42)
+    expect(parseTypedAnswer(' 0 ')).toBe(0)
+    expect(parseTypedAnswer('0042')).toBe(42)
+    expect(parseTypedAnswer('9999')).toBe(9999)
+  })
+
+  it('reads blank as no answer', () => {
+    expect(parseTypedAnswer('')).toBeNull()
+    expect(parseTypedAnswer('   ')).toBeNull()
+  })
+
+  it('refuses anything else', () => {
+    for (const bad of ['-1', '10000', '2.5', '1e3', '12a', '½', '1,000']) expect(parseTypedAnswer(bad)).toBe('invalid')
   })
 })
 

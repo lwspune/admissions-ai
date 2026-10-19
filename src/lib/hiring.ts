@@ -1,5 +1,6 @@
-import { mathErrors } from './mathText'
-import type { Choice } from './types'
+import { mathErrors, mathToHtml } from './mathText'
+import { CHOICES, type Choice } from './types'
+import { normalizeMobile } from './mobile'
 
 // The teacher screening test (HIRING_TEST_SPEC.md): fifteen moderate questions
 // from real exam papers, a different set for every applicant. Questions come
@@ -87,6 +88,88 @@ export interface HiringItem {
   numeric_answer: number | null
   /** Set in the file only to retire a question; the seed otherwise keeps what the database has. */
   status?: 'retired'
+}
+
+/** A row of hiring_items as the database holds it — key and all. Server-side only. */
+export interface HiringItemRow extends Omit<HiringItem, 'status'> {
+  id: string
+  status: 'review' | 'live' | 'retired'
+}
+
+/** Hours an applicant has to start the test after it is issued (owner's default, 2026-10-19). */
+export const HIRING_WINDOW_HOURS = 24
+/** The first issue and two reissues. */
+export const MAX_HIRING_ISSUES = 3
+
+/** Exactly what an applicant's browser receives: HTML to show, never the key. */
+export interface ApplicantQuestion {
+  position: number
+  format: HiringFormat
+  /** An English question's printed direction, as HTML; null elsewhere. */
+  direction: string | null
+  stem: string
+  options: Record<Choice, string> | null
+}
+
+/**
+ * Strips a hiring paper to what the applicant may see — the security boundary
+ * of this test, as toCandidatePaper is of the admissions one. An ALLOW-LIST: a
+ * column added to hiring_items later does not start reaching applicants. Also
+ * withheld: the id, source, paper and chapter, which would find the question
+ * (and its answer) in PYQ Vault in one search.
+ *
+ * Text arrives as HTML, maths already drawn, because the applicant's screen is
+ * a client component and KaTeX runs on the server only (mathToHtml escapes
+ * everything else).
+ */
+export function toApplicantPaper(rows: { position: number; item: HiringItemRow }[]): ApplicantQuestion[] {
+  return [...rows]
+    .sort((a, b) => a.position - b.position)
+    .map(({ position, item }) => ({
+      position,
+      format: item.format,
+      direction: item.direction ? mathToHtml(item.direction) : null,
+      stem: mathToHtml(item.stem),
+      options:
+        item.format === 'mcq' && item.options
+          ? (Object.fromEntries(CHOICES.map((c) => [c, mathToHtml(String(item.options![c] ?? ''))])) as Record<Choice, string>)
+          : null,
+    }))
+}
+
+export interface NewApplicant {
+  name: string
+  mobile: string
+  subject: HiringSubject
+}
+
+/**
+ * The add-applicant form's checks, before anything reaches the database (which
+ * refuses the same things: migration 0021). The number is normalised as on
+ * leads, so "+91 98765 43210" and "09876543210" are one applicant's number.
+ */
+export function validateApplicant(input: { name: string; mobile: string; subject: string }):
+  | { ok: true; value: NewApplicant }
+  | { ok: false; error: string } {
+  const name = String(input.name ?? '').trim()
+  if (!name) return { ok: false, error: 'Enter the applicant’s name.' }
+  if (name.length > 100) return { ok: false, error: 'The name is too long.' }
+  const mobile = normalizeMobile(String(input.mobile ?? ''))
+  if (!mobile) return { ok: false, error: 'Enter a 10-digit mobile number.' }
+  if (!HIRING_SUBJECTS.includes(input.subject as HiringSubject)) return { ok: false, error: 'Choose a subject.' }
+  return { ok: true, value: { name, mobile, subject: input.subject as HiringSubject } }
+}
+
+/**
+ * A typed answer as the applicant entered it: a whole number from 0 to 9999,
+ * null when blank, 'invalid' otherwise. Every typed answer in the bank is such
+ * a number (hiring_items_format_pairing), so nothing else can be right.
+ */
+export function parseTypedAnswer(raw: string): number | null | 'invalid' {
+  const s = raw.trim()
+  if (s === '') return null
+  if (!/^\d{1,4}$/.test(s.replace(/^0+(?=\d)/, ''))) return 'invalid'
+  return Number(s)
 }
 
 /**

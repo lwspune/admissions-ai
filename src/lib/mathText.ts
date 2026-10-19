@@ -98,6 +98,35 @@ export function renderTex(tex: string, block: boolean): string {
   return katex.renderToString(source, { displayMode: false, throwOnError: true, strict: false, output: 'html' })
 }
 
+const ESCAPES: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }
+const escapeHtml = (s: string) => s.replace(/[&<>"']/g, (c) => ESCAPES[c]!)
+
+/**
+ * The text as HTML, for a client screen that cannot run KaTeX itself (the
+ * hiring test's). Every character of the source is escaped except what KaTeX
+ * produces, and KaTeX escapes its own input with `trust` off; so nothing in a
+ * question can become markup. Display maths gets `.math-block` to sit on its
+ * own line.
+ */
+export function mathToHtml(input: string): string {
+  return parseMathText(input)
+    .map((run) => {
+      let html: string
+      if (run.type === 'text') html = escapeHtml(run.content).replace(/\n/g, '<br>')
+      else if (run.type === 'underline') html = `<u>${escapeHtml(run.content)}</u>`
+      else {
+        try {
+          html = renderTex(run.content, run.type === 'block')
+          if (run.type === 'block') html = `<span class="math-block">${html}</span>`
+        } catch {
+          html = `<code>${escapeHtml(run.content)}</code>`
+        }
+      }
+      return run.bold ? `<strong>${html}</strong>` : html
+    })
+    .join('')
+}
+
 /** Every maths zone in the text that KaTeX refuses, quoted. Empty when all draw. */
 export function mathErrors(input: string): string[] {
   const errors: string[] = []

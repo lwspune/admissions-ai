@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { parseMathText, mathErrors, renderTex } from './mathText'
+import { parseMathText, mathErrors, mathToHtml, renderTex } from './mathText'
 
 // Hiring questions come from PYQ Vault, which stores maths as LaTeX zones in
 // plain text. This is the subset of its parser (src/components/math/parseLatex.ts
@@ -68,6 +68,35 @@ describe('renderTex', () => {
   it('draws inline maths as inline, at text size', () => {
     expect(renderTex('x^2', false)).not.toContain('katex-display')
     expect(renderTex(String.raw`\sum_{k=1}^{n} k`, false)).not.toContain('large-op')
+  })
+})
+
+// The applicant's screen is a client component, so the server sends each
+// question as finished HTML. This is the only place that HTML is made.
+describe('mathToHtml', () => {
+  it('escapes text, so a question can never inject markup', () => {
+    const html = mathToHtml(`<script>alert("x")</script> & 'q'`)
+    expect(html).not.toContain('<script')
+    expect(html).toContain('&lt;script&gt;alert(&quot;x&quot;)&lt;/script&gt; &amp; &#39;q&#39;')
+  })
+
+  it('keeps line breaks', () => {
+    expect(mathToHtml('S1: one\nS6: two')).toBe('S1: one<br>S6: two')
+  })
+
+  it('draws maths with KaTeX, display maths on its own line', () => {
+    const html = mathToHtml(String.raw`Find \(x^2\) where \[x = 3\]`)
+    expect(html).toContain('class="katex"')
+    expect(html).toContain('<span class="math-block">')
+  })
+
+  it('marks bold and underline with escaped contents', () => {
+    expect(mathToHtml('**a<b**')).toBe('<strong>a&lt;b</strong>')
+    expect(mathToHtml(String.raw`\(\underline{\text{a&b}}\)`)).toBe('<u>a&amp;b</u>')
+  })
+
+  it('shows maths KaTeX cannot draw as escaped source', () => {
+    expect(mathToHtml(String.raw`\(\frac{<}{\)`)).toBe('<code>\\frac{&lt;}{</code>')
   })
 })
 
