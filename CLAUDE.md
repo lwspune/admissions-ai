@@ -66,7 +66,8 @@ into a client bundle" into a build error. `supabase` (service-role client) ·
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
 `leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
 messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet) · `paperScan`
-(look a paper up by its number, file a scan, the sheet photo) · `hiring` (the teacher test's bank)
+(look a paper up by its number, file a scan, the sheet photo) · `hiring` (the teacher test: its bank,
+adding an applicant, issuing) · `hiringAttempt` (the applicant's side: open, number check, start, save, submit)
 
 **`src/components/`** — the shared look: `ui` (button, field, card, badge and
 alert styles, no hooks, so server and client pages share them), `icons` (inline
@@ -76,8 +77,8 @@ SVG, no icon package), `StaffShell` (the frame round every staff page),
 (`brand` is indigo, from the parent sheet); a page should reach for these before
 writing its own classes.
 
-**`src/app/`** — `/` (the homepage), `t/[token]/` and `api/cron/` are the only
-unauthenticated routes; the list and the reason for each is `src/lib/publicPaths.ts`.
+**`src/app/`** — `/` (the homepage), `t/[token]/`, `h/[token]/` (the teacher test's link) and
+`api/cron/` are the only unauthenticated routes; the list and the reason for each is `src/lib/publicPaths.ts`.
 The homepage is for other institutes: one line, an animation cycling through the
 test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get in touch" button that opens the contact form in a
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
@@ -246,6 +247,12 @@ These are the things that quietly break everything if violated.
   it. App code that checks `role !== 'telecaller'` treats any other role as senior staff; when the
   teacher role reaches `ROLES` (step 3), every such check must be read again. The bank's shape
   rules are constraints (`npm run db:probe -- 0020`); signed-in users only read it.
+  An applicant belongs to whoever added them (stamped from the session) and a teacher sees only
+  their own; `issue_hiring_test()` is the only way a test is made and draws the paper itself, and
+  no two papers in a subject hold the same set. The clock does not pause, the database sets the
+  deadline and grades (`submit_hiring_attempt`), and a test's state only moves forward
+  (migrations 0021–0022, `db:probe -- 0021`, `hiring.itest.ts`). The applicant's browser gets
+  `toApplicantPaper`, an allow-list like `toCandidatePaper`, as server-built HTML (`mathToHtml`).
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -364,6 +371,12 @@ the connection is refused (2026-10-01).
   imported from PYQ Vault's public API, seeded at review, shown at `/hiring/questions`. v1 leaves
   out figures, tables, shared stems and English passages; every pool still had hundreds to spare.
   KaTeX 0.16.45 (PYQ Vault's version) is the one new package: the questions are LaTeX.
+  Step 2 (same day): the test itself, at `/h/<token>`, on migrations 0021–0022. By my choice, not
+  yet the user's: the clock does not pause (copying is accepted, so the pause machinery buys
+  nothing), starting re-checks the number, and a started paper keeps its full time whatever the
+  24-hour window says. The browser check found a stale page load writing "opened" over a submitted
+  test; the state now only moves forward (0022), and the same race in the admissions test is in
+  the backfill ledger.
 
 - **2026-10-16 — Scanning paper tests: a live viewfinder, a photo fallback, the photo kept.** The
   user's calls: the live camera scanner as well as a photo per sheet, a saved scan is final like a

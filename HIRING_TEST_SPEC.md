@@ -1,7 +1,8 @@
 # Teacher Screening Test — Specification (v1)
 
-**Date:** 2026-10-19 · **Status:** Question bank built (step 1 of 3). Issuing, the test itself and the
-staff side are next.
+**Date:** 2026-10-19 · **Status:** The bank (step 1) and the test itself (step 2) are built. The staff
+side — the teacher role and the `/hiring` page — is next; until then a test can be issued only through
+the database function.
 
 A screen, not a judgement: an applicant for a teaching post sits fifteen moderate questions from real
 exam papers before anyone calls them. Many applicants are out of station, so it is taken remotely on a
@@ -61,11 +62,34 @@ of PYQ Vault's, and the import refuses any equation KaTeX cannot draw.
 
 Proven by `npm run db:probe -- 0020`.
 
+### Issuing and taking (migrations 0021, 0022)
+
+- An applicant belongs to whoever added them, stamped from the session; a signed-in user may send
+  only name, number and subject. A teacher sees their own applicants and everything under them;
+  superadmin sees all. The tables under an applicant are read through it, and nobody signed in
+  writes them.
+- `issue_hiring_test()` is the only way a test is made. It draws the paper itself — MCQ first, then
+  typed answers; at most two questions a chapter; nothing this applicant has seen — voids the
+  applicant's earlier link, refuses a fourth issue and refuses an applicant who has submitted. No
+  two papers in a subject hold the same set (`hiring_tests_one_set`); a collision is redrawn.
+- A link stays open 24 hours to start. Starting checks the number again (the identity screen is not
+  the only door), and the database sets the deadline: start plus the paper's minutes. **The clock
+  does not pause**: copying is accepted for this screen, so the student test's pause machinery buys
+  nothing, and the instructions say so.
+- Answers must fit the question (a letter for an MCQ, a whole number for a typed answer) and stop at
+  submit or the deadline, with 30 seconds' grace for a save in flight. The page also saves a typed
+  answer when the applicant moves on and waits for every save before submitting.
+- Grading is SQL (`submit_hiring_attempt`), with the admissions marks, and matches `grade.ts`
+  (`hiring.itest.ts`). An attempt left open past its deadline is graded as timed out when the link
+  is opened again, or by `close_expired_hiring_attempts()`. The applicant is never shown a score.
+- A test's state only moves forward — issued, opened, started, submitted, or voided (0022). Found
+  in the browser check: a slow page load wrote "opened" over a submitted test, and the link offered
+  the number screen again.
+
+Proven by `npm run db:probe -- 0021` and `src/server/hiring.itest.ts`.
+
 ## 4. Still to build
 
-- **Step 2 — the test.** Applicants and tests tables; the draw (per subject and format, at most
-  two questions a chapter, the no-duplicate set rule, reissue exclusions); the link at `/h/<token>`,
-  number check, instructions, timer, save, submit, grading.
 - **Step 3 — the staff side.** The teacher role (`/staff`, `staff:add`); the middleware keeps a
   teacher on `/hiring`; the `/hiring` page (add an applicant, issue, the WhatsApp message, score, time
   used, each question right or wrong); the purge.

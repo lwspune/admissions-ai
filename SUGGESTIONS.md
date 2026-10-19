@@ -385,6 +385,16 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
+- [ ] **An assessment's state can move backwards (2026-10-19).** Found in the hiring test's browser
+      check: a submitted test read `opened` again, so its link showed the number screen instead
+      of "submitted". The page load marks a test opened with an unconditional update; a slow load
+      that read `issued` wrote after the submit. The hiring tables now refuse any backward move
+      (migration 0022) and write `opened` only while still `issued`. `openByToken`
+      (`src/server/attempt.ts:63`) has the same unconditional write, and `assessments` has no
+      transition guard, so the same race could hit a candidate: start would still refuse (the
+      attempt is submitted), but the link and the staff list would say "opened". Not yet analysed
+      (360 needed: the fix is one `.eq('state', 'issued')` and a trigger like 0022's).
+
 - [ ] **`items:seed` reads the bank's statuses in one request, and the API stops at 1000 rows
       (2026-10-19).** Found building `hiring:seed`: its first run counted 1000 of 1050 rows, and
       the same read decides which questions keep `live`. Past 1000 items, a plain re-seed would
