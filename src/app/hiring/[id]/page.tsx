@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadApplicantReport, type HiringReportQuestion, type HiringVerdict } from '@/server/hiring'
-import { HIRING_SHAPE, HIRING_SUBJECT_LABEL, timeUsedMs } from '@/lib/hiring'
+import { HIRING_SHAPE, HIRING_SUBJECT_LABEL, istTime, timeUsedMs } from '@/lib/hiring'
 import { canHire } from '@/lib/staff'
 import { CHOICES } from '@/lib/types'
 import { MathText } from '@/components/MathText'
@@ -28,8 +28,7 @@ const STATE_LABEL: Record<string, string> = {
   voided: 'replaced by a newer link',
 }
 
-const when = (iso: string) =>
-  new Date(iso).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+const when = istTime
 const clock = (ms: number) => `${Math.floor(ms / 60_000)}:${String(Math.round((ms % 60_000) / 1000)).padStart(2, '0')}`
 
 /** One applicant's answers, question by question, for the teacher who added them or superadmin (RLS). */

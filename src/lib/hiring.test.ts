@@ -13,6 +13,8 @@ import {
   hiringIssueMessage,
   applicantStatus,
   timeUsedMs,
+  istTime,
+  istDay,
   type HiringItem,
   type HiringItemRow,
   type SourceRow,
@@ -387,6 +389,19 @@ describe('timeUsedMs', () => {
     expect(timeUsedMs(a, 25)).toBe(12.5 * 60_000)
     expect(timeUsedMs({ ...a, submitted_at: '2026-10-20T10:40:00Z' }, 25)).toBe(25 * 60_000)
     expect(timeUsedMs({ ...a, submitted_at: null }, 25)).toBeNull()
+  })
+})
+
+// Found live: the server runs on UTC, so "added 19 Oct, 08:47 am" was 2:17 pm
+// in India. Every hiring time is shown in India's time, wherever it renders.
+describe('istTime', () => {
+  it('shows a date and time in India, not in the server zone', () => {
+    expect(istTime('2026-10-19T08:47:00Z')).toBe('19 Oct, 02:17 pm')
+    expect(istTime('2026-10-19T20:00:00Z')).toBe('20 Oct, 01:30 am')
+  })
+
+  it('shows a date alone in India too', () => {
+    expect(istDay('2026-10-19T20:00:00Z')).toBe('20 Oct')
   })
 })
 

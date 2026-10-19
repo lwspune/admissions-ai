@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react'
 import type { ApplicantQuestion } from '@/lib/hiring'
-import { parseTypedAnswer } from '@/lib/hiring'
+import { istTime, parseTypedAnswer } from '@/lib/hiring'
 import type { Choice } from '@/lib/types'
 import { Icon } from '@/components/icons'
 import { Avatar, Badge, Mark, btn, card, control, cx } from '@/components/ui'
@@ -228,7 +228,7 @@ export function HiringFlow({
   }
 
   if (stage === 'instructions') {
-    const closes = new Date(expiresAt).toLocaleString('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+    const closes = istTime(expiresAt)
     return (
       <Shell title={`${subject} screening test`} icon="book" step={2}>
         <div className="mt-5 flex items-center gap-3 rounded-xl bg-brand-50 p-4 ring-1 ring-inset ring-brand-100">

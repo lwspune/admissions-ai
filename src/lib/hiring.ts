@@ -176,6 +176,16 @@ export function applicantStatus(
   return { kind: 'sent', label: 'Link sent', canIssue: more }
 }
 
+// India's time, wherever the page renders: Vercel's servers run on UTC, and a
+// client component renders on the server first, so the zone is always named.
+const IST_TIME = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })
+const IST_DAY = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', timeZone: 'Asia/Kolkata' })
+
+/** "19 Oct, 02:17 pm", in India. */
+export const istTime = (iso: string) => IST_TIME.format(new Date(iso))
+/** "19 Oct", in India. */
+export const istDay = (iso: string) => IST_DAY.format(new Date(iso))
+
 /** Time spent on a submitted attempt, capped at the paper's minutes; null until submitted. */
 export function timeUsedMs(attempt: { started_at: string; submitted_at: string | null }, limitMinutes: number): number | null {
   if (!attempt.submitted_at) return null

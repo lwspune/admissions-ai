@@ -10,6 +10,7 @@ import {
   HIRING_SUBJECT_LABEL,
   applicantStatus,
   hiringIssueMessage,
+  istDay,
   timeUsedMs,
   type ApplicantStage,
 } from '@/lib/hiring'
@@ -28,7 +29,7 @@ const STAGE_TONE: Record<ApplicantStage, 'neutral' | 'brand' | 'warning' | 'succ
 }
 
 const clock = (ms: number) => `${Math.floor(ms / 60_000)}:${String(Math.round((ms % 60_000) / 1000)).padStart(2, '0')}`
-const date = (iso: string) => new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })
+const date = istDay
 
 export function HiringConsole({
   applicants,
