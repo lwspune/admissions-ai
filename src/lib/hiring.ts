@@ -137,6 +137,52 @@ export function toApplicantPaper(rows: { position: number; item: HiringItemRow }
     }))
 }
 
+/**
+ * The WhatsApp message for a freshly issued link. It warns that the clock does
+ * not stop, since that is the one rule an applicant can lose time to, and puts
+ * the link last on its own line so WhatsApp previews it.
+ */
+export function hiringIssueMessage({ name, subject, url }: { name: string; subject: HiringSubject; url: string }): string {
+  const { mcq, numeric, minutes } = HIRING_SHAPE[subject]
+  return (
+    `Hello ${name}, this is the ${HIRING_SUBJECT_LABEL[subject]} screening test for the teaching post: ` +
+    `${mcq + numeric} questions in ${minutes} minutes. ` +
+    `Once you start, the clock does not stop, so start when you have ${minutes} minutes free. ` +
+    `The link works for ${HIRING_WINDOW_HOURS} hours. Enter this mobile number when it asks.\n\n${url}`
+  )
+}
+
+export type ApplicantStage = 'none' | 'sent' | 'opened' | 'in_progress' | 'expired' | 'submitted'
+
+/**
+ * Where an applicant stands, from their latest test and its attempt, in words
+ * for the staff list — and whether another link may be issued (the database
+ * refuses the same: three issues, none after a submit).
+ */
+export function applicantStatus(
+  test: { state: string; issue_seq: number; expires_at: string } | null,
+  attempt: { deadline_at: string; submitted_at: string | null; submit_reason: string | null } | null,
+  now: Date,
+): { kind: ApplicantStage; label: string; canIssue: boolean } {
+  if (!test) return { kind: 'none', label: 'No test yet', canIssue: true }
+  const more = test.issue_seq < MAX_HIRING_ISSUES
+  if (test.state === 'submitted' || attempt?.submitted_at) {
+    const label = attempt?.submit_reason === 'timer' ? 'Submitted when time ran out' : 'Submitted'
+    return { kind: 'submitted', label, canIssue: false }
+  }
+  if (test.state === 'started') return { kind: 'in_progress', label: 'Taking the test', canIssue: more }
+  if (now.getTime() >= new Date(test.expires_at).getTime()) return { kind: 'expired', label: 'Link expired', canIssue: more }
+  if (test.state === 'opened') return { kind: 'opened', label: 'Opened, not started', canIssue: more }
+  return { kind: 'sent', label: 'Link sent', canIssue: more }
+}
+
+/** Time spent on a submitted attempt, capped at the paper's minutes; null until submitted. */
+export function timeUsedMs(attempt: { started_at: string; submitted_at: string | null }, limitMinutes: number): number | null {
+  if (!attempt.submitted_at) return null
+  const spent = new Date(attempt.submitted_at).getTime() - new Date(attempt.started_at).getTime()
+  return Math.max(0, Math.min(spent, limitMinutes * 60_000))
+}
+
 export interface NewApplicant {
   name: string
   mobile: string

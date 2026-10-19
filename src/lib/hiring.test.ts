@@ -10,6 +10,9 @@ import {
   toApplicantPaper,
   parseTypedAnswer,
   validateApplicant,
+  hiringIssueMessage,
+  applicantStatus,
+  timeUsedMs,
   type HiringItem,
   type HiringItemRow,
   type SourceRow,
@@ -314,6 +317,76 @@ describe('validateApplicant', () => {
     })
     expect(validateApplicant({ name: 'A', mobile: '12345', subject: 'maths' })).toEqual({ ok: false, error: 'Enter a 10-digit mobile number.' })
     expect(validateApplicant({ name: 'A', mobile: '9876543210', subject: 'biology' })).toEqual({ ok: false, error: 'Choose a subject.' })
+  })
+})
+
+describe('hiringIssueMessage', () => {
+  it('names the applicant, the test and its terms, the link last on its own', () => {
+    const m = hiringIssueMessage({ name: 'Asha Rao', subject: 'physics', url: 'https://x.test/h/abc' })
+    expect(m).toBe(
+      'Hello Asha Rao, this is the Physics screening test for the teaching post: 15 questions in 25 minutes. ' +
+        'Once you start, the clock does not stop, so start when you have 25 minutes free. ' +
+        'The link works for 24 hours. Enter this mobile number when it asks.\n\nhttps://x.test/h/abc',
+    )
+  })
+
+  it('gives English its own time', () => {
+    expect(hiringIssueMessage({ name: 'A', subject: 'english', url: 'u' })).toContain('15 questions in 20 minutes')
+  })
+})
+
+describe('applicantStatus', () => {
+  const now = new Date('2026-10-20T10:00:00Z')
+  const test = (state: string, over: object = {}) => ({
+    state,
+    issue_seq: 1,
+    expires_at: '2026-10-21T00:00:00Z',
+    ...over,
+  })
+  const attempt = (over: object = {}) => ({
+    started_at: '2026-10-20T09:50:00Z',
+    deadline_at: '2026-10-20T10:15:00Z',
+    submitted_at: null,
+    submit_reason: null,
+    ...over,
+  })
+
+  it('says what stage each applicant is at, and whether a link can be issued', () => {
+    expect(applicantStatus(null, null, now)).toEqual({ kind: 'none', label: 'No test yet', canIssue: true })
+    expect(applicantStatus(test('issued'), null, now)).toEqual({ kind: 'sent', label: 'Link sent', canIssue: true })
+    expect(applicantStatus(test('opened'), null, now)).toEqual({ kind: 'opened', label: 'Opened, not started', canIssue: true })
+    expect(applicantStatus(test('started'), attempt(), now)).toEqual({ kind: 'in_progress', label: 'Taking the test', canIssue: true })
+    expect(applicantStatus(test('submitted'), attempt({ submitted_at: '2026-10-20T10:05:00Z', submit_reason: 'manual' }), now)).toEqual({
+      kind: 'submitted',
+      label: 'Submitted',
+      canIssue: false,
+    })
+    expect(applicantStatus(test('submitted'), attempt({ submitted_at: '2026-10-20T10:15:00Z', submit_reason: 'timer' }), now)).toEqual({
+      kind: 'submitted',
+      label: 'Submitted when time ran out',
+      canIssue: false,
+    })
+  })
+
+  it('calls an unstarted link past its 24 hours expired', () => {
+    expect(applicantStatus(test('opened', { expires_at: '2026-10-20T09:00:00Z' }), null, now)).toEqual({
+      kind: 'expired',
+      label: 'Link expired',
+      canIssue: true,
+    })
+  })
+
+  it('stops offering a link after the third', () => {
+    expect(applicantStatus(test('opened', { issue_seq: 3 }), null, now).canIssue).toBe(false)
+  })
+})
+
+describe('timeUsedMs', () => {
+  it('is submit minus start, never more than the paper allows', () => {
+    const a = { started_at: '2026-10-20T10:00:00Z', submitted_at: '2026-10-20T10:12:30Z' }
+    expect(timeUsedMs(a, 25)).toBe(12.5 * 60_000)
+    expect(timeUsedMs({ ...a, submitted_at: '2026-10-20T10:40:00Z' }, 25)).toBe(25 * 60_000)
+    expect(timeUsedMs({ ...a, submitted_at: null }, 25)).toBeNull()
   })
 })
 

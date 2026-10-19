@@ -9,6 +9,8 @@ export interface PurgeReport {
   identifyAttempts: number
   /** Scanned sheet photos removed from storage with their leads. */
   sheetPhotos: number
+  /** Teacher applicants (HIRING_TEST_SPEC.md), with their tests, attempts and answers. */
+  hiringApplicants: number
   /** Refs of what would go, capped — for the log, never for a response body. */
   leadIds: string[]
 }
@@ -26,6 +28,11 @@ export interface PurgeReport {
  * instances. Deleting a lead cascades through assessments, attempts, answers
  * and events, and leaves those IP rows untouched. A purge that only deleted
  * leads would quietly retain personal data forever while reporting success.
+ *
+ * Teacher applicants (2026-10-19) are kept on the same 12 months from their
+ * last activity — added, or last issued a test — and deleting one cascades
+ * through tests, papers, attempts and answers. Their number checks are in
+ * identify_attempts with everyone else's.
  *
  * The third is in storage: a paper test's scanned sheet photo (2026-10-16).
  * Storage does not cascade either, so the photos of the expired leads' paper
@@ -63,6 +70,22 @@ export async function purgeExpired(
       .map((a) => `${a.id}.jpg`),
   )
 
+  const { data: oldApplicants, error: applicantsError } = await db
+    .from('hiring_applicants')
+    .select('id, created_at, hiring_tests(created_at)')
+    .lt('created_at', cutoffIso)
+
+  if (applicantsError) throw new Error(`could not read applicants for purge: ${applicantsError.message}`)
+
+  const applicantIds = (oldApplicants ?? [])
+    .filter((a) =>
+      isExpired(
+        lastActivity(a.created_at as string, ((a.hiring_tests ?? []) as { created_at: string }[]).map((t) => t.created_at)),
+        cutoff,
+      ),
+    )
+    .map((a) => a.id as string)
+
   const { count: staleIdentify, error: countError } = await db
     .from('identify_attempts')
     .select('id', { count: 'exact', head: true })
@@ -76,6 +99,7 @@ export async function purgeExpired(
     leads: leadIds.length,
     identifyAttempts: staleIdentify ?? 0,
     sheetPhotos: photos.length,
+    hiringApplicants: applicantIds.length,
     leadIds,
   }
 
@@ -92,6 +116,12 @@ export async function purgeExpired(
     // and attempt_events.
     const { error } = await db.from('leads').delete().in('id', leadIds)
     if (error) throw new Error(`could not delete expired leads: ${error.message}`)
+  }
+
+  if (applicantIds.length > 0) {
+    // Cascades to hiring_tests, hiring_test_items, hiring_attempts and hiring_answers.
+    const { error } = await db.from('hiring_applicants').delete().in('id', applicantIds)
+    if (error) throw new Error(`could not delete expired applicants: ${error.message}`)
   }
 
   if ((staleIdentify ?? 0) > 0) {

@@ -97,3 +97,252 @@ export async function loadHiringBank(db: Db, subject: HiringSubject): Promise<Hi
     status: row.status as ItemStatus,
   }))
 }
+
+// ── the /hiring pages ───────────────────────────────────────────────────────
+
+export interface HiringTestSummary {
+  id: string
+  token: string
+  state: string
+  issueSeq: number
+  expiresAt: string
+  createdAt: string
+  limitMinutes: number
+}
+
+export interface HiringAttemptSummary {
+  startedAt: string
+  deadlineAt: string
+  submittedAt: string | null
+  submitReason: 'manual' | 'timer' | null
+  score: number | null
+  correct: number | null
+  incorrect: number | null
+  skipped: number | null
+}
+
+export interface HiringApplicantRow {
+  id: string
+  name: string
+  mobile: string
+  subject: HiringSubject
+  createdAt: string
+  createdBy: string | null
+  /** The newest test; earlier ones were voided by it. */
+  latest: HiringTestSummary | null
+  attempt: HiringAttemptSummary | null
+}
+
+interface AttemptRowRaw {
+  id: string
+  started_at: string
+  deadline_at: string
+  submitted_at: string | null
+  submit_reason: 'manual' | 'timer' | null
+  score: number | string | null
+  correct: number | null
+  incorrect: number | null
+  skipped: number | null
+}
+
+interface TestRowRaw {
+  id: string
+  token: string
+  state: string
+  issue_seq: number
+  expires_at: string
+  created_at: string
+  limit_minutes: number
+  hiring_attempts: AttemptRowRaw[] | AttemptRowRaw | null
+}
+
+const num = (v: number | string | null) => (v === null ? null : Number(v))
+
+function toTest(t: TestRowRaw): HiringTestSummary {
+  return {
+    id: t.id,
+    token: t.token,
+    state: t.state,
+    issueSeq: t.issue_seq,
+    expiresAt: t.expires_at,
+    createdAt: t.created_at,
+    limitMinutes: t.limit_minutes,
+  }
+}
+
+/** One attempt per test (unique test_id), which PostgREST may return as an object or a list. */
+function attemptOf(t: TestRowRaw): AttemptRowRaw | null {
+  const a = t.hiring_attempts
+  return Array.isArray(a) ? (a[0] ?? null) : a
+}
+
+function toAttempt(a: AttemptRowRaw): HiringAttemptSummary {
+  return {
+    startedAt: a.started_at,
+    deadlineAt: a.deadline_at,
+    submittedAt: a.submitted_at,
+    submitReason: a.submit_reason,
+    score: num(a.score),
+    correct: a.correct,
+    incorrect: a.incorrect,
+    skipped: a.skipped,
+  }
+}
+
+/**
+ * Grades any attempt whose time ran out with the page closed, so the list
+ * shows a score rather than "taking the test" forever. A failure only delays
+ * that; it never blocks the page.
+ */
+async function closeExpired(db: Db): Promise<void> {
+  const { error } = await db.rpc('close_expired_hiring_attempts')
+  if (error) console.error('hiring: closing expired attempts failed:', error)
+}
+
+const TEST_COLUMNS =
+  'id, token, state, issue_seq, expires_at, created_at, limit_minutes, ' +
+  'hiring_attempts(id, started_at, deadline_at, submitted_at, submit_reason, score, correct, incorrect, skipped)'
+
+/** The applicants this session may see — a teacher's own, or all for superadmin — newest first. */
+export async function loadApplicants(db: Db): Promise<HiringApplicantRow[]> {
+  await closeExpired(db)
+  const { data, error } = await db
+    .from('hiring_applicants')
+    .select(`id, name, mobile, subject, created_at, created_by, hiring_tests(${TEST_COLUMNS})`)
+    .order('created_at', { ascending: false })
+  if (error) throw new Error(`could not read applicants: ${error.message}`)
+
+  return (data ?? []).map((row) => {
+    const tests = ((row.hiring_tests ?? []) as unknown as TestRowRaw[]).sort((a, b) => b.issue_seq - a.issue_seq)
+    const latest = tests[0] ?? null
+    const attempt = latest ? attemptOf(latest) : null
+    return {
+      id: row.id as string,
+      name: row.name as string,
+      mobile: row.mobile as string,
+      subject: row.subject as HiringSubject,
+      createdAt: row.created_at as string,
+      createdBy: (row.created_by as string | null) ?? null,
+      latest: latest ? toTest(latest) : null,
+      attempt: attempt ? toAttempt(attempt) : null,
+    }
+  })
+}
+
+export type HiringVerdict = 'correct' | 'incorrect' | 'skipped'
+
+export interface HiringReportQuestion {
+  position: number
+  format: HiringFormat
+  chapter: string
+  paper: string
+  direction: string | null
+  stem: string
+  options: Record<Choice, string> | null
+  answerKey: Choice | null
+  numericAnswer: number | null
+  /** What the applicant gave: a letter, a number as text, or null. */
+  given: string | null
+  verdict: HiringVerdict
+}
+
+export interface HiringApplicantReport {
+  applicant: Omit<HiringApplicantRow, 'latest' | 'attempt'>
+  tests: HiringTestSummary[]
+  /** The test the report is about: the submitted one, else the newest. */
+  test: HiringTestSummary | null
+  attempt: HiringAttemptSummary | null
+  /** Empty until that test has an attempt. */
+  questions: HiringReportQuestion[]
+}
+
+interface PaperItemRaw {
+  format: HiringFormat
+  chapter: string
+  paper: string
+  direction: string | null
+  stem: string
+  options: Record<Choice, string> | null
+  answer_key: Choice | null
+  numeric_answer: number | string | null
+}
+
+/**
+ * One applicant, question by question. Null when there is no such applicant
+ * or this session may not see them — the same answer for both.
+ */
+export async function loadApplicantReport(db: Db, applicantId: string): Promise<HiringApplicantReport | null> {
+  if (!/^[0-9a-f-]{36}$/i.test(applicantId)) return null
+  await closeExpired(db)
+
+  const { data: row, error } = await db
+    .from('hiring_applicants')
+    .select(`id, name, mobile, subject, created_at, created_by, hiring_tests(${TEST_COLUMNS})`)
+    .eq('id', applicantId)
+    .maybeSingle()
+  if (error) throw new Error(`could not read the applicant: ${error.message}`)
+  if (!row) return null
+
+  const raw = ((row.hiring_tests ?? []) as unknown as TestRowRaw[]).sort((a, b) => b.issue_seq - a.issue_seq)
+  const chosen = raw.find((t) => t.state === 'submitted') ?? raw[0] ?? null
+  const attemptRaw = chosen ? attemptOf(chosen) : null
+
+  let questions: HiringReportQuestion[] = []
+  if (chosen && attemptRaw) {
+    const [paperRes, answersRes] = await Promise.all([
+      db
+        .from('hiring_test_items')
+        .select('position, hiring_items(format, chapter, paper, direction, stem, options, answer_key, numeric_answer)')
+        .eq('test_id', chosen.id)
+        .order('position'),
+      db.from('hiring_answers').select('position, choice, numeric_value').eq('attempt_id', attemptRaw.id),
+    ])
+    const failure = paperRes.error ?? answersRes.error
+    if (failure) throw new Error(`could not read the paper: ${failure.message}`)
+
+    const byPosition = new Map((answersRes.data ?? []).map((a) => [a.position as number, a]))
+    questions = (paperRes.data ?? []).map((p) => {
+      const i = p.hiring_items as unknown as PaperItemRaw
+      const a = byPosition.get(p.position as number)
+      const given = (a?.choice as string | null | undefined) ?? (a?.numeric_value == null ? null : String(a.numeric_value))
+      const verdict: HiringVerdict =
+        given === null
+          ? 'skipped'
+          : i.format === 'mcq'
+            ? given === i.answer_key
+              ? 'correct'
+              : 'incorrect'
+            : Number(given) === Number(i.numeric_answer)
+              ? 'correct'
+              : 'incorrect'
+      return {
+        position: p.position as number,
+        format: i.format,
+        chapter: i.chapter,
+        paper: i.paper,
+        direction: i.direction,
+        stem: i.stem,
+        options: i.options,
+        answerKey: i.answer_key,
+        numericAnswer: num(i.numeric_answer),
+        given,
+        verdict,
+      }
+    })
+  }
+
+  return {
+    applicant: {
+      id: row.id as string,
+      name: row.name as string,
+      mobile: row.mobile as string,
+      subject: row.subject as HiringSubject,
+      createdAt: row.created_at as string,
+      createdBy: (row.created_by as string | null) ?? null,
+    },
+    tests: raw.map(toTest),
+    test: chosen ? toTest(chosen) : null,
+    attempt: attemptRaw ? toAttempt(attemptRaw) : null,
+    questions,
+  }
+}

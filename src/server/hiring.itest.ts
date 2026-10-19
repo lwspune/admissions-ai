@@ -1,7 +1,8 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
-import { addApplicant, issueHiringTest } from './hiring'
+import { purgeExpired } from './retention'
+import { addApplicant, issueHiringTest, loadApplicants, loadApplicantReport } from './hiring'
 import {
   openHiringTest,
   identifyApplicant,
@@ -263,7 +264,96 @@ describe('taking the test', () => {
     if (second.ok) expect((await openHiringTest(svc as never, second.token)).status).toBe('ok')
   })
 
+  it('lists a teacher their own applicants with the latest test, superadmin everyone', async () => {
+    const mine = await applicantWithTest(18)
+    const added = await addApplicant(otherTeacher.db as never, { name: 'Hiring Test 19', mobile: mobile(19), subject: 'english' })
+    if (!added.ok) throw new Error(added.error)
+
+    const forTeacher = await loadApplicants(teacher.db as never)
+    expect(forTeacher.map((a) => a.name)).toEqual(['Hiring Test 18'])
+    expect(forTeacher[0]).toMatchObject({ subject: 'chemistry', mobile: mobile(18), latest: { state: 'issued', issueSeq: 1, token: mine.token }, attempt: null })
+
+    const forSuperadmin = (await loadApplicants(superadmin.db as never)).filter((a) => a.mobile.startsWith('97000021'))
+    expect(forSuperadmin.map((a) => a.name).sort()).toEqual(['Hiring Test 18', 'Hiring Test 19'])
+    expect(forSuperadmin.find((a) => a.name === 'Hiring Test 19')!.latest).toBeNull()
+  })
+
+  it('reports each question right, wrong or skipped, to the teacher who added the applicant only', async () => {
+    const { applicantId, token } = await applicantWithTest(20)
+    const { attemptId } = await begin(token, 20)
+    await saveHiringAnswer(svc as never, { attemptId, position: 1, choice: 'A', numericValue: null })
+    await saveHiringAnswer(svc as never, { attemptId, position: 13, choice: null, numericValue: 9999 })
+    await submitHiringTest(svc as never, { attemptId, reason: 'manual' })
+
+    const report = await loadApplicantReport(teacher.db as never, applicantId)
+    expect(report).not.toBeNull()
+    expect(report!.attempt).toMatchObject({ submitReason: 'manual' })
+    expect(report!.questions).toHaveLength(15)
+    const q1 = report!.questions[0]!
+    expect(q1).toMatchObject({ position: 1, format: 'mcq', given: 'A', verdict: q1.answerKey === 'A' ? 'correct' : 'incorrect' })
+    expect(report!.questions[12]).toMatchObject({ position: 13, format: 'numeric', given: '9999', verdict: 'incorrect' })
+    expect(report!.questions.filter((q) => q.verdict === 'skipped')).toHaveLength(13)
+    // The verdicts add up to the stored score.
+    const score = report!.questions.reduce((s, q) => s + (q.verdict === 'correct' ? 1 : q.verdict === 'incorrect' && q.format === 'mcq' ? -0.25 : 0), 0)
+    expect(score).toBe(report!.attempt!.score)
+
+    expect(await loadApplicantReport(otherTeacher.db as never, applicantId)).toBeNull()
+    expect(await loadApplicantReport(superadmin.db as never, applicantId)).not.toBeNull()
+  })
+
   it('treats a malformed token as not found', async () => {
+    expect(await openHiringTest(svc as never, "x' or 1=1 --")).toEqual({ status: 'not_found' })
+  })
+})
+
+// Applicant data is kept 12 months from the last activity, like a lead's
+// (RETENTION_MONTHS). The nightly purge deletes the applicant; tests,
+// questions drawn, attempts and answers cascade.
+describe('the 12-month purge', () => {
+  const longAgo = new Date(Date.now() - 400 * 86_400_000).toISOString()
+  const recently = new Date(Date.now() - 10 * 86_400_000).toISOString()
+  const backdate = async (table: string, id: string, column: string, iso: string) => {
+    const { error } = await svc.from(table).update({ [column]: iso }).eq(table === 'hiring_tests' ? 'applicant_id' : 'id', id)
+    if (error) throw new Error(error.message)
+  }
+  const exists = async (table: string, column: string, id: string) =>
+    (await svc.from(table).select('id', { count: 'exact', head: true }).eq(column, id)).count
+
+  it('deletes an applicant idle for over 12 months, with their tests', async () => {
+    const { applicantId, token } = await applicantWithTest(30)
+    await begin(token, 30)
+    await backdate('hiring_applicants', applicantId, 'created_at', longAgo)
+    await backdate('hiring_tests', applicantId, 'created_at', longAgo)
+
+    const report = await purgeExpired(svc as never)
+    expect(report.hiringApplicants).toBeGreaterThanOrEqual(1)
+    expect(await exists('hiring_applicants', 'id', applicantId)).toBe(0)
+    expect(await exists('hiring_tests', 'applicant_id', applicantId)).toBe(0)
+  })
+
+  it('keeps a recent applicant, and an old one with a recent test', async () => {
+    const recent = await applicantWithTest(31)
+    await backdate('hiring_applicants', recent.applicantId, 'created_at', recently)
+    const old = await applicantWithTest(32)
+    await backdate('hiring_applicants', old.applicantId, 'created_at', longAgo)
+
+    await purgeExpired(svc as never)
+    expect(await exists('hiring_applicants', 'id', recent.applicantId)).toBe(1)
+    expect(await exists('hiring_applicants', 'id', old.applicantId)).toBe(1)
+  })
+
+  it('counts without deleting on a dry run', async () => {
+    const { applicantId } = await applicantWithTest(33)
+    await backdate('hiring_applicants', applicantId, 'created_at', longAgo)
+    await backdate('hiring_tests', applicantId, 'created_at', longAgo)
+    const report = await purgeExpired(svc as never, { dryRun: true })
+    expect(report.hiringApplicants).toBeGreaterThanOrEqual(1)
+    expect(await exists('hiring_applicants', 'id', applicantId)).toBe(1)
+  })
+})
+
+describe('malformed input', () => {
+  it('treats a malformed token as not found here too', async () => {
     expect(await openHiringTest(svc as never, "x' or 1=1 --")).toEqual({ status: 'not_found' })
   })
 })
