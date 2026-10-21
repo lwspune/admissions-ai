@@ -16,10 +16,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       **Defaults awaiting the user's word:** 24-hour window, two reissues, no score shown to the
       applicant, the clock does not pause, starting re-checks the number.
 
-- [ ] **Teacher screening test: the hiring bank is at review (2026-10-19).** 1,050 questions from
-      PYQ Vault, none drawable until a subject is signed off (`npm run hiring:seed -- --live --file
-      <subject>`); the user reviews at `/hiring/questions` or in `content/hiring/*.json`.
-      **Flagged for that review:** chemistry #37 (`54e5bffa`, MHT-CET 2025 · 21 April Shift I,
+- [x] **Teacher screening test: the hiring bank is live (2026-10-21).** All 1,050 questions from
+      PYQ Vault promoted on the user's word ("make all content live"), one subject at a time with
+      `npm run hiring:seed -- --live --file <subject>`; integration suite 177/177 after. Still open
+      from the review: chemistry #37 (`54e5bffa`, MHT-CET 2025 · 21 April Shift I,
       Amines, "Identify product A…"). On a phone it read "… + CH₃CHO +", which looked truncated; the
       stored text ends "+ HCl". The cause was display maths that could not wrap and ran off-screen,
       fixed the same day (`renderTex` draws it wrapping). Confirm it reads whole on a phone.
