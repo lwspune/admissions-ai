@@ -254,6 +254,10 @@ export function HiringFlow({
             leave the page. When time is up, your answers are submitted as they stand.
           </Rule>
           <Rule>Answers save as you go. If you lose your connection, open the link again.</Rule>
+          <Rule>
+            <span className="font-semibold text-slate-900">In the interview you may be asked to solve and explain</span>{' '}
+            questions from this test.
+          </Rule>
         </ul>
         {error && <FieldError>{error}</FieldError>}
         <button type="button" className={fullWidth} onClick={() => void doStart()} disabled={busy}>

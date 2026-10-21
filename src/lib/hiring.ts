@@ -148,7 +148,8 @@ export function hiringIssueMessage({ name, subject, url }: { name: string; subje
     `Hello ${name}, this is the ${HIRING_SUBJECT_LABEL[subject]} screening test for the teaching post: ` +
     `${mcq + numeric} questions in ${minutes} minutes. ` +
     `Once you start, the clock does not stop, so start when you have ${minutes} minutes free. ` +
-    `The link works for ${HIRING_WINDOW_HOURS} hours. When it asks, enter the mobile number you gave us.\n\n${url}`
+    `The link works for ${HIRING_WINDOW_HOURS} hours. When it asks, enter the mobile number you gave us. ` +
+    `If you are called for an interview, you will be asked to solve and explain some of these questions there.\n\n${url}`
   )
 }
 

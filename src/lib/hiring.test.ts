@@ -328,7 +328,9 @@ describe('hiringIssueMessage', () => {
     expect(m).toBe(
       'Hello Asha Rao, this is the Physics screening test for the teaching post: 15 questions in 25 minutes. ' +
         'Once you start, the clock does not stop, so start when you have 25 minutes free. ' +
-        'The link works for 24 hours. When it asks, enter the mobile number you gave us.\n\nhttps://x.test/h/abc',
+        'The link works for 24 hours. When it asks, enter the mobile number you gave us. ' +
+          'If you are called for an interview, you will be asked to solve and explain some of these questions there.' +
+          '\n\nhttps://x.test/h/abc',
     )
   })
 
