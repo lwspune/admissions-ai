@@ -8,7 +8,10 @@ role".
 A screen, not a judgement: an applicant for a teaching post sits fifteen moderate questions from real
 exam papers before anyone calls them. Many applicants are out of station, so it is taken remotely on a
 link. Copying is accepted — the interview that follows is where they are grilled — so the test does not
-fight it beyond giving every applicant a different set.
+fight it beyond giving every applicant a different set. Copying includes solving with AI, which no
+remote check stops (a second phone beats any detector), so the defence is a warning: the issue message
+and the instructions screen both say the interview may ask them to solve and explain questions from
+the test (owner, 2026-10-21; an on-page list of questions to ask was offered and dropped).
 
 A second track beside the admissions test, sharing none of its tables. Those are built round a
 student lead, the class rule and the parent; an applicant has none of them.
