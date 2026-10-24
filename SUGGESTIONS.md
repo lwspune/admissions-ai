@@ -7,6 +7,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Do before anyone real uses this
 
+- [ ] **Hiring applicants are kept for good, and nothing can remove one (2026-10-24).** The user's
+      call: past applicants inform future hiring, so the purge no longer touches them (step 4,
+      migration 0023). No page or script deletes an applicant or their resume, so an applicant who
+      asks to be removed can only be deleted by hand on service role: the applicant row (it
+      cascades) and `hiring-resumes/<id>` (storage does not cascade). If removal on request is
+      wanted, a superadmin-only delete that does both is a small step 5. Applicants are told nothing
+      about retention today: neither the issue message nor the test says how long anything is kept.
+
 - [ ] **Teacher screening test: built, not yet in use (2026-10-19).** All three steps on branch
       `feat/teacher-screening`; migrations 0020–0022 applied. Verified in headless Edge on local dev
       against production: a teacher kept to /hiring, adds an applicant, sends the link; the applicant

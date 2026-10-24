@@ -255,6 +255,11 @@ These are the things that quietly break everything if violated.
   deadline and grades (`submit_hiring_attempt`), and a test's state only moves forward
   (migrations 0021–0022, `db:probe -- 0021`, `hiring.itest.ts`). The applicant's browser gets
   `toApplicantPaper`, an allow-list like `toCandidatePaper`, as server-built HTML (`mathToHtml`).
+  After the test (0023): a decision that only superadmin moves into or out of hired and rejected
+  (a trigger), insert-only `hiring_notes`, and one resume per applicant in the private
+  `hiring-resumes` bucket, recorded by `attach_resume()` (`db:probe -- 0023`). **Applicants are
+  never purged** (the owner's call, 2026-10-24); the 12-month rule is admissions' only, so a new
+  hiring table needs no purge entry, and the resume bucket is not in `purgeExpired`.
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
@@ -362,6 +367,14 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-24 — Hiring gets a decision, notes and a resume, and its applicants are kept for good.**
+  The user's calls: six decisions (in progress, shortlisted, on hold, hired, rejected, withdrawn),
+  hired and rejected set by superadmin only, PDF and Word resumes, no lock on a decided applicant,
+  and no purge of applicants at all, because past applicants inform future hiring. That reverses
+  the 12-month purge of 2026-10-19, which had not yet deleted anyone. Staff upload resumes;
+  applicant self-upload on the test link was left out, because it would be the first upload open
+  without a session. HIRING_TEST_SPEC.md, step 4.
 
 - **2026-10-19 — A screening test for teacher applicants, built here beside admissions.** The
   user's calls: hiring screens applicants before anyone calls them, many are out of station, and

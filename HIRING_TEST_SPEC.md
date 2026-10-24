@@ -1,9 +1,7 @@
 # Teacher Screening Test — Specification (v1)
 
-**Date:** 2026-10-19 · **Status:** Built (steps 1–3, 2026-10-19), on branch `feat/teacher-screening`. Not usable until a
-subject's questions are signed off (`npm run hiring:seed -- --live --file <subject>`) and the branch
-ships; create teacher accounts only after it ships — the live code before it shows a teacher as "No
-role".
+**Date:** 2026-10-19 · **Status:** Live (steps 1–3, 2026-10-19; all four subjects' questions live
+2026-10-21). Step 4, the decision, notes and resume (2026-10-24), is on branch `feat/hiring-pipeline`.
 
 A screen, not a judgement: an applicant for a teaching post sits fifteen moderate questions from real
 exam papers before anyone calls them. Many applicants are out of station, so it is taken remotely on a
@@ -31,7 +29,7 @@ student lead, the class rule and the parent; an applicant has none of them.
 | Window | 24 hours to start (applicants are out of station) — default, not yet confirmed in use |
 | Reissues | At most 2 — default |
 | The applicant sees | "Submitted" — no score, no answers — default |
-| Kept | 12 months, then purged, as candidate data |
+| Kept | For good: never purged, so past applicants inform future hiring (owner, 2026-10-24; was 12 months) |
 
 ## 2. The questions
 
@@ -104,8 +102,35 @@ Proven by `npm run db:probe -- 0021` and `src/server/hiring.itest.ts`.
   stand and, once submitted, the score out of 15, right/wrong/skipped and time used. Superadmin sees
   who added each applicant.
 - **`/hiring/[id]`**: the score and every question with the answer chosen, the key and the verdict.
-- **The purge** deletes an applicant 12 months after their last activity (added, or last issued),
-  with everything under them (`purgeExpired`, `hiring.itest.ts`).
+- **The purge** leaves applicants alone (owner, 2026-10-24: their history helps future hiring). Only
+  their number checks go, with everyone's, from `identify_attempts`. Until then it deleted an
+  applicant 12 months after their last activity; none was old enough to have gone.
+
+### After the test: decision, notes, resume (step 4, migration 0023, 2026-10-24)
+
+The owner's calls: the six decisions below, PDF and Word resumes, hired and rejected set by superadmin
+only, applicants never purged, and no lock on a decided applicant (a new link can still be issued).
+
+- **Decision** — In progress (every applicant starts here), Shortlisted, On hold, Hired, Rejected,
+  Withdrawn. A teacher sets it on their own applicants; Hired and Rejected are superadmin's, into and
+  out of, so a teacher cannot undo superadmin's call (`hiring_applicants_decision_guard`). Only that
+  column is writable (a column grant), and every change writes a history line. Nothing sets it from
+  the score: a person decides. `/hiring` shows it as a badge and filters by it.
+- **Notes** — `hiring_notes`, the applicant's history, newest first on `/hiring/[id]`: notes, decision
+  changes and resumes added or replaced. Insert-only, the author stamped from the session, visible to
+  whoever sees the applicant. A signed-in user writes only plain notes; the other lines come from the
+  database.
+- **Resume** — one file per applicant in the private `hiring-resumes` bucket, named by the applicant's
+  id: PDF or Word (.docx), at most 5 MB, both enforced by the bucket. The page checks the file's first
+  bytes too, so a renamed file is refused before upload. The browser uploads straight to storage
+  (past Vercel's 4.5 MB body limit) and `attach_resume()` records it, reading the type from the stored
+  object, never from the caller. Uploading again replaces it. `/hiring/[id]/resume` signs a fresh
+  ten-minute link on each click: a PDF opens, a Word file downloads under the applicant's name. The
+  teacher who added the applicant and superadmin can read and write it, nobody else (storage policy,
+  `hiring_resume_allowed`).
+
+Proven by `npm run db:probe -- 0023` and `src/server/hiring.itest.ts` (the bucket's type and size
+limits, which no SQL reaches).
 
 ## 4. Open
 
