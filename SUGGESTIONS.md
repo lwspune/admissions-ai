@@ -14,6 +14,9 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       cascades) and `hiring-resumes/<id>` (storage does not cascade). If removal on request is
       wanted, a superadmin-only delete that does both is a small step 5. Applicants are told nothing
       about retention today: neither the issue message nor the test says how long anything is kept.
+      Kept for good also means `/hiring` grows for good: it loads every applicant, with their tests
+      and notes, in one query and has no paging. Fine at tens or low hundreds; page it (or default
+      the filter to the open decisions) before it is slow.
 
 - [ ] **Teacher screening test: built, not yet in use (2026-10-19).** All three steps on branch
       `feat/teacher-screening`; migrations 0020–0022 applied. Verified in headless Edge on local dev

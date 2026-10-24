@@ -120,6 +120,11 @@ only, applicants never purged, and no lock on a decided applicant (a new link ca
   changes and resumes added or replaced. Insert-only, the author stamped from the session, visible to
   whoever sees the applicant. A signed-in user writes only plain notes; the other lines come from the
   database.
+- **On the `/hiring` card** (owner, same day): a line that opens and closes, collapsed by default,
+  showing the note count and the newest note. Open, it holds the decision control, the applicant's
+  plain notes and the add-note box, so nobody opens the applicant's page for them. Decision changes
+  and resumes stay on the page's full history; the badges already show where the applicant stands.
+  The notes come with the list in one query, through the same RLS.
 - **Resume** — one file per applicant in the private `hiring-resumes` bucket, named by the applicant's
   id: PDF or Word (.docx), at most 5 MB, both enforced by the bucket. The page checks the file's first
   bytes too, so a renamed file is refused before upload. The browser uploads straight to storage
