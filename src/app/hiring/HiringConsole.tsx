@@ -14,6 +14,7 @@ import {
   type HiringDecision,
   hiringIssueMessage,
   istDay,
+  notePreview,
   timeUsedMs,
   type ApplicantStage,
 } from '@/lib/hiring'
@@ -21,6 +22,7 @@ import { Icon } from '@/components/icons'
 import { useConfirm } from '@/components/ConfirmDialog'
 import { Alert, Badge, EmptyState, btn, card, control, cx, input, label } from '@/components/ui'
 import { addApplicantAction, issueTestAction } from './actions'
+import { DecisionControl, History, NoteForm } from './ApplicantControls'
 
 const STAGE_TONE: Record<ApplicantStage, 'neutral' | 'brand' | 'warning' | 'success'> = {
   none: 'neutral',
@@ -46,12 +48,15 @@ const date = istDay
 export function HiringConsole({
   applicants,
   addedBy,
+  role,
   now,
   appUrl,
 }: {
   applicants: HiringApplicantRow[]
   /** Login id → name, for superadmin; null for a teacher, who sees only their own. */
   addedBy: Record<string, string> | null
+  /** Decides which decisions the card offers; the database decides what saves. */
+  role: string
   now: string
   appUrl: string
 }) {
@@ -93,7 +98,7 @@ export function HiringConsole({
           ) : (
             <ul className="mt-3 space-y-3">
               {shown.map((a) => (
-                <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} now={new Date(now)} appUrl={appUrl} />
+                <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} role={role} now={new Date(now)} appUrl={appUrl} />
               ))}
             </ul>
           )}
@@ -172,11 +177,13 @@ function AddApplicant() {
 function ApplicantCard({
   applicant: a,
   addedBy,
+  role,
   now,
   appUrl,
 }: {
   applicant: HiringApplicantRow
   addedBy: Record<string, string> | null
+  role: string
   now: Date
   appUrl: string
 }) {
@@ -277,7 +284,41 @@ function ApplicantCard({
         </Alert>
       )}
       {shown && <LinkToSend name={a.name} mobile={a.mobile} subject={a.subject} url={shown.url} fresh={shown.fresh} />}
+      <NotesAndDecision applicant={a} role={role} />
     </li>
+  )
+}
+
+/**
+ * The card's notes and decision, collapsed to one line: the newest note, so
+ * nobody opens the applicant's page to read or add one. Plain notes only; the
+ * full history (decision changes, resumes) is on the page.
+ */
+function NotesAndDecision({ applicant: a, role }: { applicant: HiringApplicantRow; role: string }) {
+  const latest = a.notes[0]
+  return (
+    <details className="group mt-3 border-t border-slate-100 pt-2">
+      <summary className="flex min-h-tap cursor-pointer list-none items-center gap-2 rounded-lg text-sm text-slate-700 hover:text-slate-900 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 [&::-webkit-details-marker]:hidden">
+        <Icon name="chevronRight" className="h-4 w-4 shrink-0 transition-transform group-open:rotate-90" />
+        <span className="shrink-0 whitespace-nowrap font-medium text-slate-900">{a.notes.length > 0 ? `Notes (${a.notes.length})` : 'Notes'}</span>
+        <span className="min-w-0 truncate text-slate-600">
+          {latest ? (
+            <>
+              · {notePreview(latest.body)} — {latest.authorName ?? 'System'}, {date(latest.createdAt)}
+            </>
+          ) : (
+            '· add one, or change the decision'
+          )}
+        </span>
+      </summary>
+      <div className="mt-3 space-y-5 pb-1">
+        <div className="max-w-sm">
+          <DecisionControl applicantId={a.id} decision={a.decision} role={role} framed={false} />
+        </div>
+        <History notes={a.notes} empty="No notes yet." />
+        <NoteForm applicantId={a.id} />
+      </div>
+    </details>
   )
 }
 

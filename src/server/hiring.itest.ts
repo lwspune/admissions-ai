@@ -358,6 +358,23 @@ describe('notes', () => {
     ])
   })
 
+  it('comes with the list: notes only, newest first, and only to those who see the applicant', async () => {
+    const { applicantId } = await applicantWithTest(42)
+    expect((await addHiringNote(teacher.db as never, applicantId, 'First note')).ok).toBe(true)
+    expect((await setHiringDecision(teacher.db as never, applicantId, 'shortlisted')).ok).toBe(true)
+    expect((await addHiringNote(superadmin.db as never, applicantId, 'Second note')).ok).toBe(true)
+
+    for (const s of [teacher, superadmin]) {
+      const row = (await loadApplicants(s.db as never)).find((a) => a.id === applicantId)!
+      expect(row.notes.map((n) => [n.kind, n.body, n.authorName])).toEqual([
+        ['note', 'Second note', 'Hiring s'],
+        ['note', 'First note', 'Hiring t1'],
+      ])
+    }
+    const others = await loadApplicants(otherTeacher.db as never)
+    expect(others.flatMap((a) => a.notes).some((n) => n.body.endsWith(' note'))).toBe(false)
+  })
+
   it('refuses a blank note, and any note from another teacher', async () => {
     const { applicantId } = await applicantWithTest(41)
     expect(await addHiringNote(teacher.db as never, applicantId, '  ')).toEqual({ ok: false, error: 'Write a note first.' })

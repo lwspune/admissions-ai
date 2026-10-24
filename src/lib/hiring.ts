@@ -224,6 +224,15 @@ export function validateNote(body: string): { ok: true; value: string } | { ok: 
   return { ok: true, value }
 }
 
+/** A note on one line for a collapsed list card: whitespace folded, cut at a word with an ellipsis. */
+export function notePreview(body: string, max = 80): string {
+  const flat = body.replace(/\s+/g, ' ').trim()
+  if (flat.length <= max) return flat
+  const cut = flat.slice(0, max - 1)
+  const space = cut.lastIndexOf(' ')
+  return `${(space > 0 ? cut.slice(0, space) : cut).replace(/[\s,;:]+$/, '')}…`
+}
+
 /** The hiring-resumes bucket's limit; the bucket refuses past it too. */
 export const RESUME_MAX_BYTES = 5 * 1024 * 1024
 

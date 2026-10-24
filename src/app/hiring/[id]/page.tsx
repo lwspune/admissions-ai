@@ -2,15 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
-import { loadApplicantReport, type HiringNote, type HiringReportQuestion, type HiringVerdict } from '@/server/hiring'
-import { HIRING_SHAPE, HIRING_SUBJECT_LABEL, formatDecisionChange, istTime, timeUsedMs } from '@/lib/hiring'
+import { loadApplicantReport, type HiringReportQuestion, type HiringVerdict } from '@/server/hiring'
+import { HIRING_SHAPE, HIRING_SUBJECT_LABEL, istTime, timeUsedMs } from '@/lib/hiring'
 import { canHire } from '@/lib/staff'
 import { CHOICES } from '@/lib/types'
 import { MathText } from '@/components/MathText'
 import { StaffShell } from '@/components/StaffShell'
-import { Icon, type IconName } from '@/components/icons'
+import { Icon } from '@/components/icons'
 import { Badge, EmptyState, Eyebrow, PageHeader, card, cx } from '@/components/ui'
-import { DecisionControl, NoteForm, ResumeControl } from './ApplicantControls'
+import { DecisionControl, History, NoteForm, ResumeControl } from '../ApplicantControls'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { title: 'Applicant', robots: { index: false, follow: false } }
@@ -121,41 +121,6 @@ export default async function ApplicantPage({ params }: { params: Promise<{ id: 
         </section>
       )}
     </StaffShell>
-  )
-}
-
-const HISTORY_ICON: Record<HiringNote['kind'], IconName> = {
-  note: 'message',
-  decision: 'refresh',
-  resume: 'fileText',
-}
-
-/** Notes, decision changes and resumes, newest first; nothing in it is ever edited. */
-function History({ notes }: { notes: HiringNote[] }) {
-  if (notes.length === 0) return <p className="mt-3 text-sm text-slate-600">Nothing yet.</p>
-  return (
-    <ol className="relative mt-4 space-y-5 before:absolute before:bottom-2 before:left-[15px] before:top-2 before:w-px before:bg-slate-200">
-      {notes.map((n) => (
-        <li key={n.id} className="relative flex gap-3">
-          <span
-            className={cx(
-              'relative grid h-8 w-8 shrink-0 place-items-center rounded-full ring-4 ring-white',
-              n.kind === 'decision' ? 'bg-brand-50 text-brand-700' : n.kind === 'resume' ? 'bg-sky-50 text-sky-700' : 'bg-slate-100 text-slate-600',
-            )}
-          >
-            <Icon name={HISTORY_ICON[n.kind]} className="h-3.5 w-3.5" />
-          </span>
-          <div className="min-w-0 flex-1 pt-1">
-            <p className={n.kind === 'note' ? 'whitespace-pre-wrap break-words text-sm text-slate-900' : 'text-sm font-medium text-slate-700'}>
-              {n.kind === 'decision' ? formatDecisionChange(n.body) : n.body}
-            </p>
-            <p className="mt-1 text-xs text-slate-600">
-              {n.authorName ?? 'System'} · {when(n.createdAt)}
-            </p>
-          </div>
-        </li>
-      ))}
-    </ol>
   )
 }
 

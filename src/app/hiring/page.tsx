@@ -50,6 +50,7 @@ export default async function HiringPage() {
       <HiringConsole
         applicants={applicants}
         addedBy={addedBy}
+        role={staff.role}
         now={new Date().toISOString()}
         appUrl={process.env.NEXT_PUBLIC_APP_URL ?? ''}
       />

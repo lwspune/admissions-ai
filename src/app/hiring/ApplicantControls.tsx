@@ -1,24 +1,61 @@
 'use client'
 
-import { useRef, useState, useTransition } from 'react'
+import { useId, useRef, useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import {
   HIRING_DECISION_LABEL,
   MAX_HIRING_NOTE,
   checkResume,
   decisionChoices,
+  formatDecisionChange,
   istTime,
   type HiringDecision,
   type ResumeKind,
 } from '@/lib/hiring'
-import type { HiringResult } from '@/server/hiring'
+import type { HiringNote, HiringResult } from '@/server/hiring'
 import { browserClient } from '@/lib/browserClient'
-import { Icon } from '@/components/icons'
+import { Icon, type IconName } from '@/components/icons'
 import { Alert, Eyebrow, btn, card, control, cx, hint, input, label } from '@/components/ui'
-import { addNoteAction, attachResumeAction, setDecisionAction } from '../actions'
+import { addNoteAction, attachResumeAction, setDecisionAction } from './actions'
 
-// The after-the-test controls on /hiring/[id] (migration 0023). The database
-// decides every rule; these only offer what will save and say why when not.
+// The after-the-test controls (migration 0023), on /hiring/[id] and inside each
+// /hiring card. The database decides every rule; these only offer what will
+// save and say why when not.
+
+const HISTORY_ICON: Record<HiringNote['kind'], IconName> = {
+  note: 'message',
+  decision: 'refresh',
+  resume: 'fileText',
+}
+
+/** Notes, decision changes and resumes, newest first; nothing in it is ever edited. */
+export function History({ notes, empty = 'Nothing yet.' }: { notes: HiringNote[]; empty?: string }) {
+  if (notes.length === 0) return <p className="mt-3 text-sm text-slate-600">{empty}</p>
+  return (
+    <ol className="relative mt-4 space-y-5 before:absolute before:bottom-2 before:left-[15px] before:top-2 before:w-px before:bg-slate-200">
+      {notes.map((n) => (
+        <li key={n.id} className="relative flex gap-3">
+          <span
+            className={cx(
+              'relative grid h-8 w-8 shrink-0 place-items-center rounded-full ring-4 ring-white',
+              n.kind === 'decision' ? 'bg-brand-50 text-brand-700' : n.kind === 'resume' ? 'bg-sky-50 text-sky-700' : 'bg-slate-100 text-slate-600',
+            )}
+          >
+            <Icon name={HISTORY_ICON[n.kind]} className="h-3.5 w-3.5" />
+          </span>
+          <div className="min-w-0 flex-1 pt-1">
+            <p className={n.kind === 'note' ? 'whitespace-pre-wrap break-words text-sm text-slate-900' : 'text-sm font-medium text-slate-700'}>
+              {n.kind === 'decision' ? formatDecisionChange(n.body) : n.body}
+            </p>
+            <p className="mt-1 text-xs text-slate-600">
+              {n.authorName ?? 'System'} · {istTime(n.createdAt)}
+            </p>
+          </div>
+        </li>
+      ))}
+    </ol>
+  )
+}
 
 function useAction() {
   const router = useRouter()
@@ -46,15 +83,21 @@ function Status({ result }: { result: { ok: boolean; message: string } | null })
   )
 }
 
+const eyebrow = 'block text-xs font-semibold uppercase tracking-wider text-slate-600'
+
 export function DecisionControl({
   applicantId,
   decision,
   role,
+  framed = true,
 }: {
   applicantId: string
   decision: HiringDecision
   role: string
+  /** Its own card on the applicant's page; bare inside a list card. */
+  framed?: boolean
 }) {
+  const id = useId()
   const [value, setValue] = useState<HiringDecision>(decision)
   const { pending, result, run } = useAction()
   const choices = decisionChoices(role, decision)
@@ -62,25 +105,28 @@ export function DecisionControl({
 
   return (
     <form
-      className={cx(card, 'p-5')}
+      className={framed ? cx(card, 'p-5') : undefined}
       onSubmit={(e) => {
         e.preventDefault()
         run(() => setDecisionAction(applicantId, value), 'Decision saved.')
       }}
     >
-      <label htmlFor="decision" className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-        Decision
-      </label>
       {locked ? (
-        <p className="mt-2 text-sm text-slate-900">
-          {HIRING_DECISION_LABEL[decision]}
-          <span className="block text-xs text-slate-600">Set by superadmin.</span>
-        </p>
+        <>
+          <p className={eyebrow}>Decision</p>
+          <p className="mt-2 text-sm text-slate-900">
+            {HIRING_DECISION_LABEL[decision]}
+            <span className="block text-xs text-slate-600">Set by superadmin.</span>
+          </p>
+        </>
       ) : (
         <>
+          <label htmlFor={id} className={eyebrow}>
+            Decision
+          </label>
           <div className="mt-2 flex gap-2">
             <select
-              id="decision"
+              id={id}
               value={value}
               onChange={(e) => setValue(e.target.value as HiringDecision)}
               className={cx(control, 'min-w-0 flex-1')}
@@ -186,6 +232,8 @@ export function ResumeControl({
 }
 
 export function NoteForm({ applicantId }: { applicantId: string }) {
+  // One per card on /hiring, so the id is per instance.
+  const id = useId()
   const [body, setBody] = useState('')
   const { pending, result, run } = useAction()
 
@@ -196,11 +244,11 @@ export function NoteForm({ applicantId }: { applicantId: string }) {
         run(() => addNoteAction(applicantId, body), 'Note added.', () => setBody(''))
       }}
     >
-      <label htmlFor="note" className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
+      <label htmlFor={id} className={eyebrow}>
         Add a note
       </label>
       <textarea
-        id="note"
+        id={id}
         value={body}
         onChange={(e) => setBody(e.target.value)}
         maxLength={MAX_HIRING_NOTE}

@@ -209,6 +209,28 @@ export interface HiringApplicantRow {
   /** The newest test; earlier ones were voided by it. */
   latest: HiringTestSummary | null
   attempt: HiringAttemptSummary | null
+  /** Plain notes only, newest first, for the card; the full history is on the applicant's page. */
+  notes: HiringNote[]
+}
+
+export interface HiringNote {
+  id: number
+  kind: 'note' | 'decision' | 'resume'
+  body: string
+  authorName: string | null
+  createdAt: string
+}
+
+const NOTE_COLUMNS = 'id, kind, body, author_name, created_at'
+
+function toNote(n: Record<string, unknown>): HiringNote {
+  return {
+    id: Number(n.id),
+    kind: n.kind as HiringNote['kind'],
+    body: n.body as string,
+    authorName: (n.author_name as string | null) ?? null,
+    createdAt: n.created_at as string,
+  }
 }
 
 interface AttemptRowRaw {
@@ -279,7 +301,7 @@ async function closeExpired(db: Db): Promise<void> {
 
 const APPLICANT_COLUMNS = 'id, name, mobile, subject, created_at, created_by, decision, resume_type, resume_name, resume_at'
 
-function toApplicant(row: Record<string, unknown>): Omit<HiringApplicantRow, 'latest' | 'attempt'> {
+function toApplicant(row: Record<string, unknown>): Omit<HiringApplicantRow, 'latest' | 'attempt' | 'notes'> {
   return {
     id: row.id as string,
     name: row.name as string,
@@ -303,8 +325,10 @@ export async function loadApplicants(db: Db): Promise<HiringApplicantRow[]> {
   await closeExpired(db)
   const { data, error } = await db
     .from('hiring_applicants')
-    .select(`${APPLICANT_COLUMNS}, hiring_tests(${TEST_COLUMNS})`)
+    .select(`${APPLICANT_COLUMNS}, hiring_tests(${TEST_COLUMNS}), hiring_notes(${NOTE_COLUMNS})`)
+    .eq('hiring_notes.kind', 'note')
     .order('created_at', { ascending: false })
+    .order('id', { referencedTable: 'hiring_notes', ascending: false })
   if (error) throw new Error(`could not read applicants: ${error.message}`)
 
   return (data ?? []).map((row) => {
@@ -315,6 +339,7 @@ export async function loadApplicants(db: Db): Promise<HiringApplicantRow[]> {
       ...toApplicant(row),
       latest: latest ? toTest(latest) : null,
       attempt: attempt ? toAttempt(attempt) : null,
+      notes: ((row.hiring_notes ?? []) as Record<string, unknown>[]).map(toNote),
     }
   })
 }
@@ -336,16 +361,8 @@ export interface HiringReportQuestion {
   verdict: HiringVerdict
 }
 
-export interface HiringNote {
-  id: number
-  kind: 'note' | 'decision' | 'resume'
-  body: string
-  authorName: string | null
-  createdAt: string
-}
-
 export interface HiringApplicantReport {
-  applicant: Omit<HiringApplicantRow, 'latest' | 'attempt'>
+  applicant: Omit<HiringApplicantRow, 'latest' | 'attempt' | 'notes'>
   /** The history, newest first. */
   notes: HiringNote[]
   tests: HiringTestSummary[]
@@ -379,7 +396,7 @@ export async function loadApplicantReport(db: Db, applicantId: string): Promise<
     db.from('hiring_applicants').select(`${APPLICANT_COLUMNS}, hiring_tests(${TEST_COLUMNS})`).eq('id', applicantId).maybeSingle(),
     db
       .from('hiring_notes')
-      .select('id, kind, body, author_name, created_at')
+      .select(NOTE_COLUMNS)
       .eq('applicant_id', applicantId)
       .order('id', { ascending: false }),
   ])
@@ -437,13 +454,7 @@ export async function loadApplicantReport(db: Db, applicantId: string): Promise<
 
   return {
     applicant: toApplicant(row),
-    notes: (notesRes.data ?? []).map((n) => ({
-      id: Number(n.id),
-      kind: n.kind as HiringNote['kind'],
-      body: n.body as string,
-      authorName: (n.author_name as string | null) ?? null,
-      createdAt: n.created_at as string,
-    })),
+    notes: (notesRes.data ?? []).map(toNote),
     tests: raw.map(toTest),
     test: chosen ? toTest(chosen) : null,
     attempt: attemptRaw ? toAttempt(attemptRaw) : null,

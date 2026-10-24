@@ -20,6 +20,7 @@ import {
   mayChangeDecision,
   formatDecisionChange,
   validateNote,
+  notePreview,
   checkResume,
   resumeDownloadName,
   RESUME_MAX_BYTES,
@@ -510,6 +511,23 @@ describe('notes', () => {
     expect(validateNote('   ')).toEqual({ ok: false, error: 'Write a note first.' })
     expect(validateNote('x'.repeat(2001))).toEqual({ ok: false, error: 'A note can be at most 2000 characters.' })
     expect(validateNote('x'.repeat(2000)).ok).toBe(true)
+  })
+})
+
+describe('notePreview', () => {
+  it('is the note on one line', () => {
+    expect(notePreview('Strong on\n\ncalculus.   Call Monday')).toBe('Strong on calculus. Call Monday')
+  })
+
+  it('cuts a long note at a word, with an ellipsis', () => {
+    const long = 'Strong on calculus and coordinate geometry, weaker on probability; call for a demo class on Monday'
+    const p = notePreview(long, 60)
+    expect(p.length).toBeLessThanOrEqual(60)
+    expect(p).toBe('Strong on calculus and coordinate geometry, weaker on…')
+  })
+
+  it('cuts a note with no spaces at the limit', () => {
+    expect(notePreview('x'.repeat(100), 10)).toBe('xxxxxxxxx…')
   })
 })
 
