@@ -5,7 +5,7 @@ import { canManageLeads } from '@/lib/staff'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { CLASSES } from '@/lib/classes'
-import { STAGES, STAGE_LABEL, STAGE_TONE, INTERESTS, type LeadFilters } from '@/lib/leads'
+import { STAGES, STAGE_LABEL, STAGE_TONE, INTERESTS, leadsHref, summaryHref, type LeadFilters } from '@/lib/leads'
 import type { LeadList } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { Icon } from '@/components/icons'
@@ -183,18 +183,6 @@ function Filters({
   )
 }
 
-function pageHref(filters: LeadFilters, page: number): string {
-  const params = new URLSearchParams()
-  if (filters.q) params.set('q', filters.q)
-  if (filters.stage) params.set('stage', filters.stage)
-  if (filters.interest) params.set('interest', filters.interest)
-  if (filters.source) params.set('source', filters.source)
-  if (filters.assignee) params.set('assignee', filters.assignee)
-  if (page > 1) params.set('page', String(page))
-  const query = params.toString()
-  return query ? `/leads?${query}` : '/leads'
-}
-
 function Results({
   list,
   filters,
@@ -295,7 +283,7 @@ function Results({
                 )}
                 <Avatar name={lead.name} className="mt-0.5 hidden sm:grid" />
                 <div className="min-w-0 flex-1">
-                  <RowTest lead={lead} action={lead.testAction} canPaper={canAssign}>
+                  <RowTest lead={lead} action={lead.testAction} canPaper={canAssign} reportHref={summaryHref(lead.id, filters)}>
                     {/* Full width on a phone, so the button drops below rather than squeezing the details. */}
                     <div className="min-w-0 flex-1 basis-full sm:basis-0">
                       <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
@@ -379,7 +367,7 @@ function Results({
       {pages > 1 && (
         <nav aria-label="Pages" className="mt-4 flex items-center justify-between">
           {filters.page > 1 ? (
-            <Link href={pageHref(filters, filters.page - 1)} className={btn('secondary')}>
+            <Link href={leadsHref(filters, filters.page - 1)} className={btn('secondary')}>
               <Icon name="chevronLeft" className="h-4 w-4" />
               Previous
             </Link>
@@ -387,7 +375,7 @@ function Results({
             <span />
           )}
           {filters.page < pages && (
-            <Link href={pageHref(filters, filters.page + 1)} className={btn('secondary')}>
+            <Link href={leadsHref(filters, filters.page + 1)} className={btn('secondary')}>
               Next
               <Icon name="chevronRight" className="h-4 w-4" />
             </Link>

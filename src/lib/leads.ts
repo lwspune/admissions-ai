@@ -292,6 +292,37 @@ export function parseLeadFilters(params: Params): LeadFilters {
   }
 }
 
+/** The list's address for these filters: what `parseLeadFilters` reads back. */
+export function leadsHref(filters: LeadFilters, page = filters.page): string {
+  const params = new URLSearchParams()
+  if (filters.q) params.set('q', filters.q)
+  if (filters.stage) params.set('stage', filters.stage)
+  if (filters.interest) params.set('interest', filters.interest)
+  if (filters.source) params.set('source', filters.source)
+  if (filters.assignee) params.set('assignee', filters.assignee)
+  if (page > 1) params.set('page', String(page))
+  const query = params.toString()
+  return query ? `/leads?${query}` : '/leads'
+}
+
+/**
+ * The score sheet, opened from a list row, carrying that list's filters so
+ * its back link returns to the same list rather than to the lead.
+ */
+export function summaryHref(leadId: string, filters: LeadFilters): string {
+  const query = leadsHref(filters).split('?')[1]
+  const base = `/reports/${leadId}/summary`
+  return query ? `${base}?back=${encodeURIComponent(query)}` : base
+}
+
+/**
+ * Where the score sheet's back link goes. `back` is read as list filters, never
+ * as an address, so whatever the URL says the link can only lead to the list.
+ */
+export function summaryBackHref(back: string | null | undefined): string {
+  return leadsHref(parseLeadFilters(Object.fromEntries(new URLSearchParams(back ?? ''))))
+}
+
 /**
  * What the search box searches. Digits search the number, anything else the
  * name. LIKE's own wildcards are escaped, so "50%" finds "50%", not everything.

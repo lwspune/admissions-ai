@@ -1,12 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadParentReport } from '@/server/report'
 import type { ParentReport } from '@/lib/report'
 import type { Subject } from '@/lib/types'
-import { Icon } from '@/components/icons'
+import { summaryBackHref } from '@/lib/leads'
 import { PrintButton } from './PrintButton'
+import { BackToLeads } from './BackToLeads'
 
 export const dynamic = 'force-dynamic'
 export const metadata: Metadata = { robots: { index: false, follow: false } }
@@ -22,7 +22,13 @@ const SUBJECT: Record<Subject, { label: string; text: string; soft: string; bar:
  * questions never leave the institute. Everything shown comes through
  * `toParentReport`, the allow-list.
  */
-export default async function ParentReportPage({ params }: { params: Promise<{ leadId: string }> }) {
+export default async function ParentReportPage({
+  params,
+  searchParams,
+}: {
+  params: Promise<{ leadId: string }>
+  searchParams: Promise<{ back?: string | string[] }>
+}) {
   const staff = await currentStaff()
   if (!staff) redirect('/login')
 
@@ -31,6 +37,8 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
   if (!report) notFound()
 
   const { total } = report
+  // A list row (RowTest) says which list it was; read as filters, never as an address.
+  const { back } = await searchParams
 
   return (
     <main
@@ -43,13 +51,7 @@ export default async function ParentReportPage({ params }: { params: Promise<{ l
       <style>{'@page { size: A4 portrait; margin: 12mm; }'}</style>
 
       <div className="mx-auto mb-4 flex max-w-2xl items-center justify-between gap-3 print:hidden">
-        <Link
-          href={`/leads/${leadId}`}
-          className="inline-flex min-h-tap items-center gap-1 rounded text-sm font-medium text-slate-600 hover:text-slate-900"
-        >
-          <Icon name="chevronLeft" className="h-4 w-4" />
-          Back to lead
-        </Link>
+        <BackToLeads href={summaryBackHref(typeof back === 'string' ? back : null)} />
         <PrintButton />
       </div>
 

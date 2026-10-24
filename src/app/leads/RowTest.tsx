@@ -19,12 +19,15 @@ export function RowTest({
   lead,
   action,
   canPaper,
+  reportHref,
   children,
 }: {
   lead: { id: string; name: string | null; contact_mobile: string; class_level: number | null }
   action: TestAction
   /** Counsellors and superadmin may issue the test on paper (2026-10-16). */
   canPaper: boolean
+  /** The score sheet, carrying this list's filters so its back link returns here. */
+  reportHref: string
   children: React.ReactNode
 }) {
   const router = useRouter()
@@ -84,7 +87,7 @@ export function RowTest({
       <div className="flex flex-wrap items-center gap-x-3 gap-y-2">
         {children}
         {action === 'report' && (
-          <Link href={`/reports/${lead.id}/summary`} aria-label={`Score report for ${who}`} className={btn('success', 'sm')}>
+          <Link href={reportHref} aria-label={`Score report for ${who}`} className={btn('success', 'sm')}>
             <Icon name="chart" className="h-4 w-4" />
             Report
           </Link>

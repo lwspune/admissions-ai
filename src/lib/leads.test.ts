@@ -11,6 +11,9 @@ import {
   STAGE_TONE,
   MAX_NOTE,
   parseLeadFilters,
+  leadsHref,
+  summaryHref,
+  summaryBackHref,
   searchTerm,
   testStatus,
   testAction,
@@ -232,6 +235,54 @@ describe('parseLeadFilters', () => {
   it('accepts "me" and a staff id as the assignee', () => {
     expect(parseLeadFilters({ assignee: 'me' }).assignee).toBe('me')
     expect(parseLeadFilters({ assignee: ID }).assignee).toBe(ID)
+  })
+})
+
+describe('leadsHref', () => {
+  const ID = '0b6f3c1e-8a2d-4c55-9f1e-2d3c4b5a6f70'
+  const none = parseLeadFilters({})
+
+  it('is the bare list with no filters', () => {
+    expect(leadsHref(none)).toBe('/leads')
+  })
+
+  it('writes back what parseLeadFilters reads', () => {
+    const filters = parseLeadFilters({ q: 'Adhe Rao', stage: 'cnr', interest: 'SPI', source: ID, assignee: 'me', page: '3' })
+    const query = leadsHref(filters).split('?')[1]
+    expect(parseLeadFilters(Object.fromEntries(new URLSearchParams(query)))).toEqual(filters)
+  })
+
+  it('takes the page as its own argument', () => {
+    expect(leadsHref(parseLeadFilters({ stage: 'new', page: '2' }), 3)).toBe('/leads?stage=new&page=3')
+    expect(leadsHref(parseLeadFilters({ page: '2' }), 1)).toBe('/leads')
+  })
+})
+
+describe('the score sheet goes back to the list it was opened from', () => {
+  const LEAD = '6b7d8c18-3af7-47fc-9ca4-3ca24eb78adb'
+
+  it('carries the list filters to the sheet and back', () => {
+    const filters = parseLeadFilters({ q: 'Sonakshi', stage: 'new', page: '2' })
+    const href = summaryHref(LEAD, filters)
+    expect(href.startsWith(`/reports/${LEAD}/summary?back=`)).toBe(true)
+    const back = new URL(href, 'https://x.test').searchParams.get('back')
+    expect(summaryBackHref(back)).toBe(leadsHref(filters))
+  })
+
+  it('opens the sheet plainly from an unfiltered list', () => {
+    expect(summaryHref(LEAD, parseLeadFilters({}))).toBe(`/reports/${LEAD}/summary`)
+  })
+
+  it('falls back to the list when there is nothing to go back to', () => {
+    expect(summaryBackHref(null)).toBe('/leads')
+    expect(summaryBackHref(undefined)).toBe('/leads')
+    expect(summaryBackHref('')).toBe('/leads')
+  })
+
+  it('only ever leads to the list, whatever the address says', () => {
+    for (const back of ['https://evil.test/leads', '//evil.test', '/staff', 'javascript:alert(1)', 'stage=closed&x=1']) {
+      expect(summaryBackHref(back)).toBe('/leads')
+    }
   })
 })
 
