@@ -44,14 +44,13 @@ export async function GET(req: NextRequest) {
     // the returned report for in-process callers such as a dry run.
     console.warn(
       `purge: cutoff=${report.cutoff} dryRun=${report.dryRun} ` +
-        `leads=${report.leads} hiringApplicants=${report.hiringApplicants} identifyAttempts=${report.identifyAttempts}`,
+        `leads=${report.leads} identifyAttempts=${report.identifyAttempts}`,
     )
     return NextResponse.json({
       ok: true,
       cutoff: report.cutoff,
       dryRun: report.dryRun,
       leads: report.leads,
-      hiringApplicants: report.hiringApplicants,
       identifyAttempts: report.identifyAttempts,
     })
   } catch (error) {

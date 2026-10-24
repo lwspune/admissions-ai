@@ -2,7 +2,14 @@
 
 import { revalidatePath } from 'next/cache'
 import { currentStaff, userClient } from '@/server/auth'
-import { addApplicant, issueHiringTest, type HiringResult } from '@/server/hiring'
+import {
+  addApplicant,
+  addHiringNote,
+  attachResume,
+  issueHiringTest,
+  setHiringDecision,
+  type HiringResult,
+} from '@/server/hiring'
 import { canHire } from '@/lib/staff'
 
 // Thin wrappers over src/server/hiring.ts, on the session client: the
@@ -38,4 +45,32 @@ export async function issueTestAction(applicantId: string): Promise<HiringResult
   if (!result.ok) return result
   revalidatePath('/hiring')
   return { ok: true, url: `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/h/${result.token}` }
+}
+
+/** Revalidates the applicant's page and the list, which shows the decision and the resume marker. */
+function done(applicantId: string, result: HiringResult): HiringResult {
+  if (result.ok) {
+    revalidatePath(`/hiring/${applicantId}`)
+    revalidatePath('/hiring')
+  }
+  return result
+}
+
+export async function addNoteAction(applicantId: string, body: string): Promise<HiringResult> {
+  const c = await hiringClient()
+  if (!c.ok) return c
+  return done(applicantId, await addHiringNote(c.db, applicantId, body))
+}
+
+export async function setDecisionAction(applicantId: string, decision: string): Promise<HiringResult> {
+  const c = await hiringClient()
+  if (!c.ok) return c
+  return done(applicantId, await setHiringDecision(c.db, applicantId, decision))
+}
+
+/** After the browser has uploaded the file to storage under the applicant's id. */
+export async function attachResumeAction(applicantId: string, fileName: string): Promise<HiringResult> {
+  const c = await hiringClient()
+  if (!c.ok) return c
+  return done(applicantId, await attachResume(c.db, applicantId, String(fileName ?? '')))
 }

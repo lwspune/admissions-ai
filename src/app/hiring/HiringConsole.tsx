@@ -5,10 +5,13 @@ import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import type { HiringApplicantRow } from '@/server/hiring'
 import {
+  HIRING_DECISIONS,
+  HIRING_DECISION_LABEL,
   HIRING_SHAPE,
   HIRING_SUBJECTS,
   HIRING_SUBJECT_LABEL,
   applicantStatus,
+  type HiringDecision,
   hiringIssueMessage,
   istDay,
   timeUsedMs,
@@ -16,7 +19,7 @@ import {
 } from '@/lib/hiring'
 import { Icon } from '@/components/icons'
 import { useConfirm } from '@/components/ConfirmDialog'
-import { Alert, Badge, EmptyState, btn, card, cx, input, label } from '@/components/ui'
+import { Alert, Badge, EmptyState, btn, card, control, cx, input, label } from '@/components/ui'
 import { addApplicantAction, issueTestAction } from './actions'
 
 const STAGE_TONE: Record<ApplicantStage, 'neutral' | 'brand' | 'warning' | 'success'> = {
@@ -26,6 +29,15 @@ const STAGE_TONE: Record<ApplicantStage, 'neutral' | 'brand' | 'warning' | 'succ
   in_progress: 'warning',
   expired: 'neutral',
   submitted: 'success',
+}
+
+const DECISION_TONE: Record<HiringDecision, 'neutral' | 'brand' | 'warning' | 'success' | 'danger'> = {
+  in_progress: 'neutral',
+  shortlisted: 'brand',
+  on_hold: 'warning',
+  hired: 'success',
+  rejected: 'danger',
+  withdrawn: 'neutral',
 }
 
 const clock = (ms: number) => `${Math.floor(ms / 60_000)}:${String(Math.round((ms % 60_000) / 1000)).padStart(2, '0')}`
@@ -43,6 +55,10 @@ export function HiringConsole({
   now: string
   appUrl: string
 }) {
+  const [show, setShow] = useState<HiringDecision | 'all'>('all')
+  const shown = show === 'all' ? applicants : applicants.filter((a) => a.decision === show)
+  const count = (d: HiringDecision) => applicants.filter((a) => a.decision === d).length
+
   return (
     <>
       <AddApplicant />
@@ -53,11 +69,35 @@ export function HiringConsole({
           </EmptyState>
         </div>
       ) : (
-        <ul className="mt-6 space-y-3">
-          {applicants.map((a) => (
-            <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} now={new Date(now)} appUrl={appUrl} />
-          ))}
-        </ul>
+        <>
+          <div className="mt-6 flex items-center justify-end gap-2">
+            <label htmlFor="show" className="text-sm font-medium text-slate-700">
+              Show
+            </label>
+            <select
+              id="show"
+              value={show}
+              onChange={(e) => setShow(e.target.value as HiringDecision | 'all')}
+              className={control}
+            >
+              <option value="all">Everyone ({applicants.length})</option>
+              {HIRING_DECISIONS.map((d) => (
+                <option key={d} value={d}>
+                  {HIRING_DECISION_LABEL[d]} ({count(d)})
+                </option>
+              ))}
+            </select>
+          </div>
+          {shown.length === 0 ? (
+            <p className="mt-3 text-sm text-slate-600">No one is {HIRING_DECISION_LABEL[show as HiringDecision].toLowerCase()}.</p>
+          ) : (
+            <ul className="mt-3 space-y-3">
+              {shown.map((a) => (
+                <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} now={new Date(now)} appUrl={appUrl} />
+              ))}
+            </ul>
+          )}
+        </>
       )}
     </>
   )
@@ -183,21 +223,28 @@ function ApplicantCard({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <p className="flex flex-wrap items-center gap-2">
-            <span className="font-semibold text-slate-900">{a.name}</span>
+            <Link href={`/hiring/${a.id}`} className="rounded font-semibold text-slate-900 underline-offset-2 hover:underline">
+              {a.name}
+            </Link>
             <Badge tone="neutral">{HIRING_SUBJECT_LABEL[a.subject]}</Badge>
             <Badge tone={STAGE_TONE[status.kind]}>{status.label}</Badge>
+            <Badge tone={DECISION_TONE[a.decision]}>{HIRING_DECISION_LABEL[a.decision]}</Badge>
           </p>
           <p className="mt-1 text-sm text-slate-600">
             {a.mobile} · added {date(a.createdAt)}
             {addedBy && <> by {a.createdBy ? (addedBy[a.createdBy] ?? 'a removed account') : 'a removed account'}</>}
+            {a.resumeType && (
+              <>
+                {' · '}
+                <Icon name="fileText" className="inline h-3.5 w-3.5 align-[-2px]" /> resume
+              </>
+            )}
           </p>
         </div>
         <div className="flex flex-wrap gap-2">
-          {status.kind === 'submitted' && (
-            <Link href={`/hiring/${a.id}`} className={btn('secondary', 'sm')}>
-              See answers
-            </Link>
-          )}
+          <Link href={`/hiring/${a.id}`} className={btn('secondary', 'sm')}>
+            {status.kind === 'submitted' ? 'See answers' : 'Open'}
+          </Link>
           {liveUrl && !shown && (
             <button type="button" className={btn('secondary', 'sm')} onClick={() => setShown({ url: liveUrl, fresh: false })}>
               <Icon name="message" className="h-4 w-4" />

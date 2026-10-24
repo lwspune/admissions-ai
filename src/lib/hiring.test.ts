@@ -15,6 +15,14 @@ import {
   timeUsedMs,
   istTime,
   istDay,
+  HIRING_DECISIONS,
+  decisionChoices,
+  mayChangeDecision,
+  formatDecisionChange,
+  validateNote,
+  checkResume,
+  resumeDownloadName,
+  RESUME_MAX_BYTES,
   type HiringItem,
   type HiringItemRow,
   type SourceRow,
@@ -456,5 +464,93 @@ describe('pickPool', () => {
     const picked = pickPool(candidates, 20, 'seed')
     const keys = picked.map((p) => `${p.chapter}\u0000${p.source_ref}`)
     expect(keys).toEqual([...keys].sort())
+  })
+})
+
+// ── after the test: decision, notes, resume (migration 0023) ────────────────
+
+describe('decisions', () => {
+  it('starts every applicant in progress', () => {
+    expect(HIRING_DECISIONS[0]).toBe('in_progress')
+    expect(HIRING_DECISIONS).toEqual(['in_progress', 'shortlisted', 'on_hold', 'hired', 'rejected', 'withdrawn'])
+  })
+
+  it('leaves hired and rejected to superadmin, both ways', () => {
+    expect(mayChangeDecision('teacher', 'in_progress', 'shortlisted')).toBe(true)
+    expect(mayChangeDecision('teacher', 'shortlisted', 'withdrawn')).toBe(true)
+    expect(mayChangeDecision('teacher', 'shortlisted', 'hired')).toBe(false)
+    expect(mayChangeDecision('teacher', 'in_progress', 'rejected')).toBe(false)
+    expect(mayChangeDecision('teacher', 'hired', 'on_hold')).toBe(false)
+    expect(mayChangeDecision('teacher', 'rejected', 'in_progress')).toBe(false)
+    expect(mayChangeDecision('superadmin', 'rejected', 'hired')).toBe(true)
+    expect(mayChangeDecision('superadmin', 'in_progress', 'rejected')).toBe(true)
+  })
+
+  it('refuses every role but teacher and superadmin', () => {
+    expect(mayChangeDecision('counsellor', 'in_progress', 'shortlisted')).toBe(false)
+    expect(mayChangeDecision('telecaller', 'in_progress', 'shortlisted')).toBe(false)
+  })
+
+  it('offers a teacher the four open decisions, and nothing once superadmin has decided', () => {
+    expect(decisionChoices('teacher', 'in_progress')).toEqual(['in_progress', 'shortlisted', 'on_hold', 'withdrawn'])
+    expect(decisionChoices('teacher', 'hired')).toEqual(['hired'])
+    expect(decisionChoices('superadmin', 'rejected')).toEqual(HIRING_DECISIONS)
+  })
+
+  it('words a history line from its codes', () => {
+    expect(formatDecisionChange('in_progress → hired')).toBe('Decision: In progress → Hired')
+    expect(formatDecisionChange('on_hold → withdrawn')).toBe('Decision: On hold → Withdrawn')
+    expect(formatDecisionChange('garbled')).toBe('Decision: garbled')
+  })
+})
+
+describe('notes', () => {
+  it('trims a note and refuses an empty or overlong one', () => {
+    expect(validateNote('  Strong on calculus  ')).toEqual({ ok: true, value: 'Strong on calculus' })
+    expect(validateNote('   ')).toEqual({ ok: false, error: 'Write a note first.' })
+    expect(validateNote('x'.repeat(2001))).toEqual({ ok: false, error: 'A note can be at most 2000 characters.' })
+    expect(validateNote('x'.repeat(2000)).ok).toBe(true)
+  })
+})
+
+describe('checkResume', () => {
+  const PDF = new TextEncoder().encode('%PDF-1.7 ')
+  const ZIP = new Uint8Array([0x50, 0x4b, 0x03, 0x04, 0x14, 0x00])
+  const file = (name: string, size = 1000) => ({ name, size })
+
+  it('takes a PDF and a Word file, with the content type the bucket allows', () => {
+    expect(checkResume(file('Asha CV.PDF'), PDF)).toEqual({ ok: true, kind: 'pdf', contentType: 'application/pdf' })
+    expect(checkResume(file('resume.docx'), ZIP)).toEqual({
+      ok: true,
+      kind: 'docx',
+      contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    })
+  })
+
+  it('refuses other files, naming the fix for an old Word file', () => {
+    expect(checkResume(file('photo.jpg'), PDF)).toEqual({ ok: false, error: 'Choose a PDF or a Word (.docx) file.' })
+    expect(checkResume(file('old.doc'), PDF)).toEqual({
+      ok: false,
+      error: 'Old Word files (.doc) are not accepted. Save it as .docx or PDF and try again.',
+    })
+  })
+
+  it('refuses an empty file and one over 5 MB', () => {
+    expect(RESUME_MAX_BYTES).toBe(5 * 1024 * 1024)
+    expect(checkResume(file('a.pdf', 0), PDF)).toEqual({ ok: false, error: 'The file is empty.' })
+    expect(checkResume(file('a.pdf', RESUME_MAX_BYTES + 1), PDF)).toEqual({ ok: false, error: 'The file is over 5 MB.' })
+    expect(checkResume(file('a.pdf', RESUME_MAX_BYTES), PDF).ok).toBe(true)
+  })
+
+  it('refuses a file whose contents do not match its name', () => {
+    expect(checkResume(file('a.pdf'), ZIP)).toEqual({ ok: false, error: 'This file is not a real PDF.' })
+    expect(checkResume(file('a.docx'), PDF)).toEqual({ ok: false, error: 'This file is not a real Word (.docx) file.' })
+  })
+})
+
+describe('resumeDownloadName', () => {
+  it('names the file after the applicant, with nothing a file system refuses', () => {
+    expect(resumeDownloadName('Asha Rao', 'pdf')).toBe('Asha Rao - resume.pdf')
+    expect(resumeDownloadName('A/B: "C"?', 'docx')).toBe('A B C - resume.docx')
   })
 })

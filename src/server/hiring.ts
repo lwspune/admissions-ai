@@ -3,7 +3,17 @@ import type { Db } from './supabase'
 import type { ItemStatus } from '../lib/items'
 import type { Choice } from '../lib/types'
 import { generateToken } from '../lib/token'
-import { validateApplicant, type HiringFormat, type HiringSource, type HiringSubject } from '../lib/hiring'
+import {
+  HIRING_DECISIONS,
+  resumeDownloadName,
+  validateApplicant,
+  validateNote,
+  type HiringDecision,
+  type HiringFormat,
+  type HiringSource,
+  type HiringSubject,
+  type ResumeKind,
+} from '../lib/hiring'
 
 export type HiringResult<T extends object = object> = ({ ok: true } & T) | { ok: false; error: string }
 
@@ -47,6 +57,70 @@ export async function issueHiringTest(db: Db, applicantId: string): Promise<Hiri
   }
   const test = data as { id: string; token: string }
   return { ok: true, token: test.token, testId: test.id }
+}
+
+// ── after the test: notes, decision, resume (migration 0023) ────────────────
+
+/** A note on an applicant; the database stamps the author and refuses an applicant this session cannot see. */
+export async function addHiringNote(db: Db, applicantId: string, body: string): Promise<HiringResult> {
+  const checked = validateNote(body)
+  if (!checked.ok) return checked
+  const { error } = await db.from('hiring_notes').insert({ applicant_id: applicantId, body: checked.value })
+  if (error) {
+    if (error.code === '42501') return { ok: false, error: 'You cannot add a note to this applicant.' }
+    console.error('hiring: add note failed:', error)
+    return { ok: false, error: 'The note could not be saved. Try again.' }
+  }
+  return { ok: true }
+}
+
+/**
+ * Sets where an applicant stands. A teacher may not touch hired or rejected,
+ * into or out of (hiring_applicants_decision_guard); RLS hides another
+ * teacher's applicant, which updates nothing.
+ */
+export async function setHiringDecision(db: Db, applicantId: string, decision: string): Promise<HiringResult> {
+  if (!HIRING_DECISIONS.includes(decision as HiringDecision)) return { ok: false, error: 'Choose a decision.' }
+  const { data, error } = await db.from('hiring_applicants').update({ decision }).eq('id', applicantId).select('id')
+  if (error) {
+    if (error.code === '42501') return { ok: false, error: 'Only superadmin can mark an applicant hired or rejected.' }
+    console.error('hiring: set decision failed:', error)
+    return { ok: false, error: 'The decision could not be saved. Try again.' }
+  }
+  if (!data || data.length === 0) return { ok: false, error: 'You cannot change this applicant.' }
+  return { ok: true }
+}
+
+/**
+ * Records a resume the browser has just uploaded under the applicant's id
+ * (attach_resume checks it is there and reads its type from storage).
+ */
+export async function attachResume(db: Db, applicantId: string, fileName: string): Promise<HiringResult> {
+  const { error } = await db.rpc('attach_resume', { p_applicant: applicantId, p_file_name: fileName.slice(0, 200) })
+  if (error) {
+    const message = error.message ?? ''
+    if (error.code === '42501') return { ok: false, error: 'You cannot add a resume for this applicant.' }
+    if (message.includes('upload the resume')) return { ok: false, error: 'The file did not upload. Try again.' }
+    console.error('hiring: attach resume failed:', error)
+    return { ok: false, error: 'The resume could not be saved. Try again.' }
+  }
+  return { ok: true }
+}
+
+/**
+ * A ten-minute link to an applicant's resume; null when there is none or the
+ * storage policy refuses this session. A PDF opens in the browser; a Word
+ * file downloads, named after the applicant.
+ */
+export async function hiringResumeUrl(
+  db: Db,
+  applicant: { id: string; name: string; resumeType: ResumeKind | null },
+): Promise<string | null> {
+  if (!applicant.resumeType) return null
+  const options = applicant.resumeType === 'docx' ? { download: resumeDownloadName(applicant.name, 'docx') } : undefined
+  const { data, error } = await db.storage.from('hiring-resumes').createSignedUrl(applicant.id, 600, options)
+  if (error || !data) return null
+  return data.signedUrl
 }
 
 // The teacher screening test's server side (HIRING_TEST_SPEC.md). Every read
@@ -128,6 +202,10 @@ export interface HiringApplicantRow {
   subject: HiringSubject
   createdAt: string
   createdBy: string | null
+  decision: HiringDecision
+  resumeType: ResumeKind | null
+  resumeName: string | null
+  resumeAt: string | null
   /** The newest test; earlier ones were voided by it. */
   latest: HiringTestSummary | null
   attempt: HiringAttemptSummary | null
@@ -199,6 +277,23 @@ async function closeExpired(db: Db): Promise<void> {
   if (error) console.error('hiring: closing expired attempts failed:', error)
 }
 
+const APPLICANT_COLUMNS = 'id, name, mobile, subject, created_at, created_by, decision, resume_type, resume_name, resume_at'
+
+function toApplicant(row: Record<string, unknown>): Omit<HiringApplicantRow, 'latest' | 'attempt'> {
+  return {
+    id: row.id as string,
+    name: row.name as string,
+    mobile: row.mobile as string,
+    subject: row.subject as HiringSubject,
+    createdAt: row.created_at as string,
+    createdBy: (row.created_by as string | null) ?? null,
+    decision: row.decision as HiringDecision,
+    resumeType: (row.resume_type as ResumeKind | null) ?? null,
+    resumeName: (row.resume_name as string | null) ?? null,
+    resumeAt: (row.resume_at as string | null) ?? null,
+  }
+}
+
 const TEST_COLUMNS =
   'id, token, state, issue_seq, expires_at, created_at, limit_minutes, ' +
   'hiring_attempts(id, started_at, deadline_at, submitted_at, submit_reason, score, correct, incorrect, skipped)'
@@ -208,7 +303,7 @@ export async function loadApplicants(db: Db): Promise<HiringApplicantRow[]> {
   await closeExpired(db)
   const { data, error } = await db
     .from('hiring_applicants')
-    .select(`id, name, mobile, subject, created_at, created_by, hiring_tests(${TEST_COLUMNS})`)
+    .select(`${APPLICANT_COLUMNS}, hiring_tests(${TEST_COLUMNS})`)
     .order('created_at', { ascending: false })
   if (error) throw new Error(`could not read applicants: ${error.message}`)
 
@@ -217,12 +312,7 @@ export async function loadApplicants(db: Db): Promise<HiringApplicantRow[]> {
     const latest = tests[0] ?? null
     const attempt = latest ? attemptOf(latest) : null
     return {
-      id: row.id as string,
-      name: row.name as string,
-      mobile: row.mobile as string,
-      subject: row.subject as HiringSubject,
-      createdAt: row.created_at as string,
-      createdBy: (row.created_by as string | null) ?? null,
+      ...toApplicant(row),
       latest: latest ? toTest(latest) : null,
       attempt: attempt ? toAttempt(attempt) : null,
     }
@@ -246,8 +336,18 @@ export interface HiringReportQuestion {
   verdict: HiringVerdict
 }
 
+export interface HiringNote {
+  id: number
+  kind: 'note' | 'decision' | 'resume'
+  body: string
+  authorName: string | null
+  createdAt: string
+}
+
 export interface HiringApplicantReport {
   applicant: Omit<HiringApplicantRow, 'latest' | 'attempt'>
+  /** The history, newest first. */
+  notes: HiringNote[]
   tests: HiringTestSummary[]
   /** The test the report is about: the submitted one, else the newest. */
   test: HiringTestSummary | null
@@ -275,12 +375,16 @@ export async function loadApplicantReport(db: Db, applicantId: string): Promise<
   if (!/^[0-9a-f-]{36}$/i.test(applicantId)) return null
   await closeExpired(db)
 
-  const { data: row, error } = await db
-    .from('hiring_applicants')
-    .select(`id, name, mobile, subject, created_at, created_by, hiring_tests(${TEST_COLUMNS})`)
-    .eq('id', applicantId)
-    .maybeSingle()
+  const [{ data: row, error }, notesRes] = await Promise.all([
+    db.from('hiring_applicants').select(`${APPLICANT_COLUMNS}, hiring_tests(${TEST_COLUMNS})`).eq('id', applicantId).maybeSingle(),
+    db
+      .from('hiring_notes')
+      .select('id, kind, body, author_name, created_at')
+      .eq('applicant_id', applicantId)
+      .order('id', { ascending: false }),
+  ])
   if (error) throw new Error(`could not read the applicant: ${error.message}`)
+  if (notesRes.error) throw new Error(`could not read the notes: ${notesRes.error.message}`)
   if (!row) return null
 
   const raw = ((row.hiring_tests ?? []) as unknown as TestRowRaw[]).sort((a, b) => b.issue_seq - a.issue_seq)
@@ -332,14 +436,14 @@ export async function loadApplicantReport(db: Db, applicantId: string): Promise<
   }
 
   return {
-    applicant: {
-      id: row.id as string,
-      name: row.name as string,
-      mobile: row.mobile as string,
-      subject: row.subject as HiringSubject,
-      createdAt: row.created_at as string,
-      createdBy: (row.created_by as string | null) ?? null,
-    },
+    applicant: toApplicant(row),
+    notes: (notesRes.data ?? []).map((n) => ({
+      id: Number(n.id),
+      kind: n.kind as HiringNote['kind'],
+      body: n.body as string,
+      authorName: (n.author_name as string | null) ?? null,
+      createdAt: n.created_at as string,
+    })),
     tests: raw.map(toTest),
     test: chosen ? toTest(chosen) : null,
     attempt: attemptRaw ? toAttempt(attemptRaw) : null,

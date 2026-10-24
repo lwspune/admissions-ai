@@ -2,7 +2,16 @@ import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
 import { purgeExpired } from './retention'
-import { addApplicant, issueHiringTest, loadApplicants, loadApplicantReport } from './hiring'
+import {
+  addApplicant,
+  issueHiringTest,
+  loadApplicants,
+  loadApplicantReport,
+  addHiringNote,
+  setHiringDecision,
+  attachResume,
+  hiringResumeUrl,
+} from './hiring'
 import {
   openHiringTest,
   identifyApplicant,
@@ -52,6 +61,10 @@ async function signIn(role: Role, tag: string): Promise<Session> {
 }
 
 async function cleanup() {
+  // Storage does not cascade: a test applicant's resume goes by name first.
+  const { data } = await svc.from('hiring_applicants').select('id').like('mobile', '97000021%')
+  const names = (data ?? []).map((a) => a.id as string)
+  if (names.length > 0) await svc.storage.from('hiring-resumes').remove(names)
   await svc.from('hiring_applicants').delete().like('mobile', '97000021%')
 }
 
@@ -306,49 +319,133 @@ describe('taking the test', () => {
   })
 })
 
-// Applicant data is kept 12 months from the last activity, like a lead's
-// (RETENTION_MONTHS). The nightly purge deletes the applicant; tests,
-// questions drawn, attempts and answers cascade.
-describe('the 12-month purge', () => {
+// Applicants are never purged (the owner, 2026-10-24): past applicants
+// inform future hiring. The nightly purge leaves them, however old.
+describe('the purge', () => {
   const longAgo = new Date(Date.now() - 400 * 86_400_000).toISOString()
-  const recently = new Date(Date.now() - 10 * 86_400_000).toISOString()
-  const backdate = async (table: string, id: string, column: string, iso: string) => {
-    const { error } = await svc.from(table).update({ [column]: iso }).eq(table === 'hiring_tests' ? 'applicant_id' : 'id', id)
-    if (error) throw new Error(error.message)
-  }
-  const exists = async (table: string, column: string, id: string) =>
-    (await svc.from(table).select('id', { count: 'exact', head: true }).eq(column, id)).count
 
-  it('deletes an applicant idle for over 12 months, with their tests', async () => {
+  it('keeps an applicant idle for over 12 months, with their tests and notes', async () => {
     const { applicantId, token } = await applicantWithTest(30)
     await begin(token, 30)
-    await backdate('hiring_applicants', applicantId, 'created_at', longAgo)
-    await backdate('hiring_tests', applicantId, 'created_at', longAgo)
-
-    const report = await purgeExpired(svc as never)
-    expect(report.hiringApplicants).toBeGreaterThanOrEqual(1)
-    expect(await exists('hiring_applicants', 'id', applicantId)).toBe(0)
-    expect(await exists('hiring_tests', 'applicant_id', applicantId)).toBe(0)
-  })
-
-  it('keeps a recent applicant, and an old one with a recent test', async () => {
-    const recent = await applicantWithTest(31)
-    await backdate('hiring_applicants', recent.applicantId, 'created_at', recently)
-    const old = await applicantWithTest(32)
-    await backdate('hiring_applicants', old.applicantId, 'created_at', longAgo)
+    expect((await addHiringNote(teacher.db as never, applicantId, 'Old note')).ok).toBe(true)
+    for (const [table, column] of [['hiring_applicants', 'id'], ['hiring_tests', 'applicant_id'], ['hiring_notes', 'applicant_id']] as const) {
+      const { error } = await svc.from(table).update({ created_at: longAgo }).eq(column, applicantId)
+      if (error) throw new Error(error.message)
+    }
 
     await purgeExpired(svc as never)
-    expect(await exists('hiring_applicants', 'id', recent.applicantId)).toBe(1)
-    expect(await exists('hiring_applicants', 'id', old.applicantId)).toBe(1)
+    const count = async (table: string, column: string) =>
+      (await svc.from(table).select('*', { count: 'exact', head: true }).eq(column, applicantId)).count
+    expect(await count('hiring_applicants', 'id')).toBe(1)
+    expect(await count('hiring_tests', 'applicant_id')).toBe(1)
+    expect(await count('hiring_notes', 'applicant_id')).toBe(1)
+  })
+})
+
+// After the test (migration 0023). The rules are proven by `db:probe -- 0023`;
+// this proves the server code uses them, through real sessions and the real
+// storage API, whose type and size limits no SQL probe can reach.
+describe('notes', () => {
+  it('lets the teacher who added an applicant write notes that superadmin reads, with the author', async () => {
+    const { applicantId } = await applicantWithTest(40)
+    expect(await addHiringNote(teacher.db as never, applicantId, '  Strong on calculus  ')).toEqual({ ok: true })
+    expect(await addHiringNote(superadmin.db as never, applicantId, 'Call on Monday')).toEqual({ ok: true })
+
+    const report = await loadApplicantReport(superadmin.db as never, applicantId)
+    expect(report!.notes.map((n) => [n.kind, n.body, n.authorName])).toEqual([
+      ['note', 'Call on Monday', 'Hiring s'],
+      ['note', 'Strong on calculus', 'Hiring t1'],
+    ])
   })
 
-  it('counts without deleting on a dry run', async () => {
-    const { applicantId } = await applicantWithTest(33)
-    await backdate('hiring_applicants', applicantId, 'created_at', longAgo)
-    await backdate('hiring_tests', applicantId, 'created_at', longAgo)
-    const report = await purgeExpired(svc as never, { dryRun: true })
-    expect(report.hiringApplicants).toBeGreaterThanOrEqual(1)
-    expect(await exists('hiring_applicants', 'id', applicantId)).toBe(1)
+  it('refuses a blank note, and any note from another teacher', async () => {
+    const { applicantId } = await applicantWithTest(41)
+    expect(await addHiringNote(teacher.db as never, applicantId, '  ')).toEqual({ ok: false, error: 'Write a note first.' })
+    expect((await addHiringNote(otherTeacher.db as never, applicantId, 'Not mine')).ok).toBe(false)
+    expect((await addHiringNote(counsellor.db as never, applicantId, 'Not mine')).ok).toBe(false)
+  })
+})
+
+describe('the decision', () => {
+  it('starts in progress, and a teacher may shortlist but not hire', async () => {
+    const { applicantId } = await applicantWithTest(50)
+    const listed = async () => (await loadApplicants(teacher.db as never)).find((a) => a.id === applicantId)!
+    expect((await listed()).decision).toBe('in_progress')
+
+    expect(await setHiringDecision(teacher.db as never, applicantId, 'shortlisted')).toEqual({ ok: true })
+    expect((await listed()).decision).toBe('shortlisted')
+    expect(await setHiringDecision(teacher.db as never, applicantId, 'hired')).toEqual({
+      ok: false,
+      error: 'Only superadmin can mark an applicant hired or rejected.',
+    })
+    expect((await listed()).decision).toBe('shortlisted')
+  })
+
+  it('lets superadmin hire, writes each change into the history, and refuses another teacher', async () => {
+    const { applicantId } = await applicantWithTest(51)
+    expect((await setHiringDecision(otherTeacher.db as never, applicantId, 'on_hold')).ok).toBe(false)
+    expect(await setHiringDecision(teacher.db as never, applicantId, 'on_hold')).toEqual({ ok: true })
+    expect(await setHiringDecision(superadmin.db as never, applicantId, 'hired')).toEqual({ ok: true })
+
+    const report = await loadApplicantReport(teacher.db as never, applicantId)
+    expect(report!.applicant.decision).toBe('hired')
+    expect(report!.notes.map((n) => [n.kind, n.body, n.authorName])).toEqual([
+      ['decision', 'on_hold → hired', 'Hiring s'],
+      ['decision', 'in_progress → on_hold', 'Hiring t1'],
+    ])
+    expect(await setHiringDecision(teacher.db as never, applicantId, 'in_progress')).toMatchObject({ ok: false })
+  })
+
+  it('refuses a decision that is not one, before the database', async () => {
+    const { applicantId } = await applicantWithTest(52)
+    expect(await setHiringDecision(teacher.db as never, applicantId, 'maybe')).toEqual({ ok: false, error: 'Choose a decision.' })
+  })
+})
+
+describe('the resume', () => {
+  const PDF = new TextEncoder().encode('%PDF-1.4 itest resume')
+  const upload = (s: Session, applicantId: string, body: Uint8Array, contentType = 'application/pdf') =>
+    s.db.storage.from('hiring-resumes').upload(applicantId, body, { contentType, upsert: true })
+
+  it('is uploaded by the teacher, attached, and opened through a short-lived link', async () => {
+    const { applicantId } = await applicantWithTest(60)
+    expect((await upload(teacher, applicantId, PDF)).error).toBeNull()
+    expect(await attachResume(teacher.db as never, applicantId, 'Asha CV.pdf')).toEqual({ ok: true })
+
+    const report = await loadApplicantReport(teacher.db as never, applicantId)
+    expect(report!.applicant).toMatchObject({ resumeType: 'pdf', resumeName: 'Asha CV.pdf' })
+    expect(report!.notes[0]).toMatchObject({ kind: 'resume', body: 'Resume added: Asha CV.pdf' })
+    expect((await loadApplicants(teacher.db as never)).find((a) => a.id === applicantId)!.resumeType).toBe('pdf')
+
+    const url = await hiringResumeUrl(teacher.db as never, report!.applicant)
+    const res = await fetch(url!)
+    expect(res.status).toBe(200)
+    expect(new Uint8Array(await res.arrayBuffer())).toEqual(PDF)
+  })
+
+  it('is not attached before it is uploaded', async () => {
+    const { applicantId } = await applicantWithTest(61)
+    expect(await attachResume(teacher.db as never, applicantId, 'CV.pdf')).toEqual({
+      ok: false,
+      error: 'The file did not upload. Try again.',
+    })
+  })
+
+  it('is closed to another teacher, both ways', async () => {
+    const { applicantId } = await applicantWithTest(62)
+    expect((await upload(otherTeacher, applicantId, PDF)).error).not.toBeNull()
+    expect((await upload(teacher, applicantId, PDF)).error).toBeNull()
+    expect((await attachResume(otherTeacher.db as never, applicantId, 'CV.pdf')).ok).toBe(false)
+    const { data } = await otherTeacher.db.storage.from('hiring-resumes').createSignedUrl(applicantId, 60)
+    expect(data).toBeNull()
+  })
+
+  it('is refused by the bucket when it is not a PDF or Word file, or is over 5 MB', async () => {
+    const { applicantId } = await applicantWithTest(63)
+    expect((await upload(teacher, applicantId, new TextEncoder().encode('<html>'), 'text/html')).error).not.toBeNull()
+    const big = new Uint8Array(5 * 1024 * 1024 + 1)
+    big.set(PDF)
+    expect((await upload(teacher, applicantId, big)).error).not.toBeNull()
   })
 })
 

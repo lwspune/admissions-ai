@@ -177,6 +177,92 @@ export function applicantStatus(
   return { kind: 'sent', label: 'Link sent', canIssue: more }
 }
 
+// ── after the test: decision, notes, resume (migration 0023) ────────────────
+
+export const HIRING_DECISIONS = ['in_progress', 'shortlisted', 'on_hold', 'hired', 'rejected', 'withdrawn'] as const
+export type HiringDecision = (typeof HIRING_DECISIONS)[number]
+
+export const HIRING_DECISION_LABEL: Record<HiringDecision, string> = {
+  in_progress: 'In progress',
+  shortlisted: 'Shortlisted',
+  on_hold: 'On hold',
+  hired: 'Hired',
+  rejected: 'Rejected',
+  withdrawn: 'Withdrawn',
+}
+
+/** Superadmin's alone, into and out of (the owner, 2026-10-24). */
+const FINAL_DECISIONS: readonly HiringDecision[] = ['hired', 'rejected']
+
+const isDecision = (v: unknown): v is HiringDecision => HIRING_DECISIONS.includes(v as HiringDecision)
+
+/** The rule hiring_applicants_decision_guard enforces, for the page to offer only what will save. */
+export function mayChangeDecision(role: unknown, from: HiringDecision, to: HiringDecision): boolean {
+  if (role === 'superadmin') return true
+  if (role !== 'teacher') return false
+  return !FINAL_DECISIONS.includes(from) && !FINAL_DECISIONS.includes(to)
+}
+
+/** What the decision control lists: the current one, then every one this role may move to. */
+export function decisionChoices(role: unknown, current: HiringDecision): HiringDecision[] {
+  return HIRING_DECISIONS.filter((d) => d === current || mayChangeDecision(role, current, d))
+}
+
+/** A decision line is stored as "old → new" in codes (hiring_applicants_decision_history). */
+export function formatDecisionChange(body: string): string {
+  const [from, to] = body.split(' → ')
+  if (isDecision(from) && isDecision(to)) return `Decision: ${HIRING_DECISION_LABEL[from]} → ${HIRING_DECISION_LABEL[to]}`
+  return `Decision: ${body}`
+}
+
+export const MAX_HIRING_NOTE = 2000
+
+export function validateNote(body: string): { ok: true; value: string } | { ok: false; error: string } {
+  const value = String(body ?? '').trim()
+  if (!value) return { ok: false, error: 'Write a note first.' }
+  if (value.length > MAX_HIRING_NOTE) return { ok: false, error: `A note can be at most ${MAX_HIRING_NOTE} characters.` }
+  return { ok: true, value }
+}
+
+/** The hiring-resumes bucket's limit; the bucket refuses past it too. */
+export const RESUME_MAX_BYTES = 5 * 1024 * 1024
+
+export type ResumeKind = 'pdf' | 'docx'
+
+const RESUME: Record<ResumeKind, { contentType: string; magic: number[]; label: string }> = {
+  pdf: { contentType: 'application/pdf', magic: [0x25, 0x50, 0x44, 0x46, 0x2d], label: 'PDF' }, // %PDF-
+  docx: {
+    contentType: 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+    magic: [0x50, 0x4b, 0x03, 0x04], // a zip, which a .docx is
+    label: 'Word (.docx) file',
+  },
+}
+
+/**
+ * A resume before upload: by its name, its size and its first bytes. The
+ * browser's own type is not trusted (Windows reports a .docx inconsistently);
+ * the upload is sent with the canonical type, which the bucket checks.
+ */
+export function checkResume(
+  file: { name: string; size: number },
+  head: Uint8Array,
+): { ok: true; kind: ResumeKind; contentType: string } | { ok: false; error: string } {
+  const ext = /\.([a-z0-9]+)$/i.exec(file.name)?.[1]?.toLowerCase()
+  if (ext === 'doc') return { ok: false, error: 'Old Word files (.doc) are not accepted. Save it as .docx or PDF and try again.' }
+  if (ext !== 'pdf' && ext !== 'docx') return { ok: false, error: 'Choose a PDF or a Word (.docx) file.' }
+  if (file.size === 0) return { ok: false, error: 'The file is empty.' }
+  if (file.size > RESUME_MAX_BYTES) return { ok: false, error: 'The file is over 5 MB.' }
+  const r = RESUME[ext]
+  if (!r.magic.every((b, i) => head[i] === b)) return { ok: false, error: `This file is not a real ${r.label}.` }
+  return { ok: true, kind: ext, contentType: r.contentType }
+}
+
+/** The name a downloaded resume is saved under. */
+export function resumeDownloadName(applicantName: string, kind: ResumeKind): string {
+  const safe = applicantName.replace(/[\\/:*?"<>|]+/g, ' ').replace(/\s+/g, ' ').trim() || 'Applicant'
+  return `${safe} - resume.${kind}`
+}
+
 // India's time, wherever the page renders: Vercel's servers run on UTC, and a
 // client component renders on the server first, so the zone is always named.
 const IST_TIME = new Intl.DateTimeFormat('en-IN', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit', timeZone: 'Asia/Kolkata' })
