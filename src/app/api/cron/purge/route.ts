@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from 'next/server'
-import { timingSafeEqual } from 'node:crypto'
+import { bearerMatches } from '@/lib/bearer'
 import { serviceClient } from '@/server/supabase'
 import { purgeExpired } from '@/server/retention'
 
@@ -29,7 +29,7 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'not configured' }, { status: 503 })
   }
 
-  if (!presentedSecretMatches(req.headers.get('authorization'), secret)) {
+  if (!bearerMatches(req.headers.get('authorization'), secret)) {
     return NextResponse.json({ error: 'not found' }, { status: 404 })
   }
 
@@ -57,19 +57,4 @@ export async function GET(req: NextRequest) {
     console.error('purge failed:', error)
     return NextResponse.json({ error: 'purge failed' }, { status: 500 })
   }
-}
-
-/**
- * Constant-time comparison of the presented bearer token.
- *
- * `===` on a secret leaks its prefix through timing. The length check first is
- * unavoidable — timingSafeEqual throws on mismatched lengths — and reveals
- * only the length, which is not the secret.
- */
-function presentedSecretMatches(header: string | null, secret: string): boolean {
-  if (!header?.startsWith('Bearer ')) return false
-  const presented = Buffer.from(header.slice('Bearer '.length))
-  const expected = Buffer.from(secret)
-  if (presented.length !== expected.length) return false
-  return timingSafeEqual(presented, expected)
 }
