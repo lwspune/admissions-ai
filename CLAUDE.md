@@ -89,7 +89,7 @@ test, report, leads and admin screens (`ProductTour`, `tourScenes`) and a "Get i
 `<dialog>` (`ContactDialog`); staff who land on it go to `/leads`.
 `api/cron/` guards itself with `CRON_SECRET`. The parents' PDFs in
 `public/parent-pack/` are open too, as static files (no candidate data). `api/t/*` are
-thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/`, `messages/` and `hiring/questions` (superadmin only), `downloads/` (admissions roles), `hiring/` and
+thin wrappers over `src/server`. `leads/` (the board: one column per stage, a lead moved from its card), `leads/[id]/`, `leads/[id]/paper/[assessmentId]` (the paper test, counsellor and superadmin), `scan/` (scanning sheets, counsellor and superadmin), `leads/import/` (counsellor and superadmin), `login/`, `reports/[leadId]/` (and `/summary`, the parent sheet), `items/`, `staff/`, `messages/` and `hiring/questions` (superadmin only), `downloads/` (admissions roles), `hiring/` and
 `hiring/[id]` (teacher and superadmin) are staff, guarded by
 `src/middleware.ts`.
 
@@ -272,6 +272,13 @@ These are the things that quietly break everything if violated.
   A trigger on `assessments` (migration 0024), so online, paper and direct writes
   all count; the history line is the issuer's. A lead added by hand starts at
   Contacted (`createLead`); imports set their own stage, New unless the file says.
+- **Five stages, and the board is where a lead moves.** New → CNR → Contacted →
+  In EIS → Not interested: `STAGES` in `src/lib/leads.ts`, in column order, and
+  the `leads_stage_known` CHECK (migration 0026; Qualified became In EIS). Any
+  stage may move to any other, from the card's Move menu on `/leads`; the
+  lead's own page shows the stage and does not change it. A board column reads
+  `show_<stage>` cards (50 at a time, at most 500), and its detail lookups go
+  100 leads at a time (the 1,000-row and URL traps).
 - **GoPost's leads arrive by the import's rule, and the feed's cursor moves with them.**
   GoPost serves LWS Pune's leads at its `/api/feeds/admissions` behind
   `GOPOST_LEADS_SECRET` (`ADMISSIONS_LEADS_SECRET` there); this app holds no key
@@ -400,6 +407,17 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — Leads are a pipeline board, not a filtered list.** The user's calls: columns New
+  leads → CNR → Contacted → In EIS → Not interested ("In EIS is Qualified itself", so Qualified
+  went, migration 0026, with no lead in it), not a stage filter; a button on each card moves a
+  lead, both ways; the lead's own page lost its Stage dropdown, so the board is the one place a
+  stage changes; search, the source filter, assigning and the card's Issue link stay. By my
+  choice: one Move menu listing the other four stages (so New → Not interested is one move), tabs
+  in place of columns below 1280 px since five do not fit a phone, 50 cards a column with "Show
+  more" up to 500, the interest and telecaller filters kept (they were never offered for
+  removal), and `/leads` at full width (`StaffShell width="full"`). The homepage mock's
+  "Qualified" badge became "In EIS".
 
 - **2026-10-26 — GoPost's leads come here every hour, as New.** The user's calls: every lead
   GoPost holds for LWS Pune with an Indian mobile, whatever the course (CDS and AFCAT
