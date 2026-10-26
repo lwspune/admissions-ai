@@ -60,6 +60,14 @@ In Vercel → Settings → Environment Variables. **Scope each one deliberately.
 | `SUPABASE_SERVICE_ROLE_KEY` | production project | *leave unset* |
 | `NEXT_PUBLIC_APP_URL` | `https://<your-domain>` | *leave unset* |
 | `CRON_SECRET` | the value in `.env.local` | *leave unset* |
+| `GOPOST_LEADS_SECRET` | the value in `.env.local`; the same as `ADMISSIONS_LEADS_SECRET` on GoPost's project (`fable-island/lws-marketing-engine`) | *leave unset* |
+
+`CRON_SECRET` also lives in Supabase Vault as `gopost_sync_secret`, beside
+`gopost_sync_url` (`https://<your-domain>/api/cron/gopost`): pg_cron sends it
+on the hourly GoPost read (migration 0025). Rotating `CRON_SECRET` means
+updating that Vault secret too, or the hourly read stops with a 404:
+`select vault.update_secret((select id from vault.secrets where name = 'gopost_sync_secret'), '<new value>');`
+Rotating `GOPOST_LEADS_SECRET` means changing both Vercel projects together.
 
 **Why Preview is deliberately empty.** Preview deployments get public URLs and
 inherit production variables by default. A preview would then be a second,

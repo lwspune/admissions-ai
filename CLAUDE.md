@@ -32,7 +32,10 @@ production running against a schema it does not know about. Ship them close
 together, schema first only when the old code tolerates it.
 
 `vercel.json` registers one cron: `/api/cron/purge`, daily at 03:00 UTC.
-Hobby caps cron frequency at once per day.
+Hobby caps cron frequency at once per day, so the hourly GoPost read comes from
+the database instead: pg_cron job `gopost-leads-hourly` (migration 0025) posts to
+`/api/cron/gopost` at :45, once the Vault secrets `gopost_sync_url` and
+`gopost_sync_secret` exist.
 
 ---
 
@@ -51,6 +54,8 @@ translation meets, whether a paper offers Hindi, per-class coverage) · `candida
 candidate screen's words, English and Hindi) ·
 `parentPack` (the PDFs' public paths and the issue message) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
+`gopostLeads` (GoPost's feed: a lead as an import row, the page check, the /leads warning, the paging loop) ·
+`bearer` (the secret check of every route that guards itself) ·
 `contact` (what a homepage message must hold) · `publicPaths` (what opens without a session) ·
 `omr/layout` (the paper test's answer sheet, **the contract with the scanner**) · `omr/sheetPdf` (its ink) ·
 `omr/detectSquares`, `omr/gridFit`, `omr/readBubbles`, `omr/liveCapture` (the reader, ported from nda-tracker) ·
@@ -64,7 +69,7 @@ candidate screen's words, English and Hindi) ·
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
-`leads` (list and detail reads) · `leadImport` (preview and commit) · `contact` (homepage
+`leads` (list and detail reads) · `leadImport` (preview and commit) · `gopostSync` (the hourly GoPost read) · `contact` (homepage
 messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet) · `paperScan`
 (look a paper up by its number, file a scan, the sheet photo) · `hiring` (the teacher test: its bank,
 adding an applicant, issuing) · `hiringAttempt` (the applicant's side: open, number check, start, save, submit)
@@ -90,8 +95,8 @@ thin wrappers over `src/server`. `leads/`, `leads/[id]/`, `leads/[id]/paper/[ass
 
 **Two clients, never interchangeable.** Staff paths use the session-bound
 client so **RLS** decides access; the candidate API uses service role because
-it has no session to act for, and so does the homepage's contact form, for the same
-reason. A staff feature reaching for service role is a
+it has no session to act for, and so do the homepage's contact form and the hourly
+GoPost read (`/api/cron/gopost`), for the same reason. A staff feature reaching for service role is a
 bug — it moves the access rule out of the database and into an `if`. The one
 sanctioned exception is `src/server/staff.ts` (see Invariants): login accounts
 have no RLS path at all.
@@ -267,6 +272,17 @@ These are the things that quietly break everything if violated.
   A trigger on `assessments` (migration 0024), so online, paper and direct writes
   all count; the history line is the issuer's. A lead added by hand starts at
   Contacted (`createLead`); imports set their own stage, New unless the file says.
+- **GoPost's leads arrive by the import's rule, and the feed's cursor moves with them.**
+  GoPost serves LWS Pune's leads at its `/api/feeds/admissions` behind
+  `GOPOST_LEADS_SECRET` (`ADMISSIONS_LEADS_SECRET` there); this app holds no key
+  to GoPost's database. `import_feed_page` (migration 0025, service role only)
+  writes a page, its sources ("GoPost · Instagram"…) and the cursor in one
+  transaction, and refuses a page that does not start where the feed stopped.
+  The merge is `internal.merge_lead_rows`, which `import_leads` calls too, so a
+  sheet and the feed cannot drift apart; `internal` is not a schema the API
+  serves. Only new leads travel: an edit or a "Not a lead" in GoPost afterwards
+  does not reach here. `gopostIntake.itest.ts` uses its own feed row and
+  sources, never `gopost`'s.
 
 ## Commands
 
@@ -284,6 +300,7 @@ npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
 npm run hiring:import [-- <subject>]         (PYQ Vault → content/hiring/<subject>.json; reads its public API)
 npm run hiring:seed  [-- --live --file <subject>]   (load the hiring bank; --live promotes one reviewed subject)
+npm run leads:gopost [-- --dry-run]          (GoPost's leads by hand, from where the feed stopped; counts only)
 ```
 
 Before/after screenshot sheets go in `screenshots/<date>-<topic>/` at the project root (the
@@ -367,10 +384,26 @@ the connection is refused (2026-10-01).
   boundary go through a SECURITY DEFINER function that returns a count and
   nothing else (`leads_on_mobile`). When narrowing a policy, list every
   caller that *counts* rows, not only those that read them.
+- **An error code can turn a refusal into a 30-second hang.** `supabase-js`
+  retries a 503 or 520 with backoff for about half a minute, and PostgREST
+  answers some SQLSTATEs with a 503: `serialization_failure` did, so a feed page
+  refused for a stale cursor timed the test out instead of failing (0025, the
+  same day). Raise a refusal with the default code (P0001, a 400) or a 4xx one.
 
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — GoPost's leads come here every hour, as New.** The user's calls: every lead
+  GoPost holds for LWS Pune with an Indian mobile, whatever the course (CDS and AFCAT
+  included); consent is implied, since the parent answered the ad and shared the number to be
+  contacted; GoPost's class goes in the note as written ("12th passed"), never as the admitting
+  class; assignment comes later, so the leads arrive unassigned and only counsellors and
+  superadmin see them until someone assigns them. GoPost serves a feed, this app reads it
+  (the way GoPost reads PYQ Vault), so neither holds a key to the other's database and a run
+  that fails just waits for the next. Each GoPost channel is its own source. The dry run before
+  the first import: 2,579 leads, 2,577 new, 2 already here, no siblings. GoPost's deploys had
+  been blocked since 26 Oct 00:54 (its Vercel team, `fable-island`); the user cleared it.
 
 - **2026-10-26 — Leads arrive New; the test goes out from Contacted.** The user's flow, ahead of
   GoPost's leads arriving here: imported leads are New, someone speaks to the family, and the link

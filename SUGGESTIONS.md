@@ -265,9 +265,18 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       after this change. If a record is ever wanted, the telecaller ticking "consent taken"
       before issuing is the natural place.
 
+- [ ] **GoPost's leads: assignment, and what does not travel (2026-10-26).** They arrive
+      unassigned, so telecallers see none until a counsellor assigns them (bulk assign on
+      `/leads` works today); automatic assignment is the user's "later". Only new leads travel: a
+      name or course fixed in GoPost afterwards, or a "Not a lead" there, never reaches this app.
+      About 2,500 of the 2,579 are website leads (PYQ Vault students and the NDA age
+      calculator), including CDS and AFCAT adults, by the user's choice. They are kept 12 months
+      from their import date like any lead (see "Decide whether leads that never took a test are
+      ever purged" below, which this import makes matter).
 - [ ] **Lead management: what is deliberately not built (2026-09-28).** EIS matching (the user
       will share the EIS Excel; decide then whether "in EIS" is a flag or carries EIS status);
-      call-back reminders; automatic intake from Meta / Google forms; a per-row Source column in
+      call-back reminders; automatic intake from Meta / Google forms (since 2026-10-26 GoPost
+      gathers those and this app reads GoPost hourly, so direct intake is no longer needed); a per-row Source column in
       an import file (one source per file for now — the user may have meant per-row). An import is
       capped at 5000 rows / 900 KB: one file is one transaction and must finish inside the
       statement timeout. A comment's author name is captured when it is written, so a rename does
