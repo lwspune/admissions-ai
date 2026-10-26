@@ -280,6 +280,13 @@ These are the things that quietly break everything if violated.
   (`NEXT_STAGE`) or anywhere from its ⋯ menu; the lead's own page shows the
   stage and does not change it. Detail lookups go 100 leads at a time (the
   1,000-row and URL traps).
+- **A stage lists newest enquiry first, by `leads.enquired_on`, which the database keeps.**
+  Migration 0027: the latest `lead_origins.source_date`, so a repeat enquiry moves a
+  lead up and an older one never moves it back; a lead an import creates takes its
+  first origin's date however old (the `lead_origins_enquired` trigger tells it by
+  `created_at = now()`, the same transaction); a lead typed in by hand takes the day,
+  in India, and keeps it. It sorts and labels rows only; the retention clock stays
+  `created_at`.
 - **GoPost's leads arrive by the import's rule, and the feed's cursor moves with them.**
   GoPost serves LWS Pune's leads at its `/api/feeds/admissions` behind
   `GOPOST_LEADS_SECRET` (`ADMISSIONS_LEADS_SECRET` there); this app holds no key
@@ -408,6 +415,16 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — Leads show and sort by when they enquired.** The user asked for the date, to
+  prioritise. created_at is the import morning for all 2,577 GoPost leads, so each row shows
+  "Enquired 25 Oct" (the source's date) or "Added 22 Oct" (typed in), and every stage lists newest
+  first; the user chose the latest enquiry over the first when a lead has several. 44 had enquired
+  in the week before, against about 2,100 from April–May. The new order put a lead named
+  "🕊️vicky…" on page 1 and exposed a hydration mismatch in `Avatar`: `word[0]` is half an emoji.
+  Initials now take the first letter or digit (`src/lib/initials.ts`). Same day: the 26 tested leads
+  went to Contacted, and 8 "written cleared" numbers to Not interested with a note, on the user's
+  word, so a GoPost re-send cannot bring them back as New.
 
 - **2026-10-26 — Leads are a pipeline, not a filtered list.** The user's calls: stages New
   leads → CNR → Contacted → In EIS → Not interested ("In EIS is Qualified itself", so Qualified
