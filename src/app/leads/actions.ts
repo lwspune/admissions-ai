@@ -74,9 +74,12 @@ export async function createLead(formData: FormData): Promise<ActionResult> {
     }
   }
 
+  // Someone typing a lead in has spoken to the family, so it starts where an
+  // issued test would move it (migration 0024). Imports arrive New.
   const { error } = await db.from('leads').insert({
     name,
     contact_mobile: mobile,
+    stage: 'contacted',
     city: str(formData.get('city')),
     school: str(formData.get('school')),
     board: str(formData.get('board')),

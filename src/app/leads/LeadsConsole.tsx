@@ -290,7 +290,7 @@ function Results({
                         <Link href={`/leads/${lead.id}`} className="rounded font-semibold text-slate-900 hover:text-brand-700">
                           {lead.name ?? <span className="font-normal italic text-slate-600">No name</span>}
                         </Link>
-                        {/* New is where every lead starts; only a stage someone set is worth a tag. */}
+                        {/* New is where an imported lead starts; only a stage it has moved to is worth a tag. */}
                         {lead.stage !== 'new' && <Badge tone={STAGE_TONE[lead.stage]}>{STAGE_LABEL[lead.stage]}</Badge>}
                         {/* "Issue link" says there is no test; the row must say a completed one is done. */}
                         {lead.testAction !== 'issue' && lead.test && (
