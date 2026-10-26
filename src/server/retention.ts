@@ -2,6 +2,15 @@ import 'server-only'
 import type { Db } from './supabase'
 import { retentionCutoff, lastActivity, isExpired } from '../lib/retention'
 
+/** Supabase's cap on rows per request. */
+const READ_PAGE = 1000
+/** 100 uuids is about 3.7 KB of URL, near what leadImport's preview sends (200 numbers, ~2.6 KB). */
+const DELETE_CHUNK = 100
+const PHOTO_CHUNK = 100
+
+const chunks = <T>(items: T[], size: number): T[][] =>
+  Array.from({ length: Math.ceil(items.length / size) }, (_, i) => items.slice(i * size, (i + 1) * size))
+
 export interface PurgeReport {
   cutoff: string
   dryRun: boolean
@@ -46,14 +55,23 @@ export async function purgeExpired(
   // Candidates whose lead row is old enough to be a candidate for deletion.
   // The lead date alone does not decide it — a lead entered thirteen months
   // ago and reissued last week is active — so the assessments are checked too.
-  const { data: oldLeads, error: leadsError } = await db
-    .from('leads')
-    .select('id, created_at, assessments(id, created_at, mode)')
-    .lt('created_at', cutoffIso)
+  // Read a page at a time: Supabase returns at most 1,000 rows per request,
+  // whatever the query asks, and a day's import can exceed that (2026-10-26).
+  const oldLeads: { id: string; created_at: string; assessments: unknown }[] = []
+  for (let from = 0; ; from += READ_PAGE) {
+    const { data, error } = await db
+      .from('leads')
+      .select('id, created_at, assessments(id, created_at, mode)')
+      .lt('created_at', cutoffIso)
+      .order('created_at')
+      .order('id')
+      .range(from, from + READ_PAGE - 1)
+    if (error) throw new Error(`could not read leads for purge: ${error.message}`)
+    oldLeads.push(...(data ?? []))
+    if ((data ?? []).length < READ_PAGE) break
+  }
 
-  if (leadsError) throw new Error(`could not read leads for purge: ${leadsError.message}`)
-
-  const expired = (oldLeads ?? []).filter((lead) => {
+  const expired = oldLeads.filter((lead) => {
     const assessments = (lead.assessments ?? []) as { created_at: string }[]
     return isExpired(
       lastActivity(lead.created_at as string, assessments.map((a) => a.created_at)),
@@ -85,16 +103,17 @@ export async function purgeExpired(
 
   if (dryRun) return report
 
-  if (photos.length > 0) {
+  for (const names of chunks(photos, PHOTO_CHUNK)) {
     // Removing a name that was never uploaded is not an error.
-    const { error } = await db.storage.from('omr-sheets').remove(photos)
+    const { error } = await db.storage.from('omr-sheets').remove(names)
     if (error) throw new Error(`could not delete expired sheet photos: ${error.message}`)
   }
 
-  if (leadIds.length > 0) {
-    // Cascades to assessments, assessment_items, attempts, attempt_answers
-    // and attempt_events.
-    const { error } = await db.from('leads').delete().in('id', leadIds)
+  // An `in` filter rides in the URL, which PostgREST refuses past a few
+  // kilobytes: a thousand ids was a 400. Cascades to assessments,
+  // assessment_items, attempts, attempt_answers and attempt_events.
+  for (const ids of chunks(leadIds, DELETE_CHUNK)) {
+    const { error } = await db.from('leads').delete().in('id', ids)
     if (error) throw new Error(`could not delete expired leads: ${error.message}`)
   }
 

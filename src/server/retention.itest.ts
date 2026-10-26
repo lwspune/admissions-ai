@@ -146,6 +146,26 @@ describe('purgeExpired', () => {
     expect(count).toBe(1)
   })
 
+  // Supabase returns at most 1,000 rows per request, and an `in` filter rides in
+  // the URL, so a purge must page its read and chunk its delete. 2,577 GoPost
+  // leads were imported on one day (2026-10-26) and expire together.
+  it('deletes every expired lead when more than a thousand expire at once', async () => {
+    const rows = Array.from({ length: 1001 }, (_, i) => ({
+      name: `${MARKER} Bulk ${i}`,
+      contact_mobile: MOBILE,
+      created_at: longAgo,
+    }))
+    const { error } = await db.from('leads').insert(rows)
+    if (error) throw new Error(`could not create leads: ${error.message}`)
+
+    const report = await purgeExpired(db)
+    expect(report.leads).toBeGreaterThanOrEqual(1001)
+
+    const { count } = await db
+      .from('leads').select('id', { count: 'exact', head: true }).like('name', `${MARKER} Bulk %`)
+    expect(count).toBe(0)
+  }, 120_000)
+
   it('deletes nothing on a dry run, but reports what it would take', async () => {
     const leadId = await makeLead('DryRun')
     await backdate('leads', 'created_at', leadId, longAgo)
