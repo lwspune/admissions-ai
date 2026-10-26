@@ -268,9 +268,16 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 - [x] ~~**GoPost's hourly read is idle until its two Vault secrets exist.**~~ **DONE 2026-10-26.**
       The first import ran by hand (2,579 leads: 2,577 new, 2 merged, 0 siblings); the Vault
       secrets were set on the user's go-ahead, and a manual `internal.trigger_gopost_sync()` got a
-      200 and moved `lead_feeds.last_synced_at`. `gopost-leads-hourly` runs at :45. Not yet seen:
-      a run fired by the schedule itself rather than by hand; check `last_synced_at` after the
-      next :45.
+      200 and moved `lead_feeds.last_synced_at`. `gopost-leads-hourly` runs at :45; the schedule's
+      own run was seen at 17:45 UTC the same day.
+- [ ] **GoPost's feed answers `limit=500` with an empty page (2026-10-26).** Once GoPost began
+      sending its NDA age calculator sheet, 2,171 leads waited past the cursor; asked for 500 the
+      feed returned no leads and the cursor itself as `next`, while 499 and below came back
+      whole, so every hourly run reported "nothing new" with no error. Ours now asks for 200
+      (`feedPageUrl`, tested) and the 2,171 were imported by hand (all new, by the user's "go
+      all"). The bug is GoPost's to fix, in its feed route (not on this machine). An empty page
+      from a broken feed still looks exactly like a quiet hour here; comparing GoPost's lead count
+      with ours would catch it, if it recurs.
 - [x] ~~**The purge reads expired leads in one query, which Supabase caps at 1,000 rows.**~~
       **FIXED 2026-10-26.** Worse than first written here: the test that expired 1,001 leads at
       once showed the delete (`in('id', …)` with every id in the URL) refused outright with a

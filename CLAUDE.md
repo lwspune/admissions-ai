@@ -418,10 +418,21 @@ the connection is refused (2026-10-01).
   answers some SQLSTATEs with a 503: `serialization_failure` did, so a feed page
   refused for a stale cursor timed the test out instead of failing (0025, the
   same day). Raise a refusal with the default code (P0001, a 400) or a 4xx one.
+- **A quiet feed and a broken one look the same.** GoPost answered `limit=500` with an
+  empty page past its 2,579th lead, and the hourly sync logged "0 new, no error" while
+  2,171 leads waited (2026-10-26; ours now asks for 200). When the sync says nothing is new,
+  check GoPost's lead count against ours before believing it.
 
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — GoPost's NDA age calculator leads came in too, all of them.** The user asked
+  whether the sync worked; it had imported nothing since morning, because GoPost's feed answered
+  our 500-lead page with an empty one (see Traps). Ours asks for 200 now, and on the user's "go all"
+  the 2,171 waiting were imported by hand as New and unassigned: 2,159 from the age calculator
+  (mostly aspirants from across India, some junk names), 10 popup form, 2 WhatsApp. New went to
+  4,727. Three near-identical "Satvik" entries that look like tests came in with them.
 
 - **2026-10-26 — Leads download for Excel, as in GoPost.** The user asked for it, pointing at
   GoPost's logic: all, or new since your last download. Their calls: both follow the stage and
