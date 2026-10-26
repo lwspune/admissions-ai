@@ -1,33 +1,41 @@
 'use client'
 
-import { useState, useTransition } from 'react'
+import { useRef, useState, useTransition } from 'react'
 import { canManageLeads } from '@/lib/staff'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
 import { CLASSES } from '@/lib/classes'
-import { STAGES, STAGE_LABEL, STAGE_TONE, INTERESTS, leadsHref, summaryHref, type LeadFilters } from '@/lib/leads'
-import type { LeadList } from '@/server/leads'
+import {
+  STAGES,
+  COLUMN_TITLE,
+  BOARD_MAX,
+  BOARD_STEP,
+  INTERESTS,
+  leadsHref,
+  summaryHref,
+  type LeadFilters,
+  type Stage,
+} from '@/lib/leads'
+import type { LeadList, LeadListRow } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { Icon } from '@/components/icons'
-import { Alert, Avatar, Badge, EmptyState, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
-import { createLead, assignLeads, type ActionResult } from './actions'
+import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
+import { createLead, assignLeads, setStage, type ActionResult } from './actions'
 import { RowTest } from './RowTest'
 
 export function LeadsConsole({
   staff,
-  list,
+  board,
   filters,
   sources,
   assignees,
-  pageSize,
   feedWarning,
 }: {
   staff: { id: string; name: string | null; email: string; role: string }
-  list: LeadList
+  board: Record<Stage, LeadList>
   filters: LeadFilters
   sources: { id: string; name: string }[]
   assignees: Assignee[]
-  pageSize: number
   /** GoPost's leads are not arriving (src/lib/gopostLeads.ts); counsellors and superadmin only. */
   feedWarning: string | null
 }) {
@@ -67,21 +75,17 @@ export function LeadsConsole({
 
       <Filters filters={filters} sources={sources} assignees={assignees} canAssign={canAssign} />
 
-      <Results
-        list={list}
-        filters={filters}
-        pageSize={pageSize}
-        me={staff.id}
-        assignees={assignees}
-        canAssign={canAssign}
-      />
+      <Board board={board} filters={filters} me={staff.id} assignees={assignees} canAssign={canAssign} />
     </>
   )
 }
 
 const select = input
 
-/** A plain GET form: the filters live in the URL, so a filtered list can be bookmarked or shared. */
+/**
+ * A plain GET form: the filters live in the URL, so a filtered board can be
+ * bookmarked or shared. There is no stage filter: every stage is a column.
+ */
 function Filters({
   filters,
   sources,
@@ -93,11 +97,13 @@ function Filters({
   assignees: Assignee[]
   canAssign: boolean
 }) {
-  const active = [filters.stage, filters.interest, filters.source, canAssign && filters.assignee].filter(Boolean).length
+  const active = [filters.interest, filters.source, canAssign && filters.assignee].filter(Boolean).length
   const anything = active > 0 || Boolean(filters.q)
 
   return (
     <form method="get" action="/leads" className={cx(card, 'mt-6 p-3 sm:p-4')}>
+      {/* A search keeps a phone on the column it was looking at. */}
+      {filters.col !== 'new' && <input type="hidden" name="col" value={filters.col} />}
       <div className="flex gap-2">
         <div className="relative min-w-0 flex-1">
           <label htmlFor="q" className="sr-only">
@@ -130,20 +136,7 @@ function Filters({
           {active > 0 && <Badge tone="brand">{active}</Badge>}
           <Icon name="chevronDown" className="h-4 w-4 text-slate-500 transition-transform group-open:rotate-180" />
         </summary>
-        <div className="grid gap-3 px-1 pb-1 pt-2 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
-            <label htmlFor="stage" className={label}>
-              Stage
-            </label>
-            <select id="stage" name="stage" defaultValue={filters.stage ?? ''} className={select}>
-              <option value="">Any</option>
-              {STAGES.map((s) => (
-                <option key={s} value={s}>
-                  {STAGE_LABEL[s]}
-                </option>
-              ))}
-            </select>
-          </div>
+        <div className="grid gap-3 px-1 pb-1 pt-2 sm:grid-cols-3">
           <div>
             <label htmlFor="interest" className={label}>
               Interest
@@ -192,17 +185,20 @@ function Filters({
   )
 }
 
-function Results({
-  list,
+/**
+ * The pipeline (2026-10-26): one column per stage, and a lead moves between
+ * them from its card. On a wide screen the five columns sit side by side; on
+ * anything narrower, tabs show one column at a time, since five do not fit.
+ */
+function Board({
+  board,
   filters,
-  pageSize,
   me,
   assignees,
   canAssign,
 }: {
-  list: LeadList
+  board: Record<Stage, LeadList>
   filters: LeadFilters
-  pageSize: number
   me: string
   assignees: Assignee[]
   canAssign: boolean
@@ -213,11 +209,9 @@ function Results({
   const [result, setResult] = useState<ActionResult | null>(null)
   const [pending, start] = useTransition()
 
-  const pages = Math.max(1, Math.ceil(list.total / pageSize))
   const names = new Map(assignees.map((a) => [a.id, a.label]))
   const assignedLabel = (id: string | null) =>
     id === null ? 'Unassigned' : id === me ? 'You' : (names.get(id) ?? 'Not a telecaller now')
-  const allOnPage = list.rows.length > 0 && list.rows.every((r) => selected.has(r.id))
 
   function toggle(id: string) {
     setSelected((prev) => {
@@ -241,108 +235,44 @@ function Results({
   }
 
   return (
-    <section aria-labelledby="results-heading" className="mt-6">
-      <div className="flex min-h-tap flex-wrap items-center justify-between gap-3">
-        <h2 id="results-heading" className="text-sm font-medium text-slate-700">
-          {list.total === 0 ? 'No leads' : `${list.total} lead${list.total === 1 ? '' : 's'}`}
-          {pages > 1 && <span className="text-slate-600"> · page {filters.page} of {pages}</span>}
-        </h2>
-        {canAssign && list.rows.length > 0 && (
-          <label className="inline-flex min-h-tap cursor-pointer items-center gap-2 text-sm text-slate-700">
-            <input
-              type="checkbox"
-              checked={allOnPage}
-              onChange={() => setSelected(allOnPage ? new Set() : new Set(list.rows.map((r) => r.id)))}
-              className="h-5 w-5 rounded accent-brand-700"
-            />
-            Select all on this page
-          </label>
-        )}
-      </div>
+    <section aria-label="Pipeline" className="mt-6">
+      {/* The last tab is cut off at the edge, which says there are more; a scrollbar would only add a grey line. */}
+      <nav aria-label="Stages" className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] xl:hidden [&::-webkit-scrollbar]:hidden">
+        {STAGES.map((s) => (
+          <Link
+            key={s}
+            href={leadsHref(filters, { col: s })}
+            aria-current={s === filters.col ? 'page' : undefined}
+            className={cx(
+              'min-h-tap inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 text-sm font-medium',
+              s === filters.col ? 'bg-brand-700 text-white' : 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50',
+            )}
+          >
+            {COLUMN_TITLE[s]}
+            <span className={cx('tabular-nums', s === filters.col ? 'text-brand-100' : 'text-slate-500')}>{board[s].total}</span>
+          </Link>
+        ))}
+      </nav>
 
-      <p aria-live="polite" className={result?.error ? 'mb-2 text-sm text-rose-700' : 'sr-only'}>
+      <p aria-live="polite" className={result?.error ? 'mt-2 text-sm text-rose-700' : 'sr-only'}>
         {result?.error ?? (result?.ok ? 'Assigned.' : '')}
       </p>
 
-      {list.rows.length === 0 ? (
-        <div className={cx(card, 'mt-2')}>
-          <EmptyState title="No leads here">
-            {filters.q || filters.stage || filters.interest || filters.source || filters.assignee
-              ? 'Nothing matches these filters.'
-              : 'Add a lead, or import a sheet.'}
-          </EmptyState>
-        </div>
-      ) : (
-        <ul className={cx(card, 'mt-2 divide-y divide-slate-100 overflow-hidden')}>
-          {list.rows.map((lead) => {
-            const isSelected = selected.has(lead.id)
-            return (
-              <li
-                key={lead.id}
-                className={cx('flex items-start gap-3 px-3 py-3.5 transition-colors sm:px-4', isSelected ? 'bg-brand-50/60' : 'hover:bg-slate-50/70')}
-              >
-                {canAssign && (
-                  <input
-                    type="checkbox"
-                    checked={isSelected}
-                    onChange={() => toggle(lead.id)}
-                    aria-label={`Select ${lead.name ?? lead.contact_mobile}`}
-                    className="mt-2.5 h-5 w-5 shrink-0 rounded accent-brand-700"
-                  />
-                )}
-                <Avatar name={lead.name} className="mt-0.5 hidden sm:grid" />
-                <div className="min-w-0 flex-1">
-                  <RowTest lead={lead} action={lead.testAction} canPaper={canAssign} reportHref={summaryHref(lead.id, filters)}>
-                    {/* Full width on a phone, so the button drops below rather than squeezing the details. */}
-                    <div className="min-w-0 flex-1 basis-full sm:basis-0">
-                      <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-                        <Link href={`/leads/${lead.id}`} className="rounded font-semibold text-slate-900 hover:text-brand-700">
-                          {lead.name ?? <span className="font-normal italic text-slate-600">No name</span>}
-                        </Link>
-                        {/* New is where an imported lead starts; only a stage it has moved to is worth a tag. */}
-                        {lead.stage !== 'new' && <Badge tone={STAGE_TONE[lead.stage]}>{STAGE_LABEL[lead.stage]}</Badge>}
-                        {/* "Issue link" says there is no test; the row must say a completed one is done. */}
-                        {lead.testAction !== 'issue' && lead.test && (
-                          <Badge tone={lead.testAction === 'report' ? 'success' : 'info'} icon={lead.testAction === 'report' ? 'check' : 'clock'}>
-                            {lead.test}
-                          </Badge>
-                        )}
-                      </div>
-                      <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-0.5 text-sm text-slate-600">
-                        <span className="tabular-nums">{lead.contact_mobile}</span>
-                        {[
-                          lead.interest,
-                          lead.class_level && `Class ${lead.class_level}`,
-                          lead.sources.join(', ') || 'Added by hand',
-                          canAssign && assignedLabel(lead.assigned_to),
-                        ]
-                          .filter(Boolean)
-                          .map((part, i) => (
-                            <span key={i} className="flex items-center gap-x-2">
-                              <span aria-hidden="true" className="text-slate-300">
-                                •
-                              </span>
-                              {part}
-                            </span>
-                          ))}
-                      </p>
-                    </div>
-                  </RowTest>
-                  {lead.lastNote && (
-                    <p className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 px-3 py-1.5 text-sm text-slate-700">
-                      <Icon name="message" className="mt-0.5 h-3.5 w-3.5 text-slate-500" />
-                      <span className="min-w-0 truncate">
-                        <span className="font-medium text-slate-600">{lead.lastNote.author_name ?? 'Import'}:</span>{' '}
-                        {lead.lastNote.body}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </li>
-            )
-          })}
-        </ul>
-      )}
+      <div className="mt-3 xl:mt-0 xl:grid xl:grid-cols-5 xl:items-start xl:gap-3">
+        {STAGES.map((s) => (
+          <Column
+            key={s}
+            stage={s}
+            list={board[s]}
+            filters={filters}
+            shown={s === filters.col}
+            canAssign={canAssign}
+            selected={selected}
+            toggle={toggle}
+            assignedLabel={assignedLabel}
+          />
+        ))}
+      </div>
 
       {canAssign && selected.size > 0 && (
         <div className="sticky bottom-4 z-20 mt-4 flex flex-wrap items-end gap-3 rounded-xl bg-slate-900 p-3 text-white shadow-raised sm:p-4">
@@ -372,26 +302,220 @@ function Results({
           </button>
         </div>
       )}
-
-      {pages > 1 && (
-        <nav aria-label="Pages" className="mt-4 flex items-center justify-between">
-          {filters.page > 1 ? (
-            <Link href={leadsHref(filters, filters.page - 1)} className={btn('secondary')}>
-              <Icon name="chevronLeft" className="h-4 w-4" />
-              Previous
-            </Link>
-          ) : (
-            <span />
-          )}
-          {filters.page < pages && (
-            <Link href={leadsHref(filters, filters.page + 1)} className={btn('secondary')}>
-              Next
-              <Icon name="chevronRight" className="h-4 w-4" />
-            </Link>
-          )}
-        </nav>
-      )}
     </section>
+  )
+}
+
+function Column({
+  stage,
+  list,
+  filters,
+  shown,
+  canAssign,
+  selected,
+  toggle,
+  assignedLabel,
+}: {
+  stage: Stage
+  list: LeadList
+  filters: LeadFilters
+  /** The column a phone shows; on a wide screen every column shows. */
+  shown: boolean
+  canAssign: boolean
+  selected: Set<string>
+  toggle: (id: string) => void
+  assignedLabel: (id: string | null) => string
+}) {
+  const headingId = `column-${stage}`
+  const allHere = list.rows.length > 0 && list.rows.every((r) => selected.has(r.id))
+  const more = list.total - list.rows.length
+
+  return (
+    <section aria-labelledby={headingId} className={cx(shown ? 'block' : 'hidden', 'min-w-0 xl:block')}>
+      <div className="flex min-h-tap items-center justify-between gap-2 px-1">
+        {/* Below xl the selected tab already names the column; the heading stays for screen readers. */}
+        <h2 id={headingId} className="text-sm font-semibold text-slate-800 max-xl:sr-only">
+          {COLUMN_TITLE[stage]} <span className="font-normal tabular-nums text-slate-600">{list.total}</span>
+        </h2>
+        {canAssign && list.rows.length > 0 && (
+          <label className="inline-flex min-h-tap cursor-pointer items-center gap-2 text-xs text-slate-700">
+            <input
+              type="checkbox"
+              checked={allHere}
+              onChange={() => list.rows.forEach((r) => (allHere || !selected.has(r.id)) && toggle(r.id))}
+              aria-label={`Select every lead shown in ${COLUMN_TITLE[stage]}`}
+              className="h-5 w-5 rounded accent-brand-700"
+            />
+            All
+          </label>
+        )}
+      </div>
+
+      {list.rows.length === 0 ? (
+        <p className="rounded-xl border border-dashed border-slate-300 px-3 py-6 text-center text-sm text-slate-600">No leads</p>
+      ) : (
+        <ul className="space-y-2">
+          {list.rows.map((lead) => (
+            <LeadCard
+              key={lead.id}
+              lead={lead}
+              filters={filters}
+              canAssign={canAssign}
+              selected={selected.has(lead.id)}
+              toggle={toggle}
+              assignedLabel={assignedLabel}
+            />
+          ))}
+        </ul>
+      )}
+
+      {more > 0 &&
+        (filters.show[stage] < BOARD_MAX ? (
+          <Link href={leadsHref(filters, { more: stage })} scroll={false} className={cx(btn('secondary', 'sm'), 'mt-2 w-full')}>
+            Show {Math.min(BOARD_STEP, more)} more
+            <span className="font-normal text-slate-600">· {more} not shown</span>
+          </Link>
+        ) : (
+          <p className="mt-2 px-1 text-xs text-slate-600">
+            {more} more not shown. Search or filter to find one.
+          </p>
+        ))}
+    </section>
+  )
+}
+
+function LeadCard({
+  lead,
+  filters,
+  canAssign,
+  selected,
+  toggle,
+  assignedLabel,
+}: {
+  lead: LeadListRow
+  filters: LeadFilters
+  canAssign: boolean
+  selected: boolean
+  toggle: (id: string) => void
+  assignedLabel: (id: string | null) => string
+}) {
+  const who = lead.name ?? lead.contact_mobile
+  return (
+    <li className={cx(card, 'p-3', selected && 'ring-2 ring-brand-500')}>
+      <div className="flex items-start gap-2">
+        {canAssign && (
+          <input
+            type="checkbox"
+            checked={selected}
+            onChange={() => toggle(lead.id)}
+            aria-label={`Select ${who}`}
+            className="mt-0.5 h-5 w-5 shrink-0 rounded accent-brand-700"
+          />
+        )}
+        <Avatar name={lead.name} className="hidden sm:grid xl:hidden" />
+        <div className="min-w-0 flex-1">
+          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+            <Link href={`/leads/${lead.id}`} className="break-words rounded font-semibold text-slate-900 hover:text-brand-700">
+              {lead.name ?? <span className="font-normal italic text-slate-600">No name</span>}
+            </Link>
+            {/* "Issue link" says there is no test; the card must say a completed one is done. */}
+            {lead.testAction !== 'issue' && lead.test && (
+              <Badge tone={lead.testAction === 'report' ? 'success' : 'info'} icon={lead.testAction === 'report' ? 'check' : 'clock'}>
+                {lead.test}
+              </Badge>
+            )}
+          </div>
+          <p className="mt-0.5 text-sm text-slate-600">
+            {[lead.contact_mobile, lead.interest, lead.class_level && `Class ${lead.class_level}`].filter(Boolean).join(' · ')}
+          </p>
+          <p className="text-sm text-slate-600">
+            {[lead.sources.join(', ') || 'Added by hand', canAssign && assignedLabel(lead.assigned_to)].filter(Boolean).join(' · ')}
+          </p>
+        </div>
+      </div>
+
+      {lead.lastNote && (
+        <p className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 px-2.5 py-1.5 text-sm text-slate-700">
+          <Icon name="message" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
+          <span className="line-clamp-2 min-w-0">
+            <span className="font-medium text-slate-600">{lead.lastNote.author_name ?? 'Import'}:</span> {lead.lastNote.body}
+          </span>
+        </p>
+      )}
+
+      <div className="mt-2">
+        <RowTest lead={lead} action={lead.testAction} canPaper={canAssign} reportHref={summaryHref(lead.id, filters)}>
+          <MoveMenu leadId={lead.id} stage={lead.stage} who={who} />
+        </RowTest>
+      </div>
+    </li>
+  )
+}
+
+/**
+ * Moves a lead to any other stage, forwards or back (2026-10-26). The
+ * database writes the history line and refuses a lead the user cannot see.
+ */
+function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: string }) {
+  const router = useRouter()
+  const menu = useRef<HTMLDetailsElement>(null)
+  const [pending, start] = useTransition()
+  const [error, setError] = useState('')
+
+  function close() {
+    menu.current?.removeAttribute('open')
+  }
+
+  function move(to: Stage) {
+    setError('')
+    start(async () => {
+      const r = await setStage(leadId, to)
+      close()
+      if (!r.ok) setError(r.error ?? 'Could not move the lead.')
+      router.refresh()
+    })
+  }
+
+  return (
+    <div>
+      <details
+        ref={menu}
+        className="relative"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape') {
+            close()
+            menu.current?.querySelector('summary')?.focus()
+          }
+        }}
+      >
+        <summary
+          aria-label={`Move ${who} to another stage`}
+          className={cx(btn('secondary', 'sm'), 'cursor-pointer list-none [&::-webkit-details-marker]:hidden')}
+        >
+          {pending ? 'Moving…' : 'Move'}
+          <Icon name="chevronDown" className="h-4 w-4" />
+        </summary>
+        <ul className="absolute left-0 z-30 mt-1 w-44 rounded-lg border border-slate-200 bg-white p-1 shadow-raised">
+          {STAGES.filter((s) => s !== stage).map((s) => (
+            <li key={s}>
+              <button
+                type="button"
+                onClick={() => move(s)}
+                disabled={pending}
+                className="min-h-tap w-full rounded-md px-3 text-left text-sm text-slate-800 hover:bg-slate-100 disabled:opacity-60"
+              >
+                {COLUMN_TITLE[s]}
+              </button>
+            </li>
+          ))}
+        </ul>
+      </details>
+      {error && (
+        <p role="alert" className="mt-1 text-sm text-rose-700">
+          {error}
+        </p>
+      )}
+    </div>
   )
 }
 

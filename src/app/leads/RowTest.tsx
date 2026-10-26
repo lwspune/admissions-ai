@@ -93,7 +93,7 @@ export function RowTest({
           </Link>
         )}
         {(action === 'issue' || action === 'reissue') && (
-          <span className="flex items-center gap-2">
+          <span className="flex flex-wrap items-center gap-2">
             {missing && (
               <span id={`missing-${lead.id}`} className="text-xs text-amber-800">
                 Add name and class first

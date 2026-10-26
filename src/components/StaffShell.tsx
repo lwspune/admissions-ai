@@ -17,7 +17,8 @@ export async function StaffShell({
   children,
 }: {
   staff: { name: string | null; email: string; role: Role | string }
-  width?: 'narrow' | 'default' | 'wide'
+  /** `full` is the leads board's five columns (2026-10-26); every other page reads at a page width. */
+  width?: 'narrow' | 'default' | 'wide' | 'full'
   children: React.ReactNode
 }) {
   const items: NavItem[] = []
@@ -43,7 +44,7 @@ export async function StaffShell({
   return (
     <div className="min-h-screen">
       <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/90 backdrop-blur supports-[backdrop-filter]:bg-white/80">
-        <div className="mx-auto flex max-w-6xl items-center gap-4 px-4">
+        <div className={cx('mx-auto flex items-center gap-4 px-4', width === 'full' ? 'max-w-screen-2xl' : 'max-w-6xl')}>
           <Link href={home} aria-label={`Aptitude Test — ${home === '/hiring' ? 'hiring' : 'leads'}`} className="min-h-tap flex items-center rounded-lg py-2">
             <Mark labelClassName="hidden sm:inline" />
           </Link>
@@ -66,7 +67,7 @@ export async function StaffShell({
       <main
         className={cx(
           'mx-auto px-4 pb-16 pt-6 sm:pt-8',
-          width === 'narrow' ? 'max-w-3xl' : width === 'wide' ? 'max-w-6xl' : 'max-w-5xl',
+          width === 'narrow' ? 'max-w-3xl' : width === 'wide' ? 'max-w-6xl' : width === 'full' ? 'max-w-screen-2xl' : 'max-w-5xl',
         )}
       >
         {children}

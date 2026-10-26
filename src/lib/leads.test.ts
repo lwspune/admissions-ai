@@ -9,6 +9,9 @@ import {
   isStage,
   STAGES,
   STAGE_TONE,
+  COLUMN_TITLE,
+  BOARD_STEP,
+  BOARD_MAX,
   MAX_NOTE,
   parseLeadFilters,
   leadsHref,
@@ -37,9 +40,12 @@ describe('stageFromStatus', () => {
   })
 
   it('maps our own stage labels back, so an exported list re-imports', () => {
-    expect(stageFromStatus('Qualified')).toBe('qualified')
     expect(stageFromStatus('In EIS')).toBe('in_eis')
     expect(stageFromStatus('Not interested')).toBe('not_interested')
+  })
+
+  it('reads "Qualified" as In EIS, which it became on 2026-10-26', () => {
+    expect(stageFromStatus('Qualified')).toBe('in_eis')
   })
 
   it('returns null for blank or unknown text rather than guessing', () => {
@@ -216,20 +222,32 @@ describe('prepareImport', () => {
 describe('parseLeadFilters', () => {
   const ID = '0b6f3c1e-8a2d-4c55-9f1e-2d3c4b5a6f70'
 
-  it('reads every filter from the query string', () => {
+  const fifty = { new: 50, cnr: 50, contacted: 50, in_eis: 50, not_interested: 50 }
+
+  it('reads every filter, the column a phone shows, and how many cards each column shows', () => {
     expect(
-      parseLeadFilters({ q: ' Adhe ', stage: 'cnr', interest: 'SPI', source: ID, assignee: 'none', page: '3' }),
-    ).toEqual({ q: 'Adhe', stage: 'cnr', interest: 'SPI', source: ID, assignee: 'none', page: 3 })
+      parseLeadFilters({ q: ' Adhe ', interest: 'SPI', source: ID, assignee: 'none', col: 'cnr', show_new: '150' }),
+    ).toEqual({ q: 'Adhe', interest: 'SPI', source: ID, assignee: 'none', col: 'cnr', show: { ...fifty, new: 150 } })
+  })
+
+  it('has no stage filter: the board shows every stage as a column', () => {
+    expect(parseLeadFilters({ stage: 'cnr' })).not.toHaveProperty('stage')
   })
 
   it('drops anything it does not recognise instead of passing it to the query', () => {
     expect(
-      parseLeadFilters({ stage: 'closed', interest: 'JEE', source: 'x); drop', assignee: 'bob', page: '-2' }),
-    ).toEqual({ q: '', stage: null, interest: null, source: null, assignee: null, page: 1 })
+      parseLeadFilters({ interest: 'JEE', source: 'x); drop', assignee: 'bob', col: 'closed', show_new: '-2' }),
+    ).toEqual({ q: '', interest: null, source: null, assignee: null, col: 'new', show: fifty })
+  })
+
+  it('shows cards in steps of fifty, up to the cap', () => {
+    expect(parseLeadFilters({ show_cnr: '120' }).show.cnr).toBe(BOARD_STEP)
+    expect(parseLeadFilters({ show_cnr: String(BOARD_MAX + BOARD_STEP) }).show.cnr).toBe(BOARD_STEP)
+    expect(parseLeadFilters({ show_cnr: String(BOARD_MAX) }).show.cnr).toBe(BOARD_MAX)
   })
 
   it('takes the first value when a parameter repeats', () => {
-    expect(parseLeadFilters({ stage: ['new', 'cnr'] }).stage).toBe('new')
+    expect(parseLeadFilters({ col: ['contacted', 'cnr'] }).col).toBe('contacted')
   })
 
   it('accepts "me" and a staff id as the assignee', () => {
@@ -247,14 +265,23 @@ describe('leadsHref', () => {
   })
 
   it('writes back what parseLeadFilters reads', () => {
-    const filters = parseLeadFilters({ q: 'Adhe Rao', stage: 'cnr', interest: 'SPI', source: ID, assignee: 'me', page: '3' })
+    const filters = parseLeadFilters({ q: 'Adhe Rao', interest: 'SPI', source: ID, assignee: 'me', col: 'cnr', show_in_eis: '100' })
     const query = leadsHref(filters).split('?')[1]
     expect(parseLeadFilters(Object.fromEntries(new URLSearchParams(query)))).toEqual(filters)
   })
 
-  it('takes the page as its own argument', () => {
-    expect(leadsHref(parseLeadFilters({ stage: 'new', page: '2' }), 3)).toBe('/leads?stage=new&page=3')
-    expect(leadsHref(parseLeadFilters({ page: '2' }), 1)).toBe('/leads')
+  it('switches the phone’s column, keeping everything else', () => {
+    expect(leadsHref(parseLeadFilters({ q: 'Rao' }), { col: 'contacted' })).toBe('/leads?q=Rao&col=contacted')
+    expect(leadsHref(parseLeadFilters({ col: 'cnr' }), { col: 'new' })).toBe('/leads')
+  })
+
+  it('shows fifty more in one column, and keeps that column on a phone', () => {
+    expect(leadsHref(none, { more: 'new' })).toBe('/leads?show_new=100')
+    expect(leadsHref(parseLeadFilters({ show_cnr: '100' }), { more: 'cnr' })).toBe('/leads?col=cnr&show_cnr=150')
+  })
+
+  it('never asks for more than the cap', () => {
+    expect(leadsHref(parseLeadFilters({ show_new: String(BOARD_MAX) }), { more: 'new' })).toBe(`/leads?show_new=${BOARD_MAX}`)
   })
 })
 
@@ -262,7 +289,7 @@ describe('the score sheet goes back to the list it was opened from', () => {
   const LEAD = '6b7d8c18-3af7-47fc-9ca4-3ca24eb78adb'
 
   it('carries the list filters to the sheet and back', () => {
-    const filters = parseLeadFilters({ q: 'Sonakshi', stage: 'new', page: '2' })
+    const filters = parseLeadFilters({ q: 'Sonakshi', col: 'contacted', show_contacted: '100' })
     const href = summaryHref(LEAD, filters)
     expect(href.startsWith(`/reports/${LEAD}/summary?back=`)).toBe(true)
     const back = new URL(href, 'https://x.test').searchParams.get('back')
@@ -369,9 +396,15 @@ describe('stages', () => {
   })
 
   it('reads the two outcomes as outcomes and an unanswered call as needing another', () => {
-    expect(STAGE_TONE.qualified).toBe('success')
+    expect(STAGE_TONE.in_eis).toBe('success')
     expect(STAGE_TONE.not_interested).toBe('danger')
     expect(STAGE_TONE.cnr).toBe('warning')
     expect(STAGE_TONE.new).toBe('neutral')
+  })
+
+  it('runs the board in the owner’s order, five columns and no Qualified', () => {
+    expect(STAGES).toEqual(['new', 'cnr', 'contacted', 'in_eis', 'not_interested'])
+    expect(isStage('qualified')).toBe(false)
+    expect(STAGES.map((s) => COLUMN_TITLE[s])).toEqual(['New leads', 'CNR', 'Contacted', 'In EIS', 'Not interested'])
   })
 })

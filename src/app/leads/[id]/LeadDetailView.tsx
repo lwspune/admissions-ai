@@ -3,12 +3,12 @@
 import { useState, useTransition } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { STAGES, STAGE_LABEL, STAGE_TONE, INTERESTS, MAX_NOTE, formatStageChange } from '@/lib/leads'
+import { STAGE_LABEL, STAGE_TONE, INTERESTS, MAX_NOTE, formatStageChange } from '@/lib/leads'
 import type { LeadDetail } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { Icon, type IconName } from '@/components/icons'
 import { Avatar, Badge, Eyebrow, btn, card, cx, input, label } from '@/components/ui'
-import { addNote, setStage, assignLeads, updateLead, type ActionResult } from '../actions'
+import { addNote, assignLeads, updateLead, type ActionResult } from '../actions'
 import { IssuePanel } from '../IssuePanel'
 import { ClassField } from '../LeadsConsole'
 
@@ -65,12 +65,12 @@ export function LeadDetailView({
         </div>
       </header>
 
-      {/* On a phone the test and stage come first; on a wide screen they sit beside the history. */}
+      {/* On a phone the test comes first; on a wide screen it sits beside the history. */}
       <div className="mt-6 grid gap-6 lg:grid-cols-[minmax(0,1fr)_22rem]">
         <aside className="space-y-4 lg:order-2">
           {/* Those who assign are those who may print a paper test: everyone but a telecaller. */}
           <IssuePanel lead={lead} assessments={assessments} canPaper={canAssign} />
-          <StageControl leadId={lead.id} stage={lead.stage} />
+          {/* The stage moves on the board only (the owner's call, 2026-10-26); here it is the badge above. */}
           {canAssign ? (
             <AssignControl leadId={lead.id} assignedTo={lead.assigned_to} assignees={assignees} />
           ) : (
@@ -158,38 +158,6 @@ function Status({ result, ok }: { result: ActionResult | null; ok: string }) {
     <p aria-live="polite" className="sr-only">
       {result?.ok ? ok : ''}
     </p>
-  )
-}
-
-function StageControl({ leadId, stage }: { leadId: string; stage: LeadDetail['lead']['stage'] }) {
-  const [value, setValue] = useState<string>(stage)
-  const { result, pending, run } = useAction()
-
-  return (
-    <form
-      className={cx(card, 'p-5')}
-      onSubmit={(e) => {
-        e.preventDefault()
-        run(() => setStage(leadId, value))
-      }}
-    >
-      <label htmlFor="stage" className="block text-xs font-semibold uppercase tracking-wider text-slate-600">
-        Stage
-      </label>
-      <div className="mt-1 flex gap-2">
-        <select id="stage" value={value} onChange={(e) => setValue(e.target.value)} className={control}>
-          {STAGES.map((s) => (
-            <option key={s} value={s}>
-              {STAGE_LABEL[s]}
-            </option>
-          ))}
-        </select>
-        <button type="submit" disabled={pending || value === stage} className={`${primary} mt-1`}>
-          {pending ? 'Saving…' : 'Save'}
-        </button>
-      </div>
-      <Status result={result} ok="Stage saved." />
-    </form>
   )
 }
 

@@ -8,18 +8,23 @@
 
 import { normalizeMobile } from './mobile'
 
-/** Mirrors the CHECK on leads.stage. Order is the funnel's order. */
-export const STAGES = ['new', 'cnr', 'contacted', 'qualified', 'in_eis', 'not_interested'] as const
+/**
+ * Mirrors the CHECK on leads.stage, in the order of the board's columns: the
+ * owner's pipeline (2026-10-26). Qualified was folded into In EIS (0026).
+ */
+export const STAGES = ['new', 'cnr', 'contacted', 'in_eis', 'not_interested'] as const
 export type Stage = (typeof STAGES)[number]
 
 export const STAGE_LABEL: Record<Stage, string> = {
   new: 'New',
   cnr: 'CNR',
   contacted: 'Contacted',
-  qualified: 'Qualified',
   in_eis: 'In EIS',
   not_interested: 'Not interested',
 }
+
+/** A column's heading on the board. */
+export const COLUMN_TITLE: Record<Stage, string> = { ...STAGE_LABEL, new: 'New leads' }
 
 export type Tone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger'
 
@@ -28,8 +33,7 @@ export const STAGE_TONE: Record<Stage, Tone> = {
   new: 'neutral',
   cnr: 'warning',
   contacted: 'info',
-  qualified: 'success',
-  in_eis: 'accent',
+  in_eis: 'success',
   not_interested: 'danger',
 }
 
@@ -64,6 +68,8 @@ const STATUS_WORDS: Record<string, Stage> = {
   'not reachable': 'cnr',
   'no answer': 'cnr',
   'not interested': 'not_interested',
+  // The stage it became (2026-10-26); a sheet exported before then still says it.
+  qualified: 'in_eis',
   ...Object.fromEntries(STAGES.map((s) => [STAGE_LABEL[s].toLowerCase(), s])),
 }
 
@@ -256,23 +262,32 @@ export function isUuid(value: unknown): value is string {
   return typeof value === 'string' && UUID.test(value)
 }
 
+/** Cards a column shows at first, and how many more each "Show more" adds. */
+export const BOARD_STEP = 50
+/** Past this, searching finds a lead faster than scrolling to it. */
+export const BOARD_MAX = 500
+
+/**
+ * The board's state (2026-10-26). There is no stage filter: every stage is a
+ * column. `col` is the column a phone shows, one at a time; `show` is how many
+ * cards each column shows.
+ */
 export interface LeadFilters {
   q: string
-  stage: Stage | null
   interest: Interest | null
   /** A lead_sources id. */
   source: string | null
   /** 'me', 'none' (unassigned), or a telecaller's id. */
   assignee: string | null
-  /** 1-based. */
-  page: number
+  col: Stage
+  show: Record<Stage, number>
 }
 
 type Params = Record<string, string | string[] | undefined>
 
 /**
- * The lead list's filters, read from the URL. Anything unrecognised is
- * dropped here, so no raw query-string text reaches a database filter.
+ * The board's filters, read from the URL. Anything unrecognised is dropped
+ * here, so no raw query-string text reaches a database filter.
  */
 export function parseLeadFilters(params: Params): LeadFilters {
   const one = (k: string) => {
@@ -280,27 +295,38 @@ export function parseLeadFilters(params: Params): LeadFilters {
     return (Array.isArray(v) ? v[0] : v) ?? ''
   }
   const assignee = one('assignee')
-  const page = Number.parseInt(one('page'), 10)
+  const count = (raw: string) => {
+    const n = Number(raw)
+    return Number.isInteger(n) && n >= BOARD_STEP && n <= BOARD_MAX && n % BOARD_STEP === 0 ? n : BOARD_STEP
+  }
 
   return {
     q: one('q').trim(),
-    stage: isStage(one('stage')) ? (one('stage') as Stage) : null,
     interest: isInterest(one('interest')) ? (one('interest') as Interest) : null,
     source: isUuid(one('source')) ? one('source') : null,
     assignee: assignee === 'me' || assignee === 'none' || isUuid(assignee) ? assignee : null,
-    page: Number.isFinite(page) && page > 1 ? page : 1,
+    col: isStage(one('col')) ? (one('col') as Stage) : 'new',
+    show: Object.fromEntries(STAGES.map((s) => [s, count(one(`show_${s}`))])) as Record<Stage, number>,
   }
 }
 
-/** The list's address for these filters: what `parseLeadFilters` reads back. */
-export function leadsHref(filters: LeadFilters, page = filters.page): string {
+/**
+ * The board's address: what `parseLeadFilters` reads back. `col` switches the
+ * column a phone shows; `more` shows fifty more cards in one column, and keeps
+ * that column on a phone.
+ */
+export function leadsHref(filters: LeadFilters, { col, more }: { col?: Stage; more?: Stage } = {}): string {
+  const show = { ...filters.show }
+  if (more) show[more] = Math.min(show[more] + BOARD_STEP, BOARD_MAX)
+  const column = more ?? col ?? filters.col
+
   const params = new URLSearchParams()
   if (filters.q) params.set('q', filters.q)
-  if (filters.stage) params.set('stage', filters.stage)
   if (filters.interest) params.set('interest', filters.interest)
   if (filters.source) params.set('source', filters.source)
   if (filters.assignee) params.set('assignee', filters.assignee)
-  if (page > 1) params.set('page', String(page))
+  if (column !== 'new') params.set('col', column)
+  for (const s of STAGES) if (show[s] !== BOARD_STEP) params.set(`show_${s}`, String(show[s]))
   const query = params.toString()
   return query ? `/leads?${query}` : '/leads'
 }

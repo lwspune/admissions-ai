@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { canManageLeads } from '@/lib/staff'
 import { redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
-import { listLeads, listSources, gopostFeedStatus, PAGE_SIZE } from '@/server/leads'
+import { listBoard, listSources, gopostFeedStatus } from '@/server/leads'
 import { listAssignees } from '@/server/staff'
 import { parseLeadFilters } from '@/lib/leads'
 import { feedWarning } from '@/lib/gopostLeads'
@@ -25,24 +25,23 @@ export default async function LeadsPage({
   const canAssign = canManageLeads(staff.role)
 
   // Every read here goes through the session-bound client, so RLS decides what
-  // this person can see — a telecaller's list is theirs because the database
+  // this person can see — a telecaller's board is theirs because the database
   // says so, not because of a filter written here.
-  const [list, sources, assignees, feed] = await Promise.all([
-    listLeads(db, filters, staff.id),
+  const [board, sources, assignees, feed] = await Promise.all([
+    listBoard(db, filters, staff.id),
     listSources(db),
     canAssign ? listAssignees(staff) : Promise.resolve([]),
     canAssign ? gopostFeedStatus(db) : Promise.resolve(null),
   ])
 
   return (
-    <StaffShell staff={staff} width="wide">
+    <StaffShell staff={staff} width="full">
       <LeadsConsole
         staff={staff}
-        list={list}
+        board={board}
         filters={filters}
         sources={sources}
         assignees={assignees}
-        pageSize={PAGE_SIZE}
         feedWarning={feedWarning(feed, Date.now())}
       />
     </StaffShell>

@@ -1,12 +1,10 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { searchTerm, testStatus, testAction, type LeadFilters, type Stage, type Interest, type TestAction } from '../lib/leads'
+import { STAGES, searchTerm, testStatus, testAction, type LeadFilters, type Stage, type Interest, type TestAction } from '../lib/leads'
 
 // Reads for the lead pages. Always the session client: RLS decides which leads
 // a staff member sees (migration 0012), so there is no role filter here, and a
 // telecaller's list is theirs because the database says so.
-
-export const PAGE_SIZE = 50
 
 export interface LeadListRow {
   id: string
@@ -28,16 +26,26 @@ export interface LeadList {
   total: number
 }
 
-export async function listLeads(db: Db, filters: LeadFilters, me: string): Promise<LeadList> {
+/** The board: every stage's column, each as long as `filters.show` asks. */
+export async function listBoard(db: Db, filters: LeadFilters, me: string): Promise<Record<Stage, LeadList>> {
+  const columns = await Promise.all(STAGES.map((stage) => listColumn(db, filters, stage, me)))
+  return Object.fromEntries(STAGES.map((stage, i) => [stage, columns[i]!])) as Record<Stage, LeadList>
+}
+
+// The detail lookups go 100 leads at a time: an `in` filter rides in the URL,
+// and a long column's notes could pass Supabase's 1,000-row cap in one read.
+const DETAIL_CHUNK = 100
+
+async function listColumn(db: Db, filters: LeadFilters, stage: Stage, me: string): Promise<LeadList> {
   // Filtering by source needs the join to be an inner one; otherwise it is left
   // out, so a lead added by hand (no origin) still lists.
   const columns = 'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at'
   let query = db
     .from('leads')
     .select(filters.source ? `${columns}, lead_origins!inner(source_id)` : columns, { count: 'exact' })
+    .eq('stage', stage)
 
   if (filters.source) query = query.eq('lead_origins.source_id', filters.source)
-  if (filters.stage) query = query.eq('stage', filters.stage)
   if (filters.interest) query = query.eq('interest', filters.interest)
   if (filters.assignee === 'me') query = query.eq('assigned_to', me)
   else if (filters.assignee === 'none') query = query.is('assigned_to', null)
@@ -46,29 +54,40 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
   const search = searchTerm(filters.q)
   if (search) query = query.ilike(search.column, search.pattern)
 
-  const from = (filters.page - 1) * PAGE_SIZE
   const { data, count, error } = await query
     .order('created_at', { ascending: false })
     .order('id')
-    .range(from, from + PAGE_SIZE - 1)
+    .range(0, filters.show[stage] - 1)
 
   if (error) throw new Error(`could not load leads: ${error.message}`)
   const leads = (data ?? []) as unknown as Omit<LeadListRow, 'sources' | 'test' | 'testAction' | 'lastNote'>[]
   if (leads.length === 0) return { rows: [], total: count ?? 0 }
 
+  type Origin = { lead_id: string; lead_sources: { name: string } | null }
+  type Paper = { lead_id: string; state: string; issue_seq: number; mode: string }
+  type Note = NonNullable<LeadListRow['lastNote']> & { lead_id: string }
+  const origins: Origin[] = []
+  const assessments: Paper[] = []
+  const notes: Note[] = []
   const ids = leads.map((l) => l.id)
-  const [origins, assessments, notes] = await Promise.all([
-    db.from('lead_origins').select('lead_id, lead_sources(name)').in('lead_id', ids),
-    db.from('assessments').select('lead_id, state, issue_seq, mode').in('lead_id', ids),
-    db
-      .from('lead_comments')
-      .select('lead_id, kind, body, author_name, created_at')
-      .in('lead_id', ids)
-      .in('kind', ['note', 'import'])
-      .order('id', { ascending: false }),
-  ])
-  for (const r of [origins, assessments, notes]) {
-    if (r.error) throw new Error(`could not load lead details: ${r.error.message}`)
+  for (let i = 0; i < ids.length; i += DETAIL_CHUNK) {
+    const chunk = ids.slice(i, i + DETAIL_CHUNK)
+    const [o, a, n] = await Promise.all([
+      db.from('lead_origins').select('lead_id, lead_sources(name)').in('lead_id', chunk),
+      db.from('assessments').select('lead_id, state, issue_seq, mode').in('lead_id', chunk),
+      db
+        .from('lead_comments')
+        .select('lead_id, kind, body, author_name, created_at')
+        .in('lead_id', chunk)
+        .in('kind', ['note', 'import'])
+        .order('id', { ascending: false }),
+    ])
+    for (const r of [o, a, n]) {
+      if (r.error) throw new Error(`could not load lead details: ${r.error.message}`)
+    }
+    origins.push(...((o.data ?? []) as unknown as Origin[]))
+    assessments.push(...((a.data ?? []) as Paper[]))
+    notes.push(...((n.data ?? []) as Note[]))
   }
 
   const group = <T extends { lead_id: string }>(rows: T[]) => {
@@ -76,11 +95,9 @@ export async function listLeads(db: Db, filters: LeadFilters, me: string): Promi
     for (const row of rows) map.set(row.lead_id, [...(map.get(row.lead_id) ?? []), row])
     return map
   }
-  const originsBy = group((origins.data ?? []) as unknown as { lead_id: string; lead_sources: { name: string } | null }[])
-  const assessmentsBy = group(
-    (assessments.data ?? []) as { lead_id: string; state: string; issue_seq: number; mode: string }[],
-  )
-  const notesBy = group((notes.data ?? []) as (NonNullable<LeadListRow['lastNote']> & { lead_id: string })[])
+  const originsBy = group(origins)
+  const assessmentsBy = group(assessments)
+  const notesBy = group(notes)
 
   return {
     total: count ?? 0,
