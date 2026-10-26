@@ -405,6 +405,20 @@ export function testAction(assessments: { state: string; issue_seq: number }[]):
   return Math.max(...assessments.map((a) => a.issue_seq)) < 3 ? 'reissue' : null
 }
 
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+
+/**
+ * The date on a lead's row (2026-10-26): `leads.enquired_on`, the latest
+ * enquiry a source recorded, or the day a hand-added lead was typed in. Read
+ * from the stored date's digits, never through a Date, so the server's time
+ * zone cannot move it a day.
+ */
+export function enquiryLabel(enquiredOn: string, fromSource: boolean, thisYear: number): string {
+  const [y, m, d] = enquiredOn.split('-').map(Number)
+  const date = `${d} ${MONTHS[m! - 1]}${y === thisYear ? '' : ` ${y}`}`
+  return `${fromSource ? 'Enquired' : 'Added'} ${date}`
+}
+
 /**
  * The database writes a stage change as "old → new" in stage codes (the
  * `leads_stage_history` trigger), so the labels live in one place — here.

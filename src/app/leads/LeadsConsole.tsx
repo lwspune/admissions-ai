@@ -13,6 +13,7 @@ import {
   STAGE_TONE,
   INTERESTS,
   leadsHref,
+  enquiryLabel,
   summaryHref,
   type LeadFilters,
   type Stage,
@@ -91,6 +92,9 @@ export function LeadsConsole({
 }
 
 const select = input
+
+// The year in India, so a date in it shows without the year.
+const THIS_YEAR = new Date(Date.now() + 5.5 * 3600_000).getUTCFullYear()
 
 /**
  * One row of filters: a plain GET form, so a filtered pipeline can be
@@ -444,7 +448,7 @@ function LeadRow({
       <Avatar name={lead.name} className="mt-0.5 hidden sm:grid" />
       <div className="min-w-0 flex-1">
         <RowTest lead={lead} action={lead.testAction} canPaper={canAssign} reportHref={summaryHref(lead.id, filters)}>
-          <div className="grid min-w-0 flex-1 basis-full gap-x-6 gap-y-0.5 sm:basis-0 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+          <div className="grid min-w-0 flex-1 basis-full gap-x-6 gap-y-0.5 sm:basis-0 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)_7.5rem]">
             <div className="min-w-0">
               <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
                 <Link href={`/leads/${lead.id}`} className="rounded font-semibold text-slate-900 hover:text-brand-700">
@@ -472,6 +476,10 @@ function LeadRow({
                 </p>
               )}
             </div>
+            {/* The list is sorted by this date, newest first (migration 0027). */}
+            <p className="text-sm tabular-nums text-slate-600 lg:self-center">
+              {enquiryLabel(lead.enquired_on, lead.sources.length > 0, THIS_YEAR)}
+            </p>
           </div>
           <span className="flex items-center gap-2">
             <NextStage leadId={lead.id} stage={lead.stage} who={who} />

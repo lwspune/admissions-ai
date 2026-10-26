@@ -11,6 +11,7 @@ import {
   STAGE_TONE,
   COLUMN_TITLE,
   NEXT_STAGE,
+  enquiryLabel,
   MAX_NOTE,
   parseLeadFilters,
   leadsHref,
@@ -399,5 +400,21 @@ describe('stages', () => {
     expect(STAGES).toEqual(['new', 'cnr', 'contacted', 'in_eis', 'not_interested'])
     expect(isStage('qualified')).toBe(false)
     expect(STAGES.map((s) => COLUMN_TITLE[s])).toEqual(['New leads', 'CNR', 'Contacted', 'In EIS', 'Not interested'])
+  })
+})
+
+describe('the date on a lead’s row', () => {
+  it('says when the person enquired, or when a hand-added lead was typed in', () => {
+    expect(enquiryLabel('2026-10-25', true, 2026)).toBe('Enquired 25 Oct')
+    expect(enquiryLabel('2026-10-22', false, 2026)).toBe('Added 22 Oct')
+  })
+
+  it('names the year only when it is not this one', () => {
+    expect(enquiryLabel('2025-05-21', true, 2026)).toBe('Enquired 21 May 2025')
+    expect(enquiryLabel('2026-01-03', true, 2026)).toBe('Enquired 3 Jan')
+  })
+
+  it('shows the date as stored, whatever the server’s time zone', () => {
+    expect(enquiryLabel('2026-03-01', true, 2026)).toBe('Enquired 1 Mar')
   })
 })

@@ -315,6 +315,45 @@ describe('the board’s stages', () => {
   })
 })
 
+// The date a lead is sorted and shown by (migration 0027): the latest enquiry
+// a source recorded, or the day a hand-added lead was typed in.
+describe('the enquiry date', () => {
+  const enquired = async (n: number) =>
+    (await svc.from('leads').select('enquired_on').eq('contact_mobile', mobile(n)).single()).data!.enquired_on
+  const istToday = () => new Date(Date.now() + 5.5 * 3600_000).toISOString().slice(0, 10)
+
+  it('is the source’s date for a lead an import creates, however old', async () => {
+    const src = await source()
+    await importLeads(counsellor.db, src, [row(80, { sourceDate: '2026-04-12' })])
+    expect(await enquired(80)).toBe('2026-04-12')
+  })
+
+  it('moves up with a newer enquiry and never back with an older one', async () => {
+    const src = await source()
+    await importLeads(counsellor.db, src, [row(81, { sourceDate: '2026-04-12' })])
+    await importLeads(counsellor.db, src, [row(81, { sourceDate: '2026-10-20' })])
+    expect(await enquired(81)).toBe('2026-10-20')
+    await importLeads(counsellor.db, src, [row(81, { sourceDate: '2026-05-01' })])
+    expect(await enquired(81)).toBe('2026-10-20')
+  })
+
+  it('is the day a lead was typed in, in India, for one added by hand', async () => {
+    const { data } = await tcA.db
+      .from('leads')
+      .insert({ name: 'LeadTest Typed', contact_mobile: mobile(82) })
+      .select('enquired_on')
+      .single()
+    expect(data!.enquired_on).toBe(istToday())
+  })
+
+  it('keeps a hand-added lead’s own date when a sheet later says it enquired earlier', async () => {
+    await lead(83, { name: 'LeadTest Typed First' })
+    const src = await source()
+    await importLeads(counsellor.db, src, [row(83, { sourceDate: '2026-03-01' })])
+    expect(await enquired(83)).toBe(istToday())
+  })
+})
+
 describe('names', () => {
   it('refuses to issue a test to a lead with no name', async () => {
     const l = await lead(30, { class_level: 11 })

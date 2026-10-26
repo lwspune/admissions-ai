@@ -15,6 +15,8 @@ export interface LeadListRow {
   assigned_to: string | null
   class_level: number | null
   created_at: string
+  /** The latest enquiry a source recorded, or the day it was typed in (migration 0027). */
+  enquired_on: string
   sources: string[]
   test: string
   testAction: TestAction
@@ -75,10 +77,12 @@ async function listStage(db: Db, filters: LeadFilters, me: string): Promise<Lead
     db,
     filters,
     me,
-    'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at',
+    'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at, enquired_on',
     { count: 'exact' },
   )
     .eq('stage', filters.stage)
+    // Newest enquiry first, so the warm leads are called first (migration 0027).
+    .order('enquired_on', { ascending: false })
     .order('created_at', { ascending: false })
     .order('id')
     .range(from, from + PAGE_SIZE - 1)
