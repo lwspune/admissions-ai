@@ -14,7 +14,7 @@ import { readFileSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { createClient } from '@supabase/supabase-js'
-import { parseFeedPage, syncFeed, type FeedCounts, type FeedRow } from '../src/lib/gopostLeads'
+import { feedPageUrl, parseFeedPage, syncFeed, type FeedCounts, type FeedRow } from '../src/lib/gopostLeads'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const FEED = 'gopost'
@@ -61,9 +61,7 @@ async function main(): Promise<number> {
         return data.cursor as string | null
       },
       fetchPage: async (after) => {
-        const q = new URLSearchParams({ limit: '500' })
-        if (after) q.set('after', after)
-        const res = await fetch(`${url}?${q}`, { headers: { authorization: `Bearer ${secret}` } })
+        const res = await fetch(feedPageUrl(url, after), { headers: { authorization: `Bearer ${secret}` } })
         if (!res.ok) throw new Error(`GoPost answered ${res.status}`)
         return parseFeedPage(await res.json())
       },

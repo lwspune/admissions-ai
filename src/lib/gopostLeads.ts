@@ -102,6 +102,18 @@ export function toFeedRow(lead: FeedLead): FeedRow | null {
   }
 }
 
+// Below 500: on 2026-10-26 GoPost answered limit=500 with an empty page (its
+// cursor as `next`) once 2,171 leads waited, and every hourly run read that as
+// "nothing new". 499 and below came back whole.
+const PAGE_SIZE = 200
+
+/** The request for one page of the feed, after `cursor` or from the top. */
+export function feedPageUrl(feed: string, cursor: string | null): string {
+  const q = new URLSearchParams({ limit: String(PAGE_SIZE) })
+  if (cursor) q.set('after', cursor)
+  return `${feed}?${q}`
+}
+
 /** The feed's reply, checked before anything is written. */
 export function parseFeedPage(body: unknown): FeedPage {
   const b = body as { leads?: unknown; next?: unknown } | null

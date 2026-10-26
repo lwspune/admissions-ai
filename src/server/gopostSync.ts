@@ -1,6 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { parseFeedPage, syncFeed, type FeedCounts, type FeedDeps, type FeedRow, type SyncResult } from '../lib/gopostLeads'
+import { feedPageUrl, parseFeedPage, syncFeed, type FeedCounts, type FeedDeps, type FeedRow, type SyncResult } from '../lib/gopostLeads'
 
 // The hourly read of GoPost's admissions feed (migration 0025). Service role,
 // because the call comes from pg_cron with no session to act for; the write
@@ -10,7 +10,6 @@ import { parseFeedPage, syncFeed, type FeedCounts, type FeedDeps, type FeedRow, 
 
 export const GOPOST_FEED_URL = 'https://gopostapp.vercel.app/api/feeds/admissions'
 const FEED = 'gopost'
-const PAGE_SIZE = 500
 
 const toRpcRows = (rows: FeedRow[]) =>
   rows.map((r) => ({
@@ -43,9 +42,7 @@ export function gopostDeps(db: Db, { url, secret }: { url: string; secret: strin
       return data.cursor as string | null
     },
     fetchPage: async (after) => {
-      const q = new URLSearchParams({ limit: String(PAGE_SIZE) })
-      if (after) q.set('after', after)
-      const res = await fetch(`${url}?${q}`, { headers: { authorization: `Bearer ${secret}` }, cache: 'no-store' })
+      const res = await fetch(feedPageUrl(url, after), { headers: { authorization: `Bearer ${secret}` }, cache: 'no-store' })
       if (!res.ok) throw new Error(`GoPost answered ${res.status}`)
       return parseFeedPage(await res.json())
     },

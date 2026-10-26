@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest'
 import {
   toFeedRow,
   parseFeedPage,
+  feedPageUrl,
   classLabel,
   feedWarning,
   syncFeed,
@@ -100,6 +101,24 @@ describe('a page from the feed', () => {
     for (const body of [null, {}, { leads: 'x', next: null }, { leads: [], next: 3 }, { leads: [{ cursor: 'c' }], next: 'c' }]) {
       expect(() => parseFeedPage(body)).toThrow()
     }
+  })
+})
+
+describe('asking for a page', () => {
+  const FEED = 'https://gopost.example/api/feeds/admissions'
+
+  // On 2026-10-26 GoPost answered limit=500 with an empty page past 2,579 leads,
+  // which the sync took for "nothing new" for a day; 499 and below were whole.
+  it('asks for fewer than 500 leads at a time', () => {
+    const limit = Number(new URL(feedPageUrl(FEED, null)).searchParams.get('limit'))
+    expect(limit).toBeGreaterThan(0)
+    expect(limit).toBeLessThan(500)
+  })
+
+  it('starts from the cursor, encoded, and from the top without one', () => {
+    const cursor = '2026-10-26T00:26:09.26947+00:00~fe695154-a8f4-4eb8-b56f-a3a348dfcd1d'
+    expect(new URL(feedPageUrl(FEED, cursor)).searchParams.get('after')).toBe(cursor)
+    expect(new URL(feedPageUrl(FEED, null)).searchParams.has('after')).toBe(false)
   })
 })
 
