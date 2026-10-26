@@ -234,6 +234,60 @@ describe('comments', () => {
   })
 })
 
+// Issuing a test means someone has spoken to the family, so a New or CNR lead
+// moves to Contacted on its own (migration 0024). It never moves a lead back.
+describe('stage on issue', () => {
+  const stageOf = async (id: string) =>
+    (await svc.from('leads').select('stage').eq('id', id).single()).data!.stage
+  const history = async (id: string) =>
+    (await svc.from('lead_comments').select('kind, body, author').eq('lead_id', id).order('id')).data
+
+  it('moves a new lead to contacted when a test is issued, by whoever issued it', async () => {
+    const l = await lead(60, { name: 'LeadTest Issued', class_level: 11, assigned_to: tcA.id })
+    await issueAssessment(tcA.db, { leadId: l.id, issuedBy: tcA.id })
+
+    expect(await stageOf(l.id)).toBe('contacted')
+    expect(await history(l.id)).toEqual([{ kind: 'stage', body: 'new → contacted', author: tcA.id }])
+  })
+
+  it('moves a CNR lead too', async () => {
+    const l = await lead(61, { name: 'LeadTest CNR', class_level: 11, stage: 'cnr' })
+    await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id })
+    expect(await stageOf(l.id)).toBe('contacted')
+  })
+
+  it('moves a lead when a paper test is issued', async () => {
+    const l = await lead(62, { name: 'LeadTest Paper', class_level: 11 })
+    await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id, mode: 'paper' })
+    expect(await stageOf(l.id)).toBe('contacted')
+  })
+
+  it('never moves a lead back', async () => {
+    const l = await lead(63, { name: 'LeadTest Qualified', class_level: 11, stage: 'qualified' })
+    await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id })
+    expect(await stageOf(l.id)).toBe('qualified')
+    expect(await history(l.id)).toEqual([])
+  })
+
+  it('writes one history line however many times a test is reissued', async () => {
+    const l = await lead(64, { name: 'LeadTest Reissued', class_level: 11 })
+    await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id })
+    await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id })
+    expect(await history(l.id)).toHaveLength(1)
+  })
+
+  it('lets a lead added by hand start at contacted, with no history line', async () => {
+    const { data, error } = await tcA.db
+      .from('leads')
+      .insert({ name: 'LeadTest By Hand', contact_mobile: mobile(65), stage: 'contacted' })
+      .select('id, stage')
+      .single()
+    expect(error).toBeNull()
+    expect(data!.stage).toBe('contacted')
+    expect(await history(data!.id)).toEqual([])
+  })
+})
+
 describe('names', () => {
   it('refuses to issue a test to a lead with no name', async () => {
     const l = await lead(30, { class_level: 11 })
