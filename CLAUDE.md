@@ -384,6 +384,13 @@ the connection is refused (2026-10-01).
   boundary go through a SECURITY DEFINER function that returns a count and
   nothing else (`leads_on_mobile`). When narrowing a policy, list every
   caller that *counts* rows, not only those that read them.
+- **A read stops at 1,000 rows, and an `in` filter stops at a few kilobytes of URL.**
+  Supabase returns at most 1,000 rows per request whatever the query asks, and
+  PostgREST puts `in(…)` in the URL: 1,000 ids was a 400. Both were silent
+  until the GoPost import put 2,604 leads in the table; the purge would have
+  failed every night from October 2027 (fixed 2026-10-26). Any read that can
+  pass 1,000 rows pages with `.range()` and a unique tie-breaker in `.order()`;
+  any `in` over a list that grows goes in chunks (100 uuids, 200 mobiles).
 - **An error code can turn a refusal into a 30-second hang.** `supabase-js`
   retries a 503 or 520 with backoff for about half a minute, and PostgREST
   answers some SQLSTATEs with a 503: `serialization_failure` did, so a feed page

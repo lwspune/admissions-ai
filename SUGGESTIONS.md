@@ -271,11 +271,14 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       200 and moved `lead_feeds.last_synced_at`. `gopost-leads-hourly` runs at :45. Not yet seen:
       a run fired by the schedule itself rather than by hand; check `last_synced_at` after the
       next :45.
-- [ ] **The purge reads expired leads in one query, which Supabase caps at 1,000 rows (2026-10-26).**
-      `purgeExpired` selects every lead older than the cutoff without paging. With 2,577 GoPost
-      leads imported on one day, about October 2027 each nightly run would delete at most 1,000
-      and catch up over three nights; nothing is lost, but its log undercounts. Page it (as GoPost's
-      `allRows` does) before then. No other read is affected: `/leads` pages with `range`.
+- [x] ~~**The purge reads expired leads in one query, which Supabase caps at 1,000 rows.**~~
+      **FIXED 2026-10-26.** Worse than first written here: the test that expired 1,001 leads at
+      once showed the delete (`in('id', …)` with every id in the URL) refused outright with a
+      400, so from about October 2027, when the 2,577 GoPost leads expire together, every nightly
+      purge would have failed and kept data past the consented 12 months. `purgeExpired` now
+      reads in pages of 1,000 and deletes in chunks of 100 ids (sheet photos in 100s);
+      `retention.itest.ts` holds it. No other read is affected: `/leads` pages with `range`, and
+      the import's preview already chunks its `in` filter.
 - [ ] **GoPost's leads: assignment, and what does not travel (2026-10-26).** They arrive
       unassigned, so telecallers see none until a counsellor assigns them (bulk assign on
       `/leads` works today); automatic assignment is the user's "later". Only new leads travel: a
