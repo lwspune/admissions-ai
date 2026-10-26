@@ -55,7 +55,7 @@ candidate screen's words, English and Hindi) ·
 `parentPack` (the PDFs' public paths and the issue message) ·
 `retention` (the 12-month rule) · `leads` (stages, the import rules, list filters) ·
 `gopostLeads` (GoPost's feed: a lead as an import row, the page check, the /leads warning, the paging loop) ·
-`bearer` (the secret check of every route that guards itself) ·
+`bearer` (the secret check of every route that guards itself) · `leadExport` (the Excel download: the CSV, its rules) · `initials` (an avatar's letters) ·
 `contact` (what a homepage message must hold) · `publicPaths` (what opens without a session) ·
 `omr/layout` (the paper test's answer sheet, **the contract with the scanner**) · `omr/sheetPdf` (its ink) ·
 `omr/detectSquares`, `omr/gridFit`, `omr/readBubbles`, `omr/liveCapture` (the reader, ported from nda-tracker) ·
@@ -69,7 +69,7 @@ candidate screen's words, English and Hindi) ·
 into a client bundle" into a build error. `supabase` (service-role client) ·
 `auth` (session-bound client) · `staff` (accounts, via the admin API) · `assessments` (issue) · `items` (the bank) · `attempt` (open,
 identify, start, save, record, submit) · `report` · `retention` (the purge) ·
-`leads` (list and detail reads) · `leadImport` (preview and commit) · `gopostSync` (the hourly GoPost read) · `contact` (homepage
+`leads` (list and detail reads) · `leadImport` (preview and commit) · `gopostSync` (the hourly GoPost read) · `leadExport` (the download's reads) · `contact` (homepage
 messages: send, list, mark read) · `paperTest` (a paper test's question paper and sheet) · `paperScan`
 (look a paper up by its number, file a scan, the sheet photo) · `hiring` (the teacher test: its bank,
 adding an applicant, issuing) · `hiringAttempt` (the applicant's side: open, number check, start, save, submit)
@@ -287,6 +287,13 @@ These are the things that quietly break everything if violated.
   `created_at = now()`, the same transaction); a lead typed in by hand takes the day,
   in India, and keeps it. It sorts and labels rows only; the retention clock stays
   `created_at`.
+- **Downloading leads is a counsellor's and superadmin's, and it takes the stage on screen.**
+  `POST /leads/export` (`src/lib/leadExport.ts`, after GoPost's): every lead of the stage
+  under the filters, or those that reached the app (`created_at`) since your last download
+  of that stage. `record_lead_download` (migration 0028) refuses anyone else and stores the
+  point per person and stage, after the file is built; reads page by 1,000. The CSV starts
+  with a BOM built by `String.fromCharCode` (the escape for it, written in source, landed as the raw character
+  once), keeps formula characters inert and writes mobiles as "98765 43210".
 - **GoPost's leads arrive by the import's rule, and the feed's cursor moves with them.**
   GoPost serves LWS Pune's leads at its `/api/feeds/admissions` behind
   `GOPOST_LEADS_SECRET` (`ADMISSIONS_LEADS_SECRET` there); this app holds no key
@@ -415,6 +422,13 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — Leads download for Excel, as in GoPost.** The user asked for it, pointing at
+  GoPost's logic: all, or new since your last download. Their calls: both follow the stage and
+  filters on screen, and only counsellors and superadmin may download (a file of every number
+  walks out easily). The point is per person and per stage. Checked with a real download of all
+  2,556 New leads (the 1,000-row cap paged past). Same evening, also on the user's word: 14 leads
+  matching the institute's student list (student or guardian number) went to Not interested.
 
 - **2026-10-26 — Leads show and sort by when they enquired.** The user asked for the date, to
   prioritise. created_at is the import morning for all 2,577 GoPost leads, so each row shows
