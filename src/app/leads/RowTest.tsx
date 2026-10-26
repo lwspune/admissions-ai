@@ -93,10 +93,13 @@ export function RowTest({
           </Link>
         )}
         {(action === 'issue' || action === 'reissue') && (
-          <span className="flex flex-wrap items-center gap-2">
+          // Greyed out until the lead has a name and a class; the reason shows on
+          // hover (on the wrapper, since a disabled button may not show a title)
+          // and is read out with the button.
+          <span className="flex flex-wrap items-center gap-2" title={missing ? 'Add the name and class first' : undefined}>
             {missing && (
-              <span id={`missing-${lead.id}`} className="text-xs text-amber-800">
-                Add name and class first
+              <span id={`missing-${lead.id}`} className="sr-only">
+                Add the name and class first
               </span>
             )}
             <button

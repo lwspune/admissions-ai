@@ -8,15 +8,17 @@ import { CLASSES } from '@/lib/classes'
 import {
   STAGES,
   COLUMN_TITLE,
-  BOARD_MAX,
-  BOARD_STEP,
+  NEXT_STAGE,
+  PAGE_SIZE,
+  STAGE_TONE,
   INTERESTS,
   leadsHref,
   summaryHref,
   type LeadFilters,
   type Stage,
+  type Tone,
 } from '@/lib/leads'
-import type { LeadList, LeadListRow } from '@/server/leads'
+import type { LeadListRow, Pipeline } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { Icon } from '@/components/icons'
 import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
@@ -25,14 +27,14 @@ import { RowTest } from './RowTest'
 
 export function LeadsConsole({
   staff,
-  board,
+  pipeline,
   filters,
   sources,
   assignees,
   feedWarning,
 }: {
   staff: { id: string; name: string | null; email: string; role: string }
-  board: Record<Stage, LeadList>
+  pipeline: Pipeline
   filters: LeadFilters
   sources: { id: string; name: string }[]
   assignees: Assignee[]
@@ -75,7 +77,15 @@ export function LeadsConsole({
 
       <Filters filters={filters} sources={sources} assignees={assignees} canAssign={canAssign} />
 
-      <Board board={board} filters={filters} me={staff.id} assignees={assignees} canAssign={canAssign} />
+      <PipelineBar counts={pipeline.counts} filters={filters} />
+
+      <StageList
+        list={pipeline.list}
+        filters={filters}
+        me={staff.id}
+        assignees={assignees}
+        canAssign={canAssign}
+      />
     </>
   )
 }
@@ -83,8 +93,9 @@ export function LeadsConsole({
 const select = input
 
 /**
- * A plain GET form: the filters live in the URL, so a filtered board can be
- * bookmarked or shared. There is no stage filter: every stage is a column.
+ * One row of filters: a plain GET form, so a filtered pipeline can be
+ * bookmarked or shared. The filters narrow every stage, and every count on
+ * the bar with them; the stage itself is chosen on the bar.
  */
 function Filters({
   filters,
@@ -97,15 +108,15 @@ function Filters({
   assignees: Assignee[]
   canAssign: boolean
 }) {
-  const active = [filters.interest, filters.source, canAssign && filters.assignee].filter(Boolean).length
-  const anything = active > 0 || Boolean(filters.q)
+  const more = [filters.interest, canAssign && filters.assignee].filter(Boolean).length
+  const anything = more > 0 || Boolean(filters.q || filters.source)
 
   return (
-    <form method="get" action="/leads" className={cx(card, 'mt-6 p-3 sm:p-4')}>
-      {/* A search keeps a phone on the column it was looking at. */}
-      {filters.col !== 'new' && <input type="hidden" name="col" value={filters.col} />}
-      <div className="flex gap-2">
-        <div className="relative min-w-0 flex-1">
+    <form method="get" action="/leads" className={cx(card, 'mt-5 p-3')}>
+      {/* A search keeps the stage being looked at. */}
+      {filters.stage !== 'new' && <input type="hidden" name="stage" value={filters.stage} />}
+      <div className="flex flex-wrap items-center gap-2">
+        <div className="relative min-w-[12rem] flex-1">
           <label htmlFor="q" className="sr-only">
             Search
           </label>
@@ -119,24 +130,35 @@ function Filters({
             className={cx(control, 'block w-full pl-9')}
           />
         </div>
+        <label htmlFor="source" className="sr-only">
+          Source
+        </label>
+        <select id="source" name="source" defaultValue={filters.source ?? ''} className={cx(control, 'w-full sm:w-56')}>
+          <option value="">All sources</option>
+          {sources.map((s) => (
+            <option key={s.id} value={s.id}>
+              {s.name}
+            </option>
+          ))}
+        </select>
         <button type="submit" className={btn('primary')}>
           Search
         </button>
         {anything && (
-          <Link href="/leads" className={btn('ghost')}>
+          <Link href={leadsHref({ ...filters, q: '', source: null, interest: null, assignee: null })} className={btn('ghost')}>
             Clear
           </Link>
         )}
       </div>
 
-      <details open={active > 0} className="group mt-2">
+      <details open={more > 0} className="group mt-1">
         <summary className="min-h-tap inline-flex cursor-pointer list-none items-center gap-2 rounded-lg px-2 text-sm font-medium text-slate-700 hover:bg-slate-50 [&::-webkit-details-marker]:hidden">
           <Icon name="filter" className="h-4 w-4 text-slate-500" />
-          Filters
-          {active > 0 && <Badge tone="brand">{active}</Badge>}
+          More filters
+          {more > 0 && <Badge tone="brand">{more}</Badge>}
           <Icon name="chevronDown" className="h-4 w-4 text-slate-500 transition-transform group-open:rotate-180" />
         </summary>
-        <div className="grid gap-3 px-1 pb-1 pt-2 sm:grid-cols-3">
+        <div className="grid gap-3 px-1 pb-1 pt-2 sm:grid-cols-2 lg:max-w-xl">
           <div>
             <label htmlFor="interest" className={label}>
               Interest
@@ -146,19 +168,6 @@ function Filters({
               {INTERESTS.map((i) => (
                 <option key={i} value={i}>
                   {i}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div>
-            <label htmlFor="source" className={label}>
-              Source
-            </label>
-            <select id="source" name="source" defaultValue={filters.source ?? ''} className={select}>
-              <option value="">Any</option>
-              {sources.map((s) => (
-                <option key={s.id} value={s.id}>
-                  {s.name}
                 </option>
               ))}
             </select>
@@ -185,19 +194,75 @@ function Filters({
   )
 }
 
+/** A stage's colour, as a dot: the same meaning as its badge (STAGE_TONE). */
+const DOT: Record<Tone, string> = {
+  neutral: 'bg-slate-400',
+  info: 'bg-sky-500',
+  accent: 'bg-violet-500',
+  success: 'bg-emerald-500',
+  warning: 'bg-amber-500',
+  danger: 'bg-rose-500',
+}
+
+// Chevron steps: each one points into the next. The first has no notch, the last no point.
+const CHEVRON = {
+  first: 'polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%)',
+  middle: 'polygon(0 0, calc(100% - 16px) 0, 100% 50%, calc(100% - 16px) 100%, 0 100%, 16px 50%)',
+  last: 'polygon(0 0, 100% 0, 100% 100%, 0 100%, 16px 50%)',
+}
+
 /**
- * The pipeline (2026-10-26): one column per stage, and a lead moves between
- * them from its card. On a wide screen the five columns sit side by side; on
- * anything narrower, tabs show one column at a time, since five do not fit.
+ * The pipeline (2026-10-26): every stage as a step with its count. A step is
+ * a link: clicking it shows that stage's leads below, across the page.
  */
-function Board({
-  board,
+function PipelineBar({ counts, filters }: { counts: Record<Stage, number>; filters: LeadFilters }) {
+  return (
+    <nav aria-label="Pipeline" className="mt-5">
+      {/* On a phone the bar scrolls sideways; the step cut off at the edge says there are more. */}
+      <ol className="flex overflow-x-auto pb-1 [filter:drop-shadow(0_1px_1px_rgb(15_23_42/0.14))] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+        {STAGES.map((s, i) => {
+          const selected = s === filters.stage
+          const shape = i === 0 ? CHEVRON.first : i === STAGES.length - 1 ? CHEVRON.last : CHEVRON.middle
+          return (
+            <li key={s} className={cx('min-w-[9.5rem] flex-1 shrink-0 sm:min-w-[10.5rem]', i > 0 && '-ml-2')}>
+              <Link
+                href={leadsHref(filters, { stage: s })}
+                aria-current={selected ? 'page' : undefined}
+                style={{ clipPath: shape }}
+                className={cx(
+                  // On a phone the count sits under the name, so the name is never cut short.
+                  'flex h-16 flex-col justify-center text-sm outline-none transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-3',
+                  'focus-visible:ring-4 focus-visible:ring-inset focus-visible:ring-brand-300',
+                  i === 0 ? 'pl-4' : 'pl-8',
+                  i === STAGES.length - 1 ? 'pr-4' : 'pr-8',
+                  selected ? 'bg-brand-700 text-white' : 'bg-white text-slate-700 hover:bg-brand-50',
+                )}
+              >
+                <span className="flex min-w-0 items-center gap-2 font-medium">
+                  <span aria-hidden="true" className={cx('h-2.5 w-2.5 shrink-0 rounded-full', DOT[STAGE_TONE[s]], selected && 'ring-2 ring-white')} />
+                  <span className="truncate">{COLUMN_TITLE[s]}</span>
+                </span>
+                <span className={cx('text-lg font-semibold tabular-nums', selected ? 'text-white' : 'text-slate-900')}>
+                  {counts[s].toLocaleString('en-IN')}
+                </span>
+              </Link>
+            </li>
+          )
+        })}
+      </ol>
+    </nav>
+  )
+}
+
+/** The stage the bar shows, a page at a time, one lead per row across the page. */
+function StageList({
+  list,
   filters,
   me,
   assignees,
   canAssign,
 }: {
-  board: Record<Stage, LeadList>
+  list: Pipeline['list']
   filters: LeadFilters
   me: string
   assignees: Assignee[]
@@ -209,9 +274,12 @@ function Board({
   const [result, setResult] = useState<ActionResult | null>(null)
   const [pending, start] = useTransition()
 
+  const pages = Math.max(1, Math.ceil(list.total / PAGE_SIZE))
   const names = new Map(assignees.map((a) => [a.id, a.label]))
   const assignedLabel = (id: string | null) =>
     id === null ? 'Unassigned' : id === me ? 'You' : (names.get(id) ?? 'Not a telecaller now')
+  const allOnPage = list.rows.length > 0 && list.rows.every((r) => selected.has(r.id))
+  const title = COLUMN_TITLE[filters.stage]
 
   function toggle(id: string) {
     setSelected((prev) => {
@@ -235,44 +303,57 @@ function Board({
   }
 
   return (
-    <section aria-label="Pipeline" className="mt-6">
-      {/* The last tab is cut off at the edge, which says there are more; a scrollbar would only add a grey line. */}
-      <nav aria-label="Stages" className="-mx-1 flex gap-1 overflow-x-auto px-1 pb-1 [scrollbar-width:none] xl:hidden [&::-webkit-scrollbar]:hidden">
-        {STAGES.map((s) => (
-          <Link
-            key={s}
-            href={leadsHref(filters, { col: s })}
-            aria-current={s === filters.col ? 'page' : undefined}
-            className={cx(
-              'min-h-tap inline-flex shrink-0 items-center gap-1.5 rounded-lg px-3 text-sm font-medium',
-              s === filters.col ? 'bg-brand-700 text-white' : 'bg-white text-slate-700 ring-1 ring-slate-200 hover:bg-slate-50',
-            )}
-          >
-            {COLUMN_TITLE[s]}
-            <span className={cx('tabular-nums', s === filters.col ? 'text-brand-100' : 'text-slate-500')}>{board[s].total}</span>
-          </Link>
-        ))}
-      </nav>
+    <section aria-labelledby="stage-heading" className="mt-4">
+      <div className="flex min-h-tap flex-wrap items-center justify-between gap-3">
+        <h2 id="stage-heading" className="text-base font-semibold text-slate-900">
+          {title}
+          <span className="ml-2 text-sm font-normal text-slate-600">
+            {list.total === 0
+              ? 'no leads'
+              : `${list.total.toLocaleString('en-IN')} lead${list.total === 1 ? '' : 's'}${pages > 1 ? ` · page ${filters.page} of ${pages}` : ''}`}
+          </span>
+        </h2>
+        {canAssign && list.rows.length > 0 && (
+          <label className="inline-flex min-h-tap cursor-pointer items-center gap-2 text-sm text-slate-700">
+            <input
+              type="checkbox"
+              checked={allOnPage}
+              onChange={() => setSelected(allOnPage ? new Set() : new Set(list.rows.map((r) => r.id)))}
+              className="h-5 w-5 rounded accent-brand-700"
+            />
+            Select all on this page
+          </label>
+        )}
+      </div>
 
-      <p aria-live="polite" className={result?.error ? 'mt-2 text-sm text-rose-700' : 'sr-only'}>
+      <p aria-live="polite" className={result?.error ? 'mb-2 text-sm text-rose-700' : 'sr-only'}>
         {result?.error ?? (result?.ok ? 'Assigned.' : '')}
       </p>
 
-      <div className="mt-3 xl:mt-0 xl:grid xl:grid-cols-5 xl:items-start xl:gap-3">
-        {STAGES.map((s) => (
-          <Column
-            key={s}
-            stage={s}
-            list={board[s]}
-            filters={filters}
-            shown={s === filters.col}
-            canAssign={canAssign}
-            selected={selected}
-            toggle={toggle}
-            assignedLabel={assignedLabel}
-          />
-        ))}
-      </div>
+      {list.rows.length === 0 ? (
+        <div className={cx(card, 'mt-2 px-6 py-12 text-center')}>
+          <p className="font-medium text-slate-900">No leads in {title}</p>
+          <p className="mt-1 text-sm text-slate-600">
+            {filters.q || filters.source || filters.interest || filters.assignee
+              ? 'Nothing here matches these filters.'
+              : 'Move a lead here with the buttons on its row.'}
+          </p>
+        </div>
+      ) : (
+        <ul className={cx(card, 'mt-2 divide-y divide-slate-100')}>
+          {list.rows.map((lead) => (
+            <LeadRow
+              key={lead.id}
+              lead={lead}
+              filters={filters}
+              canAssign={canAssign}
+              selected={selected.has(lead.id)}
+              toggle={toggle}
+              assignedLabel={assignedLabel}
+            />
+          ))}
+        </ul>
+      )}
 
       {canAssign && selected.size > 0 && (
         <div className="sticky bottom-4 z-20 mt-4 flex flex-wrap items-end gap-3 rounded-xl bg-slate-900 p-3 text-white shadow-raised sm:p-4">
@@ -302,89 +383,35 @@ function Board({
           </button>
         </div>
       )}
-    </section>
-  )
-}
 
-function Column({
-  stage,
-  list,
-  filters,
-  shown,
-  canAssign,
-  selected,
-  toggle,
-  assignedLabel,
-}: {
-  stage: Stage
-  list: LeadList
-  filters: LeadFilters
-  /** The column a phone shows; on a wide screen every column shows. */
-  shown: boolean
-  canAssign: boolean
-  selected: Set<string>
-  toggle: (id: string) => void
-  assignedLabel: (id: string | null) => string
-}) {
-  const headingId = `column-${stage}`
-  const allHere = list.rows.length > 0 && list.rows.every((r) => selected.has(r.id))
-  const more = list.total - list.rows.length
-
-  return (
-    <section aria-labelledby={headingId} className={cx(shown ? 'block' : 'hidden', 'min-w-0 xl:block')}>
-      <div className="flex min-h-tap items-center justify-between gap-2 px-1">
-        {/* Below xl the selected tab already names the column; the heading stays for screen readers. */}
-        <h2 id={headingId} className="text-sm font-semibold text-slate-800 max-xl:sr-only">
-          {COLUMN_TITLE[stage]} <span className="font-normal tabular-nums text-slate-600">{list.total}</span>
-        </h2>
-        {canAssign && list.rows.length > 0 && (
-          <label className="inline-flex min-h-tap cursor-pointer items-center gap-2 text-xs text-slate-700">
-            <input
-              type="checkbox"
-              checked={allHere}
-              onChange={() => list.rows.forEach((r) => (allHere || !selected.has(r.id)) && toggle(r.id))}
-              aria-label={`Select every lead shown in ${COLUMN_TITLE[stage]}`}
-              className="h-5 w-5 rounded accent-brand-700"
-            />
-            All
-          </label>
-        )}
-      </div>
-
-      {list.rows.length === 0 ? (
-        <p className="rounded-xl border border-dashed border-slate-300 px-3 py-6 text-center text-sm text-slate-600">No leads</p>
-      ) : (
-        <ul className="space-y-2">
-          {list.rows.map((lead) => (
-            <LeadCard
-              key={lead.id}
-              lead={lead}
-              filters={filters}
-              canAssign={canAssign}
-              selected={selected.has(lead.id)}
-              toggle={toggle}
-              assignedLabel={assignedLabel}
-            />
-          ))}
-        </ul>
+      {pages > 1 && (
+        <nav aria-label="Pages" className="mt-4 flex items-center justify-between gap-3">
+          {filters.page > 1 ? (
+            <Link href={leadsHref(filters, { page: filters.page - 1 })} className={btn('secondary')}>
+              <Icon name="chevronLeft" className="h-4 w-4" />
+              Previous
+            </Link>
+          ) : (
+            <span />
+          )}
+          <span className="text-sm text-slate-600">
+            Page {filters.page} of {pages}
+          </span>
+          {filters.page < pages ? (
+            <Link href={leadsHref(filters, { page: filters.page + 1 })} className={btn('secondary')}>
+              Next
+              <Icon name="chevronRight" className="h-4 w-4" />
+            </Link>
+          ) : (
+            <span />
+          )}
+        </nav>
       )}
-
-      {more > 0 &&
-        (filters.show[stage] < BOARD_MAX ? (
-          <Link href={leadsHref(filters, { more: stage })} scroll={false} className={cx(btn('secondary', 'sm'), 'mt-2 w-full')}>
-            Show {Math.min(BOARD_STEP, more)} more
-            <span className="font-normal text-slate-600">· {more} not shown</span>
-          </Link>
-        ) : (
-          <p className="mt-2 px-1 text-xs text-slate-600">
-            {more} more not shown. Search or filter to find one.
-          </p>
-        ))}
     </section>
   )
 }
 
-function LeadCard({
+function LeadRow({
   lead,
   filters,
   canAssign,
@@ -400,81 +427,112 @@ function LeadCard({
   assignedLabel: (id: string | null) => string
 }) {
   const who = lead.name ?? lead.contact_mobile
+  // A comment a person wrote is worth a line on the row; an import's note stays in the history.
+  const note = lead.lastNote?.kind === 'note' ? lead.lastNote : null
+
   return (
-    <li className={cx(card, 'p-3', selected && 'ring-2 ring-brand-500')}>
-      <div className="flex items-start gap-2">
-        {canAssign && (
-          <input
-            type="checkbox"
-            checked={selected}
-            onChange={() => toggle(lead.id)}
-            aria-label={`Select ${who}`}
-            className="mt-0.5 h-5 w-5 shrink-0 rounded accent-brand-700"
-          />
-        )}
-        <Avatar name={lead.name} className="hidden sm:grid xl:hidden" />
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
-            <Link href={`/leads/${lead.id}`} className="break-words rounded font-semibold text-slate-900 hover:text-brand-700">
-              {lead.name ?? <span className="font-normal italic text-slate-600">No name</span>}
-            </Link>
-            {/* "Issue link" says there is no test; the card must say a completed one is done. */}
-            {lead.testAction !== 'issue' && lead.test && (
-              <Badge tone={lead.testAction === 'report' ? 'success' : 'info'} icon={lead.testAction === 'report' ? 'check' : 'clock'}>
-                {lead.test}
-              </Badge>
-            )}
-          </div>
-          <p className="mt-0.5 text-sm text-slate-600">
-            {[lead.contact_mobile, lead.interest, lead.class_level && `Class ${lead.class_level}`].filter(Boolean).join(' · ')}
-          </p>
-          <p className="text-sm text-slate-600">
-            {[lead.sources.join(', ') || 'Added by hand', canAssign && assignedLabel(lead.assigned_to)].filter(Boolean).join(' · ')}
-          </p>
-        </div>
-      </div>
-
-      {lead.lastNote && (
-        <p className="mt-2 flex items-start gap-2 rounded-lg bg-slate-50 px-2.5 py-1.5 text-sm text-slate-700">
-          <Icon name="message" className="mt-0.5 h-3.5 w-3.5 shrink-0 text-slate-500" />
-          <span className="line-clamp-2 min-w-0">
-            <span className="font-medium text-slate-600">{lead.lastNote.author_name ?? 'Import'}:</span> {lead.lastNote.body}
-          </span>
-        </p>
+    <li className={cx('flex items-start gap-3 px-3 py-3 transition-colors sm:px-4', selected ? 'bg-brand-50/60' : 'hover:bg-slate-50/70')}>
+      {canAssign && (
+        <input
+          type="checkbox"
+          checked={selected}
+          onChange={() => toggle(lead.id)}
+          aria-label={`Select ${who}`}
+          className="mt-2.5 h-5 w-5 shrink-0 rounded accent-brand-700"
+        />
       )}
-
-      <div className="mt-2">
+      <Avatar name={lead.name} className="mt-0.5 hidden sm:grid" />
+      <div className="min-w-0 flex-1">
         <RowTest lead={lead} action={lead.testAction} canPaper={canAssign} reportHref={summaryHref(lead.id, filters)}>
-          <MoveMenu leadId={lead.id} stage={lead.stage} who={who} />
+          <div className="grid min-w-0 flex-1 basis-full gap-x-6 gap-y-0.5 sm:basis-0 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
+            <div className="min-w-0">
+              <div className="flex flex-wrap items-center gap-x-2 gap-y-1">
+                <Link href={`/leads/${lead.id}`} className="rounded font-semibold text-slate-900 hover:text-brand-700">
+                  {lead.name ?? <span className="font-normal italic text-slate-600">No name</span>}
+                </Link>
+                {/* "Issue link" says there is no test; the row must say a completed one is done. */}
+                {lead.testAction !== 'issue' && lead.test && (
+                  <Badge tone={lead.testAction === 'report' ? 'success' : 'info'} icon={lead.testAction === 'report' ? 'check' : 'clock'}>
+                    {lead.test}
+                  </Badge>
+                )}
+              </div>
+              <p className="text-sm tabular-nums text-slate-600">
+                {[lead.contact_mobile, lead.interest, lead.class_level && `Class ${lead.class_level}`].filter(Boolean).join(' · ')}
+              </p>
+            </div>
+            <div className="min-w-0 text-sm text-slate-600 lg:self-center">
+              <p className="truncate">
+                {[lead.sources.join(', ') || 'Added by hand', canAssign && assignedLabel(lead.assigned_to)].filter(Boolean).join(' · ')}
+              </p>
+              {note && (
+                <p className="truncate text-slate-700">
+                  <Icon name="message" className="mr-1 inline h-3.5 w-3.5 align-[-2px] text-slate-500" />
+                  {note.body}
+                </p>
+              )}
+            </div>
+          </div>
+          <span className="flex items-center gap-2">
+            <NextStage leadId={lead.id} stage={lead.stage} who={who} />
+            <MoveMenu leadId={lead.id} stage={lead.stage} who={who} />
+          </span>
         </RowTest>
       </div>
     </li>
   )
 }
 
-/**
- * Moves a lead to any other stage, forwards or back (2026-10-26). The
- * database writes the history line and refuses a lead the user cannot see.
- */
-function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: string }) {
+function useMove(leadId: string) {
   const router = useRouter()
-  const menu = useRef<HTMLDetailsElement>(null)
   const [pending, start] = useTransition()
   const [error, setError] = useState('')
-
-  function close() {
-    menu.current?.removeAttribute('open')
-  }
-
-  function move(to: Stage) {
+  const move = (to: Stage, then?: () => void) => {
     setError('')
     start(async () => {
       const r = await setStage(leadId, to)
-      close()
+      then?.()
       if (!r.ok) setError(r.error ?? 'Could not move the lead.')
       router.refresh()
     })
   }
+  return { pending, error, move }
+}
+
+/** The usual next step in one click (NEXT_STAGE); none from an outcome. */
+function NextStage({ leadId, stage, who }: { leadId: string; stage: Stage; who: string }) {
+  const next = NEXT_STAGE[stage]
+  const { pending, error, move } = useMove(leadId)
+  if (!next) return null
+  return (
+    <>
+      <button
+        type="button"
+        onClick={() => move(next)}
+        disabled={pending}
+        aria-label={`Move ${who} to ${COLUMN_TITLE[next]}`}
+        className={btn('secondary', 'sm')}
+      >
+        <Icon name="arrowRight" className="h-4 w-4" />
+        {pending ? 'Moving…' : COLUMN_TITLE[next]}
+      </button>
+      {error && (
+        <span role="alert" className="text-sm text-rose-700">
+          {error}
+        </span>
+      )}
+    </>
+  )
+}
+
+/**
+ * Every other stage, forwards or back (2026-10-26). The database writes the
+ * history line and refuses a lead the user cannot see.
+ */
+function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: string }) {
+  const menu = useRef<HTMLDetailsElement>(null)
+  const { pending, error, move } = useMove(leadId)
+  const close = () => menu.current?.removeAttribute('open')
 
   return (
     <div>
@@ -490,25 +548,29 @@ function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: s
       >
         <summary
           aria-label={`Move ${who} to another stage`}
-          className={cx(btn('secondary', 'sm'), 'cursor-pointer list-none [&::-webkit-details-marker]:hidden')}
+          title="Move to another stage"
+          className={cx(btn('secondary', 'sm'), 'cursor-pointer list-none px-2.5 [&::-webkit-details-marker]:hidden')}
         >
-          {pending ? 'Moving…' : 'Move'}
-          <Icon name="chevronDown" className="h-4 w-4" />
+          <Icon name="more" className="h-4 w-4" />
         </summary>
-        <ul className="absolute left-0 z-30 mt-1 w-44 rounded-lg border border-slate-200 bg-white p-1 shadow-raised">
-          {STAGES.filter((s) => s !== stage).map((s) => (
-            <li key={s}>
-              <button
-                type="button"
-                onClick={() => move(s)}
-                disabled={pending}
-                className="min-h-tap w-full rounded-md px-3 text-left text-sm text-slate-800 hover:bg-slate-100 disabled:opacity-60"
-              >
-                {COLUMN_TITLE[s]}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <div className="absolute right-0 z-30 mt-1 w-48 rounded-lg border border-slate-200 bg-white p-1 shadow-raised">
+          <p className="px-3 pb-1 pt-1.5 text-xs font-semibold uppercase tracking-wider text-slate-500">Move to</p>
+          <ul>
+            {STAGES.filter((s) => s !== stage).map((s) => (
+              <li key={s}>
+                <button
+                  type="button"
+                  onClick={() => move(s, close)}
+                  disabled={pending}
+                  className="min-h-tap flex w-full items-center gap-2 rounded-md px-3 text-left text-sm text-slate-800 hover:bg-slate-100 disabled:opacity-60"
+                >
+                  <span aria-hidden="true" className={cx('h-2 w-2 rounded-full', DOT[STAGE_TONE[s]])} />
+                  {COLUMN_TITLE[s]}
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       </details>
       {error && (
         <p role="alert" className="mt-1 text-sm text-rose-700">

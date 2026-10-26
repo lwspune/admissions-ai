@@ -23,8 +23,20 @@ export const STAGE_LABEL: Record<Stage, string> = {
   not_interested: 'Not interested',
 }
 
-/** A column's heading on the board. */
+/** A stage's name on the pipeline bar. */
 export const COLUMN_TITLE: Record<Stage, string> = { ...STAGE_LABEL, new: 'New leads' }
+
+/**
+ * The one-click move on a lead's row: the owner's usual next step (2026-10-26).
+ * CNR and Not interested, and moving back, are in the row's menu instead.
+ */
+export const NEXT_STAGE: Record<Stage, Stage | null> = {
+  new: 'contacted',
+  cnr: 'contacted',
+  contacted: 'in_eis',
+  in_eis: null,
+  not_interested: null,
+}
 
 export type Tone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger'
 
@@ -262,15 +274,12 @@ export function isUuid(value: unknown): value is string {
   return typeof value === 'string' && UUID.test(value)
 }
 
-/** Cards a column shows at first, and how many more each "Show more" adds. */
-export const BOARD_STEP = 50
-/** Past this, searching finds a lead faster than scrolling to it. */
-export const BOARD_MAX = 500
+/** Rows a page of one stage shows. */
+export const PAGE_SIZE = 50
 
 /**
- * The board's state (2026-10-26). There is no stage filter: every stage is a
- * column. `col` is the column a phone shows, one at a time; `show` is how many
- * cards each column shows.
+ * The pipeline's state (2026-10-26): the stage the bar shows, its page, and
+ * the filters, which narrow every stage and so every count on the bar.
  */
 export interface LeadFilters {
   q: string
@@ -279,14 +288,15 @@ export interface LeadFilters {
   source: string | null
   /** 'me', 'none' (unassigned), or a telecaller's id. */
   assignee: string | null
-  col: Stage
-  show: Record<Stage, number>
+  stage: Stage
+  /** 1-based. */
+  page: number
 }
 
 type Params = Record<string, string | string[] | undefined>
 
 /**
- * The board's filters, read from the URL. Anything unrecognised is dropped
+ * The pipeline's state, read from the URL. Anything unrecognised is dropped
  * here, so no raw query-string text reaches a database filter.
  */
 export function parseLeadFilters(params: Params): LeadFilters {
@@ -295,38 +305,34 @@ export function parseLeadFilters(params: Params): LeadFilters {
     return (Array.isArray(v) ? v[0] : v) ?? ''
   }
   const assignee = one('assignee')
-  const count = (raw: string) => {
-    const n = Number(raw)
-    return Number.isInteger(n) && n >= BOARD_STEP && n <= BOARD_MAX && n % BOARD_STEP === 0 ? n : BOARD_STEP
-  }
+  const page = Number.parseInt(one('page'), 10)
 
   return {
     q: one('q').trim(),
     interest: isInterest(one('interest')) ? (one('interest') as Interest) : null,
     source: isUuid(one('source')) ? one('source') : null,
     assignee: assignee === 'me' || assignee === 'none' || isUuid(assignee) ? assignee : null,
-    col: isStage(one('col')) ? (one('col') as Stage) : 'new',
-    show: Object.fromEntries(STAGES.map((s) => [s, count(one(`show_${s}`))])) as Record<Stage, number>,
+    stage: isStage(one('stage')) ? (one('stage') as Stage) : 'new',
+    page: Number.isFinite(page) && page > 1 ? page : 1,
   }
 }
 
 /**
- * The board's address: what `parseLeadFilters` reads back. `col` switches the
- * column a phone shows; `more` shows fifty more cards in one column, and keeps
- * that column on a phone.
+ * The pipeline's address: what `parseLeadFilters` reads back. `stage` is a
+ * click on the bar, which starts that stage at page one; `page` turns the
+ * page within the stage shown.
  */
-export function leadsHref(filters: LeadFilters, { col, more }: { col?: Stage; more?: Stage } = {}): string {
-  const show = { ...filters.show }
-  if (more) show[more] = Math.min(show[more] + BOARD_STEP, BOARD_MAX)
-  const column = more ?? col ?? filters.col
+export function leadsHref(filters: LeadFilters, { stage, page }: { stage?: Stage; page?: number } = {}): string {
+  const shown = stage ?? filters.stage
+  const at = stage ? 1 : (page ?? filters.page)
 
   const params = new URLSearchParams()
   if (filters.q) params.set('q', filters.q)
   if (filters.interest) params.set('interest', filters.interest)
   if (filters.source) params.set('source', filters.source)
   if (filters.assignee) params.set('assignee', filters.assignee)
-  if (column !== 'new') params.set('col', column)
-  for (const s of STAGES) if (show[s] !== BOARD_STEP) params.set(`show_${s}`, String(show[s]))
+  if (shown !== 'new') params.set('stage', shown)
+  if (at > 1) params.set('page', String(at))
   const query = params.toString()
   return query ? `/leads?${query}` : '/leads'
 }

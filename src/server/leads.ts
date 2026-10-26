@@ -1,6 +1,6 @@
 import 'server-only'
 import type { Db } from './supabase'
-import { STAGES, searchTerm, testStatus, testAction, type LeadFilters, type Stage, type Interest, type TestAction } from '../lib/leads'
+import { STAGES, PAGE_SIZE, searchTerm, testStatus, testAction, type LeadFilters, type Stage, type Interest, type TestAction } from '../lib/leads'
 
 // Reads for the lead pages. Always the session client: RLS decides which leads
 // a staff member sees (migration 0012), so there is no role filter here, and a
@@ -26,38 +26,62 @@ export interface LeadList {
   total: number
 }
 
-/** The board: every stage's column, each as long as `filters.show` asks. */
-export async function listBoard(db: Db, filters: LeadFilters, me: string): Promise<Record<Stage, LeadList>> {
-  const columns = await Promise.all(STAGES.map((stage) => listColumn(db, filters, stage, me)))
-  return Object.fromEntries(STAGES.map((stage, i) => [stage, columns[i]!])) as Record<Stage, LeadList>
+export interface Pipeline {
+  /** Every stage's count under the filters: the numbers on the pipeline bar. */
+  counts: Record<Stage, number>
+  /** One page of the stage the bar shows. */
+  list: LeadList
 }
 
-// The detail lookups go 100 leads at a time: an `in` filter rides in the URL,
-// and a long column's notes could pass Supabase's 1,000-row cap in one read.
-const DETAIL_CHUNK = 100
+/** The pipeline (2026-10-26): every stage's count, and a page of the one shown. */
+export async function listPipeline(db: Db, filters: LeadFilters, me: string): Promise<Pipeline> {
+  const [counts, list] = await Promise.all([
+    Promise.all(
+      STAGES.map(async (stage) => {
+        const { count, error } = await filtered(db, filters, me, 'id', { count: 'exact', head: true }).eq('stage', stage)
+        if (error) throw new Error(`could not count leads: ${error.message}`)
+        return count ?? 0
+      }),
+    ),
+    listStage(db, filters, me),
+  ])
+  return { counts: Object.fromEntries(STAGES.map((s, i) => [s, counts[i]!])) as Record<Stage, number>, list }
+}
 
-async function listColumn(db: Db, filters: LeadFilters, stage: Stage, me: string): Promise<LeadList> {
-  // Filtering by source needs the join to be an inner one; otherwise it is left
-  // out, so a lead added by hand (no origin) still lists.
-  const columns = 'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at'
-  let query = db
-    .from('leads')
-    .select(filters.source ? `${columns}, lead_origins!inner(source_id)` : columns, { count: 'exact' })
-    .eq('stage', stage)
-
+/**
+ * Leads under the filters, which narrow every stage alike. Filtering by source
+ * needs the join to be an inner one; otherwise it is left out, so a lead added
+ * by hand (no origin) still lists.
+ */
+function filtered(db: Db, filters: LeadFilters, me: string, columns: string, opts: { count: 'exact'; head?: boolean }) {
+  let query = db.from('leads').select(filters.source ? `${columns}, lead_origins!inner(source_id)` : columns, opts)
   if (filters.source) query = query.eq('lead_origins.source_id', filters.source)
   if (filters.interest) query = query.eq('interest', filters.interest)
   if (filters.assignee === 'me') query = query.eq('assigned_to', me)
   else if (filters.assignee === 'none') query = query.is('assigned_to', null)
   else if (filters.assignee) query = query.eq('assigned_to', filters.assignee)
-
   const search = searchTerm(filters.q)
   if (search) query = query.ilike(search.column, search.pattern)
+  return query
+}
 
-  const { data, count, error } = await query
+// The detail lookups go 100 leads at a time: an `in` filter rides in the URL,
+// and many leads' notes could pass Supabase's 1,000-row cap in one read.
+const DETAIL_CHUNK = 100
+
+async function listStage(db: Db, filters: LeadFilters, me: string): Promise<LeadList> {
+  const from = (filters.page - 1) * PAGE_SIZE
+  const { data, count, error } = await filtered(
+    db,
+    filters,
+    me,
+    'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at',
+    { count: 'exact' },
+  )
+    .eq('stage', filters.stage)
     .order('created_at', { ascending: false })
     .order('id')
-    .range(0, filters.show[stage] - 1)
+    .range(from, from + PAGE_SIZE - 1)
 
   if (error) throw new Error(`could not load leads: ${error.message}`)
   const leads = (data ?? []) as unknown as Omit<LeadListRow, 'sources' | 'test' | 'testAction' | 'lastNote'>[]
