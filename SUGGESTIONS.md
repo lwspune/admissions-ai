@@ -411,6 +411,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 Learnings that may apply to work already shipped. Each needs a 360 analysis and the user's
 go-ahead before anything shipped is touched.
 
+- [ ] **Leads issued a test before 0024 still sit at New (2026-10-26).** From 0024, issuing a
+      test moves a New or CNR lead to Contacted, but the trigger acts only on new papers. On the
+      day it shipped, 26 production leads were at New with a test already issued (none at CNR).
+      Moving them once would be one `update`, writing a "new → contacted" history line each with
+      no author. Not yet analysed (360 needed: whether anyone filters on New to find work).
+
 - [ ] **Some times are formatted without India's zone (2026-10-19).** Found live on /hiring: the
       server runs on UTC, so "added 08:47 am" was 2:17 pm. Hiring now uses `istTime`/`istDay`, and
       the unit suite runs on UTC (`vitest.config.ts`) so a zoneless format fails there instead of

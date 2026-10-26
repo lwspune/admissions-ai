@@ -263,6 +263,10 @@ These are the things that quietly break everything if violated.
 - **A lead's name is optional until a test is issued, then permanent.**
   `issue_assessment` refuses a nameless lead (the candidate confirms the name
   on screen), and `leads_guard` refuses removing a name once set.
+- **Issuing a test moves a New or CNR lead to Contacted, and never moves one back.**
+  A trigger on `assessments` (migration 0024), so online, paper and direct writes
+  all count; the history line is the issuer's. A lead added by hand starts at
+  Contacted (`createLead`); imports set their own stage, New unless the file says.
 
 ## Commands
 
@@ -367,6 +371,14 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-26 — Leads arrive New; the test goes out from Contacted.** The user's flow, ahead of
+  GoPost's leads arriving here: imported leads are New, someone speaks to the family, and the link
+  is issued from Contacted. A counsellor's hand-added lead goes straight to Contacted. By my
+  choice, issuing moves the stage rather than requiring it (a refusal would add a click and
+  nothing else), anyone's hand-added lead counts, not only a counsellor's, and the 26 leads already
+  at New with a test are left for the backfill ledger. Next: GoPost's leads, hourly, as New, with
+  assignment later.
 
 - **2026-10-24 — Hiring gets a decision, notes and a resume, and its applicants are kept for good.**
   The user's calls: six decisions (in progress, shortlisted, on hold, hired, rejected, withdrawn),
