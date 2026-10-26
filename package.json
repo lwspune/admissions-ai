@@ -27,7 +27,8 @@
     "issue": "tsx scripts/issue-test.mts",
     "staff:rm": "node scripts/create-staff.mjs rm",
     "hiring:import": "tsx scripts/hiring-import.mts",
-    "hiring:seed": "tsx scripts/hiring-seed.mts"
+    "hiring:seed": "tsx scripts/hiring-seed.mts",
+    "leads:gopost": "tsx scripts/gopost-sync.mts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",
