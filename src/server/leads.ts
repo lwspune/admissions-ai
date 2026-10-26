@@ -53,9 +53,9 @@ export async function listPipeline(db: Db, filters: LeadFilters, me: string): Pr
 /**
  * Leads under the filters, which narrow every stage alike. Filtering by source
  * needs the join to be an inner one; otherwise it is left out, so a lead added
- * by hand (no origin) still lists.
+ * by hand (no origin) still lists. The download (leadExport.ts) reads through it too.
  */
-function filtered(db: Db, filters: LeadFilters, me: string, columns: string, opts: { count: 'exact'; head?: boolean }) {
+export function filtered(db: Db, filters: LeadFilters, me: string, columns: string, opts: { count?: 'exact'; head?: boolean } = {}) {
   let query = db.from('leads').select(filters.source ? `${columns}, lead_origins!inner(source_id)` : columns, opts)
   if (filters.source) query = query.eq('lead_origins.source_id', filters.source)
   if (filters.interest) query = query.eq('interest', filters.interest)

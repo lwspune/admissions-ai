@@ -33,6 +33,7 @@ export function LeadsConsole({
   sources,
   assignees,
   feedWarning,
+  download,
 }: {
   staff: { id: string; name: string | null; email: string; role: string }
   pipeline: Pipeline
@@ -41,6 +42,8 @@ export function LeadsConsole({
   assignees: Assignee[]
   /** GoPost's leads are not arriving (src/lib/gopostLeads.ts); counsellors and superadmin only. */
   feedWarning: string | null
+  /** "Download for Excel": your last download of the stage on screen, and how many are new since. Null hides it. */
+  download: { lastAt: string | null; fresh: number | null } | null
 }) {
   const [adding, setAdding] = useState(false)
   const canAssign = canManageLeads(staff.role)
@@ -50,21 +53,24 @@ export function LeadsConsole({
       <PageHeader
         title="Leads"
         actions={
-          <button
-            type="button"
-            className={adding ? btn('secondary') : btn('primary')}
-            aria-expanded={adding}
-            onClick={() => setAdding((v) => !v)}
-          >
-            {adding ? (
-              'Cancel'
-            ) : (
-              <>
-                <Icon name="plus" className="h-4 w-4" />
-                Add lead
-              </>
-            )}
-          </button>
+          <>
+            {download && <DownloadMenu filters={filters} total={pipeline.list.total} download={download} />}
+            <button
+              type="button"
+              className={adding ? btn('secondary') : btn('primary')}
+              aria-expanded={adding}
+              onClick={() => setAdding((v) => !v)}
+            >
+              {adding ? (
+                'Cancel'
+              ) : (
+                <>
+                  <Icon name="plus" className="h-4 w-4" />
+                  Add lead
+                </>
+              )}
+            </button>
+          </>
         }
       />
 
@@ -586,6 +592,79 @@ function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: s
         </p>
       )}
     </div>
+  )
+}
+
+/**
+ * "Download for Excel" (2026-10-26, after GoPost's): the stage and filters on
+ * screen, every lead or only those that reached the app since your last
+ * download of the stage. Each choice is a POST, since it moves your download
+ * point (migration 0028); the browser saves the file and stays on the page.
+ */
+function DownloadMenu({
+  filters,
+  total,
+  download,
+}: {
+  filters: LeadFilters
+  total: number
+  download: { lastAt: string | null; fresh: number | null }
+}) {
+  const router = useRouter()
+  const menu = useRef<HTMLDetailsElement>(null)
+  const title = COLUMN_TITLE[filters.stage]
+  const item = 'flex w-full flex-col rounded-md px-3 py-2 text-left hover:bg-slate-100 disabled:cursor-not-allowed disabled:opacity-50'
+
+  return (
+    <details
+      ref={menu}
+      className="relative"
+      onKeyDown={(e) => {
+        if (e.key === 'Escape') {
+          menu.current?.removeAttribute('open')
+          menu.current?.querySelector('summary')?.focus()
+        }
+      }}
+    >
+      <summary className={cx(btn('secondary'), 'cursor-pointer list-none [&::-webkit-details-marker]:hidden')}>
+        <Icon name="download" className="h-4 w-4" />
+        Download for Excel
+      </summary>
+      <form
+        method="post"
+        action="/leads/export"
+        onSubmit={() => {
+          menu.current?.removeAttribute('open')
+          // The new download point shows once the file has been built.
+          setTimeout(() => router.refresh(), 2000)
+        }}
+        className="absolute right-0 z-30 mt-1 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-slate-200 bg-white p-1 text-sm shadow-raised"
+      >
+        <input type="hidden" name="stage" value={filters.stage} />
+        {filters.q && <input type="hidden" name="q" value={filters.q} />}
+        {filters.source && <input type="hidden" name="source" value={filters.source} />}
+        {filters.interest && <input type="hidden" name="interest" value={filters.interest} />}
+        {filters.assignee && <input type="hidden" name="assignee" value={filters.assignee} />}
+        <button type="submit" name="kind" value="all" disabled={total === 0} className={item}>
+          <span className="font-medium text-slate-900">
+            All in {title} ({total.toLocaleString('en-IN')})
+          </span>
+          <span className="text-xs text-slate-600">With the search and filters on screen</span>
+        </button>
+        {download.lastAt ? (
+          <button type="submit" name="kind" value="new" disabled={!download.fresh} className={item}>
+            <span className="font-medium text-slate-900">
+              New since your last download ({(download.fresh ?? 0).toLocaleString('en-IN')})
+            </span>
+            <span className="text-xs text-slate-600">Last download {download.lastAt}</span>
+          </button>
+        ) : (
+          <p className="px-3 py-2 text-xs text-slate-600">
+            Your first download of {title}, so there is no “new since” yet.
+          </p>
+        )}
+      </form>
+    </details>
   )
 }
 

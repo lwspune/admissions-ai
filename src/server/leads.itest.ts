@@ -354,6 +354,29 @@ describe('the enquiry date', () => {
   })
 })
 
+// "Download for Excel" (migration 0028): each person's download point, per
+// stage, recorded only by a counsellor or superadmin and read only by its owner.
+describe('lead downloads', () => {
+  const record = (db: SupabaseClient, stage: string, at: string, since: string | null = null) =>
+    db.rpc('record_lead_download', { p_kind: since ? 'new' : 'all', p_stage: stage, p_count: 3, p_since: since, p_at: at })
+
+  it('records a counsellor’s download, which only they can read back', async () => {
+    const at = new Date(Date.now() - 60_000).toISOString()
+    expect((await record(counsellor.db, 'new', at)).error).toBeNull()
+    const { data } = await counsellor.db.from('lead_downloads').select('stage, kind, lead_count, user_id').eq('stage', 'new')
+    expect(data).toEqual([{ stage: 'new', kind: 'all', lead_count: 3, user_id: counsellor.id }])
+    const { data: theirs } = await tcA.db.from('lead_downloads').select('id')
+    expect(theirs).toEqual([])
+  })
+
+  it('refuses a telecaller, a time in the future, and a stage that does not exist', async () => {
+    const now = new Date().toISOString()
+    expect((await record(tcA.db, 'new', now)).error?.message).toMatch(/only a counsellor or superadmin/)
+    expect((await record(counsellor.db, 'new', new Date(Date.now() + 3_600_000).toISOString())).error?.message).toMatch(/time is not valid/)
+    expect((await record(counsellor.db, 'qualified', now)).error?.message).toMatch(/lead_downloads_stage_check|violates check constraint/)
+  })
+})
+
 describe('names', () => {
   it('refuses to issue a test to a lead with no name', async () => {
     const l = await lead(30, { class_level: 11 })
