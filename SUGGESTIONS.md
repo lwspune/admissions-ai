@@ -265,13 +265,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       after this change. If a record is ever wanted, the telecaller ticking "consent taken"
       before issuing is the natural place.
 
-- [ ] **GoPost's hourly read is idle until its two Vault secrets exist (2026-10-26).** The first
-      import ran by hand (2,579 leads: 2,577 new, 2 merged, 0 siblings) and the cursor is set,
-      but writing `gopost_sync_url` and `gopost_sync_secret` was refused by the permission check,
-      so pg_cron's `gopost-leads-hourly` returns without calling. Until they are set, new GoPost
-      leads arrive only by `npm run leads:gopost`. The two lines are in migration 0025's header
-      (the second takes `CRON_SECRET` from `.env.local`); then `select internal.trigger_gopost_sync()`
-      once and check `lead_feeds.last_synced_at` moves.
+- [x] ~~**GoPost's hourly read is idle until its two Vault secrets exist.**~~ **DONE 2026-10-26.**
+      The first import ran by hand (2,579 leads: 2,577 new, 2 merged, 0 siblings); the Vault
+      secrets were set on the user's go-ahead, and a manual `internal.trigger_gopost_sync()` got a
+      200 and moved `lead_feeds.last_synced_at`. `gopost-leads-hourly` runs at :45. Not yet seen:
+      a run fired by the schedule itself rather than by hand; check `last_synced_at` after the
+      next :45.
 - [ ] **The purge reads expired leads in one query, which Supabase caps at 1,000 rows (2026-10-26).**
       `purgeExpired` selects every lead older than the cutoff without paging. With 2,577 GoPost
       leads imported on one day, about October 2027 each nightly run would delete at most 1,000
