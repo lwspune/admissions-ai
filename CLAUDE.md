@@ -284,7 +284,7 @@ These are the things that quietly break everything if violated.
   GoPost serves LWS Pune's leads at its `/api/feeds/admissions` behind
   `GOPOST_LEADS_SECRET` (`ADMISSIONS_LEADS_SECRET` there); this app holds no key
   to GoPost's database. `import_feed_page` (migration 0025, service role only)
-  writes a page, its sources ("GoPost · Instagram"…) and the cursor in one
+  writes a page, its sources (by channel: "Instagram", "Website"…, no "GoPost") and the cursor in one
   transaction, and refuses a page that does not start where the feed stopped.
   The merge is `internal.merge_lead_rows`, which `import_leads` calls too, so a
   sheet and the feed cannot drift apart; `internal` is not a schema the API

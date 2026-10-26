@@ -97,7 +97,8 @@ export function toFeedRow(lead: FeedLead): FeedRow | null {
     interest: interestFrom(lead.course),
     sourceDate: istDate(lead.leadAt),
     notes: note ? [note] : [],
-    source: `GoPost · ${channelLabel(lead.channel)}`,
+    // The channel alone, as staff know it; "GoPost" means nothing on the lead list (2026-10-26).
+    source: channelLabel(lead.channel),
   }
 }
 

@@ -38,7 +38,7 @@ describe('a GoPost lead as an import row', () => {
       interest: 'NDA',
       sourceDate: '2026-10-20',
       notes: ['12th passed · NDA · Instagram ad · Shared a phone number'],
-      source: 'GoPost · Instagram',
+      source: 'Instagram',
     })
   })
 
@@ -59,14 +59,14 @@ describe('a GoPost lead as an import row', () => {
   it('names where a website lead came from by its page, and leaves out what GoPost did not know', () => {
     const row = toFeedRow(lead({ channel: 'website', page: 'PYQ Vault · quiz', fromAd: false, classLevel: null, course: null, reason: null }))!
     expect(row.notes).toEqual(['PYQ Vault · quiz'])
-    expect(row.source).toBe('GoPost · Website')
+    expect(row.source).toBe('Website')
   })
 
-  it('names each channel as GoPost does', () => {
+  it('names the source by its channel alone, as staff know it (2026-10-26)', () => {
     const source = (channel: string) => toFeedRow(lead({ channel }))!.source
-    expect(source('whatsapp')).toBe('GoPost · WhatsApp')
-    expect(source('facebook')).toBe('GoPost · Facebook')
-    expect(source('telegram')).toBe('GoPost · Telegram')
+    expect(source('whatsapp')).toBe('WhatsApp')
+    expect(source('facebook')).toBe('Facebook')
+    expect(source('telegram')).toBe('Telegram')
   })
 
   it('skips a number that is not an Indian mobile', () => {
