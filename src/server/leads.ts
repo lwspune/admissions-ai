@@ -105,6 +105,13 @@ export async function listSources(db: Db): Promise<{ id: string; name: string }[
   return data ?? []
 }
 
+/** How GoPost's feed last went (migration 0025). RLS shows it to counsellors and superadmin only. */
+export async function gopostFeedStatus(db: Db): Promise<{ last_synced_at: string | null; last_error: string | null } | null> {
+  const { data, error } = await db.from('lead_feeds').select('last_synced_at, last_error').eq('name', 'gopost').maybeSingle()
+  if (error) throw new Error(`could not load the GoPost feed: ${error.message}`)
+  return data
+}
+
 export interface LeadDetail {
   lead: {
     id: string

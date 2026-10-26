@@ -2,9 +2,10 @@ import type { Metadata } from 'next'
 import { canManageLeads } from '@/lib/staff'
 import { redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
-import { listLeads, listSources, PAGE_SIZE } from '@/server/leads'
+import { listLeads, listSources, gopostFeedStatus, PAGE_SIZE } from '@/server/leads'
 import { listAssignees } from '@/server/staff'
 import { parseLeadFilters } from '@/lib/leads'
+import { feedWarning } from '@/lib/gopostLeads'
 import { StaffShell } from '@/components/StaffShell'
 import { LeadsConsole } from './LeadsConsole'
 
@@ -26,10 +27,11 @@ export default async function LeadsPage({
   // Every read here goes through the session-bound client, so RLS decides what
   // this person can see — a telecaller's list is theirs because the database
   // says so, not because of a filter written here.
-  const [list, sources, assignees] = await Promise.all([
+  const [list, sources, assignees, feed] = await Promise.all([
     listLeads(db, filters, staff.id),
     listSources(db),
     canAssign ? listAssignees(staff) : Promise.resolve([]),
+    canAssign ? gopostFeedStatus(db) : Promise.resolve(null),
   ])
 
   return (
@@ -41,6 +43,7 @@ export default async function LeadsPage({
         sources={sources}
         assignees={assignees}
         pageSize={PAGE_SIZE}
+        feedWarning={feedWarning(feed, Date.now())}
       />
     </StaffShell>
   )

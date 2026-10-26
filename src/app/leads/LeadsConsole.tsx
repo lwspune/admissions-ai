@@ -20,6 +20,7 @@ export function LeadsConsole({
   sources,
   assignees,
   pageSize,
+  feedWarning,
 }: {
   staff: { id: string; name: string | null; email: string; role: string }
   list: LeadList
@@ -27,6 +28,8 @@ export function LeadsConsole({
   sources: { id: string; name: string }[]
   assignees: Assignee[]
   pageSize: number
+  /** GoPost's leads are not arriving (src/lib/gopostLeads.ts); counsellors and superadmin only. */
+  feedWarning: string | null
 }) {
   const [adding, setAdding] = useState(false)
   const canAssign = canManageLeads(staff.role)
@@ -53,6 +56,12 @@ export function LeadsConsole({
           </button>
         }
       />
+
+      {feedWarning && (
+        <Alert tone="warning" role="status" className="mt-4">
+          <p>{feedWarning}</p>
+        </Alert>
+      )}
 
       {adding && <AddLead onDone={() => setAdding(false)} />}
 
