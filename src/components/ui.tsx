@@ -5,6 +5,7 @@
 
 import type { Tone } from '@/lib/leads'
 import { Icon, type IconName } from './icons'
+import { initials } from '@/lib/initials'
 
 export function cx(...parts: (string | false | null | undefined)[]): string {
   return parts.filter(Boolean).join(' ')
@@ -199,12 +200,7 @@ export function Skeleton({ className }: { className?: string }) {
 
 /** Initials in a circle, for a lead or a staff member. */
 export function Avatar({ name, className }: { name: string | null; className?: string }) {
-  const initials = (name ?? '')
-    .trim()
-    .split(/\s+/)
-    .slice(0, 2)
-    .map((w) => w[0]?.toUpperCase() ?? '')
-    .join('')
+  const letters = initials(name)
   return (
     <span
       aria-hidden="true"
@@ -213,7 +209,7 @@ export function Avatar({ name, className }: { name: string | null; className?: s
         className,
       )}
     >
-      {initials || <Icon name="user" className="h-4 w-4" />}
+      {letters || <Icon name="user" className="h-4 w-4" />}
     </span>
   )
 }
