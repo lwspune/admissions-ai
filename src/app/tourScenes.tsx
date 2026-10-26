@@ -217,12 +217,12 @@ export function ReportScene({ step }: SceneProps) {
 
 const LEADS = [
   { name: 'Riya Patil', meta: 'Class 9 · NDA', stage: 'New' as const },
-  { name: 'Arjun Mehta', meta: 'Class 11 · NDA', stage: 'Qualified' as const },
+  { name: 'Arjun Mehta', meta: 'Class 11 · NDA', stage: 'In EIS' as const, tested: true },
   { name: 'Kabir Shaikh', meta: 'Class 10 · SPI', stage: 'CNR' as const },
   { name: 'Ananya Joshi', meta: 'Class 8 · SPI', stage: 'In EIS' as const },
   { name: 'Vihaan Kulkarni', meta: 'Class 12 · NDA', stage: 'Contacted' as const },
 ]
-const STAGE_TONE = { New: 'neutral', Contacted: 'info', Qualified: 'success', CNR: 'warning', 'In EIS': 'accent' } as const
+const STAGE_TONE = { New: 'neutral', Contacted: 'info', CNR: 'warning', 'In EIS': 'success' } as const
 
 const MESSAGE = issueMessage({ name: 'Riya Patil', testUrl: 'https://aptitudetestai.vercel.app/t/r7Kq2mXa', classLevel: 9 })
 
@@ -263,7 +263,7 @@ export function LeadsScene({ step }: SceneProps) {
                   riya && step === 4 ? 'border-brand-600 bg-brand-50 text-brand-800 ring-2 ring-brand-200' : 'border-slate-300 bg-white text-slate-800',
                 )}
               >
-                {lead.stage === 'Qualified' ? 'Report' : issued ? 'Reissue' : 'Issue link'}
+                {'tested' in lead ? 'Report' : issued ? 'Reissue' : 'Issue link'}
               </span>
             </li>
           )

@@ -120,7 +120,7 @@ describe('a page from the feed', () => {
   it('adds to an existing lead without touching its stage, assignment or name', async () => {
     const { data: existing } = await svc
       .from('leads')
-      .insert({ contact_mobile: mobile(3), name: 'Kept Name', stage: 'qualified', assigned_to: telecaller.id })
+      .insert({ contact_mobile: mobile(3), name: 'Kept Name', stage: 'in_eis', assigned_to: telecaller.id })
       .select('id')
       .single()
     const { data } = await importPage(null, 'c1', [row(3, { name: 'Other', interest: 'SPI' })])
@@ -133,7 +133,7 @@ describe('a page from the feed', () => {
       .single()
     expect(after).toMatchObject({
       name: 'Kept Name',
-      stage: 'qualified',
+      stage: 'in_eis',
       assigned_to: telecaller.id,
       interest: 'SPI',
       lead_comments: [{ body: 'note 3' }],

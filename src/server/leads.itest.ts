@@ -263,9 +263,9 @@ describe('stage on issue', () => {
   })
 
   it('never moves a lead back', async () => {
-    const l = await lead(63, { name: 'LeadTest Qualified', class_level: 11, stage: 'qualified' })
+    const l = await lead(63, { name: 'LeadTest In EIS', class_level: 11, stage: 'in_eis' })
     await issueAssessment(counsellor.db, { leadId: l.id, issuedBy: counsellor.id })
-    expect(await stageOf(l.id)).toBe('qualified')
+    expect(await stageOf(l.id)).toBe('in_eis')
     expect(await history(l.id)).toEqual([])
   })
 
@@ -285,6 +285,33 @@ describe('stage on issue', () => {
     expect(error).toBeNull()
     expect(data!.stage).toBe('contacted')
     expect(await history(data!.id)).toEqual([])
+  })
+})
+
+// The board (2026-10-26): five stages, and a lead moves between any two.
+describe('the board’s stages', () => {
+  it('refuses Qualified, which became In EIS (migration 0026)', async () => {
+    const l = await lead(70, { name: 'LeadTest Board' })
+    const { error } = await svc.from('leads').update({ stage: 'qualified' }).eq('id', l.id)
+    expect(error).not.toBeNull()
+  })
+
+  it('moves a lead forward and back, a history line for each move by whoever made it', async () => {
+    const l = await lead(71, { name: 'LeadTest Mover', assigned_to: tcA.id })
+    for (const stage of ['cnr', 'not_interested', 'new']) {
+      const { error } = await tcA.db.from('leads').update({ stage }).eq('id', l.id)
+      expect(error).toBeNull()
+    }
+    const { error } = await counsellor.db.from('leads').update({ stage: 'in_eis' }).eq('id', l.id)
+    expect(error).toBeNull()
+
+    const { data } = await svc.from('lead_comments').select('body, author').eq('lead_id', l.id).order('id')
+    expect(data).toEqual([
+      { body: 'new → cnr', author: tcA.id },
+      { body: 'cnr → not_interested', author: tcA.id },
+      { body: 'not_interested → new', author: tcA.id },
+      { body: 'new → in_eis', author: counsellor.id },
+    ])
   })
 })
 
@@ -349,7 +376,7 @@ describe('import', () => {
 
   it('adds to an existing lead without overwriting its stage, assignment or name', async () => {
     const src = await source()
-    const existing = await lead(42, { name: 'Kept Name', stage: 'qualified', assigned_to: tcA.id })
+    const existing = await lead(42, { name: 'Kept Name', stage: 'in_eis', assigned_to: tcA.id })
 
     const result = await importLeads(counsellor.db, src, [
       row(42, { name: 'Other Name', stage: 'cnr', interest: 'SPI', notes: ['second source'] }),
@@ -363,7 +390,7 @@ describe('import', () => {
       .single()
     expect(data).toMatchObject({
       name: 'Kept Name',
-      stage: 'qualified',
+      stage: 'in_eis',
       assigned_to: tcA.id,
       interest: 'SPI', // blank before, so filled
       lead_origins: [{ source_id: src }],
