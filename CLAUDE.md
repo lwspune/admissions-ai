@@ -427,6 +427,13 @@ the connection is refused (2026-10-01).
 
 ### 2026-10
 
+- **2026-10-27 — Leads filter by enquiry date.** The user asked for a date filter on New leads.
+  Their calls: the enquiry date (`enquired_on`, what each row shows), not the day a lead reached
+  the app, which is one import morning for every GoPost lead; and From/To boxes without preset
+  buttons, to add if the same range keeps being typed. It sits in `filtered()`, so like source and
+  interest it narrows every stage's count, the list and the download. Checked live data locally:
+  20–26 Oct is 75 of 4,727 New leads.
+
 - **2026-10-26 — GoPost's NDA age calculator leads came in too, all of them.** The user asked
   whether the sync worked; it had imported nothing since morning, because GoPost's feed answered
   our 500-lead page with an empty one (see Traps). Ours asks for 200 now, and on the user's "go all"
