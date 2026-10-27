@@ -119,7 +119,7 @@ function Filters({
   canAssign: boolean
 }) {
   const more = [filters.interest, canAssign && filters.assignee].filter(Boolean).length
-  const anything = more > 0 || Boolean(filters.q || filters.source)
+  const anything = more > 0 || Boolean(filters.q || filters.source || filters.from || filters.to)
 
   return (
     <form method="get" action="/leads" className={cx(card, 'mt-5 p-3')}>
@@ -151,11 +151,20 @@ function Filters({
             </option>
           ))}
         </select>
+        {/* The enquiry date each row shows; both ends included. */}
+        <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2 text-sm text-slate-700 sm:flex sm:w-auto">
+          <label htmlFor="from">Enquired from</label>
+          <input id="from" name="from" type="date" defaultValue={filters.from ?? ''} className={cx(control, 'sm:w-40')} />
+          <label htmlFor="to" className="text-right">
+            to
+          </label>
+          <input id="to" name="to" type="date" defaultValue={filters.to ?? ''} className={cx(control, 'sm:w-40')} />
+        </div>
         <button type="submit" className={btn('primary')}>
           Search
         </button>
         {anything && (
-          <Link href={leadsHref({ ...filters, q: '', source: null, interest: null, assignee: null })} className={btn('ghost')}>
+          <Link href={leadsHref({ ...filters, q: '', source: null, interest: null, assignee: null, from: null, to: null })} className={btn('ghost')}>
             Clear
           </Link>
         )}
@@ -344,7 +353,7 @@ function StageList({
         <div className={cx(card, 'mt-2 px-6 py-12 text-center')}>
           <p className="font-medium text-slate-900">No leads in {title}</p>
           <p className="mt-1 text-sm text-slate-600">
-            {filters.q || filters.source || filters.interest || filters.assignee
+            {filters.q || filters.source || filters.interest || filters.assignee || filters.from || filters.to
               ? 'Nothing here matches these filters.'
               : 'Move a lead here with the buttons on its row.'}
           </p>
@@ -645,6 +654,8 @@ function DownloadMenu({
         {filters.source && <input type="hidden" name="source" value={filters.source} />}
         {filters.interest && <input type="hidden" name="interest" value={filters.interest} />}
         {filters.assignee && <input type="hidden" name="assignee" value={filters.assignee} />}
+        {filters.from && <input type="hidden" name="from" value={filters.from} />}
+        {filters.to && <input type="hidden" name="to" value={filters.to} />}
         <button type="submit" name="kind" value="all" disabled={total === 0} className={item}>
           <span className="font-medium text-slate-900">
             All in {title} ({total.toLocaleString('en-IN')})

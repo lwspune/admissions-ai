@@ -4,8 +4,9 @@ import { serviceClient } from './supabase'
 import { issueAssessment } from './assessments'
 import { importLeads, previewImport } from './leadImport'
 import { listAssignees } from './staff'
+import { listPipeline } from './leads'
 import type { StaffUser } from './auth'
-import type { ImportRow } from '../lib/leads'
+import { parseLeadFilters, type ImportRow } from '../lib/leads'
 
 // Lead management, against the real database, signed in as real staff.
 //
@@ -351,6 +352,24 @@ describe('the enquiry date', () => {
     const src = await source()
     await importLeads(counsellor.db, src, [row(83, { sourceDate: '2026-03-01' })])
     expect(await enquired(83)).toBe(istToday())
+  })
+
+  it('filters the list and every count by a range, both ends included', async () => {
+    const src = await source()
+    const dates = { 84: '2026-10-19', 85: '2026-10-20', 86: '2026-10-26', 87: '2026-10-27' }
+    await importLeads(
+      counsellor.db,
+      src,
+      Object.entries(dates).map(([n, sourceDate]) => row(Number(n), { sourceDate })),
+    )
+    const mobiles = async (params: Record<string, string>) => {
+      const { counts, list } = await listPipeline(counsellor.db, parseLeadFilters({ q: '97000010', ...params }), counsellor.id)
+      return { count: counts.new, shown: list.rows.map((r) => r.contact_mobile).sort() }
+    }
+
+    expect(await mobiles({ from: '2026-10-20', to: '2026-10-26' })).toEqual({ count: 2, shown: [mobile(85), mobile(86)] })
+    expect(await mobiles({ from: '2026-10-26' })).toEqual({ count: 2, shown: [mobile(86), mobile(87)] })
+    expect(await mobiles({ to: '2026-10-19' })).toEqual({ count: 1, shown: [mobile(84)] })
   })
 })
 

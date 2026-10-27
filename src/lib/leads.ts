@@ -288,6 +288,9 @@ export interface LeadFilters {
   source: string | null
   /** 'me', 'none' (unassigned), or a telecaller's id. */
   assignee: string | null
+  /** The enquiry date range (`enquired_on`), YYYY-MM-DD, both ends included; either may be open. */
+  from: string | null
+  to: string | null
   stage: Stage
   /** 1-based. */
   page: number
@@ -306,15 +309,28 @@ export function parseLeadFilters(params: Params): LeadFilters {
   }
   const assignee = one('assignee')
   const page = Number.parseInt(one('page'), 10)
+  let from = calendarDay(one('from'))
+  let to = calendarDay(one('to'))
+  // A range given backwards is the same range, not an empty one.
+  if (from && to && from > to) [from, to] = [to, from]
 
   return {
     q: one('q').trim(),
     interest: isInterest(one('interest')) ? (one('interest') as Interest) : null,
     source: isUuid(one('source')) ? one('source') : null,
     assignee: assignee === 'me' || assignee === 'none' || isUuid(assignee) ? assignee : null,
+    from,
+    to,
     stage: isStage(one('stage')) ? (one('stage') as Stage) : 'new',
     page: Number.isFinite(page) && page > 1 ? page : 1,
   }
+}
+
+/** A YYYY-MM-DD that names a real day (what a date input sends), or null. */
+function calendarDay(value: string): string | null {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(value)) return null
+  const day = new Date(`${value}T00:00:00Z`)
+  return !Number.isNaN(day.getTime()) && day.toISOString().slice(0, 10) === value ? value : null
 }
 
 /**
@@ -331,6 +347,8 @@ export function leadsHref(filters: LeadFilters, { stage, page }: { stage?: Stage
   if (filters.interest) params.set('interest', filters.interest)
   if (filters.source) params.set('source', filters.source)
   if (filters.assignee) params.set('assignee', filters.assignee)
+  if (filters.from) params.set('from', filters.from)
+  if (filters.to) params.set('to', filters.to)
   if (shown !== 'new') params.set('stage', shown)
   if (at > 1) params.set('page', String(at))
   const query = params.toString()

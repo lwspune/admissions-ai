@@ -62,6 +62,8 @@ export function filtered(db: Db, filters: LeadFilters, me: string, columns: stri
   if (filters.assignee === 'me') query = query.eq('assigned_to', me)
   else if (filters.assignee === 'none') query = query.is('assigned_to', null)
   else if (filters.assignee) query = query.eq('assigned_to', filters.assignee)
+  if (filters.from) query = query.gte('enquired_on', filters.from)
+  if (filters.to) query = query.lte('enquired_on', filters.to)
   const search = searchTerm(filters.q)
   if (search) query = query.ilike(search.column, search.pattern)
   return query

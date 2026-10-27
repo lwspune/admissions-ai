@@ -225,7 +225,7 @@ describe('parseLeadFilters', () => {
   it('reads every filter, the stage the pipeline shows, and the page', () => {
     expect(
       parseLeadFilters({ q: ' Adhe ', interest: 'SPI', source: ID, assignee: 'none', stage: 'cnr', page: '3' }),
-    ).toEqual({ q: 'Adhe', interest: 'SPI', source: ID, assignee: 'none', stage: 'cnr', page: 3 })
+    ).toEqual({ q: 'Adhe', interest: 'SPI', source: ID, assignee: 'none', from: null, to: null, stage: 'cnr', page: 3 })
   })
 
   it('opens on New leads, page one', () => {
@@ -235,7 +235,23 @@ describe('parseLeadFilters', () => {
   it('drops anything it does not recognise instead of passing it to the query', () => {
     expect(
       parseLeadFilters({ interest: 'JEE', source: 'x); drop', assignee: 'bob', stage: 'qualified', page: '-2' }),
-    ).toEqual({ q: '', interest: null, source: null, assignee: null, stage: 'new', page: 1 })
+    ).toEqual({ q: '', interest: null, source: null, assignee: null, from: null, to: null, stage: 'new', page: 1 })
+  })
+
+  it('reads an enquiry date range, either end alone', () => {
+    expect(parseLeadFilters({ from: '2026-10-20', to: '2026-10-26' })).toMatchObject({ from: '2026-10-20', to: '2026-10-26' })
+    expect(parseLeadFilters({ from: '2026-10-20' })).toMatchObject({ from: '2026-10-20', to: null })
+    expect(parseLeadFilters({ to: '2026-04-30' })).toMatchObject({ from: null, to: '2026-04-30' })
+  })
+
+  it('drops a date that is not a real calendar day', () => {
+    for (const bad of ['2026-02-30', '2026-13-01', '26-10-20', '2026-10-20T00:00', '20/10/2026', "2026-10-20'); drop"]) {
+      expect(parseLeadFilters({ from: bad, to: bad })).toMatchObject({ from: null, to: null })
+    }
+  })
+
+  it('swaps a range given backwards rather than showing nothing', () => {
+    expect(parseLeadFilters({ from: '2026-10-26', to: '2026-10-20' })).toMatchObject({ from: '2026-10-20', to: '2026-10-26' })
   })
 
   it('takes the first value when a parameter repeats', () => {
@@ -257,7 +273,16 @@ describe('leadsHref', () => {
   })
 
   it('writes back what parseLeadFilters reads', () => {
-    const filters = parseLeadFilters({ q: 'Adhe Rao', interest: 'SPI', source: ID, assignee: 'me', stage: 'cnr', page: '3' })
+    const filters = parseLeadFilters({
+      q: 'Adhe Rao',
+      interest: 'SPI',
+      source: ID,
+      assignee: 'me',
+      from: '2026-10-20',
+      to: '2026-10-26',
+      stage: 'cnr',
+      page: '3',
+    })
     const query = leadsHref(filters).split('?')[1]
     expect(parseLeadFilters(Object.fromEntries(new URLSearchParams(query)))).toEqual(filters)
   })
@@ -265,6 +290,7 @@ describe('leadsHref', () => {
   it('switches stage from the pipeline, keeping the filters and starting at page one', () => {
     expect(leadsHref(parseLeadFilters({ q: 'Rao', page: '4' }), { stage: 'contacted' })).toBe('/leads?q=Rao&stage=contacted')
     expect(leadsHref(parseLeadFilters({ stage: 'cnr' }), { stage: 'new' })).toBe('/leads')
+    expect(leadsHref(parseLeadFilters({ from: '2026-10-20', page: '2' }), { stage: 'cnr' })).toBe('/leads?from=2026-10-20&stage=cnr')
   })
 
   it('turns the page within a stage', () => {
