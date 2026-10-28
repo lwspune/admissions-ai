@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { createClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { openByToken, identify, startAttempt, recordEvents, submitAttempt } from './attempt'
 import { loadLeadReport } from './report'
 import { generateToken } from '../lib/token'
@@ -66,7 +67,7 @@ async function freshLead() {
   await db.from('leads').delete().like('name', 'HiTest%')
   const { data, error } = await db
     .from('leads')
-    .insert({ name: 'HiTest Candidate', contact_mobile: MOBILE, class_level: 11 })
+    .insert({ name: 'HiTest Candidate', contact_mobile: MOBILE, class_level: 11, org_id: ITEST_ORG })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)

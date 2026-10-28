@@ -51,12 +51,13 @@ begin
     (select id from public.test_items where status = 'live' and subject = 'english' and part = 'basics' and difficulty = 'difficult' limit 2)
   ) e;
 
-  insert into public.leads (name, contact_mobile, class_level)
-  values ('Probe Paper', '9700009999', 12)
+  -- LWS Pune's: a lead names its org (migration 0030).
+  insert into public.leads (name, contact_mobile, class_level, org_id)
+  values ('Probe Paper', '9700009999', 12, 'b31b8575-91c2-434a-b025-a7d12d3c0988')
   returning id into v_lead;
 
   -- From here on, a signed-in counsellor.
-  perform set_config('request.jwt.claims', '{"role":"authenticated","app_metadata":{"role":"counsellor"}}', true);
+  perform set_config('request.jwt.claims', '{"role":"authenticated","app_metadata":{"role":"counsellor","org_id":"b31b8575-91c2-434a-b025-a7d12d3c0988"}}', true);
   execute 'set local role authenticated';
 
   begin

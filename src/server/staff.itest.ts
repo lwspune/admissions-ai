@@ -1,5 +1,6 @@
 import { describe, it, expect, afterAll } from 'vitest'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { listStaff, addStaff, changeStaffRole, renameStaff, removeStaff } from './staff'
 import type { StaffUser } from './auth'
 
@@ -12,9 +13,9 @@ const db = serviceClient()
 const PREFIX = 'stafftest-'
 const email = (tag: string) => `${PREFIX}${tag}-${Date.now()}@example.com`
 
-const superadmin: StaffUser = { id: 'itest-superadmin', name: null, email: 'sa@example.com', role: 'superadmin' }
-const telecaller: StaffUser = { id: 'itest-telecaller', name: null, email: 'tc@example.com', role: 'telecaller' }
-const counsellor: StaffUser = { id: 'itest-counsellor', name: null, email: 'co@example.com', role: 'counsellor' }
+const superadmin: StaffUser = { id: 'itest-superadmin', name: null, email: 'sa@example.com', role: 'superadmin', orgId: ITEST_ORG }
+const telecaller: StaffUser = { id: 'itest-telecaller', name: null, email: 'tc@example.com', role: 'telecaller', orgId: ITEST_ORG }
+const counsellor: StaffUser = { id: 'itest-counsellor', name: null, email: 'co@example.com', role: 'counsellor', orgId: ITEST_ORG }
 
 async function findUser(address: string) {
   const { data, error } = await db.auth.admin.listUsers({ perPage: 1000 })
@@ -65,6 +66,8 @@ describe('addStaff', () => {
     const user = (await findUser(address))!
     expect(user.app_metadata.role).toBe('counsellor')
     expect(user.app_metadata.name).toBe('Test Person')
+    // Until /staff offers a choice, a new account joins the superadmin's org.
+    expect(user.app_metadata.org_id).toBe(ITEST_ORG)
     expect(user.user_metadata?.role).toBeUndefined()
     expect(user.user_metadata?.name).toBeUndefined()
     expect(user.email_confirmed_at).toBeTruthy()
@@ -151,7 +154,7 @@ describe('renameStaff', () => {
     const address = email('rename-self')
     await addStaff(superadmin, { name: 'Test Person', email: address, password: 'longenough', role: 'superadmin' })
     const self = (await findUser(address))!
-    const actor: StaffUser = { id: self.id, name: null, email: address, role: 'superadmin' }
+    const actor: StaffUser = { id: self.id, name: null, email: address, role: 'superadmin', orgId: ITEST_ORG }
 
     expect((await renameStaff(actor, self.id, 'Own Name')).ok).toBe(true)
     expect((await findUser(address))!.app_metadata.name).toBe('Own Name')

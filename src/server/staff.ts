@@ -79,6 +79,8 @@ export interface Assignee {
  * only list of who the telecallers are is the auth admin API. It returns ids
  * and names and nothing else. Assignment itself is enforced in the database
  * (the `leads_guard` trigger, migration 0012); this only fills the dropdown.
+ * A counsellor sees their own org's telecallers; superadmin sees every org's,
+ * and the trigger refuses one from outside the lead's org (migration 0030).
  */
 export async function listAssignees(actor: StaffUser): Promise<Assignee[]> {
   if (actor.role !== 'counsellor' && actor.role !== 'superadmin') {
@@ -93,11 +95,36 @@ export async function listAssignees(actor: StaffUser): Promise<Assignee[]> {
 
   return data.users
     .filter((u) => u.app_metadata?.role === 'telecaller')
+    .filter((u) => actor.role === 'superadmin' || (actor.orgId !== null && u.app_metadata?.org_id === actor.orgId))
     .map((u) => ({
       id: u.id,
       label: typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : (u.email ?? u.id),
     }))
     .sort((a, b) => a.label.localeCompare(b.label))
+}
+
+/**
+ * Account id → name, for the "by …" on /hiring. A teacher sees every applicant
+ * in their org, so they get the names of their org's accounts (every role, so
+ * an adder since re-roled keeps their name); superadmin gets every org's.
+ * Names only, like listAssignees.
+ */
+export async function listApplicantAdders(actor: StaffUser): Promise<Record<string, string>> {
+  if (actor.role !== 'teacher' && actor.role !== 'superadmin') {
+    throw new Error('Only a teacher or superadmin sees who added an applicant.')
+  }
+
+  const { data, error } = await serviceClient().auth.admin.listUsers({ perPage: PER_PAGE })
+  if (error) {
+    console.error('staff: applicant adders failed:', error)
+    throw new Error('Could not load the names.')
+  }
+
+  return Object.fromEntries(
+    data.users
+      .filter((u) => actor.role === 'superadmin' || (actor.orgId !== null && u.app_metadata?.org_id === actor.orgId))
+      .map((u) => [u.id, typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : (u.email ?? u.id)]),
+  )
 }
 
 export async function addStaff(
@@ -117,7 +144,8 @@ export async function addStaff(
     // The name sits beside the role in app_metadata, not in user_metadata:
     // the latter is editable by its owner, and a name that labels who issued a
     // test is only worth anything if staff cannot rewrite their own.
-    app_metadata: { role, name },
+    // The org is the superadmin's own until /staff offers a choice.
+    app_metadata: { role, name, org_id: actor.orgId },
   })
 
   if (error?.code === 'email_exists') {

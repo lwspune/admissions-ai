@@ -19,7 +19,7 @@ export type HiringResult<T extends object = object> = ({ ok: true } & T) | { ok:
 
 /**
  * Adds an applicant for the signed-in teacher or superadmin. The database
- * stamps who added them; a teacher sees only their own (migration 0021).
+ * stamps who added them and their org; a teacher sees every applicant in their org (migration 0030).
  */
 export async function addApplicant(
   db: Db,
@@ -77,7 +77,7 @@ export async function addHiringNote(db: Db, applicantId: string, body: string): 
 /**
  * Sets where an applicant stands. A teacher may not touch hired or rejected,
  * into or out of (hiring_applicants_decision_guard); RLS hides another
- * teacher's applicant, which updates nothing.
+ * org's applicant, which updates nothing.
  */
 export async function setHiringDecision(db: Db, applicantId: string, decision: string): Promise<HiringResult> {
   if (!HIRING_DECISIONS.includes(decision as HiringDecision)) return { ok: false, error: 'Choose a decision.' }

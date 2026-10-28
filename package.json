@@ -24,6 +24,7 @@
     "items:hindi": "tsx scripts/hindi-items.mts",
     "staff:add": "node scripts/create-staff.mjs add",
     "staff:list": "node scripts/create-staff.mjs list",
+    "staff:org": "node scripts/create-staff.mjs org",
     "issue": "tsx scripts/issue-test.mts",
     "staff:rm": "node scripts/create-staff.mjs rm",
     "hiring:import": "tsx scripts/hiring-import.mts",

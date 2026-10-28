@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { importLeads } from './leadImport'
 import type { StaffUser } from './auth'
 
@@ -31,7 +32,7 @@ async function signIn(role: StaffUser['role'], tag: string): Promise<Session> {
     email,
     password: PASSWORD,
     email_confirm: true,
-    app_metadata: { role, name: `Feed ${tag}` },
+    app_metadata: { role, name: `Feed ${tag}`, org_id: ITEST_ORG },
   })
   if (error) throw new Error(`could not create ${role}: ${error.message}`)
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
@@ -64,7 +65,7 @@ beforeAll(async () => {
 })
 beforeEach(async () => {
   await cleanup()
-  const { error } = await svc.from('lead_feeds').insert({ name: FEED })
+  const { error } = await svc.from('lead_feeds').insert({ name: FEED, org_id: ITEST_ORG })
   if (error) throw new Error(`could not create the feed: ${error.message}`)
 })
 afterAll(async () => {
@@ -89,7 +90,7 @@ const importPage = (from: string | null, next: string | null, rows: object[], dr
 const feed = async () => (await svc.from('lead_feeds').select('*').eq('name', FEED).single()).data!
 
 describe('a page from the feed', () => {
-  it('adds new leads as New under the source each row names, and moves the cursor with them', async () => {
+  it('adds new leads as New, in the feed’s org, under the source each row names, and moves the cursor with them', async () => {
     const { data, error } = await importPage(null, 'c1', [
       row(1, { name: 'Feed One', interest: 'NDA' }),
       row(2, { source: `${SOURCE_PREFIX} · Website` }),
@@ -99,7 +100,7 @@ describe('a page from the feed', () => {
 
     const { data: one } = await svc
       .from('leads')
-      .select('name, stage, interest, assigned_to, lead_origins(source_date, lead_sources(name)), lead_comments(kind, body, author)')
+      .select('name, stage, interest, assigned_to, org_id, lead_origins(source_date, lead_sources(name)), lead_comments(kind, body, author)')
       .eq('contact_mobile', mobile(1))
       .single()
     expect(one).toMatchObject({
@@ -107,6 +108,7 @@ describe('a page from the feed', () => {
       stage: 'new',
       interest: 'NDA',
       assigned_to: null,
+      org_id: ITEST_ORG,
       lead_origins: [{ source_date: '2026-10-20', lead_sources: { name: `${SOURCE_PREFIX} · Instagram` } }],
       lead_comments: [{ kind: 'import', body: 'note 1', author: null }],
     })
@@ -120,7 +122,7 @@ describe('a page from the feed', () => {
   it('adds to an existing lead without touching its stage, assignment or name', async () => {
     const { data: existing } = await svc
       .from('leads')
-      .insert({ contact_mobile: mobile(3), name: 'Kept Name', stage: 'in_eis', assigned_to: telecaller.id })
+      .insert({ contact_mobile: mobile(3), name: 'Kept Name', stage: 'in_eis', assigned_to: telecaller.id, org_id: ITEST_ORG })
       .select('id')
       .single()
     const { data } = await importPage(null, 'c1', [row(3, { name: 'Other', interest: 'SPI' })])
@@ -142,8 +144,8 @@ describe('a page from the feed', () => {
 
   it('leaves a number shared by siblings alone and reports it', async () => {
     await svc.from('leads').insert([
-      { contact_mobile: mobile(4), name: 'Sibling One' },
-      { contact_mobile: mobile(4), name: 'Sibling Two' },
+      { contact_mobile: mobile(4), name: 'Sibling One', org_id: ITEST_ORG },
+      { contact_mobile: mobile(4), name: 'Sibling Two', org_id: ITEST_ORG },
     ])
     const { data } = await importPage(null, 'c1', [row(4), row(5)])
     expect(data).toEqual({ created: 1, merged: 0, ambiguous: [mobile(4)] })
@@ -167,7 +169,7 @@ describe('a page from the feed', () => {
   })
 
   it('counts on a dry run without writing a lead, a source or the cursor', async () => {
-    await svc.from('leads').insert({ contact_mobile: mobile(8), name: 'Existing' })
+    await svc.from('leads').insert({ contact_mobile: mobile(8), name: 'Existing', org_id: ITEST_ORG })
     const { data } = await importPage(null, 'c1', [row(8), row(9, { source: `${SOURCE_PREFIX} · Dry` })], true)
     expect(data).toEqual({ created: 1, merged: 1, ambiguous: [] })
     const { count } = await svc.from('leads').select('id', { count: 'exact', head: true }).eq('contact_mobile', mobile(9))

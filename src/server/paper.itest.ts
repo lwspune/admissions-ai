@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { issueAssessment } from './assessments'
 import { openByToken, identify, startAttempt } from './attempt'
 import { loadPaperTest } from './paperTest'
@@ -35,7 +36,7 @@ async function signIn(role: StaffUser['role'], tag: string): Promise<Session> {
     email,
     password: PASSWORD,
     email_confirm: true,
-    app_metadata: { role, name },
+    app_metadata: { role, name, org_id: ITEST_ORG },
   })
   if (error) throw new Error(`could not create ${role}: ${error.message}`)
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
@@ -43,7 +44,7 @@ async function signIn(role: StaffUser['role'], tag: string): Promise<Session> {
   })
   const { error: signInError } = await db.auth.signInWithPassword({ email, password: PASSWORD })
   if (signInError) throw new Error(`could not sign in as ${role}: ${signInError.message}`)
-  return { db, actor: { id: data.user.id, name, email, role } }
+  return { db, actor: { id: data.user.id, name, email, role, orgId: ITEST_ORG } }
 }
 
 async function cleanup() {
@@ -76,7 +77,7 @@ afterAll(async () => {
 async function lead(n: number): Promise<string> {
   const { data, error } = await svc
     .from('leads')
-    .insert({ name: `PaperTest ${n}`, contact_mobile: mobile(n), class_level: 9, assigned_to: telecaller.actor.id })
+    .insert({ name: `PaperTest ${n}`, contact_mobile: mobile(n), class_level: 9, assigned_to: telecaller.actor.id, org_id: ITEST_ORG })
     .select('id')
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)

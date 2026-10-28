@@ -36,7 +36,7 @@ export type CommitResult = { ok: true; sourceId: string; result: ImportResult; s
 async function importer() {
   const staff = await requireStaff()
   if (!canManageLeads(staff.role)) throw new Error('Only a counsellor or superadmin can import leads.')
-  return userClient()
+  return { db: await userClient(), staff }
 }
 
 function records(csv: unknown): string[][] {
@@ -72,7 +72,7 @@ function fail(action: string, e: unknown): Fail {
 
 export async function inspectCsv(input: { csv: string; sourceId: string }): Promise<InspectResult> {
   try {
-    const db = await importer()
+    const { db } = await importer()
     const rows = records(input.csv)
     const headers = rows[0] ?? []
     if (headers.every((h) => h.trim() === '')) return { ok: false, error: 'The first row should hold the column names.' }
@@ -94,9 +94,9 @@ export async function inspectCsv(input: { csv: string; sourceId: string }): Prom
 
 export async function previewCsv(input: { csv: string; map: ColumnMap }): Promise<PreviewResult> {
   try {
-    const db = await importer()
+    const { db, staff } = await importer()
     const prepared = prepare(input.csv, input.map)
-    const preview = await previewImport(db, prepared.rows)
+    const preview = await previewImport(db, prepared.rows, staff.orgId)
     return { ok: true, leads: prepared.rows.length, preview, skipped: prepared.skipped }
   } catch (e) {
     return fail('preview', e)
@@ -110,7 +110,7 @@ export async function commitCsv(input: {
   newSourceName: string
 }): Promise<CommitResult> {
   try {
-    const db = await importer()
+    const { db } = await importer()
     const prepared = prepare(input.csv, input.map)
     if (prepared.rows.length === 0) return { ok: false, error: 'No row in this file has a usable mobile number.' }
 

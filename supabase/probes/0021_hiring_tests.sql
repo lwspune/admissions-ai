@@ -4,6 +4,10 @@
 -- Uses two existing logins as two teachers (their ids only; nothing about them
 -- changes) and probe questions it inserts live. ONE statement that always ends
 -- by raising, so every row rolls back and no other session sees any of it.
+--
+-- Orgs (migration 0030): a teacher sees every applicant in their org, so the
+-- first login stands in as an LWS Pune teacher and the second, the outsider,
+-- as an LWS Delhi one.
 
 do $$
 declare
@@ -42,7 +46,7 @@ begin
 
   -- ── applicants: the creator comes from the session ─────────────────────────
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988'))::text, true);
   execute 'set local role authenticated';
   begin
     insert into public.hiring_applicants (name, mobile, subject, created_by)
@@ -82,7 +86,7 @@ begin
   -- ── another teacher sees nothing and cannot issue ─────────────────────────
   execute 'reset role';
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t2,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', '787f94d7-8d1b-4c45-a11d-b85916b7ccff'))::text, true);
   execute 'set local role authenticated';
   select count(*) into v_n from public.hiring_applicants where id = v_app;
   if v_n <> 0 then v_fail := true; v_out := v_out || 'OTHER TEACHER SEES APPLICANT; '; end if;
@@ -112,12 +116,12 @@ begin
     v_fail := true; v_out := v_out || 'COUNSELLOR ADDED APPLICANT; ';
   exception when insufficient_privilege then null;
   end;
-  v_out := v_out || 'a teacher sees only their own; ';
+  v_out := v_out || 'another org's teacher sees nothing; ';
 
   -- ── a teacher writes nothing directly ─────────────────────────────────────
   execute 'reset role';
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988'))::text, true);
   execute 'set local role authenticated';
   begin
     update public.hiring_tests set expires_at = now() + interval '30 days' where id = v_test.id;
@@ -142,7 +146,7 @@ begin
    where test_id in (v_test.id, v_t2nd.id, v_t3rd.id);
   if v_n <> 0 then v_fail := true; v_out := v_out || format('%s REPEATED ACROSS REISSUES; ', v_n); end if;
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988'))::text, true);
   execute 'set local role authenticated';
   begin
     perform public.issue_hiring_test(v_app, 'probe21aaaaaaaaaaaaa04');
@@ -244,7 +248,7 @@ begin
   -- ── an attempt past its deadline is closed as timed out ──────────────────
   -- A fresh applicant, issued and started, with the clock moved back.
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988'))::text, true);
   execute 'set local role authenticated';
   insert into public.hiring_applicants (name, mobile, subject) values ('Probe Late', '9700002103', 'physics')
   returning id into v_app;
@@ -260,7 +264,7 @@ begin
   exception when check_violation then null;
   end;
   perform set_config('request.jwt.claims', json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher'))::text, true);
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988'))::text, true);
   execute 'set local role authenticated';
   perform public.close_expired_hiring_attempts();
   execute 'reset role';

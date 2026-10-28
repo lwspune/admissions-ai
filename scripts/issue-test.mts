@@ -1,9 +1,11 @@
 // Issues a test link for manual end-to-end checking.
 //
-//   npm run issue -- "Candidate Name" 9876543210 11
+//   npm run issue -- "Candidate Name" 9876543210 11 [org-slug]
 //
 // The third argument is the class the candidate is being admitted to (8-12).
 // It decides the pool: an admit to class N draws content taught up to N-1.
+// The fourth is the org a new lead goes into, lws-pune unless named; a number
+// is looked up within that org (migration 0030).
 //
 // The throwaway version of what the staff console will do. It exists so the
 // candidate flow can be exercised on a real phone before that console is built.
@@ -35,10 +37,10 @@ const env = Object.fromEntries(
 )
 
 async function main(): Promise<number> {
-  const [name, mobile, rawClass] = process.argv.slice(2)
+  const [name, mobile, rawClass, slug = 'lws-pune'] = process.argv.slice(2)
   const classLevel = parseClassLevel(rawClass)
   if (!name || !mobile || classLevel === null) {
-    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210 <8|9|10|11|12>\n')
+    console.error('\nUsage: npm run issue -- "Candidate Name" 9876543210 <8|9|10|11|12> [org-slug]\n')
     return 1
   }
 
@@ -46,7 +48,13 @@ async function main(): Promise<number> {
     auth: { persistSession: false },
   })
 
-  const { data: existing } = await db.from('leads').select('id, name').eq('contact_mobile', mobile)
+  const { data: org } = await db.from('organizations').select('id').eq('slug', slug).maybeSingle()
+  if (!org) {
+    console.error(`\nNo org "${slug}".\n`)
+    return 1
+  }
+
+  const { data: existing } = await db.from('leads').select('id, name').eq('contact_mobile', mobile).eq('org_id', org.id)
 
   let leadId: string
   if (existing?.length) {
@@ -55,7 +63,7 @@ async function main(): Promise<number> {
   } else {
     const { data, error } = await db
       .from('leads')
-      .insert({ name, contact_mobile: mobile, class_level: classLevel })
+      .insert({ name, contact_mobile: mobile, class_level: classLevel, org_id: org.id })
       .select()
       .single()
     if (error) {

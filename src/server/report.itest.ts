@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeAll, afterAll } from 'vitest'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { issueAssessment } from './assessments'
 import { identify, startAttempt, submitAttempt } from './attempt'
 import { loadLeadReport } from './report'
@@ -22,7 +23,7 @@ beforeAll(async () => {
   await db.from('leads').delete().like('name', 'RptTest%')
   const { data, error } = await db
     .from('leads')
-    .insert({ name: 'RptTest Candidate', contact_mobile: MOBILE, class_level: 11 })
+    .insert({ name: 'RptTest Candidate', contact_mobile: MOBILE, class_level: 11, org_id: ITEST_ORG })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)

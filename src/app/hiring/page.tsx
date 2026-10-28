@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadApplicants } from '@/server/hiring'
-import { listStaff } from '@/server/staff'
+import { listApplicantAdders } from '@/server/staff'
 import { canHire } from '@/lib/staff'
 import { StaffShell } from '@/components/StaffShell'
 import { Icon } from '@/components/icons'
@@ -15,8 +15,8 @@ export const metadata: Metadata = { title: 'Hiring', robots: { index: false, fol
 
 /**
  * The teacher screening test, staff side (HIRING_TEST_SPEC.md): add an
- * applicant, send the link, read the score. A teacher sees the applicants they
- * added; superadmin sees everyone's, with who added them. RLS decides the list.
+ * applicant, send the link, read the score. A teacher sees every applicant in
+ * their org, superadmin every org's, each with who added them. RLS decides the list.
  */
 export default async function HiringPage() {
   const staff = await currentStaff()
@@ -25,13 +25,9 @@ export default async function HiringPage() {
 
   const applicants = await loadApplicants(await userClient())
 
-  // Who added each applicant, for superadmin only: names live in the auth
-  // admin API, which listStaff opens to superadmin and no one else.
-  let addedBy: Record<string, string> | null = null
-  if (staff.role === 'superadmin') {
-    const accounts = await listStaff(staff).catch(() => [])
-    addedBy = Object.fromEntries(accounts.map((a) => [a.id, a.name ?? a.email]))
-  }
+  // Names live in the auth admin API; listApplicantAdders opens only names, and
+  // only the org's (migration 0030).
+  const addedBy = await listApplicantAdders(staff).catch(() => null)
 
   return (
     <StaffShell staff={staff}>

@@ -12,6 +12,8 @@ export interface StaffUser {
   name: string | null
   email: string
   role: Role
+  /** The org the account belongs to (migration 0030). Null sees nothing, except superadmin, who sees every org. */
+  orgId: string | null
 }
 
 /**
@@ -63,11 +65,13 @@ export async function currentStaff(): Promise<StaffUser | null> {
   if (!ROLES.includes(role as Role)) return null
 
   const name = data.user.app_metadata?.name
+  const orgId = data.user.app_metadata?.org_id
   return {
     id: data.user.id,
     name: typeof name === 'string' ? name : null,
     email: data.user.email ?? '',
     role: role as Role,
+    orgId: typeof orgId === 'string' ? orgId : null,
   }
 }
 

@@ -28,9 +28,11 @@ const CHUNK = 200
  * What an import would do, without writing. The same matching rule as
  * `import_leads`: one existing lead on the number merges, several is left for a
  * person to decide. Advisory only — the commit re-decides inside its
- * transaction, since a lead can be added between the two.
+ * transaction, since a lead can be added between the two. Matched within the
+ * importer's org, as the commit is: superadmin sees every org's leads but
+ * imports into their own (migration 0030).
  */
-export async function previewImport(db: Db, rows: ImportRow[]): Promise<ImportPreview> {
+export async function previewImport(db: Db, rows: ImportRow[], orgId: string | null): Promise<ImportPreview> {
   const counts = new Map<string, number>()
   const mobiles = rows.map((r) => r.mobile)
 
@@ -38,6 +40,7 @@ export async function previewImport(db: Db, rows: ImportRow[]): Promise<ImportPr
     const { data, error } = await db
       .from('leads')
       .select('contact_mobile')
+      .eq('org_id', orgId ?? '00000000-0000-0000-0000-000000000000')
       .in('contact_mobile', mobiles.slice(i, i + CHUNK))
     if (error) throw new Error(`could not check existing leads: ${error.message}`)
     for (const { contact_mobile } of data ?? []) {

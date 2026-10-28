@@ -4,6 +4,10 @@
 -- Uses two existing logins as two teachers (their ids only; nothing about them
 -- changes). ONE statement that always ends by raising, so every row — the
 -- storage rows too — rolls back and no other session sees any of it.
+--
+-- Orgs (migration 0030): a teacher sees every applicant in their org, so the
+-- first login stands in as an LWS Pune teacher and the second, the outsider,
+-- as an LWS Delhi one.
 
 do $$
 declare
@@ -30,9 +34,9 @@ begin
   v_t1 := v_ids[1];
   v_t2 := v_ids[2];
   v_c_t1 := json_build_object('role', 'authenticated', 'sub', v_t1,
-    'app_metadata', json_build_object('role', 'teacher', 'name', 'Probe Teacher'))::text;
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', 'b31b8575-91c2-434a-b025-a7d12d3c0988', 'name', 'Probe Teacher'))::text;
   v_c_t2 := json_build_object('role', 'authenticated', 'sub', v_t2,
-    'app_metadata', json_build_object('role', 'teacher'))::text;
+    'app_metadata', json_build_object('role', 'teacher', 'org_id', '787f94d7-8d1b-4c45-a11d-b85916b7ccff'))::text;
   v_c_sa := json_build_object('role', 'authenticated', 'sub', v_t2,
     'app_metadata', json_build_object('role', 'superadmin', 'name', 'Probe Admin'))::text;
   v_c_co := json_build_object('role', 'authenticated', 'sub', v_t2,

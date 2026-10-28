@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG, ITEST_OTHER_ORG } from './itestOrg'
 import { purgeExpired } from './retention'
 import {
   addApplicant,
@@ -43,13 +44,13 @@ interface Session {
   id: string
 }
 
-async function signIn(role: Role, tag: string): Promise<Session> {
+async function signIn(role: Role, tag: string, org = ITEST_ORG): Promise<Session> {
   const email = `${PREFIX}${tag}-${Date.now()}@example.com`
   const { data, error } = await svc.auth.admin.createUser({
     email,
     password: PASSWORD,
     email_confirm: true,
-    app_metadata: { role, name: `Hiring ${tag}` },
+    app_metadata: { role, name: `Hiring ${tag}`, org_id: org },
   })
   if (error) throw new Error(`could not create ${role}: ${error.message}`)
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
@@ -104,7 +105,9 @@ beforeAll(async () => {
   await removeItemsAndUsers()
   await seedItems()
   teacher = await signIn('teacher', 't1')
-  otherTeacher = await signIn('teacher', 't2')
+  // A teacher sees every applicant in their org (migration 0030), so the
+  // outsider here is another org's.
+  otherTeacher = await signIn('teacher', 't2', ITEST_OTHER_ORG)
   superadmin = await signIn('superadmin', 's')
   counsellor = await signIn('counsellor', 'c')
 })
@@ -141,7 +144,7 @@ describe('adding and issuing', () => {
     expect(await addApplicant(teacher.db as never, { name: '  ', mobile: mobile(2), subject: 'maths' })).toMatchObject({ ok: false })
   })
 
-  it('shows an applicant to the teacher who added them and to superadmin only', async () => {
+  it('shows an applicant to their org’s teachers and to superadmin only', async () => {
     const { applicantId } = await applicantWithTest(3)
     const seen = async (s: Session) =>
       (await s.db.from('hiring_applicants').select('id').eq('id', applicantId)).data?.length ?? 0
@@ -277,12 +280,12 @@ describe('taking the test', () => {
     if (second.ok) expect((await openHiringTest(svc as never, second.token)).status).toBe('ok')
   })
 
-  it('lists a teacher their own applicants with the latest test, superadmin everyone', async () => {
+  it('lists a teacher their org’s applicants with the latest test, superadmin every org’s', async () => {
     const mine = await applicantWithTest(18)
     const added = await addApplicant(otherTeacher.db as never, { name: 'Hiring Test 19', mobile: mobile(19), subject: 'english' })
     if (!added.ok) throw new Error(added.error)
 
-    const forTeacher = await loadApplicants(teacher.db as never)
+    const forTeacher = (await loadApplicants(teacher.db as never)).filter((a) => a.mobile.startsWith('97000021'))
     expect(forTeacher.map((a) => a.name)).toEqual(['Hiring Test 18'])
     expect(forTeacher[0]).toMatchObject({ subject: 'chemistry', mobile: mobile(18), latest: { state: 'issued', issueSeq: 1, token: mine.token }, attempt: null })
 
@@ -291,7 +294,7 @@ describe('taking the test', () => {
     expect(forSuperadmin.find((a) => a.name === 'Hiring Test 19')!.latest).toBeNull()
   })
 
-  it('reports each question right, wrong or skipped, to the teacher who added the applicant only', async () => {
+  it('reports each question right, wrong or skipped, to the applicant’s org only', async () => {
     const { applicantId, token } = await applicantWithTest(20)
     const { attemptId } = await begin(token, 20)
     await saveHiringAnswer(svc as never, { attemptId, position: 1, choice: 'A', numericValue: null })
@@ -346,7 +349,7 @@ describe('the purge', () => {
 // this proves the server code uses them, through real sessions and the real
 // storage API, whose type and size limits no SQL probe can reach.
 describe('notes', () => {
-  it('lets the teacher who added an applicant write notes that superadmin reads, with the author', async () => {
+  it('lets a teacher of the applicant’s org write notes that superadmin reads, with the author', async () => {
     const { applicantId } = await applicantWithTest(40)
     expect(await addHiringNote(teacher.db as never, applicantId, '  Strong on calculus  ')).toEqual({ ok: true })
     expect(await addHiringNote(superadmin.db as never, applicantId, 'Call on Monday')).toEqual({ ok: true })
@@ -375,7 +378,7 @@ describe('notes', () => {
     expect(others.flatMap((a) => a.notes).some((n) => n.body.endsWith(' note'))).toBe(false)
   })
 
-  it('refuses a blank note, and any note from another teacher', async () => {
+  it('refuses a blank note, and any note from another org’s teacher', async () => {
     const { applicantId } = await applicantWithTest(41)
     expect(await addHiringNote(teacher.db as never, applicantId, '  ')).toEqual({ ok: false, error: 'Write a note first.' })
     expect((await addHiringNote(otherTeacher.db as never, applicantId, 'Not mine')).ok).toBe(false)
@@ -398,7 +401,7 @@ describe('the decision', () => {
     expect((await listed()).decision).toBe('shortlisted')
   })
 
-  it('lets superadmin hire, writes each change into the history, and refuses another teacher', async () => {
+  it('lets superadmin hire, writes each change into the history, and refuses another org’s teacher', async () => {
     const { applicantId } = await applicantWithTest(51)
     expect((await setHiringDecision(otherTeacher.db as never, applicantId, 'on_hold')).ok).toBe(false)
     expect(await setHiringDecision(teacher.db as never, applicantId, 'on_hold')).toEqual({ ok: true })
@@ -448,7 +451,7 @@ describe('the resume', () => {
     })
   })
 
-  it('is closed to another teacher, both ways', async () => {
+  it('is closed to another org’s teacher, both ways', async () => {
     const { applicantId } = await applicantWithTest(62)
     expect((await upload(otherTeacher, applicantId, PDF)).error).not.toBeNull()
     expect((await upload(teacher, applicantId, PDF)).error).toBeNull()

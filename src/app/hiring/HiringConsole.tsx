@@ -53,7 +53,7 @@ export function HiringConsole({
   appUrl,
 }: {
   applicants: HiringApplicantRow[]
-  /** Login id → name, for superadmin; null for a teacher, who sees only their own. */
+  /** Login id → name, the org's accounts (every org's for superadmin); null if the names could not be read. */
   addedBy: Record<string, string> | null
   /** Decides which decisions the card offers; the database decides what saves. */
   role: string

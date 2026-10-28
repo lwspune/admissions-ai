@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterAll } from 'vitest'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { issueAssessment } from './assessments'
 import { identify } from './attempt'
 import { purgeExpired } from './retention'
@@ -25,7 +26,7 @@ async function backdate(table: string, column: string, id: string, iso: string) 
 async function makeLead(name: string) {
   const { data, error } = await db
     .from('leads')
-    .insert({ name: `${MARKER} ${name}`, contact_mobile: MOBILE, class_level: 11 })
+    .insert({ name: `${MARKER} ${name}`, contact_mobile: MOBILE, class_level: 11, org_id: ITEST_ORG })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)
@@ -153,6 +154,7 @@ describe('purgeExpired', () => {
     const rows = Array.from({ length: 1001 }, (_, i) => ({
       name: `${MARKER} Bulk ${i}`,
       contact_mobile: MOBILE,
+      org_id: ITEST_ORG,
       created_at: longAgo,
     }))
     const { error } = await db.from('leads').insert(rows)

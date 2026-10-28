@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { issueAssessment, type Assessment } from './assessments'
 import { lookupPaperForScan, recordPaperScan, sheetPhotoPath, sheetPhotoUrl } from './paperScan'
 import { loadLeadReport, loadParentReport } from './report'
@@ -36,7 +37,7 @@ async function signIn(role: StaffUser['role'], tag: string): Promise<Session> {
     email,
     password: PASSWORD,
     email_confirm: true,
-    app_metadata: { role, name },
+    app_metadata: { role, name, org_id: ITEST_ORG },
   })
   if (error) throw new Error(`could not create ${role}: ${error.message}`)
   const db = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!, {
@@ -44,7 +45,7 @@ async function signIn(role: StaffUser['role'], tag: string): Promise<Session> {
   })
   const { error: signInError } = await db.auth.signInWithPassword({ email, password: PASSWORD })
   if (signInError) throw new Error(`could not sign in as ${role}: ${signInError.message}`)
-  return { db, actor: { id: data.user.id, name, email, role } }
+  return { db, actor: { id: data.user.id, name, email, role, orgId: ITEST_ORG } }
 }
 
 const issued: string[] = []
@@ -75,7 +76,7 @@ afterAll(async () => {
 async function paperTest(n: number): Promise<Assessment & { leadId: string }> {
   const { data, error } = await svc
     .from('leads')
-    .insert({ name: `ScanTest ${n}`, contact_mobile: mobile(n), class_level: 9, assigned_to: telecaller.actor.id })
+    .insert({ name: `ScanTest ${n}`, contact_mobile: mobile(n), class_level: 9, assigned_to: telecaller.actor.id, org_id: ITEST_ORG })
     .select('id')
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)
@@ -236,7 +237,7 @@ describe('filing a scan', () => {
   it('refuses an online test', async () => {
     const { data } = await svc
       .from('leads')
-      .insert({ name: 'ScanTest 8', contact_mobile: mobile(8), class_level: 9 })
+      .insert({ name: 'ScanTest 8', contact_mobile: mobile(8), class_level: 9, org_id: ITEST_ORG })
       .select('id')
       .single()
     const { assessment } = await issueAssessment(counsellor.db as never, { leadId: data!.id as string, issuedBy: null })

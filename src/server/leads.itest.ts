@@ -1,6 +1,7 @@
 import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
+import { ITEST_ORG } from './itestOrg'
 import { issueAssessment } from './assessments'
 import { importLeads, previewImport } from './leadImport'
 import { listAssignees } from './staff'
@@ -36,7 +37,7 @@ async function signIn(role: StaffUser['role'], tag: string, name: string): Promi
     email,
     password: PASSWORD,
     email_confirm: true,
-    app_metadata: { role, name },
+    app_metadata: { role, name, org_id: ITEST_ORG },
   })
   if (error) throw new Error(`could not create ${role}: ${error.message}`)
 
@@ -46,7 +47,7 @@ async function signIn(role: StaffUser['role'], tag: string, name: string): Promi
   const { error: signInError } = await db.auth.signInWithPassword({ email, password: PASSWORD })
   if (signInError) throw new Error(`could not sign in as ${role}: ${signInError.message}`)
 
-  return { id: data.user.id, db, actor: { id: data.user.id, name, email, role } }
+  return { id: data.user.id, db, actor: { id: data.user.id, name, email, role, orgId: ITEST_ORG } }
 }
 
 async function cleanup() {
@@ -81,7 +82,7 @@ afterAll(async () => {
 async function lead(n: number, fields: Record<string, unknown> = {}) {
   const { data, error } = await svc
     .from('leads')
-    .insert({ contact_mobile: mobile(n), ...fields })
+    .insert({ contact_mobile: mobile(n), org_id: ITEST_ORG, ...fields })
     .select()
     .single()
   if (error) throw new Error(`could not create lead: ${error.message}`)
@@ -570,7 +571,7 @@ describe('import', () => {
     await lead(49, { name: 'Sib 1' })
     await lead(49, { name: 'Sib 2' })
 
-    const preview = await previewImport(counsellor.db, [row(48), row(49), row(50)])
+    const preview = await previewImport(counsellor.db, [row(48), row(49), row(50)], ITEST_ORG)
     expect(preview).toEqual({ create: 1, merge: 1, ambiguous: [mobile(49)] })
     const { count } = await svc.from('leads').select('id', { count: 'exact', head: true }).eq('contact_mobile', mobile(50))
     expect(count).toBe(0)
