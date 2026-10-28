@@ -197,7 +197,11 @@ These are the things that quietly break everything if violated.
   `record_paper_scan`, the resume, `issue_hiring_test`, `leads_on_mobile`, and the import merge,
   which matches a number within one org (the same parent at Pune and Delhi is two leads). The
   question banks and lead source names are shared. GoPost's feed writes into its row's org
-  (Pune's). A new root table holding an org's data needs `org_id` and these checks
+  (Pune's). Only superadmin names an org (migration 0031: `leads_on_mobile`, `import_leads` and the
+  applicant's `org_id` take it; anyone else's is their own or refused); `orgFor` in
+  `src/lib/orgs.ts` states the rule for the screens, which show orgs only to superadmin. Moving an
+  account (`/staff`, `changeStaffOrg`) is refused while it has leads assigned outside the new org.
+  A new root table holding an org's data needs `org_id` and these checks
   (`orgs.itest.ts`, `db:probe -- 0030`).
 - **A telecaller sees only leads assigned to them; visibility is stated once.**
   `can_see_lead()` on `leads` (migration 0012), and every table hanging off a
@@ -456,9 +460,13 @@ the connection is refused (2026-10-01).
   loses sight of Pune's leads. Everything before is Pune's, GoPost's feed included. Step 1
   (migration 0030) is the data and the rules; accounts were given their org before it ran, so no
   one saw an empty list. By my choice: the org is read from the JWT like the role, falling back to
-  the account for an older token; a superadmin's new account and import go to their own org until
-  step 2 adds the screens (an org on `/staff`, a badge and filter on `/leads` and `/hiring`, an org
-  choice when superadmin adds or imports). Teachers now see "by …" on each applicant too.
+  the account for an older token. Teachers now see "by …" on each applicant too. Step 2 (0031, the
+  same evening), on the mock-ups the user approved: an Org beside each Role on `/staff`; for
+  superadmin an "All orgs" filter and org badges on `/leads` and `/hiring`, and an Org choice when
+  adding a lead, an applicant or an import; the org under the role in the header for everyone else
+  (not for superadmin, who works across orgs, and whose header it crowded). The user's calls: a
+  move is refused while the account has leads assigned (it says how many), and the filter starts at
+  All orgs.
 
 - **2026-10-28 — GoPost's feed hid leads again; the sync now checks an empty page.** The user
   saw no new leads. Since 26 Oct 17:29 UTC every hourly run had read "0 new, no error" while

@@ -241,15 +241,12 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
-- [ ] **Orgs, step 2: the screens (2026-10-28).** Step 1 (migration 0030) separated the data; nothing
-      on screen names an org yet. Planned, mock-up shown to the user: an Org column and picker on
-      `/staff`, an org badge and filter on `/leads` and `/hiring` for superadmin, an org choice when
-      superadmin adds or imports leads, the org's name in the header. Until then: a new account from
-      `/staff` and every superadmin import or hand-added lead go to the superadmin's own org (Pune);
-      superadmin's lists and downloads mix every org; superadmin's telecaller dropdown lists every
-      org's (the trigger refuses the wrong one); a moved account (`staff:org`) keeps its old org in
-      the database until its token refreshes, as a role change does.
-- [ ] **Orgs, deliberately not done in step 1.** A lead cannot move to another org (refused by
+- [x] ~~**Orgs, step 2: the screens.**~~ **DONE 2026-10-28** (migration 0031): org on `/staff`, the
+      superadmin's org filter, badges and org choice on `/leads`, `/leads/import` and `/hiring`, the
+      org in the header. Still true: a moved account keeps its old org in the database until its
+      token refreshes, as a role change does; superadmin's telecaller dropdown lists every org's,
+      labelled, and the trigger refuses the wrong one.
+- [ ] **Orgs, deliberately not done.** A lead cannot move to another org (refused by
       `leads_guard`). Lead source names are one shared list, by the user's choice. GoPost's feed is
       Pune's only; a Delhi feed would be a second `lead_feeds` row. "New since your last download"
       is per person and stage, not per org, which matters only to superadmin.
