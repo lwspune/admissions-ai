@@ -294,7 +294,8 @@ These are the things that quietly break everything if violated.
 - **Downloading leads is a counsellor's and superadmin's, and it takes the stage on screen.**
   `POST /leads/export` (`src/lib/leadExport.ts`, after GoPost's): every lead of the stage
   under the filters, or those that reached the app (`created_at`) since your last download
-  of that stage. `record_lead_download` (migration 0028) refuses anyone else and stores the
+  of that stage, or the leads ticked on screen (ids in the body, at most 500), which neither
+  reads nor moves the download point. `record_lead_download` (migration 0028) refuses anyone else and stores the
   point per person and stage, after the file is built; reads page by 1,000. The CSV starts
   with a BOM built by `String.fromCharCode` (the escape for it, written in source, landed as the raw character
   once), keeps formula characters inert and writes mobiles as "98765 43210".
@@ -430,6 +431,14 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-28 — Download for Excel takes the ticked leads too.** The user asked for it. Their
+  call, on my options: only as a first item in the Download for Excel menu ("Selected leads
+  (n)"), not also on the dark bar. By my choice: a selected download records nothing, so it
+  never moves the "new since your last download" point, and the selection moved up to the page
+  (remembering the view it was made on) so the menu can see it. The same change made the menu
+  open from the left on phones, where it had run off the screen. Checked live data locally:
+  two ticked In EIS leads came out as exactly those two, and the point stayed put.
 
 - **2026-10-28 — Ticked leads move stage together.** The user asked for a bulk move. Their calls,
   on my recommendations: only the ticked leads (no "move all matching the filters", which would
