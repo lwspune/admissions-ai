@@ -186,6 +186,19 @@ These are the things that quietly break everything if violated.
   An imported lead's `created_at` is its import date, never the source's
   date (that is `lead_origins.source_date`) — or the purge would delete a
   2025 sheet row the night it arrived.
+- **Every lead and applicant belongs to one org, and staff see only their own org's.**
+  Orgs are LWS branches (`organizations`, migration 0030: LWS Pune, LWS Delhi); superadmin sees
+  every org. A staff account's org is `app_metadata.org_id`, beside the role (`staff:org`), read
+  by `auth_org()`; an account with no org sees nothing. `leads`, `hiring_applicants` and
+  `lead_feeds` carry `org_id`: a session's insert takes its own org whatever it sends (superadmin
+  may name one), a service-key insert must name it, and a lead never changes org. `can_see_lead()`
+  and `can_see_applicant()` add "in my org", so everything hanging off either inherits it. The
+  doors that skip RLS check it themselves: the sheet photo (`omr_sheet_readable`/`_writable`),
+  `record_paper_scan`, the resume, `issue_hiring_test`, `leads_on_mobile`, and the import merge,
+  which matches a number within one org (the same parent at Pune and Delhi is two leads). The
+  question banks and lead source names are shared. GoPost's feed writes into its row's org
+  (Pune's). A new root table holding an org's data needs `org_id` and these checks
+  (`orgs.itest.ts`, `db:probe -- 0030`).
 - **A telecaller sees only leads assigned to them; visibility is stated once.**
   `can_see_lead()` on `leads` (migration 0012), and every table hanging off a
   lead — assessments, attempts, answers, events, identify_attempts, comments,
@@ -254,8 +267,8 @@ These are the things that quietly break everything if violated.
   allow-lists (`canManageLeads`, `isAdmissionsStaff`, `canHire` in `src/lib/staff.ts`): never write
   `role !== 'telecaller'` again — it lets every role added later through. The bank's shape
   rules are constraints (`npm run db:probe -- 0020`); signed-in users only read it.
-  An applicant belongs to whoever added them (stamped from the session) and a teacher sees only
-  their own; `issue_hiring_test()` is the only way a test is made and draws the paper itself, and
+  An applicant is stamped with who added them and their org, and a teacher sees every applicant
+  in their org (0030; before it, only their own); `issue_hiring_test()` is the only way a test is made and draws the paper itself, and
   no two papers in a subject hold the same set. The clock does not pause, the database sets the
   deadline and grades (`submit_hiring_attempt`), and a test's state only moves forward
   (migrations 0021–0022, `db:probe -- 0021`, `hiring.itest.ts`). The applicant's browser gets
@@ -321,8 +334,8 @@ npm run db:verify     npm run db:verify-rls -- <email> <password>
 npm run db:probe [-- <name>]                 (rollback-only SQL probes, safe on production)
 npm run items:seed                   npm run items:seed -- --live --file <batch.json>
 npm run items:hindi -- --stamp|--sheet|--file <batch>   (Hindi: fill source, review sheet, load)
-npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin|teacher> ["Full Name"]
-npm run staff:list    npm run staff:rm -- <email>
+npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin|teacher> <org-slug> ["Full Name"]
+npm run staff:list    npm run staff:org -- <email> <org-slug>    npm run staff:rm -- <email>
 npm run issue -- "Name" 9876543210 <8|9|10|11|12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
 npm run hiring:import [-- <subject>]         (PYQ Vault → content/hiring/<subject>.json; reads its public API)
@@ -434,6 +447,18 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-28 — Orgs: LWS Pune and LWS Delhi, each seeing only its own.** The user asked for a
+  teacher to see every applicant in their org, and said the project was meant to be multi-org;
+  nothing recorded that, and the app had no org anywhere. Their calls, on my recommendations: full
+  orgs rather than only opening hiring; an org is an LWS branch; superadmin sees every org; the
+  question banks and lead source names stay shared; Amit Mishra (counsellor) goes to LWS Delhi and
+  loses sight of Pune's leads. Everything before is Pune's, GoPost's feed included. Step 1
+  (migration 0030) is the data and the rules; accounts were given their org before it ran, so no
+  one saw an empty list. By my choice: the org is read from the JWT like the role, falling back to
+  the account for an older token; a superadmin's new account and import go to their own org until
+  step 2 adds the screens (an org on `/staff`, a badge and filter on `/leads` and `/hiring`, an org
+  choice when superadmin adds or imports). Teachers now see "by …" on each applicant too.
 
 - **2026-10-28 — GoPost's feed hid leads again; the sync now checks an empty page.** The user
   saw no new leads. Since 26 Oct 17:29 UTC every hourly run had read "0 new, no error" while

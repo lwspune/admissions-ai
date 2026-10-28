@@ -241,6 +241,19 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
+- [ ] **Orgs, step 2: the screens (2026-10-28).** Step 1 (migration 0030) separated the data; nothing
+      on screen names an org yet. Planned, mock-up shown to the user: an Org column and picker on
+      `/staff`, an org badge and filter on `/leads` and `/hiring` for superadmin, an org choice when
+      superadmin adds or imports leads, the org's name in the header. Until then: a new account from
+      `/staff` and every superadmin import or hand-added lead go to the superadmin's own org (Pune);
+      superadmin's lists and downloads mix every org; superadmin's telecaller dropdown lists every
+      org's (the trigger refuses the wrong one); a moved account (`staff:org`) keeps its old org in
+      the database until its token refreshes, as a role change does.
+- [ ] **Orgs, deliberately not done in step 1.** A lead cannot move to another org (refused by
+      `leads_guard`). Lead source names are one shared list, by the user's choice. GoPost's feed is
+      Pune's only; a Delhi feed would be a second `lead_feeds` row. "New since your last download"
+      is per person and stage, not per org, which matters only to superadmin.
+
 - [ ] **The user asked (2026-10-11) that student data never be deleted. Not done; needs a 360
       and their go-ahead.** It reverses an invariant: the 12-month purge (`/api/cron/purge`,
       `RETENTION_MONTHS`) exists because that is what the parent consents to on the call, and
@@ -546,6 +559,15 @@ go-ahead before anything shipped is touched.
   bar. Do not let this drift into the app.
 
 ## Traps worth remembering
+
+- **Two tests fail for reasons outside the code under test (found 2026-10-28, not yet fixed).**
+  Probe 0021 grades a hiring paper drawn from every live physics question while assuming its own
+  seeded keys (all A, numeric 5); since the real physics bank went live the draw mixes real items,
+  so the score is random and the probe fails every run. `attempt.itest.ts`' "answer changed after a
+  pause" compares the database's clock (the resume event's `at`) with this machine's
+  (`last_answered_at` is `new Date()` in the caller); this PC runs about a second ahead, so it fails
+  here every time. In production both stamps come from synced servers. Fix the probe by seeding a
+  subject with no live items, and the test by waiting a second or reading the clock from the database.
 
 - **Never run `next build` while `next dev` is live.** It overwrites the `.next` the dev server is
   serving and every asset 404s with nothing explaining why. Use `npm run build:check`, which writes to

@@ -25,7 +25,7 @@ student lead, the class rule and the parent; an applicant has none of them.
 | Time | 25 minutes; English 20 |
 | Sets | Every applicant gets their own random draw. No two papers in a subject may hold the same set (a database rule); a reissue skips what the applicant has seen |
 | Marking | As the admissions test: +1 correct, −0.25 wrong MCQ, 0 wrong typed answer, 0 skipped |
-| Who issues and reads | A new **teacher** role, and superadmin. A teacher sees only the applicants they added; superadmin sees all. Counsellors and telecallers see nothing of it |
+| Who issues and reads | A new **teacher** role, and superadmin. A teacher sees every applicant in their org, whoever added them (2026-10-28; before, only their own); superadmin sees every org's. Counsellors and telecallers see nothing of it |
 | Window | 24 hours to start (applicants are out of station) — default, not yet confirmed in use |
 | Reissues | At most 2 — default |
 | The applicant sees | "Submitted" — no score, no answers — default |
@@ -66,9 +66,9 @@ Proven by `npm run db:probe -- 0020`.
 
 ### Issuing and taking (migrations 0021, 0022)
 
-- An applicant belongs to whoever added them, stamped from the session; a signed-in user may send
-  only name, number and subject. A teacher sees their own applicants and everything under them;
-  superadmin sees all. The tables under an applicant are read through it, and nobody signed in
+- An applicant is stamped with who added them and their org, from the session; a signed-in user
+  may send only name, number and subject. A teacher sees every applicant in their org and
+  everything under them (migration 0030); superadmin sees every org's. The tables under an applicant are read through it, and nobody signed in
   writes them.
 - `issue_hiring_test()` is the only way a test is made. It draws the paper itself — MCQ first, then
   typed answers; at most two questions a chapter; nothing this applicant has seen — voids the
@@ -112,7 +112,7 @@ The owner's calls: the six decisions below, PDF and Word resumes, hired and reje
 only, applicants never purged, and no lock on a decided applicant (a new link can still be issued).
 
 - **Decision** — In progress (every applicant starts here), Shortlisted, On hold, Hired, Rejected,
-  Withdrawn. A teacher sets it on their own applicants; Hired and Rejected are superadmin's, into and
+  Withdrawn. A teacher sets it on their org's applicants; Hired and Rejected are superadmin's, into and
   out of, so a teacher cannot undo superadmin's call (`hiring_applicants_decision_guard`). Only that
   column is writable (a column grant), and every change writes a history line. Nothing sets it from
   the score: a person decides. `/hiring` shows it as a badge and filters by it.
