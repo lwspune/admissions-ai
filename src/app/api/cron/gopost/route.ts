@@ -33,7 +33,8 @@ export async function POST(req: NextRequest) {
     // Counts only: the numbers on the sibling list stay out of a third-party log.
     console.warn(
       `gopost: dryRun=${dryRun} pages=${result.pages} leads=${result.leads} created=${result.created} ` +
-        `merged=${result.merged} siblings=${result.ambiguous.length} skipped=${result.skipped} done=${result.done}`,
+        `merged=${result.merged} siblings=${result.ambiguous.length} skipped=${result.skipped} done=${result.done} ` +
+        `narrowed=${result.narrowed}`,
     )
     return NextResponse.json({
       ok: true,

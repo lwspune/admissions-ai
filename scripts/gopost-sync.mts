@@ -60,8 +60,8 @@ async function main(): Promise<number> {
         if (error) throw new Error(`could not read the feed's cursor: ${error.message}`)
         return data.cursor as string | null
       },
-      fetchPage: async (after) => {
-        const res = await fetch(feedPageUrl(url, after), { headers: { authorization: `Bearer ${secret}` } })
+      fetchPage: async (after, limit) => {
+        const res = await fetch(feedPageUrl(url, after, limit), { headers: { authorization: `Bearer ${secret}` } })
         if (!res.ok) throw new Error(`GoPost answered ${res.status}`)
         return parseFeedPage(await res.json())
       },
@@ -84,6 +84,7 @@ async function main(): Promise<number> {
   console.log(`  already here:       ${result.merged}  (source and note added; stage and telecaller kept)`)
   console.log(`  siblings, skipped:  ${result.ambiguous.length}  (number on more than one lead)`)
   console.log(`  not a mobile:       ${result.skipped}`)
+  if (result.narrowed) console.log('  GoPost hid leads from a full page; smaller pages were read')
   if (bySource.size) {
     console.log('  by source:')
     for (const [source, n] of [...bySource].sort((a, b) => b[1] - a[1])) console.log(`    ${source.padEnd(22)} ${n}`)

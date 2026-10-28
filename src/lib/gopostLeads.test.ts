@@ -120,6 +120,10 @@ describe('asking for a page', () => {
     expect(new URL(feedPageUrl(FEED, cursor)).searchParams.get('after')).toBe(cursor)
     expect(new URL(feedPageUrl(FEED, null)).searchParams.has('after')).toBe(false)
   })
+
+  it('asks for a smaller page when told to', () => {
+    expect(new URL(feedPageUrl(FEED, null, 1)).searchParams.get('limit')).toBe('1')
+  })
 })
 
 describe('the warning on the lead list', () => {
@@ -145,17 +149,22 @@ describe('the warning on the lead list', () => {
 
 describe('a sync', () => {
   // A fake GoPost with these pages, and a fake database that records each call.
-  function fake(pages: FeedLead[][], opts: { failOn?: number } = {}) {
+  // `brokenAbove`: GoPost answers any larger page empty, as it did at 500 on
+  // 2026-10-26 and at 100 and 200 on 2026-10-28 while 27 leads waited.
+  function fake(pages: FeedLead[][], opts: { failOn?: number; brokenAbove?: number } = {}) {
     const calls: { kind: string; from?: string | null; next?: string | null; rows?: FeedRow[] }[] = []
+    const asked: number[] = []
     let stored: string | null = null
     let clock = 0
     const counts = (rows: FeedRow[]): FeedCounts => ({ created: rows.length, merged: 0, ambiguous: [] })
     const deps: FeedDeps = {
       cursor: async () => stored,
-      fetchPage: async (after) => {
+      fetchPage: async (after, limit) => {
+        asked.push(limit)
         const i = after === null ? 0 : Number(after.split('#')[1]) + 1
         if (opts.failOn === i) throw new Error('GoPost answered 500')
-        const leads = (pages[i] ?? []).map((l, j) => ({ ...l, cursor: `p#${i}#${j}` }))
+        if (opts.brokenAbove !== undefined && limit > opts.brokenAbove) return { leads: [], next: after }
+        const leads = (pages[i] ?? []).slice(0, limit).map((l, j) => ({ ...l, cursor: `p#${i}#${j}` }))
         return { leads, next: leads.length ? `p#${i}` : after }
       },
       importPage: async (from, next, rows) => {
@@ -172,7 +181,7 @@ describe('a sync', () => {
       },
       now: () => (clock += 1000),
     }
-    return { deps, calls }
+    return { deps, calls, asked }
   }
 
   it('imports page after page, each with the cursor it started from, until nothing is new', async () => {
@@ -212,5 +221,28 @@ describe('a sync', () => {
     const { deps, calls } = fake([[lead()], [lead({ mobile: '+919800000002' })]], { failOn: 1 })
     await expect(syncFeed(deps)).rejects.toThrow('GoPost answered 500')
     expect(calls.map((c) => c.kind)).toEqual(['import', 'error'])
+  })
+
+  it('checks an empty page with a one-lead ask before calling the feed quiet', async () => {
+    const { deps, calls, asked } = fake([])
+    const result = await syncFeed(deps)
+    expect(result).toMatchObject({ created: 0, done: true, narrowed: false })
+    expect(asked.at(-1)).toBe(1)
+    expect(calls.map((c) => c.kind)).toEqual(['import'])
+  })
+
+  it('reads on in smaller pages when GoPost answers a full page empty with leads waiting', async () => {
+    const { deps, calls } = fake([[lead(), lead({ mobile: '+919800000002' })], [lead({ mobile: '+919800000003' })]], {
+      brokenAbove: 30,
+    })
+    const result = await syncFeed(deps)
+    expect(result).toMatchObject({ pages: 2, created: 3, done: true, narrowed: true })
+    expect(calls.map((c) => c.kind)).not.toContain('error')
+  })
+
+  it('records an error when GoPost hides waiting leads even from a small page', async () => {
+    const { deps, calls } = fake([[lead()]], { brokenAbove: 10 })
+    await expect(syncFeed(deps)).rejects.toThrow(/empty page/)
+    expect(calls.map((c) => c.kind)).toEqual(['error'])
   })
 })

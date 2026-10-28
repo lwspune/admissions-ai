@@ -41,8 +41,8 @@ export function gopostDeps(db: Db, { url, secret }: { url: string; secret: strin
       if (error) throw new Error(`could not read the feed's cursor: ${error.message}`)
       return data.cursor as string | null
     },
-    fetchPage: async (after) => {
-      const res = await fetch(feedPageUrl(url, after), { headers: { authorization: `Bearer ${secret}` }, cache: 'no-store' })
+    fetchPage: async (after, limit) => {
+      const res = await fetch(feedPageUrl(url, after, limit), { headers: { authorization: `Bearer ${secret}` }, cache: 'no-store' })
       if (!res.ok) throw new Error(`GoPost answered ${res.status}`)
       return parseFeedPage(await res.json())
     },

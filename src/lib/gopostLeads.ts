@@ -102,14 +102,16 @@ export function toFeedRow(lead: FeedLead): FeedRow | null {
   }
 }
 
-// Below 500: on 2026-10-26 GoPost answered limit=500 with an empty page (its
-// cursor as `next`) once 2,171 leads waited, and every hourly run read that as
-// "nothing new". 499 and below came back whole.
-const PAGE_SIZE = 200
+// GoPost answers some page sizes with an empty page (its cursor as `next`)
+// while leads wait: 500 on 2026-10-26 with 2,171 waiting, then 100 and 200 on
+// 2026-10-28 with 27 waiting, while 50, 75 and 150 came back whole. Every
+// hourly run read that as "nothing new". So an empty page is checked with a
+// one-lead ask, and if that finds a lead the run reads on in smaller pages.
+const PAGE_SIZES = [50, 25]
 
 /** The request for one page of the feed, after `cursor` or from the top. */
-export function feedPageUrl(feed: string, cursor: string | null): string {
-  const q = new URLSearchParams({ limit: String(PAGE_SIZE) })
+export function feedPageUrl(feed: string, cursor: string | null, limit = PAGE_SIZES[0]!): string {
+  const q = new URLSearchParams({ limit: String(limit) })
   if (cursor) q.set('after', cursor)
   return `${feed}?${q}`
 }
@@ -149,7 +151,7 @@ export interface FeedCounts {
 export interface FeedDeps {
   /** Where the last run stopped. */
   cursor(): Promise<string | null>
-  fetchPage(after: string | null): Promise<FeedPage>
+  fetchPage(after: string | null, limit: number): Promise<FeedPage>
   /** Writes the rows and moves the cursor from `from` to `next`, together. */
   importPage(from: string | null, next: string | null, rows: FeedRow[]): Promise<FeedCounts>
   /** What importPage would do, writing nothing. */
@@ -164,18 +166,28 @@ export interface SyncResult extends FeedCounts {
   skipped: number
   /** False when time ran out with pages still to read; the next run continues. */
   done: boolean
+  /** True when GoPost hid waiting leads from a full page and smaller pages were read. */
+  narrowed: boolean
 }
 
 export async function syncFeed(
   deps: FeedDeps,
   { dryRun = false, budgetMs = 45_000 }: { dryRun?: boolean; budgetMs?: number } = {},
 ): Promise<SyncResult> {
-  const result: SyncResult = { pages: 0, leads: 0, skipped: 0, created: 0, merged: 0, ambiguous: [], done: false }
+  const result: SyncResult = { pages: 0, leads: 0, skipped: 0, created: 0, merged: 0, ambiguous: [], done: false, narrowed: false }
   const start = deps.now()
+  let size = 0
   try {
     let from = await deps.cursor()
     for (;;) {
-      const page = await deps.fetchPage(from)
+      let page = await deps.fetchPage(from, PAGE_SIZES[size]!)
+      while (page.leads.length === 0 && (await deps.fetchPage(from, 1)).leads.length > 0) {
+        if (++size === PAGE_SIZES.length) {
+          throw new Error(`GoPost answered an empty page of ${PAGE_SIZES[size - 1]} with leads still waiting`)
+        }
+        result.narrowed = true
+        page = await deps.fetchPage(from, PAGE_SIZES[size]!)
+      }
       const rows = page.leads.map(toFeedRow).filter((r): r is FeedRow => r !== null)
       const counts = dryRun ? await deps.preview(rows) : await deps.importPage(from, page.next, rows)
       result.created += counts.created
