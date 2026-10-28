@@ -447,6 +447,20 @@ go-ahead before anything shipped is touched.
       contacted" history line signed System, which is also the record of exactly which moved.
       Contacted rather than In EIS: a finished test is not an enrolment.
 
+- [ ] **"Changed after a pause" compares two clocks (2026-10-28).** `saveAnswer` stamps
+      `last_answered_at` with the app server's clock; the resume event's `at` is the database's.
+      From this laptop (0.6 s ahead of Supabase) `attempt.itest.ts` "records an answer changed after
+      a pause" fails every run, because its resume lands milliseconds after the first answer. Live,
+      Vercel's clock is synced and a real resume comes minutes later, so no candidate is likely
+      affected. Not yet analysed (360 needed: let the database stamp `last_answered_at`).
+
+- [ ] **Bulk assign puts every id in the URL and is not one transaction (2026-10-28).** Found
+      building the bulk stage move, which passes its ids in the body of one `move_leads` call
+      (migration 0029). `assignLeads` (`src/app/leads/actions.ts`) sends up to 500 uuids as one
+      `.in('id', …)`, about 19 KB of URL; 1,000 was a 400 (the `in` trap). The UI ticks at most a
+      page of 50 today, so nothing has failed. Not yet analysed (360 needed: an `assign_leads`
+      RPC like 0029, with `leads_guard` still deciding who may assign to whom).
+
 - [ ] **Some times are formatted without India's zone (2026-10-19).** Found live on /hiring: the
       server runs on UTC, so "added 08:47 am" was 2:17 pm. Hiring now uses `istTime`/`istDay`, and
       the unit suite runs on UTC (`vitest.config.ts`) so a zoneless format fails there instead of

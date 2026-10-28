@@ -279,7 +279,11 @@ These are the things that quietly break everything if violated.
   below, 50 rows a page (`listPipeline`). A row moves its lead one click on
   (`NEXT_STAGE`) or anywhere from its ⋯ menu; the lead's own page shows the
   stage and does not change it. Detail lookups go 100 leads at a time (the
-  1,000-row and URL traps).
+  1,000-row and URL traps). Ticked leads move together through `move_leads`
+  (migration 0029): counsellor and superadmin only, at most 500, one transaction,
+  ids in the body, RLS still deciding, a history line per lead that moved. A
+  selection lasts only while the stage, page and search stay put (`StageList` is
+  keyed by them), so nothing ticked out of sight is moved.
 - **A stage lists newest enquiry first, by `leads.enquired_on`, which the database keeps.**
   Migration 0027: the latest `lead_origins.source_date`, so a repeat enquiry moves a
   lead up and an older one never moves it back; a lead an import creates takes its
@@ -426,6 +430,14 @@ the connection is refused (2026-10-01).
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-28 — Ticked leads move stage together.** The user asked for a bulk move. Their calls,
+  on my recommendations: only the ticked leads (no "move all matching the filters", which would
+  copy the filters' logic into a large write that is hard to undo), counsellors and superadmin
+  only like assigning, and "Move to" beside "Assign to" on the dark bar, with a confirm. The same
+  change fixed the bar's Assign button, which was white on white and showed no word (the Tailwind
+  trap), and ended selections surviving a switch of stage or page. Bulk assign still sends its ids
+  in the URL: in the backfill ledger.
 
 - **2026-10-27 — Leads filter by enquiry date.** The user asked for a date filter on New leads.
   Their calls: the enquiry date (`enquired_on`, what each row shows), not the day a lead reached
