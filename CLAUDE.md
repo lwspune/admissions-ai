@@ -425,12 +425,22 @@ the connection is refused (2026-10-01).
   same day). Raise a refusal with the default code (P0001, a 400) or a 4xx one.
 - **A quiet feed and a broken one look the same.** GoPost answered `limit=500` with an
   empty page past its 2,579th lead, and the hourly sync logged "0 new, no error" while
-  2,171 leads waited (2026-10-26; ours now asks for 200). When the sync says nothing is new,
-  check GoPost's lead count against ours before believing it.
+  2,171 leads waited (2026-10-26). Asking for 200 broke the same way on 10-28, with 27 waiting,
+  while 50 and 150 worked: it is GoPost's, size-dependent, and no page size is safe. So the sync
+  asks for 50, checks every empty page with a one-lead ask, and on a hidden lead reads on in
+  pages of 25 (`narrowed=true` in the log); if 25 hides them too it records an error, which
+  /leads shows. When the sync says nothing is new, still check GoPost's count against ours.
 
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-28 — GoPost's feed hid leads again; the sync now checks an empty page.** The user
+  saw no new leads. Since 26 Oct 17:29 UTC every hourly run had read "0 new, no error" while
+  27 waited: GoPost answered our 200-lead page empty (100 too; 50, 75, 150 whole). On the
+  user's yes, not a smaller number again but a check: see the trap. Dry-run against the live
+  feed found all 27, and with 200 put back first it fell back to 25 and found them too.
+  The cause is in GoPost's `admissions_leads_after` and is GoPost's to fix.
 
 - **2026-10-28 — Download for Excel takes the ticked leads too.** The user asked for it. Their
   call, on my options: only as a first item in the Download for Excel menu ("Selected leads
