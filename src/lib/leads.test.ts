@@ -11,6 +11,8 @@ import {
   STAGE_TONE,
   COLUMN_TITLE,
   NEXT_STAGE,
+  MAX_BULK,
+  bulkMoveMessage,
   enquiryLabel,
   MAX_NOTE,
   parseLeadFilters,
@@ -302,6 +304,19 @@ describe('leadsHref', () => {
 describe('the next stage', () => {
   it('is the owner’s usual next step, and none from an outcome', () => {
     expect(NEXT_STAGE).toEqual({ new: 'contacted', cnr: 'contacted', contacted: 'in_eis', in_eis: null, not_interested: null })
+  })
+})
+
+describe('a bulk move', () => {
+  it('says how many moved, and how many were already there', () => {
+    expect(bulkMoveMessage(50, 50, 'contacted')).toBe('Moved 50 leads to Contacted.')
+    expect(bulkMoveMessage(1, 1, 'not_interested')).toBe('Moved 1 lead to Not interested.')
+    expect(bulkMoveMessage(48, 50, 'in_eis')).toBe('Moved 48 leads to In EIS; 2 were already there.')
+    expect(bulkMoveMessage(0, 1, 'cnr')).toBe('Moved 0 leads to CNR; 1 was already there.')
+  })
+
+  it('takes at most a page at a time, many times over', () => {
+    expect(MAX_BULK).toBe(500)
   })
 })
 

@@ -38,6 +38,16 @@ export const NEXT_STAGE: Record<Stage, Stage | null> = {
   not_interested: null,
 }
 
+/** The most leads one bulk assign or move takes; move_leads (0029) refuses more. */
+export const MAX_BULK = 500
+
+/** What the bar says after a bulk move; a lead already in the stage is skipped. */
+export function bulkMoveMessage(moved: number, selected: number, to: Stage): string {
+  const done = `Moved ${moved} lead${moved === 1 ? '' : 's'} to ${STAGE_LABEL[to]}`
+  const there = selected - moved
+  return there > 0 ? `${done}; ${there} ${there === 1 ? 'was' : 'were'} already there.` : `${done}.`
+}
+
 export type Tone = 'neutral' | 'info' | 'accent' | 'success' | 'warning' | 'danger'
 
 /** The colour of a stage's badge, by meaning; the classes live with the Badge. */

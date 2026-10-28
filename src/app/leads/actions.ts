@@ -6,11 +6,13 @@ import { userClient, requireStaff } from '@/server/auth'
 import { issueAssessment } from '@/server/assessments'
 import { normalizeMobile } from '@/lib/mobile'
 import { parseClassLevel } from '@/lib/classes'
-import { isStage, isInterest, isUuid, MAX_NOTE } from '@/lib/leads'
+import { isStage, isInterest, isUuid, MAX_NOTE, MAX_BULK, bulkMoveMessage } from '@/lib/leads'
 
 export interface ActionResult {
   ok: boolean
   error?: string
+  /** What to tell the user when it worked, if more than "done". */
+  message?: string
   /** The candidate link, when an issue succeeded. */
   url?: string
   /** Where a paper test's question paper and answer sheet are printed from. */
@@ -175,7 +177,7 @@ export async function assignLeads(leadIds: string[], assignee: string): Promise<
   const staff = await requireStaff()
   if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor or superadmin can assign leads.' }
   if (!Array.isArray(leadIds) || leadIds.length === 0) return { ok: false, error: 'Select at least one lead.' }
-  if (leadIds.length > 500 || !leadIds.every(isUuid)) return { ok: false, error: 'Unknown lead.' }
+  if (leadIds.length > MAX_BULK || !leadIds.every(isUuid)) return { ok: false, error: 'Unknown lead.' }
   if (assignee !== '' && !isUuid(assignee)) return { ok: false, error: 'Choose a telecaller.' }
 
   const db = await userClient()
@@ -188,6 +190,28 @@ export async function assignLeads(leadIds: string[], assignee: string): Promise<
   revalidatePath('/leads')
   for (const id of leadIds) revalidatePath(`/leads/${id}`)
   return { ok: true }
+}
+
+/**
+ * Moves the ticked leads to one stage (2026-10-28), in one transaction.
+ * `move_leads` (migration 0029) refuses anyone but a counsellor or superadmin
+ * and writes each lead's history line; this check only saves a telecaller a
+ * confusing error.
+ */
+export async function moveLeads(leadIds: string[], stage: string): Promise<ActionResult> {
+  const staff = await requireStaff()
+  if (!canManageLeads(staff.role)) return { ok: false, error: 'Only a counsellor or superadmin can move leads in bulk.' }
+  if (!Array.isArray(leadIds) || leadIds.length === 0) return { ok: false, error: 'Select at least one lead.' }
+  if (leadIds.length > MAX_BULK || !leadIds.every(isUuid)) return { ok: false, error: 'Unknown lead.' }
+  if (!isStage(stage)) return { ok: false, error: 'Choose a stage.' }
+
+  const db = await userClient()
+  const { data, error } = await db.rpc('move_leads', { p_ids: leadIds, p_stage: stage })
+  if (error) return failed('move leads', error)
+
+  revalidatePath('/leads')
+  for (const id of leadIds) revalidatePath(`/leads/${id}`)
+  return { ok: true, message: bulkMoveMessage(data as number, leadIds.length, stage) }
 }
 
 export async function updateLead(leadId: string, formData: FormData): Promise<ActionResult> {

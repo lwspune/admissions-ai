@@ -8,6 +8,7 @@ import { CLASSES } from '@/lib/classes'
 import {
   STAGES,
   COLUMN_TITLE,
+  STAGE_LABEL,
   NEXT_STAGE,
   PAGE_SIZE,
   STAGE_TONE,
@@ -23,7 +24,8 @@ import type { LeadListRow, Pipeline } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
 import { Icon } from '@/components/icons'
 import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
-import { createLead, assignLeads, setStage, type ActionResult } from './actions'
+import { useConfirm } from '@/components/ConfirmDialog'
+import { createLead, assignLeads, moveLeads, setStage, type ActionResult } from './actions'
 import { RowTest } from './RowTest'
 
 export function LeadsConsole({
@@ -86,7 +88,9 @@ export function LeadsConsole({
 
       <PipelineBar counts={pipeline.counts} filters={filters} />
 
+      {/* A new stage, page or search starts a new selection: ticks you cannot see must not be moved. */}
       <StageList
+        key={leadsHref(filters)}
         list={pipeline.list}
         filters={filters}
         me={staff.id}
@@ -290,8 +294,12 @@ function StageList({
   const router = useRouter()
   const [selected, setSelected] = useState<Set<string>>(new Set())
   const [assignee, setAssignee] = useState('')
+  const others = STAGES.filter((s) => s !== filters.stage)
+  const [to, setTo] = useState<Stage>(NEXT_STAGE[filters.stage] ?? others[0]!)
   const [result, setResult] = useState<ActionResult | null>(null)
   const [pending, start] = useTransition()
+  const [busy, setBusy] = useState<'move' | 'assign' | null>(null)
+  const { confirm, dialog } = useConfirm()
 
   const pages = Math.max(1, Math.ceil(list.total / PAGE_SIZE))
   const names = new Map(assignees.map((a) => [a.id, a.label]))
@@ -309,16 +317,30 @@ function StageList({
     })
   }
 
-  function assign() {
+  function run(kind: 'move' | 'assign', action: () => Promise<ActionResult>) {
     setResult(null)
+    setBusy(kind)
     start(async () => {
-      const r = await assignLeads([...selected], assignee)
+      const r = await action()
       setResult(r)
       if (r.ok) {
         setSelected(new Set())
         router.refresh()
       }
     })
+  }
+
+  const assign = () => run('assign', () => assignLeads([...selected], assignee))
+
+  async function move() {
+    const n = selected.size
+    const ok = await confirm({
+      title: `Move ${n} lead${n === 1 ? '' : 's'}?`,
+      body: `Move ${n} lead${n === 1 ? '' : 's'} from ${title} to ${STAGE_LABEL[to]}? Each gets a line in its history.`,
+      confirm: `Move to ${STAGE_LABEL[to]}`,
+      danger: to === 'not_interested',
+    })
+    if (ok) run('move', () => moveLeads([...selected], to))
   }
 
   return (
@@ -345,8 +367,11 @@ function StageList({
         )}
       </div>
 
-      <p aria-live="polite" className={result?.error ? 'mb-2 text-sm text-rose-700' : 'sr-only'}>
-        {result?.error ?? (result?.ok ? 'Assigned.' : '')}
+      <p
+        aria-live="polite"
+        className={result?.error ? 'mb-2 text-sm text-rose-700' : result?.message ? 'mb-2 text-sm text-emerald-700' : 'sr-only'}
+      >
+        {result?.error ?? result?.message ?? (result?.ok ? 'Assigned.' : '')}
       </p>
 
       {list.rows.length === 0 ? (
@@ -375,33 +400,59 @@ function StageList({
       )}
 
       {canAssign && selected.size > 0 && (
-        <div className="sticky bottom-4 z-20 mt-4 flex flex-wrap items-end gap-3 rounded-xl bg-slate-900 p-3 text-white shadow-raised sm:p-4">
-          <div className="min-w-[12rem] flex-1">
-            <label htmlFor="bulk-assignee" className="block text-sm font-medium text-slate-200">
-              Assign {selected.size} selected to
-            </label>
-            <select
-              id="bulk-assignee"
-              value={assignee}
-              onChange={(e) => setAssignee(e.target.value)}
-              className={cx(input, 'border-slate-700')}
+        // Dark, so the global indigo focus ring turns white inside it.
+        <div className="sticky bottom-4 z-20 mt-4 rounded-xl bg-slate-900 p-3 text-white shadow-raised [&_:focus-visible]:outline-white sm:p-4">
+          <div className="flex items-center justify-between gap-3">
+            <p className="text-sm font-semibold">{selected.size.toLocaleString('en-IN')} selected</p>
+            {/* Not btn('ghost'): its text-slate-700 outranks any colour added here (the Tailwind trap). */}
+            <button
+              type="button"
+              onClick={() => setSelected(new Set())}
+              className="min-h-tap inline-flex items-center rounded-lg px-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/10"
             >
-              <option value="">Nobody (unassign)</option>
-              {assignees.map((a) => (
-                <option key={a.id} value={a.id}>
-                  {a.label}
-                </option>
-              ))}
-            </select>
+              Clear selection
+            </button>
           </div>
-          <button type="button" onClick={() => setSelected(new Set())} className={cx(btn('ghost'), 'text-slate-200 hover:bg-white/10')}>
-            Clear selection
-          </button>
-          <button type="button" onClick={assign} disabled={pending} className={cx(btn('primary'), 'bg-white text-slate-900 hover:bg-slate-100')}>
-            {pending ? 'Assigning…' : 'Assign'}
-          </button>
+          <div className="mt-2 grid gap-3 sm:grid-cols-2 sm:gap-6">
+            <div className="flex items-end gap-2">
+              <div className="min-w-0 flex-1">
+                <label htmlFor="bulk-stage" className="block text-sm font-medium text-slate-200">
+                  Move to
+                </label>
+                <select id="bulk-stage" value={to} onChange={(e) => setTo(e.target.value as Stage)} className={input}>
+                  {others.map((s) => (
+                    <option key={s} value={s}>
+                      {STAGE_LABEL[s]}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button type="button" onClick={move} disabled={pending} className={btn('secondary')}>
+                {busy === 'move' && pending ? 'Moving…' : 'Move'}
+              </button>
+            </div>
+            <div className="flex items-end gap-2">
+              <div className="min-w-0 flex-1">
+                <label htmlFor="bulk-assignee" className="block text-sm font-medium text-slate-200">
+                  Assign to
+                </label>
+                <select id="bulk-assignee" value={assignee} onChange={(e) => setAssignee(e.target.value)} className={input}>
+                  <option value="">Nobody (unassign)</option>
+                  {assignees.map((a) => (
+                    <option key={a.id} value={a.id}>
+                      {a.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button type="button" onClick={assign} disabled={pending} className={btn('secondary')}>
+                {busy === 'assign' && pending ? 'Assigning…' : 'Assign'}
+              </button>
+            </div>
+          </div>
         </div>
       )}
+      {dialog}
 
       {pages > 1 && (
         <nav aria-label="Pages" className="mt-4 flex items-center justify-between gap-3">

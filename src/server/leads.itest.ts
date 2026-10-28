@@ -316,6 +316,61 @@ describe('the board’s stages', () => {
   })
 })
 
+// Moving the ticked leads at once (migration 0029): a counsellor's or
+// superadmin's, one transaction, one history line per lead that moved.
+describe('bulk move', () => {
+  const move = (db: SupabaseClient, ids: string[], stage: string) =>
+    db.rpc('move_leads', { p_ids: ids, p_stage: stage })
+  const stages = async (ids: string[]) =>
+    ((await svc.from('leads').select('id, stage').in('id', ids)).data ?? []).map((r) => r.stage).sort()
+
+  it('moves every lead given, a history line each by whoever moved them', async () => {
+    const a = await lead(90, { name: 'LeadTest Bulk A' })
+    const b = await lead(91, { name: 'LeadTest Bulk B', stage: 'cnr' })
+    const { data, error } = await move(counsellor.db, [a.id, b.id], 'contacted')
+    expect(error).toBeNull()
+    expect(data).toBe(2)
+    expect(await stages([a.id, b.id])).toEqual(['contacted', 'contacted'])
+
+    const { data: lines } = await svc
+      .from('lead_comments')
+      .select('lead_id, body, author')
+      .in('lead_id', [a.id, b.id])
+      .order('lead_id')
+    expect(lines).toEqual(
+      [
+        { lead_id: a.id, body: 'new → contacted', author: counsellor.id },
+        { lead_id: b.id, body: 'cnr → contacted', author: counsellor.id },
+      ].sort((x, y) => x.lead_id.localeCompare(y.lead_id)),
+    )
+  })
+
+  it('skips a lead already in the stage, without a history line', async () => {
+    const a = await lead(92, { name: 'LeadTest Bulk There', stage: 'in_eis' })
+    const b = await lead(93, { name: 'LeadTest Bulk Moves' })
+    const { data } = await move(counsellor.db, [a.id, b.id], 'in_eis')
+    expect(data).toBe(1)
+    const { count } = await svc.from('lead_comments').select('id', { count: 'exact', head: true }).eq('lead_id', a.id)
+    expect(count).toBe(0)
+  })
+
+  it('refuses a telecaller, even on their own leads', async () => {
+    const mine = await lead(94, { assigned_to: tcA.id })
+    const { error } = await move(tcA.db, [mine.id], 'cnr')
+    expect(error?.message).toMatch(/only a counsellor or superadmin/)
+    expect(await stages([mine.id])).toEqual(['new'])
+  })
+
+  it('refuses a stage that does not exist, no leads, and more than 500', async () => {
+    const l = await lead(95)
+    expect((await move(counsellor.db, [l.id], 'qualified')).error).not.toBeNull()
+    expect((await move(counsellor.db, [], 'cnr')).error?.message).toMatch(/select at least one/i)
+    const many = Array.from({ length: 501 }, () => crypto.randomUUID())
+    expect((await move(counsellor.db, many, 'cnr')).error?.message).toMatch(/500/)
+    expect(await stages([l.id])).toEqual(['new'])
+  })
+})
+
 // The date a lead is sorted and shown by (migration 0027): the latest enquiry
 // a source recorded, or the day a hand-added lead was typed in.
 describe('the enquiry date', () => {
