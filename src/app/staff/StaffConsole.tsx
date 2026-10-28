@@ -7,13 +7,14 @@ import { Icon } from '@/components/icons'
 import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
 import { useConfirm } from '@/components/ConfirmDialog'
 import type { StaffAccount, StaffResult } from '@/server/staff'
-import { addStaffAction, changeRoleAction, renameAction, removeStaffAction } from './actions'
+import { orgName, type Org } from '@/lib/orgs'
+import { addStaffAction, changeRoleAction, changeOrgAction, renameAction, removeStaffAction } from './actions'
 
 const ROLE_HINT: Record<Role, string> = {
   telecaller: 'Adds candidates and issues tests. Never sees question text.',
   counsellor: 'Everything a telecaller does, plus full reports with questions.',
   superadmin: 'Everything, including answer keys, managing staff and teacher hiring.',
-  teacher: 'Screens teacher applicants on Hiring, seeing only the ones they add. Nothing of admissions.',
+  teacher: 'Screens teacher applicants on Hiring, seeing every applicant in their org. Nothing of admissions.',
 }
 
 /** The name as the server stored it, for echoing back after a create. */
@@ -25,10 +26,15 @@ function cleanName(raw: string) {
 export function StaffConsole({
   selfId,
   accounts,
+  orgs,
+  defaultOrg,
   signInUrl,
 }: {
   selfId: string
   accounts: StaffAccount[]
+  orgs: Org[]
+  /** The superadmin's own org, which a new account starts in. */
+  defaultOrg: string | null
   signInUrl: string
 }) {
   const [adding, setAdding] = useState(false)
@@ -57,7 +63,7 @@ export function StaffConsole({
         }
       />
 
-      {adding && <AddStaff signInUrl={signInUrl} />}
+      {adding && <AddStaff signInUrl={signInUrl} orgs={orgs} defaultOrg={defaultOrg} />}
 
       <dl className="mt-6 grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
         {ROLES.map((r) => (
@@ -70,19 +76,20 @@ export function StaffConsole({
 
       <ul className={cx(card, 'mt-6 divide-y divide-slate-100')}>
         {accounts.map((a) => (
-          <StaffRow key={a.id} account={a} isSelf={a.id === selfId} />
+          <StaffRow key={a.id} account={a} isSelf={a.id === selfId} orgs={orgs} />
         ))}
       </ul>
 
       <p className="mt-4 text-xs text-slate-600">
-        A role change or removal takes effect on pages immediately, and fully within an hour, once
-        that person&apos;s current sign-in token expires.
+        A role or org change, or a removal, takes effect on pages immediately, and fully within an
+        hour, once that person&apos;s current sign-in token expires. Everyone sees only their org&apos;s
+        leads and applicants; superadmin sees every org.
       </p>
     </>
   )
 }
 
-function AddStaff({ signInUrl }: { signInUrl: string }) {
+function AddStaff({ signInUrl, orgs, defaultOrg }: { signInUrl: string; orgs: Org[]; defaultOrg: string | null }) {
   const router = useRouter()
   const form = useRef<HTMLFormElement>(null)
   const [pending, start] = useTransition()
@@ -167,6 +174,21 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
           </select>
         </div>
         <div>
+          <label htmlFor="org" className={label}>
+            Org<span aria-hidden="true"> *</span>
+          </label>
+          <select id="org" name="org" required defaultValue={defaultOrg ?? ''} className={input}>
+            <option value="" disabled>
+              Choose…
+            </option>
+            {orgs.map((o) => (
+              <option key={o.id} value={o.id}>
+                {o.name}
+              </option>
+            ))}
+          </select>
+        </div>
+        <div>
           <label htmlFor="password" className={label}>
             Password<span aria-hidden="true"> *</span>
           </label>
@@ -227,10 +249,11 @@ function AddStaff({ signInUrl }: { signInUrl: string }) {
   )
 }
 
-function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean }) {
+function StaffRow({ account, isSelf, orgs }: { account: StaffAccount; isSelf: boolean; orgs: Org[] }) {
   const router = useRouter()
   const [pending, start] = useTransition()
   const [role, setRole] = useState<string>(account.role ?? '')
+  const [org, setOrg] = useState<string>(account.orgId ?? '')
   const [error, setError] = useState('')
   const { confirm, dialog } = useConfirm()
 
@@ -239,8 +262,11 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
 
   const who = account.name ?? account.email
   const selectId = `role-${account.id}`
+  const orgSelectId = `org-${account.id}`
   const nameId = `name-${account.id}`
-  const dirty = role !== (account.role ?? '')
+  const roleDirty = role !== (account.role ?? '')
+  const orgDirty = org !== (account.orgId ?? '')
+  const dirty = roleDirty || orgDirty
 
   function run(action: () => Promise<StaffResult>, onOk?: () => void) {
     setError('')
@@ -324,11 +350,17 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
               No role — this person sees an empty console. Choose one.
             </p>
           )}
+          {!account.orgId && account.role !== 'superadmin' && (
+            <p className="text-xs font-medium text-amber-800">No org — this person sees nothing. Choose one.</p>
+          )}
         </div>
         </div>
 
         {isSelf ? (
-          <Badge tone="neutral">{account.role ? ROLE_LABEL[account.role] : 'No role'}</Badge>
+          <div className="flex flex-wrap items-center gap-2">
+            <Badge tone="neutral">{account.role ? ROLE_LABEL[account.role] : 'No role'}</Badge>
+            <Badge tone="neutral">{orgName(orgs, account.orgId)}</Badge>
+          </div>
         ) : (
           <div className="flex flex-wrap items-center gap-2">
             <label htmlFor={selectId} className="sr-only">
@@ -355,13 +387,43 @@ function StaffRow({ account, isSelf }: { account: StaffAccount; isSelf: boolean 
                 </option>
               ))}
             </select>
+            <label htmlFor={orgSelectId} className="sr-only">
+              Org for {who}
+            </label>
+            {/* Saved with the role's button, for the same reason. */}
+            <select
+              id={orgSelectId}
+              value={org}
+              disabled={pending}
+              onChange={(e) => setOrg(e.target.value)}
+              className={control}
+            >
+              {!account.orgId && (
+                <option value="" disabled>
+                  No org
+                </option>
+              )}
+              {orgs.map((o) => (
+                <option key={o.id} value={o.id}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
             {dirty && (
               <button
                 type="button"
                 disabled={pending}
-                aria-label={`Save role for ${who}`}
+                aria-label={`Save role and org for ${who}`}
                 className={btn('primary', 'sm')}
-                onClick={() => run(() => changeRoleAction(account.id, role))}
+                onClick={() =>
+                  run(async () => {
+                    if (roleDirty) {
+                      const r = await changeRoleAction(account.id, role)
+                      if (!r.ok || !orgDirty) return r
+                    }
+                    return changeOrgAction(account.id, org)
+                  })
+                }
               >
                 Save
               </button>

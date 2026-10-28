@@ -227,7 +227,13 @@ describe('parseLeadFilters', () => {
   it('reads every filter, the stage the pipeline shows, and the page', () => {
     expect(
       parseLeadFilters({ q: ' Adhe ', interest: 'SPI', source: ID, assignee: 'none', stage: 'cnr', page: '3' }),
-    ).toEqual({ q: 'Adhe', interest: 'SPI', source: ID, assignee: 'none', from: null, to: null, stage: 'cnr', page: 3 })
+    ).toEqual({ q: 'Adhe', interest: 'SPI', source: ID, assignee: 'none', from: null, to: null, org: null, stage: 'cnr', page: 3 })
+  })
+
+  it('reads the org superadmin narrows to, and drops anything that is not an id', () => {
+    expect(parseLeadFilters({ org: ID })).toMatchObject({ org: ID })
+    expect(parseLeadFilters({ org: 'lws-pune' })).toMatchObject({ org: null })
+    expect(parseLeadFilters({})).toMatchObject({ org: null })
   })
 
   it('opens on New leads, page one', () => {
@@ -237,7 +243,7 @@ describe('parseLeadFilters', () => {
   it('drops anything it does not recognise instead of passing it to the query', () => {
     expect(
       parseLeadFilters({ interest: 'JEE', source: 'x); drop', assignee: 'bob', stage: 'qualified', page: '-2' }),
-    ).toEqual({ q: '', interest: null, source: null, assignee: null, from: null, to: null, stage: 'new', page: 1 })
+    ).toEqual({ q: '', interest: null, source: null, assignee: null, from: null, to: null, org: null, stage: 'new', page: 1 })
   })
 
   it('reads an enquiry date range, either end alone', () => {
@@ -282,6 +288,7 @@ describe('leadsHref', () => {
       assignee: 'me',
       from: '2026-10-20',
       to: '2026-10-26',
+      org: ID,
       stage: 'cnr',
       page: '3',
     })

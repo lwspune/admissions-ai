@@ -2,6 +2,8 @@ import 'server-only'
 import { serviceClient } from './supabase'
 import type { StaffUser } from './auth'
 import { validateNewStaff, validateName, checkChangeTarget, isRole, type Role } from '@/lib/staff'
+import { isUuid } from '@/lib/leads'
+import { withOrg, type Org } from '@/lib/orgs'
 
 // Staff account management.
 //
@@ -26,6 +28,8 @@ export interface StaffAccount {
   email: string
   /** Null for an account created outside this app with no role set. */
   role: Role | null
+  /** Null for an account with no org, which sees nothing (migration 0030). */
+  orgId: string | null
   lastSignInAt: string | null
 }
 
@@ -39,6 +43,19 @@ const PER_PAGE = 1000
 
 function isSuperadmin(actor: StaffUser) {
   return actor.role === 'superadmin'
+}
+
+const NO_ORG: Extract<StaffResult, { ok: false }> = { ok: false, error: 'Choose an org.' }
+
+/** Every org, for labels and to check a chosen one exists. Service role, like the rest of this file. */
+async function allOrgs(): Promise<Org[]> {
+  const { data, error } = await serviceClient().from('organizations').select('id, name').order('name')
+  if (error) throw new Error(`could not read orgs: ${error.message}`)
+  return data as Org[]
+}
+
+async function orgExists(id: unknown): Promise<boolean> {
+  return isUuid(id) && (await allOrgs()).some((o) => o.id === id)
 }
 
 function failed(action: string, error: unknown): StaffResult {
@@ -61,6 +78,7 @@ export async function listStaff(actor: StaffUser): Promise<StaffAccount[]> {
       name: typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : null,
       email: u.email ?? '',
       role: isRole(u.app_metadata?.role) ? u.app_metadata.role : null,
+      orgId: typeof u.app_metadata?.org_id === 'string' ? u.app_metadata.org_id : null,
       lastSignInAt: u.last_sign_in_at ?? null,
     }))
     .sort((a, b) => (a.name ?? a.email).localeCompare(b.name ?? b.email))
@@ -80,7 +98,8 @@ export interface Assignee {
  * and names and nothing else. Assignment itself is enforced in the database
  * (the `leads_guard` trigger, migration 0012); this only fills the dropdown.
  * A counsellor sees their own org's telecallers; superadmin sees every org's,
- * and the trigger refuses one from outside the lead's org (migration 0030).
+ * each labelled with its org, and the trigger refuses one from outside the
+ * lead's org (migration 0030).
  */
 export async function listAssignees(actor: StaffUser): Promise<Assignee[]> {
   if (actor.role !== 'counsellor' && actor.role !== 'superadmin') {
@@ -93,12 +112,17 @@ export async function listAssignees(actor: StaffUser): Promise<Assignee[]> {
     throw new Error('Could not load the telecallers.')
   }
 
+  const orgs = actor.role === 'superadmin' ? await allOrgs() : []
   return data.users
     .filter((u) => u.app_metadata?.role === 'telecaller')
     .filter((u) => actor.role === 'superadmin' || (actor.orgId !== null && u.app_metadata?.org_id === actor.orgId))
     .map((u) => ({
       id: u.id,
-      label: typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : (u.email ?? u.id),
+      label: withOrg(
+        typeof u.app_metadata?.name === 'string' ? u.app_metadata.name : (u.email ?? u.id),
+        typeof u.app_metadata?.org_id === 'string' ? u.app_metadata.org_id : null,
+        orgs,
+      ),
     }))
     .sort((a, b) => a.label.localeCompare(b.label))
 }
@@ -129,12 +153,14 @@ export async function listApplicantAdders(actor: StaffUser): Promise<Record<stri
 
 export async function addStaff(
   actor: StaffUser,
-  input: { name: string; email: string; password: string; role: string },
+  input: { name: string; email: string; password: string; role: string; orgId?: string | null },
 ): Promise<StaffResult> {
   if (!isSuperadmin(actor)) return FORBIDDEN
 
   const checked = validateNewStaff(input)
   if (!checked.ok) return checked
+  const orgId = input.orgId ?? actor.orgId
+  if (!(await orgExists(orgId))) return NO_ORG
 
   const { name, email, password, role } = checked.value
   const { error } = await serviceClient().auth.admin.createUser({
@@ -144,8 +170,7 @@ export async function addStaff(
     // The name sits beside the role in app_metadata, not in user_metadata:
     // the latter is editable by its owner, and a name that labels who issued a
     // test is only worth anything if staff cannot rewrite their own.
-    // The org is the superadmin's own until /staff offers a choice.
-    app_metadata: { role, name, org_id: actor.orgId },
+    app_metadata: { role, name, org_id: orgId },
   })
 
   if (error?.code === 'email_exists') {
@@ -171,6 +196,37 @@ export async function changeStaffRole(
     app_metadata: { role },
   })
   if (error) return failed('role change', error)
+  return { ok: true }
+}
+
+/**
+ * Moves an account to another org. Refused while a telecaller still has leads
+ * assigned outside the new org: they could no longer see them, and nobody
+ * would notice the leads had gone quiet (the owner's call, 2026-10-28). Like
+ * a role change, the database follows when the account's token refreshes.
+ */
+export async function changeStaffOrg(actor: StaffUser, targetId: string, orgId: string): Promise<StaffResult> {
+  if (!isSuperadmin(actor)) return FORBIDDEN
+  if (!(await orgExists(orgId))) return NO_ORG
+
+  const target = checkChangeTarget(actor.id, targetId)
+  if (!target.ok) return target
+
+  const { count, error: countError } = await serviceClient()
+    .from('leads')
+    .select('id', { count: 'exact', head: true })
+    .eq('assigned_to', targetId)
+    .neq('org_id', orgId)
+  if (countError) return failed('org change', countError)
+  if (count) {
+    return {
+      ok: false,
+      error: `Reassign their ${count} lead${count === 1 ? '' : 's'} first: a telecaller in another org cannot see them.`,
+    }
+  }
+
+  const { error } = await serviceClient().auth.admin.updateUserById(targetId, { app_metadata: { org_id: orgId } })
+  if (error) return failed('org change', error)
   return { ok: true }
 }
 

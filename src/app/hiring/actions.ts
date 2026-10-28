@@ -11,6 +11,7 @@ import {
   type HiringResult,
 } from '@/server/hiring'
 import { canHire } from '@/lib/staff'
+import { isUuid } from '@/lib/leads'
 
 // Thin wrappers over src/server/hiring.ts, on the session client: the
 // database decides who may add and issue (can_hire, issue_hiring_test). The
@@ -32,6 +33,8 @@ export async function addApplicantAction(formData: FormData): Promise<HiringResu
     name: String(formData.get('name') ?? ''),
     mobile: String(formData.get('mobile') ?? ''),
     subject: String(formData.get('subject') ?? ''),
+    // Superadmin's choice; the stamp gives a teacher their own whatever this says (migration 0030).
+    orgId: isUuid(formData.get('org')) ? String(formData.get('org')) : null,
   })
   if (result.ok) revalidatePath('/hiring')
   return result

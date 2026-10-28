@@ -3,6 +3,7 @@ import { canManageLeads } from '@/lib/staff'
 import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { listSources } from '@/server/leads'
+import { listOrgs } from '@/server/orgs'
 import { StaffShell } from '@/components/StaffShell'
 import { PageHeader } from '@/components/ui'
 import { ImportWizard } from './ImportWizard'
@@ -16,7 +17,8 @@ export default async function ImportPage() {
   // Cosmetic: import_leads refuses a telecaller in the database regardless.
   if (!canManageLeads(staff.role)) notFound()
 
-  const sources = await listSources(await userClient())
+  const db = await userClient()
+  const [sources, orgs] = await Promise.all([listSources(db), staff.role === 'superadmin' ? listOrgs(db) : Promise.resolve([])])
 
   return (
     <StaffShell staff={staff} width="narrow">
@@ -29,7 +31,7 @@ export default async function ImportPage() {
           </>
         }
       />
-      <ImportWizard sources={sources} />
+      <ImportWizard sources={sources} orgs={orgs} defaultOrg={staff.orgId} />
     </StaffShell>
   )
 }

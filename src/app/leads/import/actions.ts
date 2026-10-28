@@ -2,7 +2,10 @@
 
 import { revalidatePath } from 'next/cache'
 import { canManageLeads } from '@/lib/staff'
-import { userClient, requireStaff } from '@/server/auth'
+import { orgFor } from '@/lib/orgs'
+import { userClient, requireStaff, type StaffUser } from '@/server/auth'
+import { listOrgs } from '@/server/orgs'
+import type { Db } from '@/server/supabase'
 import { previewImport, importLeads, type ImportPreview, type ImportResult } from '@/server/leadImport'
 import { parseCsv, CsvError } from '@/lib/csv'
 import {
@@ -37,6 +40,12 @@ async function importer() {
   const staff = await requireStaff()
   if (!canManageLeads(staff.role)) throw new Error('Only a counsellor or superadmin can import leads.')
   return { db: await userClient(), staff }
+}
+
+/** The org a file goes into: superadmin's choice, a counsellor's own (import_leads enforces it, migration 0031). */
+async function importOrg(db: Db, staff: StaffUser, requested: string): Promise<string | null> {
+  const orgs = staff.role === 'superadmin' ? await listOrgs(db) : []
+  return orgFor(staff.role, requested, staff.orgId, orgs)
 }
 
 function records(csv: unknown): string[][] {
@@ -92,11 +101,11 @@ export async function inspectCsv(input: { csv: string; sourceId: string }): Prom
   }
 }
 
-export async function previewCsv(input: { csv: string; map: ColumnMap }): Promise<PreviewResult> {
+export async function previewCsv(input: { csv: string; map: ColumnMap; orgId: string }): Promise<PreviewResult> {
   try {
     const { db, staff } = await importer()
     const prepared = prepare(input.csv, input.map)
-    const preview = await previewImport(db, prepared.rows, staff.orgId)
+    const preview = await previewImport(db, prepared.rows, await importOrg(db, staff, input.orgId))
     return { ok: true, leads: prepared.rows.length, preview, skipped: prepared.skipped }
   } catch (e) {
     return fail('preview', e)
@@ -108,9 +117,10 @@ export async function commitCsv(input: {
   map: ColumnMap
   sourceId: string
   newSourceName: string
+  orgId: string
 }): Promise<CommitResult> {
   try {
-    const { db } = await importer()
+    const { db, staff } = await importer()
     const prepared = prepare(input.csv, input.map)
     if (prepared.rows.length === 0) return { ok: false, error: 'No row in this file has a usable mobile number.' }
 
@@ -125,7 +135,7 @@ export async function commitCsv(input: {
       sourceId = data.id as string
     }
 
-    const result = await importLeads(db, sourceId, prepared.rows)
+    const result = await importLeads(db, sourceId, prepared.rows, await importOrg(db, staff, input.orgId))
 
     // Remembered for next time. Failing to save it costs a re-mapping, not
     // data, so it does not fail an import that has already been written.

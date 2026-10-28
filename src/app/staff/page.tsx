@@ -1,7 +1,8 @@
 import type { Metadata } from 'next'
 import { notFound, redirect } from 'next/navigation'
-import { currentStaff } from '@/server/auth'
+import { currentStaff, userClient } from '@/server/auth'
 import { listStaff } from '@/server/staff'
+import { listOrgs } from '@/server/orgs'
 import { StaffShell } from '@/components/StaffShell'
 import { StaffConsole } from './StaffConsole'
 
@@ -16,12 +17,12 @@ export default async function StaffPage() {
   // may not use it. listStaff refuses a non-superadmin regardless.
   if (staff.role !== 'superadmin') notFound()
 
-  const accounts = await listStaff(staff)
+  const [accounts, orgs] = await Promise.all([listStaff(staff), listOrgs(await userClient())])
   const signInUrl = `${process.env.NEXT_PUBLIC_APP_URL ?? ''}/login`
 
   return (
     <StaffShell staff={staff}>
-      <StaffConsole selfId={staff.id} accounts={accounts} signInUrl={signInUrl} />
+      <StaffConsole selfId={staff.id} accounts={accounts} orgs={orgs} defaultOrg={staff.orgId} signInUrl={signInUrl} />
     </StaffShell>
   )
 }

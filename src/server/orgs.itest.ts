@@ -2,10 +2,11 @@ import { describe, it, expect, beforeAll, beforeEach, afterAll } from 'vitest'
 import { createClient, type SupabaseClient } from '@supabase/supabase-js'
 import { serviceClient } from './supabase'
 import { importLeads, previewImport } from './leadImport'
-import { listAssignees, listApplicantAdders } from './staff'
+import { listAssignees, listApplicantAdders, listStaff, addStaff, changeStaffOrg } from './staff'
 import { addApplicant, attachResume, issueHiringTest } from './hiring'
 import type { StaffUser } from './auth'
-import type { ImportRow } from '../lib/leads'
+import { listPipeline } from './leads'
+import { parseLeadFilters, type ImportRow } from '../lib/leads'
 
 // Orgs (migration 0030): every lead and every applicant belongs to one org,
 // and staff see only their own org's. Superadmin sees every org.
@@ -282,5 +283,99 @@ describe('teacher applicants stay inside their org', () => {
     const a = await applicant(teacherA1, 24)
     const b = await applicant(teacherB, 25)
     expect((await ids(superadmin, 'hiring_applicants', 'mobile')).sort()).toEqual([a, b].sort())
+  })
+})
+
+describe('superadmin chooses the org (step 2, migration 0031)', () => {
+  it('adds a lead to the org superadmin names', async () => {
+    const { data, error } = await superadmin.db
+      .from('leads')
+      .insert({ name: 'OrgTest Chosen', contact_mobile: mobile(30), org_id: orgB })
+      .select('org_id')
+      .single()
+    expect(error).toBeNull()
+    expect(data!.org_id).toBe(orgB)
+  })
+
+  it('counts a number in the org superadmin names, and only in a counsellor’s own', async () => {
+    await lead(31, orgB)
+    const count = async (s: Session, org: string) => (await s.db.rpc('leads_on_mobile', { p_mobile: mobile(31), p_org: org })).data
+    expect(await count(superadmin, orgB)).toBe(1)
+    expect(await count(superadmin, orgA)).toBe(0)
+    expect(await count(counsellorA, orgB)).toBe(0)
+    expect(await count(counsellorB, orgA)).toBe(1)
+  })
+
+  it('imports into the org superadmin names, and refuses a counsellor naming another', async () => {
+    const { data: source } = await svc.from('lead_sources').insert({ name: SOURCE }).select('id').single()
+    expect(await importLeads(superadmin.db as never, source!.id, [row(32)], orgB)).toEqual({ created: 1, merged: 0, ambiguous: [] })
+    const { data } = await svc.from('leads').select('org_id').eq('contact_mobile', mobile(32)).single()
+    expect(data!.org_id).toBe(orgB)
+
+    await expect(importLeads(counsellorA.db as never, source!.id, [row(33)], orgB)).rejects.toThrow(/org/)
+    expect(await importLeads(counsellorA.db as never, source!.id, [row(33)], orgA)).toEqual({ created: 1, merged: 0, ambiguous: [] })
+  })
+
+  it('adds an applicant to the org superadmin names, and a teacher’s to their own whatever they send', async () => {
+    const chosen = await addApplicant(superadmin.db as never, { name: 'OrgTest 34', mobile: mobile(34), subject: 'maths', orgId: orgB })
+    const forced = await addApplicant(teacherA1.db as never, { name: 'OrgTest 35', mobile: mobile(35), subject: 'maths', orgId: orgB })
+    if (!chosen.ok || !forced.ok) throw new Error('could not add applicants')
+    const org = async (id: string) => (await svc.from('hiring_applicants').select('org_id').eq('id', id).single()).data!.org_id
+    expect(await org(chosen.id)).toBe(orgB)
+    expect(await org(forced.id)).toBe(orgA)
+  })
+
+  it('narrows superadmin’s pipeline to one org, every stage alike', async () => {
+    await lead(36, orgA)
+    await lead(37, orgB)
+    await lead(38, orgB, { stage: 'cnr' })
+    const pipeline = await listPipeline(superadmin.db as never, parseLeadFilters({ org: orgB }), superadmin.id)
+    expect(pipeline.counts).toMatchObject({ new: 1, cnr: 1, contacted: 0 })
+    expect(pipeline.list.rows.map((l) => l.contact_mobile)).toEqual([mobile(37)])
+    expect(pipeline.list.rows[0]!.org_id).toBe(orgB)
+  })
+})
+
+describe('an account’s org on /staff (step 2)', () => {
+  it('lists each account with its org, and adds one into the org chosen', async () => {
+    const email = `${PREFIX}added-${Date.now()}@example.com`
+    expect(await addStaff(superadmin.actor, { name: 'Org Added', email, password: 'longenough', role: 'counsellor', orgId: orgB })).toEqual({ ok: true })
+    const listed = (await listStaff(superadmin.actor)).find((a) => a.email === email)
+    expect(listed?.orgId).toBe(orgB)
+    expect((await listStaff(superadmin.actor)).find((a) => a.id === counsellorA.id)?.orgId).toBe(orgA)
+  })
+
+  it('refuses an org that does not exist', async () => {
+    const email = `${PREFIX}nowhere-${Date.now()}@example.com`
+    const r = await addStaff(superadmin.actor, { name: 'Org Nowhere', email, password: 'longenough', role: 'counsellor', orgId: '00000000-0000-0000-0000-000000000000' })
+    expect(r).toEqual({ ok: false, error: 'Choose an org.' })
+  })
+
+  it('moves an account, by superadmin only and never their own', async () => {
+    const mover = await signIn('counsellor', 'mover', orgA)
+    expect(await changeStaffOrg(counsellorA.actor, mover.id, orgB)).toEqual({ ok: false, error: 'Only a superadmin can manage staff.' })
+    expect((await changeStaffOrg(superadmin.actor, superadmin.id, orgB)).ok).toBe(false)
+    expect(await changeStaffOrg(superadmin.actor, mover.id, '00000000-0000-0000-0000-000000000000')).toEqual({ ok: false, error: 'Choose an org.' })
+    expect(await changeStaffOrg(superadmin.actor, mover.id, orgB)).toEqual({ ok: true })
+    expect((await listStaff(superadmin.actor)).find((a) => a.id === mover.id)?.orgId).toBe(orgB)
+  })
+
+  it('refuses to move a telecaller who still has leads assigned, saying how many', async () => {
+    const tc = await signIn('telecaller', 'tcmove', orgA)
+    await lead(40, orgA, { assigned_to: tc.id })
+    await lead(41, orgA, { assigned_to: tc.id })
+    expect(await changeStaffOrg(superadmin.actor, tc.id, orgB)).toEqual({
+      ok: false,
+      error: 'Reassign their 2 leads first: a telecaller in another org cannot see them.',
+    })
+    await svc.from('leads').update({ assigned_to: null }).like('contact_mobile', '97000030%')
+    expect(await changeStaffOrg(superadmin.actor, tc.id, orgB)).toEqual({ ok: true })
+  })
+
+  it('labels superadmin’s telecallers with their org, and a counsellor’s without', async () => {
+    const forSuperadmin = await listAssignees(superadmin.actor)
+    expect(forSuperadmin.find((a) => a.id === telecallerB.id)?.label).toBe('Org tb · ITest Org B')
+    const forCounsellor = await listAssignees(counsellorA.actor)
+    expect(forCounsellor.find((a) => a.id === telecallerA.id)?.label).toBe('Org ta')
   })
 })

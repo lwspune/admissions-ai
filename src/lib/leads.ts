@@ -301,6 +301,8 @@ export interface LeadFilters {
   /** The enquiry date range (`enquired_on`), YYYY-MM-DD, both ends included; either may be open. */
   from: string | null
   to: string | null
+  /** An org id, for superadmin, who sees every org; null is all of them. */
+  org: string | null
   stage: Stage
   /** 1-based. */
   page: number
@@ -331,6 +333,7 @@ export function parseLeadFilters(params: Params): LeadFilters {
     assignee: assignee === 'me' || assignee === 'none' || isUuid(assignee) ? assignee : null,
     from,
     to,
+    org: isUuid(one('org')) ? one('org') : null,
     stage: isStage(one('stage')) ? (one('stage') as Stage) : 'new',
     page: Number.isFinite(page) && page > 1 ? page : 1,
   }
@@ -359,6 +362,7 @@ export function leadsHref(filters: LeadFilters, { stage, page }: { stage?: Stage
   if (filters.assignee) params.set('assignee', filters.assignee)
   if (filters.from) params.set('from', filters.from)
   if (filters.to) params.set('to', filters.to)
+  if (filters.org) params.set('org', filters.org)
   if (shown !== 'new') params.set('stage', shown)
   if (at > 1) params.set('page', String(at))
   const query = params.toString()

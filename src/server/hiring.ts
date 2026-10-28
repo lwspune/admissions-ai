@@ -20,15 +20,17 @@ export type HiringResult<T extends object = object> = ({ ok: true } & T) | { ok:
 /**
  * Adds an applicant for the signed-in teacher or superadmin. The database
  * stamps who added them and their org; a teacher sees every applicant in their org (migration 0030).
+ * `orgId` is honoured for superadmin only; the stamp gives anyone else their own.
  */
 export async function addApplicant(
   db: Db,
-  input: { name: string; mobile: string; subject: string },
+  input: { name: string; mobile: string; subject: string; orgId?: string | null },
 ): Promise<HiringResult<{ id: string }>> {
   const checked = validateApplicant(input)
   if (!checked.ok) return checked
 
-  const { data, error } = await db.from('hiring_applicants').insert(checked.value).select('id').single()
+  const row = input.orgId ? { ...checked.value, org_id: input.orgId } : checked.value
+  const { data, error } = await db.from('hiring_applicants').insert(row).select('id').single()
   if (error) {
     if (error.code === '42501') return { ok: false, error: 'Only a teacher or superadmin can add an applicant.' }
     console.error('hiring: add applicant failed:', error)
@@ -202,6 +204,8 @@ export interface HiringApplicantRow {
   subject: HiringSubject
   createdAt: string
   createdBy: string | null
+  /** Shown to superadmin, who sees every org (migration 0030). */
+  orgId: string
   decision: HiringDecision
   resumeType: ResumeKind | null
   resumeName: string | null
@@ -299,7 +303,7 @@ async function closeExpired(db: Db): Promise<void> {
   if (error) console.error('hiring: closing expired attempts failed:', error)
 }
 
-const APPLICANT_COLUMNS = 'id, name, mobile, subject, created_at, created_by, decision, resume_type, resume_name, resume_at'
+const APPLICANT_COLUMNS = 'id, name, mobile, subject, created_at, created_by, org_id, decision, resume_type, resume_name, resume_at'
 
 function toApplicant(row: Record<string, unknown>): Omit<HiringApplicantRow, 'latest' | 'attempt' | 'notes'> {
   return {
@@ -309,6 +313,7 @@ function toApplicant(row: Record<string, unknown>): Omit<HiringApplicantRow, 'la
     subject: row.subject as HiringSubject,
     createdAt: row.created_at as string,
     createdBy: (row.created_by as string | null) ?? null,
+    orgId: row.org_id as string,
     decision: row.decision as HiringDecision,
     resumeType: (row.resume_type as ResumeKind | null) ?? null,
     resumeName: (row.resume_name as string | null) ?? null,

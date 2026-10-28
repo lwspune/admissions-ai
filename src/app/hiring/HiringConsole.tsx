@@ -23,6 +23,7 @@ import { useConfirm } from '@/components/ConfirmDialog'
 import { Alert, Badge, EmptyState, btn, card, control, cx, input, label } from '@/components/ui'
 import { addApplicantAction, issueTestAction } from './actions'
 import { DecisionControl, History, NoteForm } from './ApplicantControls'
+import { orgName, type Org } from '@/lib/orgs'
 
 const STAGE_TONE: Record<ApplicantStage, 'neutral' | 'brand' | 'warning' | 'success'> = {
   none: 'neutral',
@@ -51,6 +52,8 @@ export function HiringConsole({
   role,
   now,
   appUrl,
+  orgs,
+  defaultOrg,
 }: {
   applicants: HiringApplicantRow[]
   /** Login id → name, the org's accounts (every org's for superadmin); null if the names could not be read. */
@@ -59,14 +62,19 @@ export function HiringConsole({
   role: string
   now: string
   appUrl: string
+  /** Every org, for superadmin, who sees them all (migration 0030); empty for a teacher. */
+  orgs: Org[]
+  defaultOrg: string | null
 }) {
   const [show, setShow] = useState<HiringDecision | 'all'>('all')
-  const shown = show === 'all' ? applicants : applicants.filter((a) => a.decision === show)
-  const count = (d: HiringDecision) => applicants.filter((a) => a.decision === d).length
+  const [org, setOrg] = useState('all')
+  const inOrg = org === 'all' ? applicants : applicants.filter((a) => a.orgId === org)
+  const shown = show === 'all' ? inOrg : inOrg.filter((a) => a.decision === show)
+  const count = (d: HiringDecision) => inOrg.filter((a) => a.decision === d).length
 
   return (
     <>
-      <AddApplicant />
+      <AddApplicant orgs={orgs} defaultOrg={defaultOrg} />
       {applicants.length === 0 ? (
         <div className={cx(card, 'mt-6')}>
           <EmptyState icon="user" title="No applicants yet">
@@ -75,7 +83,22 @@ export function HiringConsole({
         </div>
       ) : (
         <>
-          <div className="mt-6 flex items-center justify-end gap-2">
+          <div className="mt-6 flex flex-wrap items-center justify-end gap-2">
+            {orgs.length > 1 && (
+              <>
+                <label htmlFor="org-filter" className="text-sm font-medium text-slate-700">
+                  Org
+                </label>
+                <select id="org-filter" value={org} onChange={(e) => setOrg(e.target.value)} className={control}>
+                  <option value="all">All orgs</option>
+                  {orgs.map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.name}
+                    </option>
+                  ))}
+                </select>
+              </>
+            )}
             <label htmlFor="show" className="text-sm font-medium text-slate-700">
               Show
             </label>
@@ -85,7 +108,7 @@ export function HiringConsole({
               onChange={(e) => setShow(e.target.value as HiringDecision | 'all')}
               className={control}
             >
-              <option value="all">Everyone ({applicants.length})</option>
+              <option value="all">Everyone ({inOrg.length})</option>
               {HIRING_DECISIONS.map((d) => (
                 <option key={d} value={d}>
                   {HIRING_DECISION_LABEL[d]} ({count(d)})
@@ -98,7 +121,7 @@ export function HiringConsole({
           ) : (
             <ul className="mt-3 space-y-3">
               {shown.map((a) => (
-                <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} role={role} now={new Date(now)} appUrl={appUrl} />
+                <ApplicantCard key={a.id} applicant={a} addedBy={addedBy} role={role} now={new Date(now)} appUrl={appUrl} orgs={orgs} />
               ))}
             </ul>
           )}
@@ -108,7 +131,7 @@ export function HiringConsole({
   )
 }
 
-function AddApplicant() {
+function AddApplicant({ orgs, defaultOrg }: { orgs: Org[]; defaultOrg: string | null }) {
   const router = useRouter()
   const form = useRef<HTMLFormElement>(null)
   const [pending, start] = useTransition()
@@ -132,7 +155,7 @@ function AddApplicant() {
       <h2 id="add-heading" className="text-base font-semibold text-slate-900">
         Add an applicant
       </h2>
-      <div className="mt-4 grid gap-4 sm:grid-cols-[2fr_1.5fr_1fr_auto] sm:items-end">
+      <div className={cx('mt-4 grid gap-4 sm:items-end', orgs.length > 1 ? 'sm:grid-cols-[2fr_1.5fr_1fr_1fr_auto]' : 'sm:grid-cols-[2fr_1.5fr_1fr_auto]')}>
         <div>
           <label htmlFor="name" className={label}>
             Name
@@ -160,6 +183,20 @@ function AddApplicant() {
             ))}
           </select>
         </div>
+        {orgs.length > 1 && (
+          <div>
+            <label htmlFor="applicant-org" className={label}>
+              Org
+            </label>
+            <select id="applicant-org" name="org" defaultValue={defaultOrg ?? ''} className={input}>
+              {orgs.map((o) => (
+                <option key={o.id} value={o.id}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
         <button type="submit" className={btn('primary', 'md')} disabled={pending}>
           <Icon name="plus" className="h-4 w-4" />
           {pending ? 'Adding…' : 'Add'}
@@ -180,12 +217,14 @@ function ApplicantCard({
   role,
   now,
   appUrl,
+  orgs,
 }: {
   applicant: HiringApplicantRow
   addedBy: Record<string, string> | null
   role: string
   now: Date
   appUrl: string
+  orgs: Org[]
 }) {
   const router = useRouter()
   const { confirm, dialog } = useConfirm()
@@ -236,6 +275,7 @@ function ApplicantCard({
             <Badge tone="neutral">{HIRING_SUBJECT_LABEL[a.subject]}</Badge>
             <Badge tone={STAGE_TONE[status.kind]}>{status.label}</Badge>
             <Badge tone={DECISION_TONE[a.decision]}>{HIRING_DECISION_LABEL[a.decision]}</Badge>
+            {orgs.length > 1 && <Badge tone="neutral">{orgName(orgs, a.orgId)}</Badge>}
           </p>
           <p className="mt-1 text-sm text-slate-600">
             {a.mobile} · added {date(a.createdAt)}

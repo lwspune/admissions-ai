@@ -22,6 +22,7 @@ import {
 } from '@/lib/leads'
 import type { LeadListRow, Pipeline } from '@/server/leads'
 import type { Assignee } from '@/server/staff'
+import { orgName, type Org } from '@/lib/orgs'
 import { Icon } from '@/components/icons'
 import { Alert, Avatar, Badge, PageHeader, btn, card, control, cx, hint, input, label } from '@/components/ui'
 import { useConfirm } from '@/components/ConfirmDialog'
@@ -36,8 +37,9 @@ export function LeadsConsole({
   assignees,
   feedWarning,
   download,
+  orgs,
 }: {
-  staff: { id: string; name: string | null; email: string; role: string }
+  staff: { id: string; name: string | null; email: string; role: string; orgId: string | null }
   pipeline: Pipeline
   filters: LeadFilters
   sources: { id: string; name: string }[]
@@ -46,6 +48,8 @@ export function LeadsConsole({
   feedWarning: string | null
   /** "Download for Excel": your last download of the stage on screen, and how many are new since. Null hides it. */
   download: { lastAt: string | null; fresh: number | null } | null
+  /** Every org, for superadmin, who sees them all (migration 0030); empty for anyone else, who sees no org. */
+  orgs: Org[]
 }) {
   const [adding, setAdding] = useState(false)
   const canAssign = canManageLeads(staff.role)
@@ -97,9 +101,9 @@ export function LeadsConsole({
         </Alert>
       )}
 
-      {adding && <AddLead onDone={() => setAdding(false)} />}
+      {adding && <AddLead onDone={() => setAdding(false)} orgs={orgs} defaultOrg={staff.orgId} />}
 
-      <Filters filters={filters} sources={sources} assignees={assignees} canAssign={canAssign} />
+      <Filters filters={filters} sources={sources} assignees={assignees} canAssign={canAssign} orgs={orgs} />
 
       <PipelineBar counts={pipeline.counts} filters={filters} />
 
@@ -111,6 +115,7 @@ export function LeadsConsole({
         me={staff.id}
         assignees={assignees}
         canAssign={canAssign}
+        orgs={orgs}
         selected={selected}
         setSelected={setSelected}
       />
@@ -135,14 +140,16 @@ function Filters({
   sources,
   assignees,
   canAssign,
+  orgs,
 }: {
   filters: LeadFilters
   sources: { id: string; name: string }[]
   assignees: Assignee[]
   canAssign: boolean
+  orgs: Org[]
 }) {
   const more = [filters.interest, canAssign && filters.assignee].filter(Boolean).length
-  const anything = more > 0 || Boolean(filters.q || filters.source || filters.from || filters.to)
+  const anything = more > 0 || Boolean(filters.q || filters.source || filters.from || filters.to || filters.org)
 
   return (
     <form method="get" action="/leads" className={cx(card, 'mt-5 p-3')}>
@@ -174,6 +181,21 @@ function Filters({
             </option>
           ))}
         </select>
+        {orgs.length > 1 && (
+          <>
+            <label htmlFor="org" className="sr-only">
+              Org
+            </label>
+            <select id="org" name="org" defaultValue={filters.org ?? ''} className={cx(control, 'w-full sm:w-44')}>
+              <option value="">All orgs</option>
+              {orgs.map((o) => (
+                <option key={o.id} value={o.id}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
+          </>
+        )}
         {/* The enquiry date each row shows; both ends included. */}
         <div className="grid w-full grid-cols-[auto_1fr] items-center gap-2 text-sm text-slate-700 sm:flex sm:w-auto">
           <label htmlFor="from">Enquired from</label>
@@ -187,7 +209,7 @@ function Filters({
           Search
         </button>
         {anything && (
-          <Link href={leadsHref({ ...filters, q: '', source: null, interest: null, assignee: null, from: null, to: null })} className={btn('ghost')}>
+          <Link href={leadsHref({ ...filters, q: '', source: null, interest: null, assignee: null, from: null, to: null, org: null })} className={btn('ghost')}>
             Clear
           </Link>
         )}
@@ -303,6 +325,7 @@ function StageList({
   me,
   assignees,
   canAssign,
+  orgs,
   selected,
   setSelected,
 }: {
@@ -311,6 +334,7 @@ function StageList({
   me: string
   assignees: Assignee[]
   canAssign: boolean
+  orgs: Org[]
   selected: ReadonlySet<string>
   setSelected: (next: (prev: ReadonlySet<string>) => Set<string>) => void
 }) {
@@ -416,6 +440,7 @@ function StageList({
               selected={selected.has(lead.id)}
               toggle={toggle}
               assignedLabel={assignedLabel}
+              orgs={orgs}
             />
           ))}
         </ul>
@@ -510,6 +535,7 @@ function LeadRow({
   selected,
   toggle,
   assignedLabel,
+  orgs,
 }: {
   lead: LeadListRow
   filters: LeadFilters
@@ -517,6 +543,7 @@ function LeadRow({
   selected: boolean
   toggle: (id: string) => void
   assignedLabel: (id: string | null) => string
+  orgs: Org[]
 }) {
   const who = lead.name ?? lead.contact_mobile
   // A comment a person wrote is worth a line on the row; an import's note stays in the history.
@@ -548,6 +575,7 @@ function LeadRow({
                     {lead.test}
                   </Badge>
                 )}
+                {orgs.length > 1 && <Badge tone="neutral">{orgName(orgs, lead.org_id)}</Badge>}
               </div>
               <p className="text-sm tabular-nums text-slate-600">
                 {[lead.contact_mobile, lead.interest, lead.class_level && `Class ${lead.class_level}`].filter(Boolean).join(' · ')}
@@ -734,6 +762,7 @@ function DownloadMenu({
         {filters.assignee && <input type="hidden" name="assignee" value={filters.assignee} />}
         {filters.from && <input type="hidden" name="from" value={filters.from} />}
         {filters.to && <input type="hidden" name="to" value={filters.to} />}
+        {filters.org && <input type="hidden" name="org" value={filters.org} />}
         {selected.length > 0 && (
           <>
             <input type="hidden" name="ids" value={selected.join(',')} />
@@ -768,7 +797,7 @@ function DownloadMenu({
   )
 }
 
-function AddLead({ onDone }: { onDone: () => void }) {
+function AddLead({ onDone, orgs, defaultOrg }: { onDone: () => void; orgs: Org[]; defaultOrg: string | null }) {
   const router = useRouter()
   const [result, setResult] = useState<ActionResult | null>(null)
   const [pending, start] = useTransition()
@@ -808,6 +837,20 @@ function AddLead({ onDone }: { onDone: () => void }) {
         <Field name="school" label="School" />
         <Field name="city" label="City" />
         <Field name="board" label="Board" />
+        {orgs.length > 1 && (
+          <div>
+            <label htmlFor="new-org" className={label}>
+              Org
+            </label>
+            <select id="new-org" name="org" defaultValue={defaultOrg ?? ''} className={select}>
+              {orgs.map((o) => (
+                <option key={o.id} value={o.id}>
+                  {o.name}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
       </div>
 
       {result?.error && (

@@ -2,6 +2,8 @@ import Link from 'next/link'
 import { ROLE_LABEL, canHire, canManageLeads, homeFor, isAdmissionsStaff, isRole, type Role } from '@/lib/staff'
 import { userClient } from '@/server/auth'
 import { unreadContactCount } from '@/server/contact'
+import { listOrgs } from '@/server/orgs'
+import { orgName } from '@/lib/orgs'
 import { StaffNav, SignOutButton, type NavItem } from './StaffNav'
 import { Avatar, Mark, cx } from './ui'
 
@@ -16,7 +18,7 @@ export async function StaffShell({
   width = 'default',
   children,
 }: {
-  staff: { name: string | null; email: string; role: Role | string }
+  staff: { name: string | null; email: string; role: Role | string; orgId?: string | null }
   /** `full` is the leads board's five columns (2026-10-26); every other page reads at a page width. */
   width?: 'narrow' | 'default' | 'wide' | 'full'
   children: React.ReactNode
@@ -40,6 +42,9 @@ export async function StaffShell({
   }
   const home = isRole(staff.role) ? homeFor(staff.role) : '/leads'
   const role = ROLE_LABEL[staff.role as Role] ?? staff.role
+  // Which branch you are working in (migration 0030); read through RLS like the count above.
+  // Not for superadmin, who works across every org.
+  const org = staff.orgId && staff.role !== 'superadmin' ? orgName(await listOrgs(await userClient()), staff.orgId) : null
 
   return (
     <div className="min-h-screen">
@@ -54,7 +59,7 @@ export async function StaffShell({
           <div className="ml-auto flex items-center gap-3">
             <div className="hidden text-right leading-tight sm:block">
               <p className="text-sm font-medium text-slate-900">{staff.name ?? staff.email}</p>
-              <p className="text-xs text-slate-600">{role}</p>
+              <p className="whitespace-nowrap text-xs text-slate-600">{org ? `${role} · ${org}` : role}</p>
             </div>
             <Avatar name={staff.name ?? staff.email} className="hidden sm:grid" />
             <SignOutButton />

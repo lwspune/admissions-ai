@@ -58,8 +58,13 @@ export async function previewImport(db: Db, rows: ImportRow[], orgId: string | n
   return preview
 }
 
-export async function importLeads(db: Db, sourceId: string, rows: ImportRow[]): Promise<ImportResult> {
+/**
+ * Writes the file into `orgId`, which only superadmin may choose (migration
+ * 0031); a counsellor naming another org is refused. Null: the caller's own.
+ */
+export async function importLeads(db: Db, sourceId: string, rows: ImportRow[], orgId: string | null = null): Promise<ImportResult> {
   const { data, error } = await db.rpc('import_leads', {
+    p_org: orgId,
     p_source_id: sourceId,
     p_rows: rows.map((r) => ({
       mobile: r.mobile,

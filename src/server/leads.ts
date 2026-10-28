@@ -14,6 +14,8 @@ export interface LeadListRow {
   stage: Stage
   assigned_to: string | null
   class_level: number | null
+  /** Shown to superadmin, who sees every org (migration 0030). */
+  org_id: string
   created_at: string
   /** The latest enquiry a source recorded, or the day it was typed in (migration 0027). */
   enquired_on: string
@@ -64,6 +66,9 @@ export function filtered(db: Db, filters: LeadFilters, me: string, columns: stri
   else if (filters.assignee) query = query.eq('assigned_to', filters.assignee)
   if (filters.from) query = query.gte('enquired_on', filters.from)
   if (filters.to) query = query.lte('enquired_on', filters.to)
+  // Only superadmin sees more than one org, so only they narrow by it; RLS
+  // keeps everyone else to their own whatever the URL says.
+  if (filters.org) query = query.eq('org_id', filters.org)
   const search = searchTerm(filters.q)
   if (search) query = query.ilike(search.column, search.pattern)
   return query
@@ -79,7 +84,7 @@ async function listStage(db: Db, filters: LeadFilters, me: string): Promise<Lead
     db,
     filters,
     me,
-    'id, name, contact_mobile, interest, stage, assigned_to, class_level, created_at, enquired_on',
+    'id, name, contact_mobile, interest, stage, assigned_to, class_level, org_id, created_at, enquired_on',
     { count: 'exact' },
   )
     .eq('stage', filters.stage)

@@ -7,6 +7,8 @@ import { issueAssessment } from '@/server/assessments'
 import { normalizeMobile } from '@/lib/mobile'
 import { parseClassLevel } from '@/lib/classes'
 import { isStage, isInterest, isUuid, MAX_NOTE, MAX_BULK, bulkMoveMessage } from '@/lib/leads'
+import { listOrgs } from '@/server/orgs'
+import { orgFor } from '@/lib/orgs'
 
 export interface ActionResult {
   ok: boolean
@@ -36,8 +38,12 @@ export interface ActionResult {
  * the check would pass while creating a duplicate.
  */
 export async function createLead(formData: FormData): Promise<ActionResult> {
-  await requireStaff()
+  const staff = await requireStaff()
   const db = await userClient()
+  // Superadmin chooses the org; anyone else's lead goes to their own, which
+  // the database enforces too (leads_guard, migration 0030).
+  const orgs = staff.role === 'superadmin' ? await listOrgs(db) : []
+  const org = orgFor(staff.role, String(formData.get('org') ?? ''), staff.orgId, orgs)
 
   const name = String(formData.get('name') ?? '').trim()
   const rawMobile = String(formData.get('contact_mobile') ?? '')
@@ -62,11 +68,13 @@ export async function createLead(formData: FormData): Promise<ActionResult> {
   if (rawInterest !== '' && !isInterest(rawInterest)) return { ok: false, error: 'Choose NDA or SPI.' }
 
   if (!confirmedSibling) {
-    const { data: total, error: countError } = await db.rpc('leads_on_mobile', { p_mobile: mobile })
+    const { data: total, error: countError } = await db.rpc('leads_on_mobile', { p_mobile: mobile, p_org: org })
     if (countError) return { ok: false, error: countError.message }
 
     if ((total as number) > 0) {
-      const { data: visible } = await db.from('leads').select('id, name').eq('contact_mobile', mobile)
+      let visibleQuery = db.from('leads').select('id, name').eq('contact_mobile', mobile)
+      if (org) visibleQuery = visibleQuery.eq('org_id', org)
+      const { data: visible } = await visibleQuery
       return {
         ok: false,
         error: 'This number already has a lead.',
@@ -87,6 +95,7 @@ export async function createLead(formData: FormData): Promise<ActionResult> {
     board: str(formData.get('board')),
     class_level: classLevel,
     interest: rawInterest || null,
+    ...(org ? { org_id: org } : {}),
   })
 
   if (error) return { ok: false, error: error.message }

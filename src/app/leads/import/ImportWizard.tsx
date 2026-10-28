@@ -7,6 +7,7 @@ import type { ImportPreview, ImportResult } from '@/server/leadImport'
 import { Icon } from '@/components/icons'
 import { Alert, btn, card, cx, input, label } from '@/components/ui'
 import { inspectCsv, previewCsv, commitCsv } from './actions'
+import { orgName, type Org } from '@/lib/orgs'
 
 const control = input
 const primary = btn('primary')
@@ -23,8 +24,18 @@ type Step =
   | { at: 'preview'; headers: string[]; leads: number; preview: ImportPreview; skipped: SkippedRow[] }
   | { at: 'done'; sourceId: string; result: ImportResult; skipped: SkippedRow[] }
 
-export function ImportWizard({ sources }: { sources: { id: string; name: string }[] }) {
+export function ImportWizard({
+  sources,
+  orgs,
+  defaultOrg,
+}: {
+  sources: { id: string; name: string }[]
+  /** Every org, for superadmin, who chooses where the file goes (migration 0031); empty for a counsellor. */
+  orgs: Org[]
+  defaultOrg: string | null
+}) {
   const [step, setStep] = useState<Step>({ at: 'choose' })
+  const [org, setOrg] = useState(defaultOrg ?? '')
   const [sourceId, setSourceId] = useState(sources[0]?.id ?? NEW)
   const [newSourceName, setNewSourceName] = useState('')
   const [csv, setCsv] = useState('')
@@ -34,6 +45,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
   const [pending, start] = useTransition()
 
   const sourceLabel = sourceId === NEW ? newSourceName.trim() : sources.find((s) => s.id === sourceId)?.name
+  const orgLabel = orgs.length > 1 ? orgName(orgs, org) : null
 
   async function readFile(file: File | undefined) {
     setError('')
@@ -64,7 +76,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
     setError('')
     if (!map.mobile) return setError('Choose the column that holds the mobile number.')
     start(async () => {
-      const r = await previewCsv({ csv, map })
+      const r = await previewCsv({ csv, map, orgId: org })
       if (!r.ok) return setError(r.error)
       setStep({ at: 'preview', headers, leads: r.leads, preview: r.preview, skipped: r.skipped })
     })
@@ -73,7 +85,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
   function commit() {
     setError('')
     start(async () => {
-      const r = await commitCsv({ csv, map, sourceId: sourceId === NEW ? '' : sourceId, newSourceName })
+      const r = await commitCsv({ csv, map, sourceId: sourceId === NEW ? '' : sourceId, newSourceName, orgId: org })
       if (!r.ok) return setError(r.error)
       setStep({ at: 'done', sourceId: r.sourceId, result: r.result, skipped: r.skipped })
     })
@@ -108,6 +120,20 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
                 <option value={NEW}>A new source…</option>
               </select>
             </div>
+            {orgs.length > 1 && (
+              <div>
+                <label htmlFor="org" className={label}>
+                  Org these leads belong to
+                </label>
+                <select id="org" value={org} onChange={(e) => setOrg(e.target.value)} className={control}>
+                  {orgs.map((o) => (
+                    <option key={o.id} value={o.id}>
+                      {o.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            )}
             {sourceId === NEW && (
               <div>
                 <label htmlFor="new-source" className={label}>
@@ -214,7 +240,7 @@ export function ImportWizard({ sources }: { sources: { id: string; name: string 
       {step.at === 'preview' && (
         <section aria-labelledby="preview-heading" className={section}>
           <h2 id="preview-heading" className={heading}>
-            3. Check before importing into “{sourceLabel}”
+            3. Check before importing into “{sourceLabel}”{orgLabel && <> for {orgLabel}</>}
           </h2>
           <ul className="mt-3 space-y-1.5 text-sm text-slate-800">
             <li>{step.preview.create} new leads</li>

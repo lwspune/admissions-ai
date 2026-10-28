@@ -4,6 +4,7 @@ import { notFound, redirect } from 'next/navigation'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadApplicants } from '@/server/hiring'
 import { listApplicantAdders } from '@/server/staff'
+import { listOrgs } from '@/server/orgs'
 import { canHire } from '@/lib/staff'
 import { StaffShell } from '@/components/StaffShell'
 import { Icon } from '@/components/icons'
@@ -23,7 +24,12 @@ export default async function HiringPage() {
   if (!staff) redirect('/login?next=/hiring')
   if (!canHire(staff.role)) notFound()
 
-  const applicants = await loadApplicants(await userClient())
+  const db = await userClient()
+  const [applicants, orgs] = await Promise.all([
+    loadApplicants(db),
+    // Only superadmin sees more than one org, so only they are shown which.
+    staff.role === 'superadmin' ? listOrgs(db) : Promise.resolve([]),
+  ])
 
   // Names live in the auth admin API; listApplicantAdders opens only names, and
   // only the org's (migration 0030).
@@ -49,6 +55,8 @@ export default async function HiringPage() {
         role={staff.role}
         now={new Date().toISOString()}
         appUrl={process.env.NEXT_PUBLIC_APP_URL ?? ''}
+        orgs={orgs}
+        defaultOrg={staff.orgId}
       />
     </StaffShell>
   )

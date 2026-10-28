@@ -2,7 +2,7 @@
 
 import { revalidatePath } from 'next/cache'
 import { currentStaff } from '@/server/auth'
-import { addStaff, changeStaffRole, renameStaff, removeStaff, type StaffResult } from '@/server/staff'
+import { addStaff, changeStaffRole, changeStaffOrg, renameStaff, removeStaff, type StaffResult } from '@/server/staff'
 
 // Thin wrappers. The actor is resolved here from the verified session and
 // never taken from the form; the superadmin check is in src/server/staff.ts.
@@ -18,6 +18,7 @@ export async function addStaffAction(formData: FormData): Promise<StaffResult> {
     email: String(formData.get('email') ?? ''),
     password: String(formData.get('password') ?? ''),
     role: String(formData.get('role') ?? ''),
+    orgId: String(formData.get('org') ?? ''),
   })
   if (result.ok) revalidatePath('/staff')
   return result
@@ -28,6 +29,15 @@ export async function changeRoleAction(targetId: string, role: string): Promise<
   if (!actor) return SIGNED_OUT
 
   const result = await changeStaffRole(actor, targetId, role)
+  if (result.ok) revalidatePath('/staff')
+  return result
+}
+
+export async function changeOrgAction(targetId: string, orgId: string): Promise<StaffResult> {
+  const actor = await currentStaff()
+  if (!actor) return SIGNED_OUT
+
+  const result = await changeStaffOrg(actor, targetId, orgId)
   if (result.ok) revalidatePath('/staff')
   return result
 }
