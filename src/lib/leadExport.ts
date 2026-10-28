@@ -1,17 +1,19 @@
 // "Download for Excel" on /leads (2026-10-26), after GoPost's (its
-// src/lib/leads/export.ts). Two choices, both for the stage and filters on
-// screen: everything, or only the leads that reached the app since your last
-// download of that stage. A download moves your point for the stage, but only
-// after the file is built; if saving the point fails you still get the file,
-// and the next "new" download repeats these leads. Counsellors and superadmin
+// src/lib/leads/export.ts). Two choices for the stage and filters on screen:
+// everything, or only the leads that reached the app since your last download
+// of that stage. A download moves your point for the stage, but only after the
+// file is built; if saving the point fails you still get the file, and the next
+// "new" download repeats these leads. A third (2026-10-28) is the leads ticked
+// on screen, which neither reads nor moves the point: a few picked by hand must
+// not make "new since" skip the rest. Counsellors and superadmin
 // only: a file of every number walks out easily (the lead-theft note in
 // BRAINSTORM.md), and `record_lead_download` (migration 0028) refuses anyone else.
 //
 // Free of Next and Supabase, so it tests directly; the route passes the reads.
 
-import { STAGE_LABEL, COLUMN_TITLE, isStage, type Stage } from './leads'
+import { STAGE_LABEL, COLUMN_TITLE, MAX_BULK, isStage, isUuid, type Stage } from './leads'
 
-export type ExportKind = 'all' | 'new'
+export type ExportKind = 'all' | 'new' | 'selected'
 
 /** One lead as the file shows it. */
 export interface ExportRow {
@@ -88,7 +90,9 @@ export interface ExportDeps {
   lastDownload: (stage: Stage) => Promise<string | null>
   /** The stage's leads under the form's filters, added after `since` (null: any time) and up to `until`. */
   load: (window: { since: string | null; until: string }, form: Record<string, string>) => Promise<ExportRow[]>
-  record: (d: { kind: ExportKind; stage: Stage; count: number; since: string | null; at: string }) => Promise<void>
+  /** These leads, in this order: the ticked ones, as on screen. */
+  loadSelected: (ids: string[]) => Promise<ExportRow[]>
+  record: (d: { kind: 'all' | 'new'; stage: Stage; count: number; since: string | null; at: string }) => Promise<void>
   now: () => Date
   logger?: { error: (...args: unknown[]) => void }
 }
@@ -114,11 +118,26 @@ export async function handleLeadExport(req: Request, deps: ExportDeps): Promise<
     /* not a form */
   }
   const kind = form.kind
-  if (kind !== 'all' && kind !== 'new') return refuse(400, 'Choose all leads or new leads.')
+  if (kind !== 'all' && kind !== 'new' && kind !== 'selected') return refuse(400, 'Choose all leads or new leads.')
   if (!(await deps.mayDownload())) return refuse(403, 'Only a counsellor or superadmin can download leads.')
   const stage: Stage = isStage(form.stage) ? form.stage : 'new'
 
   const at = deps.now().toISOString()
+  // Comma-separated in the body, never the URL (the 1,000-id trap).
+  if (kind === 'selected') {
+    const ids = [...new Set((form.ids ?? '').split(',').filter(Boolean))]
+    if (ids.length === 0) return refuse(400, 'Tick the leads to download.')
+    if (ids.length > MAX_BULK || !ids.every(isUuid)) return refuse(400, 'Unknown lead.')
+    let rows: ExportRow[]
+    try {
+      rows = await deps.loadSelected(ids)
+    } catch (e) {
+      log.error('leads: export of selected failed', e)
+      return refuse(500, 'Could not read the leads. Try again.')
+    }
+    return csvResponse(leadsCsv(rows), exportFilename(kind, stage, at))
+  }
+
   let rows: ExportRow[]
   let since: string | null = null
   try {
@@ -134,10 +153,14 @@ export async function handleLeadExport(req: Request, deps: ExportDeps): Promise<
   } catch (e) {
     log.error('leads: saving the download point failed', e)
   }
+  return csvResponse(csv, exportFilename(kind, stage, at))
+}
+
+function csvResponse(csv: string, filename: string): Response {
   return new Response(csv, {
     headers: {
       'content-type': 'text/csv; charset=utf-8',
-      'content-disposition': `attachment; filename="${exportFilename(kind, stage, at)}"`,
+      'content-disposition': `attachment; filename="${filename}"`,
       'cache-control': 'no-store',
     },
   })

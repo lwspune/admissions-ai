@@ -35,6 +35,8 @@ export async function countSince(db: Db, filters: LeadFilters, me: string, since
   return count ?? 0
 }
 
+const LEAD_COLUMNS = 'id, name, contact_mobile, interest, stage, assigned_to, class_level, enquired_on'
+
 type Lead = {
   id: string
   name: string | null
@@ -60,7 +62,7 @@ export async function loadExport(
 ): Promise<ExportRow[]> {
   const leads: Lead[] = []
   for (let from = 0; ; from += READ_PAGE) {
-    let query = filtered(db, filters, me, 'id, name, contact_mobile, interest, stage, assigned_to, class_level, enquired_on')
+    let query = filtered(db, filters, me, LEAD_COLUMNS)
       .eq('stage', filters.stage)
       .lte('created_at', until)
     if (since) query = query.gt('created_at', since)
@@ -73,7 +75,25 @@ export async function loadExport(
     leads.push(...((data ?? []) as unknown as Lead[]))
     if ((data ?? []).length < READ_PAGE) break
   }
+  return withDetails(db, leads, assignee)
+}
 
+/**
+ * The ticked leads (at most MAX_BULK), in the order given: the screen's. RLS
+ * still decides, so an id you cannot see is simply not in the file.
+ */
+export async function loadSelected(db: Db, ids: string[], assignee: (id: string | null) => string): Promise<ExportRow[]> {
+  const byId = new Map<string, Lead>()
+  for (let i = 0; i < ids.length; i += DETAIL_CHUNK) {
+    const { data, error } = await db.from('leads').select(LEAD_COLUMNS).in('id', ids.slice(i, i + DETAIL_CHUNK))
+    if (error) throw new Error(`could not read the selected leads: ${error.message}`)
+    for (const l of (data ?? []) as unknown as Lead[]) byId.set(l.id, l)
+  }
+  return withDetails(db, ids.flatMap((id) => byId.get(id) ?? []), assignee)
+}
+
+/** Each lead's sources and test, read 100 leads at a time, as the file's rows. */
+async function withDetails(db: Db, leads: Lead[], assignee: (id: string | null) => string): Promise<ExportRow[]> {
   const sources = new Map<string, Set<string>>()
   const papers = new Map<string, { state: string; issue_seq: number; mode: string }[]>()
   for (let i = 0; i < leads.length; i += DETAIL_CHUNK) {

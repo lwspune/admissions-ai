@@ -49,6 +49,14 @@ export function LeadsConsole({
 }) {
   const [adding, setAdding] = useState(false)
   const canAssign = canManageLeads(staff.role)
+  // A new stage, page or search starts a new selection: ticks you cannot see
+  // must not be moved or downloaded. The selection remembers the view it was made on.
+  const view = leadsHref(filters)
+  const [selection, setSelection] = useState<{ view: string; ids: Set<string> }>({ view, ids: new Set() })
+  const selected = selection.view === view ? selection.ids : NONE
+  // Built on the latest selection, so two quick ticks both count.
+  const setSelected = (next: (prev: ReadonlySet<string>) => Set<string>) =>
+    setSelection((s) => ({ view, ids: next(s.view === view ? s.ids : NONE) }))
 
   return (
     <>
@@ -56,7 +64,14 @@ export function LeadsConsole({
         title="Leads"
         actions={
           <>
-            {download && <DownloadMenu filters={filters} total={pipeline.list.total} download={download} />}
+            {download && (
+              <DownloadMenu
+                filters={filters}
+                total={pipeline.list.total}
+                download={download}
+                selected={pipeline.list.rows.filter((r) => selected.has(r.id)).map((r) => r.id)}
+              />
+            )}
             <button
               type="button"
               className={adding ? btn('secondary') : btn('primary')}
@@ -88,20 +103,24 @@ export function LeadsConsole({
 
       <PipelineBar counts={pipeline.counts} filters={filters} />
 
-      {/* A new stage, page or search starts a new selection: ticks you cannot see must not be moved. */}
+      {/* Keyed too, so the bar's choices reset with the view. */}
       <StageList
-        key={leadsHref(filters)}
+        key={view}
         list={pipeline.list}
         filters={filters}
         me={staff.id}
         assignees={assignees}
         canAssign={canAssign}
+        selected={selected}
+        setSelected={setSelected}
       />
     </>
   )
 }
 
 const select = input
+
+const NONE: ReadonlySet<string> = new Set()
 
 // The year in India, so a date in it shows without the year.
 const THIS_YEAR = new Date(Date.now() + 5.5 * 3600_000).getUTCFullYear()
@@ -284,15 +303,18 @@ function StageList({
   me,
   assignees,
   canAssign,
+  selected,
+  setSelected,
 }: {
   list: Pipeline['list']
   filters: LeadFilters
   me: string
   assignees: Assignee[]
   canAssign: boolean
+  selected: ReadonlySet<string>
+  setSelected: (next: (prev: ReadonlySet<string>) => Set<string>) => void
 }) {
   const router = useRouter()
-  const [selected, setSelected] = useState<Set<string>>(new Set())
   const [assignee, setAssignee] = useState('')
   const others = STAGES.filter((s) => s !== filters.stage)
   const [to, setTo] = useState<Stage>(NEXT_STAGE[filters.stage] ?? others[0]!)
@@ -324,7 +346,7 @@ function StageList({
       const r = await action()
       setResult(r)
       if (r.ok) {
-        setSelected(new Set())
+        setSelected(() => new Set())
         router.refresh()
       }
     })
@@ -359,7 +381,7 @@ function StageList({
             <input
               type="checkbox"
               checked={allOnPage}
-              onChange={() => setSelected(allOnPage ? new Set() : new Set(list.rows.map((r) => r.id)))}
+              onChange={() => setSelected(() => (allOnPage ? new Set() : new Set(list.rows.map((r) => r.id))))}
               className="h-5 w-5 rounded accent-brand-700"
             />
             Select all on this page
@@ -407,7 +429,7 @@ function StageList({
             {/* Not btn('ghost'): its text-slate-700 outranks any colour added here (the Tailwind trap). */}
             <button
               type="button"
-              onClick={() => setSelected(new Set())}
+              onClick={() => setSelected(() => new Set())}
               className="min-h-tap inline-flex items-center rounded-lg px-3 text-sm font-medium text-slate-200 transition-colors hover:bg-white/10"
             >
               Clear selection
@@ -658,17 +680,22 @@ function MoveMenu({ leadId, stage, who }: { leadId: string; stage: Stage; who: s
 /**
  * "Download for Excel" (2026-10-26, after GoPost's): the stage and filters on
  * screen, every lead or only those that reached the app since your last
- * download of the stage. Each choice is a POST, since it moves your download
- * point (migration 0028); the browser saves the file and stays on the page.
+ * download of the stage, or (2026-10-28) the leads ticked on screen. Each
+ * choice is a POST, since the first two move your download point (migration
+ * 0028) and the third carries up to 50 ids; the browser saves the file and
+ * stays on the page.
  */
 function DownloadMenu({
   filters,
   total,
   download,
+  selected,
 }: {
   filters: LeadFilters
   total: number
   download: { lastAt: string | null; fresh: number | null }
+  /** The ticked leads, in the screen's order. */
+  selected: string[]
 }) {
   const router = useRouter()
   const menu = useRef<HTMLDetailsElement>(null)
@@ -698,7 +725,7 @@ function DownloadMenu({
           // The new download point shows once the file has been built.
           setTimeout(() => router.refresh(), 2000)
         }}
-        className="absolute right-0 z-30 mt-1 w-72 max-w-[calc(100vw-2rem)] rounded-lg border border-slate-200 bg-white p-1 text-sm shadow-raised"
+        className="absolute left-0 z-30 mt-1 w-72 sm:left-auto sm:right-0 max-w-[calc(100vw-2rem)] rounded-lg border border-slate-200 bg-white p-1 text-sm shadow-raised"
       >
         <input type="hidden" name="stage" value={filters.stage} />
         {filters.q && <input type="hidden" name="q" value={filters.q} />}
@@ -707,6 +734,17 @@ function DownloadMenu({
         {filters.assignee && <input type="hidden" name="assignee" value={filters.assignee} />}
         {filters.from && <input type="hidden" name="from" value={filters.from} />}
         {filters.to && <input type="hidden" name="to" value={filters.to} />}
+        {selected.length > 0 && (
+          <>
+            <input type="hidden" name="ids" value={selected.join(',')} />
+            <button type="submit" name="kind" value="selected" className={item}>
+              <span className="font-medium text-slate-900">
+                Selected leads ({selected.length.toLocaleString('en-IN')})
+              </span>
+              <span className="text-xs text-slate-600">Only the leads you ticked</span>
+            </button>
+          </>
+        )}
         <button type="submit" name="kind" value="all" disabled={total === 0} className={item}>
           <span className="font-medium text-slate-900">
             All in {title} ({total.toLocaleString('en-IN')})

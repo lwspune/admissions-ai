@@ -61,6 +61,7 @@ describe('a download', () => {
         calls.load = window
         return [row()]
       },
+      loadSelected: async () => [],
       record: async (d) => {
         calls.record = d
       },
@@ -103,6 +104,83 @@ describe('a download', () => {
     expect((await handleLeadExport(post('all'), fake({ mayDownload: async () => false }).deps)).status).toBe(403)
     expect((await handleLeadExport(post('all', 'https://evil.test'), fake().deps)).status).toBe(403)
     expect((await handleLeadExport(post('everything'), fake().deps)).status).toBe(400)
+  })
+})
+
+describe('a download of the ticked leads', () => {
+  const AT = '2026-10-28T12:00:00.000Z'
+  const A = '11111111-1111-4111-8111-111111111111'
+  const B = '22222222-2222-4222-8222-222222222222'
+  function fake(over: Partial<ExportDeps> = {}) {
+    const calls: { selected?: string[]; lastDownload?: boolean; load?: boolean; record?: boolean } = {}
+    const deps: ExportDeps = {
+      mayDownload: async () => true,
+      lastDownload: async () => {
+        calls.lastDownload = true
+        return null
+      },
+      load: async () => {
+        calls.load = true
+        return []
+      },
+      loadSelected: async (ids) => {
+        calls.selected = ids
+        return ids.map((_, i) => row({ name: `Lead ${i + 1}` }))
+      },
+      record: async () => {
+        calls.record = true
+      },
+      now: () => new Date(AT),
+      logger: { error: () => {} },
+      ...over,
+    }
+    return { deps, calls }
+  }
+  const post = (ids: string, mayDownload = true) =>
+    handleLeadExport(
+      new Request('https://app.test/leads/export', {
+        method: 'POST',
+        headers: { origin: 'https://app.test' },
+        body: new URLSearchParams({ kind: 'selected', stage: 'new', ids }),
+      }),
+      fake(mayDownload ? {} : { mayDownload: async () => false }).deps,
+    )
+
+  it('gives those leads in the order sent, named as a selection', async () => {
+    const { deps, calls } = fake()
+    const res = await handleLeadExport(
+      new Request('https://app.test/leads/export', {
+        method: 'POST',
+        headers: { origin: 'https://app.test' },
+        body: new URLSearchParams({ kind: 'selected', stage: 'new', ids: `${B},${A},${B}` }),
+      }),
+      deps,
+    )
+    expect(res.status).toBe(200)
+    expect(res.headers.get('content-disposition')).toContain('leads-new-leads-selected-2026-10-28.csv')
+    expect(calls.selected).toEqual([B, A])
+    expect(await res.text()).toContain('Lead 2')
+  })
+
+  it('never reads or moves your download point, so "new since" still holds every lead', async () => {
+    const { deps, calls } = fake()
+    await handleLeadExport(
+      new Request('https://app.test/leads/export', {
+        method: 'POST',
+        headers: { origin: 'https://app.test' },
+        body: new URLSearchParams({ kind: 'selected', stage: 'new', ids: A }),
+      }),
+      deps,
+    )
+    expect(calls).toEqual({ selected: [A] })
+  })
+
+  it('refuses no leads, an id that is not one, more than 500, and a telecaller', async () => {
+    expect((await post('')).status).toBe(400)
+    expect((await post(`${A},not-an-id`)).status).toBe(400)
+    const many = Array.from({ length: 501 }, (_, i) => `${String(i).padStart(8, '0')}-1111-4111-8111-111111111111`)
+    expect((await post(many.join(','))).status).toBe(400)
+    expect((await post(A, false)).status).toBe(403)
   })
 })
 
