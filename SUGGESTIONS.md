@@ -280,7 +280,10 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
       secrets were set on the user's go-ahead, and a manual `internal.trigger_gopost_sync()` got a
       200 and moved `lead_feeds.last_synced_at`. `gopost-leads-hourly` runs at :45; the schedule's
       own run was seen at 17:45 UTC the same day.
-- [ ] **GoPost's feed answers `limit=500` with an empty page (2026-10-26).** Once GoPost began
+- [x] ~~**GoPost's feed answers `limit=500` with an empty page (2026-10-26).**~~ **FIXED
+      2026-10-31, in GoPost.** Not a page-size bug: GoPost's Next 14 cached each database call by
+      its request, so a cursor and limit once answered empty stayed empty (CLAUDE.md, Traps).
+      GoPost `b982fe2` reads the database `no-store`. What was written here: Once GoPost began
       sending its NDA age calculator sheet, 2,171 leads waited past the cursor; asked for 500 the
       feed returned no leads and the cursor itself as `next`, while 499 and below came back
       whole, so every hourly run reported "nothing new" with no error. Ours now asks for 200
@@ -456,6 +459,13 @@ go-ahead before anything shipped is touched.
       52–53 of New leads under the GoPost import; all 26 moved to Contacted, each with a "new →
       contacted" history line signed System, which is also the record of exactly which moved.
       Contacted rather than In EIS: a finished test is not an enrolment.
+
+- [ ] **The sync's page-size workaround guards against a bug that was a cache (2026-10-31).**
+      `syncFeed` asks for 50, re-checks an empty page with a one-lead ask and reads on in pages
+      of 25 (`PAGE_SIZES`, `narrowed`), all built for a feed that seemed to break at some sizes.
+      GoPost's real fault was a cached answer, fixed there. The one-lead check still earns its
+      place (it catches an empty page with leads behind it); the narrowing to 25 could go. Low
+      value, harmless as it is: needs the 360 and a yes before touching.
 
 - [ ] **"Changed after a pause" compares two clocks (2026-10-28).** `saveAnswer` stamps
       `last_answered_at` with the app server's clock; the resume event's `at` is the database's.

@@ -440,17 +440,28 @@ the connection is refused (2026-10-01).
   answers some SQLSTATEs with a 503: `serialization_failure` did, so a feed page
   refused for a stale cursor timed the test out instead of failing (0025, the
   same day). Raise a refusal with the default code (P0001, a 400) or a 4xx one.
-- **A quiet feed and a broken one look the same.** GoPost answered `limit=500` with an
-  empty page past its 2,579th lead, and the hourly sync logged "0 new, no error" while
-  2,171 leads waited (2026-10-26). Asking for 200 broke the same way on 10-28, with 27 waiting,
-  while 50 and 150 worked: it is GoPost's, size-dependent, and no page size is safe. So the sync
-  asks for 50, checks every empty page with a one-lead ask, and on a hidden lead reads on in
-  pages of 25 (`narrowed=true` in the log); if 25 hides them too it records an error, which
-  /leads shows. When the sync says nothing is new, still check GoPost's count against ours.
+- **A quiet feed and a broken one look the same, and a cached answer is the usual break.**
+  From 10-26 to 10-31 the hourly sync logged "0 new, no error" while leads waited, three
+  times. It looked size-dependent (500, then 200, then 50 and the one-lead check came back
+  empty while other sizes were whole) and was not: GoPost (Next 14) kept its database calls in
+  Next's Data Cache, keyed by the request, so a (cursor, limit) once answered empty stayed empty,
+  and the sync sends the same one every hour. Fixed in GoPost (`b982fe2`, its service-role
+  client is `no-store`). To test a feed for this, move the cursor back a microsecond: a request
+  never sent before gets a fresh answer. When the sync says nothing is new, still check GoPost's
+  count against ours.
 
 ## Decisions
 
 ### 2026-10
+
+- **2026-10-31 — GoPost's feed was serving cached pages; fixed there.** The user asked whether
+  leads were syncing. They were not: two leads (later four) waited while every run read nothing,
+  and leads of 28 and 29 Oct had arrived a day or two late. GoPost's Next 14 cached each
+  database call by its request, so the sync's hourly request got the first, empty answer
+  forever; the page sizes that "broke" were the ones already asked. On the user's "fix it once
+  and for all", GoPost's service-role client went `no-store` (GoPost `b982fe2`, test first),
+  deployed, and the four came in. Our narrowing to 25 is now unnecessary but harmless: in the
+  backfill ledger, not removed.
 
 - **2026-10-28 — Orgs: LWS Pune and LWS Delhi, each seeing only its own.** The user asked for a
   teacher to see every applicant in their org, and said the project was meant to be multi-org;
