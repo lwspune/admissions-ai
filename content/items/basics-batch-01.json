@@ -209,7 +209,7 @@
     "subject": "english",
     "skill": "evaluating-an-argument",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A school says: \"Since we installed CCTV cameras, reported thefts have halved, so the cameras have deterred thieves.\" Which finding, if true, most weakens this conclusion?",
     "options": {
@@ -244,7 +244,7 @@
     "subject": "english",
     "skill": "supported-conclusion",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "In one class of 40 cadets, 30 said they prefer morning drills. The commanding officer concluded that most cadets across the whole academy prefer morning drills. The main weakness in this conclusion is that",
     "options": {

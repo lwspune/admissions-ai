@@ -84,7 +84,7 @@
     "subject": "science",
     "skill": "properties-of-light",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A shadow has the same shape as the object casting it. Which property of light best explains this?",
     "options": {
@@ -101,7 +101,7 @@
     "subject": "science",
     "skill": "rate-and-quantity",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "numeric",
     "stem": "A leaking tap drips 3 drops of water every second. Each drop is 0.05 ml. How many millilitres leak in one minute?",
     "numeric_answer": 9,

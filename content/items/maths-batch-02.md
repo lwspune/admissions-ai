@@ -114,7 +114,7 @@ and re-run `npm run items:lint`.
 | M-E-22 | 6 | reasoning or everyday content; open to every admit |
 | M-E-23 | 7 | simple interest — Class 7 Comparing Quantities |
 | M-E-24 | 8 | recognising perfect cubes — Class 8 Cubes and Cube Roots |
-| M-E-25 | 6 | reasoning or everyday content; open to every admit |
+| M-E-25 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
 | M-E-26 | 6 | reasoning or everyday content; open to every admit |
 | M-M-27 | 8 | ages as a linear equation — Class 8 |
 | M-M-28 | 8 | single-draw probability — Class 8 Data Handling (chance and probability) |

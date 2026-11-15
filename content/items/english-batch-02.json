@@ -89,7 +89,7 @@
     "subject": "english",
     "skill": "error-identification",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "Which part of this sentence has an error? \"Hardly had the bus left the stop than it began to rain.\"",
     "options": {

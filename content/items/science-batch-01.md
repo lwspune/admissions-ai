@@ -122,8 +122,8 @@ and re-run `npm run items:lint`.
 | S-E-08 | 9 | density = mass ÷ volume — Class 9 Gravitation (relative density) |
 | S-E-09 | 7 | series circuit, one bulb breaks the loop — Class 7 Electric Current and its Effects |
 | S-E-10 | 7 | breathing rate and oxygen demand — Class 7 Respiration in Organisms |
-| S-E-11 | 6 | reasoning or everyday content; open to every admit |
-| S-E-12 | 6 | reasoning or everyday content; open to every admit |
+| S-E-11 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
+| S-E-12 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
 | S-E-13 | 7 | blue litmus turns red in acid — Class 7 Acids, Bases and Salts |
 | S-E-14 | 7 | food chain disturbance — Class 7 |
 | S-M-15 | 7 | conduction in metal vs wood — Class 7 Heat |

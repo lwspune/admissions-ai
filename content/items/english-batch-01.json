@@ -211,7 +211,7 @@
     "subject": "english",
     "skill": "evaluating-an-argument",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "\"Students who eat breakfast score higher in exams, so eating breakfast improves exam scores.\" Which finding would most weaken this argument?",
     "options": {
@@ -228,7 +228,7 @@
     "subject": "english",
     "skill": "supported-conclusion",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "A town banned cars from its centre. Shops in the centre reported higher sales; shops just outside reported lower sales. Which conclusion is best supported?",
     "options": {
@@ -245,7 +245,7 @@
     "subject": "english",
     "skill": "identifying-tone",
     "difficulty": "difficult",
-    "taught_in": 6,
+    "taught_in": 7,
     "format": "mcq",
     "stem": "\"The new rifle is lighter than the old one, and cheaper. Reliability tests are still under way.\" The writer's attitude to the new rifle is best described as",
     "options": {

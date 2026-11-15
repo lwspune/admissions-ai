@@ -115,6 +115,6 @@ and re-run `npm run items:lint`.
 | E-M-18 | 6 | reasoning or everyday content; open to every admit |
 | E-D-19 | 6 | reasoning or everyday content; open to every admit |
 | E-D-20 | 6 | reasoning or everyday content; open to every admit |
-| E-D-21 | 6 | reasoning or everyday content; open to every admit |
-| E-D-22 | 6 | reasoning or everyday content; open to every admit |
-| E-D-23 | 6 | reasoning or everyday content; open to every admit |
+| E-D-21 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
+| E-D-22 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
+| E-D-23 | 7 | retagged 2026-11-15 for admits to class 7: beyond a child who has just finished class 6 |
