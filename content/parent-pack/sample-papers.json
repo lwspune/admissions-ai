@@ -141,7 +141,7 @@
   "difficulty": "moderate",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Which letter comes next? Z, X, V, T, ___",
+  "stem": "Find the missing letter: Z, X, V, T, ___",
   "options": {
    "A": "S",
    "B": "Q",
@@ -191,19 +191,19 @@
   "paper": 7,
   "ref": "P7-S2",
   "subject": "science",
-  "skill": "change-of-state",
+  "skill": "evaporation",
   "difficulty": "easy",
   "taught_in": 6,
   "format": "mcq",
-  "stem": "Water in a pan is heated until bubbles rise and steam comes off fast. What is this change called?",
+  "stem": "Some water is left in an open dish on a sunny windowsill. After a few days the dish is dry. Where has the water gone?",
   "options": {
-   "A": "Melting",
-   "B": "Freezing",
-   "C": "Condensation",
-   "D": "Boiling"
+   "A": "It soaked into the dish",
+   "B": "Into the air as water vapour",
+   "C": "It turned into ice",
+   "D": "The sunlight used it up"
   },
-  "answer_key": "D",
-  "rationale": "Water turning rapidly into steam, with bubbles rising through it, is boiling. Melting is solid to liquid, freezing liquid to solid, and condensation is vapour turning back into water."
+  "answer_key": "B",
+  "rationale": "The water evaporated: warmed by the sun, it slowly changed into water vapour and mixed with the air. A dish does not soak up water, ice needs cold, and sunlight does not use water up."
  },
  {
   "paper": 7,
@@ -1080,7 +1080,7 @@
   "subject": "maths",
   "skill": "unit-conversion",
   "difficulty": "easy",
-  "taught_in": 6,
+  "taught_in": 7,
   "format": "mcq",
   "stem": "How many seconds are there in 2.5 hours?",
   "options": {
