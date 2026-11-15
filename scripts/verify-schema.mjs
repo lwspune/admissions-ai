@@ -160,15 +160,15 @@ async function main() {
     subject: 'history', skill: 'probe', difficulty: 'easy', format: 'numeric',
     stem: 'probe', numeric_answer: 5, rationale: 'probe',
   })
-  await rejects('leads: rejects an admitting class below 9', 'leads', {
-    name: 'Probe Class8', contact_mobile: '9876543210', class_level: 8,
+  await rejects('leads: rejects an admitting class below 5', 'leads', {
+    name: 'Probe Class4', contact_mobile: '9876543210', class_level: 4,
   })
   await rejects('leads: rejects an admitting class above 12', 'leads', {
     name: 'Probe Class13', contact_mobile: '9876543210', class_level: 13,
   })
-  await rejects('test_items: rejects taught_in below the floor (6)', 'test_items', {
+  await rejects('test_items: rejects taught_in below the floor (4)', 'test_items', {
     subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
-    stem: 'probe', numeric_answer: 5, rationale: 'probe', taught_in: 5,
+    stem: 'probe', numeric_answer: 5, rationale: 'probe', taught_in: 3,
   })
   await rejects('test_items: rejects taught_in at class 12 — nobody may be tested on it', 'test_items', {
     subject: 'maths', skill: 'probe', difficulty: 'easy', format: 'numeric',
@@ -236,7 +236,7 @@ async function main() {
   await rejects('test_items: rejects a syllabus item with no term', 'test_items', syllabusItem({ term: null }))
   await rejects('test_items: rejects a basics item with a term', 'test_items', syllabusItem({ part: 'basics' }))
   await rejects('test_items: rejects English syllabus content', 'test_items', syllabusItem({ subject: 'english' }))
-  await rejects('test_items: rejects syllabus content below class 7', 'test_items', syllabusItem({ taught_in: 6 }))
+  await rejects('test_items: rejects syllabus content below class 4', 'test_items', syllabusItem({ taught_in: 3 }))
 
   console.log('\nHindi versions (migration 0016)')
   const hindiItem = (over) => ({

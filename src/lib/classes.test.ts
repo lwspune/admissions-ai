@@ -3,7 +3,9 @@ import {
   CLASSES,
   TAUGHT_IN_MIN,
   TAUGHT_IN_MAX,
+  ADMITTABLE,
   parseClassLevel,
+  openToAll,
   contentCeiling,
   isDrawableFor,
   isSyllabusFor,
@@ -72,6 +74,50 @@ describe('isDrawableFor', () => {
 
   it('lets the floor reach every class, so an untagged bank changes nothing', () => {
     for (const c of CLASSES) expect(isDrawableFor(TAUGHT_IN_MIN, c)).toBe(true)
+  })
+})
+
+// Admits to classes 5–7 (2026-11-15). The database takes 5–12 and content down
+// to class 4, but a class is offered only once it is in CLASSES, which happens
+// when its questions are live: a lead the app cannot draw a paper for is the
+// failure the staging prevents.
+describe('the classes the database can hold', () => {
+  it('runs from 5 to 12', () => {
+    expect(ADMITTABLE).toEqual([5, 6, 7, 8, 9, 10, 11, 12])
+  })
+
+  it('offers only classes the database can hold', () => {
+    for (const c of CLASSES) expect(ADMITTABLE).toContain(c)
+  })
+
+  it('tags content down to class 4, the ceiling of the lowest admittable class', () => {
+    expect(TAUGHT_IN_MIN).toBe(4)
+    expect(contentCeiling(5)).toBe(TAUGHT_IN_MIN)
+    for (const c of ADMITTABLE) {
+      expect(contentCeiling(c)).toBeGreaterThanOrEqual(TAUGHT_IN_MIN)
+      expect(contentCeiling(c)).toBeLessThanOrEqual(TAUGHT_IN_MAX)
+    }
+  })
+
+  it('applies the N−1 rule to the new classes', () => {
+    expect(isDrawableFor(4, 5)).toBe(true)
+    expect(isDrawableFor(5, 5)).toBe(false)
+    expect(isDrawableFor(6, 7)).toBe(true)
+    expect(isDrawableFor(7, 7)).toBe(false)
+    expect(isSyllabusFor(4, 1, 5)).toBe(true)
+    expect(isSyllabusFor(6, 1, 7)).toBe(true)
+    expect(isSyllabusFor(5, 1, 7)).toBe(false)
+  })
+})
+
+// /items labels an item "all classes" when every offered class can draw it.
+// That was taught_in 6 while the lowest class was 8; it follows CLASSES now.
+describe('openToAll', () => {
+  it('is true when the lowest offered class can draw the item', () => {
+    const lowest = Math.min(...CLASSES)
+    expect(openToAll(lowest - 1)).toBe(true)
+    expect(openToAll(TAUGHT_IN_MIN)).toBe(true)
+    expect(openToAll(lowest)).toBe(false)
   })
 })
 

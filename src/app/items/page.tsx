@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { currentStaff, userClient } from '@/server/auth'
 import { loadBank, type BankItem } from '@/server/items'
 import { groupBank, coverageByClass, thirtyReadiness, type ItemStatus, type CoverageCell, type Readiness } from '@/lib/items'
-import { CLASSES, TAUGHT_IN_MIN } from '@/lib/classes'
+import { CLASSES, openToAll } from '@/lib/classes'
 import { CHOICES, SUBJECTS, DIFFICULTIES, type Subject } from '@/lib/types'
 import { Icon } from '@/components/icons'
 import { StaffShell } from '@/components/StaffShell'
@@ -204,7 +204,7 @@ function Item({ item }: { item: BankItem }) {
         {/* The floor means "open to every admit" and is what an untagged item
             carries, so it is shown as such rather than as a class number. */}
         <span className="text-xs text-slate-600">
-          {item.taughtIn <= TAUGHT_IN_MIN ? 'all classes' : `taught in class ${item.taughtIn}`}
+          {openToAll(item.taughtIn) ? 'all classes' : `taught in class ${item.taughtIn}`}
         </span>
       </div>
 

@@ -2,22 +2,33 @@
 // they may be shown has to be testable without a database and stated in
 // exactly one place — here, and mirrored in `issue_assessment` (migration 0011).
 
-/** The classes the institute admits to. Mirrors the CHECK on leads.class_level. */
-export type ClassLevel = 8 | 9 | 10 | 11 | 12
+/**
+ * Every class the database can hold an admit for. Mirrors the CHECK on
+ * leads.class_level and assessments.class_level (migration 0032).
+ */
+export type ClassLevel = 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12
+export const ADMITTABLE: readonly ClassLevel[] = [5, 6, 7, 8, 9, 10, 11, 12] as const
+
+/**
+ * The classes the app offers: the lead form, imports, coverage and the parent
+ * pack. A class joins this list only once its questions are live, because a
+ * lead the bank cannot draw a paper for is a dead end at the moment of issue.
+ * Classes 5–7 join one at a time (2026-11-15), so this is not ADMITTABLE.
+ */
 export const CLASSES: readonly ClassLevel[] = [8, 9, 10, 11, 12] as const
 
 /**
- * The range an item's `taught_in` may take. Mirrors the CHECK on
- * test_items.taught_in.
+ * The range an item's `taught_in` may take, for basics and syllabus alike.
+ * Mirrors the CHECKs on test_items (migration 0032).
  *
- * The floor is the class by which everything a reasoning test relies on has
- * been met, and it is also what an untagged item carries: an item at the floor
- * is drawable for every admit, so a bank that nobody has tagged yet behaves
- * exactly as it did before classes existed. The ceiling is one below the
- * highest admitted class, because content taught in class 12 can never be
- * fair to anyone this test is issued to.
+ * The floor is the content ceiling of the lowest admittable class (an admit to
+ * class 5 is tested on class 4). The ceiling is one below the highest, because
+ * content taught in class 12 can never be fair to anyone this test is issued
+ * to. The database default for an untagged item stays 6, which was "open to
+ * everyone" while the lowest class was 8; the lint requires a tag in every
+ * file, so nothing reaches the default by accident.
  */
-export const TAUGHT_IN_MIN = 6
+export const TAUGHT_IN_MIN = 4
 export const TAUGHT_IN_MAX = 11
 
 /**
@@ -41,6 +52,11 @@ export function parseClassLevel(raw: unknown): ClassLevel | null {
  */
 export function contentCeiling(admittingTo: ClassLevel): number {
   return admittingTo - 1
+}
+
+/** Whether every class the app offers can draw an item tagged `taughtIn`. */
+export function openToAll(taughtIn: number): boolean {
+  return CLASSES.every((c) => isDrawableFor(taughtIn, c))
 }
 
 /** Whether an item tagged `taughtIn` may appear on a paper for this admit. */

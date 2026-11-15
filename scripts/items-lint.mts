@@ -107,8 +107,8 @@ export function lintItems(): number {
     }
 
     // The class in which the content is taught. Required, because a missing
-    // tag would be seeded as the floor and quietly open a class 11 item to a
-    // class 9 admit; the author has to say 6 on purpose.
+    // tag would be seeded as the database default (6) and quietly open a
+    // class 11 item to a class 9 admit; the author has to say the class.
     if (
       !Number.isInteger(item.taught_in) ||
       (item.taught_in as number) < TAUGHT_IN_MIN ||
@@ -119,7 +119,7 @@ export function lintItems(): number {
 
     // Two parts since 2026-10-06 (migration 0014). Basics is the default and
     // carries no term; syllabus is maths or science content from one class
-    // (7–11, the class below an admit to 8–12) and says which term.
+    // (4–11, the class below an admit to 5–12) and says which term.
     const part = item.part ?? 'basics'
     if (part !== 'basics' && part !== 'syllabus') {
       err(ref, `part must be "basics" or "syllabus", got ${JSON.stringify(item.part)}`)
@@ -128,8 +128,8 @@ export function lintItems(): number {
     } else if (part === 'syllabus') {
       if (item.term !== 1 && item.term !== 2) err(ref, `a syllabus item needs term 1 or 2, got ${JSON.stringify(item.term)}`)
       if (item.subject === 'english') err(ref, 'English has no syllabus part')
-      if (!Number.isInteger(item.taught_in) || (item.taught_in as number) < 7 || (item.taught_in as number) > 11) {
-        err(ref, `a syllabus item is class 7–11 content, got ${JSON.stringify(item.taught_in)}`)
+      if (!Number.isInteger(item.taught_in) || (item.taught_in as number) < TAUGHT_IN_MIN || (item.taught_in as number) > TAUGHT_IN_MAX) {
+        err(ref, `a syllabus item is class ${TAUGHT_IN_MIN}–${TAUGHT_IN_MAX} content, got ${JSON.stringify(item.taught_in)}`)
       }
     }
 

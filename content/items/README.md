@@ -47,7 +47,7 @@ in `hi/<batch>.hi.json`, one per English batch, each entry `{ ref, source, stem_
 | `subject` | `maths` · `english` · `science` | Spec §1: 5 per paper each |
 | `skill` | kebab-case | What the item exercises; free text, shown on `/items` |
 | `difficulty` | `easy` · `moderate` · `difficult` | A target p-value (spec §9), 3/1/1 per subject per paper |
-| `taught_in` | integer 6–11 | **The class in which the content is taught.** See below |
+| `taught_in` | integer 4–11 | **The class in which the content is taught.** See below |
 | `part` | `basics` (default) · `syllabus` | Basics is the reasoning bank, drawn for every class with `taught_in ≤ N−1`. Syllabus is maths or science content from one class's NCERT chapters, drawn only for an admit to the class above, and only if `term` is 1 |
 | `term` | `1` · `2` | Syllabus items only: the term of class `taught_in` in which the chapter is taught. Only term 1 is drawn, because candidates are tested before the year ends. Class 11 syllabus science is physics or chemistry |
 | `format` | `mcq` · `numeric` | An MCQ has `options` A–D and `answer_key`; a numeric item has `numeric_answer` and optional `numeric_tolerance` |
@@ -57,13 +57,16 @@ in `hi/<batch>.hi.json`, one per English batch, each entry `{ ref, source, stem_
 
 ## `taught_in` — the class tag
 
-Students are admitted to classes 8–12, and **an admit to class N is tested on content taught up to
+Students are admitted to classes 5–12 (5–7 since 2026-11-15, each offered once its questions are
+live), and **an admit to class N is tested on content taught up to
 class N−1** (`src/lib/classes.ts`, enforced by `issue_assessment`). The tag describes the content,
 not the audience: state the class in which the idea is taught, and let the rule decide who sees it.
 
-- **6 is the floor** and means "open to every admit". Number series, primes and factors,
-  fractions, analogies, odd-one-out and everyday physical reasoning belong here. It is also what an
-  item carries before anyone has tagged it, so an untagged batch changes nothing.
+- **4 is the floor**: an admit to class 5 is tested on class 4. Until 2026-11-15 the floor was 6
+  and meant "open to every admit" (number series, primes and factors, fractions, analogies,
+  odd-one-out, everyday physical reasoning); with admits to class 7 a 6 means what it says, taught
+  by the end of class 6, and the class 6 items were checked against a child who has just finished
+  class 6. The database still gives an untagged row 6, which is why every file must state a tag.
 - **"Taught" means taught in the NCERT book this year's admits used.** NCERT's new books reached
   classes 6–8 by 2025–26 and class 9 in 2026–27, and they moved topics later. Percentages, profit
   and loss, interest, ratio, averages, food chains and floating are class 8 (*Ganita Prakash 8*,

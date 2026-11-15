@@ -18,7 +18,7 @@ needs hundreds of attempts before it means anything is parked in §12, not built
 |---|---|
 | Funnel | Gate 2 — after the telecaller's in-call verbal screen, for high-intent leads only |
 | Issuers | Telecaller and counsellor. A paper test (2026-10-16): counsellor and superadmin only |
-| Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (8–12) is tested on content taught up to class N−1 (added 2026-09-27; class 8 added 2026-10-01) |
+| Content | Reasoning-shaped, English only, text-only. **Scoped by class:** an admit to class N (5–12) is tested on content taught up to class N−1 (added 2026-09-27; class 8 added 2026-10-01; classes 5–7 2026-11-15, each offered once its questions are live) |
 | Paper | 15 questions — 5 each Maths / English / Science, interleaved. Per subject: 3 easy, 1 moderate, 1 difficult. **From 2026-10-06, 30 questions once a class's syllabus batch is live:** 10 each; English all basics (6/2/2); maths and science 5 basics (3/1/1) + 5 from class N−1's first-term NCERT syllabus (3/1/1). All interleaved, each labelled Basics or Class N−1 |
 | Time | 15 minutes of active time (30 for the 30-question paper; each paper records its own). Timer pauses when the tab is hidden |
 | Window | 3 hours from creation (2 until 2026-10-07, migration 0015). Hard backstop — the attempt dies with the window |
@@ -66,7 +66,7 @@ Six tables. Constraints do the enforcing, not application `if`s.
 
 **`leads`** — `id` · `name` · `contact_mobile` (the parent's number, where the link goes and the
 identity key) · `student_mobile` NULL · `city` / `school` / `board` NULL · `class_level` smallint
-CHECK ∈ 8–12, **the class being admitted to**, required to issue (migrations 0011, 0013) · `consented_at` ·
+CHECK ∈ 5–12, **the class being admitted to**, required to issue (migrations 0011, 0013, 0032) · `consented_at` ·
 `created_by` · `created_at`.
 
 No unique constraint on `contact_mobile` — siblings share a parent's number. Instead the create form
