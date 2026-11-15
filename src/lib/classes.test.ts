@@ -15,7 +15,9 @@ import {
 // filter can act on. The only values that mean anything are the five classes
 // the institute admits to; everything else is refused rather than guessed.
 describe('parseClassLevel', () => {
-  it('accepts the five admitted classes as numbers or strings', () => {
+  it('accepts the admitted classes as numbers or strings', () => {
+    expect(parseClassLevel(7)).toBe(7)
+    expect(parseClassLevel('7')).toBe(7)
     expect(parseClassLevel(8)).toBe(8)
     expect(parseClassLevel(9)).toBe(9)
     expect(parseClassLevel('10')).toBe(10)
@@ -24,7 +26,7 @@ describe('parseClassLevel', () => {
   })
 
   it('refuses classes outside the admitted range', () => {
-    expect(parseClassLevel(7)).toBeNull()
+    expect(parseClassLevel(4)).toBeNull()
     expect(parseClassLevel('13')).toBeNull()
   })
 
@@ -84,6 +86,10 @@ describe('isDrawableFor', () => {
 describe('the classes the database can hold', () => {
   it('runs from 5 to 12', () => {
     expect(ADMITTABLE).toEqual([5, 6, 7, 8, 9, 10, 11, 12])
+  })
+
+  it('offers class 7 once its questions are live (2026-11-15)', () => {
+    expect(CLASSES).toEqual([7, 8, 9, 10, 11, 12])
   })
 
   it('offers only classes the database can hold', () => {
