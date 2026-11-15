@@ -1,0 +1,235 @@
+[
+  {
+    "ref": "S-E-36",
+    "subject": "science",
+    "skill": "everyday-phenomenon",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "On a hot day, drops of water appear on the outside of a glass of ice-cold water. Where does this water come from?",
+    "options": {
+      "A": "It seeps out slowly through the glass",
+      "B": "Water vapour in the surrounding air",
+      "C": "Melted ice climbing over the rim",
+      "D": "The glass itself giving off water"
+    },
+    "answer_key": "B",
+    "rationale": "Air holds water vapour; touching the cold glass it cools and condenses into drops on the outside. Glass does not let water through (A), and the drops form even on a closed bottle of cold water, so they do not come from inside it (C, D).",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-E-37",
+    "subject": "science",
+    "skill": "magnetism",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Iron pins have fallen into a heap of sand. What is the quickest way to get the pins out?",
+    "options": {
+      "A": "Move a magnet over the sand",
+      "B": "Pass the sand through a sieve",
+      "C": "Pour water over the sand",
+      "D": "Winnow the sand in the wind"
+    },
+    "answer_key": "A",
+    "rationale": "A magnet attracts iron and not sand, so it lifts the pins straight out. A sieve keeps back pebbles with the pins and is slow, water leaves pins and sand together, and winnowing blows away light husk, not heavy pins.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-E-38",
+    "subject": "science",
+    "skill": "experimental-reasoning",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Asha wants to find out whether sugar dissolves faster in hot water than in cold water. What should be different between her two glasses?",
+    "options": {
+      "A": "The amount of sugar she adds",
+      "B": "The amount of water in each",
+      "C": "The temperature of the water",
+      "D": "The size of the two glasses"
+    },
+    "answer_key": "C",
+    "rationale": "A fair test changes only the thing being tested, here the temperature, and keeps everything else the same. Changing the sugar, the water or the glass as well would leave her unable to say what made the difference.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-E-39",
+    "subject": "science",
+    "skill": "evaporation",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Sea water is let into shallow pans near the shore and left in the sun. After some days only salt is left. Which process removed the water?",
+    "options": {
+      "A": "Condensation",
+      "B": "Freezing",
+      "C": "Filtration",
+      "D": "Evaporation"
+    },
+    "answer_key": "D",
+    "rationale": "The sun's heat turns the water into vapour, which leaves the salt behind: evaporation. Condensation is vapour turning back into water, freezing needs cold, and filtration cannot separate salt that is dissolved.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-M-40",
+    "subject": "science",
+    "skill": "interpreting-evidence",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Seeds are kept in three dishes: on dry cotton, on wet cotton, and completely under water. Only the seeds on wet cotton sprout. What does this suggest seeds need to sprout?",
+    "options": {
+      "A": "Soil and sunlight",
+      "B": "Darkness and warmth",
+      "C": "Both water and air",
+      "D": "Only water, no air"
+    },
+    "answer_key": "C",
+    "rationale": "Dry seeds had air but no water; seeds under water had water but little air. Only seeds with both sprouted. D ignores the seeds under water, and every dish had the same light, warmth and no soil, so A and B were never tested.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-M-41",
+    "subject": "science",
+    "skill": "applying-a-principle",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Why should a compass be kept away from magnets and iron objects while it is being used to find directions?",
+    "options": {
+      "A": "They may crack the glass cover",
+      "B": "They make the needle too heavy",
+      "C": "They stop the needle spinning",
+      "D": "They pull the needle off north"
+    },
+    "answer_key": "D",
+    "rationale": "A compass needle is a small magnet that points north–south. A nearby magnet or iron pulls on it, so it points towards them instead and gives a wrong direction. The other options are not what a magnet does to the needle.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-D-42",
+    "subject": "science",
+    "skill": "magnetism",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Three bars P, Q and R look the same. P and Q attract each other. P and R repel each other. Q and R attract each other. Which bars are certainly magnets?",
+    "options": {
+      "A": "P only",
+      "B": "P and R",
+      "C": "P and Q",
+      "D": "All three"
+    },
+    "answer_key": "B",
+    "rationale": "Only two magnets can repel, so P and R are magnets. Attraction proves nothing: a magnet also attracts plain iron, so Q may be iron. D and C read attraction as proof, the trap this item is built on.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-D-43",
+    "subject": "science",
+    "skill": "experimental-reasoning",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "To test whether a heavy ball rolls down faster than a light one, Ravi rolls the heavy ball down a steep slope and the light ball down a gentle slope. What is wrong with his test?",
+    "options": {
+      "A": "He changed two things at once",
+      "B": "He should have used three balls",
+      "C": "The balls should weigh the same",
+      "D": "Nothing is wrong with the test"
+    },
+    "answer_key": "A",
+    "rationale": "He changed the weight and the slope together, so a faster ball could be due to either. Weight is what he is testing, so C would remove the very thing under test; more balls do not fix the flaw.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-D-44",
+    "subject": "science",
+    "skill": "rate-and-quantity",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "A cycle wheel goes round once for every 2 metres the cycle moves forward. How many times does the wheel go round when the cycle travels 1 kilometre?",
+    "numeric_answer": 500,
+    "numeric_tolerance": 0,
+    "rationale": "One kilometre is 1,000 metres, and each turn covers 2 metres, so 1,000 ÷ 2 = 500 turns. Forgetting to turn kilometres into metres gives 0.5, and multiplying gives 2,000.",
+    "taught_in": 6
+  },
+  {
+    "ref": "S-D-45",
+    "subject": "science",
+    "skill": "evaporation",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Water kept in an earthen pot stays cooler in summer than water kept in a steel pot. What is the main reason?",
+    "options": {
+      "A": "Clay is a naturally cold material itself",
+      "B": "The thick clay keeps all sunlight out",
+      "C": "Water seeping out evaporates and cools it",
+      "D": "Earthen pots hold much less water inside"
+    },
+    "answer_key": "C",
+    "rationale": "A little water seeps through the pores of the clay and evaporates from the outside, and evaporation takes heat away, cooling the water. A steel pot also keeps out sunlight, so B cannot explain the difference; clay is not cold in itself.",
+    "taught_in": 6
+  },
+  {
+    "ref": "E-D-46",
+    "subject": "english",
+    "skill": "synonym-in-context",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The old fort stood desolate on the hill; nobody had lived near it for years. As used here, \"desolate\" most nearly means",
+    "options": {
+      "A": "empty and lonely",
+      "B": "tall and strong",
+      "C": "newly repaired",
+      "D": "crowded and busy"
+    },
+    "answer_key": "A",
+    "rationale": "The second half of the sentence, nobody living near it for years, defines the word: deserted and lonely. B fits a fort but not the clue, and D is the opposite of what the sentence says.",
+    "taught_in": 6
+  },
+  {
+    "ref": "E-D-47",
+    "subject": "english",
+    "skill": "error-identification",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Which part of this sentence has an error? \"Each of the girls have brought her own lunch.\"",
+    "options": {
+      "A": "Each of the girls",
+      "B": "have brought",
+      "C": "her own lunch",
+      "D": "No error"
+    },
+    "answer_key": "B",
+    "rationale": "The subject is \"each\", which is singular, so the verb must be \"has brought\". The plural \"girls\" just before the verb is the trap. \"Her\" agrees with \"each\" and is correct.",
+    "taught_in": 6
+  },
+  {
+    "ref": "E-D-48",
+    "subject": "english",
+    "skill": "sentence-completion",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Meera was usually ___, so her friends were surprised when she spoke ___ at the meeting.",
+    "options": {
+      "A": "talkative … freely",
+      "B": "shy … quietly",
+      "C": "quiet … boldly",
+      "D": "confident … loudly"
+    },
+    "answer_key": "C",
+    "rationale": "\"Surprised\" means the second blank must go against the first: a quiet girl speaking boldly. A, B and D each describe behaviour that matches the habit (a talker speaking freely, a shy girl speaking quietly), so nothing would surprise her friends.",
+    "taught_in": 6
+  },
+  {
+    "ref": "E-D-49",
+    "subject": "english",
+    "skill": "reading-inference",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The shopkeeper counted the coins twice, frowned and looked at the boy again. The boy quickly put another coin on the counter. What most likely happened?",
+    "options": {
+      "A": "The shopkeeper wanted a tip",
+      "B": "Some of the coins were fake",
+      "C": "The boy had paid too much",
+      "D": "The boy had paid too little"
+    },
+    "answer_key": "D",
+    "rationale": "Counting twice and frowning shows something was wrong with the amount, and the boy adding a coin shows it was short. Paying too much would bring change back, not another coin; nothing in the passage suggests fake coins or a tip.",
+    "taught_in": 6
+  }
+]

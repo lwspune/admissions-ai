@@ -1,5 +1,540 @@
 [
  {
+  "paper": 7,
+  "ref": "P7-M1",
+  "subject": "maths",
+  "skill": "number-series",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Find the next number in the series: 4, 9, 14, 19, 24, ___",
+  "options": {
+   "A": "29",
+   "B": "28",
+   "C": "30",
+   "D": "34"
+  },
+  "answer_key": "A",
+  "rationale": "Each number is 5 more than the one before, so the next is 24 + 5 = 29."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-M2",
+  "subject": "maths",
+  "skill": "prime-numbers",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "How many prime numbers are there between 20 and 30?",
+  "options": {
+   "A": "1",
+   "B": "2",
+   "C": "3",
+   "D": "4"
+  },
+  "answer_key": "B",
+  "rationale": "The numbers from 21 to 29 that have no factor other than 1 and themselves are 23 and 29. The rest are even or divisible by 3 or 5."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-M3",
+  "subject": "maths",
+  "skill": "area-and-perimeter",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "A rectangle is 9 cm long and 4 cm wide. What is its area, in square centimetres?",
+  "numeric_answer": 36,
+  "numeric_tolerance": 0,
+  "rationale": "The area of a rectangle is length × width: 9 × 4 = 36 square centimetres. This is a type-in question."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-M4",
+  "subject": "maths",
+  "skill": "calendar-reasoning",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "5 March is a Tuesday. What day of the week is 28 March of the same year?",
+  "options": {
+   "A": "Monday",
+   "B": "Tuesday",
+   "C": "Wednesday",
+   "D": "Thursday"
+  },
+  "answer_key": "D",
+  "rationale": "28 March is 23 days after 5 March. 21 days is exactly three weeks, which brings us to Tuesday again, and 2 more days gives Thursday."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-M5",
+  "subject": "maths",
+  "skill": "multi-step-arithmetic",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "The sum of three consecutive numbers is 72. What is the largest of the three?",
+  "numeric_answer": 25,
+  "numeric_tolerance": 0,
+  "rationale": "Three consecutive numbers have the middle one as their average: 72 ÷ 3 = 24, so the numbers are 23, 24 and 25, and the largest is 25. This is a type-in question."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The puppy was timid and hid behind the sofa whenever guests came. As used here, \"timid\" most nearly means",
+  "options": {
+   "A": "shy",
+   "B": "hungry",
+   "C": "playful",
+   "D": "sleepy"
+  },
+  "answer_key": "A",
+  "rationale": "Hiding whenever guests come shows the puppy is easily frightened: shy. Nothing in the sentence is about food, play or sleep."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E2",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: My brother and I ___ going to the fair.",
+  "options": {
+   "A": "am",
+   "B": "is",
+   "C": "are",
+   "D": "was"
+  },
+  "answer_key": "C",
+  "rationale": "\"My brother and I\" is two people, a plural subject, so the verb is \"are\". \"Am\" goes with \"I\" alone, and \"is\" and \"was\" with one person."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E3",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Cow is to calf as dog is to ___",
+  "options": {
+   "A": "kitten",
+   "B": "puppy",
+   "C": "cub",
+   "D": "foal"
+  },
+  "answer_key": "B",
+  "rationale": "A calf is a young cow, so the pair is animal and its young: a young dog is a puppy. A kitten is a young cat, a cub a young lion or bear, a foal a young horse."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E4",
+  "subject": "english",
+  "skill": "letter-series",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which letter comes next? Z, X, V, T, ___",
+  "options": {
+   "A": "S",
+   "B": "Q",
+   "C": "R",
+   "D": "P"
+  },
+  "answer_key": "C",
+  "rationale": "The series goes backwards through the alphabet, skipping one letter each time: Z (Y) X (W) V (U) T (S) R."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E5",
+  "subject": "english",
+  "skill": "error-identification",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which part of this sentence has an error? \"One of my friend lives near the railway station.\"",
+  "options": {
+   "A": "One of my friend",
+   "B": "lives near",
+   "C": "the railway station",
+   "D": "No error"
+  },
+  "answer_key": "A",
+  "rationale": "\"One of\" picks one out of a group, so the group must be plural: \"one of my friends\". \"Lives\" is right, because the subject is \"one\"."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-S1",
+  "subject": "science",
+  "skill": "magnetism",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The north pole of one magnet is brought close to the north pole of another magnet. What happens?",
+  "options": {
+   "A": "They pull together",
+   "B": "They push apart",
+   "C": "Nothing happens",
+   "D": "Both lose magnetism"
+  },
+  "answer_key": "B",
+  "rationale": "Like poles repel and unlike poles attract. Two north poles are like poles, so the magnets push each other away."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-S2",
+  "subject": "science",
+  "skill": "change-of-state",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Water in a pan is heated until bubbles rise and steam comes off fast. What is this change called?",
+  "options": {
+   "A": "Melting",
+   "B": "Freezing",
+   "C": "Condensation",
+   "D": "Boiling"
+  },
+  "answer_key": "D",
+  "rationale": "Water turning rapidly into steam, with bubbles rising through it, is boiling. Melting is solid to liquid, freezing liquid to solid, and condensation is vapour turning back into water."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-S3",
+  "subject": "science",
+  "skill": "experimental-reasoning",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Priya wants to find out which of two brands of paper towel soaks up more water. What must she keep the same for both towels?",
+  "options": {
+   "A": "The amount of water used",
+   "B": "The brand of the towel",
+   "C": "Nothing at all",
+   "D": "Only the colour of the towel"
+  },
+  "answer_key": "A",
+  "rationale": "The brand is what she is testing, so it is the one thing that changes. Everything else, such as the amount of water and the size of the towel, must be the same, or the result could not be trusted."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-S4",
+  "subject": "science",
+  "skill": "interpreting-evidence",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Two equal ice cubes are left on a table, one wrapped in a woollen cloth and one open. After an hour the wrapped cube is bigger. This shows that wool",
+  "options": {
+   "A": "slows heat from reaching the ice",
+   "B": "makes the ice colder than before",
+   "C": "adds water to the ice cube",
+   "D": "keeps the ice warm and melts it"
+  },
+  "answer_key": "A",
+  "rationale": "Ice melts when heat reaches it from the warmer air. The wrapped cube melted less, so the wool slowed the heat getting in. Wool keeps us warm the same way, by slowing heat leaving the body; it makes nothing colder by itself."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-S5",
+  "subject": "science",
+  "skill": "magnetism",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "A steel paper clip sticks to the end of a magnet. A second clip then sticks to the bottom of the first clip. Why does the second clip stick?",
+  "options": {
+   "A": "The clips are pressed tightly",
+   "B": "Steel clips are slightly sticky",
+   "C": "The first clip acts as a magnet",
+   "D": "The second clip is heavier"
+  },
+  "answer_key": "C",
+  "rationale": "While it touches the magnet, the first clip becomes a magnet itself and attracts the second. Take the magnet away and the clips soon drop apart, which rules out stickiness or pressing."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E6",
+  "subject": "english",
+  "skill": "antonym",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the word most nearly opposite in meaning to \"brave\".",
+  "options": {
+   "A": "strong",
+   "B": "cowardly",
+   "C": "bold",
+   "D": "clever"
+  },
+  "answer_key": "B",
+  "rationale": "A brave person faces danger; a cowardly one runs from it. \"Bold\" means nearly the same as brave, and \"strong\" and \"clever\" are other good qualities, not opposites."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E7",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Choose the correct word: He is afraid ___ dogs.",
+  "options": {
+   "A": "from",
+   "B": "with",
+   "C": "by",
+   "D": "of"
+  },
+  "answer_key": "D",
+  "rationale": "\"Afraid\" is always followed by \"of\": afraid of dogs, afraid of the dark. \"Afraid from\" is a common slip in speech."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E8",
+  "subject": "english",
+  "skill": "odd-one-out",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which one of these is different from the other three?",
+  "options": {
+   "A": "Carrot",
+   "B": "Potato",
+   "C": "Onion",
+   "D": "Mango"
+  },
+  "answer_key": "D",
+  "rationale": "Carrot, potato and onion are vegetables that grow under the ground; a mango is a fruit that grows on a tree."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E9",
+  "subject": "english",
+  "skill": "sentence-completion",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The room was so ___ that we could hear the clock ticking on the wall.",
+  "options": {
+   "A": "noisy",
+   "B": "quiet",
+   "C": "crowded",
+   "D": "bright"
+  },
+  "answer_key": "B",
+  "rationale": "Hearing a small sound like a clock ticking means there was no other noise: the room was quiet. A noisy or crowded room would drown it out, and brightness has nothing to do with hearing."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-E10",
+  "subject": "english",
+  "skill": "reading-inference",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Arun's mother found muddy footprints from the door to the kitchen and an empty biscuit tin. Arun's shoes by the door were still wet. What can she most reasonably conclude?",
+  "options": {
+   "A": "Arun came in from outside and ate the biscuits",
+   "B": "A thief came in and stole the biscuits",
+   "C": "It had been dry outside all day long",
+   "D": "Arun had been asleep in his room all day"
+  },
+  "answer_key": "A",
+  "rationale": "The wet shoes link the muddy footprints to Arun, and the prints lead to the kitchen where the tin is empty. Wet shoes and mud rule out a dry day, and nothing points to a stranger."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-MS1",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "number-patterns",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "The square numbers are 1, 4, 9, 16, … What is the next square number after 49?",
+  "options": {
+   "A": "56",
+   "B": "64",
+   "C": "81",
+   "D": "50"
+  },
+  "answer_key": "B",
+  "rationale": "49 = 7 × 7, so the next square number is 8 × 8 = 64. 56 is 49 + 7, a slip for the next multiple of 7; 81 is 9 × 9, one too far."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-MS2",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "lines-and-angles",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "How many degrees are there in a right angle?",
+  "numeric_answer": 90,
+  "numeric_tolerance": 0,
+  "rationale": "A full turn is 360° and a right angle is a quarter turn, so it is 360 ÷ 4 = 90°. This is a type-in question."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-MS3",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "factors-and-multiples",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What is the smallest prime number?",
+  "options": {
+   "A": "0",
+   "B": "1",
+   "C": "2",
+   "D": "3"
+  },
+  "answer_key": "C",
+  "rationale": "A prime number has exactly two factors, 1 and itself. 2 has exactly two (1 and 2). 1 has only one factor, so it is not prime, and 0 is not prime either."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-MS4",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "data-handling",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "In a bar graph, 1 unit of height stands for 5 students. The bar for 'Cricket' is 7 units tall. How many students chose cricket?",
+  "numeric_answer": 35,
+  "numeric_tolerance": 0,
+  "rationale": "Each unit is 5 students, so 7 units are 7 × 5 = 35 students. Reading the height as the answer gives 7. This is a type-in question."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-MS5",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "number-play",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "numeric",
+  "stem": "A palindrome reads the same backwards. How many 3-digit palindromes begin with the digit 5?",
+  "numeric_answer": 10,
+  "numeric_tolerance": 0,
+  "rationale": "A 3-digit palindrome beginning with 5 must also end with 5: 5_5. The middle digit can be any of 0 to 9, so there are 10 (505, 515, …, 595). This is a type-in question."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-SS1",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "plant-diversity",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "A camel is suited to life in the desert mainly because it",
+  "options": {
+   "A": "can go many days without drinking water",
+   "B": "has thick fur to keep out the cold",
+   "C": "has gills to breathe under water",
+   "D": "sleeps through the whole summer"
+  },
+  "answer_key": "A",
+  "rationale": "Deserts have little water, and a camel can go many days without drinking. Thick fur suits cold places, gills suit water, and a camel does not sleep through the summer."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-SS2",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "food-and-nutrients",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which of these foods is rich in protein?",
+  "options": {
+   "A": "Rice",
+   "B": "Dal",
+   "C": "Sugar",
+   "D": "Butter"
+  },
+  "answer_key": "B",
+  "rationale": "Pulses such as dal are a rich source of protein. Rice and sugar are mainly carbohydrates, and butter is mainly fat."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-SS3",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "measurement",
+  "difficulty": "easy",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "What is the SI unit of length?",
+  "options": {
+   "A": "Centimetre",
+   "B": "Kilometre",
+   "C": "Metre",
+   "D": "Millimetre"
+  },
+  "answer_key": "C",
+  "rationale": "The metre is the SI unit of length. Centimetres, millimetres and kilometres are parts or multiples of a metre."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-SS4",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "materials",
+  "difficulty": "moderate",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Some cooking oil is poured into a glass of water and stirred well. After a few minutes, what is seen?",
+  "options": {
+   "A": "The oil dissolves completely",
+   "B": "The oil forms a layer on top",
+   "C": "The oil sinks to the bottom",
+   "D": "The water turns into oil"
+  },
+  "answer_key": "B",
+  "rationale": "Oil does not mix with water. Once the stirring stops it separates and, being lighter, floats as a layer on top."
+ },
+ {
+  "paper": 7,
+  "ref": "P7-SS5",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "motion",
+  "difficulty": "difficult",
+  "taught_in": 6,
+  "format": "mcq",
+  "stem": "Which of these shows circular motion and straight-line motion at the same time?",
+  "options": {
+   "A": "A top spinning in one place",
+   "B": "A ceiling fan",
+   "C": "A swing moving to and fro",
+   "D": "A bicycle wheel on a straight road"
+  },
+  "answer_key": "D",
+  "rationale": "A bicycle wheel turns round its axle (circular motion) while the whole wheel moves forward along the road (straight-line motion). A spinning top and a fan only turn in place, and a swing moves to and fro."
+ },
+ {
   "paper": 8,
   "ref": "P8-M1",
   "subject": "maths",
