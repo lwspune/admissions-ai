@@ -164,11 +164,13 @@ These are the things that quietly break everything if violated.
   The database reads roles from the JWT, so a demotion or removal reaches RLS
   only when that token expires (≤ 1 hour).
 - **The paper is scoped to the class being admitted to.** `leads.class_level`
-  is the class the student joins (8–12), not the one they are in;
-  `test_items.taught_in` is the class in which the content is taught (6–11,
-  6 meaning "open to everyone" and what an untagged item carries), in the
+  is the class the student joins (5–12 in the database, migration 0032), not the one they are in;
+  `test_items.taught_in` is the class in which the content is taught (4–11; the
+  database still gives an untagged row 6, so every item file states a tag), in the
   NCERT book this year's admits used; where old and new editions disagree, the
-  later class. An admit to
+  later class. The app offers a class only once its questions are live: `CLASSES`
+  (7–12 since 2026-11-15) against `ADMITTABLE` (5–12), both in `src/lib/classes.ts`,
+  because a lead the bank cannot draw for is a dead end at issue. An admit to
   class N draws `taught_in ≤ N−1`. The rule is stated once in
   `src/lib/classes.ts` and enforced in `issue_assessment`, which checks the
   finished paper against `live_pool(p_class)` — a SECURITY DEFINER function,
@@ -451,6 +453,19 @@ the connection is refused (2026-10-01).
   count against ours.
 
 ## Decisions
+
+### 2026-11
+
+- **2026-11-15 — Admits to classes 5, 6 and 7; class 7 live first.** The user asked for questions
+  for those admissions. Their calls, on my recommendations: the same 30-question, 30-minute paper
+  and the same −0.25 for every class; EVS shows as "Science" for admits to 5 and 6; one class at a
+  time, 7 → 6 → 5. Migration 0032 widened the database to classes 5–12 and content down to class
+  4; the app offers a class only once its questions are live. For class 7: `syllabus-class-06`
+  (*Ganita Prakash* 6 ch. 1–5, *Curiosity* 6 ch. 2–6, the first term from a 2026–27 CBSE school's
+  syllabus), `basics-batch-02`, Hindi, the parent PDFs. Reading the class 6 items as a child who has
+  just finished class 6 moved nine to class 7 (light and decimals are class 7 in the new books;
+  critical-reasoning English), and a parent sample, P9-M1, with them; nothing changed for admits to
+  8–12. Classes 6 and 5 are open in SUGGESTIONS.md.
 
 ### 2026-10
 

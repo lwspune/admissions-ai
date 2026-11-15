@@ -3,8 +3,8 @@
 What parents get for the syllabus and a sample paper: one PDF per admitting class, built into
 `public/parent-pack/reasoning-test-class-N.pdf` and served by the site **without a login**
 (`src/lib/parentPack.ts`, the `/parent-pack/` entry in `src/middleware.ts`). The issue message
-links the admitting class's PDF after the test link, and the staff `/downloads` page lists all
-five with Download, Copy link and WhatsApp. They hold no candidate data and no bank item, which
+links the admitting class's PDF after the test link, and the staff `/downloads` page lists
+them all (one per class the app offers) with Download, Copy link and WhatsApp. They hold no candidate data and no bank item, which
 is what makes them safe to leave open; keep it that way. Each holds how the test works, the basics topics and class N−1
 chapters the paper draws on for that class, a sample paper of the real shape, and the answers
 with working.
