@@ -173,14 +173,14 @@ describe('parseOptionValue', () => {
 // number the lint and the bank page both read; it has to be right in one place.
 import { coverageByClass, thirtyReadiness } from './items'
 import type { Part } from './types'
-import { CLASSES } from './classes'
+import { CLASSES, TAUGHT_IN_MIN } from './classes'
 import { PAPER_MIX } from './types'
 
 describe('coverageByClass', () => {
   const item = (subject: Subject, difficulty: Difficulty, taught_in: number) => ({ subject, difficulty, taught_in })
 
-  /** `per` items in every stratum, all tagged `taught_in`. */
-  const bank = (per: number, taught_in = 6) => {
+  /** `per` items in every stratum, all tagged `taught_in` (the floor, open to every class, by default). */
+  const bank = (per: number, taught_in = TAUGHT_IN_MIN) => {
     const out = []
     for (const s of SUBJECTS) for (const d of DIFFICULTIES) for (let n = 0; n < per; n++) out.push(item(s, d, taught_in))
     return out
@@ -225,7 +225,7 @@ describe('coverageByClass', () => {
   it('marks a stratum thin when every paper would draw the same items', () => {
     // Exactly the need in each stratum: every class-9 paper is the same paper.
     const exact = []
-    for (const s of SUBJECTS) for (const d of DIFFICULTIES) for (let n = 0; n < PAPER_MIX[d]; n++) exact.push(item(s, d, 6))
+    for (const s of SUBJECTS) for (const d of DIFFICULTIES) for (let n = 0; n < PAPER_MIX[d]; n++) exact.push(item(s, d, TAUGHT_IN_MIN))
     const cells = coverageByClass(exact)
     expect(cell(cells, 9, 'maths', 'easy').status).toBe('thin')
     expect(cell(cells, 9, 'maths', 'moderate').status).toBe('thin')

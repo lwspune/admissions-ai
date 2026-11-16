@@ -15,7 +15,7 @@ export const ADMITTABLE: readonly ClassLevel[] = [5, 6, 7, 8, 9, 10, 11, 12] as 
  * lead the bank cannot draw a paper for is a dead end at the moment of issue.
  * Classes 5–7 join one at a time (2026-11-15), so this is not ADMITTABLE.
  */
-export const CLASSES: readonly ClassLevel[] = [7, 8, 9, 10, 11, 12] as const
+export const CLASSES: readonly ClassLevel[] = [6, 7, 8, 9, 10, 11, 12] as const
 
 /**
  * The range an item's `taught_in` may take, for basics and syllabus alike.
