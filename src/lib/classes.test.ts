@@ -16,6 +16,7 @@ import {
 // the institute admits to; everything else is refused rather than guessed.
 describe('parseClassLevel', () => {
   it('accepts the admitted classes as numbers or strings', () => {
+    expect(parseClassLevel(5)).toBe(5)
     expect(parseClassLevel(6)).toBe(6)
     expect(parseClassLevel(7)).toBe(7)
     expect(parseClassLevel('7')).toBe(7)
@@ -89,8 +90,8 @@ describe('the classes the database can hold', () => {
     expect(ADMITTABLE).toEqual([5, 6, 7, 8, 9, 10, 11, 12])
   })
 
-  it('offers classes 6 and 7 once their questions are live (2026-11-15, 2026-11-16)', () => {
-    expect(CLASSES).toEqual([6, 7, 8, 9, 10, 11, 12])
+  it('offers classes 5–7 once their questions are live (7 on 2026-11-15, 6 and 5 on 2026-11-16)', () => {
+    expect(CLASSES).toEqual(ADMITTABLE)
   })
 
   it('offers only classes the database can hold', () => {
