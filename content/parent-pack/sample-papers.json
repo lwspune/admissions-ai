@@ -1,5 +1,530 @@
 [
  {
+  "paper": 6,
+  "ref": "P6-M1",
+  "subject": "maths",
+  "skill": "number-series",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Find the next number in the series: 5, 10, 20, 40, ___",
+  "options": {
+   "A": "60",
+   "B": "70",
+   "C": "80",
+   "D": "50"
+  },
+  "answer_key": "C",
+  "rationale": "Each number is double the one before, so the next is 40 × 2 = 80. Adding 20 again gives 60."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-M2",
+  "subject": "maths",
+  "skill": "multi-step-arithmetic",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "A bus has 42 seats. How many seats are there in 5 such buses?",
+  "numeric_answer": 210,
+  "numeric_tolerance": 0,
+  "rationale": "Each bus has 42 seats, so 5 buses have 5 × 42 = 210 seats. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-M3",
+  "subject": "maths",
+  "skill": "unit-conversion",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "A bag of rice weighs 3 kg. How many grams is that?",
+  "numeric_answer": 3000,
+  "numeric_tolerance": 0,
+  "rationale": "1 kg = 1,000 g, so 3 kg = 3 × 1,000 = 3,000 g. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-M4",
+  "subject": "maths",
+  "skill": "rate-reasoning",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "A tap fills one bucket in 4 minutes. How many buckets can it fill in one hour?",
+  "options": {
+   "A": "12",
+   "B": "15",
+   "C": "16",
+   "D": "20"
+  },
+  "answer_key": "B",
+  "rationale": "One hour is 60 minutes, and each bucket takes 4 minutes, so 60 ÷ 4 = 15 buckets."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-M5",
+  "subject": "maths",
+  "skill": "pattern-rule",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "One square in a row takes 4 matchsticks, two squares in a row take 7, and three take 10. How many matchsticks do five squares in a row take?",
+  "numeric_answer": 16,
+  "numeric_tolerance": 0,
+  "rationale": "Each new square shares a side with the one before, so it adds 3 matchsticks: 4, 7, 10, 13, 16. Five separate squares would need 20. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "The kitten was so tiny that it could sit in my palm. As used here, \"tiny\" most nearly means",
+  "options": {
+   "A": "very soft",
+   "B": "very old",
+   "C": "very loud",
+   "D": "very small"
+  },
+  "answer_key": "D",
+  "rationale": "Sitting in a palm shows the kitten was very small. Soft, old and loud do not fit the clue."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E2",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Choose the correct word: The birds ___ singing in the tree.",
+  "options": {
+   "A": "is",
+   "B": "was",
+   "C": "are",
+   "D": "has"
+  },
+  "answer_key": "C",
+  "rationale": "\"The birds\" is plural, so the verb is \"are\". \"Is\" and \"was\" go with one bird."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E3",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Pen is to write as knife is to ___",
+  "options": {
+   "A": "sharp",
+   "B": "cut",
+   "C": "kitchen",
+   "D": "steel"
+  },
+  "answer_key": "B",
+  "rationale": "A pen is used to write, so the pair is a tool and its use: a knife is used to cut. Sharp describes a knife; kitchen and steel are where it is and what it is made of."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E4",
+  "subject": "english",
+  "skill": "letter-series",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Continue the series: A, D, G, J, ___",
+  "options": {
+   "A": "K",
+   "B": "L",
+   "C": "M",
+   "D": "N"
+  },
+  "answer_key": "C",
+  "rationale": "Each letter skips two before the next one: A (B C) D (E F) G (H I) J (K L) M. Skipping one letter would give L."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E5",
+  "subject": "english",
+  "skill": "error-identification",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Which part of this sentence has an error? \"He don't like cold milk.\"",
+  "options": {
+   "A": "He don't",
+   "B": "like",
+   "C": "cold milk",
+   "D": "No error"
+  },
+  "answer_key": "A",
+  "rationale": "\"He\" takes \"does not\" (doesn't), not \"do not\": \"He doesn't like cold milk.\" \"Don't\" goes with I, you, we and they."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-S1",
+  "subject": "science",
+  "skill": "evaporation",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Where will a wet towel dry fastest?",
+  "options": {
+   "A": "Folded inside a bag",
+   "B": "Spread on a line in the sun",
+   "C": "Rolled up in a cupboard",
+   "D": "Kept in a closed bucket"
+  },
+  "answer_key": "B",
+  "rationale": "Spread out in the sun, the towel gets heat and has its whole surface open to the air, so its water turns into vapour fastest. Folded or shut away, it stays damp."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-S2",
+  "subject": "science",
+  "skill": "rate-and-quantity",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "A snail moves 3 cm every minute. How far does it move in 6 minutes, in centimetres?",
+  "numeric_answer": 18,
+  "numeric_tolerance": 0,
+  "rationale": "It moves 3 cm each minute, so in 6 minutes it moves 6 × 3 = 18 cm. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-S3",
+  "subject": "science",
+  "skill": "interpreting-evidence",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Two similar plants are kept in sunlight. One is watered every day; the other is not. After a week the second plant has dried up. What does this show?",
+  "options": {
+   "A": "Plants need water",
+   "B": "Plants need darkness",
+   "C": "Plants need more soil",
+   "D": "Plants grow without water"
+  },
+  "answer_key": "A",
+  "rationale": "The only difference between the plants was water, and the one without it dried up, so plants need water to live."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-S4",
+  "subject": "science",
+  "skill": "evaporation",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Puddles dry up faster on a hot day than on a cool day. Why?",
+  "options": {
+   "A": "Clouds soak up the puddles",
+   "B": "Cool air takes more water",
+   "C": "Heat turns water into vapour faster",
+   "D": "The road drinks the water"
+  },
+  "answer_key": "C",
+  "rationale": "The Sun's heat turns water into water vapour, and more heat does it faster, so puddles vanish sooner on a hot day."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-S5",
+  "subject": "science",
+  "skill": "interpreting-evidence",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Some seeds are put on wet cotton in a dark cupboard, and some on wet cotton by a window. Both sets sprout. What does this tell us?",
+  "options": {
+   "A": "Seeds need light to sprout",
+   "B": "Seeds can sprout without light",
+   "C": "Seeds sprout only in the dark",
+   "D": "Cotton makes the seeds sprout"
+  },
+  "answer_key": "B",
+  "rationale": "The seeds in the dark cupboard sprouted too, so light was not needed. A is the trap: it is true of growing plants later, not of sprouting."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E6",
+  "subject": "english",
+  "skill": "antonym",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Choose the word most nearly opposite in meaning to \"early\".",
+  "options": {
+   "A": "fast",
+   "B": "late",
+   "C": "soon",
+   "D": "first"
+  },
+  "answer_key": "B",
+  "rationale": "Early means before the usual time; late means after it. Soon and first are close to early, not opposite."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E7",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Choose the correct word: The book is lying ___ the table.",
+  "options": {
+   "A": "at",
+   "B": "of",
+   "C": "on",
+   "D": "by"
+  },
+  "answer_key": "C",
+  "rationale": "Something resting on top of a surface is \"on\" it: on the table."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E8",
+  "subject": "english",
+  "skill": "odd-one-out",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Find the odd one out.",
+  "options": {
+   "A": "Apple",
+   "B": "Banana",
+   "C": "Grapes",
+   "D": "Potato"
+  },
+  "answer_key": "D",
+  "rationale": "Apple, banana and grapes are fruits; a potato is a vegetable."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E9",
+  "subject": "english",
+  "skill": "sentence-completion",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "It was raining heavily, ___ we stayed at home.",
+  "options": {
+   "A": "but",
+   "B": "so",
+   "C": "because",
+   "D": "or"
+  },
+  "answer_key": "B",
+  "rationale": "Staying at home is the result of the rain, and \"so\" introduces a result. \"Because\" would need the reason after it: we stayed at home because it was raining."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-E10",
+  "subject": "english",
+  "skill": "reading-inference",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Mother came home to find an empty milk bowl on the floor and the cat licking its whiskers near the kitchen door. What most likely happened?",
+  "options": {
+   "A": "Mother drank the milk",
+   "B": "The milk was never there",
+   "C": "It rained inside the house",
+   "D": "The cat drank the milk"
+  },
+  "answer_key": "D",
+  "rationale": "An empty bowl on the floor and a cat licking its whiskers point to the cat drinking the milk. Mother has just come home, so she could not have drunk it."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-MS1",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "five-digit-numbers",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Which of these is the smallest number?",
+  "options": {
+   "A": "50,312",
+   "B": "50,123",
+   "C": "51,023",
+   "D": "50,231"
+  },
+  "answer_key": "B",
+  "rationale": "All but 51,023 have 50 thousand; then compare the hundreds: 1 hundred is the fewest, so 50,123 is the smallest."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-MS2",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "rounding",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "Round 3,468 to the nearest hundred.",
+  "numeric_answer": 3500,
+  "numeric_tolerance": 0,
+  "rationale": "3,468 lies between 3,400 and 3,500, and 68 is more than half a hundred, so it rounds up to 3,500. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-MS3",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "angles-as-turns",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Which of these makes a straight angle?",
+  "options": {
+   "A": "One quarter turn",
+   "B": "Two quarter turns",
+   "C": "Three quarter turns",
+   "D": "Four quarter turns"
+  },
+  "answer_key": "B",
+  "rationale": "Two quarter turns make a half turn, which is a straight angle. One quarter turn is a right angle, and four quarter turns make a full turn."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-MS4",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "length-units",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "A pencil measures 4 cm and 5 mm. Write its length in mm.",
+  "numeric_answer": 45,
+  "numeric_tolerance": 0,
+  "rationale": "1 cm = 10 mm, so 4 cm = 40 mm, and 40 + 5 = 45 mm. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-MS5",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "adding-big-numbers",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "numeric",
+  "stem": "A library had 4,350 books. It gave away 1,275 books and then bought 2,030 new ones. How many books does it have now?",
+  "numeric_answer": 5105,
+  "numeric_tolerance": 0,
+  "rationale": "After giving away: 4,350 − 1,275 = 3,075. After buying: 3,075 + 2,030 = 5,105 books. This is a type-in question."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-SS1",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "water-forms-and-cycle",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Ice, liquid water and steam are three forms of",
+  "options": {
+   "A": "salt",
+   "B": "water",
+   "C": "air",
+   "D": "sand"
+  },
+  "answer_key": "B",
+  "rationale": "Ice is solid water and steam is water vapour, so all three are forms of water."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-SS2",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "rivers",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Where does a river begin its journey?",
+  "options": {
+   "A": "At the delta",
+   "B": "In the sea",
+   "C": "At its source",
+   "D": "At a dam"
+  },
+  "answer_key": "C",
+  "rationale": "A river begins at its source, often in the hills, and ends at the sea, where it may form a delta."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-SS3",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "food-spoilage",
+  "difficulty": "easy",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Which of these helps to stop food from spoiling?",
+  "options": {
+   "A": "Keeping it warm and wet",
+   "B": "Drying it in the sun",
+   "C": "Leaving it uncovered",
+   "D": "Adding water to it"
+  },
+  "answer_key": "B",
+  "rationale": "Drying takes away moisture, which microbes need to grow. Warmth, water and open air all help microbes instead."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-SS4",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "rivers",
+  "difficulty": "moderate",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "A dam is built across a river. What happens to the water just behind the dam?",
+  "options": {
+   "A": "It collects in a reservoir",
+   "B": "It flows away faster",
+   "C": "It turns into salty water",
+   "D": "It disappears into the air"
+  },
+  "answer_key": "A",
+  "rationale": "A dam blocks the river like a wall, so the water collects behind it in a large body called a reservoir."
+ },
+ {
+  "paper": 6,
+  "ref": "P6-SS5",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "food-spoilage",
+  "difficulty": "difficult",
+  "taught_in": 5,
+  "format": "mcq",
+  "stem": "Jam is fruit cooked with a lot of sugar, and it keeps for months. Like salt in pickles, the sugar helps by",
+  "options": {
+   "A": "making the fruit heavier",
+   "B": "adding more water to it",
+   "C": "feeding more microbes",
+   "D": "stopping microbes growing"
+  },
+  "answer_key": "D",
+  "rationale": "Salt and sugar have long been used to keep food from spoiling: in large amounts they stop microbes from growing. They do not feed the microbes that spoil food."
+ },
+ {
   "paper": 7,
   "ref": "P7-M1",
   "subject": "maths",

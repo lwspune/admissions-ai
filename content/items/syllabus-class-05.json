@@ -1,0 +1,537 @@
+[
+  {
+    "ref": "M5-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "five-digit-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "How is the number 45,207 read?",
+    "options": {
+      "A": "Forty-five thousand two hundred seven",
+      "B": "Four thousand five hundred twenty-seven",
+      "C": "Forty-five thousand two hundred seventy",
+      "D": "Forty-five thousand twenty-seven"
+    },
+    "answer_key": "A",
+    "rationale": "The comma marks thousands: 45 thousand, then 2 hundreds, 0 tens and 7 ones, so forty-five thousand two hundred seven. C reads the 0 and 7 the wrong way round; D drops the hundreds."
+  },
+  {
+    "ref": "M5-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rounding",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is 6,782 rounded to the nearest hundred?",
+    "numeric_answer": 6800,
+    "numeric_tolerance": 0,
+    "rationale": "6,782 lies between 6,700 and 6,800, and 82 is more than half of a hundred, so it rounds up to 6,800. Rounding down gives 6,700; rounding to the nearest thousand gives 7,000."
+  },
+  {
+    "ref": "M5-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "five-digit-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers is the greatest?",
+    "options": {
+      "A": "38,901",
+      "B": "39,018",
+      "C": "38,999",
+      "D": "39,009"
+    },
+    "answer_key": "B",
+    "rationale": "Compare the ten thousands and thousands first: 39 thousand beats 38 thousand, leaving 39,018 and 39,009. Then the tens: 18 is more than 09, so 39,018 is greatest. 38,999 has the most 9s, which is the trap."
+  },
+  {
+    "ref": "M5-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "equivalent-fractions",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which fraction is equal to 1/2?",
+    "options": {
+      "A": "2/3",
+      "B": "1/4",
+      "C": "2/5",
+      "D": "3/6"
+    },
+    "answer_key": "D",
+    "rationale": "3/6 is 3 pieces out of 6 equal pieces, which is half the whole, so 3/6 = 1/2. 1/4 is half of a half; 2/3 and 2/5 are not halves."
+  },
+  {
+    "ref": "M5-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "comparing-fractions",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Two chocolate bars are exactly the same size. Which is the bigger piece: 1/3 of one bar or 1/2 of the other?",
+    "options": {
+      "A": "1/3 of a bar",
+      "B": "1/2 of a bar",
+      "C": "Both are the same",
+      "D": "It cannot be told"
+    },
+    "answer_key": "B",
+    "rationale": "With the same whole, fewer equal parts means bigger parts: a half is bigger than a third. \"It cannot be told\" is right only when the bars differ in size, which is the point the chapter makes."
+  },
+  {
+    "ref": "M5-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "angles-as-turns",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A quarter turn makes",
+    "options": {
+      "A": "a right angle",
+      "B": "a straight angle",
+      "C": "a full turn",
+      "D": "an acute angle"
+    },
+    "answer_key": "A",
+    "rationale": "A quarter turn is a right angle, like the corner of a page. Two quarter turns make a straight angle and four make a full turn; an acute angle is less than a quarter turn."
+  },
+  {
+    "ref": "M5-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "angles-as-turns",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many quarter turns make one full turn?",
+    "numeric_answer": 4,
+    "numeric_tolerance": 0,
+    "rationale": "Four quarter turns in the same direction bring you back to where you started, which is a full turn. Two quarter turns make only a half turn."
+  },
+  {
+    "ref": "M5-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "adding-big-numbers",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "What is 4,325 + 2,148?",
+    "numeric_answer": 6473,
+    "numeric_tolerance": 0,
+    "rationale": "Add by place value: ones 5 + 8 = 13, write 3 and carry 1; tens 2 + 4 + 1 = 7; hundreds 3 + 1 = 4; thousands 4 + 2 = 6. So 6,473. Forgetting the carry gives 6,463."
+  },
+  {
+    "ref": "M5-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "length-units",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many centimetres are there in 3 metres?",
+    "numeric_answer": 300,
+    "numeric_tolerance": 0,
+    "rationale": "1 m = 100 cm, so 3 m = 3 × 100 = 300 cm. Using 10 (millimetres in a centimetre) gives 30; using 1,000 (metres in a kilometre) gives 3,000."
+  },
+  {
+    "ref": "M5-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rounding",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Vijay rounded a number to the nearest thousand and got 5,000. Which of these could his number have been?",
+    "options": {
+      "A": "4,420",
+      "B": "5,620",
+      "C": "4,780",
+      "D": "5,500"
+    },
+    "answer_key": "C",
+    "rationale": "4,780 is nearer 5,000 than 4,000, so it rounds to 5,000. 4,420 rounds to 4,000, and 5,620 and 5,500 round up to 6,000. 5,500 is the trap: being \"5-something\" does not make it round to 5,000."
+  },
+  {
+    "ref": "M5-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "consecutive-numbers",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Without adding them one by one, find 49 + 50 + 51.",
+    "numeric_answer": 150,
+    "numeric_tolerance": 0,
+    "rationale": "Three consecutive numbers add up to three times the middle one: 3 × 50 = 150, because 49 is one less than 50 and 51 one more. Adding gives the same, 150."
+  },
+  {
+    "ref": "M5-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "length-units",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A ribbon is 2 m 35 cm long. What is its length in centimetres?",
+    "numeric_answer": 235,
+    "numeric_tolerance": 0,
+    "rationale": "2 m = 200 cm, and 200 + 35 = 235 cm. Writing 2 m 35 cm as 37 or 2,035 are the usual slips."
+  },
+  {
+    "ref": "M5-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "equivalent-fractions",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Meena ate 2/8 of a pizza. Arjun ate 1/4 of another pizza of the same size. Who ate more?",
+    "options": {
+      "A": "Meena ate more",
+      "B": "Arjun ate more",
+      "C": "Both ate the same",
+      "D": "It cannot be told"
+    },
+    "answer_key": "C",
+    "rationale": "2/8 is 2 of 8 equal slices; joining slices in pairs makes 1 of 4 equal parts, so 2/8 = 1/4 and they ate the same. Meena looks bigger because 2 and 8 are bigger numbers, which is the trap."
+  },
+  {
+    "ref": "M5-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "adding-big-numbers",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "Along one straight road from a city, town A is 1,855 km away and town B is 2,310 km away, further on. How far is town B from town A, in km?",
+    "numeric_answer": 455,
+    "numeric_tolerance": 0,
+    "rationale": "Both are measured from the city along the same road, so the distance between them is the difference: 2,310 − 1,855 = 455 km. Adding them, 4,165 km, is the trap."
+  },
+  {
+    "ref": "M5-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "angles-as-turns",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "A clock's minute hand points at 12. It turns clockwise through three quarter turns. Which number does it point at now?",
+    "options": {
+      "A": "3",
+      "B": "6",
+      "C": "9",
+      "D": "12"
+    },
+    "answer_key": "C",
+    "rationale": "Each quarter turn clockwise moves the hand on by three numbers: 12 to 3, 3 to 6, 6 to 9. Turning anti-clockwise by mistake ends at 3; one quarter turn alone ends at 3 as well."
+  },
+  {
+    "ref": "S5-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "water-forms-and-cycle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "When water is cooled enough in a freezer, it turns into",
+    "options": {
+      "A": "ice",
+      "B": "steam",
+      "C": "salt",
+      "D": "sand"
+    },
+    "answer_key": "A",
+    "rationale": "Water has three forms: liquid, solid (ice) and vapour (as in steam). Cooling turns it into ice; heating, not cooling, makes steam."
+  },
+  {
+    "ref": "S5-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "water-forms-and-cycle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these holds salty water?",
+    "options": {
+      "A": "A well",
+      "B": "A river",
+      "C": "The sea",
+      "D": "A pond"
+    },
+    "answer_key": "C",
+    "rationale": "Sea water is salt water. Wells, rivers and ponds hold fresh water, which people, animals and plants depend on."
+  },
+  {
+    "ref": "S5-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "water-forms-and-cycle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "If all the water on Earth were in one glass, about how much of it would be fresh water?",
+    "options": {
+      "A": "About half the glass",
+      "B": "About a teaspoon",
+      "C": "Nearly all of it",
+      "D": "None of it"
+    },
+    "answer_key": "B",
+    "rationale": "Almost all of Earth's water is salty sea water; the fresh water would fill only about a teaspoon, which is why it must be used wisely."
+  },
+  {
+    "ref": "S5-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "water-forms-and-cycle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "In the water cycle, the Sun's heat turns water from seas and rivers into",
+    "options": {
+      "A": "solid ice",
+      "B": "grains of salt",
+      "C": "fine dust",
+      "D": "water vapour"
+    },
+    "answer_key": "D",
+    "rationale": "Heat turns water into water vapour, which rises, cools into droplets and falls back as rain. Ice comes from cooling, not heating; salt is left behind in the sea."
+  },
+  {
+    "ref": "S5-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rivers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Smaller streams and rivers that join a big river are called its",
+    "options": {
+      "A": "deltas",
+      "B": "dams",
+      "C": "tributaries",
+      "D": "reservoirs"
+    },
+    "answer_key": "C",
+    "rationale": "Streams that join a river and make it bigger are its tributaries. A delta is where it spreads out at the sea, and a dam and reservoir hold its water back."
+  },
+  {
+    "ref": "S5-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rivers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A river that flows all year round is called a ___ river.",
+    "options": {
+      "A": "seasonal",
+      "B": "dry",
+      "C": "short",
+      "D": "perennial"
+    },
+    "answer_key": "D",
+    "rationale": "A perennial river flows all year round, like the Godavari. A seasonal river flows only when the rains fill it."
+  },
+  {
+    "ref": "S5-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rivers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "The large body of water stored behind a dam is called a",
+    "options": {
+      "A": "reservoir",
+      "B": "delta",
+      "C": "tributary",
+      "D": "glacier"
+    },
+    "answer_key": "A",
+    "rationale": "A dam is like a giant wall across a river, and the water it holds back is the reservoir. A delta is at the river's mouth, and a glacier is ice."
+  },
+  {
+    "ref": "S5-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "food-spoilage",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "The tiny living things that grow on food and spoil it are called",
+    "options": {
+      "A": "insects",
+      "B": "seeds",
+      "C": "crystals",
+      "D": "microbes"
+    },
+    "answer_key": "D",
+    "rationale": "Microbes are living things too small to see one by one; they grow on food and change it. Mould is a colony of thousands of them. Some microbes are useful, as in making curd."
+  },
+  {
+    "ref": "S5-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "food-spoilage",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Chillies are dried in the Sun mainly so that they",
+    "options": {
+      "A": "taste sweeter",
+      "B": "do not spoil",
+      "C": "become heavier",
+      "D": "change colour"
+    },
+    "answer_key": "B",
+    "rationale": "Drying takes the moisture out, and without moisture microbes cannot grow, so the chillies keep for months. Drying makes them lighter, not heavier."
+  },
+  {
+    "ref": "S5-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "food-spoilage",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Microbes need moisture, air and the right temperature to grow. Drying food in the Sun stops them mainly by taking away",
+    "options": {
+      "A": "the air",
+      "B": "moisture",
+      "C": "the light",
+      "D": "the salt"
+    },
+    "answer_key": "B",
+    "rationale": "Drying removes water, the moisture microbes need. Dried food is still in the air and the light, so A and C are not what drying changes."
+  },
+  {
+    "ref": "S5-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rivers",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Where a river reaches the sea and spreads out into many small streams, it forms a",
+    "options": {
+      "A": "tributary",
+      "B": "dam",
+      "C": "delta",
+      "D": "source"
+    },
+    "answer_key": "C",
+    "rationale": "Near the sea a river splits into many small streams and the land between them is its delta. Tributaries join a river higher up; the source is where it begins."
+  },
+  {
+    "ref": "S5-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "water-forms-and-cycle",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A closed plastic bag with some water in it is kept in the Sun. Drops of water form on the inside of the bag. They form because the water vapour",
+    "options": {
+      "A": "cools",
+      "B": "heats up",
+      "C": "becomes salty",
+      "D": "turns to ice"
+    },
+    "answer_key": "A",
+    "rationale": "The Sun turns some water into vapour; when the vapour touches the cooler bag it cools and turns back into droplets, the same way clouds form. It does not turn to ice in the Sun."
+  },
+  {
+    "ref": "S5-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "food-spoilage",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Pickles covered with a layer of oil stay good for months. The oil helps mainly by",
+    "options": {
+      "A": "adding moisture to the pickle",
+      "B": "keeping air away from the food",
+      "C": "making the pickle warmer",
+      "D": "adding good microbes to it"
+    },
+    "answer_key": "B",
+    "rationale": "Microbes need air to grow, and oil on top seals the pickle off from the air. Adding moisture would help microbes, the opposite of what is wanted."
+  },
+  {
+    "ref": "S5-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "rivers",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Why does a river flow from the mountains down to the sea and never the other way?",
+    "options": {
+      "A": "Water flows from higher to lower ground",
+      "B": "The sea pulls the river water towards it",
+      "C": "The wind blows the water along the land",
+      "D": "Fish swim along and push the water"
+    },
+    "answer_key": "A",
+    "rationale": "Water always flows downhill, from higher ground to lower ground, following the shape of the land; mountains are high and the sea is low. The other options are not what moves a river."
+  },
+  {
+    "ref": "S5-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 5,
+    "skill": "food-spoilage",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Butter spoils outside a fridge, but ghee, made by heating butter until its water is gone, keeps for months. Why does ghee keep longer?",
+    "options": {
+      "A": "Ghee is sweeter than butter",
+      "B": "Ghee has more salt in it",
+      "C": "Ghee has no water for microbes",
+      "D": "Butter is made less cleanly"
+    },
+    "answer_key": "C",
+    "rationale": "Heating drives the water out of butter to make ghee, and without moisture microbes cannot grow. Ghee is not sweeter or saltier than butter."
+  }
+]

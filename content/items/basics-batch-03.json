@@ -1,0 +1,186 @@
+[
+  {
+    "ref": "M-E-53",
+    "subject": "maths",
+    "skill": "unit-conversion",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A cyclist rides 4 km along a road. How many metres is that?",
+    "numeric_answer": 4000,
+    "numeric_tolerance": 0,
+    "rationale": "1 km = 1,000 m, so 4 km = 4 × 1,000 = 4,000 m. Using 100 (centimetres in a metre) gives 400.",
+    "taught_in": 5
+  },
+  {
+    "ref": "M-E-54",
+    "subject": "maths",
+    "skill": "division-word-problem",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "56 children are put into teams of 8 children each. How many teams are there?",
+    "options": {
+      "A": "6",
+      "B": "7",
+      "C": "8",
+      "D": "9"
+    },
+    "answer_key": "B",
+    "rationale": "56 ÷ 8 = 7, because 7 × 8 = 56. 8 is the team size, not the number of teams; 6 × 8 = 48 leaves 8 children out.",
+    "taught_in": 5
+  },
+  {
+    "ref": "M-M-55",
+    "subject": "maths",
+    "skill": "multi-step-arithmetic",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "Riya buys 3 pencils at ₹12 each and an eraser for ₹9. She pays with a ₹100 note. How much change does she get, in rupees?",
+    "numeric_answer": 55,
+    "numeric_tolerance": 0,
+    "rationale": "Pencils: 3 × 12 = ₹36. With the eraser: 36 + 9 = ₹45. Change: 100 − 45 = ₹55. Counting one pencil only gives 100 − 21 = 79.",
+    "taught_in": 5
+  },
+  {
+    "ref": "M-D-56",
+    "subject": "maths",
+    "skill": "calendar-reasoning",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The 1st of a month is a Thursday. Ravi's birthday is on the third Saturday of that month. On which date is his birthday?",
+    "options": {
+      "A": "15th",
+      "B": "17th",
+      "C": "18th",
+      "D": "24th"
+    },
+    "answer_key": "B",
+    "rationale": "Thursday the 1st makes Saturday the 3rd, so the Saturdays are the 3rd, 10th and 17th; the third is the 17th. Counting the 1st as a Saturday gives 15th; 24th is the fourth Saturday.",
+    "taught_in": 5
+  },
+  {
+    "ref": "M-D-57",
+    "subject": "maths",
+    "skill": "rate-reasoning",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "5 notebooks cost ₹75 in all. At the same price, how much do 8 notebooks cost, in rupees?",
+    "numeric_answer": 120,
+    "numeric_tolerance": 0,
+    "rationale": "One notebook costs 75 ÷ 5 = ₹15, so 8 cost 8 × 15 = ₹120. Adding 3 to 75 (for 3 more notebooks) gives 78, the usual slip.",
+    "taught_in": 5
+  },
+  {
+    "ref": "M-D-58",
+    "subject": "maths",
+    "skill": "number-series",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Find the next number in the series: 1, 2, 4, 7, 11, 16, ___",
+    "options": {
+      "A": "20",
+      "B": "21",
+      "C": "22",
+      "D": "23"
+    },
+    "answer_key": "C",
+    "rationale": "The gaps are 1, 2, 3, 4, 5, each one more than the last, so the next gap is 6 and 16 + 6 = 22. Repeating the gap of 5 gives 21.",
+    "taught_in": 5
+  },
+  {
+    "ref": "S-E-46",
+    "subject": "science",
+    "skill": "interpreting-evidence",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A potted plant kept near a window slowly bends its stem towards the window. What is the plant growing towards?",
+    "options": {
+      "A": "The wall",
+      "B": "Light from the window",
+      "C": "The air from the fan",
+      "D": "The floor"
+    },
+    "answer_key": "B",
+    "rationale": "Plants need light to make food, and they grow towards it, so a plant by a window bends towards the light. The wall, fan and floor are not what a plant grows towards.",
+    "taught_in": 5
+  },
+  {
+    "ref": "S-E-47",
+    "subject": "science",
+    "skill": "rate-and-quantity",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A plant grows 2 cm taller every week. It is 10 cm tall now. How tall will it be after 4 weeks, in centimetres?",
+    "numeric_answer": 18,
+    "numeric_tolerance": 0,
+    "rationale": "In 4 weeks it grows 4 × 2 = 8 cm, so it will be 10 + 8 = 18 cm tall. Forgetting the 10 cm it already has gives 8.",
+    "taught_in": 5
+  },
+  {
+    "ref": "S-D-48",
+    "subject": "science",
+    "skill": "interpreting-evidence",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Equal ice cubes sit in three glasses: in the sun, in the shade and in a fridge. After half an hour the sunny one has melted most, the shaded one less, the fridge one not at all. This shows",
+    "options": {
+      "A": "ice melts only in the sunlight",
+      "B": "the glass decides how fast",
+      "C": "ice melts faster where warmer",
+      "D": "a fridge makes the ice grow"
+    },
+    "answer_key": "C",
+    "rationale": "The warmer the place, the faster the ice melted: sun, then shade, then fridge. The cube in the shade also melted, so A is wrong; the glasses were the same, so B cannot explain it.",
+    "taught_in": 5
+  },
+  {
+    "ref": "E-D-50",
+    "subject": "english",
+    "skill": "synonym-in-context",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "The boy was so famished after the long walk that he ate three plates of rice. As used here, \"famished\" most nearly means",
+    "options": {
+      "A": "very tired",
+      "B": "very cold",
+      "C": "very hungry",
+      "D": "very happy"
+    },
+    "answer_key": "C",
+    "rationale": "Eating three plates of rice is the clue: he was extremely hungry. A long walk also makes one tired, which is the trap, but tiredness does not explain the eating.",
+    "taught_in": 5
+  },
+  {
+    "ref": "E-D-51",
+    "subject": "english",
+    "skill": "error-identification",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Which part of this sentence has an error? \"My sister and me are going to the market.\"",
+    "options": {
+      "A": "My sister and me",
+      "B": "are going",
+      "C": "to the market",
+      "D": "No error"
+    },
+    "answer_key": "A",
+    "rationale": "The people doing the going are the subject, so it must be \"My sister and I\". Test it by dropping \"my sister\": \"me am going\" is wrong, \"I am going\" is right. \"Are\" is correct for two people.",
+    "taught_in": 5
+  },
+  {
+    "ref": "E-D-52",
+    "subject": "english",
+    "skill": "reading-inference",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Tanvi opened her umbrella as she stepped out, though there was not a cloud in the sky. She walked along the road in the afternoon heat, cool and comfortable. Why did she most likely open the umbrella?",
+    "options": {
+      "A": "It was raining",
+      "B": "To hide from a friend",
+      "C": "To carry it more easily",
+      "D": "To keep off the hot sun"
+    },
+    "answer_key": "D",
+    "rationale": "A cloudless sky rules out rain, and staying cool in the afternoon heat shows the umbrella kept the sun off her. Nothing in the passage points to a friend, and opening it does not make it easier to carry.",
+    "taught_in": 5
+  }
+]

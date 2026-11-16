@@ -1,7 +1,7 @@
 {
   "cohortYear": 2026,
   "cohortNote": "An admit to class N is in class N−1 during 2026–27 and joins in April 2027.",
-  "newFrom": { "6": 2024, "7": 2025, "8": 2025, "9": 2026 },
+  "newFrom": { "5": 2025, "6": 2024, "7": 2025, "8": 2025, "9": 2026 },
 
   "topics": [
     { "key": "m-patterns", "subject": "maths", "label": "Number patterns and series", "label_hi": "संख्या पैटर्न और श्रेणियाँ", "skills": ["number-series", "pattern-rule"] },
@@ -55,6 +55,9 @@
   ],
 
   "chapters": [
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "title": "We the Travellers — II", "topics": ["m-patterns"] },
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "title": "Shapes and Patterns", "topics": ["m-patterns"] },
+    { "subject": "science", "classLevel": 5, "edition": "new", "book": "Our Wondrous World", "title": "Water — The Essence of Life", "topics": ["s-water"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "title": "Patterns in Mathematics", "topics": ["m-patterns"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "title": "Perimeter and Area", "topics": ["m-area"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "title": "Prime Time", "topics": ["m-primes"] },
@@ -133,6 +136,14 @@
   ],
 
   "syllabusChapters": [
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 1, "term": 1, "title": "We the Travellers — I", "title_hi": "हम हैं यात्री – 1", "covers": "five-digit numbers, place value, rounding", "skills": ["five-digit-numbers", "rounding"] },
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 2, "term": 1, "title": "Fractions", "title_hi": "भिन्न", "covers": "equivalent fractions, comparing fractions of the same whole", "skills": ["equivalent-fractions", "comparing-fractions"] },
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 3, "term": 1, "title": "Angles as Turns", "title_hi": "घुमाव के रूप में कोण", "covers": "quarter, half and full turns, right angles", "skills": ["angles-as-turns"] },
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 4, "term": 1, "title": "We the Travellers — II", "title_hi": "हम हैं यात्री – 2", "covers": "adding and subtracting big numbers, consecutive numbers", "skills": ["adding-big-numbers", "consecutive-numbers"] },
+    { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 5, "term": 1, "title": "Far and Near", "title_hi": "दूर और पास", "covers": "mm, cm, m and km", "skills": ["length-units"] },
+    { "subject": "science", "classLevel": 5, "edition": "new", "book": "Our Wondrous World", "chapter": 1, "term": 1, "title": "Water — The Essence of Life", "title_hi": "जल — जीवन का आधार", "covers": "forms of water, fresh and salt water, the water cycle", "skills": ["water-forms-and-cycle"] },
+    { "subject": "science", "classLevel": 5, "edition": "new", "book": "Our Wondrous World", "chapter": 2, "term": 1, "title": "Journey of a River", "title_hi": "एक नदी की यात्रा", "covers": "tributaries, perennial rivers, dams, deltas", "skills": ["rivers"] },
+    { "subject": "science", "classLevel": 5, "edition": "new", "book": "Our Wondrous World", "chapter": 3, "term": 1, "title": "The Mystery of Food", "title_hi": "भोजन का रहस्य", "covers": "microbes, food spoiling and keeping food", "skills": ["food-spoilage"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "chapter": 1, "term": 1, "title": "Patterns in Mathematics", "title_hi": "गणित में पैटर्न", "covers": "number sequences, square and triangular numbers", "skills": ["number-patterns"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "chapter": 2, "term": 1, "title": "Lines and Angles", "title_hi": "रेखाएँ और कोण", "covers": "types of angles, degrees, turns", "skills": ["lines-and-angles"] },
     { "subject": "maths", "classLevel": 6, "edition": "new", "book": "Ganita Prakash", "chapter": 3, "term": 1, "title": "Number Play", "title_hi": "संख्याओं का खेल", "covers": "palindromes, digit sums, making numbers from digits", "skills": ["number-play"] },
