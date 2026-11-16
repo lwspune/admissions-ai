@@ -241,12 +241,13 @@ Spec: [APTITUDE_TEST_SPEC.md](APTITUDE_TEST_SPEC.md) · Context: [BRAINSTORM.md]
 
 ## Known gaps
 
-- [ ] **Admits to classes 6 and 5 (2026-11-15).** The database takes 5–12 (migration 0032); the
-      app offers a class once its questions are live. Class 7 went live 2026-11-15. Next:
-      `syllabus-class-05` and `syllabus-class-04` (maths and EVS, from the books those children
-      used; the new class 4–5 NCERT books came 2025–26), basics at classes 4–5 (about 30 English,
-      15 maths, 15 science), Hindi, parent PDFs, and the same re-read of the floor items for that
-      age. EVS shows as "Science", by the user's choice.
+- [ ] **Admits to class 5 (2026-11-15).** The database takes 5–12 (migration 0032); the app offers a
+      class once its questions are live. Class 7 went live 2026-11-15, class 6 on 2026-11-16. Next:
+      `syllabus-class-04` (maths and EVS from the class 4 books this cohort used; NCERT codes start
+      with `d`), basics at class 4 (read the class 5 items as a child who has just finished class 4
+      first, as was done for classes 7 and 6), Hindi, parent PDFs. EVS shows as "Science", by the
+      user's choice. Class 6's first term is less certain than 7's (no clean 2026–27 split for the
+      new class 5 books; `syllabus-class-05.md`); worth asking a class 5 teacher.
 - [ ] **`attempt.itest.ts` "changed after a pause" fails when this PC's clock runs ahead of the
       database's.** `last_answered_at` comes from the app server's clock and the resume event's
       `at` from the database's `now()`; the test saves and resumes within milliseconds, so a clock

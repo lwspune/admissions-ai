@@ -169,7 +169,7 @@ These are the things that quietly break everything if violated.
   database still gives an untagged row 6, so every item file states a tag), in the
   NCERT book this year's admits used; where old and new editions disagree, the
   later class. The app offers a class only once its questions are live: `CLASSES`
-  (7–12 since 2026-11-15) against `ADMITTABLE` (5–12), both in `src/lib/classes.ts`,
+  (6–12: 7 since 2026-11-15, 6 since 2026-11-16) against `ADMITTABLE` (5–12), both in `src/lib/classes.ts`,
   because a lead the bank cannot draw for is a dead end at issue. An admit to
   class N draws `taught_in ≤ N−1`. The rule is stated once in
   `src/lib/classes.ts` and enforced in `issue_assessment`, which checks the
@@ -342,7 +342,7 @@ npm run items:seed                   npm run items:seed -- --live --file <batch.
 npm run items:hindi -- --stamp|--sheet|--file <batch>   (Hindi: fill source, review sheet, load)
 npm run staff:add -- <email> <password> <telecaller|counsellor|superadmin|teacher> <org-slug> ["Full Name"]
 npm run staff:list    npm run staff:org -- <email> <org-slug>    npm run staff:rm -- <email>
-npm run issue -- "Name" 9876543210 <8|9|10|11|12>
+npm run issue -- "Name" 9876543210 <6–12>
 npm run parent-pack                          (syllabus + sample paper PDFs, one per class)
 npm run hiring:import [-- <subject>]         (PYQ Vault → content/hiring/<subject>.json; reads its public API)
 npm run hiring:seed  [-- --live --file <subject>]   (load the hiring bank; --live promotes one reviewed subject)
@@ -466,6 +466,14 @@ the connection is refused (2026-10-01).
   just finished class 6 moved nine to class 7 (light and decimals are class 7 in the new books;
   critical-reasoning English), and a parent sample, P9-M1, with them; nothing changed for admits to
   8–12. Classes 6 and 5 are open in SUGGESTIONS.md.
+
+- **2026-11-16 — Class 6 live.** On the user's sign-off: `syllabus-class-05` (*Maths Mela* 5 ch. 1–5,
+  *Our Wondrous World* 5 ch. 1–3, both new in 2025; the term-1 split is less certain than class
+  6's, so chapters that every source covers before October), `basics-batch-03`, Hindi, the parent
+  PDFs. Reading the class 6 basics as a child who has just finished class 5 moved 39 to class 5,
+  which opens them to class 6 admits only. Not seeded as drafts first: a plain seed would have
+  applied those moves to live items before the user confirmed them. The class 7 sheet gained
+  "Everyday units", since M-E-53 (class 5) is drawable for it. Class 5 is open in SUGGESTIONS.md.
 
 ### 2026-10
 
