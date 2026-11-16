@@ -1,5 +1,540 @@
 [
  {
+  "paper": 5,
+  "ref": "P5-M1",
+  "subject": "maths",
+  "skill": "number-series",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "What comes next? 3, 6, 9, 12, ___",
+  "options": {
+   "A": "14",
+   "B": "15",
+   "C": "16",
+   "D": "18"
+  },
+  "answer_key": "B",
+  "rationale": "Each number is 3 more than the one before, so the next is 12 + 3 = 15."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-M2",
+  "subject": "maths",
+  "skill": "multi-step-arithmetic",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "numeric",
+  "stem": "Meena has 36 stickers. She gives 12 of them to her friend. How many stickers does Meena have left?",
+  "numeric_answer": 24,
+  "numeric_tolerance": 0,
+  "rationale": "Giving away means taking away: 36 − 12 = 24. This is a type-in question."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-M3",
+  "subject": "maths",
+  "skill": "numeric-coding",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "If A = 1, B = 2, C = 3 and so on, what do the letters of \"BAD\" add up to?",
+  "options": {
+   "A": "7",
+   "B": "6",
+   "C": "8",
+   "D": "9"
+  },
+  "answer_key": "A",
+  "rationale": "Count each letter's place in the alphabet: B = 2, A = 1 and D = 4, and 2 + 1 + 4 = 7."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-M4",
+  "subject": "maths",
+  "skill": "calendar-reasoning",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Rohan's birthday is on 25 May. Today is 18 May. In how many days is his birthday?",
+  "options": {
+   "A": "6",
+   "B": "7",
+   "C": "8",
+   "D": "5"
+  },
+  "answer_key": "B",
+  "rationale": "From 18 May to 25 May is 25 − 18 = 7 days. Counting both days gives 8, the usual slip."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-M5",
+  "subject": "maths",
+  "skill": "multi-step-arithmetic",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "numeric",
+  "stem": "A pen costs ₹15 and a pencil costs ₹5. How much do 2 pens and 3 pencils cost together, in rupees?",
+  "numeric_answer": 45,
+  "numeric_tolerance": 0,
+  "rationale": "Two pens cost 2 × 15 = ₹30 and three pencils cost 3 × 5 = ₹15, so together 30 + 15 = ₹45. This is a type-in question."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E1",
+  "subject": "english",
+  "skill": "synonym-in-context",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "The pond water was so cold that my hands began to shiver. As used here, \"shiver\" most nearly means",
+  "options": {
+   "A": "shake",
+   "B": "sweat",
+   "C": "burn",
+   "D": "grow"
+  },
+  "answer_key": "A",
+  "rationale": "Cold makes the body shake, which is what shivering is. Sweating and burning come from heat."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E2",
+  "subject": "english",
+  "skill": "subject-verb-agreement",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Choose the correct word: My mother ___ tea every morning.",
+  "options": {
+   "A": "drink",
+   "B": "drinks",
+   "C": "drinking",
+   "D": "are drinking"
+  },
+  "answer_key": "B",
+  "rationale": "\"My mother\" is one person, so the verb takes -s: she drinks. \"Drink\" goes with I, you, we and they."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E3",
+  "subject": "english",
+  "skill": "analogy",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Day is to night as hot is to ___",
+  "options": {
+   "A": "warm",
+   "B": "sun",
+   "C": "cold",
+   "D": "fire"
+  },
+  "answer_key": "C",
+  "rationale": "Day and night are opposites, so the word needed is the opposite of hot: cold. Warm is close to hot, not its opposite."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E4",
+  "subject": "english",
+  "skill": "letter-series",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Fill the gap: B, D, F, H, ___",
+  "options": {
+   "A": "I",
+   "B": "J",
+   "C": "K",
+   "D": "G"
+  },
+  "answer_key": "B",
+  "rationale": "Each letter skips one letter before the next: B (C) D (E) F (G) H (I) J. Not skipping would give I."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E5",
+  "subject": "english",
+  "skill": "error-identification",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Which part of this sentence has an error? \"She have a red umbrella.\"",
+  "options": {
+   "A": "She have",
+   "B": "a red",
+   "C": "umbrella",
+   "D": "No error"
+  },
+  "answer_key": "A",
+  "rationale": "\"She\" takes \"has\", not \"have\": \"She has a red umbrella.\" \"Have\" goes with I, you, we and they."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-S1",
+  "subject": "science",
+  "skill": "experimental-reasoning",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Tara wants to find out which of two paper boats floats longer. What should be the same for both boats?",
+  "options": {
+   "A": "The water they float in",
+   "B": "Only their colour",
+   "C": "Nothing at all",
+   "D": "Only their names"
+  },
+  "answer_key": "A",
+  "rationale": "The boats are what she is testing, so everything else, such as the water and where they float, must be the same. Otherwise the result could not be trusted."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-S2",
+  "subject": "science",
+  "skill": "interpreting-evidence",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Ravi hangs one wet cloth in the sun and another in the shade. The one in the sun dries first. This shows that",
+  "options": {
+   "A": "shade dries clothes faster",
+   "B": "clothes dry only at night",
+   "C": "heat helps things dry faster",
+   "D": "the colour of cloth decides"
+  },
+  "answer_key": "C",
+  "rationale": "The only difference was sun or shade, and the cloth in the warm sun dried first, so heat helps things dry faster."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-S3",
+  "subject": "science",
+  "skill": "rate-and-quantity",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "numeric",
+  "stem": "A frog catches 4 flies every hour. How many flies does it catch in 5 hours?",
+  "numeric_answer": 20,
+  "numeric_tolerance": 0,
+  "rationale": "It catches 4 each hour, so in 5 hours it catches 5 × 4 = 20 flies. This is a type-in question."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-S4",
+  "subject": "science",
+  "skill": "applying-a-principle",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Why do people wear woollen clothes in winter?",
+  "options": {
+   "A": "To look taller",
+   "B": "To keep the body warm",
+   "C": "To stay wet",
+   "D": "To feel cooler"
+  },
+  "answer_key": "B",
+  "rationale": "Wool keeps the warmth of the body from escaping, so woollen clothes keep us warm in the cold."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-S5",
+  "subject": "science",
+  "skill": "interpreting-evidence",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Two similar plants are watered every day. One stands by a sunny window, the other in a dark cupboard. After a week the cupboard plant is pale and weak. What does this show?",
+  "options": {
+   "A": "Plants need sunlight to stay healthy",
+   "B": "Plants need darkness to grow",
+   "C": "Water is harmful to plants",
+   "D": "Cupboards make plants cold"
+  },
+  "answer_key": "A",
+  "rationale": "Both got water; only the light was different, and the plant without sunlight grew pale and weak. So plants need sunlight."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E6",
+  "subject": "english",
+  "skill": "antonym",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Choose the word most nearly opposite in meaning to \"full\".",
+  "options": {
+   "A": "heavy",
+   "B": "open",
+   "C": "empty",
+   "D": "big"
+  },
+  "answer_key": "C",
+  "rationale": "A full glass has as much as it can hold; an empty one has nothing. Heavy and big often go with full, but are not its opposite."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E7",
+  "subject": "english",
+  "skill": "preposition-usage",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Choose the correct word: The cat is sleeping ___ the bed.",
+  "options": {
+   "A": "under",
+   "B": "of",
+   "C": "to",
+   "D": "from"
+  },
+  "answer_key": "A",
+  "rationale": "\"Under the bed\" tells where the cat is. \"Of\", \"to\" and \"from\" do not show a place to sleep."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E8",
+  "subject": "english",
+  "skill": "odd-one-out",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Pick the word that is different from the rest.",
+  "options": {
+   "A": "Rose",
+   "B": "Lotus",
+   "C": "Mango",
+   "D": "Lily"
+  },
+  "answer_key": "C",
+  "rationale": "Rose, lotus and lily are all flowers; a mango is a fruit, so it is the odd one out."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E9",
+  "subject": "english",
+  "skill": "sentence-completion",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "The bag was too ___ for the small boy to lift.",
+  "options": {
+   "A": "light",
+   "B": "heavy",
+   "C": "empty",
+   "D": "soft"
+  },
+  "answer_key": "B",
+  "rationale": "\"Too … to lift\" means the bag was more than he could carry, so it was heavy. A light or empty bag would be easy to lift."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-E10",
+  "subject": "english",
+  "skill": "reading-inference",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Anu came in from the garden with muddy hands and a basket full of red tomatoes. What had she most likely been doing?",
+  "options": {
+   "A": "Sleeping in her room",
+   "B": "Watching television",
+   "C": "Cooking rice for lunch",
+   "D": "Picking tomatoes"
+  },
+  "answer_key": "D",
+  "rationale": "Muddy hands from the garden and a basket of tomatoes point to picking tomatoes. The other activities would not happen in the garden."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-MS1",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "four-digit-numbers",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "numeric",
+  "stem": "Which number has 6 thousands, 2 hundreds, 0 tens and 5 ones?",
+  "numeric_answer": 6205,
+  "numeric_tolerance": 0,
+  "rationale": "6 thousands, 2 hundreds, 0 tens and 5 ones make 6,205. Leaving out the 0 gives 625, a three-digit number. This is a type-in question."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-MS2",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "metres-and-centimetres",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Which is longer: 1 metre or 90 centimetres?",
+  "options": {
+   "A": "1 metre",
+   "B": "90 centimetres",
+   "C": "Both are equal",
+   "D": "It cannot be told"
+  },
+  "answer_key": "A",
+  "rationale": "1 metre is 100 centimetres, which is more than 90 centimetres. 90 looks bigger than 1 only because the units differ."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-MS3",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "shapes-and-angles",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "How many corners does a triangle have?",
+  "options": {
+   "A": "3",
+   "B": "4",
+   "C": "2",
+   "D": "5"
+  },
+  "answer_key": "A",
+  "rationale": "A triangle has 3 straight sides that meet at 3 corners. A square or a rectangle has 4."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-MS4",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "halves-and-quarters",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Half of a cake is shared equally between two children. What part of the whole cake does each child get?",
+  "options": {
+   "A": "A half",
+   "B": "A quarter",
+   "C": "A whole",
+   "D": "A third"
+  },
+  "answer_key": "B",
+  "rationale": "Half of a half is a quarter: the whole cake would make four such pieces, so each child gets a quarter."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-MS5",
+  "subject": "maths",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "add-and-subtract",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "numeric",
+  "stem": "A shop had 950 mangoes. It sold 375 in the morning and 290 in the evening. How many mangoes are left?",
+  "numeric_answer": 285,
+  "numeric_tolerance": 0,
+  "rationale": "Sold in all: 375 + 290 = 665. Left: 950 − 665 = 285. This is a type-in question."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-SS1",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "animals-and-plants",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Which bird has a long, sharp beak for catching fish?",
+  "options": {
+   "A": "Kingfisher",
+   "B": "Sparrow",
+   "C": "Pigeon",
+   "D": "Hen"
+  },
+  "answer_key": "A",
+  "rationale": "A kingfisher dives into water and catches fish with its long, sharp beak. A sparrow cracks seeds with a short beak."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-SS2",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "food-groups",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Which of these foods is made from a millet?",
+  "options": {
+   "A": "Wheat bread",
+   "B": "Ragi roti",
+   "C": "Rice noodles",
+   "D": "Plain biscuit"
+  },
+  "answer_key": "B",
+  "rationale": "Ragi is a millet, so ragi roti is a millet food. Wheat and rice are grains, but not millets."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-SS3",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "nature-in-daily-life",
+  "difficulty": "easy",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "The Palash tree is called the 'flame of the forest' because of its",
+  "options": {
+   "A": "bright orange-red flowers",
+   "B": "very tall trunk",
+   "C": "sweet juicy fruits",
+   "D": "huge green leaves"
+  },
+  "answer_key": "A",
+  "rationale": "When the Palash blooms, its bright orange-red flowers make the forest look as if it is on fire from a distance."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-SS4",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "animals-and-plants",
+  "difficulty": "moderate",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "A squirrel buries nuts and forgets some of them. Later, new trees grow there. This shows that",
+  "options": {
+   "A": "squirrels dislike trees",
+   "B": "nuts can never grow",
+   "C": "animals can help plants spread",
+   "D": "trees need squirrels to drink"
+  },
+  "answer_key": "C",
+  "rationale": "The forgotten nuts grew into trees, so the squirrel helped the trees spread. Plants and animals depend on each other."
+ },
+ {
+  "paper": 5,
+  "ref": "P5-SS5",
+  "subject": "science",
+  "part": "syllabus",
+  "term": 1,
+  "skill": "food-groups",
+  "difficulty": "difficult",
+  "taught_in": 4,
+  "format": "mcq",
+  "stem": "Which of these lunches is the most balanced?",
+  "options": {
+   "A": "Only rice and potato",
+   "B": "Only sweets and cake",
+   "C": "Only a glass of juice",
+   "D": "Rice, dal and vegetables"
+  },
+  "answer_key": "D",
+  "rationale": "Rice gives energy, dal builds the body and vegetables protect from illness, so this lunch has all three kinds of food. The others have one kind only."
+ },
+ {
   "paper": 6,
   "ref": "P6-M1",
   "subject": "maths",

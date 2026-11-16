@@ -1,0 +1,145 @@
+[
+  {
+    "ref": "M-E-59",
+    "subject": "maths",
+    "skill": "multi-step-arithmetic",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A box has 25 red pencils and 18 blue pencils. How many pencils are there in the box in all?",
+    "numeric_answer": 43,
+    "numeric_tolerance": 0,
+    "rationale": "Add the two colours: 25 + 18 = 43. Forgetting to carry the ten from 5 + 8 = 13 gives 33.",
+    "taught_in": 4
+  },
+  {
+    "ref": "M-E-60",
+    "subject": "maths",
+    "skill": "calendar-reasoning",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Today is Tuesday. What day of the week will it be 3 days from today?",
+    "options": {
+      "A": "Thursday",
+      "B": "Friday",
+      "C": "Saturday",
+      "D": "Wednesday"
+    },
+    "answer_key": "B",
+    "rationale": "Count on three days from Tuesday: Wednesday, Thursday, Friday. Counting Tuesday itself as the first day gives Thursday.",
+    "taught_in": 4
+  },
+  {
+    "ref": "S-E-49",
+    "subject": "science",
+    "skill": "applying-a-principle",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A scoop of ice cream is left on a plate in the sun. Soon it turns runny. What made it melt?",
+    "options": {
+      "A": "The colour of the plate",
+      "B": "The wind blowing on it",
+      "C": "Heat from the sun",
+      "D": "The spoon beside it"
+    },
+    "answer_key": "C",
+    "rationale": "Ice cream melts when it is warmed, and the sun's heat warms it. The plate's colour, the spoon and a breeze do not melt it on their own.",
+    "taught_in": 4
+  },
+  {
+    "ref": "S-E-50",
+    "subject": "science",
+    "skill": "experimental-reasoning",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Ria wants to know which of two balls bounces higher. To make it a fair test, she should drop both balls",
+    "options": {
+      "A": "from the same height",
+      "B": "from different heights",
+      "C": "onto different floors",
+      "D": "one after a long wait"
+    },
+    "answer_key": "A",
+    "rationale": "Only the ball should be different, so both must fall from the same height onto the same floor. Different heights or floors would change how high they bounce, whatever the ball.",
+    "taught_in": 4
+  },
+  {
+    "ref": "S-E-51",
+    "subject": "science",
+    "skill": "rate-and-quantity",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A hen lays one egg every day. How many eggs does it lay in two weeks?",
+    "numeric_answer": 14,
+    "numeric_tolerance": 0,
+    "rationale": "A week has 7 days, so two weeks have 14 days, and one egg a day makes 14 eggs. Counting one week only gives 7.",
+    "taught_in": 4
+  },
+  {
+    "ref": "E-E-53",
+    "subject": "english",
+    "skill": "synonym-in-context",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "The lane was so narrow that only one car could pass at a time. As used here, \"narrow\" most nearly means",
+    "options": {
+      "A": "very long",
+      "B": "not wide",
+      "C": "very busy",
+      "D": "not clean"
+    },
+    "answer_key": "B",
+    "rationale": "Only one car fitting at a time is the clue: the lane was not wide. Long, busy or dirty would not stop two cars passing.",
+    "taught_in": 4
+  },
+  {
+    "ref": "E-E-54",
+    "subject": "english",
+    "skill": "antonym",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which word means the opposite of \"strong\"?",
+    "options": {
+      "A": "tall",
+      "B": "quick",
+      "C": "loud",
+      "D": "weak"
+    },
+    "answer_key": "D",
+    "rationale": "Strong means having a lot of power; weak means having little. Tall, quick and loud describe other things.",
+    "taught_in": 4
+  },
+  {
+    "ref": "E-E-55",
+    "subject": "english",
+    "skill": "analogy",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Bird is to fly as fish is to ___",
+    "options": {
+      "A": "walk",
+      "B": "run",
+      "C": "swim",
+      "D": "jump"
+    },
+    "answer_key": "C",
+    "rationale": "The pair is an animal and the way it moves: a bird flies, a fish swims.",
+    "taught_in": 4
+  },
+  {
+    "ref": "E-E-56",
+    "subject": "english",
+    "skill": "tense",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Choose the correct word: Yesterday we ___ to the zoo with our cousins.",
+    "options": {
+      "A": "go",
+      "B": "goes",
+      "C": "went",
+      "D": "going"
+    },
+    "answer_key": "C",
+    "rationale": "\"Yesterday\" puts the trip in the past, so the past tense \"went\" is needed. \"Go\" and \"goes\" are present; \"going\" needs a helper such as \"were\".",
+    "taught_in": 4
+  }
+]

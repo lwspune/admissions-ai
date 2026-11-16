@@ -1,0 +1,542 @@
+[
+  {
+    "ref": "M4-E-01",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "four-digit-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which number is \"four thousand three hundred six\"?",
+    "options": {
+      "A": "4,360",
+      "B": "4,306",
+      "C": "4,036",
+      "D": "4,630"
+    },
+    "answer_key": "B",
+    "rationale": "4 thousands, 3 hundreds, 0 tens and 6 ones is 4,306. 4,360 puts the 6 in the tens place; 4,036 drops the hundreds."
+  },
+  {
+    "ref": "M4-E-02",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "four-digit-numbers",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these four numbers is the biggest?",
+    "options": {
+      "A": "5,099",
+      "B": "5,909",
+      "C": "5,990",
+      "D": "5,900"
+    },
+    "answer_key": "C",
+    "rationale": "All have 5 thousands, so compare the hundreds: 9 hundreds beat 0, leaving 5,909, 5,990 and 5,900. Then the tens: 9 tens is most, so 5,990."
+  },
+  {
+    "ref": "M4-E-03",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "odd-and-even",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these numbers is odd?",
+    "options": {
+      "A": "34",
+      "B": "50",
+      "C": "27",
+      "D": "18"
+    },
+    "answer_key": "C",
+    "rationale": "An odd number cannot be put into pairs with none left over; it ends in 1, 3, 5, 7 or 9. 27 ends in 7. The others end in 4, 0 and 8, so they are even."
+  },
+  {
+    "ref": "M4-E-04",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "odd-and-even",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many even numbers are there from 1 to 10?",
+    "numeric_answer": 5,
+    "numeric_tolerance": 0,
+    "rationale": "The even numbers are 2, 4, 6, 8 and 10: five of them. Leaving out 10 gives 4."
+  },
+  {
+    "ref": "M4-E-05",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "halves-and-quarters",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A roti is cut into 4 equal parts. Each part is called",
+    "options": {
+      "A": "a quarter",
+      "B": "a half",
+      "C": "a third",
+      "D": "a whole"
+    },
+    "answer_key": "A",
+    "rationale": "When a whole is divided into four equal parts, each part is a quarter. Two equal parts would make halves."
+  },
+  {
+    "ref": "M4-E-06",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "halves-and-quarters",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many quarters make one whole?",
+    "numeric_answer": 4,
+    "numeric_tolerance": 0,
+    "rationale": "A quarter is one of four equal parts, so four quarters make the whole. Two quarters make only a half."
+  },
+  {
+    "ref": "M4-E-07",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "metres-and-centimetres",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "How many centimetres make 1 metre?",
+    "numeric_answer": 100,
+    "numeric_tolerance": 0,
+    "rationale": "Laying a 1 cm length 100 times end to end makes 1 metre, so 1 m = 100 cm."
+  },
+  {
+    "ref": "M4-E-08",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "shapes-and-angles",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these shapes has no corners and no straight edges?",
+    "options": {
+      "A": "Cube",
+      "B": "Cuboid",
+      "C": "Pyramid",
+      "D": "Sphere"
+    },
+    "answer_key": "D",
+    "rationale": "A sphere, like a ball, is curved all over, so it has no corners and no straight edges. A cube, a cuboid and a pyramid all have corners."
+  },
+  {
+    "ref": "M4-E-09",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "add-and-subtract",
+    "difficulty": "easy",
+    "format": "numeric",
+    "stem": "A school has 345 girls and 278 boys. How many children are there in all?",
+    "numeric_answer": 623,
+    "numeric_tolerance": 0,
+    "rationale": "Add: 345 + 278. Ones 5 + 8 = 13, carry 1; tens 4 + 7 + 1 = 12, carry 1; hundreds 3 + 2 + 1 = 6. So 623. Forgetting the carries gives 513."
+  },
+  {
+    "ref": "M4-M-10",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "metres-and-centimetres",
+    "difficulty": "moderate",
+    "format": "numeric",
+    "stem": "A ribbon is half a metre long. How many centimetres is that?",
+    "numeric_answer": 50,
+    "numeric_tolerance": 0,
+    "rationale": "One metre is 100 cm, and half of 100 is 50, so half a metre is 50 cm."
+  },
+  {
+    "ref": "M4-M-11",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "halves-and-quarters",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which of these is the same as one half?",
+    "options": {
+      "A": "One quarter",
+      "B": "Two quarters",
+      "C": "Three quarters",
+      "D": "Four quarters"
+    },
+    "answer_key": "B",
+    "rationale": "Two of the four equal parts cover half the whole, so two quarters are the same as one half. Four quarters make the whole."
+  },
+  {
+    "ref": "M4-M-12",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "views",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "You look straight down at a round tin of biscuits from above. What shape do you see?",
+    "options": {
+      "A": "A circle",
+      "B": "A square",
+      "C": "A triangle",
+      "D": "A rectangle"
+    },
+    "answer_key": "A",
+    "rationale": "From the top you see only the round lid, a circle. From the side the same tin looks like a rectangle, which is the trap."
+  },
+  {
+    "ref": "M4-D-13",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "add-and-subtract",
+    "difficulty": "difficult",
+    "format": "numeric",
+    "stem": "Her cousin's school has 612 children. Her school has 178 children fewer. How many children are in her school?",
+    "numeric_answer": 434,
+    "numeric_tolerance": 0,
+    "rationale": "'Fewer' means taking away: 612 − 178 = 434. Adding the two numbers, 790, is the usual slip."
+  },
+  {
+    "ref": "M4-D-14",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "shapes-and-angles",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "How many straight edges does a cube have?",
+    "options": {
+      "A": "6",
+      "B": "8",
+      "C": "12",
+      "D": "10"
+    },
+    "answer_key": "C",
+    "rationale": "A cube has 4 edges round the top, 4 round the bottom and 4 joining them: 12. 6 is the number of faces and 8 the number of corners."
+  },
+  {
+    "ref": "M4-D-15",
+    "subject": "maths",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "odd-and-even",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Raju has an odd number of marbles. He gets one more marble. Is the number of marbles he has now odd or even?",
+    "options": {
+      "A": "Odd",
+      "B": "It cannot be told",
+      "C": "It becomes double",
+      "D": "Even"
+    },
+    "answer_key": "D",
+    "rationale": "An odd number has one left over when paired; one more marble pairs it up, so the new number is always even. It can be told without knowing the number."
+  },
+  {
+    "ref": "S4-E-01",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which body part does an elephant use to pick up food and drink water?",
+    "options": {
+      "A": "Its ears",
+      "B": "Its tail",
+      "C": "Its trunk",
+      "D": "Its tusks"
+    },
+    "answer_key": "C",
+    "rationale": "An elephant's long trunk picks up food and sucks up water. Tusks are teeth, and ears and tail are not used for eating."
+  },
+  {
+    "ref": "S4-E-02",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A sparrow has a short, strong beak. It helps the sparrow to",
+    "options": {
+      "A": "crack seeds",
+      "B": "catch fish",
+      "C": "suck nectar",
+      "D": "tear meat"
+    },
+    "answer_key": "A",
+    "rationale": "A short, strong beak cracks seeds. A long thin beak sucks nectar, and a sharp curved beak tears meat."
+  },
+  {
+    "ref": "S4-E-03",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "An eagle catches its prey with its",
+    "options": {
+      "A": "soft feathers",
+      "B": "long tail",
+      "C": "thin legs",
+      "D": "sharp claws"
+    },
+    "answer_key": "D",
+    "rationale": "An eagle grips its prey with sharp claws and tears it with its sharp, curved beak. Feathers and a tail help it fly, not catch."
+  },
+  {
+    "ref": "S4-E-04",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "nature-in-daily-life",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Earthen pots used to store grain were lined inside with neem leaves. Why?",
+    "options": {
+      "A": "To keep insects away from the grain",
+      "B": "To make the grain taste sweeter",
+      "C": "To make the pots heavier",
+      "D": "To give the grain a green colour"
+    },
+    "answer_key": "A",
+    "rationale": "Neem leaves keep insects and pests away, so the stored grain stays safe. They do not sweeten or colour it."
+  },
+  {
+    "ref": "S4-E-05",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "nature-in-daily-life",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Natural dyes can be made from",
+    "options": {
+      "A": "plastic bags",
+      "B": "flowers and leaves",
+      "C": "pieces of glass",
+      "D": "iron nails"
+    },
+    "answer_key": "B",
+    "rationale": "Flowers, leaves, bark and roots such as marigold, hibiscus and beetroot give colours that can be made into natural dyes."
+  },
+  {
+    "ref": "S4-E-06",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Which of these foods gives us the most energy?",
+    "options": {
+      "A": "Water",
+      "B": "Salt",
+      "C": "Rice",
+      "D": "Tea"
+    },
+    "answer_key": "C",
+    "rationale": "Rice, wheat, potatoes and millets are energy-giving foods. Water and salt are needed by the body but give no energy."
+  },
+  {
+    "ref": "S4-E-07",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Pulses, milk and eggs mainly help our body to",
+    "options": {
+      "A": "grow and build itself",
+      "B": "see better in the dark",
+      "C": "sleep for longer hours",
+      "D": "feel cold in the winter"
+    },
+    "answer_key": "A",
+    "rationale": "Pulses, milk, eggs and nuts are body-building foods: they help the body grow and repair itself."
+  },
+  {
+    "ref": "S4-E-08",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "Jowar, ragi and bajra are all",
+    "options": {
+      "A": "pulses",
+      "B": "fruits",
+      "C": "spices",
+      "D": "millets"
+    },
+    "answer_key": "D",
+    "rationale": "Jowar, ragi and bajra are millets, grains rich in nutrients. Pulses are dals such as moong and chana."
+  },
+  {
+    "ref": "S4-E-09",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "easy",
+    "format": "mcq",
+    "stem": "A meal with energy-giving, body-building and protective foods in the right amounts is called",
+    "options": {
+      "A": "tasty fast food",
+      "B": "balanced food",
+      "C": "uncooked raw food",
+      "D": "very sweet food"
+    },
+    "answer_key": "B",
+    "rationale": "Balanced food has all three kinds of food in the right amounts. A meal can be raw or sweet without being balanced."
+  },
+  {
+    "ref": "S4-M-10",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "A sunbird has a long, thin beak. It mainly uses it to",
+    "options": {
+      "A": "crack hard nuts and seeds",
+      "B": "drink nectar from flowers",
+      "C": "catch fish in the water",
+      "D": "dig deep into the soil"
+    },
+    "answer_key": "B",
+    "rationale": "A long, thin beak reaches deep into flowers to drink nectar. Cracking nuts needs a short, strong beak."
+  },
+  {
+    "ref": "S4-M-11",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "Which of these mainly protects us from diseases?",
+    "options": {
+      "A": "Sugar and sweet honey",
+      "B": "Cooking oil and butter",
+      "C": "Fruits and vegetables",
+      "D": "Rice and wheat rotis"
+    },
+    "answer_key": "C",
+    "rationale": "Fruits and vegetables are protective foods that help keep diseases away. Sugar, honey, rice and wheat mainly give energy."
+  },
+  {
+    "ref": "S4-M-12",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "moderate",
+    "format": "mcq",
+    "stem": "By looking at a bird's beak and claws, we can best guess",
+    "options": {
+      "A": "what it eats",
+      "B": "how old it is",
+      "C": "how loudly it sings",
+      "D": "the colour of its eggs"
+    },
+    "answer_key": "A",
+    "rationale": "A bird's beak and claws suit the food it eats: a seed-cracking beak, a nectar-sipping beak, claws for catching prey. They tell little about its age or song."
+  },
+  {
+    "ref": "S4-D-13",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Bees visit flowers to collect nectar, and many flowers need bees to make seeds. This shows that",
+    "options": {
+      "A": "bees harm the flowers they visit",
+      "B": "flowers do not need any animals",
+      "C": "bees eat only the leaves of plants",
+      "D": "plants and animals depend on each other"
+    },
+    "answer_key": "D",
+    "rationale": "Each helps the other: the bee gets food and the flower gets help to make seeds. This is the web of life, where plants and animals depend on each other."
+  },
+  {
+    "ref": "S4-D-14",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "food-groups",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "Ravi eats only rice and potatoes every day. What is his food missing most?",
+    "options": {
+      "A": "Energy-giving food like grains",
+      "B": "Body-building and protective food",
+      "C": "Food that is cooked at home",
+      "D": "Food that tastes very sweet"
+    },
+    "answer_key": "B",
+    "rationale": "Rice and potatoes are both energy-giving, so energy is the one thing he does get. He is missing body-building foods (pulses, milk) and protective foods (fruits, vegetables)."
+  },
+  {
+    "ref": "S4-D-15",
+    "subject": "science",
+    "part": "syllabus",
+    "term": 1,
+    "taught_in": 4,
+    "skill": "animals-and-plants",
+    "difficulty": "difficult",
+    "format": "mcq",
+    "stem": "In the mud by a pond you see footprints with skin joining the toes. Which animal most likely made them?",
+    "options": {
+      "A": "A hen",
+      "B": "A dog",
+      "C": "A duck",
+      "D": "A cat"
+    },
+    "answer_key": "C",
+    "rationale": "Skin between the toes (webbed feet) helps a duck paddle in water, and it lives by ponds. A hen, dog and cat have separate toes."
+  }
+]

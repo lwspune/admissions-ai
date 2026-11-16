@@ -1,7 +1,7 @@
 {
   "cohortYear": 2026,
   "cohortNote": "An admit to class N is in class N−1 during 2026–27 and joins in April 2027.",
-  "newFrom": { "5": 2025, "6": 2024, "7": 2025, "8": 2025, "9": 2026 },
+  "newFrom": { "4": 2025, "5": 2025, "6": 2024, "7": 2025, "8": 2025, "9": 2026 },
 
   "topics": [
     { "key": "m-patterns", "subject": "maths", "label": "Number patterns and series", "label_hi": "संख्या पैटर्न और श्रेणियाँ", "skills": ["number-series", "pattern-rule"] },
@@ -55,6 +55,7 @@
   ],
 
   "chapters": [
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "title": "Pattern Around Us", "topics": ["m-patterns"] },
     { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "title": "We the Travellers — II", "topics": ["m-patterns"] },
     { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "title": "Shapes and Patterns", "topics": ["m-patterns"] },
     { "subject": "science", "classLevel": 5, "edition": "new", "book": "Our Wondrous World", "title": "Water — The Essence of Life", "topics": ["s-water"] },
@@ -136,6 +137,16 @@
   ],
 
   "syllabusChapters": [
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 1, "term": 1, "title": "Shapes Around Us", "title_hi": "हमारे आस-पास की आकृतियाँ", "covers": "3D shapes, edges and corners, right angles", "skills": ["shapes-and-angles"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 2, "term": 1, "title": "Hide and Seek", "title_hi": "लुका-छिपी", "covers": "top, front and side views", "skills": ["views"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 3, "term": 1, "title": "Pattern Around Us", "title_hi": "हमारे चारों ओर पैटर्न", "covers": "odd and even numbers, patterns", "skills": ["odd-and-even"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 4, "term": 1, "title": "Thousands Around Us", "title_hi": "हमारे आस-पास हजार", "covers": "four-digit numbers", "skills": ["four-digit-numbers"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 5, "term": 1, "title": "Sharing and Measuring", "title_hi": "बाँटना और मापना", "covers": "halves and quarters", "skills": ["halves-and-quarters"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 6, "term": 1, "title": "Measuring Length", "title_hi": "लंबाई मापन", "covers": "metres and centimetres", "skills": ["metres-and-centimetres"] },
+    { "subject": "maths", "classLevel": 4, "edition": "new", "book": "Maths Mela", "chapter": 7, "term": 1, "title": "The Cleanest Village", "title_hi": "स्वच्छतम गाँव", "covers": "adding and subtracting, word problems", "skills": ["add-and-subtract"] },
+    { "subject": "science", "classLevel": 4, "edition": "new", "book": "Our Wondrous World", "chapter": 3, "term": 1, "title": "Nature Trail", "title_hi": "प्रकृति की पाठशाला", "covers": "features of animals and plants, how they depend on each other", "skills": ["animals-and-plants"] },
+    { "subject": "science", "classLevel": 4, "edition": "new", "book": "Our Wondrous World", "chapter": 4, "term": 1, "title": "Growing up with Nature", "title_hi": "प्रकृति की गोद में", "covers": "neem, natural dyes, nature in daily life", "skills": ["nature-in-daily-life"] },
+    { "subject": "science", "classLevel": 4, "edition": "new", "book": "Our Wondrous World", "chapter": 5, "term": 1, "title": "Food for Health", "title_hi": "स्वास्थ्य के लिए भोजन", "covers": "food groups, balanced food, millets", "skills": ["food-groups"] },
     { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 1, "term": 1, "title": "We the Travellers — I", "title_hi": "हम हैं यात्री – 1", "covers": "five-digit numbers, place value, rounding", "skills": ["five-digit-numbers", "rounding"] },
     { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 2, "term": 1, "title": "Fractions", "title_hi": "भिन्न", "covers": "equivalent fractions, comparing fractions of the same whole", "skills": ["equivalent-fractions", "comparing-fractions"] },
     { "subject": "maths", "classLevel": 5, "edition": "new", "book": "Maths Mela", "chapter": 3, "term": 1, "title": "Angles as Turns", "title_hi": "घुमाव के रूप में कोण", "covers": "quarter, half and full turns, right angles", "skills": ["angles-as-turns"] },
