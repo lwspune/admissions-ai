@@ -64,3 +64,8 @@ C 1 (3 numeric); science B 1 · C 1 (1 numeric); English A 1 · C 1 · D 1.
 | E-D-50 | difficult | synonym-in-context | "famished" after a long walk | **C** very hungry |
 | E-D-51 | difficult | error-identification | "My sister and me are going" | **A** My sister and me |
 | E-D-52 | difficult | reading-inference | Umbrella open under a cloudless sky | **D** to keep off the hot sun |
+
+## Later moves
+
+On 2026-11-16, for admits to class 5, M-E-54, M-M-55, M-D-56, M-D-58, S-E-46, S-E-47, S-D-48, E-D-51,
+E-D-52 and many of the moves above went on to class 4. See `basics-batch-04.md`.

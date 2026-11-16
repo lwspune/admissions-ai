@@ -55,7 +55,7 @@
     "subject": "english",
     "skill": "preposition-usage",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Choose the correct word: The cadet was absent ___ the morning parade.",
     "options": {
@@ -72,7 +72,7 @@
     "subject": "english",
     "skill": "idiom-meaning",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "The instructor said the written test would be a piece of cake. He meant that the test would be",
     "options": {
@@ -89,7 +89,7 @@
     "subject": "english",
     "skill": "tense",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Choose the correct words: Yesterday, while I ___ my homework, the lights went out.",
     "options": {
@@ -106,7 +106,7 @@
     "subject": "english",
     "skill": "analogy",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Carpenter is to wood as tailor is to ___",
     "options": {
@@ -123,7 +123,7 @@
     "subject": "english",
     "skill": "odd-one-out",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Which one does not belong with the others?",
     "options": {
@@ -140,7 +140,7 @@
     "subject": "english",
     "skill": "letter-coding",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "In a code, LAMP is written as PMAL. How is SHIP written in the same code?",
     "options": {
@@ -174,7 +174,7 @@
     "subject": "english",
     "skill": "letter-series",
     "difficulty": "moderate",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Which letter pair comes next? AC, BE, CG, DI, ___",
     "options": {
@@ -324,7 +324,7 @@
     "subject": "maths",
     "skill": "calendar-reasoning",
     "difficulty": "difficult",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "1 January 2027 is a Friday. On which day of the week does 1 March 2027 fall?",
     "options": {

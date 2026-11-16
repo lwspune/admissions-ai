@@ -4,7 +4,7 @@
     "subject": "maths",
     "skill": "number-series",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Find the missing number in the sequence: 2, 6, 12, 20, ___, 42",
     "options": {
@@ -72,7 +72,7 @@
     "subject": "maths",
     "skill": "calendar-reasoning",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "If today is Monday, what day of the week will it be 45 days from now?",
     "options": {
@@ -174,7 +174,7 @@
     "subject": "maths",
     "skill": "rate-reasoning",
     "difficulty": "moderate",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "If 7 cats catch 7 mice in 7 minutes, how long will 14 cats take to catch 14 mice?",
     "options": {
@@ -226,7 +226,7 @@
     "subject": "english",
     "skill": "anagram",
     "difficulty": "easy",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "Rearrange the letters to form a meaningful word: OBRNW",
     "options": {
@@ -243,7 +243,7 @@
     "subject": "english",
     "skill": "letter-series",
     "difficulty": "moderate",
-    "taught_in": 5,
+    "taught_in": 4,
     "format": "mcq",
     "stem": "What is the next letter in the pattern? A, C, F, J, O, ___",
     "options": {

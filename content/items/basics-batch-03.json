@@ -26,7 +26,7 @@
     },
     "answer_key": "B",
     "rationale": "56 ÷ 8 = 7, because 7 × 8 = 56. 8 is the team size, not the number of teams; 6 × 8 = 48 leaves 8 children out.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "M-M-55",
@@ -38,7 +38,7 @@
     "numeric_answer": 55,
     "numeric_tolerance": 0,
     "rationale": "Pencils: 3 × 12 = ₹36. With the eraser: 36 + 9 = ₹45. Change: 100 − 45 = ₹55. Counting one pencil only gives 100 − 21 = 79.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "M-D-56",
@@ -55,7 +55,7 @@
     },
     "answer_key": "B",
     "rationale": "Thursday the 1st makes Saturday the 3rd, so the Saturdays are the 3rd, 10th and 17th; the third is the 17th. Counting the 1st as a Saturday gives 15th; 24th is the fourth Saturday.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "M-D-57",
@@ -84,7 +84,7 @@
     },
     "answer_key": "C",
     "rationale": "The gaps are 1, 2, 3, 4, 5, each one more than the last, so the next gap is 6 and 16 + 6 = 22. Repeating the gap of 5 gives 21.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "S-E-46",
@@ -101,7 +101,7 @@
     },
     "answer_key": "B",
     "rationale": "Plants need light to make food, and they grow towards it, so a plant by a window bends towards the light. The wall, fan and floor are not what a plant grows towards.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "S-E-47",
@@ -113,7 +113,7 @@
     "numeric_answer": 18,
     "numeric_tolerance": 0,
     "rationale": "In 4 weeks it grows 4 × 2 = 8 cm, so it will be 10 + 8 = 18 cm tall. Forgetting the 10 cm it already has gives 8.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "S-D-48",
@@ -130,7 +130,7 @@
     },
     "answer_key": "C",
     "rationale": "The warmer the place, the faster the ice melted: sun, then shade, then fridge. The cube in the shade also melted, so A is wrong; the glasses were the same, so B cannot explain it.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "E-D-50",
@@ -164,7 +164,7 @@
     },
     "answer_key": "A",
     "rationale": "The people doing the going are the subject, so it must be \"My sister and I\". Test it by dropping \"my sister\": \"me am going\" is wrong, \"I am going\" is right. \"Are\" is correct for two people.",
-    "taught_in": 5
+    "taught_in": 4
   },
   {
     "ref": "E-D-52",
@@ -181,6 +181,6 @@
     },
     "answer_key": "D",
     "rationale": "A cloudless sky rules out rain, and staying cool in the afternoon heat shows the umbrella kept the sun off her. Nothing in the passage points to a friend, and opening it does not make it easier to carry.",
-    "taught_in": 5
+    "taught_in": 4
   }
 ]

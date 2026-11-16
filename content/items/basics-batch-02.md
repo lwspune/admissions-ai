@@ -60,3 +60,8 @@ Worth a second look:
 | E-D-47 | difficult | error-identification | "Each of the girls have brought" | **B** have brought |
 | E-D-48 | difficult | sentence-completion | Usually ___, surprised she spoke ___ | **C** quiet … boldly |
 | E-D-49 | difficult | reading-inference | Shopkeeper counts twice, boy adds a coin | **D** paid too little |
+
+## Later moves
+
+On 2026-11-16, S-E-38, S-M-40, S-D-43, E-D-48 and E-D-49 went on to class 4, for admits to class 5.
+See `basics-batch-04.md`.
