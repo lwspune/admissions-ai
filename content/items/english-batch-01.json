@@ -72,7 +72,7 @@
     "subject": "english",
     "skill": "idiom-meaning",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "The captain told the cadets to pull up their socks. He was telling them to",
     "options": {
@@ -124,7 +124,7 @@
     "subject": "english",
     "skill": "reading-inference",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "The library was silent except for the scratch of pens. Anand glanced at the clock, closed his unopened book and left. It is most reasonable to conclude that Anand",
     "options": {

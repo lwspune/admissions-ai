@@ -117,7 +117,7 @@ and re-run `npm run items:lint`.
 
 | Ref | taught_in | Why |
 |---|---|---|
-| S-E-06 | 6 | reasoning or everyday content; open to every admit |
+| S-E-06 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | S-E-07 | 9 | inertia — Class 9 Force and Laws of Motion |
 | S-E-08 | 9 | density = mass ÷ volume — Class 9 Gravitation (relative density) |
 | S-E-09 | 7 | series circuit, one bulb breaks the loop — Class 7 Electric Current and its Effects |
@@ -127,7 +127,7 @@ and re-run `npm run items:lint`.
 | S-E-13 | 7 | blue litmus turns red in acid — Class 7 Acids, Bases and Salts |
 | S-E-14 | 7 | food chain disturbance — Class 7 |
 | S-M-15 | 7 | conduction in metal vs wood — Class 7 Heat |
-| S-M-16 | 6 | reasoning or everyday content; open to every admit |
+| S-M-16 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | S-M-17 | 9 | density by displacement — Class 9 |
 | S-D-18 | 9 | floating by average density — Class 9 Gravitation (buoyancy) |
 | S-D-19 | 7 | plants respire in the dark — Class 7 Respiration in Organisms |

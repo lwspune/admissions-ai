@@ -141,18 +141,18 @@ and re-run `npm run items:lint`.
 
 | Ref | taught_in | Why |
 |---|---|---|
-| M-E-06 | 6 | reasoning or everyday content; open to every admit |
+| M-E-06 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | M-E-07 | 7 | speed = distance ÷ time — Class 7 Motion and Time |
 | M-E-08 | 7 | one-step linear equation — Class 7 Simple Equations |
 | M-E-09 | 6 | reasoning or everyday content; open to every admit |
-| M-E-10 | 6 | reasoning or everyday content; open to every admit |
-| M-E-11 | 6 | reasoning or everyday content; open to every admit |
+| M-E-10 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
+| M-E-11 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | M-E-12 | 8 | variable on both sides — Class 8 Linear Equations in One Variable |
-| M-E-13 | 6 | reasoning or everyday content; open to every admit |
+| M-E-13 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | M-M-14 | 6 | reasoning or everyday content; open to every admit |
 | M-M-15 | 8 | inverse proportion — Class 8 |
-| M-M-16 | 6 | reasoning or everyday content; open to every admit |
+| M-M-16 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | M-D-17 | 7 | chained ratio — Class 7 ratio and proportion |
 | E-E-06 | 6 | reasoning or everyday content; open to every admit |
-| E-E-07 | 6 | reasoning or everyday content; open to every admit |
-| E-M-08 | 6 | reasoning or everyday content; open to every admit |
+| E-E-07 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
+| E-M-08 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |

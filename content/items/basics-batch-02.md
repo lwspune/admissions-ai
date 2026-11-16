@@ -4,7 +4,9 @@
 **Status:** for review. Promoted with `npm run items:seed -- --live --file basics-batch-02.json`
 once signed off.
 **Composition:** science 10 (4 easy, 2 moderate, 4 difficult), English 4 difficult. One numeric.
-Every item: `part: basics`, `taught_in: 6`, so every admit from class 7 up can draw them.
+Every item: `part: basics`, `taught_in: 6`, so every admit from class 7 up can draw them. On 2026-11-16
+S-E-36, S-E-38, S-E-39, S-M-40, S-D-43, S-D-44 and E-D-47, E-D-48, E-D-49 moved to class 5, for admits to
+class 6: see `basics-batch-03.md`.
 
 ## Why these, and the nine items that moved to class 7
 

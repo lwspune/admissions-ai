@@ -54,4 +54,4 @@ length warning on E-D-38, 44 characters against 43).
 | M-D-49 | 7 | linear-equation | Three consecutive evens sum to 30 more than the smallest; largest | **C** 16 |
 | M-D-50 | 6 | multi-step-arithmetic | Tank 3/5 full, 24 L out, 1/3 full; capacity | **D** 90 |
 | M-D-51 | 6 | clock-angles | Angle between the hands at 4:40 | **A** 100° |
-| M-D-52 | 6 | calendar-reasoning | 1 Jan 2027 a Friday; 1 March 2027 | **B** Monday |
+| M-D-52 | 5 | calendar-reasoning | 1 Jan 2027 a Friday; 1 March 2027 | **B** Monday |

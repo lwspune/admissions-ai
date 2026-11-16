@@ -4,7 +4,7 @@
     "subject": "science",
     "skill": "evaporation",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "Water left in an open saucer disappears sooner than the same amount of water in a corked bottle. The main reason is that in the saucer the water",
     "options": {
@@ -164,7 +164,7 @@
     "subject": "science",
     "skill": "interpreting-evidence",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "Moist seeds are kept in two identical jars, one in a warm room and one in a fridge. Only the seeds in the warm jar sprout. This experiment shows that germination needs",
     "options": {

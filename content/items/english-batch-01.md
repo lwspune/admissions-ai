@@ -107,10 +107,10 @@ and re-run `npm run items:lint`.
 | E-E-10 | 6 | reasoning or everyday content; open to every admit |
 | E-E-11 | 6 | reasoning or everyday content; open to every admit |
 | E-E-12 | 6 | reasoning or everyday content; open to every admit |
-| E-E-13 | 6 | reasoning or everyday content; open to every admit |
+| E-E-13 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | E-M-14 | 6 | reasoning or everyday content; open to every admit |
 | E-M-15 | 6 | reasoning or everyday content; open to every admit |
-| E-M-16 | 6 | reasoning or everyday content; open to every admit |
+| E-M-16 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | E-M-17 | 6 | reasoning or everyday content; open to every admit |
 | E-M-18 | 6 | reasoning or everyday content; open to every admit |
 | E-D-19 | 6 | reasoning or everyday content; open to every admit |

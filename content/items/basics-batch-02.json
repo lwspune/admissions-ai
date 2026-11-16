@@ -14,7 +14,7 @@
     },
     "answer_key": "B",
     "rationale": "Air holds water vapour; touching the cold glass it cools and condenses into drops on the outside. Glass does not let water through (A), and the drops form even on a closed bottle of cold water, so they do not come from inside it (C, D).",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-E-37",
@@ -48,7 +48,7 @@
     },
     "answer_key": "C",
     "rationale": "A fair test changes only the thing being tested, here the temperature, and keeps everything else the same. Changing the sugar, the water or the glass as well would leave her unable to say what made the difference.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-E-39",
@@ -65,7 +65,7 @@
     },
     "answer_key": "D",
     "rationale": "The sun's heat turns the water into vapour, which leaves the salt behind: evaporation. Condensation is vapour turning back into water, freezing needs cold, and filtration cannot separate salt that is dissolved.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-M-40",
@@ -82,7 +82,7 @@
     },
     "answer_key": "C",
     "rationale": "Dry seeds had air but no water; seeds under water had water but little air. Only seeds with both sprouted. D ignores the seeds under water, and every dish had the same light, warmth and no soil, so A and B were never tested.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-M-41",
@@ -133,7 +133,7 @@
     },
     "answer_key": "A",
     "rationale": "He changed the weight and the slope together, so a faster ball could be due to either. Weight is what he is testing, so C would remove the very thing under test; more balls do not fix the flaw.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-D-44",
@@ -145,7 +145,7 @@
     "numeric_answer": 500,
     "numeric_tolerance": 0,
     "rationale": "One kilometre is 1,000 metres, and each turn covers 2 metres, so 1,000 ÷ 2 = 500 turns. Forgetting to turn kilometres into metres gives 0.5, and multiplying gives 2,000.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "S-D-45",
@@ -196,7 +196,7 @@
     },
     "answer_key": "B",
     "rationale": "The subject is \"each\", which is singular, so the verb must be \"has brought\". The plural \"girls\" just before the verb is the trap. \"Her\" agrees with \"each\" and is correct.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "E-D-48",
@@ -213,7 +213,7 @@
     },
     "answer_key": "C",
     "rationale": "\"Surprised\" means the second blank must go against the first: a quiet girl speaking boldly. A, B and D each describe behaviour that matches the habit (a talker speaking freely, a shy girl speaking quietly), so nothing would surprise her friends.",
-    "taught_in": 6
+    "taught_in": 5
   },
   {
     "ref": "E-D-49",
@@ -230,6 +230,6 @@
     },
     "answer_key": "D",
     "rationale": "Counting twice and frowning shows something was wrong with the amount, and the boy adding a coin shows it was short. Paying too much would bring change back, not another coin; nothing in the passage suggests fake coins or a tip.",
-    "taught_in": 6
+    "taught_in": 5
   }
 ]

@@ -125,7 +125,7 @@
     "subject": "maths",
     "skill": "numeric-coding",
     "difficulty": "easy",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "If CAT is written as 3-1-20, how is DOG written in the same code?",
     "options": {
@@ -176,7 +176,7 @@
     "subject": "maths",
     "skill": "number-series",
     "difficulty": "moderate",
-    "taught_in": 6,
+    "taught_in": 5,
     "format": "mcq",
     "stem": "Find the next number in the series: 5, 11, 23, 47, 95, ___",
     "options": {

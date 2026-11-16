@@ -464,18 +464,18 @@ and re-run `npm run items:lint`.
 
 | Ref | taught_in | Why |
 |---|---|---|
-| M-E-01 | 6 | reasoning or everyday content; open to every admit |
+| M-E-01 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | M-E-02 | 7 | percentage — Class 7 Comparing Quantities |
 | M-E-03 | 6 | reasoning or everyday content; open to every admit |
 | M-M-04 | 8 | two taps / work rates — Class 8 Direct and Inverse Proportions |
 | M-D-05 | 8 | mark-up then discount — Class 8 Comparing Quantities |
-| E-E-01 | 6 | reasoning or everyday content; open to every admit |
-| E-E-02 | 6 | reasoning or everyday content; open to every admit |
-| E-E-03 | 6 | reasoning or everyday content; open to every admit |
-| E-M-04 | 6 | reasoning or everyday content; open to every admit |
+| E-E-01 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
+| E-E-02 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
+| E-E-03 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
+| E-M-04 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | E-D-05 | 6 | reasoning or everyday content; open to every admit |
-| S-E-01 | 6 | reasoning or everyday content; open to every admit |
+| S-E-01 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | S-E-02 | 9 | mixture vs compound (brass, CO₂) — Class 9 Is Matter Around Us Pure |
 | S-E-03 | 7 | average speed — Class 7 Motion and Time |
-| S-M-04 | 6 | reasoning or everyday content; open to every admit |
+| S-M-04 | 5 | retagged 2026-11-16 for admits to class 6: fair for a child who has just finished class 5 |
 | S-D-05 | 9 | gas pressure rises on heating at fixed volume — Class 9 Matter in Our Surroundings |
